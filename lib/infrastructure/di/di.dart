@@ -11,7 +11,13 @@ abstract class RegisterModule {
   
   @Named('ApiEndpoint')
   String get apiEndpoint => 'http://api.cato.club:5000/graphql';
-  
+
+  @Named('PlayStoreUrl')
+  String get playStoreUrl => 'https://play.google.com/store/apps/details?id=cato.tv.feed';
+
+  @Named('AppStoreUrl')
+  String get appStoreUrl => 'https://play.google.com/store/apps/details?id=cato.tv.feed';
+
   @lazySingleton
   GoogleSignIn get getGoogleSignIn => GoogleSignIn(
       scopes: ['email', 'profile'],

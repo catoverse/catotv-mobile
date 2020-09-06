@@ -17,8 +17,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/home/feed/feed_bloc.dart';
+import 'application/init/init_bloc.dart';
 import 'application/onboard/onboard_bloc.dart';
 import 'application/splash/splash_bloc.dart';
+import 'application/topic/topic_bloc.dart';
 import 'application/topic_selection/topicselection_bloc.dart';
 import 'domain/auth/i_auth_facade.dart';
 import 'domain/auth/i_user_repository.dart';
@@ -50,8 +52,13 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<MyDatabase>(() => MyDatabase());
   final sharedPreferences = await registerModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
+  gh.factory<SplashBloc>(() => SplashBloc());
   gh.factory<String>(() => registerModule.apiEndpoint,
       instanceName: 'ApiEndpoint');
+  gh.factory<String>(() => registerModule.playStoreUrl,
+      instanceName: 'PlayStoreUrl');
+  gh.factory<String>(() => registerModule.appStoreUrl,
+      instanceName: 'AppStoreUrl');
   gh.lazySingleton<Network>(() => Network(
         g<ILogger>(),
         g<Connectivity>(),
@@ -62,7 +69,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<ILogger>(),
         g<MyDatabase>(),
       ));
-  gh.lazySingleton<IRepository>(() => Repository(g<Network>()));
+  gh.lazySingleton<IRepository>(() => Repository(g<Network>(), g<ILogger>()));
   gh.lazySingleton<ITopicRepository>(() => TopicRepository(
         g<MyDatabase>(),
         g<Network>(),
@@ -74,6 +81,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<ILogger>(),
         g<SharedPreferences>(),
       ));
+  gh.factory<InitBloc>(() => InitBloc(g<IRepository>()));
+  gh.factory<TopicBloc>(
+      () => TopicBloc(g<IUserRepository>(), g<ITopicRepository>()));
   gh.factory<TopicselectionBloc>(
       () => TopicselectionBloc(g<IUserRepository>(), g<ITopicRepository>()));
   gh.factory<FeedBloc>(() => FeedBloc(g<IPostRepository>()));
@@ -83,12 +93,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<ILogger>(),
       ));
   gh.factory<OnboardBloc>(() => OnboardBloc(g<IAuthFacade>()));
-  gh.factory<SplashBloc>(() => SplashBloc(
-        g<IAuthFacade>(),
-        g<IRepository>(),
-        g<ITopicRepository>(),
-        g<FirebaseDynamicLinks>(),
-      ));
   gh.factory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
 
   // Eager singletons must be registered in the right order
