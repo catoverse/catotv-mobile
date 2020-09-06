@@ -12,6 +12,7 @@ abstract class IUserRepository {
   static const KEY_ACCESS_TOKEN = "access_token";
 
   Future<Result<Failure, User>> getUser(KtMap<String, dynamic> details);
-  Future<Result<Failure, User>> updateTopics(KtList<String> topicIds);
+  Future<Result<Failure, User>> updateTopics(User user, KtList<String> topicIds);
   Future<Result<Failure, bool>> signOut(String googleId);
+  Future<List<String>> getSelectedTopics(User user);
 }
