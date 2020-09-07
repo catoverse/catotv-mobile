@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/init/init.dart';
+import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:flutter/material.dart';
 import 'package:cato_feed/injection.dart';
@@ -75,21 +76,21 @@ class SplashPage extends StatelessWidget {
             if (state.failure != null) {
               bloc.add(SplashEvent.failure(state.failure));
             } else if (state.allTopics != null) {
-              // TODO: Add event to post bloc to get posts
-              bloc.add(SplashEvent.success());
+              if (state.allTopics != null) {
+                context.bloc<PostBloc>().add(PostEvent.loadFeed(0, 10));
+              }
+
+              if (state.selectedTopicIds == null ||
+                  state.selectedTopicIds.isEmpty) {
+                // Send to topic Selected
+                context.navigator.replace(CatoRoutes.topicSelectionScreen);
+              } else {
+                // Send to home screen
+                context.navigator.replace(CatoRoutes.homeScreen);
+              }
             }
           },
-        ),
-        BlocListener<SplashBloc, SplashState>(
-          listener: (_, state) {
-            state.maybeWhen(
-              success: () {
-                context.navigator.replace(CatoRoutes.homeScreen);
-              },
-              orElse: () {},
-            );
-          },
-        ),
+        )
       ],
       child: Stack(
         children: [

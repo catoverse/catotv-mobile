@@ -22,7 +22,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
    yield event.map(
       failure: (e) => SplashState.failure(e.failure),
       updateRequired: (e) => SplashState.forceUpdateRequired(),
-      success: (e) => SplashState.success(),
     );
   }
 }

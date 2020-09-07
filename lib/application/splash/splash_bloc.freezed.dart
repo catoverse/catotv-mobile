@@ -23,11 +23,6 @@ class _$SplashEventTearOff {
   _EventUpdateRequired updateRequired() {
     return const _EventUpdateRequired();
   }
-
-// ignore: unused_element
-  _EventSuccess success() {
-    return const _EventSuccess();
-  }
 }
 
 // ignore: unused_element
@@ -38,26 +33,22 @@ mixin _$SplashEvent {
   Result when<Result extends Object>({
     @required Result failure(Failure failure),
     @required Result updateRequired(),
-    @required Result success(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result failure(Failure failure),
     Result updateRequired(),
-    Result success(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result failure(_EventFailure value),
     @required Result updateRequired(_EventUpdateRequired value),
-    @required Result success(_EventSuccess value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result failure(_EventFailure value),
     Result updateRequired(_EventUpdateRequired value),
-    Result success(_EventSuccess value),
     @required Result orElse(),
   });
 }
@@ -146,11 +137,9 @@ class _$_EventFailure implements _EventFailure {
   Result when<Result extends Object>({
     @required Result failure(Failure failure),
     @required Result updateRequired(),
-    @required Result success(),
   }) {
     assert(failure != null);
     assert(updateRequired != null);
-    assert(success != null);
     return failure(this.failure);
   }
 
@@ -159,7 +148,6 @@ class _$_EventFailure implements _EventFailure {
   Result maybeWhen<Result extends Object>({
     Result failure(Failure failure),
     Result updateRequired(),
-    Result success(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -174,11 +162,9 @@ class _$_EventFailure implements _EventFailure {
   Result map<Result extends Object>({
     @required Result failure(_EventFailure value),
     @required Result updateRequired(_EventUpdateRequired value),
-    @required Result success(_EventSuccess value),
   }) {
     assert(failure != null);
     assert(updateRequired != null);
-    assert(success != null);
     return failure(this);
   }
 
@@ -187,7 +173,6 @@ class _$_EventFailure implements _EventFailure {
   Result maybeMap<Result extends Object>({
     Result failure(_EventFailure value),
     Result updateRequired(_EventUpdateRequired value),
-    Result success(_EventSuccess value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -243,11 +228,9 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   Result when<Result extends Object>({
     @required Result failure(Failure failure),
     @required Result updateRequired(),
-    @required Result success(),
   }) {
     assert(failure != null);
     assert(updateRequired != null);
-    assert(success != null);
     return updateRequired();
   }
 
@@ -256,7 +239,6 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   Result maybeWhen<Result extends Object>({
     Result failure(Failure failure),
     Result updateRequired(),
-    Result success(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -271,11 +253,9 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   Result map<Result extends Object>({
     @required Result failure(_EventFailure value),
     @required Result updateRequired(_EventUpdateRequired value),
-    @required Result success(_EventSuccess value),
   }) {
     assert(failure != null);
     assert(updateRequired != null);
-    assert(success != null);
     return updateRequired(this);
   }
 
@@ -284,7 +264,6 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   Result maybeMap<Result extends Object>({
     Result failure(_EventFailure value),
     Result updateRequired(_EventUpdateRequired value),
-    Result success(_EventSuccess value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -297,99 +276,6 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
 
 abstract class _EventUpdateRequired implements SplashEvent {
   const factory _EventUpdateRequired() = _$_EventUpdateRequired;
-}
-
-abstract class _$EventSuccessCopyWith<$Res> {
-  factory _$EventSuccessCopyWith(
-          _EventSuccess value, $Res Function(_EventSuccess) then) =
-      __$EventSuccessCopyWithImpl<$Res>;
-}
-
-class __$EventSuccessCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
-    implements _$EventSuccessCopyWith<$Res> {
-  __$EventSuccessCopyWithImpl(
-      _EventSuccess _value, $Res Function(_EventSuccess) _then)
-      : super(_value, (v) => _then(v as _EventSuccess));
-
-  @override
-  _EventSuccess get _value => super._value as _EventSuccess;
-}
-
-class _$_EventSuccess implements _EventSuccess {
-  const _$_EventSuccess();
-
-  @override
-  String toString() {
-    return 'SplashEvent.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _EventSuccess);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result failure(Failure failure),
-    @required Result updateRequired(),
-    @required Result success(),
-  }) {
-    assert(failure != null);
-    assert(updateRequired != null);
-    assert(success != null);
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result failure(Failure failure),
-    Result updateRequired(),
-    Result success(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result failure(_EventFailure value),
-    @required Result updateRequired(_EventUpdateRequired value),
-    @required Result success(_EventSuccess value),
-  }) {
-    assert(failure != null);
-    assert(updateRequired != null);
-    assert(success != null);
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result failure(_EventFailure value),
-    Result updateRequired(_EventUpdateRequired value),
-    Result success(_EventSuccess value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _EventSuccess implements SplashEvent {
-  const factory _EventSuccess() = _$_EventSuccess;
 }
 
 class _$SplashStateTearOff {
@@ -411,11 +297,6 @@ class _$SplashStateTearOff {
       failure,
     );
   }
-
-// ignore: unused_element
-  _Success success() {
-    return const _Success();
-  }
 }
 
 // ignore: unused_element
@@ -427,14 +308,12 @@ mixin _$SplashState {
     @required Result loading(),
     @required Result forceUpdateRequired(),
     @required Result failure(Failure failure),
-    @required Result success(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result loading(),
     Result forceUpdateRequired(),
     Result failure(Failure failure),
-    Result success(),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -442,14 +321,12 @@ mixin _$SplashState {
     @required Result loading(_Loading value),
     @required Result forceUpdateRequired(_ForceUpdateRequired value),
     @required Result failure(_Failure value),
-    @required Result success(_Success value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result loading(_Loading value),
     Result forceUpdateRequired(_ForceUpdateRequired value),
     Result failure(_Failure value),
-    Result success(_Success value),
     @required Result orElse(),
   });
 }
@@ -504,12 +381,10 @@ class _$_Loading implements _Loading {
     @required Result loading(),
     @required Result forceUpdateRequired(),
     @required Result failure(Failure failure),
-    @required Result success(),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
     assert(failure != null);
-    assert(success != null);
     return loading();
   }
 
@@ -519,7 +394,6 @@ class _$_Loading implements _Loading {
     Result loading(),
     Result forceUpdateRequired(),
     Result failure(Failure failure),
-    Result success(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -535,12 +409,10 @@ class _$_Loading implements _Loading {
     @required Result loading(_Loading value),
     @required Result forceUpdateRequired(_ForceUpdateRequired value),
     @required Result failure(_Failure value),
-    @required Result success(_Success value),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
     assert(failure != null);
-    assert(success != null);
     return loading(this);
   }
 
@@ -550,7 +422,6 @@ class _$_Loading implements _Loading {
     Result loading(_Loading value),
     Result forceUpdateRequired(_ForceUpdateRequired value),
     Result failure(_Failure value),
-    Result success(_Success value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -604,12 +475,10 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
     @required Result loading(),
     @required Result forceUpdateRequired(),
     @required Result failure(Failure failure),
-    @required Result success(),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
     assert(failure != null);
-    assert(success != null);
     return forceUpdateRequired();
   }
 
@@ -619,7 +488,6 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
     Result loading(),
     Result forceUpdateRequired(),
     Result failure(Failure failure),
-    Result success(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -635,12 +503,10 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
     @required Result loading(_Loading value),
     @required Result forceUpdateRequired(_ForceUpdateRequired value),
     @required Result failure(_Failure value),
-    @required Result success(_Success value),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
     assert(failure != null);
-    assert(success != null);
     return forceUpdateRequired(this);
   }
 
@@ -650,7 +516,6 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
     Result loading(_Loading value),
     Result forceUpdateRequired(_ForceUpdateRequired value),
     Result failure(_Failure value),
-    Result success(_Success value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -734,12 +599,10 @@ class _$_Failure implements _Failure {
     @required Result loading(),
     @required Result forceUpdateRequired(),
     @required Result failure(Failure failure),
-    @required Result success(),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
     assert(failure != null);
-    assert(success != null);
     return failure(this.failure);
   }
 
@@ -749,7 +612,6 @@ class _$_Failure implements _Failure {
     Result loading(),
     Result forceUpdateRequired(),
     Result failure(Failure failure),
-    Result success(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -765,12 +627,10 @@ class _$_Failure implements _Failure {
     @required Result loading(_Loading value),
     @required Result forceUpdateRequired(_ForceUpdateRequired value),
     @required Result failure(_Failure value),
-    @required Result success(_Success value),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
     assert(failure != null);
-    assert(success != null);
     return failure(this);
   }
 
@@ -780,7 +640,6 @@ class _$_Failure implements _Failure {
     Result loading(_Loading value),
     Result forceUpdateRequired(_ForceUpdateRequired value),
     Result failure(_Failure value),
-    Result success(_Success value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -796,101 +655,4 @@ abstract class _Failure implements SplashState {
 
   Failure get failure;
   _$FailureCopyWith<_Failure> get copyWith;
-}
-
-abstract class _$SuccessCopyWith<$Res> {
-  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
-      __$SuccessCopyWithImpl<$Res>;
-}
-
-class __$SuccessCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
-    implements _$SuccessCopyWith<$Res> {
-  __$SuccessCopyWithImpl(_Success _value, $Res Function(_Success) _then)
-      : super(_value, (v) => _then(v as _Success));
-
-  @override
-  _Success get _value => super._value as _Success;
-}
-
-class _$_Success implements _Success {
-  const _$_Success();
-
-  @override
-  String toString() {
-    return 'SplashState.success()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Success);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result forceUpdateRequired(),
-    @required Result failure(Failure failure),
-    @required Result success(),
-  }) {
-    assert(loading != null);
-    assert(forceUpdateRequired != null);
-    assert(failure != null);
-    assert(success != null);
-    return success();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result forceUpdateRequired(),
-    Result failure(Failure failure),
-    Result success(),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (success != null) {
-      return success();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_Loading value),
-    @required Result forceUpdateRequired(_ForceUpdateRequired value),
-    @required Result failure(_Failure value),
-    @required Result success(_Success value),
-  }) {
-    assert(loading != null);
-    assert(forceUpdateRequired != null);
-    assert(failure != null);
-    assert(success != null);
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_Loading value),
-    Result forceUpdateRequired(_ForceUpdateRequired value),
-    Result failure(_Failure value),
-    Result success(_Success value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _Success implements SplashState {
-  const factory _Success() = _$_Success;
 }
