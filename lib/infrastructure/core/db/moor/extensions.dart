@@ -149,6 +149,10 @@ extension PostDTO on Post {
 
   static Post fromResponse(dynamic response) {
     try {
+      if(response['id'] == null) return null;
+      var videoUrl = response['video_url'] as String;
+      if(videoUrl == null || videoUrl.isEmpty || !videoUrl.startsWith('http')) return null;
+
       return Post(
         id: response['id'],
         videoUrl: response['video_url'],
