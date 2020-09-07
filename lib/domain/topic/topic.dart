@@ -17,16 +17,16 @@ abstract class Topic implements _$Topic {
   String getImage() {
     switch(name) {
       case "Career":  {
-        return ImageAssets.Release.topicImageHealth;
-      }
-      case "Social": {
-        return ImageAssets.Release.topicImageIntellectual;
-      }
-      case "Health & Nutrition": {
         return ImageAssets.Release.topicImageCareer;
       }
+      case "Social": {
+        return ImageAssets.Release.topicImageSocial;
+      }
+      case "Health & Nutrition": {
+        return ImageAssets.Release.topicImageHealth;
+      }
       case "Intellectual": {
-        return ImageAssets.Release.topicImageEmotional;
+        return ImageAssets.Release.topicImageIntellectual;
       }
       case "Emotional": {
         return ImageAssets.Release.topicImageEmotional;
