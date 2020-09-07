@@ -99,7 +99,7 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
   }
 }
 
-class _$_Topic implements _Topic {
+class _$_Topic extends _Topic {
   const _$_Topic(
       {@required this.id,
       @required this.name,
@@ -108,7 +108,8 @@ class _$_Topic implements _Topic {
       : assert(id != null),
         assert(name != null),
         assert(color != null),
-        assert(image != null);
+        assert(image != null),
+        super._();
 
   @override
   final String id;
@@ -151,7 +152,8 @@ class _$_Topic implements _Topic {
       __$TopicCopyWithImpl<_Topic>(this, _$identity);
 }
 
-abstract class _Topic implements Topic {
+abstract class _Topic extends Topic {
+  const _Topic._() : super._();
   const factory _Topic(
       {@required String id,
       @required String name,
