@@ -17,10 +17,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/home/feed/feed_bloc.dart';
+import 'application/home/saved_posts/saved_posts_bloc.dart';
 import 'application/init/init_bloc.dart';
 import 'application/onboard/onboard_bloc.dart';
 import 'application/post/post_bloc.dart';
-import 'application/saved_posts/saved_posts_bloc.dart';
 import 'application/splash/splash_bloc.dart';
 import 'application/topic/topic_bloc.dart';
 import 'application/topic_selection/topicselection_bloc.dart';
@@ -48,6 +48,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final registerModule = _$RegisterModule();
   gh.factory<Connectivity>(() => registerModule.connectivity);
+  gh.factory<FeedBloc>(() => FeedBloc());
   gh.lazySingleton<FirebaseAnalytics>(() => registerModule.firebaseAnalytics);
   gh.factory<FirebaseDynamicLinks>(() => registerModule.dynamicLinks);
   gh.factory<FirebaseMessaging>(() => registerModule.firebaseMessaging);
@@ -94,7 +95,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<TopicSelectionBloc>(
       () => TopicSelectionBloc(g<IUserRepository>(), g<ITopicRepository>()));
   gh.factory<UserProfileBloc>(() => UserProfileBloc(g<IPostRepository>()));
-  gh.factory<FeedBloc>(() => FeedBloc(g<IPostRepository>()));
   gh.lazySingleton<IAuthFacade>(() => AuthFacade(
         g<GoogleSignIn>(),
         g<IUserRepository>(),

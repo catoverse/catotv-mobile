@@ -1,8 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cato_feed/domain/posts/i_post_repository.dart';
-import 'package:cato_feed/domain/posts/post.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,9 +12,8 @@ part 'feed_bloc.freezed.dart';
 
 @injectable
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
-  final IPostRepository _postRepository;
 
-  FeedBloc(this._postRepository) : super(FeedState.initial());
+  FeedBloc() : super(FeedState.initial());
 
   @override
   Stream<FeedState> mapEventToState(
