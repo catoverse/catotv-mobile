@@ -353,12 +353,12 @@ class _$PostPageStateTearOff {
   const _$PostPageStateTearOff();
 
 // ignore: unused_element
-  _PostPageState call(List<Post> posts, int skip, int limit, String topicId) {
+  _PostPageState call(int skip, int limit, {List<Post> posts, String topicId}) {
     return _PostPageState(
-      posts,
       skip,
       limit,
-      topicId,
+      posts: posts,
+      topicId: topicId,
     );
   }
 }
@@ -367,9 +367,9 @@ class _$PostPageStateTearOff {
 const $PostPageState = _$PostPageStateTearOff();
 
 mixin _$PostPageState {
-  List<Post> get posts;
   int get skip;
   int get limit;
+  List<Post> get posts;
   String get topicId;
 
   $PostPageStateCopyWith<PostPageState> get copyWith;
@@ -379,7 +379,7 @@ abstract class $PostPageStateCopyWith<$Res> {
   factory $PostPageStateCopyWith(
           PostPageState value, $Res Function(PostPageState) then) =
       _$PostPageStateCopyWithImpl<$Res>;
-  $Res call({List<Post> posts, int skip, int limit, String topicId});
+  $Res call({int skip, int limit, List<Post> posts, String topicId});
 }
 
 class _$PostPageStateCopyWithImpl<$Res>
@@ -392,15 +392,15 @@ class _$PostPageStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object posts = freezed,
     Object skip = freezed,
     Object limit = freezed,
+    Object posts = freezed,
     Object topicId = freezed,
   }) {
     return _then(_value.copyWith(
-      posts: posts == freezed ? _value.posts : posts as List<Post>,
       skip: skip == freezed ? _value.skip : skip as int,
       limit: limit == freezed ? _value.limit : limit as int,
+      posts: posts == freezed ? _value.posts : posts as List<Post>,
       topicId: topicId == freezed ? _value.topicId : topicId as String,
     ));
   }
@@ -412,7 +412,7 @@ abstract class _$PostPageStateCopyWith<$Res>
           _PostPageState value, $Res Function(_PostPageState) then) =
       __$PostPageStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<Post> posts, int skip, int limit, String topicId});
+  $Res call({int skip, int limit, List<Post> posts, String topicId});
 }
 
 class __$PostPageStateCopyWithImpl<$Res>
@@ -427,51 +427,49 @@ class __$PostPageStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object posts = freezed,
     Object skip = freezed,
     Object limit = freezed,
+    Object posts = freezed,
     Object topicId = freezed,
   }) {
     return _then(_PostPageState(
-      posts == freezed ? _value.posts : posts as List<Post>,
       skip == freezed ? _value.skip : skip as int,
       limit == freezed ? _value.limit : limit as int,
-      topicId == freezed ? _value.topicId : topicId as String,
+      posts: posts == freezed ? _value.posts : posts as List<Post>,
+      topicId: topicId == freezed ? _value.topicId : topicId as String,
     ));
   }
 }
 
 class _$_PostPageState implements _PostPageState {
-  const _$_PostPageState(this.posts, this.skip, this.limit, this.topicId)
-      : assert(posts != null),
-        assert(skip != null),
-        assert(limit != null),
-        assert(topicId != null);
+  const _$_PostPageState(this.skip, this.limit, {this.posts, this.topicId})
+      : assert(skip != null),
+        assert(limit != null);
 
-  @override
-  final List<Post> posts;
   @override
   final int skip;
   @override
   final int limit;
   @override
+  final List<Post> posts;
+  @override
   final String topicId;
 
   @override
   String toString() {
-    return 'PostPageState(posts: $posts, skip: $skip, limit: $limit, topicId: $topicId)';
+    return 'PostPageState(skip: $skip, limit: $limit, posts: $posts, topicId: $topicId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _PostPageState &&
-            (identical(other.posts, posts) ||
-                const DeepCollectionEquality().equals(other.posts, posts)) &&
             (identical(other.skip, skip) ||
                 const DeepCollectionEquality().equals(other.skip, skip)) &&
             (identical(other.limit, limit) ||
                 const DeepCollectionEquality().equals(other.limit, limit)) &&
+            (identical(other.posts, posts) ||
+                const DeepCollectionEquality().equals(other.posts, posts)) &&
             (identical(other.topicId, topicId) ||
                 const DeepCollectionEquality().equals(other.topicId, topicId)));
   }
@@ -479,9 +477,9 @@ class _$_PostPageState implements _PostPageState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(posts) ^
       const DeepCollectionEquality().hash(skip) ^
       const DeepCollectionEquality().hash(limit) ^
+      const DeepCollectionEquality().hash(posts) ^
       const DeepCollectionEquality().hash(topicId);
 
   @override
@@ -490,15 +488,15 @@ class _$_PostPageState implements _PostPageState {
 }
 
 abstract class _PostPageState implements PostPageState {
-  const factory _PostPageState(
-      List<Post> posts, int skip, int limit, String topicId) = _$_PostPageState;
+  const factory _PostPageState(int skip, int limit,
+      {List<Post> posts, String topicId}) = _$_PostPageState;
 
-  @override
-  List<Post> get posts;
   @override
   int get skip;
   @override
   int get limit;
+  @override
+  List<Post> get posts;
   @override
   String get topicId;
   @override
@@ -509,12 +507,12 @@ class _$PostStateTearOff {
   const _$PostStateTearOff();
 
 // ignore: unused_element
-  _PostState call(
-      PostPageState allFeed, PostPageState feedByTopic, Failure failure) {
+  _PostState call(PostPageState allFeed, PostPageState feedByTopic,
+      {Failure failure}) {
     return _PostState(
       allFeed,
       feedByTopic,
-      failure,
+      failure: failure,
     );
   }
 }
@@ -629,16 +627,15 @@ class __$PostStateCopyWithImpl<$Res> extends _$PostStateCopyWithImpl<$Res>
       feedByTopic == freezed
           ? _value.feedByTopic
           : feedByTopic as PostPageState,
-      failure == freezed ? _value.failure : failure as Failure,
+      failure: failure == freezed ? _value.failure : failure as Failure,
     ));
   }
 }
 
 class _$_PostState implements _PostState {
-  const _$_PostState(this.allFeed, this.feedByTopic, this.failure)
+  const _$_PostState(this.allFeed, this.feedByTopic, {this.failure})
       : assert(allFeed != null),
-        assert(feedByTopic != null),
-        assert(failure != null);
+        assert(feedByTopic != null);
 
   @override
   final PostPageState allFeed;
@@ -679,9 +676,8 @@ class _$_PostState implements _PostState {
 }
 
 abstract class _PostState implements PostState {
-  const factory _PostState(
-          PostPageState allFeed, PostPageState feedByTopic, Failure failure) =
-      _$_PostState;
+  const factory _PostState(PostPageState allFeed, PostPageState feedByTopic,
+      {Failure failure}) = _$_PostState;
 
   @override
   PostPageState get allFeed;

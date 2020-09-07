@@ -32,7 +32,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
         } else {
           var newPosts = (state.allFeed.posts ?? List())..addAll(result.data.asList());
           var skip = state.allFeed.skip + result.data.size;
-          yield state.copyWith.allFeed(posts: newPosts, skip: skip)..copyWith(failure: null);
+          yield state.copyWith.allFeed(posts: newPosts, skip: skip, limit: e.limit)..copyWith(failure: null);
         }
       },
       loadFeedByTopic: (e) async* {
@@ -49,7 +49,7 @@ class PostBloc extends Bloc<PostEvent, PostState> {
           }
           newPosts = newPosts..addAll(result.data.asList());
           skip += result.data.size;
-          yield state.copyWith.feedByTopic(posts: newPosts, skip: skip, topicId: e.topicId)..copyWith(failure: null);
+          yield state.copyWith.feedByTopic(posts: newPosts, skip: skip, topicId: e.topicId, limit: e.limit)..copyWith(failure: null);
         }
       },
     );
