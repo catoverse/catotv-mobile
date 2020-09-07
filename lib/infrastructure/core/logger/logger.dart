@@ -81,7 +81,7 @@ class Logger implements ILogger {
   @override
   void logEvent(String name, {Map<String, dynamic> params}) {
     _analytics.logEvent(
-      name: null,
+      name: name,
       parameters: params,
     );
   }

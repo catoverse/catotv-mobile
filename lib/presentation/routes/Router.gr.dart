@@ -88,8 +88,11 @@ class CatoRouter extends RouterBase {
       );
     },
     ProfileScreen: (data) {
+      var args = data.getArgs<ProfileScreenArguments>(
+        orElse: () => ProfileScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ProfileScreen(),
+        builder: (context) => ProfileScreen(key: args.key),
         settings: data,
       );
     },
@@ -126,6 +129,12 @@ class CatoRouter extends RouterBase {
 /// ************************************************************************
 /// Arguments holder classes
 /// *************************************************************************
+
+/// ProfileScreen arguments holder class
+class ProfileScreenArguments {
+  final Key key;
+  ProfileScreenArguments({this.key});
+}
 
 /// ProfileOverviewScreen arguments holder class
 class ProfileOverviewScreenArguments {
