@@ -11,6 +11,7 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'presentation/utils/assets/theme.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:cato_feed/application/topic/topic.dart';
+import 'package:cato_feed/application/post/post.dart';
 
 /// Handler for firebase messaging background message
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
@@ -56,7 +57,8 @@ Future<void> main() async {
     providers: [
       BlocProvider(create: (_) => getIt<InitBloc>()..add(InitEvent.requestAppVersionCheck())),
       BlocProvider(create: (_) => getIt<AuthBloc>()),
-      BlocProvider(create: (_) => getIt<TopicBloc>())
+      BlocProvider(create: (_) => getIt<TopicBloc>()),
+      BlocProvider(create: (_) => getIt<PostBloc>()),
     ],
     child: PlatformApp(
       title: 'Cato',
