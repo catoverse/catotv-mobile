@@ -20,4 +20,6 @@ class ColorAssets {
   static final Color topicColorEmotional = Color(0xFFFFC641);
   static final Color topicColorSocial = Color(0xFF1A776D);
   static final Color topicColorProductivity = Color(0xFFFFC86B);
+
+  static final Color black32 = Color(0xFF323232);
 }
