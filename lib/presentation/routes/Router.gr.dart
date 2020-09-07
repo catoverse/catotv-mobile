@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 
 import '../screens/app_redirect.dart';
 import '../screens/home/home.dart';
@@ -14,7 +15,7 @@ import '../screens/home/profile_overview.dart';
 import '../screens/no_distraction_settings.dart';
 import '../screens/notification_settings.dart';
 import '../screens/onboard/onboard_screen.dart';
-import '../screens/profile.dart';
+import '../screens/profile/profile.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/topic_selection/topic_selection.dart';
 
@@ -93,8 +94,11 @@ class CatoRouter extends RouterBase {
       );
     },
     ProfileOverviewScreen: (data) {
+      var args = data.getArgs<ProfileOverviewScreenArguments>(
+        orElse: () => ProfileOverviewScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => ProfileOverviewScreen(),
+        builder: (context) => ProfileOverviewScreen(key: args.key),
         settings: data,
       );
     },
@@ -117,4 +121,14 @@ class CatoRouter extends RouterBase {
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// ProfileOverviewScreen arguments holder class
+class ProfileOverviewScreenArguments {
+  final Key key;
+  ProfileOverviewScreenArguments({this.key});
 }

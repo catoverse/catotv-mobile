@@ -5,7 +5,7 @@ import 'package:cato_feed/presentation/screens/home/home.dart';
 import 'package:cato_feed/presentation/screens/no_distraction_settings.dart';
 import 'package:cato_feed/presentation/screens/notification_settings.dart';
 import 'package:cato_feed/presentation/screens/onboard/onboard_screen.dart';
-import 'package:cato_feed/presentation/screens/profile.dart';
+import 'package:cato_feed/presentation/screens/profile/profile.dart';
 import 'package:cato_feed/presentation/screens/home/profile_overview.dart';
 import 'package:cato_feed/presentation/screens/splash/splash_screen.dart';
 
