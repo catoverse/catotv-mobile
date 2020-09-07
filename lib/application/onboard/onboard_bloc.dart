@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cato_feed/domain/auth/i_auth_facade.dart';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cato_feed/domain/core/failure.dart';

@@ -308,10 +308,10 @@ class _$OnboardStateTearOff {
   const _$OnboardStateTearOff();
 
 // ignore: unused_element
-  _OnboardState call(int currentCardIndex, Failure failure) {
+  _OnboardState call(int currentCardIndex, {Failure failure}) {
     return _OnboardState(
       currentCardIndex,
-      failure,
+      failure: failure,
     );
   }
 }
@@ -396,15 +396,14 @@ class __$OnboardStateCopyWithImpl<$Res> extends _$OnboardStateCopyWithImpl<$Res>
       currentCardIndex == freezed
           ? _value.currentCardIndex
           : currentCardIndex as int,
-      failure == freezed ? _value.failure : failure as Failure,
+      failure: failure == freezed ? _value.failure : failure as Failure,
     ));
   }
 }
 
 class _$_OnboardState implements _OnboardState {
-  const _$_OnboardState(this.currentCardIndex, this.failure)
-      : assert(currentCardIndex != null),
-        assert(failure != null);
+  const _$_OnboardState(this.currentCardIndex, {this.failure})
+      : assert(currentCardIndex != null);
 
   @override
   final int currentCardIndex;
@@ -439,7 +438,7 @@ class _$_OnboardState implements _OnboardState {
 }
 
 abstract class _OnboardState implements OnboardState {
-  const factory _OnboardState(int currentCardIndex, Failure failure) =
+  const factory _OnboardState(int currentCardIndex, {Failure failure}) =
       _$_OnboardState;
 
   @override
