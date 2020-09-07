@@ -11,6 +11,7 @@ import 'package:cato_feed/domain/core/result.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cato_feed/infrastructure/core/db/moor/extensions.dart';
 
 @LazySingleton(as: IPostRepository)
 class PostRepository implements IPostRepository {
@@ -82,4 +83,17 @@ class PostRepository implements IPostRepository {
     return await _savePosts(likedPosts, _USER_LIKED_POSTS_KEY);
   }
 
+  @override
+  Future<List<Post>> getLikedPosts() async {
+    var likedPosts = await getLikedPostsId();
+    var posts = await db.postsDao.getPostsById(likedPosts);
+    return posts.map((e) => e.toPost()).toList();
+  }
+
+  @override
+  Future<List<Post>> getSavedPosts() async {
+    var savedPosts = await getSavedPostsId();
+    var posts = await db.postsDao.getPostsById(savedPosts);
+    return posts.map((e) => e.toPost()).toList();
+  }
 }

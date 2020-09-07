@@ -12,4 +12,6 @@ abstract class IPostRepository {
   Future<bool> removeSavePost(String postId);
   Future<List<String>> getSavedPostsId();
   Future<List<String>> getLikedPostsId();
+  Future<List<Post>> getSavedPosts();
+  Future<List<Post>> getLikedPosts();
 }

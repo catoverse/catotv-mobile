@@ -71,6 +71,10 @@ class PostsDao extends DatabaseAccessor<MyDatabase> with _$PostsDaoMixin {
     return (select(posts)..where((t) => t.id.equals(id))).getSingle();
   }
 
+  Future<List<MPost>> getPostsById(List<String> ids) {
+    return (select(posts)..where((t) => t.id.isIn(ids))).get();
+  }
+
   Future<List<MPost>> getAllPosts() {
     return select(posts).get();
   }

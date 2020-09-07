@@ -58,16 +58,16 @@ extension UserDTO on User {
       var loginResult = response['googleLogin'];
       var userResult = response['googleLogin']['user'];
       return User(
-        id: userResult['id'] as String,
-        email: userResult['email'] as String,
-        name: userResult['name'] as String,
-        photoUrl: userResult['avatar'] as String,
-        googleId: googleId,
-        jwtToken: loginResult['token'],
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        jwtIssueDate: DateTime.now(),
-        interestSelected: false
+          id: userResult['id'] as String,
+          email: userResult['email'] as String,
+          name: userResult['name'] as String,
+          photoUrl: userResult['avatar'] as String,
+          googleId: googleId,
+          jwtToken: loginResult['token'],
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+          jwtIssueDate: DateTime.now(),
+          interestSelected: false
       );
     } catch (_) {
       return null;
@@ -108,7 +108,8 @@ extension TopicDTO on Topic {
       var topicsResult = response as List<dynamic>;
       List<Topic> topicList = [];
       topicsResult.forEach((element) {
-        topicList.add(Topic(id: element['id'], name: element['name'], color: '', image: ''));
+        topicList.add(Topic(
+            id: element['id'], name: element['name'], color: '', image: ''));
       });
       return KtList.from(topicList);
     } catch (_) {
@@ -139,7 +140,7 @@ extension PostDTO on Post {
       List<Post> posts = [];
       videoResults.forEach((element) {
         var p = fromResponse(element);
-        if(p != null) posts.add(p);
+        if (p != null) posts.add(p);
       });
       return KtList.from(posts);
     } catch (_) {
@@ -149,26 +150,40 @@ extension PostDTO on Post {
 
   static Post fromResponse(dynamic response) {
     try {
-      if(response['id'] == null) return null;
+      if (response['id'] == null) return null;
       var videoUrl = response['video_url'] as String;
-      if(videoUrl == null || videoUrl.isEmpty || !videoUrl.startsWith('http')) return null;
+      if (videoUrl == null || videoUrl.isEmpty || !videoUrl.startsWith('http'))
+        return null;
 
       return Post(
-        id: response['id'],
-        videoUrl: response['video_url'],
-        title: response['title'] ?? '',
-        description: response['description'] ?? '',
-        authorName: response['author_name'] ?? '',
-        authorAvatar: '',
-        startTimestamp: response['start_timestamp'] as int,
-        endTimestamp: response['end_timestamp'] as int,
-        topicId: response['topic']['id'] ?? ''
+          id: response['id'],
+          videoUrl: response['video_url'],
+          title: response['title'] ?? '',
+          description: response['description'] ?? '',
+          authorName: response['author_name'] ?? '',
+          authorAvatar: '',
+          startTimestamp: response['start_timestamp'] as int,
+          endTimestamp: response['end_timestamp'] as int,
+          topicId: response['topic']['id'] ?? ''
       );
     } catch (_) {
       return null;
     }
   }
+}
 
+extension MPostDTO on MPost {
+  Post toPost() {
+    if (this == null) return null;
 
-
+    return Post(id: this.id,
+        authorName: this.authorName,
+        authorAvatar: this.authorAvatar,
+        title: this.title,
+        description: this.description,
+        videoUrl: this.videoUrl,
+        startTimestamp: this.startTimestamp,
+        endTimestamp: this.endTimestamp,
+        topicId: this.topicId);
+  }
 }

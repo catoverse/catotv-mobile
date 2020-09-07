@@ -20,6 +20,7 @@ import 'application/home/feed/feed_bloc.dart';
 import 'application/init/init_bloc.dart';
 import 'application/onboard/onboard_bloc.dart';
 import 'application/post/post_bloc.dart';
+import 'application/saved_posts/saved_posts_bloc.dart';
 import 'application/splash/splash_bloc.dart';
 import 'application/topic/topic_bloc.dart';
 import 'application/topic_selection/topicselection_bloc.dart';
@@ -87,6 +88,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       ));
   gh.factory<InitBloc>(() => InitBloc(g<IRepository>()));
   gh.factory<PostBloc>(() => PostBloc(g<IPostRepository>()));
+  gh.factory<SavedPostsBloc>(() => SavedPostsBloc(g<IPostRepository>()));
   gh.factory<TopicBloc>(
       () => TopicBloc(g<IUserRepository>(), g<ITopicRepository>()));
   gh.factory<TopicSelectionBloc>(
