@@ -33,7 +33,7 @@ extension UserDTO on User {
     return MUser(
         id: this.id,
         name: this.name,
-        email: this.name,
+        email: this.email,
         avatar: this.photoUrl,
         googleId: this.googleId,
         jwtToken: this.jwtToken,
