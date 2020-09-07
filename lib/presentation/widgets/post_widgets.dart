@@ -1,6 +1,8 @@
+import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/domain/posts/post.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class _PostTitleWidget extends StatelessWidget {
@@ -145,36 +147,66 @@ class _PostSocialStatsWidget extends StatelessWidget {
 }
 
 class _PostSocialInteractionWidget extends StatelessWidget {
+  final String postId;
+
+  const _PostSocialInteractionWidget(this.postId, {Key key}) : super(key: key);
+
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 15,
-        ),
-        Icon(
-          Icons.favorite_border,
-          color: Colors.white,
-          size: 30,
-        ),
-        SizedBox(
-          width: 24,
-        ),
-        Icon(
-          Icons.bookmark_border,
-          size: 30,
-          color: Colors.white,
-        ),
-        Spacer(),
-        Icon(
-          Icons.share,
-          size: 30,
-          color: Colors.white,
-        ),
-        SizedBox(
-          width: 15,
-        )
-      ],
+    return BlocBuilder<UserProfileBloc, UserProfileState>(
+      builder: (_, state) {
+        var isLiked = state.isLiked(postId);
+        var isSaved = state.isSaved(postId);
+        var bloc = context.bloc<UserProfileBloc>();
+        return Row(
+          children: [
+            SizedBox(
+              width: 15,
+            ),
+            InkWell(
+              onTap: () {
+                if(isLiked) {
+                  bloc.add(UserProfileEvent.unlikePost(postId));
+                } else {
+                  bloc.add(UserProfileEvent.likePost(postId));
+                }
+              },
+              child: Icon(
+                (isLiked) ? Icons.favorite : Icons.favorite_border,
+                color: (isLiked) ? Colors.red.shade600 : Colors.white,
+                size: 30,
+              ),
+            ),
+            SizedBox(
+              width: 24,
+            ),
+            InkWell(
+              onTap: () {
+                if(isSaved) {
+                  bloc.add(UserProfileEvent.unSavePost(postId));
+                } else {
+                  bloc.add(UserProfileEvent.savePost(postId));
+                }
+              },
+              child: Icon(
+                (isSaved) ? Icons.bookmark : Icons.bookmark_border,
+                size: 30,
+                color: (isSaved) ? ColorAssets.teal : Colors.white,
+              ),
+            ),
+            Spacer(),
+            Icon(
+              Icons.share,
+              size: 30,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 15,
+            )
+          ],
+        );
+      },
     );
   }
 }
@@ -247,7 +279,7 @@ class PostWidget extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          _PostSocialInteractionWidget(),
+          _PostSocialInteractionWidget(post.id),
           SizedBox(
             height: 10,
           ),

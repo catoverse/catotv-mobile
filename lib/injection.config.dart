@@ -23,6 +23,7 @@ import 'application/post/post_bloc.dart';
 import 'application/splash/splash_bloc.dart';
 import 'application/topic/topic_bloc.dart';
 import 'application/topic_selection/topicselection_bloc.dart';
+import 'application/user_profile/userprofile_bloc.dart';
 import 'domain/auth/i_auth_facade.dart';
 import 'domain/auth/i_user_repository.dart';
 import 'domain/core/i_logger.dart';
@@ -70,6 +71,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<Network>(),
         g<ILogger>(),
         g<MyDatabase>(),
+        g<SharedPreferences>(),
       ));
   gh.lazySingleton<IRepository>(() => Repository(g<Network>(), g<ILogger>()));
   gh.lazySingleton<ITopicRepository>(() => TopicRepository(
@@ -89,6 +91,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       () => TopicBloc(g<IUserRepository>(), g<ITopicRepository>()));
   gh.factory<TopicSelectionBloc>(
       () => TopicSelectionBloc(g<IUserRepository>(), g<ITopicRepository>()));
+  gh.factory<UserProfileBloc>(() => UserProfileBloc(g<IPostRepository>()));
   gh.factory<FeedBloc>(() => FeedBloc(g<IPostRepository>()));
   gh.lazySingleton<IAuthFacade>(() => AuthFacade(
         g<GoogleSignIn>(),
