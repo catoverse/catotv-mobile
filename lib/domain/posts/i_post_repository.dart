@@ -10,4 +10,6 @@ abstract class IPostRepository {
   Future<bool> unlikePost(String postId);
   Future<bool> savePost(String postId, KtList<String> topicIds);
   Future<bool> removeSavePost(String postId);
+  Future<List<String>> getSavedPostsId();
+  Future<List<String>> getLikedPostsId();
 }
