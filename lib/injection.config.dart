@@ -51,6 +51,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<FirebaseMessaging>(() => registerModule.firebaseMessaging);
   gh.lazySingleton<GoogleSignIn>(() => registerModule.getGoogleSignIn);
   gh.lazySingleton<MyDatabase>(() => MyDatabase());
+  gh.factory<OnboardBloc>(() => OnboardBloc());
   final sharedPreferences = await registerModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.factory<SplashBloc>(() => SplashBloc());
@@ -86,15 +87,14 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<PostBloc>(() => PostBloc(g<IPostRepository>()));
   gh.factory<TopicBloc>(
       () => TopicBloc(g<IUserRepository>(), g<ITopicRepository>()));
-  gh.factory<TopicselectionBloc>(
-      () => TopicselectionBloc(g<IUserRepository>(), g<ITopicRepository>()));
+  gh.factory<TopicSelectionBloc>(
+      () => TopicSelectionBloc(g<IUserRepository>(), g<ITopicRepository>()));
   gh.factory<FeedBloc>(() => FeedBloc(g<IPostRepository>()));
   gh.lazySingleton<IAuthFacade>(() => AuthFacade(
         g<GoogleSignIn>(),
         g<IUserRepository>(),
         g<ILogger>(),
       ));
-  gh.factory<OnboardBloc>(() => OnboardBloc(g<IAuthFacade>()));
   gh.factory<AuthBloc>(() => AuthBloc(g<IAuthFacade>()));
 
   // Eager singletons must be registered in the right order
