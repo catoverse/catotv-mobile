@@ -4,6 +4,8 @@ import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/init/init.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:cato_feed/main.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -129,6 +131,7 @@ class SplashPage extends StatelessWidget {
                           ),
                           textColor: Colors.white,
                           onPressed: () async {
+                            getIt<ILogger>().logEvent(LogEvents.EVENT_UPDATE_APP_CLICKED);
                             var url = (Platform.isAndroid)
                                 ? getIt.get(instanceName: 'PlayStoreUrl')
                                 : getIt.get(instanceName: 'AppStoreUrl');

@@ -3,6 +3,8 @@ import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/onboard/onboard_bloc.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/domain/core/failure.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/main.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
@@ -157,6 +159,7 @@ class OnboardingPage extends StatelessWidget {
               child: Center(
                 child: GoogleSignInButton(
                   onPressed: () {
+                    getIt<ILogger>().logEvent(LogEvents.EVENT_LOGIN_PRESSED);
                     context.bloc<AuthBloc>().add(AuthEvent.login());
                   },
                   darkMode: true,

@@ -4,7 +4,9 @@ import 'package:cato_feed/application/home/feed/feed_bloc.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/application/video_player/video_player_bloc.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/domain/posts/post.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:cato_feed/presentation/widgets/horizontal_tags.dart';
@@ -116,15 +118,18 @@ class _MainFeedPageState extends State<MainFeedPage> {
                     margin: EdgeInsets.only(top: 35, bottom: 10),
                     child: BlocBuilder<FeedBloc, FeedState>(
                       builder: (_, state) {
-                        return HorizontalTags(
-                            topics,
-                            state.selectedTopicId,
+                        return HorizontalTags(topics, state.selectedTopicId,
                             onTap: (selectedTopicId) {
-                              if(state.selectedTopicId != selectedTopicId) {
-                                context.bloc<FeedBloc>().add(FeedEvent.selectTopic(topicId: selectedTopicId));
-                              }
-                            }
-                        );
+                          if (state.selectedTopicId != selectedTopicId) {
+                            getIt<ILogger>().logEvent(
+                                LogEvents.EVENT_LIST_FILTER_SELECTED,
+                                params:
+                                    LogEvents.getListFilterSelectedVariables(
+                                        selectedTopicId));
+                            context.bloc<FeedBloc>().add(FeedEvent.selectTopic(
+                                topicId: selectedTopicId));
+                          }
+                        });
                       },
                     ),
                   );

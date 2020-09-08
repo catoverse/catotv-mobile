@@ -9,6 +9,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:cato_feed/domain/posts/post.dart';
 import 'package:cato_feed/application/video_player/video_player_bloc.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 
 class SavedPostScreen extends StatelessWidget {
   SavedPostScreen({Key key}) : super(key: key);
@@ -77,6 +79,11 @@ class _SavedPostPageState extends State<SavedPostPage> {
                           ),
                           onTap: () {
                             if (state.selectedPage != list[index]) {
+                              getIt<ILogger>().logEvent(
+                                  LogEvents.EVENT_LIST_FILTER_SELECTED,
+                                  params:
+                                  LogEvents.getListFilterSelectedVariables(
+                                      (list[index] == SelectedPage.Liked) ? 'Liked' : 'Saved'));
                               context
                                   .bloc<SavedPostsBloc>()
                                   .add(SavedPostsEvent.updateSelectedPage(list[index]));

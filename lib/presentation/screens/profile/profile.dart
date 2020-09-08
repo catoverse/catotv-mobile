@@ -1,5 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cato_feed/application/auth/auth.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
+import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
@@ -172,9 +175,11 @@ class ProfileScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return _profileItems[index]._buildWidget(() {
                       if (index == 0) {
+                        getIt<ILogger>().logEvent(LogEvents.EVENT_PROFILE_PICK_TOPIC);
                         ExtendedNavigator.of(context)
                             .push(CatoRoutes.topicSelectionScreen);
                       } else if (index == 1) {
+                        getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_PRESSED);
                         _logout(context);
                       }
                     });
@@ -209,12 +214,14 @@ class ProfileScreen extends StatelessWidget {
             actions: <Widget>[
               FlatButton(
                 onPressed: () {
+                  getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
                   Navigator.of(context).pop(false);
                 },
                 child: Text('Cancel'),
               ),
               FlatButton(
                 onPressed: () {
+                  getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
                   context.bloc<AuthBloc>().add(AuthEvent.signedOut());
                 },
                 child: Text('Logout'),

@@ -6,6 +6,8 @@ import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -79,8 +81,8 @@ Future<void> main() async {
         builder: ExtendedNavigator.builder(
           router: CatoRouter(),
           observers: [
-            // FirebaseAnalyticsObserver(
-            //     analytics: getIt.get<FirebaseAnalytics>()),
+            FirebaseAnalyticsObserver(
+                analytics: getIt.get<FirebaseAnalytics>()),
           ],
         ),
       ),

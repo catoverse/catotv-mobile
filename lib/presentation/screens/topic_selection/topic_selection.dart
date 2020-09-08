@@ -4,7 +4,9 @@ import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/application/topic_selection/topicselection_bloc.dart';
 import 'package:cato_feed/domain/auth/user.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/domain/topic/topic.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/main.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
@@ -47,14 +49,17 @@ class TopicSelectionScreen extends StatelessWidget {
             margin: EdgeInsets.only(right: 32, top: 4),
             child: (context.navigator.canPop())
                 ? GestureDetector(
-              child: InkWell(
-                child: Icon(
-                  Icons.close,
-                  color: ColorAssets.blueHaiti,
-                ),
-              ),
-              onTap: () => context.navigator.pop(),
-            )
+                    child: InkWell(
+                      child: Icon(
+                        Icons.close,
+                        color: ColorAssets.blueHaiti,
+                      ),
+                    ),
+                    onTap: () {
+                      getIt<ILogger>().logEvent(LogEvents.EVENT_TOPIC_PICK_CANCEL);
+                      context.navigator.pop();
+                    },
+                  )
                 : null,
           ),
         ],
@@ -73,15 +78,14 @@ class TopicSelectionPage extends StatefulWidget {
 }
 
 class _TopicSelectionPageState extends State<TopicSelectionPage> {
-
   @override
   void initState() {
     super.initState();
     var state = context.bloc<TopicBloc>().state;
-    if (state.selectedTopicIds != null ||
-        state.selectedTopicIds.isNotEmpty) {
+    if (state.selectedTopicIds != null || state.selectedTopicIds.isNotEmpty) {
       context.bloc<TopicSelectionBloc>().add(
-          TopicSelectionEvent.updateSelectedTopics(KtList.from(state.selectedTopicIds)));
+          TopicSelectionEvent.updateSelectedTopics(
+              KtList.from(state.selectedTopicIds)));
     }
   }
 
@@ -94,7 +98,8 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
             if (state.selectedTopicIds != null ||
                 state.selectedTopicIds.isNotEmpty) {
               context.bloc<TopicSelectionBloc>().add(
-                  TopicSelectionEvent.updateSelectedTopics(KtList.from(state.selectedTopicIds)));
+                  TopicSelectionEvent.updateSelectedTopics(
+                      KtList.from(state.selectedTopicIds)));
             }
             if (state.failure != null) {
               var msg = state.failure.map(
@@ -105,8 +110,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
               Flushbar(
                 message: msg,
                 duration: Duration(seconds: 3),
-              )
-                ..show(context);
+              )..show(context);
             }
           },
         ),
@@ -116,15 +120,17 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
               if (context.navigator.canPop()) {
                 context.navigator.pop();
               } else {
-                await openDynamicLinkOr(context, otherScreen: CatoRoutes.homeScreen);
+                await openDynamicLinkOr(context,
+                    otherScreen: CatoRoutes.homeScreen);
               }
               User user = context
                   .bloc<AuthBloc>()
                   .state
                   .maybeWhen(orElse: () => null, authenticated: (user) => user);
               if (user != null) {
-                context.bloc<TopicBloc>().add(
-                    TopicEvent.refreshSelectedTopics(user));
+                context
+                    .bloc<TopicBloc>()
+                    .add(TopicEvent.refreshSelectedTopics(user));
               }
             } else if (state.failure != null) {
               var msg = state.failure.map(
@@ -135,8 +141,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
               Flushbar(
                 message: msg,
                 duration: Duration(seconds: 3),
-              )
-                ..show(context);
+              )..show(context);
             }
           },
         ),
@@ -153,62 +158,62 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
               children: [
                 (allTopics.length > 0)
                     ? StaggeredGridView.builder(
-                  itemCount: allTopics.length + 1,
-                  // 1 for getting spacing
-                  scrollDirection: Axis.vertical,
-                  gridDelegate:
-                  SliverStaggeredGridDelegateWithFixedCrossAxisCount(
-                      staggeredTileBuilder: (index) {
-                        if (index >= allTopics.length)
-                          return StaggeredTile.fit(2);
-                        return StaggeredTile.fit(1);
-                      },
-
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 12,
-                      staggeredTileCount: allTopics.length + 1),
-                  padding: EdgeInsets.only(left: 32, right: 32),
-                  itemBuilder: (context, index) {
-                    if (index >= allTopics.length) return SizedBox(height: 50,);
-                    return GestureDetector(
-                      onTap: () {
-                        var item = allTopics[index];
-                        // ignore: close_sinks
-                        var bloc = context.bloc<TopicSelectionBloc>();
-                        if (state.selectedTopicIds.contains(item.id)) {
-                          bloc.add(
-                              TopicSelectionEvent.unSelectTopic(item.id));
-                        } else {
-                          bloc.add(
-                              TopicSelectionEvent.selectTopic(item.id));
-                        }
-                      },
-                      child: _buildCard(allTopics[index],
-                          state.isSelected(allTopics[index].id)),
-                    );
-                  },
-                )
+                        itemCount: allTopics.length + 1,
+                        // 1 for getting spacing
+                        scrollDirection: Axis.vertical,
+                        gridDelegate:
+                            SliverStaggeredGridDelegateWithFixedCrossAxisCount(
+                                staggeredTileBuilder: (index) {
+                                  if (index >= allTopics.length)
+                                    return StaggeredTile.fit(2);
+                                  return StaggeredTile.fit(1);
+                                },
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 12,
+                                staggeredTileCount: allTopics.length + 1),
+                        padding: EdgeInsets.only(left: 32, right: 32),
+                        itemBuilder: (context, index) {
+                          if (index >= allTopics.length)
+                            return SizedBox(
+                              height: 50,
+                            );
+                          return GestureDetector(
+                            onTap: () {
+                              var item = allTopics[index];
+                              // ignore: close_sinks
+                              var bloc = context.bloc<TopicSelectionBloc>();
+                              if (state.selectedTopicIds.contains(item.id)) {
+                                bloc.add(
+                                    TopicSelectionEvent.unSelectTopic(item.id));
+                              } else {
+                                bloc.add(
+                                    TopicSelectionEvent.selectTopic(item.id));
+                              }
+                            },
+                            child: _buildCard(allTopics[index],
+                                state.isSelected(allTopics[index].id)),
+                          );
+                        },
+                      )
                     : Center(
-                  child: CircularProgressIndicator(),
-                ),
+                        child: CircularProgressIndicator(),
+                      ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: GestureDetector(
                     child: Card(
                       margin: EdgeInsets.only(top: 60, bottom: 8),
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.all(Radius.circular(26))),
+                          borderRadius: BorderRadius.all(Radius.circular(26))),
                       elevation: 0.0,
                       color: ColorAssets.teal,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 16, horizontal: 100),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 16, horizontal: 100),
                         child: Text(
                           'Done',
-                          style: TextStyle(
-                              color: Colors.white, fontSize: 18),
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
                       ),
                     ),
@@ -217,18 +222,20 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                           state.selectedTopicIds.isEmpty()) {
                         Flushbar(
                           message:
-                          'Please select at least one topic to continue',
+                              'Please select at least one topic to continue',
                           duration: Duration(seconds: 2),
-                        )
-                          ..show(context);
+                        )..show(context);
                       } else {
+                        getIt<ILogger>().logEvent(
+                            LogEvents.EVENT_TOPIC_PICK_DONE,
+                            params:
+                                LogEvents.getTopicPickDoneVariables(state.selectedTopicIds.asList()));
                         // ignore: close_sinks
                         var bloc = context.bloc<AuthBloc>();
                         bloc.state.maybeWhen(
-                          authenticated: (user) =>
-                              context
-                                  .bloc<TopicSelectionBloc>()
-                                  .add(TopicSelectionEvent.saveTopics(user)),
+                          authenticated: (user) => context
+                              .bloc<TopicSelectionBloc>()
+                              .add(TopicSelectionEvent.saveTopics(user)),
                           orElse: () {},
                         );
                       }
@@ -265,10 +272,10 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
       ),
       child: (isChecked)
           ? Icon(
-        Icons.check,
-        color: Colors.white,
-        size: 15,
-      )
+              Icons.check,
+              color: Colors.white,
+              size: 15,
+            )
           : null,
     );
   }

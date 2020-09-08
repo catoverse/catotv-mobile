@@ -68,7 +68,7 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<bool> likePost(String postId) async {
-    _logger.logEvent(LogEvents.POST_LIKED, params: LogEvents.getPostVariables(postId));
+    _logger.logEvent(LogEvents.EVENT_POST_LIKED, params: LogEvents.getPostVariables(postId));
     var likedPosts = await getLikedPostsId();
     likedPosts.add(postId);
     return await _savePosts(likedPosts, _USER_LIKED_POSTS_KEY);
@@ -76,7 +76,7 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<bool> removeSavePost(String postId) async{
-    _logger.logEvent(LogEvents.POST_UNSAVED, params: LogEvents.getPostVariables(postId));
+    _logger.logEvent(LogEvents.EVENT_POST_UNSAVED, params: LogEvents.getPostVariables(postId));
     var savedPosts = await getSavedPostsId();
     savedPosts.remove(postId);
     return await _savePosts(savedPosts, _USER_SAVED_POSTS_KEY);
@@ -84,7 +84,7 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<bool> savePost(String postId, KtList<String> topicIds) async{
-    _logger.logEvent(LogEvents.POST_SAVED, params: LogEvents.getPostVariables(postId));
+    _logger.logEvent(LogEvents.EVENT_POST_SAVED, params: LogEvents.getPostVariables(postId));
     var savedPosts = await getSavedPostsId();
     savedPosts.add(postId);
     return await _savePosts(savedPosts, _USER_SAVED_POSTS_KEY);
@@ -92,7 +92,7 @@ class PostRepository implements IPostRepository {
 
   @override
   Future<bool> unlikePost(String postId) async {
-    _logger.logEvent(LogEvents.POST_UNLIKED, params: LogEvents.getPostVariables(postId));
+    _logger.logEvent(LogEvents.EVENT_POST_UNLIKED, params: LogEvents.getPostVariables(postId));
     var likedPosts = await getLikedPostsId();
     likedPosts.remove(postId);
     return await _savePosts(likedPosts, _USER_LIKED_POSTS_KEY);

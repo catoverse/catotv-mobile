@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -46,7 +47,7 @@ class ShareVideoBloc extends Bloc<ShareVideoEvent, ShareVideoState> {
         final Uri dynamicLink = shortDynamicLink.shortUrl;
         var message = 'Checkout ${data.title} and other interesting videos at $dynamicLink';
         yield state.copyWith(shareText: message);
-        logger.logShare(data.postId);
+        logger.logEvent(LogEvents.EVENT_POST_SHARE, params: LogEvents.getPostVariables(data.postId));
       },
     );
   }
