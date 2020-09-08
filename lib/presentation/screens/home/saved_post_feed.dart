@@ -8,14 +8,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:cato_feed/domain/posts/post.dart';
+import 'package:cato_feed/application/video_player/video_player_bloc.dart';
 
 class SavedPostScreen extends StatelessWidget {
   SavedPostScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<SavedPostsBloc>()..add(SavedPostsEvent.refresh()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<SavedPostsBloc>()..add(SavedPostsEvent.refresh()),),
+        BlocProvider(create: (context) => getIt<VideoPlayerBloc>())
+      ],
       child: SavedPostPage(),
     );
   }

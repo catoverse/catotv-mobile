@@ -25,6 +25,7 @@ import 'application/splash/splash_bloc.dart';
 import 'application/topic/topic_bloc.dart';
 import 'application/topic_selection/topicselection_bloc.dart';
 import 'application/user_profile/userprofile_bloc.dart';
+import 'application/video_player/video_player_bloc.dart';
 import 'domain/auth/i_auth_facade.dart';
 import 'domain/auth/i_user_repository.dart';
 import 'domain/core/i_logger.dart';
@@ -64,6 +65,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       instanceName: 'PlayStoreUrl');
   gh.factory<String>(() => registerModule.appStoreUrl,
       instanceName: 'AppStoreUrl');
+  gh.factory<VideoPlayerBloc>(() => VideoPlayerBloc());
   gh.lazySingleton<Network>(() => Network(
         g<ILogger>(),
         g<Connectivity>(),

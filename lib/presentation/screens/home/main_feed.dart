@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cato_feed/application/home/feed/feed_bloc.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
+import 'package:cato_feed/application/video_player/video_player_bloc.dart';
 import 'package:cato_feed/domain/posts/post.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
@@ -23,8 +24,11 @@ class MainFeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<FeedBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<FeedBloc>()),
+        BlocProvider(create: (context) => getIt<VideoPlayerBloc>())
+      ],
       child: MainFeedPage(
         key: _key,
       ),
