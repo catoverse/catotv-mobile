@@ -150,7 +150,7 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
                 AspectRatio(
                   aspectRatio: 16 / 9.0,
                   child: Image.network(
-                    YoutubePlayer.getThumbnail(videoId: youtubeVideoId),
+                    getYoutubeThumbnail(youtubeVideoId),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -345,7 +345,7 @@ class PostWidget extends StatelessWidget {
           _PostSocialInteractionWidget(
             post.id,
             post.title,
-            YoutubePlayer.getThumbnail(videoId: youtubeVideoId),
+            getYoutubeThumbnail(youtubeVideoId),
           ),
           SizedBox(
             height: 10,
@@ -359,3 +359,7 @@ class PostWidget extends StatelessWidget {
     );
   }
 }
+
+String getYoutubeThumbnail(String videoId) {
+  return 'https://img.youtube.com/vi/$videoId/sddefault.jpg';
+} 

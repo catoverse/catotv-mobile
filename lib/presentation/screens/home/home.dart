@@ -1,15 +1,17 @@
 import 'package:cato_feed/application/auth/auth.dart';
-import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/injection.dart';
+import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/screens/home/main_feed.dart';
 import 'package:cato_feed/presentation/screens/home/saved_post_feed.dart';
 import 'package:cato_feed/presentation/screens/profile/profile.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:share/share.dart';
+import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,6 +19,34 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    initDynamicLinks();
+  }
+
+  void initDynamicLinks() async {
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      var isAuthenticated = context
+          .bloc<AuthBloc>()
+          .state
+          .maybeWhen(orElse: () => false, authenticated: (_) => true);
+
+      if(isAuthenticated) {
+        final Uri deepLink = dynamicLink?.link;
+
+        if (deepLink != null) {
+          context.navigator.push(deepLink.path);
+        }
+      } else {
+        context.navigator.push(CatoRoutes.onboardingScreen);
+      }
+    }, onError: (OnLinkErrorException e) async {
+      getIt<ILogger>().logException(e);
+    });
+  }
+
   List<Widget> _pages = [
     MainFeedScreen(
       key: PageStorageKey('feedScreen'),
@@ -52,13 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     _currentPage = 0;
                   }
                 });
-              }
-            },
-          ),
-          BlocListener<ShareVideoBloc, ShareVideoState>(
-            listener: (_, state) async {
-              if(state.shareText != null) {
-                await Share.share(state.shareText);
               }
             },
           ),

@@ -5,6 +5,7 @@ import 'package:cato_feed/application/topic_selection/topicselection_bloc.dart';
 import 'package:cato_feed/domain/auth/user.dart';
 import 'package:cato_feed/domain/topic/topic.dart';
 import 'package:cato_feed/injection.dart';
+import 'package:cato_feed/main.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
@@ -107,12 +108,12 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
           },
         ),
         BlocListener<TopicSelectionBloc, TopicSelectionState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state.topicSavedSuccess == true) {
               if (context.navigator.canPop()) {
                 context.navigator.pop();
               } else {
-                context.navigator.replace(CatoRoutes.homeScreen);
+                await openDynamicLinkOr(context, otherScreen: CatoRoutes.homeScreen);
               }
               User user = context
                   .bloc<AuthBloc>()

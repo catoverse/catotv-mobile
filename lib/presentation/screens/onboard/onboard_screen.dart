@@ -4,6 +4,7 @@ import 'package:cato_feed/application/onboard/onboard_bloc.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/domain/core/failure.dart';
 import 'package:cato_feed/injection.dart';
+import 'package:cato_feed/main.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
@@ -70,7 +71,7 @@ class OnboardingPage extends StatelessWidget {
           },
         ),
         BlocListener<TopicBloc, TopicState>(
-          listener: (_, state) {
+          listener: (_, state) async {
             // ignore: close_sinks
             var bloc = context.bloc<OnboardBloc>();
 
@@ -86,7 +87,7 @@ class OnboardingPage extends StatelessWidget {
                 // Send to topic Selected
                 context.navigator.replace(CatoRoutes.topicSelectionScreen);
               } else {
-                context.navigator.replace(CatoRoutes.homeScreen);
+                await openDynamicLinkOr(context, otherScreen: CatoRoutes.homeScreen);
               }
             }
           },

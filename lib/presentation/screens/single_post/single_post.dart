@@ -38,7 +38,7 @@ class SinglePostPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SinglePostBloc, SinglePostState>(
-      listener: (_, state) {
+      listener: (_, state) async {
         if (state.failure != null) {
           Flushbar(
             message: state.failure.when(
@@ -48,6 +48,11 @@ class SinglePostPage extends StatelessWidget {
             ),
             duration: Duration(seconds: 3),
           )..show(context);
+        }
+
+        if(state.post != null) {
+          await Future.delayed(Duration(milliseconds: 100)); // Wait for at least 100 milliseconds ~6 frames
+          context.bloc<VideoPlayerBloc>().add(VideoPlayerEvent.setCurrentPlayablePlayingId(state.post.id));
         }
       },
       builder: (_, state) {
@@ -61,7 +66,11 @@ class SinglePostPage extends StatelessWidget {
                 color: Colors.white,
               ),
               onTap: () {
-                context.navigator.replace(CatoRoutes.homeScreen);
+                if(context.navigator.canPop()) {
+                  context.navigator.pop();
+                } else {
+                  context.navigator.replace(CatoRoutes.homeScreen);
+                }
               },
             ),
             backgroundColor: ColorAssets.black21,

@@ -4,6 +4,8 @@ import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/init/init.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
+import 'package:cato_feed/main.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -69,7 +71,7 @@ class SplashPage extends StatelessWidget {
           },
         ),
         BlocListener<TopicBloc, TopicState>(
-          listener: (_, state) {
+          listener: (_, state) async {
             // ignore: close_sinks
             var bloc = context.bloc<SplashBloc>();
 
@@ -85,8 +87,8 @@ class SplashPage extends StatelessWidget {
                 // Send to topic Selected
                 context.navigator.replace(CatoRoutes.topicSelectionScreen);
               } else {
+                await openDynamicLinkOr(context, otherScreen: CatoRoutes.homeScreen);
                 // Send to home screen
-                context.navigator.replace(CatoRoutes.homeScreen);
               }
             }
           },

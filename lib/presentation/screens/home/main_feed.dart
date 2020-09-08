@@ -48,14 +48,14 @@ class _MainFeedPageState extends State<MainFeedPage> {
 
   @override
   void initState() {
-    _dataSource = PostDataSource(0, 15, context.bloc<FeedBloc>());
     super.initState();
+    _dataSource = PostDataSource(0, 15, context.bloc<FeedBloc>());
   }
 
   @override
   void dispose() {
-    _dataSource.dispose();
     super.dispose();
+    _dataSource.dispose();
   }
 
   @override
