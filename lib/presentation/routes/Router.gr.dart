@@ -16,6 +16,7 @@ import '../screens/no_distraction_settings.dart';
 import '../screens/notification_settings.dart';
 import '../screens/onboard/onboard_screen.dart';
 import '../screens/profile/profile.dart';
+import '../screens/single_post/single_post.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/topic_selection/topic_selection.dart';
 
@@ -31,6 +32,9 @@ class CatoRoutes {
   static const String noDistractionSettingsScreen =
       '/no-distraction-settings-screen';
   static const String appRedirectScreen = '/app-redirect-screen';
+  static const String _singlePostScreen = '/video/:postId';
+  static String singlePostScreen({@required dynamic postId}) =>
+      '/video/$postId';
   static const all = <String>{
     splashScreen,
     onboardingScreen,
@@ -41,6 +45,7 @@ class CatoRoutes {
     notificationSettingScreen,
     noDistractionSettingsScreen,
     appRedirectScreen,
+    _singlePostScreen,
   };
 }
 
@@ -59,6 +64,7 @@ class CatoRouter extends RouterBase {
     RouteDef(CatoRoutes.noDistractionSettingsScreen,
         page: NoDistractionSettingsScreen),
     RouteDef(CatoRoutes.appRedirectScreen, page: AppRedirectScreen),
+    RouteDef(CatoRoutes._singlePostScreen, page: SinglePostScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -85,6 +91,7 @@ class CatoRouter extends RouterBase {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => HomeScreen(),
         settings: data,
+        maintainState: true,
       );
     },
     ProfileScreen: (data) {
@@ -120,6 +127,13 @@ class CatoRouter extends RouterBase {
     AppRedirectScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
         builder: (context) => AppRedirectScreen(),
+        settings: data,
+      );
+    },
+    SinglePostScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) =>
+            SinglePostScreen(postId: data.pathParams['postId'].stringValue),
         settings: data,
       );
     },
