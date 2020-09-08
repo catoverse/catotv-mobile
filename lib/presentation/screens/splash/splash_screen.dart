@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      backgroundColor: ColorAssets.black21,
+      backgroundColor: Colors.white,
       body: BlocProvider(
         create: (_) => getIt<SplashBloc>(),
         child: SplashPage(),
@@ -99,8 +99,7 @@ class SplashPage extends StatelessWidget {
           Center(
             child: Container(
               width: MediaQuery.of(context).size.width * 0.75,
-              height: MediaQuery.of(context).size.width * 0.75,
-              child: Image.asset(ImageAssets.Release.boy_block_game),
+              child: Image.asset(ImageAssets.Release.cato_logo),
             ),
           ),
           Align(

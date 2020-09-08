@@ -29,6 +29,7 @@ class _Release {
 
   // Logos
   final String google_logo = _releasePath + 'google-logo.png';
+  final String cato_logo = _releasePath + 'cato_logo.png';
 
   // Backgrounds
   final String abstract_bg = _releasePath + 'abstract_bg.png';

@@ -35,7 +35,6 @@ class OnboardingScreen extends StatelessWidget {
 }
 
 class OnboardingPage extends StatelessWidget {
-
   final List _onboardingCards = [
     OnboardingCardOption(
         backgroundColor: ColorAssets.onboardPink,
@@ -87,7 +86,8 @@ class OnboardingPage extends StatelessWidget {
                 // Send to topic Selected
                 context.navigator.replace(CatoRoutes.topicSelectionScreen);
               } else {
-                await openDynamicLinkOr(context, otherScreen: CatoRoutes.homeScreen);
+                await openDynamicLinkOr(context,
+                    otherScreen: CatoRoutes.homeScreen);
               }
             }
           },
@@ -98,8 +98,7 @@ class OnboardingPage extends StatelessWidget {
               var message = state.failure.map(
                   error: (err) => err.toString(),
                   exception: (err) => err.toString(),
-                  message: (msg) => msg
-              );
+                  message: (msg) => msg);
               Flushbar(
                 message: message,
                 duration: Duration(seconds: 3),
@@ -139,37 +138,29 @@ class OnboardingPage extends StatelessWidget {
                 },
               ),
             ),
-            SizedBox(
-              height: 4,
-            ),
             DotsIndicator(
               dotsCount: _onboardingCards.length,
               position: state.currentCardIndex.toDouble(),
               decorator: DotsDecorator(
                   color: Color(0xFF323232), activeColor: Color(0xFF2CB9B0)),
             ),
-            // PageIndicator
-            SizedBox(
-              height: 15,
-            ),
-            Expanded(
-              flex: 1,
-              child: ClipPath(
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  color: ColorAssets.black21,
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: GoogleSignInButton(
-                      onPressed: () {
-                        context.bloc<AuthBloc>().add(AuthEvent.login());
-                      },
-                      darkMode: true,
-                    ),
-                  ),
+            Spacer(flex: 1,),
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              decoration: BoxDecoration(
+                color: ColorAssets.black21,
+                borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(36),
+                    topLeft: Radius.circular(36)),
+              ),
+              child: Center(
+                child: GoogleSignInButton(
+                  onPressed: () {
+                    context.bloc<AuthBloc>().add(AuthEvent.login());
+                  },
+                  darkMode: true,
                 ),
-                clipper: WavePathClipper(clipFromTop: true),
               ),
             ),
           ]);

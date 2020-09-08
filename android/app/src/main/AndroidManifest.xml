@@ -11,8 +11,8 @@
 
     <application
         android:name=".MainApplication"
-        android:label="cato_feed"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Cato"
+        android:icon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -35,7 +35,7 @@
                  Flutter's first frame. -->
             <meta-data
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
-              android:resource="@drawable/launch_background"
+              android:resource="@drawable/launcher_drawable"
               />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
