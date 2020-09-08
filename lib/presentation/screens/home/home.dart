@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     )
   ];
   final Widget _savedPostScreen =
-      SavedPostScreen(key: PageStorageKey('SavedPostScreen'));
+  SavedPostScreen(key: PageStorageKey('SavedPostScreen'));
   int _currentPage = 0;
   bool showSaveNavBar = false;
   final PageStorageBucket _bucket = PageStorageBucket();
@@ -36,14 +36,17 @@ class _HomeScreenState extends State<HomeScreen> {
         .state
         .maybeWhen(orElse: () => '', authenticated: (user) => user.photoUrl);
     return BlocProvider(
-      create: (_) => getIt<UserProfileBloc>()..add(UserProfileEvent.refresh()),
+      create: (_) =>
+      getIt<UserProfileBloc>()
+        ..add(UserProfileEvent.refresh()),
       child: BlocListener<UserProfileBloc, UserProfileState>(
         listener: (_, state) {
-          var shouldShowSaveNav = !(state.likedVideosId.isEmpty && state.savedVideosId.isEmpty);
-          if(shouldShowSaveNav != showSaveNavBar) {
+          var shouldShowSaveNav = !(state.likedVideosId.isEmpty &&
+              state.savedVideosId.isEmpty);
+          if (shouldShowSaveNav != showSaveNavBar) {
             setState(() {
               showSaveNavBar = shouldShowSaveNav;
-              if(!showSaveNavBar) {
+              if (!showSaveNavBar) {
                 _currentPage = 0;
               }
             });
@@ -61,11 +64,12 @@ class _HomeScreenState extends State<HomeScreen> {
             items: _buildNavBar(context, photoUrl),
             currentIndex: _currentPage,
             backgroundColor: ColorAssets.black21,
-            material: (_, __) => MaterialNavBarData(
-              selectedItemColor: Colors.white,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-            ),
+            material: (_, __) =>
+                MaterialNavBarData(
+                  selectedItemColor: Colors.white,
+                  showSelectedLabels: false,
+                  showUnselectedLabels: false,
+                ),
             itemChanged: (value) {
               setState(() {
                 _currentPage = value;
@@ -94,8 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<BottomNavigationBarItem> _buildNavBar(context, photoUrl) {
     var baseNav = [
       BottomNavigationBarItem(
-        icon: Icon(Icons.home),
+        icon: Icon(Icons.home_outlined, color: Colors.white),
+        activeIcon: Icon(Icons.home, color: Colors.white),
         title: Text('Home'),
+
       ),
       BottomNavigationBarItem(
         icon: Container(
@@ -112,8 +118,9 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     ];
     var savePostsNav = BottomNavigationBarItem(
-      icon: Icon(Icons.bookmark_border, color: Colors.white),
-      title: Text('Home'),
+        icon: Icon(Icons.bookmark_border, color: Colors.white),
+        title: Text('Home'),
+        activeIcon: Icon(Icons.bookmark, color: Colors.white)
     );
     if (showSaveNavBar) {
       baseNav.insert(1, savePostsNav);

@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/application/topic_selection/topicselection_bloc.dart';
+import 'package:cato_feed/domain/auth/user.dart';
 import 'package:cato_feed/domain/topic/topic.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
@@ -41,14 +42,14 @@ class TopicSelectionScreen extends StatelessWidget {
             margin: EdgeInsets.only(right: 32, top: 4),
             child: (context.navigator.canPop())
                 ? GestureDetector(
-                    child: InkWell(
-                      child: Icon(
-                        Icons.close,
-                        color: ColorAssets.blueHaiti,
-                      ),
-                    ),
-                    onTap: () => context.navigator.pop(),
-                  )
+              child: InkWell(
+                child: Icon(
+                  Icons.close,
+                  color: ColorAssets.blueHaiti,
+                ),
+              ),
+              onTap: () => context.navigator.pop(),
+            )
                 : null,
           ),
         ],
@@ -77,7 +78,8 @@ class TopicSelectionPage extends StatelessWidget {
               Flushbar(
                 message: msg,
                 duration: Duration(seconds: 3),
-              )..show(context);
+              )
+                ..show(context);
             }
           },
         ),
@@ -89,6 +91,14 @@ class TopicSelectionPage extends StatelessWidget {
               } else {
                 context.navigator.replace(CatoRoutes.homeScreen);
               }
+              User user = context
+                  .bloc<AuthBloc>()
+                  .state
+                  .maybeWhen(orElse: () => null, authenticated: (user) => user);
+              if(user != null) {
+                context.bloc<TopicBloc>().add(
+                    TopicEvent.refreshSelectedTopics(user));
+              }
             } else if (state.failure != null) {
               var msg = state.failure.map(
                 error: (e) => e.toString(),
@@ -98,7 +108,8 @@ class TopicSelectionPage extends StatelessWidget {
               Flushbar(
                 message: msg,
                 duration: Duration(seconds: 3),
-              )..show(context);
+              )
+                ..show(context);
             }
           },
         ),
@@ -115,43 +126,45 @@ class TopicSelectionPage extends StatelessWidget {
               children: [
                 (allTopics.length > 0)
                     ? StaggeredGridView.builder(
-                        itemCount: allTopics.length + 1, // 1 for getting spacing
-                        scrollDirection: Axis.vertical,
-                        gridDelegate:
-                            SliverStaggeredGridDelegateWithFixedCrossAxisCount(
-                                staggeredTileBuilder: (index) {
-                                  if(index >= allTopics.length) return StaggeredTile.fit(2);
-                                  return StaggeredTile.fit(1);
-                                },
+                  itemCount: allTopics.length + 1,
+                  // 1 for getting spacing
+                  scrollDirection: Axis.vertical,
+                  gridDelegate:
+                  SliverStaggeredGridDelegateWithFixedCrossAxisCount(
+                      staggeredTileBuilder: (index) {
+                        if (index >= allTopics.length)
+                          return StaggeredTile.fit(2);
+                        return StaggeredTile.fit(1);
+                      },
 
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 12,
-                                staggeredTileCount: allTopics.length + 1),
-                        padding: EdgeInsets.only(left: 32, right: 32),
-                        itemBuilder: (context, index) {
-                          if(index >= allTopics.length) return SizedBox(height: 50,);
-                          return GestureDetector(
-                            onTap: () {
-                              var item = allTopics[index];
-                              // ignore: close_sinks
-                              var bloc = context.bloc<TopicSelectionBloc>();
-                              if (state.selectedTopicIds.contains(item.id)) {
-                                bloc.add(
-                                    TopicSelectionEvent.unSelectTopic(item.id));
-                              } else {
-                                bloc.add(
-                                    TopicSelectionEvent.selectTopic(item.id));
-                              }
-                            },
-                            child: _buildCard(allTopics[index],
-                                state.isSelected(allTopics[index].id)),
-                          );
-                        },
-                      )
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 12,
+                      staggeredTileCount: allTopics.length + 1),
+                  padding: EdgeInsets.only(left: 32, right: 32),
+                  itemBuilder: (context, index) {
+                    if (index >= allTopics.length) return SizedBox(height: 50,);
+                    return GestureDetector(
+                      onTap: () {
+                        var item = allTopics[index];
+                        // ignore: close_sinks
+                        var bloc = context.bloc<TopicSelectionBloc>();
+                        if (state.selectedTopicIds.contains(item.id)) {
+                          bloc.add(
+                              TopicSelectionEvent.unSelectTopic(item.id));
+                        } else {
+                          bloc.add(
+                              TopicSelectionEvent.selectTopic(item.id));
+                        }
+                      },
+                      child: _buildCard(allTopics[index],
+                          state.isSelected(allTopics[index].id)),
+                    );
+                  },
+                )
                     : Center(
-                        child: CircularProgressIndicator(),
-                      ),
+                  child: CircularProgressIndicator(),
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: GestureDetector(
@@ -159,7 +172,7 @@ class TopicSelectionPage extends StatelessWidget {
                       margin: EdgeInsets.only(top: 60, bottom: 8),
                       shape: RoundedRectangleBorder(
                           borderRadius:
-                              BorderRadius.all(Radius.circular(26))),
+                          BorderRadius.all(Radius.circular(26))),
                       elevation: 0.0,
                       color: ColorAssets.teal,
                       child: Padding(
@@ -177,16 +190,18 @@ class TopicSelectionPage extends StatelessWidget {
                           state.selectedTopicIds.isEmpty()) {
                         Flushbar(
                           message:
-                              'Please select at least one topic to continue',
+                          'Please select at least one topic to continue',
                           duration: Duration(seconds: 2),
-                        )..show(context);
+                        )
+                          ..show(context);
                       } else {
                         // ignore: close_sinks
                         var bloc = context.bloc<AuthBloc>();
                         bloc.state.maybeWhen(
-                          authenticated: (user) => context
-                              .bloc<TopicSelectionBloc>()
-                              .add(TopicSelectionEvent.saveTopics(user)),
+                          authenticated: (user) =>
+                              context
+                                  .bloc<TopicSelectionBloc>()
+                                  .add(TopicSelectionEvent.saveTopics(user)),
                           orElse: () {},
                         );
                       }
@@ -223,10 +238,10 @@ class TopicSelectionPage extends StatelessWidget {
       ),
       child: (isChecked)
           ? Icon(
-              Icons.check,
-              color: Colors.white,
-              size: 15,
-            )
+        Icons.check,
+        color: Colors.white,
+        size: 15,
+      )
           : null,
     );
   }
