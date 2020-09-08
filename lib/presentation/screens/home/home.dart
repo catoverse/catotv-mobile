@@ -43,6 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
           if(shouldShowSaveNav != showSaveNavBar) {
             setState(() {
               showSaveNavBar = shouldShowSaveNav;
+              if(!showSaveNavBar) {
+                _currentPage = 0;
+              }
             });
           }
         },
