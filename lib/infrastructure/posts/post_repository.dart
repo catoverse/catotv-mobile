@@ -38,6 +38,21 @@ class PostRepository implements IPostRepository {
   }
 
   @override
+  Future<Result<Failure, Post>> getPostById(String postId) async {
+    var post = await db.postsDao.getPostById(postId);
+    if(post != null) {
+      return Result.data(post.toPost());
+    }
+
+    var result = await _network.getPostById(postId);
+    if(result.hasFailed()) return Result.fail(result.failure);
+
+    await db.postsDao.insertOrUpdate(result.data.toMPost());
+
+    return Result.data(result.data);
+  }
+
+  @override
   Future<List<String>> getLikedPostsId() async {
     return pref.getStringList(_USER_LIKED_POSTS_KEY) ?? List();
   }
