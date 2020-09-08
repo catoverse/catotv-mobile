@@ -114,9 +114,10 @@ class SplashPage extends StatelessWidget {
                   return state.maybeWhen(
                     forceUpdateRequired: () => Column(
                       children: [
+                        Spacer(),
                         Text(
-                          'You need to update app to continue.',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
+                          'You need to update the app to continue.',
+                          style: TextStyle(color: ColorAssets.black21, fontSize: 16),
                         ),
                         SizedBox(
                           height: 5,
