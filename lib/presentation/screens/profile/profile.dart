@@ -113,13 +113,14 @@ class ProfileScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                            image: (user?.photoUrl == null ||
-                                    user?.photoUrl?.isEmpty == true)
-                                ? AssetImage(ImageAssets.Release.google_logo)
-                                : NetworkImage(
-                                    user?.photoUrl ?? '',
-                                  ),
-                            fit: BoxFit.fitHeight),
+                          image: (user?.photoUrl == null ||
+                                  user?.photoUrl?.isEmpty == true)
+                              ? AssetImage(ImageAssets.Release.google_logo)
+                              : NetworkImage(
+                                  user?.photoUrl ?? '',
+                                ),
+                          fit: BoxFit.fitHeight,
+                        ),
                       ),
                     ),
                   ),

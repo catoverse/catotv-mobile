@@ -5,6 +5,7 @@ import 'package:cato_feed/domain/posts/post.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class _PostTitleWidget extends StatelessWidget {
@@ -152,6 +153,11 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
                   child: Image.network(
                     getYoutubeThumbnail(youtubeVideoId),
                     fit: BoxFit.cover,
+                    loadingBuilder: (_, child, loadingProgress) {
+                      if(loadingProgress == null) return child;
+                      return BlurHash(hash: 'LKO2?U%2Tw=w]~RBVZRi};RPxuwH');
+                    },
+                    errorBuilder: (_, __, ___) => BlurHash(hash: 'LKO2?U%2Tw=w]~RBVZRi};RPxuwH'),
                   ),
                 ),
                 AspectRatio(

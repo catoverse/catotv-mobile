@@ -1,5 +1,9 @@
 package cato.tv.feed;
 
+import android.content.Context;
+
+import androidx.multidex.MultiDex;
+
 import io.flutter.app.FlutterApplication;
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback;
@@ -17,4 +21,10 @@ public class MainApplication extends FlutterApplication implements PluginRegistr
   public void registerWith(PluginRegistry registry) {
     FirebaseMessagingPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin"));
   }
+
+  @Override
+   public void attachBaseContext(Context base) {
+      super.attachBaseContext(base);
+      MultiDex.install(this);
+    }
 }

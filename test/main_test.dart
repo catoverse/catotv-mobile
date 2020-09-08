@@ -12,7 +12,6 @@ import 'package:cato_feed/infrastructure/core/db/moor/extensions.dart';
 import 'package:cato_feed/infrastructure/core/logger/logger.dart';
 import 'package:cato_feed/infrastructure/core/remote/graphql/network_client.dart';
 import 'package:cato_feed/infrastructure/core/remote/graphql/queries.dart';
-import 'package:dartz/dartz.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:test/test.dart';
@@ -94,26 +93,26 @@ void main() async {
   //   });
   // });
 }
-
-Either<Failure, KtList<Topic>> _processUserProfile(
-    Either<Failure, dynamic> result,
-    String serverErrorType,
-    Function(dynamic response) onResponse
-    ) {
-  dynamic response;
-  result.fold((l) {
-    return left(l);
-  }, (r) => {response = r});
-
-  if (response == null) {
-    return left(Failure.error(ServerError(detail: 'Unable to $serverErrorType user profile.')));
-  }
-
-  var finalResponse = onResponse(response);
-  var topics = TopicDTO.fromResponse(finalResponse);
-  if(topics == null) {
-    return left(Failure.error(ServerError(detail: 'Unable to parse user profile response.')));
-  }
-
-  return right(topics);
-}
+//
+// Either<Failure, KtList<Topic>> _processUserProfile(
+//     Either<Failure, dynamic> result,
+//     String serverErrorType,
+//     Function(dynamic response) onResponse
+//     ) {
+//   dynamic response;
+//   result.fold((l) {
+//     return left(l);
+//   }, (r) => {response = r});
+//
+//   if (response == null) {
+//     return left(Failure.error(ServerError(detail: 'Unable to $serverErrorType user profile.')));
+//   }
+//
+//   var finalResponse = onResponse(response);
+//   var topics = TopicDTO.fromResponse(finalResponse);
+//   if(topics == null) {
+//     return left(Failure.error(ServerError(detail: 'Unable to parse user profile response.')));
+//   }
+//
+//   return right(topics);
+// }
