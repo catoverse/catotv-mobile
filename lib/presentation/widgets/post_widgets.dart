@@ -61,6 +61,7 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
   YoutubePlayerController _controller;
   PlayerState _playerState;
   bool _isPlayerReady = false;
+  VideoPlayerBloc videoPlayerBloc;
 
   _PostMediaWidgetState(
       this.postId, this.youtubeVideoId, this.startTime, this.endTime);
@@ -103,14 +104,14 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
     _controller.removeListener(_youtubePlayerListener);
     _controller.dispose();
     _controller = null;
-    context
-        .bloc<VideoPlayerBloc>()
-        .add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
+    videoPlayerBloc?.add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
+    videoPlayerBloc = null;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    videoPlayerBloc = context.bloc<VideoPlayerBloc>();
     return BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
       buildWhen: (previous, current) {
         if (previous.currentPlayingPostId == current.currentPlayingPostId)

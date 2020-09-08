@@ -82,7 +82,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
   void initState() {
     super.initState();
     var state = context.bloc<TopicBloc>().state;
-    if (state.selectedTopicIds != null || state.selectedTopicIds.isNotEmpty) {
+    if (state.selectedTopicIds?.isNotEmpty == true) {
       context.bloc<TopicSelectionBloc>().add(
           TopicSelectionEvent.updateSelectedTopics(
               KtList.from(state.selectedTopicIds)));

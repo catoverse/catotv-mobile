@@ -29,9 +29,11 @@ class LogEvents {
   }
 
   static Map<String, dynamic> getTopicPickDoneVariables(List<String> topicIds) {
-    return {
-      "selected_topic_ids": topicIds
-    };
+    Map<String, dynamic> mapToReturn = {};
+    for(var i=0; i<topicIds.length; i++) {
+      mapToReturn['selected_topic_id_$i'] = topicIds[i];
+    }
+    return mapToReturn;
   }
 
   static Map<String, dynamic> getPostVariables(String postId) {
