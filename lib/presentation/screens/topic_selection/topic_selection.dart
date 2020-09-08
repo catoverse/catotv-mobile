@@ -15,6 +15,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:kt_dart/collection.dart';
 
 class TopicSelectionScreen extends StatelessWidget {
   @override
@@ -62,13 +63,35 @@ class TopicSelectionScreen extends StatelessWidget {
   }
 }
 
-class TopicSelectionPage extends StatelessWidget {
+class TopicSelectionPage extends StatefulWidget {
+  @override
+  _TopicSelectionPageState createState() => _TopicSelectionPageState();
+}
+
+class _TopicSelectionPageState extends State<TopicSelectionPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    var state = context.bloc<TopicBloc>().state;
+    if (state.selectedTopicIds != null ||
+        state.selectedTopicIds.isNotEmpty) {
+      context.bloc<TopicSelectionBloc>().add(
+          TopicSelectionEvent.updateSelectedTopics(KtList.from(state.selectedTopicIds)));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
         BlocListener<TopicBloc, TopicState>(
           listener: (context, state) {
+            if (state.selectedTopicIds != null ||
+                state.selectedTopicIds.isNotEmpty) {
+              context.bloc<TopicSelectionBloc>().add(
+                  TopicSelectionEvent.updateSelectedTopics(KtList.from(state.selectedTopicIds)));
+            }
             if (state.failure != null) {
               var msg = state.failure.map(
                 error: (e) => e.toString(),
@@ -95,7 +118,7 @@ class TopicSelectionPage extends StatelessWidget {
                   .bloc<AuthBloc>()
                   .state
                   .maybeWhen(orElse: () => null, authenticated: (user) => user);
-              if(user != null) {
+              if (user != null) {
                 context.bloc<TopicBloc>().add(
                     TopicEvent.refreshSelectedTopics(user));
               }

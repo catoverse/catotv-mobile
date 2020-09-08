@@ -36,6 +36,9 @@ class TopicSelectionBloc
           toMutableList()
             ..remove(topicId));
         },
+        updateSelectedTopics: (topicIds) async* {
+          yield state.copyWith(selectedTopicIds: topicIds);
+        },
         saveTopics: (user) async* {
           var result = await _userRepository.updateTopics(user, state.selectedTopicIds);
 

@@ -13,6 +13,13 @@ class _$TopicSelectionEventTearOff {
   const _$TopicSelectionEventTearOff();
 
 // ignore: unused_element
+  _UpdateSelectedTopic updateSelectedTopics(KtList<String> topicIds) {
+    return _UpdateSelectedTopic(
+      topicIds,
+    );
+  }
+
+// ignore: unused_element
   _SelectTopic selectTopic(String topicId) {
     return _SelectTopic(
       topicId,
@@ -40,12 +47,14 @@ const $TopicSelectionEvent = _$TopicSelectionEventTearOff();
 mixin _$TopicSelectionEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result updateSelectedTopics(KtList<String> topicIds),
     @required Result selectTopic(String topicId),
     @required Result unSelectTopic(String topicId),
     @required Result saveTopics(User user),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result updateSelectedTopics(KtList<String> topicIds),
     Result selectTopic(String topicId),
     Result unSelectTopic(String topicId),
     Result saveTopics(User user),
@@ -53,12 +62,14 @@ mixin _$TopicSelectionEvent {
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
     @required Result selectTopic(_SelectTopic value),
     @required Result unSelectTopic(_UnSelectTopic value),
     @required Result saveTopics(_SaveTopics value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result updateSelectedTopics(_UpdateSelectedTopic value),
     Result selectTopic(_SelectTopic value),
     Result unSelectTopic(_UnSelectTopic value),
     Result saveTopics(_SaveTopics value),
@@ -79,6 +90,133 @@ class _$TopicSelectionEventCopyWithImpl<$Res>
   final TopicSelectionEvent _value;
   // ignore: unused_field
   final $Res Function(TopicSelectionEvent) _then;
+}
+
+abstract class _$UpdateSelectedTopicCopyWith<$Res> {
+  factory _$UpdateSelectedTopicCopyWith(_UpdateSelectedTopic value,
+          $Res Function(_UpdateSelectedTopic) then) =
+      __$UpdateSelectedTopicCopyWithImpl<$Res>;
+  $Res call({KtList<String> topicIds});
+}
+
+class __$UpdateSelectedTopicCopyWithImpl<$Res>
+    extends _$TopicSelectionEventCopyWithImpl<$Res>
+    implements _$UpdateSelectedTopicCopyWith<$Res> {
+  __$UpdateSelectedTopicCopyWithImpl(
+      _UpdateSelectedTopic _value, $Res Function(_UpdateSelectedTopic) _then)
+      : super(_value, (v) => _then(v as _UpdateSelectedTopic));
+
+  @override
+  _UpdateSelectedTopic get _value => super._value as _UpdateSelectedTopic;
+
+  @override
+  $Res call({
+    Object topicIds = freezed,
+  }) {
+    return _then(_UpdateSelectedTopic(
+      topicIds == freezed ? _value.topicIds : topicIds as KtList<String>,
+    ));
+  }
+}
+
+class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
+  const _$_UpdateSelectedTopic(this.topicIds) : assert(topicIds != null);
+
+  @override
+  final KtList<String> topicIds;
+
+  @override
+  String toString() {
+    return 'TopicSelectionEvent.updateSelectedTopics(topicIds: $topicIds)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _UpdateSelectedTopic &&
+            (identical(other.topicIds, topicIds) ||
+                const DeepCollectionEquality()
+                    .equals(other.topicIds, topicIds)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(topicIds);
+
+  @override
+  _$UpdateSelectedTopicCopyWith<_UpdateSelectedTopic> get copyWith =>
+      __$UpdateSelectedTopicCopyWithImpl<_UpdateSelectedTopic>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result updateSelectedTopics(KtList<String> topicIds),
+    @required Result selectTopic(String topicId),
+    @required Result unSelectTopic(String topicId),
+    @required Result saveTopics(User user),
+  }) {
+    assert(updateSelectedTopics != null);
+    assert(selectTopic != null);
+    assert(unSelectTopic != null);
+    assert(saveTopics != null);
+    return updateSelectedTopics(topicIds);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result updateSelectedTopics(KtList<String> topicIds),
+    Result selectTopic(String topicId),
+    Result unSelectTopic(String topicId),
+    Result saveTopics(User user),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateSelectedTopics != null) {
+      return updateSelectedTopics(topicIds);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
+    @required Result selectTopic(_SelectTopic value),
+    @required Result unSelectTopic(_UnSelectTopic value),
+    @required Result saveTopics(_SaveTopics value),
+  }) {
+    assert(updateSelectedTopics != null);
+    assert(selectTopic != null);
+    assert(unSelectTopic != null);
+    assert(saveTopics != null);
+    return updateSelectedTopics(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result updateSelectedTopics(_UpdateSelectedTopic value),
+    Result selectTopic(_SelectTopic value),
+    Result unSelectTopic(_UnSelectTopic value),
+    Result saveTopics(_SaveTopics value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateSelectedTopics != null) {
+      return updateSelectedTopics(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateSelectedTopic implements TopicSelectionEvent {
+  const factory _UpdateSelectedTopic(KtList<String> topicIds) =
+      _$_UpdateSelectedTopic;
+
+  KtList<String> get topicIds;
+  _$UpdateSelectedTopicCopyWith<_UpdateSelectedTopic> get copyWith;
 }
 
 abstract class _$SelectTopicCopyWith<$Res> {
@@ -138,10 +276,12 @@ class _$_SelectTopic implements _SelectTopic {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result updateSelectedTopics(KtList<String> topicIds),
     @required Result selectTopic(String topicId),
     @required Result unSelectTopic(String topicId),
     @required Result saveTopics(User user),
   }) {
+    assert(updateSelectedTopics != null);
     assert(selectTopic != null);
     assert(unSelectTopic != null);
     assert(saveTopics != null);
@@ -151,6 +291,7 @@ class _$_SelectTopic implements _SelectTopic {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result updateSelectedTopics(KtList<String> topicIds),
     Result selectTopic(String topicId),
     Result unSelectTopic(String topicId),
     Result saveTopics(User user),
@@ -166,10 +307,12 @@ class _$_SelectTopic implements _SelectTopic {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
     @required Result selectTopic(_SelectTopic value),
     @required Result unSelectTopic(_UnSelectTopic value),
     @required Result saveTopics(_SaveTopics value),
   }) {
+    assert(updateSelectedTopics != null);
     assert(selectTopic != null);
     assert(unSelectTopic != null);
     assert(saveTopics != null);
@@ -179,6 +322,7 @@ class _$_SelectTopic implements _SelectTopic {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result updateSelectedTopics(_UpdateSelectedTopic value),
     Result selectTopic(_SelectTopic value),
     Result unSelectTopic(_UnSelectTopic value),
     Result saveTopics(_SaveTopics value),
@@ -256,10 +400,12 @@ class _$_UnSelectTopic implements _UnSelectTopic {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result updateSelectedTopics(KtList<String> topicIds),
     @required Result selectTopic(String topicId),
     @required Result unSelectTopic(String topicId),
     @required Result saveTopics(User user),
   }) {
+    assert(updateSelectedTopics != null);
     assert(selectTopic != null);
     assert(unSelectTopic != null);
     assert(saveTopics != null);
@@ -269,6 +415,7 @@ class _$_UnSelectTopic implements _UnSelectTopic {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result updateSelectedTopics(KtList<String> topicIds),
     Result selectTopic(String topicId),
     Result unSelectTopic(String topicId),
     Result saveTopics(User user),
@@ -284,10 +431,12 @@ class _$_UnSelectTopic implements _UnSelectTopic {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
     @required Result selectTopic(_SelectTopic value),
     @required Result unSelectTopic(_UnSelectTopic value),
     @required Result saveTopics(_SaveTopics value),
   }) {
+    assert(updateSelectedTopics != null);
     assert(selectTopic != null);
     assert(unSelectTopic != null);
     assert(saveTopics != null);
@@ -297,6 +446,7 @@ class _$_UnSelectTopic implements _UnSelectTopic {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result updateSelectedTopics(_UpdateSelectedTopic value),
     Result selectTopic(_SelectTopic value),
     Result unSelectTopic(_UnSelectTopic value),
     Result saveTopics(_SaveTopics value),
@@ -386,10 +536,12 @@ class _$_SaveTopics implements _SaveTopics {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result updateSelectedTopics(KtList<String> topicIds),
     @required Result selectTopic(String topicId),
     @required Result unSelectTopic(String topicId),
     @required Result saveTopics(User user),
   }) {
+    assert(updateSelectedTopics != null);
     assert(selectTopic != null);
     assert(unSelectTopic != null);
     assert(saveTopics != null);
@@ -399,6 +551,7 @@ class _$_SaveTopics implements _SaveTopics {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result updateSelectedTopics(KtList<String> topicIds),
     Result selectTopic(String topicId),
     Result unSelectTopic(String topicId),
     Result saveTopics(User user),
@@ -414,10 +567,12 @@ class _$_SaveTopics implements _SaveTopics {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
     @required Result selectTopic(_SelectTopic value),
     @required Result unSelectTopic(_UnSelectTopic value),
     @required Result saveTopics(_SaveTopics value),
   }) {
+    assert(updateSelectedTopics != null);
     assert(selectTopic != null);
     assert(unSelectTopic != null);
     assert(saveTopics != null);
@@ -427,6 +582,7 @@ class _$_SaveTopics implements _SaveTopics {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result updateSelectedTopics(_UpdateSelectedTopic value),
     Result selectTopic(_SelectTopic value),
     Result unSelectTopic(_UnSelectTopic value),
     Result saveTopics(_SaveTopics value),
