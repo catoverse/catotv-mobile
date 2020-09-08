@@ -21,6 +21,7 @@ import 'application/home/saved_posts/saved_posts_bloc.dart';
 import 'application/init/init_bloc.dart';
 import 'application/onboard/onboard_bloc.dart';
 import 'application/post/post_bloc.dart';
+import 'application/share_video/share_video_bloc.dart';
 import 'application/splash/splash_bloc.dart';
 import 'application/topic/topic_bloc.dart';
 import 'application/topic_selection/topicselection_bloc.dart';
@@ -56,6 +57,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<GoogleSignIn>(() => registerModule.getGoogleSignIn);
   gh.lazySingleton<MyDatabase>(() => MyDatabase());
   gh.factory<OnboardBloc>(() => OnboardBloc());
+  gh.factory<ShareVideoBloc>(() => ShareVideoBloc(g<ILogger>()));
   final sharedPreferences = await registerModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.factory<SplashBloc>(() => SplashBloc());

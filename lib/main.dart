@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/init/init.dart';
+import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -59,6 +60,7 @@ Future<void> main() async {
       BlocProvider(create: (_) => getIt<AuthBloc>()),
       BlocProvider(create: (_) => getIt<TopicBloc>()),
       BlocProvider(create: (_) => getIt<PostBloc>()),
+      BlocProvider(create: (_) => getIt<ShareVideoBloc>()),
     ],
     child: PlatformApp(
       title: 'Cato',

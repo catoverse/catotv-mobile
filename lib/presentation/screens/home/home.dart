@@ -1,4 +1,5 @@
 import 'package:cato_feed/application/auth/auth.dart';
+import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/screens/home/main_feed.dart';
@@ -8,6 +9,7 @@ import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:share/share.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -24,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     )
   ];
   final Widget _savedPostScreen =
-  SavedPostScreen(key: PageStorageKey('SavedPostScreen'));
+      SavedPostScreen(key: PageStorageKey('SavedPostScreen'));
   int _currentPage = 0;
   bool showSaveNavBar = false;
   final PageStorageBucket _bucket = PageStorageBucket();
@@ -36,22 +38,31 @@ class _HomeScreenState extends State<HomeScreen> {
         .state
         .maybeWhen(orElse: () => '', authenticated: (user) => user.photoUrl);
     return BlocProvider(
-      create: (_) =>
-      getIt<UserProfileBloc>()
-        ..add(UserProfileEvent.refresh()),
-      child: BlocListener<UserProfileBloc, UserProfileState>(
-        listener: (_, state) {
-          var shouldShowSaveNav = !(state.likedVideosId.isEmpty &&
-              state.savedVideosId.isEmpty);
-          if (shouldShowSaveNav != showSaveNavBar) {
-            setState(() {
-              showSaveNavBar = shouldShowSaveNav;
-              if (!showSaveNavBar) {
-                _currentPage = 0;
+      create: (_) => getIt<UserProfileBloc>()..add(UserProfileEvent.refresh()),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<UserProfileBloc, UserProfileState>(
+            listener: (_, state) {
+              var shouldShowSaveNav =
+                  !(state.likedVideosId.isEmpty && state.savedVideosId.isEmpty);
+              if (shouldShowSaveNav != showSaveNavBar) {
+                setState(() {
+                  showSaveNavBar = shouldShowSaveNav;
+                  if (!showSaveNavBar) {
+                    _currentPage = 0;
+                  }
+                });
               }
-            });
-          }
-        },
+            },
+          ),
+          BlocListener<ShareVideoBloc, ShareVideoState>(
+            listener: (_, state) async {
+              if(state.shareText != null) {
+                await Share.share(state.shareText);
+              }
+            },
+          ),
+        ],
         child: PlatformScaffold(
           backgroundColor: ColorAssets.black32,
           body: Container(
@@ -64,12 +75,11 @@ class _HomeScreenState extends State<HomeScreen> {
             items: _buildNavBar(context, photoUrl),
             currentIndex: _currentPage,
             backgroundColor: ColorAssets.black21,
-            material: (_, __) =>
-                MaterialNavBarData(
-                  selectedItemColor: Colors.white,
-                  showSelectedLabels: false,
-                  showUnselectedLabels: false,
-                ),
+            material: (_, __) => MaterialNavBarData(
+              selectedItemColor: Colors.white,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+            ),
             itemChanged: (value) {
               setState(() {
                 _currentPage = value;
@@ -101,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: Icon(Icons.home_outlined, color: Colors.white),
         activeIcon: Icon(Icons.home, color: Colors.white),
         title: Text('Home'),
-
       ),
       BottomNavigationBarItem(
         icon: Container(
@@ -120,8 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var savePostsNav = BottomNavigationBarItem(
         icon: Icon(Icons.bookmark_border, color: Colors.white),
         title: Text('Home'),
-        activeIcon: Icon(Icons.bookmark, color: Colors.white)
-    );
+        activeIcon: Icon(Icons.bookmark, color: Colors.white));
     if (showSaveNavBar) {
       baseNav.insert(1, savePostsNav);
     }

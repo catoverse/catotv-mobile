@@ -1,3 +1,4 @@
+import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/application/video_player/video_player_bloc.dart';
 import 'package:cato_feed/domain/posts/post.dart';
@@ -198,8 +199,12 @@ class _PostSocialStatsWidget extends StatelessWidget {
 
 class _PostSocialInteractionWidget extends StatelessWidget {
   final String postId;
+  final String title;
+  final String imageUrl;
 
-  const _PostSocialInteractionWidget(this.postId, {Key key}) : super(key: key);
+  const _PostSocialInteractionWidget(this.postId, this.title, this.imageUrl,
+      {Key key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -246,10 +251,17 @@ class _PostSocialInteractionWidget extends StatelessWidget {
               ),
             ),
             Spacer(),
-            Icon(
-              Icons.share,
-              size: 30,
-              color: Colors.white,
+            InkWell(
+              onTap: () {
+                context.bloc<ShareVideoBloc>().add(
+                      ShareVideoEvent.share(postId, title, imageUrl),
+                    );
+              },
+              child: Icon(
+                Icons.share,
+                size: 30,
+                color: Colors.white,
+              ),
             ),
             SizedBox(
               width: 15,
@@ -330,7 +342,11 @@ class PostWidget extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          _PostSocialInteractionWidget(post.id),
+          _PostSocialInteractionWidget(
+            post.id,
+            post.title,
+            YoutubePlayer.getThumbnail(videoId: youtubeVideoId),
+          ),
           SizedBox(
             height: 10,
           ),
