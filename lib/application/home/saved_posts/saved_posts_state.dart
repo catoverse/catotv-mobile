@@ -4,7 +4,14 @@ part of 'saved_posts_bloc.dart';
 abstract class SavedPostsState with _$SavedPostsState {
   const factory SavedPostsState({
     List<Post> savedPosts,
-    List<Post> likedPosts
+    List<Post> likedPosts,
+    SelectedPage selectedPage
   }) = _SavedPostsState;
-  factory SavedPostsState.initial() => SavedPostsState(savedPosts: List(), likedPosts: List());
+  factory SavedPostsState.initial() => SavedPostsState(savedPosts: List(), likedPosts: List(), selectedPage: SelectedPage.None);
+}
+
+enum SelectedPage {
+  None,
+  Liked,
+  Saved,
 }

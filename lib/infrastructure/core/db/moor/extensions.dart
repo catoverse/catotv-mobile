@@ -154,6 +154,8 @@ extension PostDTO on Post {
       var videoUrl = response['video_url'] as String;
       if (videoUrl == null || videoUrl.isEmpty || !videoUrl.startsWith('http'))
         return null;
+      var videoId = convertUrlToId(videoUrl);
+      if(videoId == null || videoId.isEmpty) return null;
 
       return Post(
           id: response['id'],
@@ -170,6 +172,25 @@ extension PostDTO on Post {
       return null;
     }
   }
+}
+
+String convertUrlToId(String url, {bool trimWhitespaces = true}) {
+  assert(url?.isNotEmpty ?? false, 'Url cannot be empty');
+  if (!url.contains("http") && (url.length == 11)) return url;
+  if (trimWhitespaces) url = url.trim();
+
+  for (var exp in [
+    RegExp(
+        r"^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
+    RegExp(
+        r"^https:\/\/(?:www\.|m\.)?youtube(?:-nocookie)?\.com\/embed\/([_\-a-zA-Z0-9]{11}).*$"),
+    RegExp(r"^https:\/\/youtu\.be\/([_\-a-zA-Z0-9]{11}).*$")
+  ]) {
+    Match match = exp.firstMatch(url);
+    if (match != null && match.groupCount >= 1) return match.group(1);
+  }
+
+  return null;
 }
 
 extension MPostDTO on MPost {
