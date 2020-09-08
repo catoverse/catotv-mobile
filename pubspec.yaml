@@ -57,6 +57,7 @@ dependencies:
   share: '>=0.6.5 <2.0.0'
   get_version: ^0.2.2
   infinite_scroll_pagination: ^1.0.0+2
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:

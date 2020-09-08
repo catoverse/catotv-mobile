@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/application/topic_selection/topicselection_bloc.dart';
@@ -23,8 +24,10 @@ class TopicSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PlatformScaffold(
       appBar: PlatformAppBar(
-        title: Text(
+        title: AutoSizeText(
           'What do you want to learn?',
+          maxLines: 1,
+          maxFontSize: 18,
           style: TextStyle(
             color: ColorAssets.blueHaiti,
             fontSize: 18,
