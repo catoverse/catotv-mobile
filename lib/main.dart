@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:share/share.dart';
-
+import 'package:flutter/foundation.dart';
 import 'presentation/utils/assets/theme.dart';
 
 /// Handler for firebase messaging background message
@@ -55,7 +55,9 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureDependencies();
-  FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  if(kReleaseMode) {
+    FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  }
 
   runApp(MultiBlocProvider(
     providers: [
@@ -81,7 +83,7 @@ Future<void> main() async {
         builder: ExtendedNavigator.builder(
           router: CatoRouter(),
           observers: [
-            FirebaseAnalyticsObserver(
+            if(kReleaseMode) FirebaseAnalyticsObserver(
                 analytics: getIt.get<FirebaseAnalytics>()),
           ],
         ),
