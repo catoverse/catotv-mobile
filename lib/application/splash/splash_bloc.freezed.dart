@@ -13,6 +13,11 @@ class _$SplashEventTearOff {
   const _$SplashEventTearOff();
 
 // ignore: unused_element
+  _EventLoading loading() {
+    return const _EventLoading();
+  }
+
+// ignore: unused_element
   _EventFailure failure(Failure failure) {
     return _EventFailure(
       failure,
@@ -31,22 +36,26 @@ const $SplashEvent = _$SplashEventTearOff();
 mixin _$SplashEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result loading(),
     @required Result failure(Failure failure),
     @required Result updateRequired(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result loading(),
     Result failure(Failure failure),
     Result updateRequired(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result loading(_EventLoading value),
     @required Result failure(_EventFailure value),
     @required Result updateRequired(_EventUpdateRequired value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result loading(_EventLoading value),
     Result failure(_EventFailure value),
     Result updateRequired(_EventUpdateRequired value),
     @required Result orElse(),
@@ -65,6 +74,99 @@ class _$SplashEventCopyWithImpl<$Res> implements $SplashEventCopyWith<$Res> {
   final SplashEvent _value;
   // ignore: unused_field
   final $Res Function(SplashEvent) _then;
+}
+
+abstract class _$EventLoadingCopyWith<$Res> {
+  factory _$EventLoadingCopyWith(
+          _EventLoading value, $Res Function(_EventLoading) then) =
+      __$EventLoadingCopyWithImpl<$Res>;
+}
+
+class __$EventLoadingCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
+    implements _$EventLoadingCopyWith<$Res> {
+  __$EventLoadingCopyWithImpl(
+      _EventLoading _value, $Res Function(_EventLoading) _then)
+      : super(_value, (v) => _then(v as _EventLoading));
+
+  @override
+  _EventLoading get _value => super._value as _EventLoading;
+}
+
+class _$_EventLoading implements _EventLoading {
+  const _$_EventLoading();
+
+  @override
+  String toString() {
+    return 'SplashEvent.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _EventLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result loading(),
+    @required Result failure(Failure failure),
+    @required Result updateRequired(),
+  }) {
+    assert(loading != null);
+    assert(failure != null);
+    assert(updateRequired != null);
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result loading(),
+    Result failure(Failure failure),
+    Result updateRequired(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result loading(_EventLoading value),
+    @required Result failure(_EventFailure value),
+    @required Result updateRequired(_EventUpdateRequired value),
+  }) {
+    assert(loading != null);
+    assert(failure != null);
+    assert(updateRequired != null);
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result loading(_EventLoading value),
+    Result failure(_EventFailure value),
+    Result updateRequired(_EventUpdateRequired value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EventLoading implements SplashEvent {
+  const factory _EventLoading() = _$_EventLoading;
 }
 
 abstract class _$EventFailureCopyWith<$Res> {
@@ -135,9 +237,11 @@ class _$_EventFailure implements _EventFailure {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result loading(),
     @required Result failure(Failure failure),
     @required Result updateRequired(),
   }) {
+    assert(loading != null);
     assert(failure != null);
     assert(updateRequired != null);
     return failure(this.failure);
@@ -146,6 +250,7 @@ class _$_EventFailure implements _EventFailure {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result loading(),
     Result failure(Failure failure),
     Result updateRequired(),
     @required Result orElse(),
@@ -160,9 +265,11 @@ class _$_EventFailure implements _EventFailure {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result loading(_EventLoading value),
     @required Result failure(_EventFailure value),
     @required Result updateRequired(_EventUpdateRequired value),
   }) {
+    assert(loading != null);
     assert(failure != null);
     assert(updateRequired != null);
     return failure(this);
@@ -171,6 +278,7 @@ class _$_EventFailure implements _EventFailure {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result loading(_EventLoading value),
     Result failure(_EventFailure value),
     Result updateRequired(_EventUpdateRequired value),
     @required Result orElse(),
@@ -226,9 +334,11 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result loading(),
     @required Result failure(Failure failure),
     @required Result updateRequired(),
   }) {
+    assert(loading != null);
     assert(failure != null);
     assert(updateRequired != null);
     return updateRequired();
@@ -237,6 +347,7 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result loading(),
     Result failure(Failure failure),
     Result updateRequired(),
     @required Result orElse(),
@@ -251,9 +362,11 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result loading(_EventLoading value),
     @required Result failure(_EventFailure value),
     @required Result updateRequired(_EventUpdateRequired value),
   }) {
+    assert(loading != null);
     assert(failure != null);
     assert(updateRequired != null);
     return updateRequired(this);
@@ -262,6 +375,7 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result loading(_EventLoading value),
     Result failure(_EventFailure value),
     Result updateRequired(_EventUpdateRequired value),
     @required Result orElse(),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/init/init.dart';
+import 'package:cato_feed/application/init/init_bloc.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
@@ -113,10 +114,11 @@ class SplashPage extends StatelessWidget {
                 builder: (_, state) {
                   return state.maybeWhen(
                     forceUpdateRequired: () => Column(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Spacer(),
                         Text(
                           'You need to update the app to continue.',
+                          textAlign: TextAlign.center,
                           style: TextStyle(color: ColorAssets.black21, fontSize: 16),
                         ),
                         SizedBox(
@@ -150,9 +152,30 @@ class SplashPage extends StatelessWidget {
                         message: (e) => e.message,
                       );
 
-                      return Text(
-                        message,
-                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            message,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: ColorAssets.black21, fontSize: 16),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          RaisedButton(
+                            color: ColorAssets.teal,
+                            child: Text('Retry',
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            textColor: Colors.white,
+                            onPressed: () async {
+                              getIt<ILogger>().logEvent(LogEvents.EVENT_SPLASH_ERROR_RETRY_CLICK);
+                              context.bloc<InitBloc>().add(InitEvent.requestAppVersionCheck());
+                              context.bloc<SplashBloc>().add(SplashEvent.loading());
+                            },
+                          ),
+                        ],
                       );
                     },
                     orElse: () => CircularProgressIndicator(),

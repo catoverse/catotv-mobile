@@ -19,9 +19,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Stream<SplashState> mapEventToState(
     SplashEvent event,
   ) async* {
-   yield event.map(
-      failure: (e) => SplashState.failure(e.failure),
-      updateRequired: (e) => SplashState.forceUpdateRequired(),
+   yield event.when(
+      failure: (e) => SplashState.failure(e),
+      updateRequired: () => const SplashState.forceUpdateRequired(),
+      loading: () => const SplashState.loading()
     );
   }
 }

@@ -28,12 +28,12 @@ class InitBloc extends Bloc<InitEvent, InitState> {
 
           if(result.hasFailed()) {
             yield InitState.failure(result.failure);
-          }
-
-          if(result.data) {
-            yield InitState.updateRequired();
           } else {
-            yield InitState.success();
+            if(result.data) {
+              yield InitState.updateRequired();
+            } else {
+              yield InitState.success();
+            }
           }
         }
     );

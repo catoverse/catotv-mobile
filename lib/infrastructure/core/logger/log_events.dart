@@ -2,6 +2,7 @@ class LogEvents {
   LogEvents._();
 
   static const EVENT_UPDATE_APP_CLICKED = "update_app_clicked";
+  static const EVENT_SPLASH_ERROR_RETRY_CLICK= "splash_error_retry_clicked";
 
   static const EVENT_POST_LIKED = "post_liked";
   static const EVENT_POST_UNLIKED = "post_unliked";
