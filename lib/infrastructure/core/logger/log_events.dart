@@ -22,6 +22,19 @@ class LogEvents {
 
   static const EVENT_LIST_FILTER_SELECTED = "list_filter_selected";
 
+  // Video
+  static const EVENT_VIDEO_PLAY_PRESSED = "video_play_pressed";
+  static const EVENT_VIDEO_WATCHED_FINISHED = "video_watched_finished";
+  static const EVENT_VIDEO_WATCHED_TIMESTAMP = "video_watched_timestamp";
+
+  static Map<String, dynamic> getVideoPlayerParams(String postId, {int playbackTimeStamp = -1}) {
+      Map<String, dynamic> returnMap = {};
+      if(playbackTimeStamp != null && playbackTimeStamp != -1) {
+        returnMap['playback_timestamp'] = playbackTimeStamp;
+      }
+      return returnMap;
+  }
+
   static Map<String, dynamic> getListFilterSelectedVariables(String topicId) {
     return {
       "filtered_on": topicId

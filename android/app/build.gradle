@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         applicationId "cato.tv.feed"
-        minSdkVersion 17
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

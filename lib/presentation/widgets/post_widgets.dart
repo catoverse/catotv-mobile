@@ -1,7 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/application/video_player/video_player_bloc.dart';
+import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/domain/posts/post.dart';
+import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
+import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,11 +26,17 @@ class _PostTitleWidget extends StatelessWidget {
         ),
         Expanded(
           flex: 1,
-          child: Text(
+          child: AutoSizeText(
             title,
             style: TextStyle(color: Colors.white, fontSize: 16),
+            overflowReplacement: AutoSizeText(title,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  height: 1.25,
+                ),
+                maxLines: 2),
             maxLines: 1,
-            textWidthBasis: TextWidthBasis.parent,
           ),
         ),
         SizedBox(
@@ -59,7 +69,6 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
   final String postId;
 
   YoutubePlayerController _controller;
-  PlayerState _playerState;
   bool _isPlayerReady = false;
   VideoPlayerBloc videoPlayerBloc;
 
@@ -82,15 +91,10 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
         endAt: endTime,
       ),
     )..addListener(_youtubePlayerListener);
-    _playerState = PlayerState.unknown;
   }
 
   void _youtubePlayerListener() {
-    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
-      setState(() {
-        _playerState = _controller.value.playerState;
-      });
-    }
+    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {}
   }
 
   @override
@@ -102,10 +106,15 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
   @override
   void dispose() {
     _controller.removeListener(_youtubePlayerListener);
-    _controller.dispose();
-    _controller = null;
     videoPlayerBloc?.add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
     videoPlayerBloc = null;
+    var currentPosition = _controller.value.position.inSeconds;
+    if(currentPosition != startTime) {
+      getIt<ILogger>().logEvent(LogEvents.EVENT_VIDEO_WATCHED_TIMESTAMP,
+          params: LogEvents.getVideoPlayerParams(postId, playbackTimeStamp: currentPosition));
+    }
+    _controller.dispose();
+    _controller = null;
     super.dispose();
   }
 
@@ -128,12 +137,19 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
               _isPlayerReady = true;
             },
             bottomActions: [
-              // ProgressBar(
-              //   controller: this._controller,
-              //   isExpanded: true,
-              // )
+              const SizedBox(width: 14.0),
+              CurrentPosition(),
+              const SizedBox(width: 8.0),
+              ProgressBar(
+                controller: _controller,
+                isExpanded: true,
+              ),
+              RemainingDuration(),
+              const SizedBox(width: 14.0),
             ],
             onEnded: (e) {
+              getIt<ILogger>().logEvent(LogEvents.EVENT_VIDEO_WATCHED_FINISHED,
+                  params: LogEvents.getVideoPlayerParams(postId));
               context
                   .bloc<VideoPlayerBloc>()
                   .add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
@@ -143,6 +159,8 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
         } else {
           return InkWell(
             onTap: () {
+              getIt<ILogger>().logEvent(LogEvents.EVENT_VIDEO_PLAY_PRESSED,
+                  params: LogEvents.getVideoPlayerParams(postId));
               context
                   .bloc<VideoPlayerBloc>()
                   .add(VideoPlayerEvent.setCurrentPlayablePlayingId(postId));
@@ -155,10 +173,11 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
                     getYoutubeThumbnail(youtubeVideoId),
                     fit: BoxFit.cover,
                     loadingBuilder: (_, child, loadingProgress) {
-                      if(loadingProgress == null) return child;
+                      if (loadingProgress == null) return child;
                       return BlurHash(hash: 'LKO2?U%2Tw=w]~RBVZRi};RPxuwH');
                     },
-                    errorBuilder: (_, __, ___) => BlurHash(hash: 'LKO2?U%2Tw=w]~RBVZRi};RPxuwH'),
+                    errorBuilder: (_, __, ___) =>
+                        BlurHash(hash: 'LKO2?U%2Tw=w]~RBVZRi};RPxuwH'),
                   ),
                 ),
                 AspectRatio(
@@ -369,4 +388,4 @@ class PostWidget extends StatelessWidget {
 
 String getYoutubeThumbnail(String videoId) {
   return 'https://img.youtube.com/vi/$videoId/sddefault.jpg';
-} 
+}
