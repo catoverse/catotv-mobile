@@ -16,6 +16,14 @@ export PATH=`pwd`/flutter/bin:$PATH
 flutter channel stable
 flutter doctor --android-licenses
 Y
+Y
+Y
+Y
+Y
+Y
+Y
+Y
+# there are 7 licenses and one Y for start accepting
 flutter build apk --release
 flutter build appbundle --release
 
