@@ -15,9 +15,8 @@ export PATH=`pwd`/flutter/bin:$PATH
 flutter channel beta
 flutter upgrade
 yes Y | flutter doctor --android-licenses # accept all licenses
-flutter build apk
-flutter build appbundle
 
-# copy the APK where AppCenter will find it
-mkdir -p android/app/build/outputs/apk/; mv build/app/outputs/apk/release/app-release.apk $_<
-mkdir -p android/app/build/outputs/bundle/; mv build/app/outputs/bundle/release/app-release.aab $_<
+flutter build apk
+mkdir -p android/app/build/outputs/apk/; mv build/app/outputs/apk/release/app-release.apk $_
+flutter build appbundle
+mkdir -p android/app/build/outputs/bundle/; mv build/app/outputs/bundle/release/app-release.aab $_
