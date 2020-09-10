@@ -14,16 +14,7 @@ git clone -b stable https://github.com/flutter/flutter.git
 export PATH=`pwd`/flutter/bin:$PATH
 
 flutter channel stable
-flutter doctor --android-licenses
-Y
-Y
-Y
-Y
-Y
-Y
-Y
-Y
-# there are 7 licenses and one Y for start accepting
+yes Y | flutter doctor --android-licenses # accept all licenses
 flutter build apk --release
 flutter build appbundle --release
 
