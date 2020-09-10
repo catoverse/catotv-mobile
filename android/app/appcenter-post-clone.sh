@@ -9,8 +9,9 @@ set -x
 cd ..
 # choose a different release channel if you want - https://github.com/flutter/flutter/wiki/Flutter-build-release-channels
 # stable - recommended for production
-
-git clone -b stable https://github.com/flutter/flutter.git
+wget https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_1.20.3-stable.zip
+unzip flutter_macos_1.20.3-stable.zip
+#git clone -b stable https://github.com/flutter/flutter.git
 export PATH=`pwd`/flutter/bin:$PATH
 
 flutter channel stable
