@@ -53,10 +53,10 @@ android {
 
     signingConfigs {
         release {
-            keyAlias keystoreProperties['keyAlias'] ? System.getenv("CATO_KEY_ALIAS") : null
-            keyPassword keystoreProperties['keyPassword'] ? System.getenv("CATO_KEY_PASSWORD") : null
+            keyAlias keystoreProperties['keyAlias'] ? keystoreProperties['keyAlias'] : System.getenv("CATO_KEY_ALIAS")
+            keyPassword keystoreProperties['keyPassword'] ? keystoreProperties['keyPassword'] : System.getenv("CATO_KEY_PASSWORD")
             storeFile rootProject.file("cato_feed.jks")
-            storePassword keystoreProperties['storePassword'] ? System.getenv("CATO_KEY_STORE_PASSWORD") : null
+            storePassword keystoreProperties['storePassword'] ? keystoreProperties['storePassword'] : System.getenv("CATO_KEY_STORE_PASSWORD")
         }
     }
 
