@@ -6,3 +6,5 @@
 /local.properties
 GeneratedPluginRegistrant.java
 key.properties
+/app/src/debug/gen/
+/app/src/profile/gen/
