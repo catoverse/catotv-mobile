@@ -14,7 +14,7 @@ import 'package:cato_feed/infrastructure/core/remote/graphql/network_client.dart
 import 'package:cato_feed/infrastructure/core/remote/graphql/queries.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:test/test.dart';
+// import 'package:test/test.dart';
 
 void main() async {
   NetworkClient client;
@@ -22,14 +22,14 @@ void main() async {
   jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmNTJkNmNkNzRkMzQ2MzhhMDY4MTc5MCIsImlhdCI6MTU5OTI2NjIxMywiZXhwIjoxNTk5MjczNDEzfQ.ub94WZTngPfNDvEDKXGVlbpq5R8yiUQsGRk-vuKvRzw";
 
 
-  setUp(() async {
-    client = NetworkClient(
-        logger: Logger(FirebaseAnalytics()),
-        apiEndpoint: 'http://localhost:5000/graphql',
-        jwtResolver: () => Future.value(jwtToken),
-        isConnected: () => Future.value(true),
-        jwtHeaderKey: 'x-auth-token');
-  });
+  // setUp(() async {
+  //   client = NetworkClient(
+  //       logger: Logger(FirebaseAnalytics()),
+  //       apiEndpoint: 'http://localhost:5000/graphql',
+  //       jwtResolver: () => Future.value(jwtToken),
+  //       isConnected: () => Future.value(true),
+  //       jwtHeaderKey: 'x-auth-token');
+  // });
 
   // test('Version Api', () async {
   //   var result = await client.query(GqlQueries.versionCheckQuery);
