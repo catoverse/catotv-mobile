@@ -7,6 +7,7 @@ import 'package:cato_feed/presentation/screens/home/saved_post_feed.dart';
 import 'package:cato_feed/presentation/screens/profile/profile.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
@@ -131,8 +132,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<BottomNavigationBarItem> _buildNavBar(context, photoUrl) {
     var baseNav = [
       BottomNavigationBarItem(
-        icon: Icon(Icons.home_outlined, color: Colors.white),
-        activeIcon: Icon(Icons.home, color: Colors.white),
+        icon: Icon(CupertinoIcons.home, color: Colors.white),
+        activeIcon: Icon(CupertinoIcons.home, color: Colors.white),
         title: Text('Home'),
       ),
       BottomNavigationBarItem(

@@ -70,7 +70,7 @@ class CategoryTag extends StatelessWidget {
                 ),
                 (isChecked)
                     ? Icon(
-                        Icons.check_circle_rounded,
+                        Icons.check_circle,
                         color: Colors.white,
                         size: 16,
                       )

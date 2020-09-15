@@ -9,10 +9,10 @@ set -x
 cd ..
 # choose a different release channel if you want - https://github.com/flutter/flutter/wiki/Flutter-build-release-channels
 # stable - recommended for production
-git clone -b beta https://github.com/flutter/flutter.git
+git clone -b stable https://github.com/flutter/flutter.git
 export PATH=`pwd`/flutter/bin:$PATH
 
-flutter channel beta
+flutter channel stable
 flutter upgrade
 yes Y | flutter doctor --android-licenses # accept all licenses
 
