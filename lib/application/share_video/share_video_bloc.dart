@@ -25,6 +25,8 @@ class ShareVideoBloc extends Bloc<ShareVideoEvent, ShareVideoState> {
   ) async* {
     yield* event.map(
       share: (data) async* {
+        yield state.copyWith(shareText: null, isLoading: true);
+
         final DynamicLinkParameters parameters = DynamicLinkParameters(
           uriPrefix: 'https://i.cato.tv',
           link: Uri.parse('https://cato.tv/video/${data.postId}'),
@@ -49,6 +51,9 @@ class ShareVideoBloc extends Bloc<ShareVideoEvent, ShareVideoState> {
         yield state.copyWith(shareText: message);
         logger.logEvent(LogEvents.EVENT_POST_SHARE, params: LogEvents.getPostVariables(data.postId));
       },
+      reset: (e) async* {
+        yield state.copyWith(shareText: null, isLoading: false);
+      }
     );
   }
 }

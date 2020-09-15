@@ -13,6 +13,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:path/path.dart';
 import 'package:share/share.dart';
 import 'package:flutter/foundation.dart';
 import 'presentation/utils/assets/theme.dart';
@@ -70,9 +71,10 @@ Future<void> main() async {
       BlocProvider(create: (_) => getIt<ShareVideoBloc>()),
     ],
     child: BlocListener<ShareVideoBloc, ShareVideoState>(
-      listener: (_, state) async {
+      listener: (context, state) async {
         if (state.shareText != null) {
           await Share.share(state.shareText);
+          context.bloc<ShareVideoBloc>().add(ShareVideoEvent.reset());
         }
       },
       child: PlatformApp(

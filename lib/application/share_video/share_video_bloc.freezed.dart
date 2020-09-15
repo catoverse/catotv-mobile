@@ -20,43 +20,45 @@ class _$ShareVideoEventTearOff {
       imageUrl,
     );
   }
+
+// ignore: unused_element
+  _ShareReset reset() {
+    return const _ShareReset();
+  }
 }
 
 // ignore: unused_element
 const $ShareVideoEvent = _$ShareVideoEventTearOff();
 
 mixin _$ShareVideoEvent {
-  String get postId;
-  String get title;
-  String get imageUrl;
-
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result share(String postId, String title, String imageUrl),
+    @required Result reset(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result share(String postId, String title, String imageUrl),
+    Result reset(),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result share(_ShareVideo value),
+    @required Result reset(_ShareReset value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result share(_ShareVideo value),
+    Result reset(_ShareReset value),
     @required Result orElse(),
   });
-
-  $ShareVideoEventCopyWith<ShareVideoEvent> get copyWith;
 }
 
 abstract class $ShareVideoEventCopyWith<$Res> {
   factory $ShareVideoEventCopyWith(
           ShareVideoEvent value, $Res Function(ShareVideoEvent) then) =
       _$ShareVideoEventCopyWithImpl<$Res>;
-  $Res call({String postId, String title, String imageUrl});
 }
 
 class _$ShareVideoEventCopyWithImpl<$Res>
@@ -66,27 +68,12 @@ class _$ShareVideoEventCopyWithImpl<$Res>
   final ShareVideoEvent _value;
   // ignore: unused_field
   final $Res Function(ShareVideoEvent) _then;
-
-  @override
-  $Res call({
-    Object postId = freezed,
-    Object title = freezed,
-    Object imageUrl = freezed,
-  }) {
-    return _then(_value.copyWith(
-      postId: postId == freezed ? _value.postId : postId as String,
-      title: title == freezed ? _value.title : title as String,
-      imageUrl: imageUrl == freezed ? _value.imageUrl : imageUrl as String,
-    ));
-  }
 }
 
-abstract class _$ShareVideoCopyWith<$Res>
-    implements $ShareVideoEventCopyWith<$Res> {
+abstract class _$ShareVideoCopyWith<$Res> {
   factory _$ShareVideoCopyWith(
           _ShareVideo value, $Res Function(_ShareVideo) then) =
       __$ShareVideoCopyWithImpl<$Res>;
-  @override
   $Res call({String postId, String title, String imageUrl});
 }
 
@@ -160,8 +147,10 @@ class _$_ShareVideo implements _ShareVideo {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result share(String postId, String title, String imageUrl),
+    @required Result reset(),
   }) {
     assert(share != null);
+    assert(reset != null);
     return share(postId, title, imageUrl);
   }
 
@@ -169,6 +158,7 @@ class _$_ShareVideo implements _ShareVideo {
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result share(String postId, String title, String imageUrl),
+    Result reset(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -182,8 +172,10 @@ class _$_ShareVideo implements _ShareVideo {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result share(_ShareVideo value),
+    @required Result reset(_ShareReset value),
   }) {
     assert(share != null);
+    assert(reset != null);
     return share(this);
   }
 
@@ -191,6 +183,7 @@ class _$_ShareVideo implements _ShareVideo {
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result share(_ShareVideo value),
+    Result reset(_ShareReset value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -205,23 +198,108 @@ abstract class _ShareVideo implements ShareVideoEvent {
   const factory _ShareVideo(String postId, String title, String imageUrl) =
       _$_ShareVideo;
 
-  @override
   String get postId;
-  @override
   String get title;
-  @override
   String get imageUrl;
-  @override
   _$ShareVideoCopyWith<_ShareVideo> get copyWith;
+}
+
+abstract class _$ShareResetCopyWith<$Res> {
+  factory _$ShareResetCopyWith(
+          _ShareReset value, $Res Function(_ShareReset) then) =
+      __$ShareResetCopyWithImpl<$Res>;
+}
+
+class __$ShareResetCopyWithImpl<$Res>
+    extends _$ShareVideoEventCopyWithImpl<$Res>
+    implements _$ShareResetCopyWith<$Res> {
+  __$ShareResetCopyWithImpl(
+      _ShareReset _value, $Res Function(_ShareReset) _then)
+      : super(_value, (v) => _then(v as _ShareReset));
+
+  @override
+  _ShareReset get _value => super._value as _ShareReset;
+}
+
+class _$_ShareReset implements _ShareReset {
+  const _$_ShareReset();
+
+  @override
+  String toString() {
+    return 'ShareVideoEvent.reset()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _ShareReset);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result share(String postId, String title, String imageUrl),
+    @required Result reset(),
+  }) {
+    assert(share != null);
+    assert(reset != null);
+    return reset();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result share(String postId, String title, String imageUrl),
+    Result reset(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (reset != null) {
+      return reset();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result share(_ShareVideo value),
+    @required Result reset(_ShareReset value),
+  }) {
+    assert(share != null);
+    assert(reset != null);
+    return reset(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result share(_ShareVideo value),
+    Result reset(_ShareReset value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (reset != null) {
+      return reset(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShareReset implements ShareVideoEvent {
+  const factory _ShareReset() = _$_ShareReset;
 }
 
 class _$ShareVideoStateTearOff {
   const _$ShareVideoStateTearOff();
 
 // ignore: unused_element
-  _ShareVideoState call({String shareText}) {
+  _ShareVideoState call({String shareText, bool isLoading}) {
     return _ShareVideoState(
       shareText: shareText,
+      isLoading: isLoading,
     );
   }
 }
@@ -231,6 +309,7 @@ const $ShareVideoState = _$ShareVideoStateTearOff();
 
 mixin _$ShareVideoState {
   String get shareText;
+  bool get isLoading;
 
   $ShareVideoStateCopyWith<ShareVideoState> get copyWith;
 }
@@ -239,7 +318,7 @@ abstract class $ShareVideoStateCopyWith<$Res> {
   factory $ShareVideoStateCopyWith(
           ShareVideoState value, $Res Function(ShareVideoState) then) =
       _$ShareVideoStateCopyWithImpl<$Res>;
-  $Res call({String shareText});
+  $Res call({String shareText, bool isLoading});
 }
 
 class _$ShareVideoStateCopyWithImpl<$Res>
@@ -253,9 +332,11 @@ class _$ShareVideoStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object shareText = freezed,
+    Object isLoading = freezed,
   }) {
     return _then(_value.copyWith(
       shareText: shareText == freezed ? _value.shareText : shareText as String,
+      isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
     ));
   }
 }
@@ -266,7 +347,7 @@ abstract class _$ShareVideoStateCopyWith<$Res>
           _ShareVideoState value, $Res Function(_ShareVideoState) then) =
       __$ShareVideoStateCopyWithImpl<$Res>;
   @override
-  $Res call({String shareText});
+  $Res call({String shareText, bool isLoading});
 }
 
 class __$ShareVideoStateCopyWithImpl<$Res>
@@ -282,22 +363,26 @@ class __$ShareVideoStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object shareText = freezed,
+    Object isLoading = freezed,
   }) {
     return _then(_ShareVideoState(
       shareText: shareText == freezed ? _value.shareText : shareText as String,
+      isLoading: isLoading == freezed ? _value.isLoading : isLoading as bool,
     ));
   }
 }
 
 class _$_ShareVideoState implements _ShareVideoState {
-  const _$_ShareVideoState({this.shareText});
+  const _$_ShareVideoState({this.shareText, this.isLoading});
 
   @override
   final String shareText;
+  @override
+  final bool isLoading;
 
   @override
   String toString() {
-    return 'ShareVideoState(shareText: $shareText)';
+    return 'ShareVideoState(shareText: $shareText, isLoading: $isLoading)';
   }
 
   @override
@@ -306,12 +391,17 @@ class _$_ShareVideoState implements _ShareVideoState {
         (other is _ShareVideoState &&
             (identical(other.shareText, shareText) ||
                 const DeepCollectionEquality()
-                    .equals(other.shareText, shareText)));
+                    .equals(other.shareText, shareText)) &&
+            (identical(other.isLoading, isLoading) ||
+                const DeepCollectionEquality()
+                    .equals(other.isLoading, isLoading)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(shareText);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(shareText) ^
+      const DeepCollectionEquality().hash(isLoading);
 
   @override
   _$ShareVideoStateCopyWith<_ShareVideoState> get copyWith =>
@@ -319,10 +409,13 @@ class _$_ShareVideoState implements _ShareVideoState {
 }
 
 abstract class _ShareVideoState implements ShareVideoState {
-  const factory _ShareVideoState({String shareText}) = _$_ShareVideoState;
+  const factory _ShareVideoState({String shareText, bool isLoading}) =
+      _$_ShareVideoState;
 
   @override
   String get shareText;
+  @override
+  bool get isLoading;
   @override
   _$ShareVideoStateCopyWith<_ShareVideoState> get copyWith;
 }

@@ -109,9 +109,10 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
     videoPlayerBloc?.add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
     videoPlayerBloc = null;
     var currentPosition = _controller.value.position.inSeconds;
-    if(currentPosition != startTime) {
+    if (currentPosition != startTime) {
       getIt<ILogger>().logEvent(LogEvents.EVENT_VIDEO_WATCHED_TIMESTAMP,
-          params: LogEvents.getVideoPlayerParams(postId, playbackTimeStamp: currentPosition));
+          params: LogEvents.getVideoPlayerParams(postId,
+              playbackTimeStamp: currentPosition));
     }
     _controller.dispose();
     _controller = null;
@@ -279,9 +280,13 @@ class _PostSocialInteractionWidget extends StatelessWidget {
             Spacer(),
             InkWell(
               onTap: () {
-                context.bloc<ShareVideoBloc>().add(
-                      ShareVideoEvent.share(postId, title, imageUrl),
-                    );
+                // ignore: close_sinks
+                var bloc = context.bloc<ShareVideoBloc>();
+                if (bloc.state.isLoading == false) {
+                  bloc.add(
+                    ShareVideoEvent.share(postId, title, imageUrl),
+                  );
+                }
               },
               child: Icon(
                 Icons.share,

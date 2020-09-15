@@ -95,7 +95,7 @@ class CatoRouter extends RouterBase {
       );
     },
     ProfileScreen: (data) {
-      var args = data.getArgs<ProfileScreenArguments>(
+      final args = data.getArgs<ProfileScreenArguments>(
         orElse: () => ProfileScreenArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
@@ -104,7 +104,7 @@ class CatoRouter extends RouterBase {
       );
     },
     ProfileOverviewScreen: (data) {
-      var args = data.getArgs<ProfileOverviewScreenArguments>(
+      final args = data.getArgs<ProfileOverviewScreenArguments>(
         orElse: () => ProfileOverviewScreenArguments(),
       );
       return buildAdaptivePageRoute<dynamic>(
