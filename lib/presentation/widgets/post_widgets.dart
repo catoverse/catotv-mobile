@@ -52,14 +52,15 @@ class _PostMediaWidget extends StatefulWidget {
   final String youtubeVideoId;
   final int startTime;
   final int endTime;
+  final int index;
 
   const _PostMediaWidget(
-      {Key key, this.postId, this.youtubeVideoId, this.startTime, this.endTime})
+      {Key key, this.postId, this.youtubeVideoId, this.startTime, this.endTime, this.index})
       : super(key: key);
 
   @override
   _PostMediaWidgetState createState() =>
-      _PostMediaWidgetState(postId, youtubeVideoId, startTime, endTime);
+      _PostMediaWidgetState(postId, youtubeVideoId, startTime, endTime, index);
 }
 
 class _PostMediaWidgetState extends State<_PostMediaWidget> {
@@ -67,13 +68,14 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
   final int startTime;
   final int endTime;
   final String postId;
+  final int index;
 
   YoutubePlayerController _controller;
   bool _isPlayerReady = false;
   VideoPlayerBloc videoPlayerBloc;
 
   _PostMediaWidgetState(
-      this.postId, this.youtubeVideoId, this.startTime, this.endTime);
+      this.postId, this.youtubeVideoId, this.startTime, this.endTime, this.index);
 
   @override
   void initState() {
@@ -126,12 +128,15 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
       buildWhen: (previous, current) {
         if (previous.currentPlayingPostId == current.currentPlayingPostId)
           return false;
-        if (previous.currentPlayingPostId == postId) return true;
-        if (current.currentPlayingPostId == postId) return true;
+        if (previous.currentPlayingPostId == '$postId;$index') return true;
+        if (current.currentPlayingPostId == '$postId;$index') return true;
         return false;
       },
       builder: (context, state) {
-        if (state.currentPlayingPostId == postId) {
+        var split = (state.currentPlayingPostId ?? ';-1').split(';');
+        var playingPostId = split[0];
+        var playingIndex = int.parse(split[1]);
+        if (state.currentPlayingPostId != null && playingPostId == postId && playingIndex == index) {
           return YoutubePlayer(
             controller: _controller,
             onReady: () {
@@ -164,7 +169,7 @@ class _PostMediaWidgetState extends State<_PostMediaWidget> {
                   params: LogEvents.getVideoPlayerParams(postId));
               context
                   .bloc<VideoPlayerBloc>()
-                  .add(VideoPlayerEvent.setCurrentPlayablePlayingId(postId));
+                  .add(VideoPlayerEvent.setCurrentPlayablePlayingId('$postId;$index'));
             },
             child: Stack(
               children: [
@@ -336,8 +341,9 @@ class _PostDescription extends StatelessWidget {
 
 class PostWidget extends StatelessWidget {
   final Post post;
+  final int index;
 
-  const PostWidget({Key key, this.post}) : super(key: key);
+  const PostWidget({Key key, this.post, this.index = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -365,6 +371,7 @@ class PostWidget extends StatelessWidget {
             youtubeVideoId: youtubeVideoId,
             startTime: post.startTimestamp,
             endTime: post.endTimestamp,
+            index: index
           ),
           // SizedBox(
           //   height: 5,

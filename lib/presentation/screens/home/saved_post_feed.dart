@@ -116,6 +116,7 @@ class _SavedPostPageState extends State<SavedPostPage> {
               itemBuilder: (_, index) => PostWidget(
                 post: posts[index],
                 key: ValueKey(posts[index].id),
+                index: index,
               ),
               separatorBuilder: (_, __) => SizedBox(
                 height: 20,

@@ -150,7 +150,7 @@ class _MainFeedPageState extends State<MainFeedPage> {
           dataSource: _dataSource,
           builderDelegate: PagedChildBuilderDelegate<Post>(
             itemBuilder: (context, post, index) {
-              return PostWidget(key: ValueKey(post.id), post: post);
+              return PostWidget(key: ValueKey(post.id), post: post, index: index,);
             },
             newPageProgressIndicatorBuilder: (context) {
               return Container(
