@@ -9,6 +9,7 @@ import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:auto_route/auto_route.dart';
@@ -68,6 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
         .bloc<AuthBloc>()
         .state
         .maybeWhen(orElse: () => '', authenticated: (user) => user.photoUrl);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarBrightness: Brightness.dark
+    ));
     return BlocProvider(
       create: (_) => getIt<UserProfileBloc>()..add(UserProfileEvent.refresh()),
       child: MultiBlocListener(
@@ -103,6 +107,9 @@ class _HomeScreenState extends State<HomeScreen> {
               selectedItemColor: Colors.white,
               showSelectedLabels: false,
               showUnselectedLabels: false,
+            ),
+            cupertino: (_, __) => CupertinoTabBarData(
+              activeColor: Colors.white,
             ),
             itemChanged: (value) {
               setState(() {

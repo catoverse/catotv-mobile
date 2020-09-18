@@ -25,48 +25,52 @@ class TopicSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: AutoSizeText(
-          'What do you want to learn?',
-          maxLines: 1,
-          maxFontSize: 18,
-          style: TextStyle(
-            color: ColorAssets.blueHaiti,
-            fontSize: 18,
-            fontFamily: FontAssets.Roboto,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        material: (_, __) {
-          return MaterialAppBarData(
-            centerTitle: true,
-            elevation: 0.0,
-          );
-        },
-        trailingActions: [
-          Container(
-            margin: EdgeInsets.only(right: 32, top: 4),
-            child: (context.navigator.canPop())
-                ? GestureDetector(
-                    child: InkWell(
-                      child: Icon(
-                        Icons.close,
-                        color: ColorAssets.blueHaiti,
-                      ),
-                    ),
-                    onTap: () {
-                      getIt<ILogger>().logEvent(LogEvents.EVENT_TOPIC_PICK_CANCEL);
-                      context.navigator.pop();
-                    },
-                  )
-                : null,
-          ),
-        ],
-      ),
       body: BlocProvider(
         create: (context) => getIt<TopicSelectionBloc>(),
-        child: TopicSelectionPage(),
+        child: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 32, left: 32, right: 32),
+              child: Row(
+                children: [
+                  Spacer(flex: 1,),
+                  AutoSizeText(
+                    'What do you want to learn?',
+                    maxLines: 1,
+                    maxFontSize: 18,
+                    style: TextStyle(
+                      color: ColorAssets.blueHaiti,
+                      fontSize: 18,
+                      fontFamily: FontAssets.Roboto,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  Spacer(flex: 1,),
+                  Card(
+                    elevation: 0.0,
+                    margin: EdgeInsets.only(right: 0, top: 4),
+                    child: (context.navigator.canPop())
+                        ? GestureDetector(
+                      child: InkWell(
+                        child: Icon(
+                          Icons.close,
+                          color: ColorAssets.blueHaiti,
+                        ),
+                      ),
+                      onTap: () {
+                        getIt<ILogger>()
+                            .logEvent(LogEvents.EVENT_TOPIC_PICK_CANCEL);
+                        context.navigator.pop();
+                      },
+                    )
+                        : null,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(child: TopicSelectionPage()),
+          ],
+        ),
       ),
     );
   }
@@ -228,8 +232,8 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                       } else {
                         getIt<ILogger>().logEvent(
                             LogEvents.EVENT_TOPIC_PICK_DONE,
-                            params:
-                                LogEvents.getTopicPickDoneVariables(state.selectedTopicIds.asList()));
+                            params: LogEvents.getTopicPickDoneVariables(
+                                state.selectedTopicIds.asList()));
                         // ignore: close_sinks
                         var bloc = context.bloc<AuthBloc>();
                         bloc.state.maybeWhen(

@@ -76,7 +76,9 @@ class ProfileScreen extends StatelessWidget {
                       color: ColorAssets.black21,
                     ),
                   ),
-                  Container(
+                  Card(
+                    color: ColorAssets.black21,
+                    elevation: 0.0,
                     margin: EdgeInsets.only(left: 16, right: 16, top: 30),
                     child: ListTile(
                       // leading: GestureDetector(
@@ -132,7 +134,8 @@ class ProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Container(
+              Card(
+                elevation: 0.0,
                 margin: EdgeInsets.only(left: 16, right: 16),
                 child: ListTile(
                   visualDensity: VisualDensity(vertical: -4),
@@ -147,7 +150,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              Card(
+                elevation: 0.0,
                 margin: EdgeInsets.only(left: 16, right: 16),
                 child: ListTile(
                   visualDensity: VisualDensity(vertical: -4),
@@ -164,7 +168,8 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              Card(
+                elevation: 0.0,
                 margin: EdgeInsets.only(left: 16, right: 16),
                 child: ListView.builder(
                   shrinkWrap: true,
@@ -175,11 +180,13 @@ class ProfileScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return _profileItems[index]._buildWidget(() {
                       if (index == 0) {
-                        getIt<ILogger>().logEvent(LogEvents.EVENT_PROFILE_PICK_TOPIC);
+                        getIt<ILogger>()
+                            .logEvent(LogEvents.EVENT_PROFILE_PICK_TOPIC);
                         ExtendedNavigator.of(context)
                             .push(CatoRoutes.topicSelectionScreen);
                       } else if (index == 1) {
-                        getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_PRESSED);
+                        getIt<ILogger>()
+                            .logEvent(LogEvents.EVENT_LOGOUT_PRESSED);
                         _logout(context);
                       }
                     });
@@ -206,30 +213,29 @@ class ProfileScreen extends StatelessWidget {
   }
 
   Future<bool> _logout(BuildContext context) {
-    return showDialog(
-          context: context,
-          child: AlertDialog(
-            title: Text('Are you sure to Logout?'),
-            content: Text('We hate to see you leave...'),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
-                  Navigator.of(context).pop(false);
-                },
-                child: Text('Cancel'),
-              ),
-              FlatButton(
-                onPressed: () {
-                  getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
-                  context.bloc<AuthBloc>().add(AuthEvent.signedOut());
-                },
-                child: Text('Logout'),
-              ),
-            ],
+    return showPlatformDialog(
+      context: context,
+      builder: (_) => PlatformAlertDialog(
+        title: Text('Are you sure to Logout?'),
+        content: Text('We hate to see you leave...'),
+        actions: [
+          PlatformDialogAction(
+            child: Text('Cancel'),
+            onPressed: () {
+              getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
+              Navigator.of(context).pop(false);
+            },
           ),
-        ) ??
-        false;
+          PlatformDialogAction(
+            child: Text('Logout'),
+            onPressed: () {
+              getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
+              context.bloc<AuthBloc>().add(AuthEvent.signedOut());
+            },
+          ),
+        ],
+      ),
+    ) ?? false;
   }
 }
 

@@ -98,9 +98,9 @@ class OnboardingPage extends StatelessWidget {
           listener: (_, state) {
             if (state.failure != null) {
               var message = state.failure.map(
-                  error: (err) => err.toString(),
-                  exception: (err) => err.toString(),
-                  message: (msg) => msg);
+                  error: (e) => e.error.toString(),
+                  exception: (e) => e.exception.toString(),
+                  message: (e) => e.message);
               Flushbar(
                 message: message,
                 duration: Duration(seconds: 3),

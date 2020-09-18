@@ -351,9 +351,9 @@ class PostWidget extends StatelessWidget {
     if (youtubeVideoId == null) return Container();
     return Card(
       color: ColorAssets.black21,
-      margin: EdgeInsets.only(left: 15, right: 15),
+      margin: EdgeInsets.only(left: 0, right: 0),
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(16))),
+          borderRadius: BorderRadius.all(Radius.circular(0))),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

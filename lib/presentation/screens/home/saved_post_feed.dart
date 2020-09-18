@@ -19,7 +19,10 @@ class SavedPostScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => getIt<SavedPostsBloc>()..add(SavedPostsEvent.refresh()),),
+        BlocProvider(
+          create: (_) =>
+              getIt<SavedPostsBloc>()..add(SavedPostsEvent.refresh()),
+        ),
         BlocProvider(create: (context) => getIt<VideoPlayerBloc>())
       ],
       child: SavedPostPage(),
@@ -50,58 +53,6 @@ class _SavedPostPageState extends State<SavedPostPage> {
       ],
       child: PlatformScaffold(
         backgroundColor: ColorAssets.black32,
-        appBar: PlatformAppBar(
-          backgroundColor: ColorAssets.black21,
-          material: (_, __) {
-            return MaterialAppBarData(
-              flexibleSpace: Container(
-                height: 32,
-                margin: EdgeInsets.only(top: 35, bottom: 10),
-                child: BlocBuilder<SavedPostsBloc, SavedPostsState>(
-                  builder: (context, state) {
-                    var list = List<SelectedPage>();
-                    if (state.savedPosts.isNotEmpty) list.add(SelectedPage.Saved);
-                    if (state.likedPosts.isNotEmpty) list.add(SelectedPage.Liked);
-                    return ListView.separated(
-                      padding: EdgeInsets.symmetric(horizontal: 16),
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (_, index) {
-                        var isSelected = state.selectedPage == list[index];
-                        var name = (list[index] == SelectedPage.Saved) ? 'Saved' : 'Liked';
-                        var color = (list[index] == SelectedPage.Saved)
-                            ? ColorAssets.teal
-                            : Colors.red.shade600;
-                        return GestureDetector(
-                          child: CategoryTag(
-                            tagColor: color,
-                            tagName: name,
-                            isChecked: isSelected,
-                          ),
-                          onTap: () {
-                            if (state.selectedPage != list[index]) {
-                              getIt<ILogger>().logEvent(
-                                  LogEvents.EVENT_LIST_FILTER_SELECTED,
-                                  params:
-                                  LogEvents.getListFilterSelectedVariables(
-                                      (list[index] == SelectedPage.Liked) ? 'Liked' : 'Saved'));
-                              context
-                                  .bloc<SavedPostsBloc>()
-                                  .add(SavedPostsEvent.updateSelectedPage(list[index]));
-                            }
-                          },
-                        );
-                      },
-                      separatorBuilder: (_, __) => SizedBox(
-                        width: 10,
-                      ),
-                      itemCount: list.length,
-                    );
-                  },
-                ),
-              ),
-            );
-          },
-        ),
         body: BlocBuilder<SavedPostsBloc, SavedPostsState>(
           builder: (_, state) {
             List<Post> posts = List();
@@ -111,17 +62,27 @@ class _SavedPostPageState extends State<SavedPostPage> {
               posts = state.likedPosts;
             }
 
-            return ListView.separated(
-              padding: EdgeInsets.only(top: 20),
-              itemBuilder: (_, index) => PostWidget(
-                post: posts[index],
-                key: ValueKey(posts[index].id),
-                index: index,
-              ),
-              separatorBuilder: (_, __) => SizedBox(
-                height: 20,
-              ),
-              itemCount: posts.length,
+            return Column(
+              children: [
+                Container(
+                  color: ColorAssets.black21,
+                  child: _buildTopicBar(),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    padding: EdgeInsets.only(top: 20),
+                    itemBuilder: (_, index) => PostWidget(
+                      post: posts[index],
+                      key: ValueKey(posts[index].id),
+                      index: index,
+                    ),
+                    separatorBuilder: (_, __) => SizedBox(
+                      height: 20,
+                    ),
+                    itemCount: posts.length,
+                  ),
+                ),
+              ],
             );
           },
         ),
@@ -178,6 +139,56 @@ class _SavedPostPageState extends State<SavedPostPage> {
     //     );
     //   },
     // );
+  }
+
+  Widget _buildTopicBar() {
+    return Container(
+      height: 32,
+      margin: EdgeInsets.only(top: 35, bottom: 10),
+      child: BlocBuilder<SavedPostsBloc, SavedPostsState>(
+        builder: (context, state) {
+          var list = List<SelectedPage>();
+          if (state.savedPosts.isNotEmpty) list.add(SelectedPage.Saved);
+          if (state.likedPosts.isNotEmpty) list.add(SelectedPage.Liked);
+          return ListView.separated(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (_, index) {
+              var isSelected = state.selectedPage == list[index];
+              var name =
+                  (list[index] == SelectedPage.Saved) ? 'Saved' : 'Liked';
+              var color = (list[index] == SelectedPage.Saved)
+                  ? ColorAssets.teal
+                  : Colors.red.shade600;
+              return GestureDetector(
+                child: CategoryTag(
+                  tagColor: color,
+                  tagName: name,
+                  isChecked: isSelected,
+                ),
+                onTap: () {
+                  if (state.selectedPage != list[index]) {
+                    getIt<ILogger>().logEvent(
+                        LogEvents.EVENT_LIST_FILTER_SELECTED,
+                        params: LogEvents.getListFilterSelectedVariables(
+                            (list[index] == SelectedPage.Liked)
+                                ? 'Liked'
+                                : 'Saved'));
+                    context
+                        .bloc<SavedPostsBloc>()
+                        .add(SavedPostsEvent.updateSelectedPage(list[index]));
+                  }
+                },
+              );
+            },
+            separatorBuilder: (_, __) => SizedBox(
+              width: 10,
+            ),
+            itemCount: list.length,
+          );
+        },
+      ),
+    );
   }
 
   Widget _buildLocalTopics(List<SelectedPage> list, SelectedPage selectedPage,

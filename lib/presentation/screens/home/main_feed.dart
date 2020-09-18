@@ -103,71 +103,81 @@ class _MainFeedPageState extends State<MainFeedPage> {
       ],
       child: PlatformScaffold(
         backgroundColor: ColorAssets.black32,
-        appBar: PlatformAppBar(
-          backgroundColor: ColorAssets.black21,
-          material: (_, __) {
-            return MaterialAppBarData(
-              flexibleSpace: BlocBuilder<TopicBloc, TopicState>(
-                builder: (_, state) {
-                  var topics = state.allTopics
-                      .where((element) =>
-                          state.selectedTopicIds.contains(element.id))
-                      .toList();
-                  return Container(
-                    height: 32,
-                    margin: EdgeInsets.only(top: 35, bottom: 10),
-                    child: BlocBuilder<FeedBloc, FeedState>(
-                      builder: (_, state) {
-                        return HorizontalTags(topics, state.selectedTopicId,
-                            onTap: (selectedTopicId) {
-                          if (state.selectedTopicId != selectedTopicId) {
-                            getIt<ILogger>().logEvent(
-                                LogEvents.EVENT_LIST_FILTER_SELECTED,
-                                params:
-                                    LogEvents.getListFilterSelectedVariables(
-                                        selectedTopicId));
-                            context.bloc<FeedBloc>().add(FeedEvent.selectTopic(
-                                topicId: selectedTopicId));
-                          }
-                        });
-                      },
-                    ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              color: ColorAssets.black21,
+              child: _buildTopicBar(context),
+            ),
+            Expanded(
+              child: PagedListView.separated(
+                addRepaintBoundaries: false,
+                padding: EdgeInsets.only(top: 20),
+                separatorBuilder: (_, __) {
+                  return SizedBox(
+                    height: 20,
                   );
                 },
-              ),
-            );
-          },
-        ),
-        body: PagedListView.separated(
-          addRepaintBoundaries: false,
-          padding: EdgeInsets.only(top: 20),
-          separatorBuilder: (_, __) {
-            return SizedBox(
-              height: 20,
-            );
-          },
-          key: PageStorageKey('feed'),
-          dataSource: _dataSource,
-          builderDelegate: PagedChildBuilderDelegate<Post>(
-            itemBuilder: (context, post, index) {
-              return PostWidget(key: ValueKey(post.id), post: post, index: index,);
-            },
-            newPageProgressIndicatorBuilder: (context) {
-              return Container(
-                margin: EdgeInsets.only(top: 8, bottom: 8),
-                child: Center(
-                  child: CircularProgressIndicator(),
+                key: PageStorageKey('feed'),
+                dataSource: _dataSource,
+                builderDelegate: PagedChildBuilderDelegate<Post>(
+                  itemBuilder: (context, post, index) {
+                    return PostWidget(
+                      key: ValueKey(post.id),
+                      post: post,
+                      index: index,
+                    );
+                  },
+                  newPageProgressIndicatorBuilder: (context) {
+                    return Container(
+                      margin: EdgeInsets.only(top: 8, bottom: 8),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    );
+                  },
+                  firstPageProgressIndicatorBuilder: (context) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 ),
-              );
-            },
-            firstPageProgressIndicatorBuilder: (context) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          ),
+              ),
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _buildTopicBar(BuildContext context) {
+    return BlocBuilder<TopicBloc, TopicState>(
+      builder: (_, state) {
+        var topics = state.allTopics
+            .where((element) => state.selectedTopicIds.contains(element.id))
+            .toList();
+        return Container(
+          height: 32,
+          margin: EdgeInsets.only(top: 40, bottom: 10),
+          child: BlocBuilder<FeedBloc, FeedState>(
+            builder: (_, state) {
+              return HorizontalTags(topics, state.selectedTopicId,
+                  onTap: (selectedTopicId) {
+                if (state.selectedTopicId != selectedTopicId) {
+                  getIt<ILogger>().logEvent(
+                      LogEvents.EVENT_LIST_FILTER_SELECTED,
+                      params: LogEvents.getListFilterSelectedVariables(
+                          selectedTopicId));
+                  context
+                      .bloc<FeedBloc>()
+                      .add(FeedEvent.selectTopic(topicId: selectedTopicId));
+                }
+              });
+            },
+          ),
+        );
+      },
     );
   }
 }
