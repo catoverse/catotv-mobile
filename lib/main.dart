@@ -8,6 +8,7 @@ import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +56,7 @@ Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await configureDependencies();
   if(kReleaseMode) {
     FlutterError.onError = Crashlytics.instance.recordFlutterError;

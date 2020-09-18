@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route_annotations.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/single_post/single_post_bloc.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
@@ -60,24 +61,29 @@ class SinglePostPage extends StatelessWidget {
         return PlatformScaffold(
           backgroundColor: ColorAssets.black32,
           appBar: PlatformAppBar(
-            leading: InkWell(
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
+            leading: Card(
+              color: Colors.transparent,
+              elevation: 0.0,
+              child: InkWell(
+                child: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  if(context.navigator.canPop()) {
+                    context.navigator.pop();
+                  } else {
+                    context.navigator.replace(CatoRoutes.homeScreen);
+                  }
+                },
               ),
-              onTap: () {
-                if(context.navigator.canPop()) {
-                  context.navigator.pop();
-                } else {
-                  context.navigator.replace(CatoRoutes.homeScreen);
-                }
-              },
             ),
             backgroundColor: ColorAssets.black21,
-            title: Text(
+            title: AutoSizeText(
               (isPostLoading) ? 'Loading...' : state.post.title,
               style: TextStyle(color: Colors.white, fontSize: 15),
               overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
           body: (isPostLoading)

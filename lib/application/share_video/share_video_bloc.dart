@@ -34,6 +34,11 @@ class ShareVideoBloc extends Bloc<ShareVideoEvent, ShareVideoState> {
             packageName: 'cato.tv.feed',
             minimumVersion: 1,
           ),
+          iosParameters: IosParameters(
+            bundleId: 'cato.tv.feed',
+            appStoreId: '1532006504',
+            minimumVersion: '0.0.1'
+          ),
           googleAnalyticsParameters: GoogleAnalyticsParameters(
             campaign: 'social_sharing',
             medium: 'cato_feed_app',
