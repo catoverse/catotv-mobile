@@ -15,6 +15,10 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/get_it_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'application/app_redirect/app_redirect_bloc/app_redirect_bloc.dart';
+import 'application/app_redirect/app_redirect_selection_bloc/app_redirect_selection_bloc.dart';
+import 'application/app_redirect/installed_apps_bloc/installed_apps_bloc.dart';
+import 'application/app_redirect/plugin/AppRedirectHelper.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/home/feed/feed_bloc.dart';
 import 'application/home/saved_posts/saved_posts_bloc.dart';
@@ -50,12 +54,17 @@ import 'infrastructure/topic/topic_repository.dart';
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final gh = GetItHelper(g, environment);
   final registerModule = _$RegisterModule();
+  gh.lazySingleton<AppRedirectHelper>(() => AppRedirectHelper());
+  gh.factory<AppRedirectSelectionBloc>(
+      () => AppRedirectSelectionBloc(g<AppRedirectHelper>()));
   gh.factory<Connectivity>(() => registerModule.connectivity);
   gh.factory<FeedBloc>(() => FeedBloc());
   gh.lazySingleton<FirebaseAnalytics>(() => registerModule.firebaseAnalytics);
   gh.factory<FirebaseDynamicLinks>(() => registerModule.dynamicLinks);
   gh.factory<FirebaseMessaging>(() => registerModule.firebaseMessaging);
   gh.lazySingleton<GoogleSignIn>(() => registerModule.getGoogleSignIn);
+  gh.factory<InstalledAppsBloc>(
+      () => InstalledAppsBloc(g<AppRedirectHelper>()));
   gh.lazySingleton<MyDatabase>(() => MyDatabase());
   gh.factory<OnboardBloc>(() => OnboardBloc());
   gh.factory<ShareVideoBloc>(() => ShareVideoBloc(g<ILogger>()));
@@ -69,6 +78,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.factory<String>(() => registerModule.appStoreUrl,
       instanceName: 'AppStoreUrl');
   gh.factory<VideoPlayerBloc>(() => VideoPlayerBloc());
+  gh.factory<AppRedirectBloc>(() => AppRedirectBloc(g<AppRedirectHelper>()));
   gh.lazySingleton<Network>(() => Network(
         g<ILogger>(),
         g<Connectivity>(),

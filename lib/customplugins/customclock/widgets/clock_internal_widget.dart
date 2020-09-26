@@ -5,22 +5,44 @@ import 'package:flutter/material.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:vector_math/vector_math_64.dart' show radians;
 
+typedef OnClockUpdate = void Function(String startTime, String endTime);
+
 class ClockInternalWidget extends StatefulWidget {
   final Color tickColor;
   final double unit;
+  final String startTime;
+  final String endTime;
+  final OnClockUpdate onUpdate;
 
-  ClockInternalWidget({Key key, @required this.tickColor, @required this.unit})
-      : super(key: key);
+  ClockInternalWidget({
+    Key key,
+    @required this.tickColor,
+    @required this.unit,
+    this.startTime = "-1",
+    this.endTime = "-1",
+    @required this.onUpdate,
+  }) : super(key: key);
 
   @override
-  _ClockInternalWidgetState createState() => _ClockInternalWidgetState();
+  _ClockInternalWidgetState createState() =>
+      _ClockInternalWidgetState(startTime, endTime, onUpdate);
 }
 
 class _ClockInternalWidgetState extends State<ClockInternalWidget> {
   var startClock = _ClockTiming(hour: 0, minutes: 6);
   var endClock = _ClockTiming(hour: 7, minutes: 9);
   bool isStartSelected = true;
+  OnClockUpdate onUpdate;
 
+  _ClockInternalWidgetState(String startTime, String endTime, this.onUpdate) {
+    if (startTime != null && startTime != "-1") {
+      startClock = _ClockTiming.fromString(startTime);
+    }
+    if (endTime != null && endTime != "-1") {
+      endClock = _ClockTiming.fromString(endTime);
+    }
+    onUpdate(startClock.to24HrTime(), endClock.to24HrTime());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,6 +104,7 @@ class _ClockInternalWidgetState extends State<ClockInternalWidget> {
                                 setState(() {
                                   startClock.changeSuffix();
                                   isStartSelected = true;
+                                  onUpdate(startClock.to24HrTime(), endClock.to24HrTime());
                                 });
                               },
                           ),
@@ -130,6 +153,7 @@ class _ClockInternalWidgetState extends State<ClockInternalWidget> {
                                 setState(() {
                                   endClock.changeSuffix();
                                   isStartSelected = false;
+                                  onUpdate(startClock.to24HrTime(), endClock.to24HrTime());
                                 });
                               },
                           ),
@@ -160,7 +184,6 @@ class _ClockInternalWidgetState extends State<ClockInternalWidget> {
     );
   }
 
-
   DoubleCircularSlider _getSlider() {
     return DoubleCircularSlider(
       12,
@@ -177,12 +200,14 @@ class _ClockInternalWidgetState extends State<ClockInternalWidget> {
       child: _getClockCircle(),
       onSelectionChange: (init, end, laps) {
         setState(() {
-          if(isStartSelected) {
+          if (isStartSelected) {
             startClock.hour = init;
             startClock.minutes = end;
+            onUpdate(startClock.to24HrTime(), endClock.to24HrTime());
           } else {
             endClock.hour = init;
             endClock.minutes = end;
+            onUpdate(startClock.to24HrTime(), endClock.to24HrTime());
           }
         });
       },
@@ -201,6 +226,57 @@ class _ClockTiming {
       @required this.minutes,
       this.timeSuffix = TIME_SUFFIX.PM});
 
+  factory _ClockTiming.fromString(String time) {
+    // time should be in format of "HH:MM::SS" and SS always 00
+    var splits = time.split(":");
+    if (splits.length != 3) return _ClockTiming(hour: 0, minutes: 6);
+    try {
+      var hour = int.parse(splits[0]);
+      var minutes = int.parse(splits[1]) / 5;
+      var suffix;
+      var finalHour = hour;
+      if (hour > 12) {
+        finalHour = hour - 12;
+      }
+      if (hour >= 12) {
+        suffix = TIME_SUFFIX.PM;
+      } else {
+        suffix = TIME_SUFFIX.AM;
+      }
+      return _ClockTiming(
+          hour: finalHour, minutes: minutes.toInt(), timeSuffix: suffix);
+    } catch (e) {
+      return _ClockTiming(hour: 0, minutes: 6);
+    }
+  }
+
+  String to24HrTime() {
+    var hour = this.hour;
+    var minute = this.minutes * 5;
+    var finalHour = hour;
+
+    if (timeSuffix == TIME_SUFFIX.PM) {
+      if (hour != 12) {
+        // 1PM = 13 and so on
+        finalHour = hour + 12;
+      }
+    } else {
+      if (hour == 12) {
+        // 12 AM = 00
+        finalHour = 0;
+      }
+    }
+    var stringHour = "$finalHour";
+    if (finalHour < 10) {
+      stringHour = "0" + stringHour;
+    }
+    var stringMinute = "$minute";
+    if(minute < 10) {
+      stringMinute = "0" + stringMinute;
+    }
+    return "$stringHour:$stringMinute:00";
+  }
+
   String getHour() {
     if (hour == 0) return "12";
     if (hour < 10) return "0$hour";
@@ -208,7 +284,7 @@ class _ClockTiming {
   }
 
   String getMinutes() {
-    if(minutes > 11) return "59";
+    if (minutes > 11) return "59";
     if (minutes == 0) return "00";
     var m = minutes * 5;
     if (m < 10) return "0$m";

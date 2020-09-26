@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
@@ -22,6 +24,8 @@ class ProfileScreen extends StatelessWidget {
         iconAsset: ImageAssets.Release.icon_select_apps, title: 'Pick Topics'),
     // _ProfileItems(iconAsset: ImageAssets.Release.icon_settings, title: 'Notifications Settings'),
     _ProfileItems(iconAsset: ImageAssets.Release.icon_logout, title: 'Logout'),
+
+    if(Platform.isAndroid) _ProfileItems(iconAsset: ImageAssets.Release.icon_no_distractions, title: 'No Distraction'),
     // _ProfileItems(iconAsset: ImageAssets.Release.icon_deactivate, title: 'Deactivate Account'),
   ];
 
@@ -188,6 +192,9 @@ class ProfileScreen extends StatelessWidget {
                         getIt<ILogger>()
                             .logEvent(LogEvents.EVENT_LOGOUT_PRESSED);
                         _logout(context);
+                      } else if(index == 2) {
+                        ExtendedNavigator.of(context).push(CatoRoutes.appRedirectScreen);
+                        // TODO: Log Event
                       }
                     });
                   },

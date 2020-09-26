@@ -8,17 +8,36 @@ final radiansPerTick = radians(360 / 60);
 final radiansPerHour = radians(360 / 12);
 
 class CustomClock extends StatefulWidget {
+  final String startTime;
+  final String endTime;
+  final OnClockUpdate onClockUpdate;
+
+  CustomClock(this.startTime, this.endTime, this.onClockUpdate);
+
   @override
-  _CustomClockState createState() => _CustomClockState();
+  _CustomClockState createState() =>
+      _CustomClockState(this.startTime, this.endTime, onClockUpdate);
 }
 
 class _CustomClockState extends State<CustomClock> {
+  final String startTime;
+  final String endTime;
+  final OnClockUpdate onClockUpdate;
+
+  _CustomClockState(this.startTime, this.endTime, this.onClockUpdate);
+
   @override
   Widget build(BuildContext context) {
     final unit = 8.0;
     return Container(
-      padding: EdgeInsets.all(1.5*unit),
-      child: ClockInternalWidget(tickColor: Color(0xFF212121), unit: unit),
+      padding: EdgeInsets.all(1.5 * unit),
+      child: ClockInternalWidget(
+        tickColor: Color(0xFF212121),
+        unit: unit,
+        startTime: startTime,
+        endTime: endTime,
+        onUpdate: onClockUpdate,
+      ),
     );
   }
 }

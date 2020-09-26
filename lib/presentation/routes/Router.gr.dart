@@ -9,10 +9,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../screens/app_redirect.dart';
+import '../screens/app_redirect/app_redirect.dart';
+import '../screens/app_redirect/no_distraction_settings.dart';
 import '../screens/home/home.dart';
 import '../screens/home/profile_overview.dart';
-import '../screens/no_distraction_settings.dart';
 import '../screens/notification_settings.dart';
 import '../screens/onboard/onboard_screen.dart';
 import '../screens/profile/profile.dart';

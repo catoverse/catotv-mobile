@@ -57,6 +57,10 @@ dependencies:
   infinite_scroll_pagination: ^1.0.0+2
   auto_size_text: ^2.1.0
   flutter_blurhash: ^0.5.0
+  app_usage: ^1.0.1
+  device_apps: ^1.2.0
+  app_blocker:
+    path: ./app_blocker
 
 dev_dependencies:
   flutter_test:

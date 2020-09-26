@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route_annotations.dart';
-import 'package:cato_feed/presentation/screens/app_redirect.dart';
+import 'package:cato_feed/presentation/screens/app_redirect/app_redirect.dart';
 import 'package:cato_feed/presentation/screens/single_post/single_post.dart';
 import 'package:cato_feed/presentation/screens/topic_selection/topic_selection.dart';
 import 'package:cato_feed/presentation/screens/home/home.dart';
-import 'package:cato_feed/presentation/screens/no_distraction_settings.dart';
+import 'package:cato_feed/presentation/screens/app_redirect/no_distraction_settings.dart';
 import 'package:cato_feed/presentation/screens/notification_settings.dart';
 import 'package:cato_feed/presentation/screens/onboard/onboard_screen.dart';
 import 'package:cato_feed/presentation/screens/profile/profile.dart';
