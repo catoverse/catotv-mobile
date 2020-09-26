@@ -28,14 +28,14 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
     yield* event.map(
       initialize: (e) async* {
         // Calculate Steps
-        var totalSteps = 2; // Start with 2 steps app select and timing
+        var totalSteps = 3; // Start with 2 steps app select and timing
 
         var isBatteryPermissionGranted =
             await _appRedirectHelper.appBlocker.isBatteryOptimizationIgnored();
 
         var isAppUsagePermissionGranted =
             await _appRedirectHelper.appBlocker.isAppUsagePermissionGranted();
-        if (!isAppUsagePermissionGranted || !isBatteryPermissionGranted) totalSteps += 1;
+
 
         var blockedPackages =
             await _appRedirectHelper.getBlockedPackages() ?? List();
@@ -52,13 +52,18 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
 
         yield state.copyWith(
           totalSteps: totalSteps,
-          blockedPackages: blockedPackages,// already selected packages must be same
+          blockedPackages: blockedPackages,
+          // already selected packages must be same
           startTime: startTime,
           endTime: endTime,
           selectedWeekDays: KtList.from(selectedWeekDays),
           failure: null,
-          appUsagePermission: (isAppUsagePermissionGranted) ? PermissionState.GRANTED : PermissionState.NOT_ALLOWED,
-          batteryPermission: (isBatteryPermissionGranted) ? PermissionState.GRANTED : PermissionState.NOT_ALLOWED,
+          appUsagePermission: (isAppUsagePermissionGranted)
+              ? PermissionState.GRANTED
+              : PermissionState.NOT_ALLOWED,
+          batteryPermission: (isBatteryPermissionGranted)
+              ? PermissionState.GRANTED
+              : PermissionState.NOT_ALLOWED,
         );
 
         // Populate data
@@ -68,23 +73,51 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
       },
       addOrRemoveWeekDay: (e) async* {
         var isSelected = state.isWeekDaySelected(e.weekDay);
-        var weekDays = state.selectedWeekDays?.toMutableList() ?? mutableListOf();
-        if(isSelected) {
+        var weekDays =
+            state.selectedWeekDays?.toMutableList() ?? mutableListOf();
+        if (isSelected) {
           weekDays.remove(e.weekDay);
         } else {
           weekDays.add(e.weekDay);
         }
         yield state.copyWith(selectedWeekDays: weekDays);
-        await _appRedirectHelper.appBlocker.setRestrictionWeekDays(weekDays.asList());
+        await _appRedirectHelper.appBlocker
+            .setRestrictionWeekDays(weekDays.asList());
       },
       updateTime: (e) async* {
         yield state.copyWith(startTime: e.startTime, endTime: e.endTime);
-        await _appRedirectHelper.appBlocker.setRestrictionTime(e.startTime, e.endTime);
+        await _appRedirectHelper.appBlocker
+            .setRestrictionTime(e.startTime, e.endTime);
+      },
+      checkPermissions: (e) async* {
+        print("checkPermission");
+        var isBatteryPermissionGranted =
+            await _appRedirectHelper.appBlocker.isBatteryOptimizationIgnored();
+
+        var isAppUsagePermissionGranted =
+            await _appRedirectHelper.appBlocker.isAppUsagePermissionGranted();
+
+        yield state.copyWith(
+          appUsagePermission: (isAppUsagePermissionGranted)
+              ? PermissionState.GRANTED
+              : PermissionState.NOT_ALLOWED,
+          batteryPermission: (isBatteryPermissionGranted)
+              ? PermissionState.GRANTED
+              : PermissionState.NOT_ALLOWED,
+        );
+      },
+      requestAppUsagePermission: (e) async* {
+        _appRedirectHelper.appBlocker.openAppUsageSettings();
+        yield state;
+      },
+      requestBatteryPermission: (e) async* {
+        _appRedirectHelper.appBlocker.openBatteryOptimizationSettings();
+        yield state;
+      },
+      startAppRedirect: (e) async* {
+        await _appRedirectHelper.appBlocker.enableAppBlocker();
+        yield state;
       }
-      // selectPackage: null,
-      // removePackage: null,
-      // updateTime: null,
-      // updateWeekDays: null,
     );
   }
 }

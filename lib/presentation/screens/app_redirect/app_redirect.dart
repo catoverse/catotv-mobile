@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/app_redirect/app_redirect_bloc/app_redirect_bloc.dart';
 import 'package:cato_feed/application/app_redirect/app_redirect_selection_bloc/app_redirect_selection_bloc.dart';
 import 'package:cato_feed/application/app_redirect/installed_apps_bloc/installed_apps_bloc.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:path/path.dart';
 
 class AppRedirectScreen extends StatelessWidget {
   @override
@@ -38,7 +40,13 @@ class AppRedirectScreen extends StatelessWidget {
   }
 }
 
-class AppRedirectPage extends StatelessWidget {
+class AppRedirectPage extends StatefulWidget {
+  @override
+  _AppRedirectPageState createState() => _AppRedirectPageState();
+}
+
+class _AppRedirectPageState extends State<AppRedirectPage>
+    with WidgetsBindingObserver {
   List<_AppRedirectItems> _appRedirectItems = [
     _AppRedirectItems(
         title: 'Apps To Restrict',
@@ -48,13 +56,9 @@ class AppRedirectPage extends StatelessWidget {
         title: 'Set Timing',
         body:
             'This is when you want to restrict yourself from using these apps.'),
-    _AppRedirectItems(
-        title: 'Permissions',
-        body:
-            'Almost done, set App Access. Cato Usage Access Must Be Enabled In Order To Restrict Apps.'),
+    _AppRedirectItems(title: 'Permissions', body: ''),
   ];
 
-  // ignore: missing_return
   Widget _buildFeatureWidget(
       BuildContext context, int currentStep, AppRedirectState state) {
     if (currentStep == 1) {
@@ -162,6 +166,7 @@ class AppRedirectPage extends StatelessWidget {
   List<String> _weekDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
   String clockStartTime;
+
   String clockEndTime;
 
   Widget _buildTimingSet(AppRedirectState state) {
@@ -242,10 +247,76 @@ class AppRedirectPage extends StatelessWidget {
     );
   }
 
+  AppLifecycleState _lastLifecycleState;
+  AppRedirectBloc bloc;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      print("onResumed");
+      if (_lastLifecycleState != null &&
+          _lastLifecycleState != AppLifecycleState.resumed) {
+        if (bloc == null) {
+          print("bloc is null");
+        }
+        bloc?.add(AppRedirectEvent.checkPermissions());
+      }
+      _lastLifecycleState = state;
+    } else {
+      print("not onResumed");
+      _lastLifecycleState = state;
+    }
+  }
+
+  void _onNextButtonPressed(BuildContext context, AppRedirectState state) {
+    switch (state.currentStep) {
+      case 1:
+        {
+          bloc..add(AppRedirectEvent.changeStep(state.currentStep + 1));
+          return;
+        }
+      case 2:
+        {
+          bloc
+            ..add(AppRedirectEvent.updateTime(clockStartTime, clockEndTime))
+            ..add(AppRedirectEvent.changeStep(state.currentStep + 1));
+          return;
+        }
+      case 3:
+        {
+          if (state.appUsagePermission == PermissionState.NOT_ALLOWED) {
+            bloc.add(AppRedirectEvent.requestAppUsagePermission());
+            return;
+          }
+
+          if (state.batteryPermission == PermissionState.NOT_ALLOWED) {
+            bloc.add(AppRedirectEvent.requestBatteryPermission());
+            return;
+          }
+
+          bloc.add(AppRedirectEvent.startAppRedirect());
+          ExtendedNavigator.of(context).pop();
+          return;
+        }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    var bloc = context.bloc<AppRedirectBloc>();
+    if (bloc == null) bloc = context.bloc<AppRedirectBloc>();
     return PlatformScaffold(
       backgroundColor: ColorAssets.black21,
       body: BlocConsumer<AppRedirectBloc, AppRedirectState>(
@@ -329,7 +400,10 @@ class AppRedirectPage extends StatelessWidget {
                               right: 32,
                             ),
                             child: Text(
-                              _appRedirectItems[state.currentStep - 1].body,
+                              (state.currentStep == 3)
+                                  ? state.getPermissionText()
+                                  : _appRedirectItems[state.currentStep - 1]
+                                      .body,
                               style: TextStyle(
                                 color: ColorAssets.black2150o,
                                 fontSize: 14,
@@ -344,7 +418,7 @@ class AppRedirectPage extends StatelessWidget {
                           _buildFeatureWidget(
                               context, state.currentStep, state),
                           SizedBox(
-                            height: 80,
+                            height: 20,
                           )
                         ],
                       ),
@@ -352,39 +426,26 @@ class AppRedirectPage extends StatelessWidget {
                         alignment: Alignment.bottomCenter,
                         child: Container(
                           color: Colors.transparent,
-                          margin: EdgeInsets.only(bottom: 20),
+                          margin: EdgeInsets.only(bottom: 10),
                           child: Row(
                             children: [
                               Spacer(
                                 flex: 1,
                               ),
-                              GestureDetector(
-                                child: Card(
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        left: 60,
-                                        right: 60,
-                                        top: 20,
-                                        bottom: 20),
-                                    child: Text(
-                                      'Back',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontFamily: FontAssets.Roboto,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  elevation: 0,
-                                  color: ColorAssets.black21,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
+                              PlatformButton(
+                                color: ColorAssets.black21,
+                                padding: EdgeInsets.symmetric(
+                                    vertical: 10, horizontal: 40),
+                                child: Text(
+                                  'Back',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: FontAssets.Roboto,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                                onTap: () {
-                                  // Handle Back Press
+                                onPressed: () {
                                   if (state.currentStep == 1) {
                                     ExtendedNavigator.of(context).pop();
                                   } else {
@@ -396,60 +457,31 @@ class AppRedirectPage extends StatelessWidget {
                               SizedBox(
                                 width: 10,
                               ),
-                              GestureDetector(
-                                child: Card(
-                                  child: Container(
-                                    margin: EdgeInsets.only(
-                                        left:
-                                            (state.currentStep == 3) ? 20 : 60,
-                                        right:
-                                            (state.currentStep == 3) ? 20 : 60,
-                                        top: 20,
-                                        bottom: 20),
-                                    child: Text(
-                                      (state.currentStep == 3)
-                                          ? 'Go to Settings'
-                                          : 'Next',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontFamily: FontAssets.Roboto,
-                                        fontWeight: FontWeight.w400,
-                                      ),
-                                    ),
-                                  ),
-                                  elevation: 0,
+                              Container(
+                                constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width / 2),
+                                child: PlatformButton(
                                   color: ColorAssets.teal,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(30)),
+                                  child: AutoSizeText(
+                                    (state.currentStep == 3)
+                                        ? state.getPermissionButtonText()
+                                        : 'Next',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily: FontAssets.Roboto,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                    maxLines: 1,
+                                  ),
+                                  onPressed: () {
+                                    _onNextButtonPressed(context, state);
+                                  },
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 10,
+                                    horizontal:
+                                        (state.currentStep == 3 && state.getPermissionButtonText() != "Finish") ? 20 : 40,
                                   ),
                                 ),
-                                onTap: () {
-                                  switch (state.currentStep) {
-                                    case 1:
-                                      {
-                                        bloc
-                                          ..add(AppRedirectEvent.changeStep(
-                                              state.currentStep + 1));
-                                        return;
-                                      }
-                                    case 2:
-                                      {
-                                        bloc
-                                          ..add(AppRedirectEvent.updateTime(
-                                              clockStartTime, clockEndTime))
-                                          ..add(AppRedirectEvent.changeStep(
-                                              state.currentStep + 1));
-                                        return;
-                                      }
-                                    case 3:
-                                      {
-                                        // TODO: Handle 3rd
-                                        return;
-                                      }
-                                  }
-                                },
                               ),
                               Spacer(
                                 flex: 1,

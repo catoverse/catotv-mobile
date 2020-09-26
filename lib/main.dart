@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:cato_feed/application/app_redirect/plugin/AppRedirectHelper.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/init/init.dart';
 import 'package:cato_feed/application/post/post.dart';
@@ -58,6 +61,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await configureDependencies();
+
+  if(Platform.isAndroid) {
+    AppRedirectHelper appRedirectHelper = getIt<AppRedirectHelper>();
+    appRedirectHelper.appBlocker.configure(onResume: (packageName) async {
+      appRedirectHelper.appBlocker.bringAppToFront();
+    }, onBackgroundMessage: null);
+  }
+
   if(kReleaseMode) {
     FlutterError.onError = Crashlytics.instance.recordFlutterError;
   }

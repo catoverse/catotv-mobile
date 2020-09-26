@@ -34,4 +34,20 @@ extension AppRedirectStateX on AppRedirectState {
   bool isWeekDaySelected(int weekDay) {
     return selectedWeekDays?.contains(weekDay) ?? false;
   }
+
+  String getPermissionButtonText() {
+    if(appUsagePermission == PermissionState.NOT_ALLOWED) return "Go to Settings";
+    if(batteryPermission == PermissionState.NOT_ALLOWED) return "Grant Permission";
+    return "Finish";
+  }
+
+  String getPermissionText() {
+    if(appUsagePermission == PermissionState.NOT_ALLOWED)
+    return "Almost done, set App Access. Cato Usage Access Must Be Enabled In Order To Restrict Apps.";
+
+    if(batteryPermission == PermissionState.NOT_ALLOWED)
+      return "Last permission. Cato need to continue run in background to continue block apps.";
+
+    return "Done!. Click on Finish and App Redirect will start working.";
+  }
 }

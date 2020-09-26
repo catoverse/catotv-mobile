@@ -38,6 +38,26 @@ class _$AppRedirectEventTearOff {
       endTime,
     );
   }
+
+// ignore: unused_element
+  _CheckPermission checkPermissions() {
+    return const _CheckPermission();
+  }
+
+// ignore: unused_element
+  _RequestAppUsagePermission requestAppUsagePermission() {
+    return const _RequestAppUsagePermission();
+  }
+
+// ignore: unused_element
+  _RequestBatteryPermission requestBatteryPermission() {
+    return const _RequestBatteryPermission();
+  }
+
+// ignore: unused_element
+  _StartAppRedirect startAppRedirect() {
+    return const _StartAppRedirect();
+  }
 }
 
 // ignore: unused_element
@@ -50,6 +70,10 @@ mixin _$AppRedirectEvent {
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
@@ -57,6 +81,10 @@ mixin _$AppRedirectEvent {
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -65,6 +93,11 @@ mixin _$AppRedirectEvent {
     @required Result changeStep(_ChangeStep value),
     @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
@@ -72,6 +105,10 @@ mixin _$AppRedirectEvent {
     Result changeStep(_ChangeStep value),
     Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   });
 }
@@ -131,11 +168,19 @@ class _$_Initialize implements _Initialize {
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return initialize();
   }
 
@@ -146,6 +191,10 @@ class _$_Initialize implements _Initialize {
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -162,11 +211,20 @@ class _$_Initialize implements _Initialize {
     @required Result changeStep(_ChangeStep value),
     @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return initialize(this);
   }
 
@@ -177,6 +235,10 @@ class _$_Initialize implements _Initialize {
     Result changeStep(_ChangeStep value),
     Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -253,11 +315,19 @@ class _$_ChangeStep implements _ChangeStep {
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return changeStep(currentStep);
   }
 
@@ -268,6 +338,10 @@ class _$_ChangeStep implements _ChangeStep {
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -284,11 +358,20 @@ class _$_ChangeStep implements _ChangeStep {
     @required Result changeStep(_ChangeStep value),
     @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return changeStep(this);
   }
 
@@ -299,6 +382,10 @@ class _$_ChangeStep implements _ChangeStep {
     Result changeStep(_ChangeStep value),
     Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -377,11 +464,19 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return addOrRemoveWeekDay(weekDay);
   }
 
@@ -392,6 +487,10 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -408,11 +507,20 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     @required Result changeStep(_ChangeStep value),
     @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return addOrRemoveWeekDay(this);
   }
 
@@ -423,6 +531,10 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     Result changeStep(_ChangeStep value),
     Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -512,11 +624,19 @@ class _$_UpdateTime implements _UpdateTime {
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return updateTime(startTime, endTime);
   }
 
@@ -527,6 +647,10 @@ class _$_UpdateTime implements _UpdateTime {
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -543,11 +667,20 @@ class _$_UpdateTime implements _UpdateTime {
     @required Result changeStep(_ChangeStep value),
     @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
     assert(changeStep != null);
     assert(addOrRemoveWeekDay != null);
     assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
     return updateTime(this);
   }
 
@@ -558,6 +691,10 @@ class _$_UpdateTime implements _UpdateTime {
     Result changeStep(_ChangeStep value),
     Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
     Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -574,6 +711,508 @@ abstract class _UpdateTime implements AppRedirectEvent {
   String get startTime;
   String get endTime;
   _$UpdateTimeCopyWith<_UpdateTime> get copyWith;
+}
+
+abstract class _$CheckPermissionCopyWith<$Res> {
+  factory _$CheckPermissionCopyWith(
+          _CheckPermission value, $Res Function(_CheckPermission) then) =
+      __$CheckPermissionCopyWithImpl<$Res>;
+}
+
+class __$CheckPermissionCopyWithImpl<$Res>
+    extends _$AppRedirectEventCopyWithImpl<$Res>
+    implements _$CheckPermissionCopyWith<$Res> {
+  __$CheckPermissionCopyWithImpl(
+      _CheckPermission _value, $Res Function(_CheckPermission) _then)
+      : super(_value, (v) => _then(v as _CheckPermission));
+
+  @override
+  _CheckPermission get _value => super._value as _CheckPermission;
+}
+
+class _$_CheckPermission implements _CheckPermission {
+  const _$_CheckPermission();
+
+  @override
+  String toString() {
+    return 'AppRedirectEvent.checkPermissions()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _CheckPermission);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initialize(),
+    @required Result changeStep(int currentStep),
+    @required Result addOrRemoveWeekDay(int weekDay),
+    @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return checkPermissions();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initialize(),
+    Result changeStep(int currentStep),
+    Result addOrRemoveWeekDay(int weekDay),
+    Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (checkPermissions != null) {
+      return checkPermissions();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initialize(_Initialize value),
+    @required Result changeStep(_ChangeStep value),
+    @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return checkPermissions(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initialize(_Initialize value),
+    Result changeStep(_ChangeStep value),
+    Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (checkPermissions != null) {
+      return checkPermissions(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CheckPermission implements AppRedirectEvent {
+  const factory _CheckPermission() = _$_CheckPermission;
+}
+
+abstract class _$RequestAppUsagePermissionCopyWith<$Res> {
+  factory _$RequestAppUsagePermissionCopyWith(_RequestAppUsagePermission value,
+          $Res Function(_RequestAppUsagePermission) then) =
+      __$RequestAppUsagePermissionCopyWithImpl<$Res>;
+}
+
+class __$RequestAppUsagePermissionCopyWithImpl<$Res>
+    extends _$AppRedirectEventCopyWithImpl<$Res>
+    implements _$RequestAppUsagePermissionCopyWith<$Res> {
+  __$RequestAppUsagePermissionCopyWithImpl(_RequestAppUsagePermission _value,
+      $Res Function(_RequestAppUsagePermission) _then)
+      : super(_value, (v) => _then(v as _RequestAppUsagePermission));
+
+  @override
+  _RequestAppUsagePermission get _value =>
+      super._value as _RequestAppUsagePermission;
+}
+
+class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
+  const _$_RequestAppUsagePermission();
+
+  @override
+  String toString() {
+    return 'AppRedirectEvent.requestAppUsagePermission()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _RequestAppUsagePermission);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initialize(),
+    @required Result changeStep(int currentStep),
+    @required Result addOrRemoveWeekDay(int weekDay),
+    @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return requestAppUsagePermission();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initialize(),
+    Result changeStep(int currentStep),
+    Result addOrRemoveWeekDay(int weekDay),
+    Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (requestAppUsagePermission != null) {
+      return requestAppUsagePermission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initialize(_Initialize value),
+    @required Result changeStep(_ChangeStep value),
+    @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return requestAppUsagePermission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initialize(_Initialize value),
+    Result changeStep(_ChangeStep value),
+    Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (requestAppUsagePermission != null) {
+      return requestAppUsagePermission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RequestAppUsagePermission implements AppRedirectEvent {
+  const factory _RequestAppUsagePermission() = _$_RequestAppUsagePermission;
+}
+
+abstract class _$RequestBatteryPermissionCopyWith<$Res> {
+  factory _$RequestBatteryPermissionCopyWith(_RequestBatteryPermission value,
+          $Res Function(_RequestBatteryPermission) then) =
+      __$RequestBatteryPermissionCopyWithImpl<$Res>;
+}
+
+class __$RequestBatteryPermissionCopyWithImpl<$Res>
+    extends _$AppRedirectEventCopyWithImpl<$Res>
+    implements _$RequestBatteryPermissionCopyWith<$Res> {
+  __$RequestBatteryPermissionCopyWithImpl(_RequestBatteryPermission _value,
+      $Res Function(_RequestBatteryPermission) _then)
+      : super(_value, (v) => _then(v as _RequestBatteryPermission));
+
+  @override
+  _RequestBatteryPermission get _value =>
+      super._value as _RequestBatteryPermission;
+}
+
+class _$_RequestBatteryPermission implements _RequestBatteryPermission {
+  const _$_RequestBatteryPermission();
+
+  @override
+  String toString() {
+    return 'AppRedirectEvent.requestBatteryPermission()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _RequestBatteryPermission);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initialize(),
+    @required Result changeStep(int currentStep),
+    @required Result addOrRemoveWeekDay(int weekDay),
+    @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return requestBatteryPermission();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initialize(),
+    Result changeStep(int currentStep),
+    Result addOrRemoveWeekDay(int weekDay),
+    Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (requestBatteryPermission != null) {
+      return requestBatteryPermission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initialize(_Initialize value),
+    @required Result changeStep(_ChangeStep value),
+    @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return requestBatteryPermission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initialize(_Initialize value),
+    Result changeStep(_ChangeStep value),
+    Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (requestBatteryPermission != null) {
+      return requestBatteryPermission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RequestBatteryPermission implements AppRedirectEvent {
+  const factory _RequestBatteryPermission() = _$_RequestBatteryPermission;
+}
+
+abstract class _$StartAppRedirectCopyWith<$Res> {
+  factory _$StartAppRedirectCopyWith(
+          _StartAppRedirect value, $Res Function(_StartAppRedirect) then) =
+      __$StartAppRedirectCopyWithImpl<$Res>;
+}
+
+class __$StartAppRedirectCopyWithImpl<$Res>
+    extends _$AppRedirectEventCopyWithImpl<$Res>
+    implements _$StartAppRedirectCopyWith<$Res> {
+  __$StartAppRedirectCopyWithImpl(
+      _StartAppRedirect _value, $Res Function(_StartAppRedirect) _then)
+      : super(_value, (v) => _then(v as _StartAppRedirect));
+
+  @override
+  _StartAppRedirect get _value => super._value as _StartAppRedirect;
+}
+
+class _$_StartAppRedirect implements _StartAppRedirect {
+  const _$_StartAppRedirect();
+
+  @override
+  String toString() {
+    return 'AppRedirectEvent.startAppRedirect()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _StartAppRedirect);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initialize(),
+    @required Result changeStep(int currentStep),
+    @required Result addOrRemoveWeekDay(int weekDay),
+    @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result startAppRedirect(),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return startAppRedirect();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initialize(),
+    Result changeStep(int currentStep),
+    Result addOrRemoveWeekDay(int weekDay),
+    Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result startAppRedirect(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (startAppRedirect != null) {
+      return startAppRedirect();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initialize(_Initialize value),
+    @required Result changeStep(_ChangeStep value),
+    @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(startAppRedirect != null);
+    return startAppRedirect(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initialize(_Initialize value),
+    Result changeStep(_ChangeStep value),
+    Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (startAppRedirect != null) {
+      return startAppRedirect(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _StartAppRedirect implements AppRedirectEvent {
+  const factory _StartAppRedirect() = _$_StartAppRedirect;
 }
 
 class _$AppRedirectStateTearOff {
