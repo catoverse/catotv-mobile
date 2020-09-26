@@ -19,6 +19,7 @@ import 'application/app_redirect/app_redirect_bloc/app_redirect_bloc.dart';
 import 'application/app_redirect/app_redirect_selection_bloc/app_redirect_selection_bloc.dart';
 import 'application/app_redirect/installed_apps_bloc/installed_apps_bloc.dart';
 import 'application/app_redirect/plugin/AppRedirectHelper.dart';
+import 'application/app_redirect_setting/app_redirect_setting_bloc.dart';
 import 'application/auth/auth_bloc.dart';
 import 'application/home/feed/feed_bloc.dart';
 import 'application/home/saved_posts/saved_posts_bloc.dart';
@@ -57,6 +58,8 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   gh.lazySingleton<AppRedirectHelper>(() => AppRedirectHelper());
   gh.factory<AppRedirectSelectionBloc>(
       () => AppRedirectSelectionBloc(g<AppRedirectHelper>()));
+  gh.factory<AppRedirectSettingBloc>(
+      () => AppRedirectSettingBloc(g<AppRedirectHelper>()));
   gh.factory<Connectivity>(() => registerModule.connectivity);
   gh.factory<FeedBloc>(() => FeedBloc());
   gh.lazySingleton<FirebaseAnalytics>(() => registerModule.firebaseAnalytics);
@@ -71,10 +74,10 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final sharedPreferences = await registerModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.factory<SplashBloc>(() => SplashBloc());
-  gh.factory<String>(() => registerModule.apiEndpoint,
-      instanceName: 'ApiEndpoint');
   gh.factory<String>(() => registerModule.playStoreUrl,
       instanceName: 'PlayStoreUrl');
+  gh.factory<String>(() => registerModule.apiEndpoint,
+      instanceName: 'ApiEndpoint');
   gh.factory<String>(() => registerModule.appStoreUrl,
       instanceName: 'AppStoreUrl');
   gh.factory<VideoPlayerBloc>(() => VideoPlayerBloc());

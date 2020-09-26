@@ -175,7 +175,9 @@ class AppBlockerPlugin: BroadcastReceiver(), MethodCallHandler, FlutterPlugin, A
         e.printStackTrace()
       }
       result.success(null)
-    }else {
+    } else if("isEnabled" == call.method) {
+      result.success(PrefManager.isAppBlockerEnabled(applicationContext));
+    } else {
       result.notImplemented()
     }
   }

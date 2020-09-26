@@ -19,13 +19,17 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:path/path.dart';
 
 class AppRedirectScreen extends StatelessWidget {
+  final int startStep;
+
+  const AppRedirectScreen({this.startStep = 1});
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
           create: (_) =>
-              getIt<AppRedirectBloc>()..add(AppRedirectEvent.initialize()),
+              getIt<AppRedirectBloc>()..add(AppRedirectEvent.initialize(startStep)),
         ),
         BlocProvider(
           create: (_) =>

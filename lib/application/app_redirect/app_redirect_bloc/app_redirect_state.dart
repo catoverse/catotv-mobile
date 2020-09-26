@@ -18,7 +18,7 @@ abstract class AppRedirectState with _$AppRedirectState {
   factory AppRedirectState.initial() => AppRedirectState(
         totalSteps: 2,
         currentStep: 1,
-        blockedPackages: List(),
+        blockedPackages: null,
         failure: null,
         startTime: null,
         endTime: null,

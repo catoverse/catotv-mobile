@@ -13,8 +13,10 @@ class _$AppRedirectEventTearOff {
   const _$AppRedirectEventTearOff();
 
 // ignore: unused_element
-  _Initialize initialize() {
-    return const _Initialize();
+  _Initialize initialize(int startStep) {
+    return _Initialize(
+      startStep,
+    );
   }
 
 // ignore: unused_element
@@ -66,7 +68,7 @@ const $AppRedirectEvent = _$AppRedirectEventTearOff();
 mixin _$AppRedirectEvent {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -77,7 +79,7 @@ mixin _$AppRedirectEvent {
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -132,6 +134,7 @@ abstract class _$InitializeCopyWith<$Res> {
   factory _$InitializeCopyWith(
           _Initialize value, $Res Function(_Initialize) then) =
       __$InitializeCopyWithImpl<$Res>;
+  $Res call({int startStep});
 }
 
 class __$InitializeCopyWithImpl<$Res>
@@ -143,28 +146,49 @@ class __$InitializeCopyWithImpl<$Res>
 
   @override
   _Initialize get _value => super._value as _Initialize;
+
+  @override
+  $Res call({
+    Object startStep = freezed,
+  }) {
+    return _then(_Initialize(
+      startStep == freezed ? _value.startStep : startStep as int,
+    ));
+  }
 }
 
 class _$_Initialize implements _Initialize {
-  const _$_Initialize();
+  const _$_Initialize(this.startStep) : assert(startStep != null);
+
+  @override
+  final int startStep;
 
   @override
   String toString() {
-    return 'AppRedirectEvent.initialize()';
+    return 'AppRedirectEvent.initialize(startStep: $startStep)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Initialize);
+    return identical(this, other) ||
+        (other is _Initialize &&
+            (identical(other.startStep, startStep) ||
+                const DeepCollectionEquality()
+                    .equals(other.startStep, startStep)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(startStep);
+
+  @override
+  _$InitializeCopyWith<_Initialize> get copyWith =>
+      __$InitializeCopyWithImpl<_Initialize>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -181,13 +205,13 @@ class _$_Initialize implements _Initialize {
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
     assert(startAppRedirect != null);
-    return initialize();
+    return initialize(startStep);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -199,7 +223,7 @@ class _$_Initialize implements _Initialize {
   }) {
     assert(orElse != null);
     if (initialize != null) {
-      return initialize();
+      return initialize(startStep);
     }
     return orElse();
   }
@@ -250,7 +274,10 @@ class _$_Initialize implements _Initialize {
 }
 
 abstract class _Initialize implements AppRedirectEvent {
-  const factory _Initialize() = _$_Initialize;
+  const factory _Initialize(int startStep) = _$_Initialize;
+
+  int get startStep;
+  _$InitializeCopyWith<_Initialize> get copyWith;
 }
 
 abstract class _$ChangeStepCopyWith<$Res> {
@@ -311,7 +338,7 @@ class _$_ChangeStep implements _ChangeStep {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -334,7 +361,7 @@ class _$_ChangeStep implements _ChangeStep {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -460,7 +487,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -483,7 +510,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -620,7 +647,7 @@ class _$_UpdateTime implements _UpdateTime {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -643,7 +670,7 @@ class _$_UpdateTime implements _UpdateTime {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -749,7 +776,7 @@ class _$_CheckPermission implements _CheckPermission {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -772,7 +799,7 @@ class _$_CheckPermission implements _CheckPermission {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -875,7 +902,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -898,7 +925,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -1001,7 +1028,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -1024,7 +1051,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),
@@ -1126,7 +1153,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result initialize(),
+    @required Result initialize(int startStep),
     @required Result changeStep(int currentStep),
     @required Result addOrRemoveWeekDay(int weekDay),
     @required Result updateTime(String startTime, String endTime),
@@ -1149,7 +1176,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result initialize(),
+    Result initialize(int startStep),
     Result changeStep(int currentStep),
     Result addOrRemoveWeekDay(int weekDay),
     Result updateTime(String startTime, String endTime),

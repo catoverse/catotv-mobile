@@ -125,8 +125,11 @@ class CatoRouter extends RouterBase {
       );
     },
     AppRedirectScreen: (data) {
+      final args = data.getArgs<AppRedirectScreenArguments>(
+        orElse: () => AppRedirectScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => AppRedirectScreen(),
+        builder: (context) => AppRedirectScreen(startStep: args.startStep),
         settings: data,
       );
     },
@@ -154,4 +157,10 @@ class ProfileScreenArguments {
 class ProfileOverviewScreenArguments {
   final Key key;
   ProfileOverviewScreenArguments({this.key});
+}
+
+/// AppRedirectScreen arguments holder class
+class AppRedirectScreenArguments {
+  final int startStep;
+  AppRedirectScreenArguments({this.startStep = 1});
 }

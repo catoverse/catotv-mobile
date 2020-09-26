@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:cato_feed/application/app_redirect_setting/app_redirect_setting_bloc.dart';
+import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
@@ -6,17 +8,22 @@ import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
 import 'package:cato_feed/presentation/utils/wave_path_clipper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-class NoDistractionSettingsScreen extends StatefulWidget {
+class NoDistractionSettingsScreen extends StatelessWidget {
   @override
-  _NoDistractionSettingsScreenState createState() =>
-      _NoDistractionSettingsScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      child: NoDistractionSettingPage(),
+      create: (_) => getIt<AppRedirectSettingBloc>()..add(AppRedirectSettingEvent.initialize()),
+    );
+  }
 }
 
-class _NoDistractionSettingsScreenState
-    extends State<NoDistractionSettingsScreen> {
-  bool _isRestricted = false;
+
+class NoDistractionSettingPage extends StatelessWidget {
+
   List<_NoDistractionItems> _noDistractionItems = [
     _NoDistractionItems(iconAsset: ImageAssets.Release.icon_select_apps,
         title: 'Choose Apps to Restrict'),
@@ -41,6 +48,9 @@ class _NoDistractionSettingsScreenState
                         Icons.arrow_back,
                         color: ColorAssets.blueHaiti,
                       ),
+                      onTap: () {
+                        ExtendedNavigator.of(context).pop();
+                      },
                     ),
                   ),
                   alignment: Alignment.bottomLeft,
@@ -95,15 +105,17 @@ class _NoDistractionSettingsScreenState
                     ),
                   ],
                 ),
-                CupertinoSwitch(
-                  value: _isRestricted,
-                  onChanged: (value) {
-                    setState(() {
-                      _isRestricted = value;
-                    });
-                    // TODO: Disable/Enable No State
-                  },
-                  activeColor: ColorAssets.teal,
+                BlocBuilder<AppRedirectSettingBloc, AppRedirectSettingState>(
+                  builder: (context, state) {
+                    return CupertinoSwitch(
+                      value: state.isEnabled,
+                      onChanged: (value) {
+                        context.bloc<AppRedirectSettingBloc>()
+                            .add(AppRedirectSettingEvent.toggleAppRedirect());
+                      },
+                      activeColor: ColorAssets.teal,
+                    );
+                  }
                 ),
               ],
             ),
@@ -122,7 +134,7 @@ class _NoDistractionSettingsScreenState
               itemBuilder: (context, index) {
                 return _noDistractionItems[index]._buildWidget(() {
                   ExtendedNavigator.of(context).push(
-                      CatoRoutes.appRedirectScreen);
+                      CatoRoutes.appRedirectScreen, arguments: AppRedirectScreenArguments(startStep: index+1));
                 });
               },
             ),

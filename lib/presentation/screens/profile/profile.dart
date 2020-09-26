@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:cato_feed/application/app_redirect/plugin/AppRedirectHelper.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
@@ -15,9 +16,19 @@ import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:cato_feed/presentation/utils/wave_path_clipper.dart';
 import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
 
-// ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ProfilePage();
+  }
+}
+
+
+// ignore: must_be_immutable
+class ProfilePage extends StatelessWidget {
+  ProfilePage({Key key}) : super(key: key);
 
   List<_ProfileItems> _profileItems = [
     _ProfileItems(
@@ -25,7 +36,10 @@ class ProfileScreen extends StatelessWidget {
     // _ProfileItems(iconAsset: ImageAssets.Release.icon_settings, title: 'Notifications Settings'),
     _ProfileItems(iconAsset: ImageAssets.Release.icon_logout, title: 'Logout'),
 
-    if(Platform.isAndroid) _ProfileItems(iconAsset: ImageAssets.Release.icon_no_distractions, title: 'No Distraction'),
+    if (Platform.isAndroid)
+      _ProfileItems(
+          iconAsset: ImageAssets.Release.icon_no_distractions,
+          title: 'No Distraction'),
     // _ProfileItems(iconAsset: ImageAssets.Release.icon_deactivate, title: 'Deactivate Account'),
   ];
 
@@ -66,7 +80,7 @@ class ProfileScreen extends StatelessWidget {
                   context.navigator.replace(CatoRoutes.onboardingScreen),
               orElse: () {});
         },
-        builder: (_, state) {
+        builder: (context, state) {
           var user = state.maybeWhen(
               orElse: () => null, authenticated: (user) => user);
           return Column(
@@ -192,9 +206,8 @@ class ProfileScreen extends StatelessWidget {
                         getIt<ILogger>()
                             .logEvent(LogEvents.EVENT_LOGOUT_PRESSED);
                         _logout(context);
-                      } else if(index == 2) {
-                        ExtendedNavigator.of(context).push(CatoRoutes.appRedirectScreen);
-                        // TODO: Log Event
+                      } else if (index == 2) {
+                        _appRedirectClick(context);
                       }
                     });
                   },
@@ -219,30 +232,41 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
+  Future<void> _appRedirectClick(BuildContext context) async {
+    var packages = await getIt<AppRedirectHelper>().getBlockedPackages();
+    var screen = (packages == null || packages.isEmpty)
+        ? CatoRoutes.appRedirectScreen
+        : CatoRoutes.noDistractionSettingsScreen;
+
+    ExtendedNavigator.of(context).push(screen);
+  }
+
   Future<bool> _logout(BuildContext context) {
     return showPlatformDialog(
-      context: context,
-      builder: (_) => PlatformAlertDialog(
-        title: Text('Are you sure to Logout?'),
-        content: Text('We hate to see you leave...'),
-        actions: [
-          PlatformDialogAction(
-            child: Text('Cancel'),
-            onPressed: () {
-              getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
-              Navigator.of(context).pop(false);
-            },
+          context: context,
+          builder: (_) => PlatformAlertDialog(
+            title: Text('Are you sure to Logout?'),
+            content: Text('We hate to see you leave...'),
+            actions: [
+              PlatformDialogAction(
+                child: Text('Cancel'),
+                onPressed: () {
+                  getIt<ILogger>()
+                      .logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
+                  Navigator.of(context).pop(false);
+                },
+              ),
+              PlatformDialogAction(
+                child: Text('Logout'),
+                onPressed: () {
+                  getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
+                  context.bloc<AuthBloc>().add(AuthEvent.signedOut());
+                },
+              ),
+            ],
           ),
-          PlatformDialogAction(
-            child: Text('Logout'),
-            onPressed: () {
-              getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
-              context.bloc<AuthBloc>().add(AuthEvent.signedOut());
-            },
-          ),
-        ],
-      ),
-    ) ?? false;
+        ) ??
+        false;
   }
 }
 

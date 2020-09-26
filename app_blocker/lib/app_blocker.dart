@@ -98,6 +98,11 @@ class AppBlocker {
     }
   }
 
+  /// Return AppBlocker state
+  Future<bool> isEnabled() async {
+    return await _channel.invokeMethod('isEnabled');
+  }
+
   /// Enables the appBlocker to block the apps
   Future<bool> enableAppBlocker() async {
     return await _channel.invokeMethod('enableAppBlocker');
