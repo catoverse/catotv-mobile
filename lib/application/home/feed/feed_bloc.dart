@@ -12,23 +12,26 @@ part 'feed_bloc.freezed.dart';
 
 @injectable
 class FeedBloc extends Bloc<FeedEvent, FeedState> {
-
   FeedBloc() : super(FeedState.initial());
 
   @override
   Stream<FeedState> mapEventToState(
     FeedEvent event,
   ) async* {
-    yield event.map(
-      load: (e) {
-        if(state.isLoading) {
-          return state;
+    yield* event.map(
+      load: (e) async* {
+        if (state.isLoading) {
+          yield state;
         } else {
-          return state.copyWith(nextPageKey: e.nextPageKey, pageSize: e.limit);
+          yield state.copyWith(nextPageKey: e.nextPageKey, pageSize: e.limit);
         }
       },
-      loadFinished: (e) => state.copyWith(isLoading: false),
-      selectTopic: (e) => state.copyWith(selectedTopicId: e.topicId, isLoading: false),
+      loadFinished: (e) async* {
+        yield state.copyWith(isLoading: false);
+      },
+      selectTopic: (e) async* {
+        yield state.copyWith(selectedTopicId: e.topicId, isLoading: false);
+      },
     );
   }
 }
