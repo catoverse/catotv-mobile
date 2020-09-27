@@ -38,6 +38,9 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
       var isAppUsagePermissionGranted =
           await _appRedirectHelper.appBlocker.isAppUsagePermissionGranted();
 
+      var isOverlayPermissionGranted =
+          await _appRedirectHelper.appBlocker.isOverlayPermissionGranted();
+
       var blockedPackages =
           await _appRedirectHelper.getBlockedPackages() ?? List();
       var selectedWeekDays =
@@ -62,6 +65,9 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
             ? PermissionState.GRANTED
             : PermissionState.NOT_ALLOWED,
         batteryPermission: (isBatteryPermissionGranted)
+            ? PermissionState.GRANTED
+            : PermissionState.NOT_ALLOWED,
+        overlayPermission: (isOverlayPermissionGranted)
             ? PermissionState.GRANTED
             : PermissionState.NOT_ALLOWED,
       );
@@ -92,11 +98,17 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
       var isAppUsagePermissionGranted =
           await _appRedirectHelper.appBlocker.isAppUsagePermissionGranted();
 
+      var isOverlayPermissionGranted =
+          await _appRedirectHelper.appBlocker.isOverlayPermissionGranted();
+
       yield state.copyWith(
         appUsagePermission: (isAppUsagePermissionGranted)
             ? PermissionState.GRANTED
             : PermissionState.NOT_ALLOWED,
         batteryPermission: (isBatteryPermissionGranted)
+            ? PermissionState.GRANTED
+            : PermissionState.NOT_ALLOWED,
+        overlayPermission: (isOverlayPermissionGranted)
             ? PermissionState.GRANTED
             : PermissionState.NOT_ALLOWED,
       );
@@ -108,6 +120,9 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
       yield state;
     }, startAppRedirect: (e) async* {
       await _appRedirectHelper.appBlocker.enableAppBlocker();
+      yield state;
+    }, requestOverlayPermission: (e) async* {
+      _appRedirectHelper.appBlocker.requestOverlayPermission();
       yield state;
     });
   }

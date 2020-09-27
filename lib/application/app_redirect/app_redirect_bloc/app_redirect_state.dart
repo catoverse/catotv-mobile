@@ -13,6 +13,7 @@ abstract class AppRedirectState with _$AppRedirectState {
     Failure failure, // Failure
     PermissionState appUsagePermission,
     PermissionState batteryPermission,
+    PermissionState overlayPermission,
   }) = _AppRedirectState;
 
   factory AppRedirectState.initial() => AppRedirectState(
@@ -25,6 +26,7 @@ abstract class AppRedirectState with _$AppRedirectState {
         selectedWeekDays: listOf(),
         appUsagePermission: PermissionState.NONE,
         batteryPermission: PermissionState.NONE,
+        overlayPermission: PermissionState.NONE,
       );
 }
 
@@ -36,17 +38,24 @@ extension AppRedirectStateX on AppRedirectState {
   }
 
   String getPermissionButtonText() {
-    if(appUsagePermission == PermissionState.NOT_ALLOWED) return "Go to Settings";
-    if(batteryPermission == PermissionState.NOT_ALLOWED) return "Grant Permission";
+    if (appUsagePermission == PermissionState.NOT_ALLOWED)
+      return "Go to Settings";
+    if (batteryPermission == PermissionState.NOT_ALLOWED)
+      return "Battery Permission";
+    if(overlayPermission == PermissionState.NOT_ALLOWED)
+      return "Overlay Permission";
     return "Finish";
   }
 
   String getPermissionText() {
-    if(appUsagePermission == PermissionState.NOT_ALLOWED)
-    return "Almost done, set App Access. Cato Usage Access Must Be Enabled In Order To Restrict Apps.";
+    if (appUsagePermission == PermissionState.NOT_ALLOWED)
+      return "Almost done, set App Access. Cato Usage Access Must Be Enabled In Order To Restrict Apps.";
 
-    if(batteryPermission == PermissionState.NOT_ALLOWED)
-      return "Last permission. Cato need to continue run in background to continue block apps.";
+    if (batteryPermission == PermissionState.NOT_ALLOWED)
+      return "Cato need to continue run in background to continue block apps.";
+
+    if(overlayPermission == PermissionState.NOT_ALLOWED)
+      return "Final step. Cato need overlay permission in order to open cato app from background.";
 
     return "Done!. Click on Finish and App Redirect will start working.";
   }

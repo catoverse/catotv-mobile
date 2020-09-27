@@ -177,6 +177,25 @@ class AppBlockerPlugin: BroadcastReceiver(), MethodCallHandler, FlutterPlugin, A
       result.success(null)
     } else if("isEnabled" == call.method) {
       result.success(PrefManager.isAppBlockerEnabled(applicationContext));
+    } else if("isOverlayPermissionGranted" == call.method) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        result.success(Settings.canDrawOverlays(applicationContext))
+      } else {
+        result.success(true)
+      }
+    } else if("requestOverlayPermission" == call.method) {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        val intent = Intent()
+        intent.action = Settings.ACTION_MANAGE_OVERLAY_PERMISSION
+        if(Build.VERSION.SDK_INT < 30) {
+          intent.data = Uri.fromParts("package", applicationContext.packageName, null)
+        }
+        try {
+          mainActivity?.startActivity(intent)
+        } catch (e: Exception) {
+          e.printStackTrace()
+        }
+      }
     } else {
       result.notImplemented()
     }

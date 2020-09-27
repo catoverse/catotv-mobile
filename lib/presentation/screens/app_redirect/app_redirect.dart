@@ -310,6 +310,11 @@ class _AppRedirectPageState extends State<AppRedirectPage>
             return;
           }
 
+          if(state.overlayPermission == PermissionState.NOT_ALLOWED) {
+            bloc.add(AppRedirectEvent.requestOverlayPermission());
+            return;
+          }
+
           bloc.add(AppRedirectEvent.startAppRedirect());
           ExtendedNavigator.of(context).pop();
           return;

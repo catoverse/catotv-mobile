@@ -181,4 +181,12 @@ class AppBlocker {
   void openBatteryOptimizationSettings() {
     _channel.invokeMethod("openBatteryOptimization");
   }
+  
+  Future<bool> isOverlayPermissionGranted() async {
+    return await _channel.invokeMethod("isOverlayPermissionGranted");
+  }
+  
+  void requestOverlayPermission() {
+    _channel.invokeMethod("requestOverlayPermission");
+  }
 }

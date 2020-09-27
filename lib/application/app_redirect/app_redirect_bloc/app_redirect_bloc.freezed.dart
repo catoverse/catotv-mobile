@@ -57,6 +57,11 @@ class _$AppRedirectEventTearOff {
   }
 
 // ignore: unused_element
+  _RequestOverlayPermission requestOverlayPermission() {
+    return const _RequestOverlayPermission();
+  }
+
+// ignore: unused_element
   _StartAppRedirect startAppRedirect() {
     return const _StartAppRedirect();
   }
@@ -75,6 +80,7 @@ mixin _$AppRedirectEvent {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   });
   @optionalTypeArgs
@@ -86,6 +92,7 @@ mixin _$AppRedirectEvent {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   });
@@ -99,6 +106,7 @@ mixin _$AppRedirectEvent {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   });
   @optionalTypeArgs
@@ -110,6 +118,7 @@ mixin _$AppRedirectEvent {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   });
@@ -195,6 +204,7 @@ class _$_Initialize implements _Initialize {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -204,6 +214,7 @@ class _$_Initialize implements _Initialize {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return initialize(startStep);
   }
@@ -218,6 +229,7 @@ class _$_Initialize implements _Initialize {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -239,6 +251,7 @@ class _$_Initialize implements _Initialize {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -248,6 +261,7 @@ class _$_Initialize implements _Initialize {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return initialize(this);
   }
@@ -262,6 +276,7 @@ class _$_Initialize implements _Initialize {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -345,6 +360,7 @@ class _$_ChangeStep implements _ChangeStep {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -354,6 +370,7 @@ class _$_ChangeStep implements _ChangeStep {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return changeStep(currentStep);
   }
@@ -368,6 +385,7 @@ class _$_ChangeStep implements _ChangeStep {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -389,6 +407,7 @@ class _$_ChangeStep implements _ChangeStep {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -398,6 +417,7 @@ class _$_ChangeStep implements _ChangeStep {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return changeStep(this);
   }
@@ -412,6 +432,7 @@ class _$_ChangeStep implements _ChangeStep {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -494,6 +515,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -503,6 +525,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return addOrRemoveWeekDay(weekDay);
   }
@@ -517,6 +540,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -538,6 +562,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -547,6 +572,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return addOrRemoveWeekDay(this);
   }
@@ -561,6 +587,7 @@ class _$_AddOrRemoveWeekDay implements _AddOrRemoveWeekDay {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -654,6 +681,7 @@ class _$_UpdateTime implements _UpdateTime {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -663,6 +691,7 @@ class _$_UpdateTime implements _UpdateTime {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return updateTime(startTime, endTime);
   }
@@ -677,6 +706,7 @@ class _$_UpdateTime implements _UpdateTime {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -698,6 +728,7 @@ class _$_UpdateTime implements _UpdateTime {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -707,6 +738,7 @@ class _$_UpdateTime implements _UpdateTime {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return updateTime(this);
   }
@@ -721,6 +753,7 @@ class _$_UpdateTime implements _UpdateTime {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -783,6 +816,7 @@ class _$_CheckPermission implements _CheckPermission {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -792,6 +826,7 @@ class _$_CheckPermission implements _CheckPermission {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return checkPermissions();
   }
@@ -806,6 +841,7 @@ class _$_CheckPermission implements _CheckPermission {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -827,6 +863,7 @@ class _$_CheckPermission implements _CheckPermission {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -836,6 +873,7 @@ class _$_CheckPermission implements _CheckPermission {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return checkPermissions(this);
   }
@@ -850,6 +888,7 @@ class _$_CheckPermission implements _CheckPermission {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -909,6 +948,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -918,6 +958,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return requestAppUsagePermission();
   }
@@ -932,6 +973,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -953,6 +995,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -962,6 +1005,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return requestAppUsagePermission(this);
   }
@@ -976,6 +1020,7 @@ class _$_RequestAppUsagePermission implements _RequestAppUsagePermission {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -1035,6 +1080,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -1044,6 +1090,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return requestBatteryPermission();
   }
@@ -1058,6 +1105,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -1079,6 +1127,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -1088,6 +1137,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return requestBatteryPermission(this);
   }
@@ -1102,6 +1152,7 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -1115,6 +1166,138 @@ class _$_RequestBatteryPermission implements _RequestBatteryPermission {
 
 abstract class _RequestBatteryPermission implements AppRedirectEvent {
   const factory _RequestBatteryPermission() = _$_RequestBatteryPermission;
+}
+
+abstract class _$RequestOverlayPermissionCopyWith<$Res> {
+  factory _$RequestOverlayPermissionCopyWith(_RequestOverlayPermission value,
+          $Res Function(_RequestOverlayPermission) then) =
+      __$RequestOverlayPermissionCopyWithImpl<$Res>;
+}
+
+class __$RequestOverlayPermissionCopyWithImpl<$Res>
+    extends _$AppRedirectEventCopyWithImpl<$Res>
+    implements _$RequestOverlayPermissionCopyWith<$Res> {
+  __$RequestOverlayPermissionCopyWithImpl(_RequestOverlayPermission _value,
+      $Res Function(_RequestOverlayPermission) _then)
+      : super(_value, (v) => _then(v as _RequestOverlayPermission));
+
+  @override
+  _RequestOverlayPermission get _value =>
+      super._value as _RequestOverlayPermission;
+}
+
+class _$_RequestOverlayPermission implements _RequestOverlayPermission {
+  const _$_RequestOverlayPermission();
+
+  @override
+  String toString() {
+    return 'AppRedirectEvent.requestOverlayPermission()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _RequestOverlayPermission);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initialize(int startStep),
+    @required Result changeStep(int currentStep),
+    @required Result addOrRemoveWeekDay(int weekDay),
+    @required Result updateTime(String startTime, String endTime),
+    @required Result checkPermissions(),
+    @required Result requestAppUsagePermission(),
+    @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
+    @required Result startAppRedirect(),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
+    assert(startAppRedirect != null);
+    return requestOverlayPermission();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initialize(int startStep),
+    Result changeStep(int currentStep),
+    Result addOrRemoveWeekDay(int weekDay),
+    Result updateTime(String startTime, String endTime),
+    Result checkPermissions(),
+    Result requestAppUsagePermission(),
+    Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
+    Result startAppRedirect(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (requestOverlayPermission != null) {
+      return requestOverlayPermission();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initialize(_Initialize value),
+    @required Result changeStep(_ChangeStep value),
+    @required Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    @required Result updateTime(_UpdateTime value),
+    @required Result checkPermissions(_CheckPermission value),
+    @required
+        Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
+    @required Result startAppRedirect(_StartAppRedirect value),
+  }) {
+    assert(initialize != null);
+    assert(changeStep != null);
+    assert(addOrRemoveWeekDay != null);
+    assert(updateTime != null);
+    assert(checkPermissions != null);
+    assert(requestAppUsagePermission != null);
+    assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
+    assert(startAppRedirect != null);
+    return requestOverlayPermission(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initialize(_Initialize value),
+    Result changeStep(_ChangeStep value),
+    Result addOrRemoveWeekDay(_AddOrRemoveWeekDay value),
+    Result updateTime(_UpdateTime value),
+    Result checkPermissions(_CheckPermission value),
+    Result requestAppUsagePermission(_RequestAppUsagePermission value),
+    Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
+    Result startAppRedirect(_StartAppRedirect value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (requestOverlayPermission != null) {
+      return requestOverlayPermission(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RequestOverlayPermission implements AppRedirectEvent {
+  const factory _RequestOverlayPermission() = _$_RequestOverlayPermission;
 }
 
 abstract class _$StartAppRedirectCopyWith<$Res> {
@@ -1160,6 +1343,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
     @required Result checkPermissions(),
     @required Result requestAppUsagePermission(),
     @required Result requestBatteryPermission(),
+    @required Result requestOverlayPermission(),
     @required Result startAppRedirect(),
   }) {
     assert(initialize != null);
@@ -1169,6 +1353,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return startAppRedirect();
   }
@@ -1183,6 +1368,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
     Result checkPermissions(),
     Result requestAppUsagePermission(),
     Result requestBatteryPermission(),
+    Result requestOverlayPermission(),
     Result startAppRedirect(),
     @required Result orElse(),
   }) {
@@ -1204,6 +1390,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
     @required
         Result requestAppUsagePermission(_RequestAppUsagePermission value),
     @required Result requestBatteryPermission(_RequestBatteryPermission value),
+    @required Result requestOverlayPermission(_RequestOverlayPermission value),
     @required Result startAppRedirect(_StartAppRedirect value),
   }) {
     assert(initialize != null);
@@ -1213,6 +1400,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
     assert(checkPermissions != null);
     assert(requestAppUsagePermission != null);
     assert(requestBatteryPermission != null);
+    assert(requestOverlayPermission != null);
     assert(startAppRedirect != null);
     return startAppRedirect(this);
   }
@@ -1227,6 +1415,7 @@ class _$_StartAppRedirect implements _StartAppRedirect {
     Result checkPermissions(_CheckPermission value),
     Result requestAppUsagePermission(_RequestAppUsagePermission value),
     Result requestBatteryPermission(_RequestBatteryPermission value),
+    Result requestOverlayPermission(_RequestOverlayPermission value),
     Result startAppRedirect(_StartAppRedirect value),
     @required Result orElse(),
   }) {
@@ -1255,7 +1444,8 @@ class _$AppRedirectStateTearOff {
       KtList<int> selectedWeekDays,
       Failure failure,
       PermissionState appUsagePermission,
-      PermissionState batteryPermission}) {
+      PermissionState batteryPermission,
+      PermissionState overlayPermission}) {
     return _AppRedirectState(
       totalSteps: totalSteps,
       currentStep: currentStep,
@@ -1266,6 +1456,7 @@ class _$AppRedirectStateTearOff {
       failure: failure,
       appUsagePermission: appUsagePermission,
       batteryPermission: batteryPermission,
+      overlayPermission: overlayPermission,
     );
   }
 }
@@ -1283,6 +1474,7 @@ mixin _$AppRedirectState {
   Failure get failure;
   PermissionState get appUsagePermission;
   PermissionState get batteryPermission;
+  PermissionState get overlayPermission;
 
   $AppRedirectStateCopyWith<AppRedirectState> get copyWith;
 }
@@ -1300,7 +1492,8 @@ abstract class $AppRedirectStateCopyWith<$Res> {
       KtList<int> selectedWeekDays,
       Failure failure,
       PermissionState appUsagePermission,
-      PermissionState batteryPermission});
+      PermissionState batteryPermission,
+      PermissionState overlayPermission});
 
   $FailureCopyWith<$Res> get failure;
 }
@@ -1324,6 +1517,7 @@ class _$AppRedirectStateCopyWithImpl<$Res>
     Object failure = freezed,
     Object appUsagePermission = freezed,
     Object batteryPermission = freezed,
+    Object overlayPermission = freezed,
   }) {
     return _then(_value.copyWith(
       totalSteps: totalSteps == freezed ? _value.totalSteps : totalSteps as int,
@@ -1344,6 +1538,9 @@ class _$AppRedirectStateCopyWithImpl<$Res>
       batteryPermission: batteryPermission == freezed
           ? _value.batteryPermission
           : batteryPermission as PermissionState,
+      overlayPermission: overlayPermission == freezed
+          ? _value.overlayPermission
+          : overlayPermission as PermissionState,
     ));
   }
 
@@ -1373,7 +1570,8 @@ abstract class _$AppRedirectStateCopyWith<$Res>
       KtList<int> selectedWeekDays,
       Failure failure,
       PermissionState appUsagePermission,
-      PermissionState batteryPermission});
+      PermissionState batteryPermission,
+      PermissionState overlayPermission});
 
   @override
   $FailureCopyWith<$Res> get failure;
@@ -1400,6 +1598,7 @@ class __$AppRedirectStateCopyWithImpl<$Res>
     Object failure = freezed,
     Object appUsagePermission = freezed,
     Object batteryPermission = freezed,
+    Object overlayPermission = freezed,
   }) {
     return _then(_AppRedirectState(
       totalSteps: totalSteps == freezed ? _value.totalSteps : totalSteps as int,
@@ -1420,6 +1619,9 @@ class __$AppRedirectStateCopyWithImpl<$Res>
       batteryPermission: batteryPermission == freezed
           ? _value.batteryPermission
           : batteryPermission as PermissionState,
+      overlayPermission: overlayPermission == freezed
+          ? _value.overlayPermission
+          : overlayPermission as PermissionState,
     ));
   }
 }
@@ -1434,7 +1636,8 @@ class _$_AppRedirectState implements _AppRedirectState {
       this.selectedWeekDays,
       this.failure,
       this.appUsagePermission,
-      this.batteryPermission});
+      this.batteryPermission,
+      this.overlayPermission});
 
   @override
   final int totalSteps;
@@ -1454,10 +1657,12 @@ class _$_AppRedirectState implements _AppRedirectState {
   final PermissionState appUsagePermission;
   @override
   final PermissionState batteryPermission;
+  @override
+  final PermissionState overlayPermission;
 
   @override
   String toString() {
-    return 'AppRedirectState(totalSteps: $totalSteps, currentStep: $currentStep, blockedPackages: $blockedPackages, startTime: $startTime, endTime: $endTime, selectedWeekDays: $selectedWeekDays, failure: $failure, appUsagePermission: $appUsagePermission, batteryPermission: $batteryPermission)';
+    return 'AppRedirectState(totalSteps: $totalSteps, currentStep: $currentStep, blockedPackages: $blockedPackages, startTime: $startTime, endTime: $endTime, selectedWeekDays: $selectedWeekDays, failure: $failure, appUsagePermission: $appUsagePermission, batteryPermission: $batteryPermission, overlayPermission: $overlayPermission)';
   }
 
   @override
@@ -1490,7 +1695,10 @@ class _$_AppRedirectState implements _AppRedirectState {
                     .equals(other.appUsagePermission, appUsagePermission)) &&
             (identical(other.batteryPermission, batteryPermission) ||
                 const DeepCollectionEquality()
-                    .equals(other.batteryPermission, batteryPermission)));
+                    .equals(other.batteryPermission, batteryPermission)) &&
+            (identical(other.overlayPermission, overlayPermission) ||
+                const DeepCollectionEquality()
+                    .equals(other.overlayPermission, overlayPermission)));
   }
 
   @override
@@ -1504,7 +1712,8 @@ class _$_AppRedirectState implements _AppRedirectState {
       const DeepCollectionEquality().hash(selectedWeekDays) ^
       const DeepCollectionEquality().hash(failure) ^
       const DeepCollectionEquality().hash(appUsagePermission) ^
-      const DeepCollectionEquality().hash(batteryPermission);
+      const DeepCollectionEquality().hash(batteryPermission) ^
+      const DeepCollectionEquality().hash(overlayPermission);
 
   @override
   _$AppRedirectStateCopyWith<_AppRedirectState> get copyWith =>
@@ -1521,7 +1730,8 @@ abstract class _AppRedirectState implements AppRedirectState {
       KtList<int> selectedWeekDays,
       Failure failure,
       PermissionState appUsagePermission,
-      PermissionState batteryPermission}) = _$_AppRedirectState;
+      PermissionState batteryPermission,
+      PermissionState overlayPermission}) = _$_AppRedirectState;
 
   @override
   int get totalSteps;
@@ -1541,6 +1751,8 @@ abstract class _AppRedirectState implements AppRedirectState {
   PermissionState get appUsagePermission;
   @override
   PermissionState get batteryPermission;
+  @override
+  PermissionState get overlayPermission;
   @override
   _$AppRedirectStateCopyWith<_AppRedirectState> get copyWith;
 }

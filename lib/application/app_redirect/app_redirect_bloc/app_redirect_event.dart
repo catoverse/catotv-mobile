@@ -9,5 +9,6 @@ abstract class AppRedirectEvent with _$AppRedirectEvent {
     const factory AppRedirectEvent.checkPermissions() = _CheckPermission;
     const factory AppRedirectEvent.requestAppUsagePermission() = _RequestAppUsagePermission;
     const factory AppRedirectEvent.requestBatteryPermission() = _RequestBatteryPermission;
+    const factory AppRedirectEvent.requestOverlayPermission() = _RequestOverlayPermission;
     const factory AppRedirectEvent.startAppRedirect() = _StartAppRedirect;
 }

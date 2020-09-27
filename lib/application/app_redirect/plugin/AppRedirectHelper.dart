@@ -27,6 +27,7 @@ class AppRedirectHelper {
     blockedApps.forEach((element) {
       apps.remove(element);
     });
+    apps.sort((app1, app2) => app1.appName.compareTo(app2.appName));
     apps.insertAll(0, blockedApps);
     return apps;
   }
