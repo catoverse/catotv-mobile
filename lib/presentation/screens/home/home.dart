@@ -35,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
           .state
           .maybeWhen(orElse: () => false, authenticated: (_) => true);
 
-      if(isAuthenticated) {
+      if (isAuthenticated) {
         final Uri deepLink = dynamicLink?.link;
 
         if (deepLink != null) {
@@ -53,14 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
     MainFeedScreen(
       key: PageStorageKey('feedScreen'),
     ),
+    SavedPostScreen(
+      key: PageStorageKey('savedPosts'),
+    ),
     ProfileScreen(
       key: PageStorageKey('profileScreen'),
     )
   ];
-  final Widget _savedPostScreen =
-      SavedPostScreen(key: PageStorageKey('SavedPostScreen'));
   int _currentPage = 0;
-  bool showSaveNavBar = false;
   final PageStorageBucket _bucket = PageStorageBucket();
 
   @override
@@ -69,79 +69,51 @@ class _HomeScreenState extends State<HomeScreen> {
         .bloc<AuthBloc>()
         .state
         .maybeWhen(orElse: () => '', authenticated: (user) => user.photoUrl);
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+        SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
     return BlocProvider(
       create: (_) => getIt<UserProfileBloc>()..add(UserProfileEvent.refresh()),
-      child: MultiBlocListener(
-        listeners: [
-          BlocListener<UserProfileBloc, UserProfileState>(
-            listener: (_, state) {
-              var shouldShowSaveNav =
-                  !(state.likedVideosId.isEmpty && state.savedVideosId.isEmpty);
-              if (shouldShowSaveNav != showSaveNavBar) {
-                setState(() {
-                  showSaveNavBar = shouldShowSaveNav;
-                  if (!showSaveNavBar) {
-                    _currentPage = 0;
-                  }
-                });
-              }
-            },
+      child: PlatformScaffold(
+        backgroundColor: ColorAssets.black32,
+        body: Container(
+          child: PageStorage(
+            bucket: _bucket,
+            child: _pages[_currentPage],
           ),
-        ],
-        child: PlatformScaffold(
-          backgroundColor: ColorAssets.black32,
-          body: Container(
-            child: PageStorage(
-              bucket: _bucket,
-              child: _getCurrentPage(_currentPage),
-            ),
+        ),
+        bottomNavBar: PlatformNavBar(
+          items: _buildNavBar(context, photoUrl),
+          currentIndex: _currentPage,
+          backgroundColor: ColorAssets.black21,
+          material: (_, __) => MaterialNavBarData(
+            selectedItemColor: Colors.white,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
           ),
-          bottomNavBar: PlatformNavBar(
-            items: _buildNavBar(context, photoUrl),
-            currentIndex: _currentPage,
-            backgroundColor: ColorAssets.black21,
-            material: (_, __) => MaterialNavBarData(
-              selectedItemColor: Colors.white,
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-            ),
-            cupertino: (_, __) => CupertinoTabBarData(
-              activeColor: Colors.white,
-            ),
-            itemChanged: (value) {
-              setState(() {
-                _currentPage = value;
-              });
-            },
+          cupertino: (_, __) => CupertinoTabBarData(
+            activeColor: Colors.white,
           ),
+          itemChanged: (value) {
+            setState(() {
+              _currentPage = value;
+            });
+          },
         ),
       ),
     );
   }
 
-  Widget _getCurrentPage(int currentPage) {
-    if (showSaveNavBar) {
-      if (_currentPage == 0) {
-        return _pages[0];
-      } else if (_currentPage == 1) {
-        return _savedPostScreen;
-      } else {
-        return _pages[1];
-      }
-    } else {
-      return _pages[currentPage];
-    }
-  }
-
   List<BottomNavigationBarItem> _buildNavBar(context, photoUrl) {
-    var baseNav = [
+    return [
       BottomNavigationBarItem(
         icon: Icon(CupertinoIcons.home, color: Colors.white),
         activeIcon: Icon(CupertinoIcons.home, color: Colors.white),
         title: Text('Home'),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.bookmark_border, color: Colors.white),
+        title: Text('Bookmarks'),
+        activeIcon: Icon(Icons.bookmark, color: Colors.white),
       ),
       BottomNavigationBarItem(
         icon: Container(
@@ -157,13 +129,5 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Profile'),
       ),
     ];
-    var savePostsNav = BottomNavigationBarItem(
-        icon: Icon(Icons.bookmark_border, color: Colors.white),
-        title: Text('Home'),
-        activeIcon: Icon(Icons.bookmark, color: Colors.white));
-    if (showSaveNavBar) {
-      baseNav.insert(1, savePostsNav);
-    }
-    return baseNav;
   }
 }

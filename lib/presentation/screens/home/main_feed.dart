@@ -101,51 +101,53 @@ class _MainFeedPageState extends State<MainFeedPage> {
           },
         ),
       ],
-      child: PlatformScaffold(
-        backgroundColor: ColorAssets.black32,
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              color: ColorAssets.black21,
-              child: _buildTopicBar(context),
-            ),
-            Expanded(
-              child: PagedListView.separated(
-                addRepaintBoundaries: false,
-                padding: EdgeInsets.only(top: 20),
-                separatorBuilder: (_, __) {
-                  return SizedBox(
-                    height: 20,
-                  );
-                },
-                key: PageStorageKey('feed'),
-                dataSource: _dataSource,
-                builderDelegate: PagedChildBuilderDelegate<Post>(
-                  itemBuilder: (context, post, index) {
-                    return PostWidget(
-                      key: ValueKey(post.id),
-                      post: post,
-                      index: index,
+      child: SafeArea(
+        child: PlatformScaffold(
+          backgroundColor: ColorAssets.black32,
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                color: ColorAssets.black21,
+                child: _buildTopicBar(context),
+              ),
+              Expanded(
+                child: PagedListView.separated(
+                  addRepaintBoundaries: false,
+                  padding: EdgeInsets.only(top: 1),
+                  separatorBuilder: (_, __) {
+                    return SizedBox(
+                      height: 20,
                     );
                   },
-                  newPageProgressIndicatorBuilder: (context) {
-                    return Container(
-                      margin: EdgeInsets.only(top: 8, bottom: 8),
-                      child: Center(
+                  key: PageStorageKey('feed'),
+                  dataSource: _dataSource,
+                  builderDelegate: PagedChildBuilderDelegate<Post>(
+                    itemBuilder: (context, post, index) {
+                      return PostWidget(
+                        key: ValueKey(post.id),
+                        post: post,
+                        index: index,
+                      );
+                    },
+                    newPageProgressIndicatorBuilder: (context) {
+                      return Container(
+                        margin: EdgeInsets.only(top: 8, bottom: 8),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    },
+                    firstPageProgressIndicatorBuilder: (context) {
+                      return Center(
                         child: CircularProgressIndicator(),
-                      ),
-                    );
-                  },
-                  firstPageProgressIndicatorBuilder: (context) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -159,7 +161,7 @@ class _MainFeedPageState extends State<MainFeedPage> {
             .toList();
         return Container(
           height: 32,
-          margin: EdgeInsets.only(top: 40, bottom: 10),
+          margin: EdgeInsets.only(top: 10, bottom: 10),
           child: BlocBuilder<FeedBloc, FeedState>(
             builder: (_, state) {
               return HorizontalTags(topics, state.selectedTopicId,

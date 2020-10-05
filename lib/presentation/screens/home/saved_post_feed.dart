@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/home/saved_posts/saved_posts_bloc.dart';
 import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/injection.dart';
@@ -42,9 +43,6 @@ class _SavedPostPageState extends State<SavedPostPage> {
   Widget build(BuildContext context) {
     return MultiBlocListener(
       listeners: [
-        BlocListener<SavedPostsBloc, SavedPostsState>(
-          listener: (_, state) {},
-        ),
         BlocListener<UserProfileBloc, UserProfileState>(
           listener: (context, state) {
             context.bloc<SavedPostsBloc>().add(SavedPostsEvent.refresh());
@@ -55,34 +53,41 @@ class _SavedPostPageState extends State<SavedPostPage> {
         backgroundColor: ColorAssets.black32,
         body: BlocBuilder<SavedPostsBloc, SavedPostsState>(
           builder: (_, state) {
-            List<Post> posts = List();
-            if (state.selectedPage == SelectedPage.Saved) {
-              posts = state.savedPosts;
-            } else if (state.selectedPage == SelectedPage.Liked) {
-              posts = state.likedPosts;
-            }
-
-            return Column(
-              children: [
-                Container(
-                  color: ColorAssets.black21,
-                  child: _buildTopicBar(),
-                ),
-                Expanded(
-                  child: ListView.separated(
-                    padding: EdgeInsets.only(top: 20),
-                    itemBuilder: (_, index) => PostWidget(
-                      post: posts[index],
-                      key: ValueKey(posts[index].id),
-                      index: index,
-                    ),
-                    separatorBuilder: (_, __) => SizedBox(
-                      height: 20,
-                    ),
-                    itemCount: posts.length,
+            var posts = state.savedPosts ?? List();
+            return SafeArea(
+              child: PlatformScaffold(
+                backgroundColor: ColorAssets.black32,
+                appBar: PlatformAppBar(
+                  title: AutoSizeText(
+                    'Bookmarked Posts',
+                    maxLines: 1,
                   ),
+                  backgroundColor: ColorAssets.black21,
+                  material: (_, __) =>
+                      MaterialAppBarData(elevation: 0.0, centerTitle: true),
                 ),
-              ],
+                body: (posts.length > 0)
+                    ? ListView.separated(
+                        padding: EdgeInsets.only(top: 1),
+                        itemBuilder: (_, index) => PostWidget(
+                          post: posts[index],
+                          key: ValueKey(posts[index].id),
+                          index: index,
+                        ),
+                        separatorBuilder: (_, __) => SizedBox(
+                          height: 20,
+                        ),
+                        itemCount: posts.length,
+                      )
+                    : Center(
+                        child: AutoSizeText(
+                          'You haven\'t bookmarked any videos.',
+                          textAlign: TextAlign.center,
+                          maxLines: 1,
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+              ),
             );
           },
         ),
@@ -141,55 +146,55 @@ class _SavedPostPageState extends State<SavedPostPage> {
     // );
   }
 
-  Widget _buildTopicBar() {
-    return Container(
-      height: 32,
-      margin: EdgeInsets.only(top: 35, bottom: 10),
-      child: BlocBuilder<SavedPostsBloc, SavedPostsState>(
-        builder: (context, state) {
-          var list = List<SelectedPage>();
-          if (state.savedPosts.isNotEmpty) list.add(SelectedPage.Saved);
-          if (state.likedPosts.isNotEmpty) list.add(SelectedPage.Liked);
-          return ListView.separated(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (_, index) {
-              var isSelected = state.selectedPage == list[index];
-              var name =
-                  (list[index] == SelectedPage.Saved) ? 'Saved' : 'Liked';
-              var color = (list[index] == SelectedPage.Saved)
-                  ? ColorAssets.teal
-                  : Colors.red.shade600;
-              return GestureDetector(
-                child: CategoryTag(
-                  tagColor: color,
-                  tagName: name,
-                  isChecked: isSelected,
-                ),
-                onTap: () {
-                  if (state.selectedPage != list[index]) {
-                    getIt<ILogger>().logEvent(
-                        LogEvents.EVENT_LIST_FILTER_SELECTED,
-                        params: LogEvents.getListFilterSelectedVariables(
-                            (list[index] == SelectedPage.Liked)
-                                ? 'Liked'
-                                : 'Saved'));
-                    context
-                        .bloc<SavedPostsBloc>()
-                        .add(SavedPostsEvent.updateSelectedPage(list[index]));
-                  }
-                },
-              );
-            },
-            separatorBuilder: (_, __) => SizedBox(
-              width: 10,
-            ),
-            itemCount: list.length,
-          );
-        },
-      ),
-    );
-  }
+  // Widget _buildTopicBar() {
+  //   return Container(
+  //     height: 32,
+  //     margin: EdgeInsets.only(top: 35, bottom: 10),
+  //     child: BlocBuilder<SavedPostsBloc, SavedPostsState>(
+  //       builder: (context, state) {
+  //         var list = List<SelectedPage>();
+  //         if (state.savedPosts.isNotEmpty) list.add(SelectedPage.Saved);
+  //         if (state.likedPosts.isNotEmpty) list.add(SelectedPage.Liked);
+  //         return ListView.separated(
+  //           padding: EdgeInsets.symmetric(horizontal: 16),
+  //           scrollDirection: Axis.horizontal,
+  //           itemBuilder: (_, index) {
+  //             var isSelected = state.selectedPage == list[index];
+  //             var name =
+  //                 (list[index] == SelectedPage.Saved) ? 'Saved' : 'Liked';
+  //             var color = (list[index] == SelectedPage.Saved)
+  //                 ? ColorAssets.teal
+  //                 : Colors.red.shade600;
+  //             return GestureDetector(
+  //               child: CategoryTag(
+  //                 tagColor: color,
+  //                 tagName: name,
+  //                 isChecked: isSelected,
+  //               ),
+  //               onTap: () {
+  //                 if (state.selectedPage != list[index]) {
+  //                   getIt<ILogger>().logEvent(
+  //                       LogEvents.EVENT_LIST_FILTER_SELECTED,
+  //                       params: LogEvents.getListFilterSelectedVariables(
+  //                           (list[index] == SelectedPage.Liked)
+  //                               ? 'Liked'
+  //                               : 'Saved'));
+  //                   context
+  //                       .bloc<SavedPostsBloc>()
+  //                       .add(SavedPostsEvent.updateSelectedPage(list[index]));
+  //                 }
+  //               },
+  //             );
+  //           },
+  //           separatorBuilder: (_, __) => SizedBox(
+  //             width: 10,
+  //           ),
+  //           itemCount: list.length,
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
 
   Widget _buildLocalTopics(List<SelectedPage> list, SelectedPage selectedPage,
       BuildContext context) {

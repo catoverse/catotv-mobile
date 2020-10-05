@@ -251,23 +251,23 @@ class _PostSocialInteractionWidget extends StatelessWidget {
             SizedBox(
               width: 15,
             ),
-            InkWell(
-              onTap: () {
-                if (isLiked) {
-                  bloc.add(UserProfileEvent.unlikePost(postId));
-                } else {
-                  bloc.add(UserProfileEvent.likePost(postId));
-                }
-              },
-              child: Icon(
-                (isLiked) ? Icons.favorite : Icons.favorite_border,
-                color: (isLiked) ? Colors.red.shade600 : Colors.white,
-                size: 30,
-              ),
-            ),
-            SizedBox(
-              width: 24,
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     if (isLiked) {
+            //       bloc.add(UserProfileEvent.unlikePost(postId));
+            //     } else {
+            //       bloc.add(UserProfileEvent.likePost(postId));
+            //     }
+            //   },
+            //   child: Icon(
+            //     (isLiked) ? Icons.favorite : Icons.favorite_border,
+            //     color: (isLiked) ? Colors.red.shade600 : Colors.white,
+            //     size: 30,
+            //   ),
+            // ),
+            // SizedBox(
+            //   width: 24,
+            // ),
             InkWell(
               onTap: () {
                 if (isSaved) {
@@ -276,10 +276,13 @@ class _PostSocialInteractionWidget extends StatelessWidget {
                   bloc.add(UserProfileEvent.savePost(postId));
                 }
               },
-              child: Icon(
-                (isSaved) ? Icons.bookmark : Icons.bookmark_border,
-                size: 30,
-                color: (isSaved) ? ColorAssets.teal : Colors.white,
+              child: Padding(
+                padding: EdgeInsets.only(left: 12.0, right: 12.0, top: 4.0, bottom: 4.0),
+                child: Icon(
+                  (isSaved) ? Icons.bookmark : Icons.bookmark_border,
+                  size: 30,
+                  color: (isSaved) ? ColorAssets.teal : Colors.white,
+                ),
               ),
             ),
             Spacer(),
@@ -293,10 +296,13 @@ class _PostSocialInteractionWidget extends StatelessWidget {
                   );
                 }
               },
-              child: Icon(
-                Icons.share,
-                size: 30,
-                color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.only(left: 12.0, right: 12.0, top: 4.0, bottom: 4.0),
+                child: Icon(
+                  Icons.share,
+                  size: 30,
+                  color: Colors.white,
+                ),
               ),
             ),
             SizedBox(
