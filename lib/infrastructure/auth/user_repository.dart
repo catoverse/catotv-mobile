@@ -57,7 +57,7 @@ class UserRepository implements IUserRepository {
         accessToken: details.get(IUserRepository.KEY_ACCESS_TOKEN),
         avatar: details.get(IUserRepository.KEY_PHOTO_URL));
 
-    if (result.hasFailed()) return result;
+    if (result.hasFailed()) return Result.fail(result.failure);
 
     var user = result.data;
     _initializeClientsOnUserData(user);
