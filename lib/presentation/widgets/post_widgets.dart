@@ -10,7 +10,7 @@ import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_webview/youtube_player_webview.dart';
 
 class _PostTitleWidget extends StatelessWidget {
   final String title;
