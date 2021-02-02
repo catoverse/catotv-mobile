@@ -20,7 +20,7 @@ class OnboardInvitePage extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Flexible(flex: 2, fit: FlexFit.loose, child: Container(),),
+            Container(height: 128,),
             Container(
               child: Center(
                 child: Image.asset(ImageAssets.Release.cato_logo),
