@@ -26,6 +26,9 @@ class _Release {
   final String topicImageSocial = _releasePath + 'topic_social.png';
   final String topicImageProductivity = _releasePath + 'topic_productivity.png';
 
+  final String onboard_expert = _releasePath + 'onboard_expert.png';
+  final String onboard_learn = _releasePath + 'onboard_learn.png';
+  final String onboard_friends = _releasePath + 'onboard_friends.png';
 
   // Logos
   final String google_logo = _releasePath + 'google-logo.png';
@@ -41,5 +44,14 @@ class _Release {
   final String icon_settings = _releasePath + 'icon_settings.png';
   final String icon_no_distractions = _releasePath + 'icon_no_distractions.png';
   final String icon_deactivate = _releasePath + 'icon_deactivate.png';
+
+  final String icon_career = _releasePath + 'icon_career.png';
+  final String icon_self_dev = _releasePath + 'icon_self_dev.png';
+  final String icon_mind = _releasePath + 'icon_mind.png';
+  final String icon_fun = _releasePath + 'icon_fun.png';
+  final String icon_health = _releasePath + 'icon_health.png';
+  final String icon_relationships = _releasePath + 'icon_relationships.png';
+  final String icon_startups = _releasePath + 'icon_startups.png';
+  final String icon_fundamentals = _releasePath + 'icon_fundamentals.png';
 
 }
