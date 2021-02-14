@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cato_feed/presentation/screens/onboard/onboard_category_card.dart';
+import 'package:cato_feed/presentation/screens/onboard_selection/onboard_category_card.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
 import 'package:flutter/cupertino.dart';
