@@ -48,45 +48,64 @@ class OnboardSelectionPage extends StatelessWidget {
                 ),
                 maxLines: 2,
               ),
-              SizedBox(height: 8.0,),
+              SizedBox(
+                height: 8.0,
+              ),
               Expanded(
                 child: GridView.count(
                   crossAxisSpacing: 8.0,
                   crossAxisCount: 2,
-                  mainAxisSpacing: 20.0 ,
-                  childAspectRatio: (cardWidth*1.0)/cardHeight,
+                  mainAxisSpacing: 20.0,
+                  childAspectRatio: (cardWidth * 1.0) / cardHeight,
                   children: List.generate(onboardItems.length, (index) {
+                    var borderColor =
+                        index == 2 ? Color(0xFF51DFD7) : Colors.white;
+                    // TODO: Update BorderColor based on selection
                     return Align(
                       child: PhysicalModel(
                         child: Container(
-                          margin: EdgeInsets.only(
-                              left: 0, right: 4.0, bottom: 4.0),
+                          margin:
+                              EdgeInsets.only(left: 0, right: 4.0, bottom: 4.0),
                           width: cardWidth,
                           height: cardHeight,
-
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(10.0)),
+                            border: Border.all(color: borderColor, width: 1.5),
                             color: Colors.white,
                           ),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 4.0, right: 4.0, top: 16.0),
-                                child: Image.asset(
-                                  onboardItems[index].imagePath,
-                                  height: 48,
-                                  width: 48,
-                                  fit: BoxFit.contain,
-                                ),
+                              Stack(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.only(
+                                  left: 4.0, right: 4.0, top: 16.0),
+                                    child: Image.asset(
+                                      onboardItems[index].imagePath,
+                                      height: 48,
+                                      width: 48,
+                                      fit: BoxFit.contain,
+                                    ),
+                                  ),
+                                  if(index == 2) // TODO: Update Selection
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 2.0, left: 2.0),
+                                    child: Icon(
+                                      Icons.check_circle,
+                                      color: Color(0xFF51DFD7),
+                                      size: 18.0,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Container(
                                 width: cardWidth - 64,
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
-                                children: [
+                                  children: [
                                     SizedBox(
                                       height: 8,
                                     ),
