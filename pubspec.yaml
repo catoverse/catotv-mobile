@@ -62,6 +62,8 @@ dependencies:
   app_blocker:
     path: ./app_blocker
   lottie: ^0.6.0
+  dotted_border: ^1.0.7
+  fl_chart: ^0.12.2
 
 dev_dependencies:
   flutter_test:
