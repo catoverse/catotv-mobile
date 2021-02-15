@@ -53,5 +53,10 @@ class _Release {
   final String icon_relationships = _releasePath + 'icon_relationships.png';
   final String icon_startups = _releasePath + 'icon_startups.png';
   final String icon_fundamentals = _releasePath + 'icon_fundamentals.png';
+  final String icon_profile = _releasePath + 'icon_profile.png';
+  final String icon_profile_cog = _releasePath + 'icon_profile_cog.png';
+  final String icon_square_star = _releasePath + 'square_star.png';
+  final String icon_friend_avatar = _releasePath + 'icon_friend_avatar.png';
+  final String icon_star_envelope = _releasePath + 'icon_star_envelope.png';
 
 }
