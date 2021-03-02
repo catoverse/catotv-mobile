@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
+import 'package:cato_feed/presentation/utils/common.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -52,9 +53,7 @@ class _UserProfilePageState extends State<UserProfilePage>
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark));
+    makeStatusBarWhite();
     return PlatformScaffold(
       body: SafeArea(
         child: NotificationListener<OverscrollIndicatorNotification>(
