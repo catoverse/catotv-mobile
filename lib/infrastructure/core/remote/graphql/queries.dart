@@ -26,8 +26,8 @@ class GqlQueries {
   ''';
 
   static final String queryUserRecommendationByTopic = r'''
-    query userRecommendation($userId: ID!){
-      userRecommendation(userId: $userId) {
+    query userRecommendationByTopic($userId: ID!, $topicId: ID!){
+      userRecommendationByTopic(userId: $userId, topicId: $topicId) {
         _id
         title
         video_url
@@ -96,6 +96,24 @@ class GqlQueries {
           }
           start_timestamp
           end_timestamp
+      }
+    }
+  ''';
+
+  static final String queryAllVideos = r'''
+    query allVideo($limit: Int!){
+      allVideo(limit: $limit) {
+        id
+        title
+        description
+        author_name
+        video_url
+        topic {
+          id
+          name
+        }
+        start_timestamp
+        end_timestamp
       }
     }
   ''';
@@ -292,7 +310,7 @@ class GqlQueries {
           data: $data
         }
       }) {
-        nameʔ
+        name
         selectedTopics
         totalWatchTime
         videoWatched {
@@ -331,6 +349,10 @@ class GqlQueries {
   static Map<String, dynamic> createMapForVideoByTopics(List<String> topics,
       int skip, int limit) {
     return {"topics": topics, "skip": skip, "limit": limit};
+  }
+
+  static Map<String, dynamic> createMapForAllVideos(int limit) {
+    return {"limit": limit};
   }
 
   static Map<String, dynamic> createMapForVideoById(String id) {
