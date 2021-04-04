@@ -73,7 +73,7 @@ class NetworkClient {
   ///
   /// Use this to make mutation with graphQl
   Future<Result<Failure, dynamic>> mutation(
-      String mutationQuery, Map<String, dynamic> variables) async {
+      String mutationQuery, {Map<String, dynamic> variables = const {}}) async {
     var hasInternet = await isConnected();
     if (!hasInternet) {
       return Result.fail(Failure.error(NoConnectivityError()));
