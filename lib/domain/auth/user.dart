@@ -5,11 +5,10 @@ part 'user.freezed.dart';
 abstract class User with _$User {
   const factory User({
     @required String id,
-    @required String googleId,
     @required String name,
     @required String email,
     @required String photoUrl,
-    @required bool interestSelected,
+    @required bool isProfileCreated,
     @required String jwtToken,
     @required DateTime createdAt,
     @required DateTime updatedAt,

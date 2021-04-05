@@ -24,3 +24,15 @@ class ServerError extends Error {
     return 'Server Error. $detail';
   }
 }
+
+class ParserError extends Error {
+
+  final String detail;
+
+  ParserError({this.detail = ""});
+
+  @override
+  String toString() {
+    return 'Parser Error. $detail';
+  }
+}
