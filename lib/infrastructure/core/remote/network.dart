@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cato_feed/domain/auth/user_profile.dart';
 import 'package:cato_feed/domain/core/errors.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/domain/posts/post.dart';
@@ -17,7 +18,7 @@ import 'package:kt_dart/collection.dart';
 @lazySingleton
 class Network {
   NetworkClient _client;
-  String _apiEndpoint ;
+  String _apiEndpoint;
 
   /// JWT token for the authenticated queries.
   /// Set this to null if don't want to add auth header.
@@ -26,7 +27,8 @@ class Network {
   Connectivity _connectivity;
   ILogger logger;
 
-  Network(this.logger, this._connectivity, @Named('ApiEndpoint') this._apiEndpoint) {
+  Network(this.logger, this._connectivity,
+      @Named('ApiEndpoint') this._apiEndpoint) {
     _initializeClient();
   }
 
@@ -52,164 +54,355 @@ class Network {
     this._jwtToken = jwtToken;
   }
 
-  /// Returns minimum version code [int] need to maintain by client
-  Future<Result<Failure, int>> getMinimumVersion() async {
-    var result = await _client.query(GqlQueries.versionCheckQuery);
-    if(result.hasFailed()) {
+  /// Returns minimum version code for android [int] need to maintain by client
+  Future<Result<Failure, int>> getMinimumVersionAndroid() async {
+    var result = await _client.query(GqlQueries.queryAndroidVersionCode);
+    if (result.hasFailed()) {
       return Result.fail(result.failure);
     }
     try {
       int minimumVersionCode = result.data["androidVersionCode"]["data"];
       return Result.data(minimumVersionCode);
-    } catch(error) {
-      return Result.fail(Failure.error(ServerError(detail: 'Error checking version update.')));
+    } catch (error) {
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Error checking version update.')));
     }
   }
 
-  /// Authenticates to backend and returns [User]
-  Future<Result<Failure, User>> authenticate(
-      {String name,
-      String email,
-      String googleId,
-      String avatar,
-      String accessToken}) async {
-    var result = await _client.mutation(
-        GqlQueries.googleLoginMutation,
-        GqlQueries.googleLoginVariables(
-            name, email, googleId, avatar, accessToken));
+  /// Returns minimum version code for android [int] need to maintain by client
+  Future<Result<Failure, int>> getMinimumVersionIos() async {
+    var result = await _client.mutation(GqlQueries.mutationIosVersionCode);
+    if (result.hasFailed()) {
+      return Result.fail(result.failure);
+    }
+    try {
+      int minimumVersionCode = result.data["iosVersionCode"]["data"];
+      return Result.data(minimumVersionCode);
+    } catch (error) {
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Error checking version update.')));
+    }
+  }
+
+  /// Returns list of recommended videos for the user.
+  Future<Result<Failure, KtList<Post>>> getUserRecommendationVideos(
+      String userId) async {
+    var result = await _client.query(GqlQueries.queryUserRecommendation,
+        variables: GqlQueries.createMapForUserRecommendation(userId));
 
     if (result.hasFailed()) return Result.fail(result.failure);
 
     dynamic response = result.data;
 
     if (response == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Login response failed.')));
+      return Result.fail(Failure.error(ServerError(
+          detail: 'Failed to get recommended videos for the user.')));
     }
 
-    // convert response to User
-    var user = UserDTO.fromResponse(response, googleId);
-    if(user == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to parse user login response.')));
-    } else {
-      return Result.data(user);
-    }
-  }
+    var posts = PostDTO.listFromResponse(response['userRecommendation']);
 
-  /// Returns list of all [Topic]s.
-  Future<Result<Failure, KtList<Topic>>> getAllTopics() async {
-    var result = await _client.query(GqlQueries.allTopicQuery);
-
-    if (result.hasFailed()) return Result.fail(result.failure);
-
-    dynamic response = result.data;
-
-    if (response == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to load topics.')));
-    }
-
-    var topics = TopicDTO.fromResponse(response['allTopic']);
-    if(topics == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to parse topic response.')));
-    }
-
-    return Result.data(topics);
-  }
-
-  // Internal common function to process user profile response
-  Future<Result<Failure, KtList<Topic>>> _processUserProfile(
-      Result<Failure, dynamic> result,
-      String serverErrorType,
-      Function(dynamic response) onResponse
-      ) async {
-
-    if(result.hasFailed()) return Result.fail(result.failure);
-
-    dynamic response = result.data;
-
-    if (response == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to $serverErrorType user profile.')));
-    }
-
-    var finalResponse = onResponse(response)['topics'];
-    var topics = TopicDTO.fromResponse(finalResponse);
-    if(topics == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to parse user profile response.')));
-    }
-
-    return Result.data(topics);
-  }
-
-  /// Returns user profile (user selected topics)
-  Future<Result<Failure, KtList<Topic>>> getUserProfile() async {
-    var result = await _client.query(GqlQueries.userProfileQuery);
-    return _processUserProfile(result, 'load', (response) => response['userProfile']);
-  }
-
-  /// Creates and returns user profile.
-  Future<Result<Failure, KtList<Topic>>> createUserProfile(
-      List<String> topicIds) async {
-    var result = await _client.mutation(GqlQueries.createUserProfileMutation,
-        GqlQueries.createUserProfileVariables(topicIds));
-
-    return _processUserProfile(result, 'create', (response) => response['createUserProfile']);
-  }
-
-  /// Updates and returns user profile.
-  Future<Result<Failure, KtList<Topic>>> updateUserProfile(
-      List<String> topicIds) async {
-    var result = await _client.mutation(GqlQueries.updateUserProfileMutation,
-        GqlQueries.updateUserProfileVariables(topicIds));
-
-    return _processUserProfile(result, 'update', (response) => response['updateUserProfile']);
-  }
-
-  /// Returns [KtList]<[Post]> using skip, limit and optional topicsIds.
-  Future<Result<Failure, KtList<Post>>> getPosts(int skip, int limit, {List<String> topicIds}) async{
-    var query;
-    var variables;
-    if(topicIds == null || topicIds.isEmpty) {
-      query = GqlQueries.videosQuery;
-      variables = GqlQueries.videosVariables(skip, limit);
-    } else {
-      query = GqlQueries.videosByTopicsQuery;
-      variables = GqlQueries.videosByTopicsVariables(skip, limit, topicIds);
-    }
-    var result = await _client.query(query,
-        variables: variables);
-
-    if(result.hasFailed()) return Result.fail(result.failure);
-
-    dynamic response = result.data;
-
-    if (response == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to load videos.')));
-    }
-
-    var posts = PostDTO.listFromResponse(response);
-    if(posts == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to parse videos response.')));
+    if (posts == null) {
+      return Result.fail(Failure.error(
+          ParserError(detail: "Unable to parse recommended videos.")));
     }
 
     return Result.data(posts);
   }
 
-  /// Returns [Post] from postId
-  Future<Result<Failure, Post>> getPostById(String postId) async {
-    var result = await _client.query(GqlQueries.videoByIdQuery,
-        variables: GqlQueries.videoByIdVariables(postId));
+  /// Returns list of recommended videos for the user by topic.
+  Future<Result<Failure, KtList<Post>>> getUserRecommendationVideosByTopic(
+      String userId, String topicId) async {
+    var result = await _client.query(GqlQueries.queryUserRecommendationByTopic,
+        variables:
+            GqlQueries.createMapForUserRecommendationByTopic(userId, topicId));
 
-    if(result.hasFailed()) return Result.fail(result.failure);
+    if (result.hasFailed()) return Result.fail(result.failure);
 
-    if (result.data == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to load video.')));
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(Failure.error(ServerError(
+          detail:
+              'Failed to get recommended videos for this topic for the user.')));
     }
 
-    var post = PostDTO.fromResponse(result.data['videoById']);
-    if(post == null) {
-      return Result.fail(Failure.error(ServerError(detail: 'Unable to parse video response.')));
+    var posts = PostDTO.listFromResponse(response['userRecommendationByTopic']);
+    if (posts == null) {
+      return Result.fail(Failure.error(
+          ParserError(detail: "Unable to parse recommended posts for the topic.")));
+    }
+    return Result.data(posts);
+  }
+
+  /// Returns list of all [Topic]s.
+  Future<Result<Failure, KtList<Topic>>> getAllTopics() async {
+    var result = await _client.query(GqlQueries.queryAllTopic);
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Unable to load topics.')));
     }
 
-    return Result.data(post);
+    var topics = TopicDTO.fromResponse(response['allTopic']);
+    if (topics == null) {
+      return Result.fail(Failure.error(
+          ParserError(detail: 'Unable to parse topic response.')));
+    }
+
+    return Result.data(topics);
+  }
+
+  /// Returns the UserProfile
+  Future<Result<Failure, UserProfile>> getUserProfile(String userId) async {
+    var result = await _client.query(GqlQueries.queryUserProfile,
+        variables: GqlQueries.createMapForUserProfile(userId));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserProfileResponse(result.data, 'createUserProfile');
+  }
+
+  /// Returns the list of posts by topics
+  Future<Result<Failure, KtList<Post>>> getVideosByTopics(
+      List<String> topics, int skip, int limit) async {
+    var result = await _client.query(GqlQueries.queryVideoByTopics,
+        variables: GqlQueries.createMapForVideoByTopics(topics, skip, limit));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(Failure.error(
+          ServerError(detail: 'Unable to get posts by topics.')));
+    }
+
+    var posts = PostDTO.listFromResponse(response["videoByTopics"]);
+    if (posts == null) {
+      return Result.fail(Failure.error(
+          ParserError(detail: "Unable to parse posts for the topic.")));
+    }
+    return Result.data(posts);
+  }
+
+  /// Returns the post based on videoId
+  Future<Result<Failure, Post>> getVideoById(String videoId) async {
+    var result = await _client.query(GqlQueries.queryVideoByTopics,
+        variables: GqlQueries.createMapForVideoById(videoId));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(Failure.error(
+          ServerError(detail: 'Unable to get post from its id.')));
+    }
+
+    var posts = PostDTO.fromResponse(response["videoById"]);
+    if (posts == null) {
+      return Result.fail(Failure.error(
+          ParserError(detail: "Unable to parse post.")));
+    }
+    return Result.data(posts);
+  }
+  
+  Future<Result<Failure, String>> generateNewAuthToken() async {
+    var result = await _client.query(GqlQueries.queryGenerateNewToken);
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(Failure.error(
+          ServerError(detail: 'Unable to generate new auth token for user.')));
+    }
+    
+    return Result.data(response['generateNewToken']['token']);
+  }
+
+  /// Updates the user events
+  Future<Result<Failure, String>> updateUserEvents(
+      String userId, int duration, String timeStamp, String userEvent) async {
+    var result = await _client.mutation(GqlQueries.mutationMqProducerUser,
+        variables: GqlQueries.createMapForMqProducerUser(
+            userId, duration, timeStamp, userEvent));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Unable to update user event.')));
+    }
+
+    return Result.data(response["MqProducerUser"]['message']);
+  }
+
+  /// Updates the user video events
+  Future<Result<Failure, String>> updateUserVideoEvents(String userId,
+      int duration, String timeStamp, String userEvent, String videoId) async {
+    var result = await _client.mutation(GqlQueries.mutationMqProducerUserVideo,
+        variables: GqlQueries.createMapForMqProducerUserVideo(
+            userId, duration, timeStamp, userEvent, videoId));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(Failure.error(
+          ServerError(detail: 'Unable to update user video event.')));
+    }
+
+    return Result.data(response["MqProducerUserVideo"]['message']);
+  }
+
+  /// Google login Authenticates to backend and returns [User]
+  Future<Result<Failure, User>> googleLogin(
+      {String name,
+      String email,
+      String googleId,
+      String avatar,
+      String accessToken}) async {
+    var result = await _client.mutation(GqlQueries.mutationGoogleLogin,
+        variables: GqlQueries.createMapForGoogleLogin(
+            name, email, googleId, avatar, accessToken));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserResponse(result.data, 'googleLogin', 'Google');
+  }
+
+  /// Apple login Authenticates to backend and returns [User]
+  Future<Result<Failure, User>> appleLogin(
+      {String name, String email, String authCode, bool useBundleId}) async {
+    var result = await _client.mutation(GqlQueries.mutationAppleLogin,
+        variables: GqlQueries.createMapForAppleLogin(
+            name, email, authCode, useBundleId));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserResponse(result.data, 'appleLogin', 'Apple');
+
+  }
+
+  /// Create the user session based on the invite code.
+  Future<Result<Failure, User>> sessionLogin({String name, String code}) async {
+    var result = await _client.mutation(GqlQueries.mutationSessionLogin,
+        variables: GqlQueries.createMapForSessionLogin(name, code));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserResponse(result.data, 'sessionLogin', 'Session');
+
+  }
+
+  Result<Failure, User> _processUserResponse(dynamic response, String key, String tag) {
+    if (response == null) {
+      return Result.fail(
+          Failure.error(ServerError(detail: '$tag login response failed.')));
+    }
+
+    // convert response to User
+    var user = UserDTO.fromResponse(response, key);
+    if (user == null) {
+      return Result.fail(Failure.error(ServerError(
+          detail: '$tag login: Unable to parse user login response.')));
+    } else {
+      return Result.data(user);
+    }
+  }
+
+  /// Generates Invite
+  Future<Result<Failure, String>> generateInvite(String email) async {
+    var result = await _client.mutation(GqlQueries.mutationGenerateInvite,
+        variables: GqlQueries.createMapForGenerateInvite(email));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Failed to generate invite.')));
+    }
+
+    return Result.data(response['generateInvite']);
+  }
+
+  /// Add email to waitlist
+  Future<Result<Failure, String>> addToWaitlist(String email) async {
+    var result = await _client.mutation(GqlQueries.mutationAddToWaitlist,
+        variables: GqlQueries.createMapForAddToWaitlist(email));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    dynamic response = result.data;
+
+    if (response == null) {
+      return Result.fail(Failure.error(
+          ServerError(detail: 'Failed to add email to waitlist.')));
+    }
+
+    return Result.data(response['addToWaitlist']['message']);
+  }
+
+  /// Creates and returns user profile.
+  Future<Result<Failure, dynamic>> createUserProfile(String name, String userId,
+      List<Map<String, dynamic>> selectedTopics) async {
+    var result = await _client.mutation(GqlQueries.mutationCreateUserProfile,
+        variables: GqlQueries.createMapForCreateUserProfile(
+            name, userId, selectedTopics));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserProfileResponse(result.data, 'createUserProfile');
+  }
+
+  /// Updates and returns user profile.
+  Future<Result<Failure, dynamic>> updateUserProfile(String name, String userId,
+      List<Map<String, dynamic>> selectedTopics) async {
+    var result = await _client.mutation(GqlQueries.mutationUpdateUserProfile,
+        variables: GqlQueries.createMapForUpdateUserProfile(
+            name, userId, selectedTopics));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserProfileResponse(result.data, 'updateUserProfile');
+
+  }
+
+  /// Updates userProfileCounters
+  Future<Result<Failure, dynamic>> updateUserProfileCounters(
+      String userId, String category, int duration, String data) async {
+    var result = await _client.mutation(
+        GqlQueries.mutationUpdateProfileCounters,
+        variables: GqlQueries.createMapForUpdateProfileCounters(
+            userId, category, duration, data));
+
+    if (result.hasFailed()) return Result.fail(result.failure);
+
+    return _processUserProfileResponse(result.data, 'updateProfileCounters');
+  }
+
+  Result<Failure, UserProfile> _processUserProfileResponse(dynamic response, String key) {
+    if (response == null) {
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Unable to get the userProfile')));
+    }
+
+    var userProfile = UserProfileDTO.fromResponse(response[key]);
+    if(userProfile == null) {
+      return Result.fail(Failure.error(ParserError(detail: 'Unable to parse user profile response.')));
+    }
+    return Result.data(userProfile);
   }
 
 }
