@@ -2,6 +2,7 @@ class GqlQueries {
   /*
     GraphQl Queries Here
    */
+  //Complete
   static final String queryAndroidVersionCode = r'''
     query {
       androidVersionCode {
@@ -10,6 +11,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String queryUserRecommendation = r'''
     query userRecommendation($userId: ID!){
       userRecommendation(userId: $userId) {
@@ -25,6 +27,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String queryUserRecommendationByTopic = r'''
     query userRecommendationByTopic($userId: ID!, $topicId: ID!){
       userRecommendationByTopic(userId: $userId, topicId: $topicId) {
@@ -40,6 +43,7 @@ class GqlQueries {
     }
   ''';
 
+  //Complete
   static final String queryAllTopic = r'''
     query {
       allTopic {
@@ -49,6 +53,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String queryUser = r'''
     query {
       user {
@@ -82,6 +87,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String queryVideoByTopics = r'''
     query VideoByTopics($topics: [ID!], $skip: Int!, $limit: Int!){
       videoByTopics(topics: $topics, skip: $skip, limit: $limit) {
@@ -100,6 +106,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String queryAllVideos = r'''
     query allVideo($limit: Int!){
       allVideo(limit: $limit) {
@@ -118,6 +125,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String queryVideoById = r'''
     query VideoById($id: ID!){
       videoById(id: $id) {
@@ -136,18 +144,30 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
+  static final String queryGenerateNewToken = r'''
+    query {
+      generateNewToken {
+        token
+      }
+    }
+    
+  ''';
+
   /*
     GraphQl mutations Here
    */
 
+  // Complete
   static final String mutationIosVersionCode = r'''
-    mutation iosVersionCode() {
+    mutation iosVersionCode {
       iosVersionCode {
         data
       }
     }
   ''';
 
+  // Complete
   static final String mutationMqProducerUser = r'''
     mutation MqProducerUser($userId: ID!, $duration: Int!, $timestamp: String!, $userEvent: UserEvent!) {
       MqProducerUser(user: {
@@ -162,6 +182,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationMqProducerUserVideo = r'''
     mutation MqProducerUserVideo($userId: ID!, $videoId: String!, $duration: Int!, $timestamp: String!, $userVideoEvent: UserVideoEvent!) {
       MqProducerUserVideo(userVideo: {
@@ -177,6 +198,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationGoogleLogin = r'''
     mutation GoogleLogin($name: String!, $email: String!, $googleId: String!, $avatarLink: String!, $googleToken: String!){
       googleLogin(user: {
@@ -197,6 +219,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationAppleLogin = r'''
     mutation AppleLogin($name: String!, $email: String!, $useBundleId: Boolean!, $authCode: String!) {
       appleLogin(user: {
@@ -216,12 +239,14 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationGenerateInvite = r'''
     mutation generateInvite($email: String!) {
       generateInvite(email: $email)
     }
   ''';
 
+  // Complete
   static final String mutationSessionLogin = r'''
     mutation sessionLogin($name: String!, $code: String!) {
       sessionLogin(user: {
@@ -239,15 +264,16 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationAddToWaitlist = r'''
     mutation addToWaitlist($email: String) {
       addToWaitlist(email: $email) {
-        data
         message
       }
     }
   ''';
 
+  // Complete
   static final String mutationCreateUserProfile = r'''
     mutation createUserProfile($name: String!, $userId: ID!, $selectedTopics: [TopicInput]!) {
       createUserProfile(user: {
@@ -274,6 +300,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationUpdateUserProfile = r'''
     mutation updateUserProfile($name: String!, $userId: ID!, $selectedTopics: [TopicInput]!) {
       updateUserProfile(userId: $userId, user: {
@@ -300,6 +327,7 @@ class GqlQueries {
     }
   ''';
 
+  // Complete
   static final String mutationUpdateProfileCounters = r'''
     mutation updateProfileCounters($userId: ID!, $category: String!, $duration: Int!, $data: String!) {
       updateProfileCounters(watchData: {
