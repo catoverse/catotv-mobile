@@ -9,6 +9,7 @@ part of 'failure.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$FailureTearOff {
   const _$FailureTearOff();
 
@@ -34,43 +35,47 @@ class _$FailureTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Failure = _$FailureTearOff();
 
+/// @nodoc
 mixin _$Failure {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result error(Error error),
-    @required Result exception(Exception exception),
-    @required Result message(String message),
+  TResult when<TResult extends Object>({
+    @required TResult error(Error error),
+    @required TResult exception(Exception exception),
+    @required TResult message(String message),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result error(Error error),
-    Result exception(Exception exception),
-    Result message(String message),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult error(Error error),
+    TResult exception(Exception exception),
+    TResult message(String message),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result error(_GenericError value),
-    @required Result exception(_RaisedException value),
-    @required Result message(_FailureMessage value),
+  TResult map<TResult extends Object>({
+    @required TResult error(_GenericError value),
+    @required TResult exception(_RaisedException value),
+    @required TResult message(_FailureMessage value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result error(_GenericError value),
-    Result exception(_RaisedException value),
-    Result message(_FailureMessage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult error(_GenericError value),
+    TResult exception(_RaisedException value),
+    TResult message(_FailureMessage value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $FailureCopyWith<$Res> {
   factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
       _$FailureCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$FailureCopyWithImpl<$Res> implements $FailureCopyWith<$Res> {
   _$FailureCopyWithImpl(this._value, this._then);
 
@@ -79,6 +84,7 @@ class _$FailureCopyWithImpl<$Res> implements $FailureCopyWith<$Res> {
   final $Res Function(Failure) _then;
 }
 
+/// @nodoc
 abstract class _$GenericErrorCopyWith<$Res> {
   factory _$GenericErrorCopyWith(
           _GenericError value, $Res Function(_GenericError) then) =
@@ -86,6 +92,7 @@ abstract class _$GenericErrorCopyWith<$Res> {
   $Res call({Error error});
 }
 
+/// @nodoc
 class __$GenericErrorCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
     implements _$GenericErrorCopyWith<$Res> {
   __$GenericErrorCopyWithImpl(
@@ -105,16 +112,12 @@ class __$GenericErrorCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_GenericError implements _GenericError {
   const _$_GenericError(this.error) : assert(error != null);
 
   @override
   final Error error;
-
-  @override
-  String toString() {
-    return 'Failure.error(error: $error)';
-  }
 
   @override
   bool operator ==(dynamic other) {
@@ -128,16 +131,17 @@ class _$_GenericError implements _GenericError {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
 
+  @JsonKey(ignore: true)
   @override
   _$GenericErrorCopyWith<_GenericError> get copyWith =>
       __$GenericErrorCopyWithImpl<_GenericError>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result error(Error error),
-    @required Result exception(Exception exception),
-    @required Result message(String message),
+  TResult when<TResult extends Object>({
+    @required TResult error(Error error),
+    @required TResult exception(Exception exception),
+    @required TResult message(String message),
   }) {
     assert(error != null);
     assert(exception != null);
@@ -147,11 +151,11 @@ class _$_GenericError implements _GenericError {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result error(Error error),
-    Result exception(Exception exception),
-    Result message(String message),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult error(Error error),
+    TResult exception(Exception exception),
+    TResult message(String message),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
@@ -162,10 +166,10 @@ class _$_GenericError implements _GenericError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result error(_GenericError value),
-    @required Result exception(_RaisedException value),
-    @required Result message(_FailureMessage value),
+  TResult map<TResult extends Object>({
+    @required TResult error(_GenericError value),
+    @required TResult exception(_RaisedException value),
+    @required TResult message(_FailureMessage value),
   }) {
     assert(error != null);
     assert(exception != null);
@@ -175,11 +179,11 @@ class _$_GenericError implements _GenericError {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result error(_GenericError value),
-    Result exception(_RaisedException value),
-    Result message(_FailureMessage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult error(_GenericError value),
+    TResult exception(_RaisedException value),
+    TResult message(_FailureMessage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
@@ -193,9 +197,11 @@ abstract class _GenericError implements Failure {
   const factory _GenericError(Error error) = _$_GenericError;
 
   Error get error;
+  @JsonKey(ignore: true)
   _$GenericErrorCopyWith<_GenericError> get copyWith;
 }
 
+/// @nodoc
 abstract class _$RaisedExceptionCopyWith<$Res> {
   factory _$RaisedExceptionCopyWith(
           _RaisedException value, $Res Function(_RaisedException) then) =
@@ -203,6 +209,7 @@ abstract class _$RaisedExceptionCopyWith<$Res> {
   $Res call({Exception exception});
 }
 
+/// @nodoc
 class __$RaisedExceptionCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
     implements _$RaisedExceptionCopyWith<$Res> {
   __$RaisedExceptionCopyWithImpl(
@@ -222,16 +229,12 @@ class __$RaisedExceptionCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_RaisedException implements _RaisedException {
   const _$_RaisedException(this.exception) : assert(exception != null);
 
   @override
   final Exception exception;
-
-  @override
-  String toString() {
-    return 'Failure.exception(exception: $exception)';
-  }
 
   @override
   bool operator ==(dynamic other) {
@@ -246,16 +249,17 @@ class _$_RaisedException implements _RaisedException {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(exception);
 
+  @JsonKey(ignore: true)
   @override
   _$RaisedExceptionCopyWith<_RaisedException> get copyWith =>
       __$RaisedExceptionCopyWithImpl<_RaisedException>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result error(Error error),
-    @required Result exception(Exception exception),
-    @required Result message(String message),
+  TResult when<TResult extends Object>({
+    @required TResult error(Error error),
+    @required TResult exception(Exception exception),
+    @required TResult message(String message),
   }) {
     assert(error != null);
     assert(exception != null);
@@ -265,11 +269,11 @@ class _$_RaisedException implements _RaisedException {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result error(Error error),
-    Result exception(Exception exception),
-    Result message(String message),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult error(Error error),
+    TResult exception(Exception exception),
+    TResult message(String message),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (exception != null) {
@@ -280,10 +284,10 @@ class _$_RaisedException implements _RaisedException {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result error(_GenericError value),
-    @required Result exception(_RaisedException value),
-    @required Result message(_FailureMessage value),
+  TResult map<TResult extends Object>({
+    @required TResult error(_GenericError value),
+    @required TResult exception(_RaisedException value),
+    @required TResult message(_FailureMessage value),
   }) {
     assert(error != null);
     assert(exception != null);
@@ -293,11 +297,11 @@ class _$_RaisedException implements _RaisedException {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result error(_GenericError value),
-    Result exception(_RaisedException value),
-    Result message(_FailureMessage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult error(_GenericError value),
+    TResult exception(_RaisedException value),
+    TResult message(_FailureMessage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (exception != null) {
@@ -311,9 +315,11 @@ abstract class _RaisedException implements Failure {
   const factory _RaisedException(Exception exception) = _$_RaisedException;
 
   Exception get exception;
+  @JsonKey(ignore: true)
   _$RaisedExceptionCopyWith<_RaisedException> get copyWith;
 }
 
+/// @nodoc
 abstract class _$FailureMessageCopyWith<$Res> {
   factory _$FailureMessageCopyWith(
           _FailureMessage value, $Res Function(_FailureMessage) then) =
@@ -321,6 +327,7 @@ abstract class _$FailureMessageCopyWith<$Res> {
   $Res call({String message});
 }
 
+/// @nodoc
 class __$FailureMessageCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
     implements _$FailureMessageCopyWith<$Res> {
   __$FailureMessageCopyWithImpl(
@@ -340,16 +347,12 @@ class __$FailureMessageCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_FailureMessage implements _FailureMessage {
   const _$_FailureMessage(this.message) : assert(message != null);
 
   @override
   final String message;
-
-  @override
-  String toString() {
-    return 'Failure.message(message: $message)';
-  }
 
   @override
   bool operator ==(dynamic other) {
@@ -363,16 +366,17 @@ class _$_FailureMessage implements _FailureMessage {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
 
+  @JsonKey(ignore: true)
   @override
   _$FailureMessageCopyWith<_FailureMessage> get copyWith =>
       __$FailureMessageCopyWithImpl<_FailureMessage>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result error(Error error),
-    @required Result exception(Exception exception),
-    @required Result message(String message),
+  TResult when<TResult extends Object>({
+    @required TResult error(Error error),
+    @required TResult exception(Exception exception),
+    @required TResult message(String message),
   }) {
     assert(error != null);
     assert(exception != null);
@@ -382,11 +386,11 @@ class _$_FailureMessage implements _FailureMessage {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result error(Error error),
-    Result exception(Exception exception),
-    Result message(String message),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult error(Error error),
+    TResult exception(Exception exception),
+    TResult message(String message),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (message != null) {
@@ -397,10 +401,10 @@ class _$_FailureMessage implements _FailureMessage {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result error(_GenericError value),
-    @required Result exception(_RaisedException value),
-    @required Result message(_FailureMessage value),
+  TResult map<TResult extends Object>({
+    @required TResult error(_GenericError value),
+    @required TResult exception(_RaisedException value),
+    @required TResult message(_FailureMessage value),
   }) {
     assert(error != null);
     assert(exception != null);
@@ -410,11 +414,11 @@ class _$_FailureMessage implements _FailureMessage {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result error(_GenericError value),
-    Result exception(_RaisedException value),
-    Result message(_FailureMessage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult error(_GenericError value),
+    TResult exception(_RaisedException value),
+    TResult message(_FailureMessage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (message != null) {
@@ -428,5 +432,6 @@ abstract class _FailureMessage implements Failure {
   const factory _FailureMessage(String message) = _$_FailureMessage;
 
   String get message;
+  @JsonKey(ignore: true)
   _$FailureMessageCopyWith<_FailureMessage> get copyWith;
 }

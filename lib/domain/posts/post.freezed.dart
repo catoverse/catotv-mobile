@@ -9,6 +9,7 @@ part of 'post.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PostTearOff {
   const _$PostTearOff();
 
@@ -37,9 +38,11 @@ class _$PostTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $Post = _$PostTearOff();
 
+/// @nodoc
 mixin _$Post {
   String get id;
   String get authorName;
@@ -51,9 +54,11 @@ mixin _$Post {
   int get endTimestamp;
   String get topicId;
 
+  @JsonKey(ignore: true)
   $PostCopyWith<Post> get copyWith;
 }
 
+/// @nodoc
 abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res>;
@@ -69,6 +74,7 @@ abstract class $PostCopyWith<$Res> {
       String topicId});
 }
 
+/// @nodoc
 class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
   _$PostCopyWithImpl(this._value, this._then);
 
@@ -109,6 +115,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   factory _$PostCopyWith(_Post value, $Res Function(_Post) then) =
       __$PostCopyWithImpl<$Res>;
@@ -125,6 +132,7 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
       String topicId});
 }
 
+/// @nodoc
 class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     implements _$PostCopyWith<$Res> {
   __$PostCopyWithImpl(_Post _value, $Res Function(_Post) _then)
@@ -166,6 +174,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_Post implements _Post {
   const _$_Post(
       {@required this.id,
@@ -254,6 +263,7 @@ class _$_Post implements _Post {
       const DeepCollectionEquality().hash(endTimestamp) ^
       const DeepCollectionEquality().hash(topicId);
 
+  @JsonKey(ignore: true)
   @override
   _$PostCopyWith<_Post> get copyWith =>
       __$PostCopyWithImpl<_Post>(this, _$identity);
@@ -290,5 +300,6 @@ abstract class _Post implements Post {
   @override
   String get topicId;
   @override
+  @JsonKey(ignore: true)
   _$PostCopyWith<_Post> get copyWith;
 }

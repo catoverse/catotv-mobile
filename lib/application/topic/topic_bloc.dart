@@ -28,18 +28,13 @@ class TopicBloc extends Bloc<TopicEvent, TopicState> {
   ) async* {
     yield* event.map(
       get: (e) async* {
-        var selectedTopics = await _userRepository.getSelectedTopics(e.user);
         var topicResult = await _topicRepository.getTopics();
 
         if(topicResult.hasFailed()) {
-          yield state.copyWith(selectedTopicIds: selectedTopics, failure: topicResult.failure);
+          yield state.copyWith(failure: topicResult.failure);
         } else {
-          yield state.copyWith(selectedTopicIds: selectedTopics, allTopics: topicResult.data.asList());
+          yield state.copyWith(allTopics: topicResult.data.asList());
         }
-      },
-      refreshSelectedTopics: (e) async* {
-        var selectedTopics = await _userRepository.getSelectedTopics(e.user);
-        yield state.copyWith(selectedTopicIds: selectedTopics);
       }
     );
   }

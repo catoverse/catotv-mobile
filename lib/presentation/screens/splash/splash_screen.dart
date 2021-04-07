@@ -5,6 +5,7 @@ import 'package:cato_feed/application/init/init.dart';
 import 'package:cato_feed/application/init/init_bloc.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/topic/topic.dart';
+import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:cato_feed/main.dart';
@@ -59,11 +60,21 @@ class SplashPage extends StatelessWidget {
           listener: (_, state) {
             state.when(
               initial: () {},
-              unauthenticated: () {
-                context.navigator.replace(CatoRoutes.onboardingScreen);
+              unauthenticated: () async {
+                // Extract the invitation code
+                var inviteCode = await getInviteCodeFromDynamicLink();
+                if (inviteCode == null || inviteCode.isEmpty) {
+                  context.navigator.replace(CatoRoutes.onboardInviteScreen);
+                } else {
+                  context.bloc<AuthBloc>().add(
+                      AuthEvent.sessionLogin(name: '', inviteCode: inviteCode));
+                }
               },
               authenticated: (user) {
-                context.bloc<TopicBloc>().add(TopicEvent.get(user));
+                context.bloc<TopicBloc>().add(TopicEvent.get());
+              },
+              sessionLoggedIn: (user) {
+                context.bloc<TopicBloc>().add(TopicEvent.get());
               },
               failure: (message) {
                 context
@@ -81,21 +92,33 @@ class SplashPage extends StatelessWidget {
             if (state.failure != null) {
               bloc.add(SplashEvent.failure(state.failure));
             } else if (state.allTopics != null) {
-              if (state.allTopics != null) {
-                context.bloc<PostBloc>().add(PostEvent.loadFeed(0, 10));
-              }
-
-              if (state.selectedTopicIds == null ||
-                  state.selectedTopicIds.isEmpty) {
-                // Send to topic Selected
-                context.navigator.replace(CatoRoutes.topicSelectionScreen);
-              } else {
-                await openDynamicLinkOr(context, otherScreen: CatoRoutes.homeScreen);
-                // Send to home screen
-              }
+              context.bloc<AuthBloc>().state.maybeMap(
+                  authenticated: (e) {
+                    // Get the user profile
+                    context.bloc<UserProfileBloc>().add(UserProfileEvent.get());
+                  },
+                  sessionLoggedIn: (e) {
+                    // Jump to onboard login
+                    context.navigator.replace(CatoRoutes.onboardLoginScreen);
+                  },
+                  orElse: () {});
             }
           },
-        )
+        ),
+        BlocListener<UserProfileBloc, UserProfileState>(listener: (context, state) async {
+          if (state.profile == null ||
+              state.profile.selectedTopics == null ||
+              state.profile.selectedTopics.isEmpty) {
+            // Navigate to the onboard selection
+            context.navigator.replace(CatoRoutes.onboardScreen);
+          } else {
+            // Request for posts
+            context.bloc<PostBloc>().add(PostEvent.loadRecommendedVideos());
+            // Navigate to home screen
+            await openDynamicLinkOr(context,
+                otherScreen: CatoRoutes.homeScreen);
+          }
+        })
       ],
       child: Stack(
         children: [
@@ -119,7 +142,8 @@ class SplashPage extends StatelessWidget {
                         Text(
                           'You need to update the app to continue.',
                           textAlign: TextAlign.center,
-                          style: TextStyle(color: ColorAssets.black21, fontSize: 16),
+                          style: TextStyle(
+                              color: ColorAssets.black21, fontSize: 16),
                         ),
                         SizedBox(
                           height: 5,
@@ -134,7 +158,8 @@ class SplashPage extends StatelessWidget {
                           ),
                           textColor: Colors.white,
                           onPressed: () async {
-                            getIt<ILogger>().logEvent(LogEvents.EVENT_UPDATE_APP_CLICKED);
+                            getIt<ILogger>()
+                                .logEvent(LogEvents.EVENT_UPDATE_APP_CLICKED);
                             var url = (Platform.isAndroid)
                                 ? getIt.get(instanceName: 'PlayStoreUrl')
                                 : getIt.get(instanceName: 'AppStoreUrl');
@@ -158,21 +183,28 @@ class SplashPage extends StatelessWidget {
                           Text(
                             message,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: ColorAssets.black21, fontSize: 16),
+                            style: TextStyle(
+                                color: ColorAssets.black21, fontSize: 16),
                           ),
                           SizedBox(
                             height: 5,
                           ),
                           RaisedButton(
                             color: ColorAssets.teal,
-                            child: Text('Retry',
+                            child: Text(
+                              'Retry',
                               style: TextStyle(fontSize: 15),
                             ),
                             textColor: Colors.white,
                             onPressed: () async {
-                              getIt<ILogger>().logEvent(LogEvents.EVENT_SPLASH_ERROR_RETRY_CLICK);
-                              context.bloc<InitBloc>().add(InitEvent.requestAppVersionCheck());
-                              context.bloc<SplashBloc>().add(SplashEvent.loading());
+                              getIt<ILogger>().logEvent(
+                                  LogEvents.EVENT_SPLASH_ERROR_RETRY_CLICK);
+                              context
+                                  .bloc<InitBloc>()
+                                  .add(InitEvent.requestAppVersionCheck());
+                              context
+                                  .bloc<SplashBloc>()
+                                  .add(SplashEvent.loading());
                             },
                           ),
                         ],

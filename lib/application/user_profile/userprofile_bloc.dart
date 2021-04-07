@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cato_feed/domain/auth/user_profile.dart';
 import 'package:cato_feed/domain/posts/i_post_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -22,9 +23,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
     UserProfileEvent event,
   ) async* {
     yield* event.map(
+      get: (e) async* {
+        // TODO: Get user profile
+      },
       refresh: (e) async* {
         var likedPosts = await _postRepository.getLikedPostsId();
-        var savedPosts = await _postRepository.getSavedPostsId();
+        var savedPosts = await _postRepository.getBookmarkedPostsId();
         yield state.copyWith(likedVideosId: likedPosts, savedVideosId: savedPosts);
       },
       likePost: (e) async* {
@@ -38,13 +42,13 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
         yield state.copyWith(likedVideosId: likedPosts);
       },
       savePost: (e) async* {
-        var res = await _postRepository.savePost(e.postId, null);
-        var savedPosts = await _postRepository.getSavedPostsId();
+        var res = await _postRepository.bookmarkPost(e.postId, null);
+        var savedPosts = await _postRepository.getBookmarkedPostsId();
         yield state.copyWith(savedVideosId: savedPosts);
       },
       unSavePost: (e) async* {
-        var res = await _postRepository.removeSavePost(e.postId);
-        var savedPosts = await _postRepository.getSavedPostsId();
+        var res = await _postRepository.removePostBookmark(e.postId);
+        var savedPosts = await _postRepository.getBookmarkedPostsId();
         yield state.copyWith(savedVideosId: savedPosts);
       },
     );

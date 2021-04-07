@@ -44,7 +44,7 @@ class AuthFacade implements IAuthFacade {
         IUserRepository.KEY_ACCESS_TOKEN: googleAuthentication.accessToken
       });
 
-      return await _userRepository.getUser(details);
+      return await _userRepository.googleLogin(details);
     } on Exception catch (error) {
       logger.logException(error);
       return Result.fail(Failure.error(ServerError()));
@@ -73,7 +73,7 @@ class AuthFacade implements IAuthFacade {
     try {
       var googleId = _googleSignIn.currentUser.id;
       await _googleSignIn.signOut();
-      return await _userRepository.signOut(googleId);
+      return await _userRepository.signOut();
     } on Exception catch (error) {
       logger.logException(error);
       return Result.fail(Failure.message('Error while signing out.'));

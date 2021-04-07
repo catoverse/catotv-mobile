@@ -9,8 +9,14 @@ part of 'post_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PostEventTearOff {
   const _$PostEventTearOff();
+
+// ignore: unused_element
+  _RecommendedVideos loadRecommendedVideos() {
+    return const _RecommendedVideos();
+  }
 
 // ignore: unused_element
   _LoadFeed loadFeed(int skip, int limit) {
@@ -30,71 +36,160 @@ class _$PostEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PostEvent = _$PostEventTearOff();
 
+/// @nodoc
 mixin _$PostEvent {
-  int get skip;
-  int get limit;
-
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loadFeed(int skip, int limit),
-    @required Result loadFeedByTopic(int skip, int limit, String topicId),
+  TResult when<TResult extends Object>({
+    @required TResult loadRecommendedVideos(),
+    @required TResult loadFeed(int skip, int limit),
+    @required TResult loadFeedByTopic(int skip, int limit, String topicId),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loadFeed(int skip, int limit),
-    Result loadFeedByTopic(int skip, int limit, String topicId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loadRecommendedVideos(),
+    TResult loadFeed(int skip, int limit),
+    TResult loadFeedByTopic(int skip, int limit, String topicId),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loadFeed(_LoadFeed value),
-    @required Result loadFeedByTopic(_LoadFeedByTopic value),
+  TResult map<TResult extends Object>({
+    @required TResult loadRecommendedVideos(_RecommendedVideos value),
+    @required TResult loadFeed(_LoadFeed value),
+    @required TResult loadFeedByTopic(_LoadFeedByTopic value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loadFeed(_LoadFeed value),
-    Result loadFeedByTopic(_LoadFeedByTopic value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loadRecommendedVideos(_RecommendedVideos value),
+    TResult loadFeed(_LoadFeed value),
+    TResult loadFeedByTopic(_LoadFeedByTopic value),
+    @required TResult orElse(),
   });
-
-  $PostEventCopyWith<PostEvent> get copyWith;
 }
 
+/// @nodoc
 abstract class $PostEventCopyWith<$Res> {
   factory $PostEventCopyWith(PostEvent value, $Res Function(PostEvent) then) =
       _$PostEventCopyWithImpl<$Res>;
-  $Res call({int skip, int limit});
 }
 
+/// @nodoc
 class _$PostEventCopyWithImpl<$Res> implements $PostEventCopyWith<$Res> {
   _$PostEventCopyWithImpl(this._value, this._then);
 
   final PostEvent _value;
   // ignore: unused_field
   final $Res Function(PostEvent) _then;
+}
+
+/// @nodoc
+abstract class _$RecommendedVideosCopyWith<$Res> {
+  factory _$RecommendedVideosCopyWith(
+          _RecommendedVideos value, $Res Function(_RecommendedVideos) then) =
+      __$RecommendedVideosCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$RecommendedVideosCopyWithImpl<$Res>
+    extends _$PostEventCopyWithImpl<$Res>
+    implements _$RecommendedVideosCopyWith<$Res> {
+  __$RecommendedVideosCopyWithImpl(
+      _RecommendedVideos _value, $Res Function(_RecommendedVideos) _then)
+      : super(_value, (v) => _then(v as _RecommendedVideos));
 
   @override
-  $Res call({
-    Object skip = freezed,
-    Object limit = freezed,
+  _RecommendedVideos get _value => super._value as _RecommendedVideos;
+}
+
+/// @nodoc
+class _$_RecommendedVideos implements _RecommendedVideos {
+  const _$_RecommendedVideos();
+
+  @override
+  String toString() {
+    return 'PostEvent.loadRecommendedVideos()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _RecommendedVideos);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult loadRecommendedVideos(),
+    @required TResult loadFeed(int skip, int limit),
+    @required TResult loadFeedByTopic(int skip, int limit, String topicId),
   }) {
-    return _then(_value.copyWith(
-      skip: skip == freezed ? _value.skip : skip as int,
-      limit: limit == freezed ? _value.limit : limit as int,
-    ));
+    assert(loadRecommendedVideos != null);
+    assert(loadFeed != null);
+    assert(loadFeedByTopic != null);
+    return loadRecommendedVideos();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult loadRecommendedVideos(),
+    TResult loadFeed(int skip, int limit),
+    TResult loadFeedByTopic(int skip, int limit, String topicId),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadRecommendedVideos != null) {
+      return loadRecommendedVideos();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult loadRecommendedVideos(_RecommendedVideos value),
+    @required TResult loadFeed(_LoadFeed value),
+    @required TResult loadFeedByTopic(_LoadFeedByTopic value),
+  }) {
+    assert(loadRecommendedVideos != null);
+    assert(loadFeed != null);
+    assert(loadFeedByTopic != null);
+    return loadRecommendedVideos(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult loadRecommendedVideos(_RecommendedVideos value),
+    TResult loadFeed(_LoadFeed value),
+    TResult loadFeedByTopic(_LoadFeedByTopic value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (loadRecommendedVideos != null) {
+      return loadRecommendedVideos(this);
+    }
+    return orElse();
   }
 }
 
-abstract class _$LoadFeedCopyWith<$Res> implements $PostEventCopyWith<$Res> {
+abstract class _RecommendedVideos implements PostEvent {
+  const factory _RecommendedVideos() = _$_RecommendedVideos;
+}
+
+/// @nodoc
+abstract class _$LoadFeedCopyWith<$Res> {
   factory _$LoadFeedCopyWith(_LoadFeed value, $Res Function(_LoadFeed) then) =
       __$LoadFeedCopyWithImpl<$Res>;
-  @override
   $Res call({int skip, int limit});
 }
 
+/// @nodoc
 class __$LoadFeedCopyWithImpl<$Res> extends _$PostEventCopyWithImpl<$Res>
     implements _$LoadFeedCopyWith<$Res> {
   __$LoadFeedCopyWithImpl(_LoadFeed _value, $Res Function(_LoadFeed) _then)
@@ -115,6 +210,7 @@ class __$LoadFeedCopyWithImpl<$Res> extends _$PostEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_LoadFeed implements _LoadFeed {
   const _$_LoadFeed(this.skip, this.limit)
       : assert(skip != null),
@@ -146,16 +242,19 @@ class _$_LoadFeed implements _LoadFeed {
       const DeepCollectionEquality().hash(skip) ^
       const DeepCollectionEquality().hash(limit);
 
+  @JsonKey(ignore: true)
   @override
   _$LoadFeedCopyWith<_LoadFeed> get copyWith =>
       __$LoadFeedCopyWithImpl<_LoadFeed>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loadFeed(int skip, int limit),
-    @required Result loadFeedByTopic(int skip, int limit, String topicId),
+  TResult when<TResult extends Object>({
+    @required TResult loadRecommendedVideos(),
+    @required TResult loadFeed(int skip, int limit),
+    @required TResult loadFeedByTopic(int skip, int limit, String topicId),
   }) {
+    assert(loadRecommendedVideos != null);
     assert(loadFeed != null);
     assert(loadFeedByTopic != null);
     return loadFeed(skip, limit);
@@ -163,10 +262,11 @@ class _$_LoadFeed implements _LoadFeed {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loadFeed(int skip, int limit),
-    Result loadFeedByTopic(int skip, int limit, String topicId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loadRecommendedVideos(),
+    TResult loadFeed(int skip, int limit),
+    TResult loadFeedByTopic(int skip, int limit, String topicId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadFeed != null) {
@@ -177,10 +277,12 @@ class _$_LoadFeed implements _LoadFeed {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loadFeed(_LoadFeed value),
-    @required Result loadFeedByTopic(_LoadFeedByTopic value),
+  TResult map<TResult extends Object>({
+    @required TResult loadRecommendedVideos(_RecommendedVideos value),
+    @required TResult loadFeed(_LoadFeed value),
+    @required TResult loadFeedByTopic(_LoadFeedByTopic value),
   }) {
+    assert(loadRecommendedVideos != null);
     assert(loadFeed != null);
     assert(loadFeedByTopic != null);
     return loadFeed(this);
@@ -188,10 +290,11 @@ class _$_LoadFeed implements _LoadFeed {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loadFeed(_LoadFeed value),
-    Result loadFeedByTopic(_LoadFeedByTopic value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loadRecommendedVideos(_RecommendedVideos value),
+    TResult loadFeed(_LoadFeed value),
+    TResult loadFeedByTopic(_LoadFeedByTopic value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadFeed != null) {
@@ -204,23 +307,21 @@ class _$_LoadFeed implements _LoadFeed {
 abstract class _LoadFeed implements PostEvent {
   const factory _LoadFeed(int skip, int limit) = _$_LoadFeed;
 
-  @override
   int get skip;
-  @override
   int get limit;
-  @override
+  @JsonKey(ignore: true)
   _$LoadFeedCopyWith<_LoadFeed> get copyWith;
 }
 
-abstract class _$LoadFeedByTopicCopyWith<$Res>
-    implements $PostEventCopyWith<$Res> {
+/// @nodoc
+abstract class _$LoadFeedByTopicCopyWith<$Res> {
   factory _$LoadFeedByTopicCopyWith(
           _LoadFeedByTopic value, $Res Function(_LoadFeedByTopic) then) =
       __$LoadFeedByTopicCopyWithImpl<$Res>;
-  @override
   $Res call({int skip, int limit, String topicId});
 }
 
+/// @nodoc
 class __$LoadFeedByTopicCopyWithImpl<$Res> extends _$PostEventCopyWithImpl<$Res>
     implements _$LoadFeedByTopicCopyWith<$Res> {
   __$LoadFeedByTopicCopyWithImpl(
@@ -244,6 +345,7 @@ class __$LoadFeedByTopicCopyWithImpl<$Res> extends _$PostEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_LoadFeedByTopic implements _LoadFeedByTopic {
   const _$_LoadFeedByTopic(this.skip, this.limit, this.topicId)
       : assert(skip != null),
@@ -281,16 +383,19 @@ class _$_LoadFeedByTopic implements _LoadFeedByTopic {
       const DeepCollectionEquality().hash(limit) ^
       const DeepCollectionEquality().hash(topicId);
 
+  @JsonKey(ignore: true)
   @override
   _$LoadFeedByTopicCopyWith<_LoadFeedByTopic> get copyWith =>
       __$LoadFeedByTopicCopyWithImpl<_LoadFeedByTopic>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loadFeed(int skip, int limit),
-    @required Result loadFeedByTopic(int skip, int limit, String topicId),
+  TResult when<TResult extends Object>({
+    @required TResult loadRecommendedVideos(),
+    @required TResult loadFeed(int skip, int limit),
+    @required TResult loadFeedByTopic(int skip, int limit, String topicId),
   }) {
+    assert(loadRecommendedVideos != null);
     assert(loadFeed != null);
     assert(loadFeedByTopic != null);
     return loadFeedByTopic(skip, limit, topicId);
@@ -298,10 +403,11 @@ class _$_LoadFeedByTopic implements _LoadFeedByTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loadFeed(int skip, int limit),
-    Result loadFeedByTopic(int skip, int limit, String topicId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loadRecommendedVideos(),
+    TResult loadFeed(int skip, int limit),
+    TResult loadFeedByTopic(int skip, int limit, String topicId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadFeedByTopic != null) {
@@ -312,10 +418,12 @@ class _$_LoadFeedByTopic implements _LoadFeedByTopic {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loadFeed(_LoadFeed value),
-    @required Result loadFeedByTopic(_LoadFeedByTopic value),
+  TResult map<TResult extends Object>({
+    @required TResult loadRecommendedVideos(_RecommendedVideos value),
+    @required TResult loadFeed(_LoadFeed value),
+    @required TResult loadFeedByTopic(_LoadFeedByTopic value),
   }) {
+    assert(loadRecommendedVideos != null);
     assert(loadFeed != null);
     assert(loadFeedByTopic != null);
     return loadFeedByTopic(this);
@@ -323,10 +431,11 @@ class _$_LoadFeedByTopic implements _LoadFeedByTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loadFeed(_LoadFeed value),
-    Result loadFeedByTopic(_LoadFeedByTopic value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loadRecommendedVideos(_RecommendedVideos value),
+    TResult loadFeed(_LoadFeed value),
+    TResult loadFeedByTopic(_LoadFeedByTopic value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadFeedByTopic != null) {
@@ -340,15 +449,14 @@ abstract class _LoadFeedByTopic implements PostEvent {
   const factory _LoadFeedByTopic(int skip, int limit, String topicId) =
       _$_LoadFeedByTopic;
 
-  @override
   int get skip;
-  @override
   int get limit;
   String get topicId;
-  @override
+  @JsonKey(ignore: true)
   _$LoadFeedByTopicCopyWith<_LoadFeedByTopic> get copyWith;
 }
 
+/// @nodoc
 class _$PostPageStateTearOff {
   const _$PostPageStateTearOff();
 
@@ -363,18 +471,22 @@ class _$PostPageStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PostPageState = _$PostPageStateTearOff();
 
+/// @nodoc
 mixin _$PostPageState {
   int get skip;
   int get limit;
   List<Post> get posts;
   String get topicId;
 
+  @JsonKey(ignore: true)
   $PostPageStateCopyWith<PostPageState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PostPageStateCopyWith<$Res> {
   factory $PostPageStateCopyWith(
           PostPageState value, $Res Function(PostPageState) then) =
@@ -382,6 +494,7 @@ abstract class $PostPageStateCopyWith<$Res> {
   $Res call({int skip, int limit, List<Post> posts, String topicId});
 }
 
+/// @nodoc
 class _$PostPageStateCopyWithImpl<$Res>
     implements $PostPageStateCopyWith<$Res> {
   _$PostPageStateCopyWithImpl(this._value, this._then);
@@ -406,6 +519,7 @@ class _$PostPageStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$PostPageStateCopyWith<$Res>
     implements $PostPageStateCopyWith<$Res> {
   factory _$PostPageStateCopyWith(
@@ -415,6 +529,7 @@ abstract class _$PostPageStateCopyWith<$Res>
   $Res call({int skip, int limit, List<Post> posts, String topicId});
 }
 
+/// @nodoc
 class __$PostPageStateCopyWithImpl<$Res>
     extends _$PostPageStateCopyWithImpl<$Res>
     implements _$PostPageStateCopyWith<$Res> {
@@ -441,6 +556,7 @@ class __$PostPageStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_PostPageState implements _PostPageState {
   const _$_PostPageState(this.skip, this.limit, {this.posts, this.topicId})
       : assert(skip != null),
@@ -482,6 +598,7 @@ class _$_PostPageState implements _PostPageState {
       const DeepCollectionEquality().hash(posts) ^
       const DeepCollectionEquality().hash(topicId);
 
+  @JsonKey(ignore: true)
   @override
   _$PostPageStateCopyWith<_PostPageState> get copyWith =>
       __$PostPageStateCopyWithImpl<_PostPageState>(this, _$identity);
@@ -500,9 +617,11 @@ abstract class _PostPageState implements PostPageState {
   @override
   String get topicId;
   @override
+  @JsonKey(ignore: true)
   _$PostPageStateCopyWith<_PostPageState> get copyWith;
 }
 
+/// @nodoc
 class _$PostStateTearOff {
   const _$PostStateTearOff();
 
@@ -517,17 +636,21 @@ class _$PostStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PostState = _$PostStateTearOff();
 
+/// @nodoc
 mixin _$PostState {
   PostPageState get allFeed;
   PostPageState get feedByTopic;
   Failure get failure;
 
+  @JsonKey(ignore: true)
   $PostStateCopyWith<PostState> get copyWith;
 }
 
+/// @nodoc
 abstract class $PostStateCopyWith<$Res> {
   factory $PostStateCopyWith(PostState value, $Res Function(PostState) then) =
       _$PostStateCopyWithImpl<$Res>;
@@ -539,6 +662,7 @@ abstract class $PostStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class _$PostStateCopyWithImpl<$Res> implements $PostStateCopyWith<$Res> {
   _$PostStateCopyWithImpl(this._value, this._then);
 
@@ -592,6 +716,7 @@ class _$PostStateCopyWithImpl<$Res> implements $PostStateCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
   factory _$PostStateCopyWith(
           _PostState value, $Res Function(_PostState) then) =
@@ -608,6 +733,7 @@ abstract class _$PostStateCopyWith<$Res> implements $PostStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$PostStateCopyWithImpl<$Res> extends _$PostStateCopyWithImpl<$Res>
     implements _$PostStateCopyWith<$Res> {
   __$PostStateCopyWithImpl(_PostState _value, $Res Function(_PostState) _then)
@@ -632,6 +758,7 @@ class __$PostStateCopyWithImpl<$Res> extends _$PostStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_PostState implements _PostState {
   const _$_PostState(this.allFeed, this.feedByTopic, {this.failure})
       : assert(allFeed != null),
@@ -670,6 +797,7 @@ class _$_PostState implements _PostState {
       const DeepCollectionEquality().hash(feedByTopic) ^
       const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$PostStateCopyWith<_PostState> get copyWith =>
       __$PostStateCopyWithImpl<_PostState>(this, _$identity);
@@ -686,5 +814,6 @@ abstract class _PostState implements PostState {
   @override
   Failure get failure;
   @override
+  @JsonKey(ignore: true)
   _$PostStateCopyWith<_PostState> get copyWith;
 }

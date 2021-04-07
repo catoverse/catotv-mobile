@@ -9,6 +9,7 @@ part of 'splash_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$SplashEventTearOff {
   const _$SplashEventTearOff();
 
@@ -30,44 +31,48 @@ class _$SplashEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SplashEvent = _$SplashEventTearOff();
 
+/// @nodoc
 mixin _$SplashEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result failure(Failure failure),
-    @required Result updateRequired(),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult failure(Failure failure),
+    @required TResult updateRequired(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result failure(Failure failure),
-    Result updateRequired(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult failure(Failure failure),
+    TResult updateRequired(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_EventLoading value),
-    @required Result failure(_EventFailure value),
-    @required Result updateRequired(_EventUpdateRequired value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_EventLoading value),
+    @required TResult failure(_EventFailure value),
+    @required TResult updateRequired(_EventUpdateRequired value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_EventLoading value),
-    Result failure(_EventFailure value),
-    Result updateRequired(_EventUpdateRequired value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_EventLoading value),
+    TResult failure(_EventFailure value),
+    TResult updateRequired(_EventUpdateRequired value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $SplashEventCopyWith<$Res> {
   factory $SplashEventCopyWith(
           SplashEvent value, $Res Function(SplashEvent) then) =
       _$SplashEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SplashEventCopyWithImpl<$Res> implements $SplashEventCopyWith<$Res> {
   _$SplashEventCopyWithImpl(this._value, this._then);
 
@@ -76,12 +81,14 @@ class _$SplashEventCopyWithImpl<$Res> implements $SplashEventCopyWith<$Res> {
   final $Res Function(SplashEvent) _then;
 }
 
+/// @nodoc
 abstract class _$EventLoadingCopyWith<$Res> {
   factory _$EventLoadingCopyWith(
           _EventLoading value, $Res Function(_EventLoading) then) =
       __$EventLoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$EventLoadingCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
     implements _$EventLoadingCopyWith<$Res> {
   __$EventLoadingCopyWithImpl(
@@ -92,6 +99,7 @@ class __$EventLoadingCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
   _EventLoading get _value => super._value as _EventLoading;
 }
 
+/// @nodoc
 class _$_EventLoading implements _EventLoading {
   const _$_EventLoading();
 
@@ -110,10 +118,10 @@ class _$_EventLoading implements _EventLoading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result failure(Failure failure),
-    @required Result updateRequired(),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult failure(Failure failure),
+    @required TResult updateRequired(),
   }) {
     assert(loading != null);
     assert(failure != null);
@@ -123,11 +131,11 @@ class _$_EventLoading implements _EventLoading {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result failure(Failure failure),
-    Result updateRequired(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult failure(Failure failure),
+    TResult updateRequired(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loading != null) {
@@ -138,10 +146,10 @@ class _$_EventLoading implements _EventLoading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_EventLoading value),
-    @required Result failure(_EventFailure value),
-    @required Result updateRequired(_EventUpdateRequired value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_EventLoading value),
+    @required TResult failure(_EventFailure value),
+    @required TResult updateRequired(_EventUpdateRequired value),
   }) {
     assert(loading != null);
     assert(failure != null);
@@ -151,11 +159,11 @@ class _$_EventLoading implements _EventLoading {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_EventLoading value),
-    Result failure(_EventFailure value),
-    Result updateRequired(_EventUpdateRequired value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_EventLoading value),
+    TResult failure(_EventFailure value),
+    TResult updateRequired(_EventUpdateRequired value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loading != null) {
@@ -169,6 +177,7 @@ abstract class _EventLoading implements SplashEvent {
   const factory _EventLoading() = _$_EventLoading;
 }
 
+/// @nodoc
 abstract class _$EventFailureCopyWith<$Res> {
   factory _$EventFailureCopyWith(
           _EventFailure value, $Res Function(_EventFailure) then) =
@@ -178,6 +187,7 @@ abstract class _$EventFailureCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$EventFailureCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
     implements _$EventFailureCopyWith<$Res> {
   __$EventFailureCopyWithImpl(
@@ -207,6 +217,7 @@ class __$EventFailureCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_EventFailure implements _EventFailure {
   const _$_EventFailure(this.failure) : assert(failure != null);
 
@@ -230,16 +241,17 @@ class _$_EventFailure implements _EventFailure {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$EventFailureCopyWith<_EventFailure> get copyWith =>
       __$EventFailureCopyWithImpl<_EventFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result failure(Failure failure),
-    @required Result updateRequired(),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult failure(Failure failure),
+    @required TResult updateRequired(),
   }) {
     assert(loading != null);
     assert(failure != null);
@@ -249,11 +261,11 @@ class _$_EventFailure implements _EventFailure {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result failure(Failure failure),
-    Result updateRequired(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult failure(Failure failure),
+    TResult updateRequired(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -264,10 +276,10 @@ class _$_EventFailure implements _EventFailure {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_EventLoading value),
-    @required Result failure(_EventFailure value),
-    @required Result updateRequired(_EventUpdateRequired value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_EventLoading value),
+    @required TResult failure(_EventFailure value),
+    @required TResult updateRequired(_EventUpdateRequired value),
   }) {
     assert(loading != null);
     assert(failure != null);
@@ -277,11 +289,11 @@ class _$_EventFailure implements _EventFailure {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_EventLoading value),
-    Result failure(_EventFailure value),
-    Result updateRequired(_EventUpdateRequired value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_EventLoading value),
+    TResult failure(_EventFailure value),
+    TResult updateRequired(_EventUpdateRequired value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -295,15 +307,18 @@ abstract class _EventFailure implements SplashEvent {
   const factory _EventFailure(Failure failure) = _$_EventFailure;
 
   Failure get failure;
+  @JsonKey(ignore: true)
   _$EventFailureCopyWith<_EventFailure> get copyWith;
 }
 
+/// @nodoc
 abstract class _$EventUpdateRequiredCopyWith<$Res> {
   factory _$EventUpdateRequiredCopyWith(_EventUpdateRequired value,
           $Res Function(_EventUpdateRequired) then) =
       __$EventUpdateRequiredCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$EventUpdateRequiredCopyWithImpl<$Res>
     extends _$SplashEventCopyWithImpl<$Res>
     implements _$EventUpdateRequiredCopyWith<$Res> {
@@ -315,6 +330,7 @@ class __$EventUpdateRequiredCopyWithImpl<$Res>
   _EventUpdateRequired get _value => super._value as _EventUpdateRequired;
 }
 
+/// @nodoc
 class _$_EventUpdateRequired implements _EventUpdateRequired {
   const _$_EventUpdateRequired();
 
@@ -333,10 +349,10 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result failure(Failure failure),
-    @required Result updateRequired(),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult failure(Failure failure),
+    @required TResult updateRequired(),
   }) {
     assert(loading != null);
     assert(failure != null);
@@ -346,11 +362,11 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result failure(Failure failure),
-    Result updateRequired(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult failure(Failure failure),
+    TResult updateRequired(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateRequired != null) {
@@ -361,10 +377,10 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_EventLoading value),
-    @required Result failure(_EventFailure value),
-    @required Result updateRequired(_EventUpdateRequired value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_EventLoading value),
+    @required TResult failure(_EventFailure value),
+    @required TResult updateRequired(_EventUpdateRequired value),
   }) {
     assert(loading != null);
     assert(failure != null);
@@ -374,11 +390,11 @@ class _$_EventUpdateRequired implements _EventUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_EventLoading value),
-    Result failure(_EventFailure value),
-    Result updateRequired(_EventUpdateRequired value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_EventLoading value),
+    TResult failure(_EventFailure value),
+    TResult updateRequired(_EventUpdateRequired value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateRequired != null) {
@@ -392,6 +408,7 @@ abstract class _EventUpdateRequired implements SplashEvent {
   const factory _EventUpdateRequired() = _$_EventUpdateRequired;
 }
 
+/// @nodoc
 class _$SplashStateTearOff {
   const _$SplashStateTearOff();
 
@@ -413,44 +430,48 @@ class _$SplashStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SplashState = _$SplashStateTearOff();
 
+/// @nodoc
 mixin _$SplashState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result forceUpdateRequired(),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult forceUpdateRequired(),
+    @required TResult failure(Failure failure),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result forceUpdateRequired(),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult forceUpdateRequired(),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_Loading value),
-    @required Result forceUpdateRequired(_ForceUpdateRequired value),
-    @required Result failure(_Failure value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_Loading value),
+    @required TResult forceUpdateRequired(_ForceUpdateRequired value),
+    @required TResult failure(_Failure value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_Loading value),
-    Result forceUpdateRequired(_ForceUpdateRequired value),
-    Result failure(_Failure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_Loading value),
+    TResult forceUpdateRequired(_ForceUpdateRequired value),
+    TResult failure(_Failure value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $SplashStateCopyWith<$Res> {
   factory $SplashStateCopyWith(
           SplashState value, $Res Function(SplashState) then) =
       _$SplashStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
   _$SplashStateCopyWithImpl(this._value, this._then);
 
@@ -459,11 +480,13 @@ class _$SplashStateCopyWithImpl<$Res> implements $SplashStateCopyWith<$Res> {
   final $Res Function(SplashState) _then;
 }
 
+/// @nodoc
 abstract class _$LoadingCopyWith<$Res> {
   factory _$LoadingCopyWith(_Loading value, $Res Function(_Loading) then) =
       __$LoadingCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$LoadingCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
     implements _$LoadingCopyWith<$Res> {
   __$LoadingCopyWithImpl(_Loading _value, $Res Function(_Loading) _then)
@@ -473,6 +496,7 @@ class __$LoadingCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
   _Loading get _value => super._value as _Loading;
 }
 
+/// @nodoc
 class _$_Loading implements _Loading {
   const _$_Loading();
 
@@ -491,10 +515,10 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result forceUpdateRequired(),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult forceUpdateRequired(),
+    @required TResult failure(Failure failure),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
@@ -504,11 +528,11 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result forceUpdateRequired(),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult forceUpdateRequired(),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loading != null) {
@@ -519,10 +543,10 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_Loading value),
-    @required Result forceUpdateRequired(_ForceUpdateRequired value),
-    @required Result failure(_Failure value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_Loading value),
+    @required TResult forceUpdateRequired(_ForceUpdateRequired value),
+    @required TResult failure(_Failure value),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
@@ -532,11 +556,11 @@ class _$_Loading implements _Loading {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_Loading value),
-    Result forceUpdateRequired(_ForceUpdateRequired value),
-    Result failure(_Failure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_Loading value),
+    TResult forceUpdateRequired(_ForceUpdateRequired value),
+    TResult failure(_Failure value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loading != null) {
@@ -550,12 +574,14 @@ abstract class _Loading implements SplashState {
   const factory _Loading() = _$_Loading;
 }
 
+/// @nodoc
 abstract class _$ForceUpdateRequiredCopyWith<$Res> {
   factory _$ForceUpdateRequiredCopyWith(_ForceUpdateRequired value,
           $Res Function(_ForceUpdateRequired) then) =
       __$ForceUpdateRequiredCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$ForceUpdateRequiredCopyWithImpl<$Res>
     extends _$SplashStateCopyWithImpl<$Res>
     implements _$ForceUpdateRequiredCopyWith<$Res> {
@@ -567,6 +593,7 @@ class __$ForceUpdateRequiredCopyWithImpl<$Res>
   _ForceUpdateRequired get _value => super._value as _ForceUpdateRequired;
 }
 
+/// @nodoc
 class _$_ForceUpdateRequired implements _ForceUpdateRequired {
   const _$_ForceUpdateRequired();
 
@@ -585,10 +612,10 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result forceUpdateRequired(),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult forceUpdateRequired(),
+    @required TResult failure(Failure failure),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
@@ -598,11 +625,11 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result forceUpdateRequired(),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult forceUpdateRequired(),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (forceUpdateRequired != null) {
@@ -613,10 +640,10 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_Loading value),
-    @required Result forceUpdateRequired(_ForceUpdateRequired value),
-    @required Result failure(_Failure value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_Loading value),
+    @required TResult forceUpdateRequired(_ForceUpdateRequired value),
+    @required TResult failure(_Failure value),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
@@ -626,11 +653,11 @@ class _$_ForceUpdateRequired implements _ForceUpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_Loading value),
-    Result forceUpdateRequired(_ForceUpdateRequired value),
-    Result failure(_Failure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_Loading value),
+    TResult forceUpdateRequired(_ForceUpdateRequired value),
+    TResult failure(_Failure value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (forceUpdateRequired != null) {
@@ -644,6 +671,7 @@ abstract class _ForceUpdateRequired implements SplashState {
   const factory _ForceUpdateRequired() = _$_ForceUpdateRequired;
 }
 
+/// @nodoc
 abstract class _$FailureCopyWith<$Res> {
   factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) then) =
       __$FailureCopyWithImpl<$Res>;
@@ -652,6 +680,7 @@ abstract class _$FailureCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$FailureCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
     implements _$FailureCopyWith<$Res> {
   __$FailureCopyWithImpl(_Failure _value, $Res Function(_Failure) _then)
@@ -680,6 +709,7 @@ class __$FailureCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_Failure implements _Failure {
   const _$_Failure(this.failure) : assert(failure != null);
 
@@ -703,16 +733,17 @@ class _$_Failure implements _Failure {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$FailureCopyWith<_Failure> get copyWith =>
       __$FailureCopyWithImpl<_Failure>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loading(),
-    @required Result forceUpdateRequired(),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult loading(),
+    @required TResult forceUpdateRequired(),
+    @required TResult failure(Failure failure),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
@@ -722,11 +753,11 @@ class _$_Failure implements _Failure {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loading(),
-    Result forceUpdateRequired(),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loading(),
+    TResult forceUpdateRequired(),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -737,10 +768,10 @@ class _$_Failure implements _Failure {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loading(_Loading value),
-    @required Result forceUpdateRequired(_ForceUpdateRequired value),
-    @required Result failure(_Failure value),
+  TResult map<TResult extends Object>({
+    @required TResult loading(_Loading value),
+    @required TResult forceUpdateRequired(_ForceUpdateRequired value),
+    @required TResult failure(_Failure value),
   }) {
     assert(loading != null);
     assert(forceUpdateRequired != null);
@@ -750,11 +781,11 @@ class _$_Failure implements _Failure {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loading(_Loading value),
-    Result forceUpdateRequired(_ForceUpdateRequired value),
-    Result failure(_Failure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loading(_Loading value),
+    TResult forceUpdateRequired(_ForceUpdateRequired value),
+    TResult failure(_Failure value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -768,5 +799,6 @@ abstract class _Failure implements SplashState {
   const factory _Failure(Failure failure) = _$_Failure;
 
   Failure get failure;
+  @JsonKey(ignore: true)
   _$FailureCopyWith<_Failure> get copyWith;
 }

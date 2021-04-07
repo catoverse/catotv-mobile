@@ -9,6 +9,7 @@ part of 'init_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$InitEventTearOff {
   const _$InitEventTearOff();
 
@@ -18,35 +19,39 @@ class _$InitEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $InitEvent = _$InitEventTearOff();
 
+/// @nodoc
 mixin _$InitEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestAppVersionCheck(),
+  TResult when<TResult extends Object>({
+    @required TResult requestAppVersionCheck(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestAppVersionCheck(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult requestAppVersionCheck(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestAppVersionCheck(_RequestAppVersionCheck value),
+  TResult map<TResult extends Object>({
+    @required TResult requestAppVersionCheck(_RequestAppVersionCheck value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestAppVersionCheck(_RequestAppVersionCheck value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult requestAppVersionCheck(_RequestAppVersionCheck value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $InitEventCopyWith<$Res> {
   factory $InitEventCopyWith(InitEvent value, $Res Function(InitEvent) then) =
       _$InitEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitEventCopyWithImpl<$Res> implements $InitEventCopyWith<$Res> {
   _$InitEventCopyWithImpl(this._value, this._then);
 
@@ -55,12 +60,14 @@ class _$InitEventCopyWithImpl<$Res> implements $InitEventCopyWith<$Res> {
   final $Res Function(InitEvent) _then;
 }
 
+/// @nodoc
 abstract class _$RequestAppVersionCheckCopyWith<$Res> {
   factory _$RequestAppVersionCheckCopyWith(_RequestAppVersionCheck value,
           $Res Function(_RequestAppVersionCheck) then) =
       __$RequestAppVersionCheckCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$RequestAppVersionCheckCopyWithImpl<$Res>
     extends _$InitEventCopyWithImpl<$Res>
     implements _$RequestAppVersionCheckCopyWith<$Res> {
@@ -72,6 +79,7 @@ class __$RequestAppVersionCheckCopyWithImpl<$Res>
   _RequestAppVersionCheck get _value => super._value as _RequestAppVersionCheck;
 }
 
+/// @nodoc
 class _$_RequestAppVersionCheck implements _RequestAppVersionCheck {
   const _$_RequestAppVersionCheck();
 
@@ -90,8 +98,8 @@ class _$_RequestAppVersionCheck implements _RequestAppVersionCheck {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result requestAppVersionCheck(),
+  TResult when<TResult extends Object>({
+    @required TResult requestAppVersionCheck(),
   }) {
     assert(requestAppVersionCheck != null);
     return requestAppVersionCheck();
@@ -99,9 +107,9 @@ class _$_RequestAppVersionCheck implements _RequestAppVersionCheck {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result requestAppVersionCheck(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult requestAppVersionCheck(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (requestAppVersionCheck != null) {
@@ -112,8 +120,8 @@ class _$_RequestAppVersionCheck implements _RequestAppVersionCheck {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result requestAppVersionCheck(_RequestAppVersionCheck value),
+  TResult map<TResult extends Object>({
+    @required TResult requestAppVersionCheck(_RequestAppVersionCheck value),
   }) {
     assert(requestAppVersionCheck != null);
     return requestAppVersionCheck(this);
@@ -121,9 +129,9 @@ class _$_RequestAppVersionCheck implements _RequestAppVersionCheck {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result requestAppVersionCheck(_RequestAppVersionCheck value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult requestAppVersionCheck(_RequestAppVersionCheck value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (requestAppVersionCheck != null) {
@@ -137,6 +145,7 @@ abstract class _RequestAppVersionCheck implements InitEvent {
   const factory _RequestAppVersionCheck() = _$_RequestAppVersionCheck;
 }
 
+/// @nodoc
 class _$InitStateTearOff {
   const _$InitStateTearOff();
 
@@ -163,47 +172,51 @@ class _$InitStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $InitState = _$InitStateTearOff();
 
+/// @nodoc
 mixin _$InitState {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result updateRequired(),
-    @required Result failure(Failure failure),
-    @required Result success(),
+  TResult when<TResult extends Object>({
+    @required TResult initial(),
+    @required TResult updateRequired(),
+    @required TResult failure(Failure failure),
+    @required TResult success(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result updateRequired(),
-    Result failure(Failure failure),
-    Result success(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initial(),
+    TResult updateRequired(),
+    TResult failure(Failure failure),
+    TResult success(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result updateRequired(_UpdateRequired value),
-    @required Result failure(_InitFailure value),
-    @required Result success(_InitSuccess value),
+  TResult map<TResult extends Object>({
+    @required TResult initial(_Initial value),
+    @required TResult updateRequired(_UpdateRequired value),
+    @required TResult failure(_InitFailure value),
+    @required TResult success(_InitSuccess value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result updateRequired(_UpdateRequired value),
-    Result failure(_InitFailure value),
-    Result success(_InitSuccess value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initial(_Initial value),
+    TResult updateRequired(_UpdateRequired value),
+    TResult failure(_InitFailure value),
+    TResult success(_InitSuccess value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $InitStateCopyWith<$Res> {
   factory $InitStateCopyWith(InitState value, $Res Function(InitState) then) =
       _$InitStateCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InitStateCopyWithImpl<$Res> implements $InitStateCopyWith<$Res> {
   _$InitStateCopyWithImpl(this._value, this._then);
 
@@ -212,11 +225,13 @@ class _$InitStateCopyWithImpl<$Res> implements $InitStateCopyWith<$Res> {
   final $Res Function(InitState) _then;
 }
 
+/// @nodoc
 abstract class _$InitialCopyWith<$Res> {
   factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
       __$InitialCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$InitialCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
     implements _$InitialCopyWith<$Res> {
   __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
@@ -226,6 +241,7 @@ class __$InitialCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
   _Initial get _value => super._value as _Initial;
 }
 
+/// @nodoc
 class _$_Initial implements _Initial {
   const _$_Initial();
 
@@ -244,11 +260,11 @@ class _$_Initial implements _Initial {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result updateRequired(),
-    @required Result failure(Failure failure),
-    @required Result success(),
+  TResult when<TResult extends Object>({
+    @required TResult initial(),
+    @required TResult updateRequired(),
+    @required TResult failure(Failure failure),
+    @required TResult success(),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -259,12 +275,12 @@ class _$_Initial implements _Initial {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result updateRequired(),
-    Result failure(Failure failure),
-    Result success(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initial(),
+    TResult updateRequired(),
+    TResult failure(Failure failure),
+    TResult success(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initial != null) {
@@ -275,11 +291,11 @@ class _$_Initial implements _Initial {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result updateRequired(_UpdateRequired value),
-    @required Result failure(_InitFailure value),
-    @required Result success(_InitSuccess value),
+  TResult map<TResult extends Object>({
+    @required TResult initial(_Initial value),
+    @required TResult updateRequired(_UpdateRequired value),
+    @required TResult failure(_InitFailure value),
+    @required TResult success(_InitSuccess value),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -290,12 +306,12 @@ class _$_Initial implements _Initial {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result updateRequired(_UpdateRequired value),
-    Result failure(_InitFailure value),
-    Result success(_InitSuccess value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initial(_Initial value),
+    TResult updateRequired(_UpdateRequired value),
+    TResult failure(_InitFailure value),
+    TResult success(_InitSuccess value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initial != null) {
@@ -309,12 +325,14 @@ abstract class _Initial implements InitState {
   const factory _Initial() = _$_Initial;
 }
 
+/// @nodoc
 abstract class _$UpdateRequiredCopyWith<$Res> {
   factory _$UpdateRequiredCopyWith(
           _UpdateRequired value, $Res Function(_UpdateRequired) then) =
       __$UpdateRequiredCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$UpdateRequiredCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
     implements _$UpdateRequiredCopyWith<$Res> {
   __$UpdateRequiredCopyWithImpl(
@@ -325,6 +343,7 @@ class __$UpdateRequiredCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
   _UpdateRequired get _value => super._value as _UpdateRequired;
 }
 
+/// @nodoc
 class _$_UpdateRequired implements _UpdateRequired {
   const _$_UpdateRequired();
 
@@ -343,11 +362,11 @@ class _$_UpdateRequired implements _UpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result updateRequired(),
-    @required Result failure(Failure failure),
-    @required Result success(),
+  TResult when<TResult extends Object>({
+    @required TResult initial(),
+    @required TResult updateRequired(),
+    @required TResult failure(Failure failure),
+    @required TResult success(),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -358,12 +377,12 @@ class _$_UpdateRequired implements _UpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result updateRequired(),
-    Result failure(Failure failure),
-    Result success(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initial(),
+    TResult updateRequired(),
+    TResult failure(Failure failure),
+    TResult success(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateRequired != null) {
@@ -374,11 +393,11 @@ class _$_UpdateRequired implements _UpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result updateRequired(_UpdateRequired value),
-    @required Result failure(_InitFailure value),
-    @required Result success(_InitSuccess value),
+  TResult map<TResult extends Object>({
+    @required TResult initial(_Initial value),
+    @required TResult updateRequired(_UpdateRequired value),
+    @required TResult failure(_InitFailure value),
+    @required TResult success(_InitSuccess value),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -389,12 +408,12 @@ class _$_UpdateRequired implements _UpdateRequired {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result updateRequired(_UpdateRequired value),
-    Result failure(_InitFailure value),
-    Result success(_InitSuccess value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initial(_Initial value),
+    TResult updateRequired(_UpdateRequired value),
+    TResult failure(_InitFailure value),
+    TResult success(_InitSuccess value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateRequired != null) {
@@ -408,6 +427,7 @@ abstract class _UpdateRequired implements InitState {
   const factory _UpdateRequired() = _$_UpdateRequired;
 }
 
+/// @nodoc
 abstract class _$InitFailureCopyWith<$Res> {
   factory _$InitFailureCopyWith(
           _InitFailure value, $Res Function(_InitFailure) then) =
@@ -417,6 +437,7 @@ abstract class _$InitFailureCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$InitFailureCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
     implements _$InitFailureCopyWith<$Res> {
   __$InitFailureCopyWithImpl(
@@ -446,6 +467,7 @@ class __$InitFailureCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_InitFailure implements _InitFailure {
   const _$_InitFailure(this.failure) : assert(failure != null);
 
@@ -469,17 +491,18 @@ class _$_InitFailure implements _InitFailure {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$InitFailureCopyWith<_InitFailure> get copyWith =>
       __$InitFailureCopyWithImpl<_InitFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result updateRequired(),
-    @required Result failure(Failure failure),
-    @required Result success(),
+  TResult when<TResult extends Object>({
+    @required TResult initial(),
+    @required TResult updateRequired(),
+    @required TResult failure(Failure failure),
+    @required TResult success(),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -490,12 +513,12 @@ class _$_InitFailure implements _InitFailure {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result updateRequired(),
-    Result failure(Failure failure),
-    Result success(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initial(),
+    TResult updateRequired(),
+    TResult failure(Failure failure),
+    TResult success(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -506,11 +529,11 @@ class _$_InitFailure implements _InitFailure {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result updateRequired(_UpdateRequired value),
-    @required Result failure(_InitFailure value),
-    @required Result success(_InitSuccess value),
+  TResult map<TResult extends Object>({
+    @required TResult initial(_Initial value),
+    @required TResult updateRequired(_UpdateRequired value),
+    @required TResult failure(_InitFailure value),
+    @required TResult success(_InitSuccess value),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -521,12 +544,12 @@ class _$_InitFailure implements _InitFailure {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result updateRequired(_UpdateRequired value),
-    Result failure(_InitFailure value),
-    Result success(_InitSuccess value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initial(_Initial value),
+    TResult updateRequired(_UpdateRequired value),
+    TResult failure(_InitFailure value),
+    TResult success(_InitSuccess value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -540,15 +563,18 @@ abstract class _InitFailure implements InitState {
   const factory _InitFailure(Failure failure) = _$_InitFailure;
 
   Failure get failure;
+  @JsonKey(ignore: true)
   _$InitFailureCopyWith<_InitFailure> get copyWith;
 }
 
+/// @nodoc
 abstract class _$InitSuccessCopyWith<$Res> {
   factory _$InitSuccessCopyWith(
           _InitSuccess value, $Res Function(_InitSuccess) then) =
       __$InitSuccessCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$InitSuccessCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
     implements _$InitSuccessCopyWith<$Res> {
   __$InitSuccessCopyWithImpl(
@@ -559,6 +585,7 @@ class __$InitSuccessCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
   _InitSuccess get _value => super._value as _InitSuccess;
 }
 
+/// @nodoc
 class _$_InitSuccess implements _InitSuccess {
   const _$_InitSuccess();
 
@@ -577,11 +604,11 @@ class _$_InitSuccess implements _InitSuccess {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result updateRequired(),
-    @required Result failure(Failure failure),
-    @required Result success(),
+  TResult when<TResult extends Object>({
+    @required TResult initial(),
+    @required TResult updateRequired(),
+    @required TResult failure(Failure failure),
+    @required TResult success(),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -592,12 +619,12 @@ class _$_InitSuccess implements _InitSuccess {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result updateRequired(),
-    Result failure(Failure failure),
-    Result success(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initial(),
+    TResult updateRequired(),
+    TResult failure(Failure failure),
+    TResult success(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (success != null) {
@@ -608,11 +635,11 @@ class _$_InitSuccess implements _InitSuccess {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result updateRequired(_UpdateRequired value),
-    @required Result failure(_InitFailure value),
-    @required Result success(_InitSuccess value),
+  TResult map<TResult extends Object>({
+    @required TResult initial(_Initial value),
+    @required TResult updateRequired(_UpdateRequired value),
+    @required TResult failure(_InitFailure value),
+    @required TResult success(_InitSuccess value),
   }) {
     assert(initial != null);
     assert(updateRequired != null);
@@ -623,12 +650,12 @@ class _$_InitSuccess implements _InitSuccess {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result updateRequired(_UpdateRequired value),
-    Result failure(_InitFailure value),
-    Result success(_InitSuccess value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initial(_Initial value),
+    TResult updateRequired(_UpdateRequired value),
+    TResult failure(_InitFailure value),
+    TResult success(_InitSuccess value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (success != null) {

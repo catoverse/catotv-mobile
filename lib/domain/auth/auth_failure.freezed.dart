@@ -9,6 +9,7 @@ part of 'auth_failure.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AuthFailureTearOff {
   const _$AuthFailureTearOff();
 
@@ -23,40 +24,44 @@ class _$AuthFailureTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AuthFailure = _$AuthFailureTearOff();
 
+/// @nodoc
 mixin _$AuthFailure {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result cancelledByUser(),
-    @required Result serverError(),
+  TResult when<TResult extends Object>({
+    @required TResult cancelledByUser(),
+    @required TResult serverError(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result cancelledByUser(),
-    Result serverError(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult cancelledByUser(),
+    TResult serverError(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result cancelledByUser(_CancelledByUser value),
-    @required Result serverError(_ServerError value),
+  TResult map<TResult extends Object>({
+    @required TResult cancelledByUser(_CancelledByUser value),
+    @required TResult serverError(_ServerError value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result cancelledByUser(_CancelledByUser value),
-    Result serverError(_ServerError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult cancelledByUser(_CancelledByUser value),
+    TResult serverError(_ServerError value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $AuthFailureCopyWith<$Res> {
   factory $AuthFailureCopyWith(
           AuthFailure value, $Res Function(AuthFailure) then) =
       _$AuthFailureCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
   _$AuthFailureCopyWithImpl(this._value, this._then);
 
@@ -65,12 +70,14 @@ class _$AuthFailureCopyWithImpl<$Res> implements $AuthFailureCopyWith<$Res> {
   final $Res Function(AuthFailure) _then;
 }
 
+/// @nodoc
 abstract class _$CancelledByUserCopyWith<$Res> {
   factory _$CancelledByUserCopyWith(
           _CancelledByUser value, $Res Function(_CancelledByUser) then) =
       __$CancelledByUserCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$CancelledByUserCopyWithImpl<$Res>
     extends _$AuthFailureCopyWithImpl<$Res>
     implements _$CancelledByUserCopyWith<$Res> {
@@ -82,6 +89,7 @@ class __$CancelledByUserCopyWithImpl<$Res>
   _CancelledByUser get _value => super._value as _CancelledByUser;
 }
 
+/// @nodoc
 class _$_CancelledByUser implements _CancelledByUser {
   const _$_CancelledByUser();
 
@@ -100,9 +108,9 @@ class _$_CancelledByUser implements _CancelledByUser {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result cancelledByUser(),
-    @required Result serverError(),
+  TResult when<TResult extends Object>({
+    @required TResult cancelledByUser(),
+    @required TResult serverError(),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
@@ -111,10 +119,10 @@ class _$_CancelledByUser implements _CancelledByUser {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result cancelledByUser(),
-    Result serverError(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult cancelledByUser(),
+    TResult serverError(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (cancelledByUser != null) {
@@ -125,9 +133,9 @@ class _$_CancelledByUser implements _CancelledByUser {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result cancelledByUser(_CancelledByUser value),
-    @required Result serverError(_ServerError value),
+  TResult map<TResult extends Object>({
+    @required TResult cancelledByUser(_CancelledByUser value),
+    @required TResult serverError(_ServerError value),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
@@ -136,10 +144,10 @@ class _$_CancelledByUser implements _CancelledByUser {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result cancelledByUser(_CancelledByUser value),
-    Result serverError(_ServerError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult cancelledByUser(_CancelledByUser value),
+    TResult serverError(_ServerError value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (cancelledByUser != null) {
@@ -153,12 +161,14 @@ abstract class _CancelledByUser implements AuthFailure {
   const factory _CancelledByUser() = _$_CancelledByUser;
 }
 
+/// @nodoc
 abstract class _$ServerErrorCopyWith<$Res> {
   factory _$ServerErrorCopyWith(
           _ServerError value, $Res Function(_ServerError) then) =
       __$ServerErrorCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$ServerErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
     implements _$ServerErrorCopyWith<$Res> {
   __$ServerErrorCopyWithImpl(
@@ -169,6 +179,7 @@ class __$ServerErrorCopyWithImpl<$Res> extends _$AuthFailureCopyWithImpl<$Res>
   _ServerError get _value => super._value as _ServerError;
 }
 
+/// @nodoc
 class _$_ServerError implements _ServerError {
   const _$_ServerError();
 
@@ -187,9 +198,9 @@ class _$_ServerError implements _ServerError {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result cancelledByUser(),
-    @required Result serverError(),
+  TResult when<TResult extends Object>({
+    @required TResult cancelledByUser(),
+    @required TResult serverError(),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
@@ -198,10 +209,10 @@ class _$_ServerError implements _ServerError {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result cancelledByUser(),
-    Result serverError(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult cancelledByUser(),
+    TResult serverError(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (serverError != null) {
@@ -212,9 +223,9 @@ class _$_ServerError implements _ServerError {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result cancelledByUser(_CancelledByUser value),
-    @required Result serverError(_ServerError value),
+  TResult map<TResult extends Object>({
+    @required TResult cancelledByUser(_CancelledByUser value),
+    @required TResult serverError(_ServerError value),
   }) {
     assert(cancelledByUser != null);
     assert(serverError != null);
@@ -223,10 +234,10 @@ class _$_ServerError implements _ServerError {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result cancelledByUser(_CancelledByUser value),
-    Result serverError(_ServerError value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult cancelledByUser(_CancelledByUser value),
+    TResult serverError(_ServerError value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (serverError != null) {

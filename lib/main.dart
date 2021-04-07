@@ -17,7 +17,6 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:path/path.dart';
 import 'package:share/share.dart';
 import 'package:flutter/foundation.dart';
 import 'presentation/utils/assets/theme.dart';
@@ -62,49 +61,54 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await configureDependencies();
 
-  if(Platform.isAndroid) {
+  if (Platform.isAndroid) {
     AppRedirectHelper appRedirectHelper = getIt<AppRedirectHelper>();
-    appRedirectHelper.appBlocker.configure(onResume: (packageName) async {
-      appRedirectHelper.appBlocker.bringAppToFront();
-    }, onBackgroundMessage: null);
+    appRedirectHelper.appBlocker.configure(
+        onResume: (packageName) async {
+          appRedirectHelper.appBlocker.bringAppToFront();
+        },
+        onBackgroundMessage: null);
   }
 
-  if(kReleaseMode) {
+  if (kReleaseMode) {
     FlutterError.onError = Crashlytics.instance.recordFlutterError;
   }
 
-  runApp(MultiBlocProvider(
-    providers: [
-      BlocProvider(
-          create: (_) =>
-              getIt<InitBloc>()..add(InitEvent.requestAppVersionCheck())),
-      BlocProvider(create: (_) => getIt<AuthBloc>()),
-      BlocProvider(create: (_) => getIt<TopicBloc>()),
-      BlocProvider(create: (_) => getIt<PostBloc>()),
-      BlocProvider(create: (_) => getIt<ShareVideoBloc>()),
-    ],
-    child: BlocListener<ShareVideoBloc, ShareVideoState>(
-      listener: (context, state) async {
-        if (state.shareText != null) {
-          await Share.share(state.shareText);
-          context.bloc<ShareVideoBloc>().add(ShareVideoEvent.reset());
-        }
-      },
-      child: PlatformApp(
-        title: 'Cato',
-        debugShowCheckedModeBanner: false,
-        material: (_, __) => MaterialAppData(theme: materialThemeData),
-        cupertino: (_, __) => CupertinoAppData(theme: cupertinoTheme),
-        builder: ExtendedNavigator.builder(
-          router: CatoRouter(),
-          observers: [
-            if(kReleaseMode) FirebaseAnalyticsObserver(
-                analytics: getIt.get<FirebaseAnalytics>()),
-          ],
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (_) =>
+                getIt<InitBloc>()..add(InitEvent.requestAppVersionCheck())),
+        BlocProvider(create: (_) => getIt<AuthBloc>()),
+        BlocProvider(create: (_) => getIt<TopicBloc>()),
+        BlocProvider(create: (_) => getIt<PostBloc>()),
+        BlocProvider(create: (_) => getIt<ShareVideoBloc>()),
+      ],
+      child: BlocListener<ShareVideoBloc, ShareVideoState>(
+        listener: (context, state) async {
+          if (state.shareText != null) {
+            await Share.share(state.shareText);
+            context.bloc<ShareVideoBloc>().add(ShareVideoEvent.reset());
+          }
+        },
+        child: PlatformApp(
+          title: 'Cato',
+          debugShowCheckedModeBanner: false,
+          material: (_, __) => MaterialAppData(theme: materialThemeData),
+          cupertino: (_, __) => CupertinoAppData(theme: cupertinoTheme),
+          builder: ExtendedNavigator.builder(
+            router: CatoRouter(),
+            observers: [
+              if (kReleaseMode)
+                FirebaseAnalyticsObserver(
+                    analytics: getIt.get<FirebaseAnalytics>()),
+            ],
+          ),
         ),
       ),
     ),
-  ));
+  );
 }
 
 Future<void> openDynamicLinkOr(BuildContext context,
@@ -119,4 +123,18 @@ Future<void> openDynamicLinkOr(BuildContext context,
   } else {
     context.navigator.replace(otherScreen);
   }
+}
+
+Future<Uri> getUriFromDynamicLink() async {
+ final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink() ;
+ if(data == null || data.link == null) return null;
+ return data.link;
+}
+
+Future<String> getInviteCodeFromDynamicLink() async {
+  var uri = await getUriFromDynamicLink();
+  if(uri != null && uri.queryParameters.isNotEmpty) {
+    return uri.queryParameters['inviteCode'];
+  }
+  return null;
 }

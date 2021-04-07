@@ -24,6 +24,9 @@ class PostBloc extends Bloc<PostEvent, PostState> {
     PostEvent event,
   ) async* {
     yield* event.map(
+      loadRecommendedVideos: (e) {
+        // TODO: Load Recommended Videos
+      },
       loadFeed: (e) async* {
         var result = await _postRepository.getPosts(e.skip, e.limit, null);
 

@@ -9,8 +9,14 @@ part of 'userprofile_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$UserProfileEventTearOff {
   const _$UserProfileEventTearOff();
+
+// ignore: unused_element
+  _UserProfile get() {
+    return const _UserProfile();
+  }
 
 // ignore: unused_element
   _Refresh refresh() {
@@ -46,52 +52,60 @@ class _$UserProfileEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $UserProfileEvent = _$UserProfileEventTearOff();
 
+/// @nodoc
 mixin _$UserProfileEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result likePost(String postId),
-    @required Result unlikePost(String postId),
-    @required Result savePost(String postId),
-    @required Result unSavePost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result likePost(String postId),
-    Result unlikePost(String postId),
-    Result savePost(String postId),
-    Result unSavePost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result likePost(_LikePost value),
-    @required Result unlikePost(_UnLikePost value),
-    @required Result savePost(_SavePost value),
-    @required Result unSavePost(_UnSavePost value),
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result likePost(_LikePost value),
-    Result unlikePost(_UnLikePost value),
-    Result savePost(_SavePost value),
-    Result unSavePost(_UnSavePost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $UserProfileEventCopyWith<$Res> {
   factory $UserProfileEventCopyWith(
           UserProfileEvent value, $Res Function(UserProfileEvent) then) =
       _$UserProfileEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$UserProfileEventCopyWithImpl<$Res>
     implements $UserProfileEventCopyWith<$Res> {
   _$UserProfileEventCopyWithImpl(this._value, this._then);
@@ -101,11 +115,128 @@ class _$UserProfileEventCopyWithImpl<$Res>
   final $Res Function(UserProfileEvent) _then;
 }
 
+/// @nodoc
+abstract class _$UserProfileCopyWith<$Res> {
+  factory _$UserProfileCopyWith(
+          _UserProfile value, $Res Function(_UserProfile) then) =
+      __$UserProfileCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$UserProfileCopyWithImpl<$Res>
+    extends _$UserProfileEventCopyWithImpl<$Res>
+    implements _$UserProfileCopyWith<$Res> {
+  __$UserProfileCopyWithImpl(
+      _UserProfile _value, $Res Function(_UserProfile) _then)
+      : super(_value, (v) => _then(v as _UserProfile));
+
+  @override
+  _UserProfile get _value => super._value as _UserProfile;
+}
+
+/// @nodoc
+class _$_UserProfile implements _UserProfile {
+  const _$_UserProfile();
+
+  @override
+  String toString() {
+    return 'UserProfileEvent.get()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _UserProfile);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
+  }) {
+    assert(get != null);
+    assert(refresh != null);
+    assert(likePost != null);
+    assert(unlikePost != null);
+    assert(savePost != null);
+    assert(unSavePost != null);
+    return get();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
+  }) {
+    assert(get != null);
+    assert(refresh != null);
+    assert(likePost != null);
+    assert(unlikePost != null);
+    assert(savePost != null);
+    assert(unSavePost != null);
+    return get(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (get != null) {
+      return get(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserProfile implements UserProfileEvent {
+  const factory _UserProfile() = _$_UserProfile;
+}
+
+/// @nodoc
 abstract class _$RefreshCopyWith<$Res> {
   factory _$RefreshCopyWith(_Refresh value, $Res Function(_Refresh) then) =
       __$RefreshCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$RefreshCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
     implements _$RefreshCopyWith<$Res> {
   __$RefreshCopyWithImpl(_Refresh _value, $Res Function(_Refresh) _then)
@@ -115,6 +246,7 @@ class __$RefreshCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
   _Refresh get _value => super._value as _Refresh;
 }
 
+/// @nodoc
 class _$_Refresh implements _Refresh {
   const _$_Refresh();
 
@@ -133,13 +265,15 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result likePost(String postId),
-    @required Result unlikePost(String postId),
-    @required Result savePost(String postId),
-    @required Result unSavePost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -150,13 +284,14 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result likePost(String postId),
-    Result unlikePost(String postId),
-    Result savePost(String postId),
-    Result unSavePost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refresh != null) {
@@ -167,13 +302,15 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result likePost(_LikePost value),
-    @required Result unlikePost(_UnLikePost value),
-    @required Result savePost(_SavePost value),
-    @required Result unSavePost(_UnSavePost value),
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -184,13 +321,14 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result likePost(_LikePost value),
-    Result unlikePost(_UnLikePost value),
-    Result savePost(_SavePost value),
-    Result unSavePost(_UnSavePost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refresh != null) {
@@ -204,12 +342,14 @@ abstract class _Refresh implements UserProfileEvent {
   const factory _Refresh() = _$_Refresh;
 }
 
+/// @nodoc
 abstract class _$LikePostCopyWith<$Res> {
   factory _$LikePostCopyWith(_LikePost value, $Res Function(_LikePost) then) =
       __$LikePostCopyWithImpl<$Res>;
   $Res call({String postId});
 }
 
+/// @nodoc
 class __$LikePostCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
     implements _$LikePostCopyWith<$Res> {
   __$LikePostCopyWithImpl(_LikePost _value, $Res Function(_LikePost) _then)
@@ -228,6 +368,7 @@ class __$LikePostCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_LikePost implements _LikePost {
   const _$_LikePost(this.postId) : assert(postId != null);
 
@@ -251,19 +392,22 @@ class _$_LikePost implements _LikePost {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(postId);
 
+  @JsonKey(ignore: true)
   @override
   _$LikePostCopyWith<_LikePost> get copyWith =>
       __$LikePostCopyWithImpl<_LikePost>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result likePost(String postId),
-    @required Result unlikePost(String postId),
-    @required Result savePost(String postId),
-    @required Result unSavePost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -274,13 +418,14 @@ class _$_LikePost implements _LikePost {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result likePost(String postId),
-    Result unlikePost(String postId),
-    Result savePost(String postId),
-    Result unSavePost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (likePost != null) {
@@ -291,13 +436,15 @@ class _$_LikePost implements _LikePost {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result likePost(_LikePost value),
-    @required Result unlikePost(_UnLikePost value),
-    @required Result savePost(_SavePost value),
-    @required Result unSavePost(_UnSavePost value),
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -308,13 +455,14 @@ class _$_LikePost implements _LikePost {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result likePost(_LikePost value),
-    Result unlikePost(_UnLikePost value),
-    Result savePost(_SavePost value),
-    Result unSavePost(_UnSavePost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (likePost != null) {
@@ -328,9 +476,11 @@ abstract class _LikePost implements UserProfileEvent {
   const factory _LikePost(String postId) = _$_LikePost;
 
   String get postId;
+  @JsonKey(ignore: true)
   _$LikePostCopyWith<_LikePost> get copyWith;
 }
 
+/// @nodoc
 abstract class _$UnLikePostCopyWith<$Res> {
   factory _$UnLikePostCopyWith(
           _UnLikePost value, $Res Function(_UnLikePost) then) =
@@ -338,6 +488,7 @@ abstract class _$UnLikePostCopyWith<$Res> {
   $Res call({String postId});
 }
 
+/// @nodoc
 class __$UnLikePostCopyWithImpl<$Res>
     extends _$UserProfileEventCopyWithImpl<$Res>
     implements _$UnLikePostCopyWith<$Res> {
@@ -358,6 +509,7 @@ class __$UnLikePostCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_UnLikePost implements _UnLikePost {
   const _$_UnLikePost(this.postId) : assert(postId != null);
 
@@ -381,19 +533,22 @@ class _$_UnLikePost implements _UnLikePost {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(postId);
 
+  @JsonKey(ignore: true)
   @override
   _$UnLikePostCopyWith<_UnLikePost> get copyWith =>
       __$UnLikePostCopyWithImpl<_UnLikePost>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result likePost(String postId),
-    @required Result unlikePost(String postId),
-    @required Result savePost(String postId),
-    @required Result unSavePost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -404,13 +559,14 @@ class _$_UnLikePost implements _UnLikePost {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result likePost(String postId),
-    Result unlikePost(String postId),
-    Result savePost(String postId),
-    Result unSavePost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unlikePost != null) {
@@ -421,13 +577,15 @@ class _$_UnLikePost implements _UnLikePost {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result likePost(_LikePost value),
-    @required Result unlikePost(_UnLikePost value),
-    @required Result savePost(_SavePost value),
-    @required Result unSavePost(_UnSavePost value),
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -438,13 +596,14 @@ class _$_UnLikePost implements _UnLikePost {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result likePost(_LikePost value),
-    Result unlikePost(_UnLikePost value),
-    Result savePost(_SavePost value),
-    Result unSavePost(_UnSavePost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unlikePost != null) {
@@ -458,15 +617,18 @@ abstract class _UnLikePost implements UserProfileEvent {
   const factory _UnLikePost(String postId) = _$_UnLikePost;
 
   String get postId;
+  @JsonKey(ignore: true)
   _$UnLikePostCopyWith<_UnLikePost> get copyWith;
 }
 
+/// @nodoc
 abstract class _$SavePostCopyWith<$Res> {
   factory _$SavePostCopyWith(_SavePost value, $Res Function(_SavePost) then) =
       __$SavePostCopyWithImpl<$Res>;
   $Res call({String postId});
 }
 
+/// @nodoc
 class __$SavePostCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
     implements _$SavePostCopyWith<$Res> {
   __$SavePostCopyWithImpl(_SavePost _value, $Res Function(_SavePost) _then)
@@ -485,6 +647,7 @@ class __$SavePostCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_SavePost implements _SavePost {
   const _$_SavePost(this.postId) : assert(postId != null);
 
@@ -508,19 +671,22 @@ class _$_SavePost implements _SavePost {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(postId);
 
+  @JsonKey(ignore: true)
   @override
   _$SavePostCopyWith<_SavePost> get copyWith =>
       __$SavePostCopyWithImpl<_SavePost>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result likePost(String postId),
-    @required Result unlikePost(String postId),
-    @required Result savePost(String postId),
-    @required Result unSavePost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -531,13 +697,14 @@ class _$_SavePost implements _SavePost {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result likePost(String postId),
-    Result unlikePost(String postId),
-    Result savePost(String postId),
-    Result unSavePost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (savePost != null) {
@@ -548,13 +715,15 @@ class _$_SavePost implements _SavePost {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result likePost(_LikePost value),
-    @required Result unlikePost(_UnLikePost value),
-    @required Result savePost(_SavePost value),
-    @required Result unSavePost(_UnSavePost value),
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -565,13 +734,14 @@ class _$_SavePost implements _SavePost {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result likePost(_LikePost value),
-    Result unlikePost(_UnLikePost value),
-    Result savePost(_SavePost value),
-    Result unSavePost(_UnSavePost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (savePost != null) {
@@ -585,9 +755,11 @@ abstract class _SavePost implements UserProfileEvent {
   const factory _SavePost(String postId) = _$_SavePost;
 
   String get postId;
+  @JsonKey(ignore: true)
   _$SavePostCopyWith<_SavePost> get copyWith;
 }
 
+/// @nodoc
 abstract class _$UnSavePostCopyWith<$Res> {
   factory _$UnSavePostCopyWith(
           _UnSavePost value, $Res Function(_UnSavePost) then) =
@@ -595,6 +767,7 @@ abstract class _$UnSavePostCopyWith<$Res> {
   $Res call({String postId});
 }
 
+/// @nodoc
 class __$UnSavePostCopyWithImpl<$Res>
     extends _$UserProfileEventCopyWithImpl<$Res>
     implements _$UnSavePostCopyWith<$Res> {
@@ -615,6 +788,7 @@ class __$UnSavePostCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_UnSavePost implements _UnSavePost {
   const _$_UnSavePost(this.postId) : assert(postId != null);
 
@@ -638,19 +812,22 @@ class _$_UnSavePost implements _UnSavePost {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(postId);
 
+  @JsonKey(ignore: true)
   @override
   _$UnSavePostCopyWith<_UnSavePost> get copyWith =>
       __$UnSavePostCopyWithImpl<_UnSavePost>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result likePost(String postId),
-    @required Result unlikePost(String postId),
-    @required Result savePost(String postId),
-    @required Result unSavePost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult get(),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -661,13 +838,14 @@ class _$_UnSavePost implements _UnSavePost {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result likePost(String postId),
-    Result unlikePost(String postId),
-    Result savePost(String postId),
-    Result unSavePost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unSavePost != null) {
@@ -678,13 +856,15 @@ class _$_UnSavePost implements _UnSavePost {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result likePost(_LikePost value),
-    @required Result unlikePost(_UnLikePost value),
-    @required Result savePost(_SavePost value),
-    @required Result unSavePost(_UnSavePost value),
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
   }) {
+    assert(get != null);
     assert(refresh != null);
     assert(likePost != null);
     assert(unlikePost != null);
@@ -695,13 +875,14 @@ class _$_UnSavePost implements _UnSavePost {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result likePost(_LikePost value),
-    Result unlikePost(_UnLikePost value),
-    Result savePost(_SavePost value),
-    Result unSavePost(_UnSavePost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unSavePost != null) {
@@ -715,39 +896,55 @@ abstract class _UnSavePost implements UserProfileEvent {
   const factory _UnSavePost(String postId) = _$_UnSavePost;
 
   String get postId;
+  @JsonKey(ignore: true)
   _$UnSavePostCopyWith<_UnSavePost> get copyWith;
 }
 
+/// @nodoc
 class _$UserProfileStateTearOff {
   const _$UserProfileStateTearOff();
 
 // ignore: unused_element
   _UserProfileState call(
-      {List<String> likedVideosId, List<String> savedVideosId}) {
+      {UserProfile profile,
+      List<String> likedVideosId,
+      List<String> savedVideosId}) {
     return _UserProfileState(
+      profile: profile,
       likedVideosId: likedVideosId,
       savedVideosId: savedVideosId,
     );
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $UserProfileState = _$UserProfileStateTearOff();
 
+/// @nodoc
 mixin _$UserProfileState {
+  UserProfile get profile;
   List<String> get likedVideosId;
   List<String> get savedVideosId;
 
+  @JsonKey(ignore: true)
   $UserProfileStateCopyWith<UserProfileState> get copyWith;
 }
 
+/// @nodoc
 abstract class $UserProfileStateCopyWith<$Res> {
   factory $UserProfileStateCopyWith(
           UserProfileState value, $Res Function(UserProfileState) then) =
       _$UserProfileStateCopyWithImpl<$Res>;
-  $Res call({List<String> likedVideosId, List<String> savedVideosId});
+  $Res call(
+      {UserProfile profile,
+      List<String> likedVideosId,
+      List<String> savedVideosId});
+
+  $UserProfileCopyWith<$Res> get profile;
 }
 
+/// @nodoc
 class _$UserProfileStateCopyWithImpl<$Res>
     implements $UserProfileStateCopyWith<$Res> {
   _$UserProfileStateCopyWithImpl(this._value, this._then);
@@ -758,10 +955,12 @@ class _$UserProfileStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object profile = freezed,
     Object likedVideosId = freezed,
     Object savedVideosId = freezed,
   }) {
     return _then(_value.copyWith(
+      profile: profile == freezed ? _value.profile : profile as UserProfile,
       likedVideosId: likedVideosId == freezed
           ? _value.likedVideosId
           : likedVideosId as List<String>,
@@ -770,17 +969,35 @@ class _$UserProfileStateCopyWithImpl<$Res>
           : savedVideosId as List<String>,
     ));
   }
+
+  @override
+  $UserProfileCopyWith<$Res> get profile {
+    if (_value.profile == null) {
+      return null;
+    }
+    return $UserProfileCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
+  }
 }
 
+/// @nodoc
 abstract class _$UserProfileStateCopyWith<$Res>
     implements $UserProfileStateCopyWith<$Res> {
   factory _$UserProfileStateCopyWith(
           _UserProfileState value, $Res Function(_UserProfileState) then) =
       __$UserProfileStateCopyWithImpl<$Res>;
   @override
-  $Res call({List<String> likedVideosId, List<String> savedVideosId});
+  $Res call(
+      {UserProfile profile,
+      List<String> likedVideosId,
+      List<String> savedVideosId});
+
+  @override
+  $UserProfileCopyWith<$Res> get profile;
 }
 
+/// @nodoc
 class __$UserProfileStateCopyWithImpl<$Res>
     extends _$UserProfileStateCopyWithImpl<$Res>
     implements _$UserProfileStateCopyWith<$Res> {
@@ -793,10 +1010,12 @@ class __$UserProfileStateCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object profile = freezed,
     Object likedVideosId = freezed,
     Object savedVideosId = freezed,
   }) {
     return _then(_UserProfileState(
+      profile: profile == freezed ? _value.profile : profile as UserProfile,
       likedVideosId: likedVideosId == freezed
           ? _value.likedVideosId
           : likedVideosId as List<String>,
@@ -807,10 +1026,14 @@ class __$UserProfileStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_UserProfileState extends _UserProfileState {
-  const _$_UserProfileState({this.likedVideosId, this.savedVideosId})
+  const _$_UserProfileState(
+      {this.profile, this.likedVideosId, this.savedVideosId})
       : super._();
 
+  @override
+  final UserProfile profile;
   @override
   final List<String> likedVideosId;
   @override
@@ -818,13 +1041,16 @@ class _$_UserProfileState extends _UserProfileState {
 
   @override
   String toString() {
-    return 'UserProfileState(likedVideosId: $likedVideosId, savedVideosId: $savedVideosId)';
+    return 'UserProfileState(profile: $profile, likedVideosId: $likedVideosId, savedVideosId: $savedVideosId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _UserProfileState &&
+            (identical(other.profile, profile) ||
+                const DeepCollectionEquality()
+                    .equals(other.profile, profile)) &&
             (identical(other.likedVideosId, likedVideosId) ||
                 const DeepCollectionEquality()
                     .equals(other.likedVideosId, likedVideosId)) &&
@@ -836,9 +1062,11 @@ class _$_UserProfileState extends _UserProfileState {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(profile) ^
       const DeepCollectionEquality().hash(likedVideosId) ^
       const DeepCollectionEquality().hash(savedVideosId);
 
+  @JsonKey(ignore: true)
   @override
   _$UserProfileStateCopyWith<_UserProfileState> get copyWith =>
       __$UserProfileStateCopyWithImpl<_UserProfileState>(this, _$identity);
@@ -847,13 +1075,17 @@ class _$_UserProfileState extends _UserProfileState {
 abstract class _UserProfileState extends UserProfileState {
   const _UserProfileState._() : super._();
   const factory _UserProfileState(
-      {List<String> likedVideosId,
+      {UserProfile profile,
+      List<String> likedVideosId,
       List<String> savedVideosId}) = _$_UserProfileState;
 
+  @override
+  UserProfile get profile;
   @override
   List<String> get likedVideosId;
   @override
   List<String> get savedVideosId;
   @override
+  @JsonKey(ignore: true)
   _$UserProfileStateCopyWith<_UserProfileState> get copyWith;
 }

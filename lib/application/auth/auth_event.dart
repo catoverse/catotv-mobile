@@ -4,5 +4,6 @@ part of 'auth_bloc.dart';
 abstract class AuthEvent with _$AuthEvent {
   const factory AuthEvent.authCheckRequested() = _AuthCheckRequested;
   const factory AuthEvent.signedOut() = _AuthSignedOut;
-  const factory AuthEvent.login() = _AuthLogin;
+  const factory AuthEvent.googleLogin() = _AuthGoogleLogin;
+  const factory AuthEvent.sessionLogin({String name, String inviteCode}) = _AuthSessionLogin;
 }

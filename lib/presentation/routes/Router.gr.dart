@@ -14,7 +14,11 @@ import '../screens/app_redirect/no_distraction_settings.dart';
 import '../screens/home/home.dart';
 import '../screens/home/profile_overview.dart';
 import '../screens/notification_settings.dart';
-import '../screens/onboard/onboard_screen.dart';
+import '../screens/onboard/onboard.dart';
+import '../screens/onboard_invite/onbord_invite.dart';
+import '../screens/onboard_login/onbord_login.dart';
+import '../screens/onboard_login/onbord_login_back.dart';
+import '../screens/onboard_selection/onboard_selection.dart';
 import '../screens/profile/profile.dart';
 import '../screens/single_post/single_post.dart';
 import '../screens/splash/splash_screen.dart';
@@ -22,7 +26,11 @@ import '../screens/topic_selection/topic_selection.dart';
 
 class CatoRoutes {
   static const String splashScreen = '/';
-  static const String onboardingScreen = '/onboarding-screen';
+  static const String onboardScreen = '/onboard-screen';
+  static const String onboardInviteScreen = '/onboard-invite-screen';
+  static const String onboardLoginScreen = '/onboard-login-screen';
+  static const String onboardLoginBackScreen = '/onboard-login-back-screen';
+  static const String onboardSelectionScreen = '/onboard-selection-screen';
   static const String topicSelectionScreen = '/topic-selection-screen';
   static const String homeScreen = '/home-screen';
   static const String profileScreen = '/profile-screen';
@@ -37,7 +45,11 @@ class CatoRoutes {
       '/video/$postId';
   static const all = <String>{
     splashScreen,
-    onboardingScreen,
+    onboardScreen,
+    onboardInviteScreen,
+    onboardLoginScreen,
+    onboardLoginBackScreen,
+    onboardSelectionScreen,
     topicSelectionScreen,
     homeScreen,
     profileScreen,
@@ -54,7 +66,11 @@ class CatoRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(CatoRoutes.splashScreen, page: SplashScreen),
-    RouteDef(CatoRoutes.onboardingScreen, page: OnboardingScreen),
+    RouteDef(CatoRoutes.onboardScreen, page: OnboardScreen),
+    RouteDef(CatoRoutes.onboardInviteScreen, page: OnboardInviteScreen),
+    RouteDef(CatoRoutes.onboardLoginScreen, page: OnboardLoginScreen),
+    RouteDef(CatoRoutes.onboardLoginBackScreen, page: OnboardLoginBackScreen),
+    RouteDef(CatoRoutes.onboardSelectionScreen, page: OnboardSelectionScreen),
     RouteDef(CatoRoutes.topicSelectionScreen, page: TopicSelectionScreen),
     RouteDef(CatoRoutes.homeScreen, page: HomeScreen),
     RouteDef(CatoRoutes.profileScreen, page: ProfileScreen),
@@ -75,9 +91,33 @@ class CatoRouter extends RouterBase {
         settings: data,
       );
     },
-    OnboardingScreen: (data) {
+    OnboardScreen: (data) {
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) => OnboardingScreen(),
+        builder: (context) => OnboardScreen(),
+        settings: data,
+      );
+    },
+    OnboardInviteScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => OnboardInviteScreen(),
+        settings: data,
+      );
+    },
+    OnboardLoginScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => OnboardLoginScreen(),
+        settings: data,
+      );
+    },
+    OnboardLoginBackScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => OnboardLoginBackScreen(),
+        settings: data,
+      );
+    },
+    OnboardSelectionScreen: (data) {
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => OnboardSelectionScreen(),
         settings: data,
       );
     },

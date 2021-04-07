@@ -9,28 +9,27 @@ part of 'user.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$UserTearOff {
   const _$UserTearOff();
 
 // ignore: unused_element
   _User call(
       {@required String id,
-      @required String googleId,
       @required String name,
       @required String email,
       @required String photoUrl,
-      @required bool interestSelected,
+      @required bool isProfileCreated,
       @required String jwtToken,
       @required DateTime createdAt,
       @required DateTime updatedAt,
       @required DateTime jwtIssueDate}) {
     return _User(
       id: id,
-      googleId: googleId,
       name: name,
       email: email,
       photoUrl: photoUrl,
-      interestSelected: interestSelected,
+      isProfileCreated: isProfileCreated,
       jwtToken: jwtToken,
       createdAt: createdAt,
       updatedAt: updatedAt,
@@ -39,40 +38,43 @@ class _$UserTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $User = _$UserTearOff();
 
+/// @nodoc
 mixin _$User {
   String get id;
-  String get googleId;
   String get name;
   String get email;
   String get photoUrl;
-  bool get interestSelected;
+  bool get isProfileCreated;
   String get jwtToken;
   DateTime get createdAt;
   DateTime get updatedAt;
   DateTime get jwtIssueDate;
 
+  @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith;
 }
 
+/// @nodoc
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
       {String id,
-      String googleId,
       String name,
       String email,
       String photoUrl,
-      bool interestSelected,
+      bool isProfileCreated,
       String jwtToken,
       DateTime createdAt,
       DateTime updatedAt,
       DateTime jwtIssueDate});
 }
 
+/// @nodoc
 class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   _$UserCopyWithImpl(this._value, this._then);
 
@@ -83,11 +85,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   @override
   $Res call({
     Object id = freezed,
-    Object googleId = freezed,
     Object name = freezed,
     Object email = freezed,
     Object photoUrl = freezed,
-    Object interestSelected = freezed,
+    Object isProfileCreated = freezed,
     Object jwtToken = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -95,13 +96,12 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   }) {
     return _then(_value.copyWith(
       id: id == freezed ? _value.id : id as String,
-      googleId: googleId == freezed ? _value.googleId : googleId as String,
       name: name == freezed ? _value.name : name as String,
       email: email == freezed ? _value.email : email as String,
       photoUrl: photoUrl == freezed ? _value.photoUrl : photoUrl as String,
-      interestSelected: interestSelected == freezed
-          ? _value.interestSelected
-          : interestSelected as bool,
+      isProfileCreated: isProfileCreated == freezed
+          ? _value.isProfileCreated
+          : isProfileCreated as bool,
       jwtToken: jwtToken == freezed ? _value.jwtToken : jwtToken as String,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
@@ -114,23 +114,24 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
-      String googleId,
       String name,
       String email,
       String photoUrl,
-      bool interestSelected,
+      bool isProfileCreated,
       String jwtToken,
       DateTime createdAt,
       DateTime updatedAt,
       DateTime jwtIssueDate});
 }
 
+/// @nodoc
 class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     implements _$UserCopyWith<$Res> {
   __$UserCopyWithImpl(_User _value, $Res Function(_User) _then)
@@ -142,11 +143,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   @override
   $Res call({
     Object id = freezed,
-    Object googleId = freezed,
     Object name = freezed,
     Object email = freezed,
     Object photoUrl = freezed,
-    Object interestSelected = freezed,
+    Object isProfileCreated = freezed,
     Object jwtToken = freezed,
     Object createdAt = freezed,
     Object updatedAt = freezed,
@@ -154,13 +154,12 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   }) {
     return _then(_User(
       id: id == freezed ? _value.id : id as String,
-      googleId: googleId == freezed ? _value.googleId : googleId as String,
       name: name == freezed ? _value.name : name as String,
       email: email == freezed ? _value.email : email as String,
       photoUrl: photoUrl == freezed ? _value.photoUrl : photoUrl as String,
-      interestSelected: interestSelected == freezed
-          ? _value.interestSelected
-          : interestSelected as bool,
+      isProfileCreated: isProfileCreated == freezed
+          ? _value.isProfileCreated
+          : isProfileCreated as bool,
       jwtToken: jwtToken == freezed ? _value.jwtToken : jwtToken as String,
       createdAt:
           createdAt == freezed ? _value.createdAt : createdAt as DateTime,
@@ -173,24 +172,23 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_User implements _User {
   const _$_User(
       {@required this.id,
-      @required this.googleId,
       @required this.name,
       @required this.email,
       @required this.photoUrl,
-      @required this.interestSelected,
+      @required this.isProfileCreated,
       @required this.jwtToken,
       @required this.createdAt,
       @required this.updatedAt,
       @required this.jwtIssueDate})
       : assert(id != null),
-        assert(googleId != null),
         assert(name != null),
         assert(email != null),
         assert(photoUrl != null),
-        assert(interestSelected != null),
+        assert(isProfileCreated != null),
         assert(jwtToken != null),
         assert(createdAt != null),
         assert(updatedAt != null),
@@ -199,15 +197,13 @@ class _$_User implements _User {
   @override
   final String id;
   @override
-  final String googleId;
-  @override
   final String name;
   @override
   final String email;
   @override
   final String photoUrl;
   @override
-  final bool interestSelected;
+  final bool isProfileCreated;
   @override
   final String jwtToken;
   @override
@@ -219,7 +215,7 @@ class _$_User implements _User {
 
   @override
   String toString() {
-    return 'User(id: $id, googleId: $googleId, name: $name, email: $email, photoUrl: $photoUrl, interestSelected: $interestSelected, jwtToken: $jwtToken, createdAt: $createdAt, updatedAt: $updatedAt, jwtIssueDate: $jwtIssueDate)';
+    return 'User(id: $id, name: $name, email: $email, photoUrl: $photoUrl, isProfileCreated: $isProfileCreated, jwtToken: $jwtToken, createdAt: $createdAt, updatedAt: $updatedAt, jwtIssueDate: $jwtIssueDate)';
   }
 
   @override
@@ -228,9 +224,6 @@ class _$_User implements _User {
         (other is _User &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.googleId, googleId) ||
-                const DeepCollectionEquality()
-                    .equals(other.googleId, googleId)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.email, email) ||
@@ -238,9 +231,9 @@ class _$_User implements _User {
             (identical(other.photoUrl, photoUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.photoUrl, photoUrl)) &&
-            (identical(other.interestSelected, interestSelected) ||
+            (identical(other.isProfileCreated, isProfileCreated) ||
                 const DeepCollectionEquality()
-                    .equals(other.interestSelected, interestSelected)) &&
+                    .equals(other.isProfileCreated, isProfileCreated)) &&
             (identical(other.jwtToken, jwtToken) ||
                 const DeepCollectionEquality()
                     .equals(other.jwtToken, jwtToken)) &&
@@ -259,16 +252,16 @@ class _$_User implements _User {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(googleId) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(photoUrl) ^
-      const DeepCollectionEquality().hash(interestSelected) ^
+      const DeepCollectionEquality().hash(isProfileCreated) ^
       const DeepCollectionEquality().hash(jwtToken) ^
       const DeepCollectionEquality().hash(createdAt) ^
       const DeepCollectionEquality().hash(updatedAt) ^
       const DeepCollectionEquality().hash(jwtIssueDate);
 
+  @JsonKey(ignore: true)
   @override
   _$UserCopyWith<_User> get copyWith =>
       __$UserCopyWithImpl<_User>(this, _$identity);
@@ -277,11 +270,10 @@ class _$_User implements _User {
 abstract class _User implements User {
   const factory _User(
       {@required String id,
-      @required String googleId,
       @required String name,
       @required String email,
       @required String photoUrl,
-      @required bool interestSelected,
+      @required bool isProfileCreated,
       @required String jwtToken,
       @required DateTime createdAt,
       @required DateTime updatedAt,
@@ -290,15 +282,13 @@ abstract class _User implements User {
   @override
   String get id;
   @override
-  String get googleId;
-  @override
   String get name;
   @override
   String get email;
   @override
   String get photoUrl;
   @override
-  bool get interestSelected;
+  bool get isProfileCreated;
   @override
   String get jwtToken;
   @override
@@ -308,5 +298,6 @@ abstract class _User implements User {
   @override
   DateTime get jwtIssueDate;
   @override
+  @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith;
 }
