@@ -9,6 +9,7 @@ part of 'onboard_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$OnboardEventTearOff {
   const _$OnboardEventTearOff();
 
@@ -27,40 +28,44 @@ class _$OnboardEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $OnboardEvent = _$OnboardEventTearOff();
 
+/// @nodoc
 mixin _$OnboardEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result cardSwiped(int totalCards),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult cardSwiped(int totalCards),
+    @required TResult failure(Failure failure),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result cardSwiped(int totalCards),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult cardSwiped(int totalCards),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result cardSwiped(_CardSwiped value),
-    @required Result failure(_EventFailure value),
+  TResult map<TResult extends Object>({
+    @required TResult cardSwiped(_CardSwiped value),
+    @required TResult failure(_EventFailure value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result cardSwiped(_CardSwiped value),
-    Result failure(_EventFailure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult cardSwiped(_CardSwiped value),
+    TResult failure(_EventFailure value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $OnboardEventCopyWith<$Res> {
   factory $OnboardEventCopyWith(
           OnboardEvent value, $Res Function(OnboardEvent) then) =
       _$OnboardEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$OnboardEventCopyWithImpl<$Res> implements $OnboardEventCopyWith<$Res> {
   _$OnboardEventCopyWithImpl(this._value, this._then);
 
@@ -69,6 +74,7 @@ class _$OnboardEventCopyWithImpl<$Res> implements $OnboardEventCopyWith<$Res> {
   final $Res Function(OnboardEvent) _then;
 }
 
+/// @nodoc
 abstract class _$CardSwipedCopyWith<$Res> {
   factory _$CardSwipedCopyWith(
           _CardSwiped value, $Res Function(_CardSwiped) then) =
@@ -76,6 +82,7 @@ abstract class _$CardSwipedCopyWith<$Res> {
   $Res call({int totalCards});
 }
 
+/// @nodoc
 class __$CardSwipedCopyWithImpl<$Res> extends _$OnboardEventCopyWithImpl<$Res>
     implements _$CardSwipedCopyWith<$Res> {
   __$CardSwipedCopyWithImpl(
@@ -95,6 +102,7 @@ class __$CardSwipedCopyWithImpl<$Res> extends _$OnboardEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_CardSwiped implements _CardSwiped {
   const _$_CardSwiped(this.totalCards) : assert(totalCards != null);
 
@@ -119,15 +127,16 @@ class _$_CardSwiped implements _CardSwiped {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(totalCards);
 
+  @JsonKey(ignore: true)
   @override
   _$CardSwipedCopyWith<_CardSwiped> get copyWith =>
       __$CardSwipedCopyWithImpl<_CardSwiped>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result cardSwiped(int totalCards),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult cardSwiped(int totalCards),
+    @required TResult failure(Failure failure),
   }) {
     assert(cardSwiped != null);
     assert(failure != null);
@@ -136,10 +145,10 @@ class _$_CardSwiped implements _CardSwiped {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result cardSwiped(int totalCards),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult cardSwiped(int totalCards),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (cardSwiped != null) {
@@ -150,9 +159,9 @@ class _$_CardSwiped implements _CardSwiped {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result cardSwiped(_CardSwiped value),
-    @required Result failure(_EventFailure value),
+  TResult map<TResult extends Object>({
+    @required TResult cardSwiped(_CardSwiped value),
+    @required TResult failure(_EventFailure value),
   }) {
     assert(cardSwiped != null);
     assert(failure != null);
@@ -161,10 +170,10 @@ class _$_CardSwiped implements _CardSwiped {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result cardSwiped(_CardSwiped value),
-    Result failure(_EventFailure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult cardSwiped(_CardSwiped value),
+    TResult failure(_EventFailure value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (cardSwiped != null) {
@@ -178,9 +187,11 @@ abstract class _CardSwiped implements OnboardEvent {
   const factory _CardSwiped(int totalCards) = _$_CardSwiped;
 
   int get totalCards;
+  @JsonKey(ignore: true)
   _$CardSwipedCopyWith<_CardSwiped> get copyWith;
 }
 
+/// @nodoc
 abstract class _$EventFailureCopyWith<$Res> {
   factory _$EventFailureCopyWith(
           _EventFailure value, $Res Function(_EventFailure) then) =
@@ -190,6 +201,7 @@ abstract class _$EventFailureCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$EventFailureCopyWithImpl<$Res> extends _$OnboardEventCopyWithImpl<$Res>
     implements _$EventFailureCopyWith<$Res> {
   __$EventFailureCopyWithImpl(
@@ -219,6 +231,7 @@ class __$EventFailureCopyWithImpl<$Res> extends _$OnboardEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_EventFailure implements _EventFailure {
   const _$_EventFailure(this.failure) : assert(failure != null);
 
@@ -242,15 +255,16 @@ class _$_EventFailure implements _EventFailure {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$EventFailureCopyWith<_EventFailure> get copyWith =>
       __$EventFailureCopyWithImpl<_EventFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result cardSwiped(int totalCards),
-    @required Result failure(Failure failure),
+  TResult when<TResult extends Object>({
+    @required TResult cardSwiped(int totalCards),
+    @required TResult failure(Failure failure),
   }) {
     assert(cardSwiped != null);
     assert(failure != null);
@@ -259,10 +273,10 @@ class _$_EventFailure implements _EventFailure {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result cardSwiped(int totalCards),
-    Result failure(Failure failure),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult cardSwiped(int totalCards),
+    TResult failure(Failure failure),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -273,9 +287,9 @@ class _$_EventFailure implements _EventFailure {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result cardSwiped(_CardSwiped value),
-    @required Result failure(_EventFailure value),
+  TResult map<TResult extends Object>({
+    @required TResult cardSwiped(_CardSwiped value),
+    @required TResult failure(_EventFailure value),
   }) {
     assert(cardSwiped != null);
     assert(failure != null);
@@ -284,10 +298,10 @@ class _$_EventFailure implements _EventFailure {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result cardSwiped(_CardSwiped value),
-    Result failure(_EventFailure value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult cardSwiped(_CardSwiped value),
+    TResult failure(_EventFailure value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failure != null) {
@@ -301,9 +315,11 @@ abstract class _EventFailure implements OnboardEvent {
   const factory _EventFailure(Failure failure) = _$_EventFailure;
 
   Failure get failure;
+  @JsonKey(ignore: true)
   _$EventFailureCopyWith<_EventFailure> get copyWith;
 }
 
+/// @nodoc
 class _$OnboardStateTearOff {
   const _$OnboardStateTearOff();
 
@@ -316,16 +332,20 @@ class _$OnboardStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $OnboardState = _$OnboardStateTearOff();
 
+/// @nodoc
 mixin _$OnboardState {
   int get currentCardIndex;
   Failure get failure;
 
+  @JsonKey(ignore: true)
   $OnboardStateCopyWith<OnboardState> get copyWith;
 }
 
+/// @nodoc
 abstract class $OnboardStateCopyWith<$Res> {
   factory $OnboardStateCopyWith(
           OnboardState value, $Res Function(OnboardState) then) =
@@ -335,6 +355,7 @@ abstract class $OnboardStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class _$OnboardStateCopyWithImpl<$Res> implements $OnboardStateCopyWith<$Res> {
   _$OnboardStateCopyWithImpl(this._value, this._then);
 
@@ -366,6 +387,7 @@ class _$OnboardStateCopyWithImpl<$Res> implements $OnboardStateCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$OnboardStateCopyWith<$Res>
     implements $OnboardStateCopyWith<$Res> {
   factory _$OnboardStateCopyWith(
@@ -378,6 +400,7 @@ abstract class _$OnboardStateCopyWith<$Res>
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$OnboardStateCopyWithImpl<$Res> extends _$OnboardStateCopyWithImpl<$Res>
     implements _$OnboardStateCopyWith<$Res> {
   __$OnboardStateCopyWithImpl(
@@ -401,6 +424,7 @@ class __$OnboardStateCopyWithImpl<$Res> extends _$OnboardStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_OnboardState implements _OnboardState {
   const _$_OnboardState(this.currentCardIndex, {this.failure})
       : assert(currentCardIndex != null);
@@ -432,6 +456,7 @@ class _$_OnboardState implements _OnboardState {
       const DeepCollectionEquality().hash(currentCardIndex) ^
       const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$OnboardStateCopyWith<_OnboardState> get copyWith =>
       __$OnboardStateCopyWithImpl<_OnboardState>(this, _$identity);
@@ -446,5 +471,6 @@ abstract class _OnboardState implements OnboardState {
   @override
   Failure get failure;
   @override
+  @JsonKey(ignore: true)
   _$OnboardStateCopyWith<_OnboardState> get copyWith;
 }

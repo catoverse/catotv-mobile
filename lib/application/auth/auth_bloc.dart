@@ -6,6 +6,7 @@ import 'package:cato_feed/domain/auth/i_user_repository.dart';
 import 'package:cato_feed/domain/auth/user.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'auth_event.dart';
 
@@ -44,9 +45,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         var googleLoginResult = await _authFacade.signInWithGoogle();
 
         if (googleLoginResult.hasFailed()) {
-          var message = googleLoginResult.failure.map(
-              cancelledByUser: (_) => 'Login required to access the app.',
-              serverError: (_) => 'Internal error while login.');
+          var message = googleLoginResult.failure?.map(
+              cancelledByUser: (_) => 'Google Login cancelled.',
+              serverError: (_) => 'Internal error while login.') ?? '';
           yield AuthState.failure(message);
         } else {
           // Login with backend
@@ -56,7 +57,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       },
       sessionLogin: (e) async* {
         var result = await _userRepository.sessionLogin(
-            name: e.name, inviteCode: e.inviteCode);
+            name: e.name ?? '', inviteCode: e.inviteCode ?? '');
 
         if (result.hasFailed()) {
           var message = result.failure.toString();

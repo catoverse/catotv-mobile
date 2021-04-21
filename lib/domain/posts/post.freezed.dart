@@ -175,7 +175,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Post implements _Post {
+class _$_Post with DiagnosticableTreeMixin implements _Post {
   const _$_Post(
       {@required this.id,
       @required this.authorName,
@@ -216,8 +216,24 @@ class _$_Post implements _Post {
   final String topicId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Post(id: $id, authorName: $authorName, authorAvatar: $authorAvatar, title: $title, description: $description, videoUrl: $videoUrl, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, topicId: $topicId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Post'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('authorName', authorName))
+      ..add(DiagnosticsProperty('authorAvatar', authorAvatar))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('description', description))
+      ..add(DiagnosticsProperty('videoUrl', videoUrl))
+      ..add(DiagnosticsProperty('startTimestamp', startTimestamp))
+      ..add(DiagnosticsProperty('endTimestamp', endTimestamp))
+      ..add(DiagnosticsProperty('topicId', topicId));
   }
 
   @override

@@ -7,6 +7,7 @@ import 'package:cato_feed/application/init/init.dart';
 import 'package:cato_feed/application/post/post.dart';
 import 'package:cato_feed/application/share_video/share_video_bloc.dart';
 import 'package:cato_feed/application/topic/topic.dart';
+import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
@@ -14,12 +15,11 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:share/share.dart';
-import 'package:flutter/foundation.dart';
-import 'presentation/utils/assets/theme.dart';
 
 /// Handler for firebase messaging background message
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
@@ -63,16 +63,21 @@ Future<void> main() async {
 
   if (Platform.isAndroid) {
     AppRedirectHelper appRedirectHelper = getIt<AppRedirectHelper>();
-    appRedirectHelper.appBlocker.configure(
-        onResume: (packageName) async {
-          appRedirectHelper.appBlocker.bringAppToFront();
-        },
-        onBackgroundMessage: null);
+    // TODO: Fix this
+    // appRedirectHelper.appBlocker.configure(
+    //     onResume: (packageName) async {
+    //       appRedirectHelper.appBlocker.bringAppToFront();
+    //     },
+    //     onBackgroundMessage: null);
   }
 
+  FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+
   if (kReleaseMode) {
-    FlutterError.onError = Crashlytics.instance.recordFlutterError;
+    FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
+
+  var router = CatoRouter();
 
   runApp(
     MultiBlocProvider(
@@ -84,25 +89,23 @@ Future<void> main() async {
         BlocProvider(create: (_) => getIt<TopicBloc>()),
         BlocProvider(create: (_) => getIt<PostBloc>()),
         BlocProvider(create: (_) => getIt<ShareVideoBloc>()),
+        BlocProvider(create: (_) => getIt<UserProfileBloc>())
       ],
       child: BlocListener<ShareVideoBloc, ShareVideoState>(
         listener: (context, state) async {
           if (state.shareText != null) {
-            await Share.share(state.shareText);
-            context.bloc<ShareVideoBloc>().add(ShareVideoEvent.reset());
+            await Share.share(state.shareText ?? '');
+            context.read<ShareVideoBloc>().add(ShareVideoEvent.reset());
           }
         },
         child: PlatformApp(
           title: 'Cato',
           debugShowCheckedModeBanner: false,
-          material: (_, __) => MaterialAppData(theme: materialThemeData),
-          cupertino: (_, __) => CupertinoAppData(theme: cupertinoTheme),
           builder: ExtendedNavigator.builder(
-            router: CatoRouter(),
+            router: router,
             observers: [
               if (kReleaseMode)
-                FirebaseAnalyticsObserver(
-                    analytics: getIt.get<FirebaseAnalytics>()),
+                FirebaseAnalyticsObserver(analytics: getIt<FirebaseAnalytics>())
             ],
           ),
         ),
@@ -119,21 +122,22 @@ Future<void> openDynamicLinkOr(BuildContext context,
   final Uri deepLink = data?.link;
 
   if (deepLink != null) {
-    context.navigator.replace(deepLink.path);
+    context.navigator?.replace(deepLink.path);
   } else {
-    context.navigator.replace(otherScreen);
+    context.navigator?.replace(otherScreen);
   }
 }
 
 Future<Uri> getUriFromDynamicLink() async {
- final PendingDynamicLinkData data = await FirebaseDynamicLinks.instance.getInitialLink() ;
- if(data == null || data.link == null) return null;
- return data.link;
+  final PendingDynamicLinkData data =
+      await FirebaseDynamicLinks.instance.getInitialLink();
+  if (data == null || data.link == null) return null;
+  return data.link;
 }
 
 Future<String> getInviteCodeFromDynamicLink() async {
   var uri = await getUriFromDynamicLink();
-  if(uri != null && uri.queryParameters.isNotEmpty) {
+  if (uri != null && uri.queryParameters.isNotEmpty) {
     return uri.queryParameters['inviteCode'];
   }
   return null;

@@ -1,3 +1,4 @@
+import 'package:cato_feed/domain/auth/user_profile.dart';
 import 'package:cato_feed/domain/posts/post.dart';
 import 'package:kt_dart/collection.dart';
 
@@ -8,17 +9,13 @@ import 'package:cato_feed/domain/topic/topic.dart';
 // Extensions for DTO
 extension MUserDTO on MUser {
   User toUser() {
-    if (this == null) {
-      return null;
-    }
 
     return User(
         id: id,
         name: name,
         email: email,
         photoUrl: avatar,
-        googleId: googleId,
-        interestSelected: isTopicSelected,
+        isProfileCreated: false, // TODO: Change this
         jwtToken: jwtToken,
         createdAt: createdAt,
         updatedAt: updatedAt,
@@ -28,16 +25,15 @@ extension MUserDTO on MUser {
 
 extension UserDTO on User {
   MUser toMUser() {
-    if (this == null) return null;
 
     return MUser(
         id: this.id,
         name: this.name,
         email: this.email,
         avatar: this.photoUrl,
-        googleId: this.googleId,
+        googleId: "", // TODO: Fix this
         jwtToken: this.jwtToken,
-        isTopicSelected: this.interestSelected,
+        isTopicSelected: this.isProfileCreated,
         createdAt: this.createdAt,
         updatedAt: this.updatedAt,
         jwtIssueDate: this.jwtIssueDate);
@@ -53,21 +49,20 @@ extension UserDTO on User {
         .isAfter(this.jwtIssueDate);
   }
 
-  static User fromResponse(dynamic response, String googleId) {
+  static User fromResponse(dynamic response, String key) {
     try {
-      var loginResult = response['googleLogin'];
-      var userResult = response['googleLogin']['user'];
+      var loginResult = response[key];
+      var userResult = loginResult['user'];
       return User(
-          id: userResult['id'] as String,
-          email: userResult['email'] as String,
-          name: userResult['name'] as String,
-          photoUrl: userResult['avatar'] as String,
-          googleId: googleId,
-          jwtToken: loginResult['token'],
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-          jwtIssueDate: DateTime.now(),
-          interestSelected: false
+        id: userResult['id'] as String,
+        email: userResult['email'] as String,
+        name: userResult['name'] as String,
+        photoUrl: userResult['avatar'] as String,
+        jwtToken: loginResult['token'],
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        jwtIssueDate: DateTime.now(),
+        isProfileCreated: false,
       );
     } catch (_) {
       return null;
@@ -75,12 +70,50 @@ extension UserDTO on User {
   }
 }
 
-extension MTopicDTO on MTopic {
-  Topic toTopic() {
-    if (this == null) {
+extension UserProfileDTO on UserProfile {
+  static UserProfile fromResponse(dynamic response) {
+    try {
+      var videoWatched = Map<String, int>();
+      var videoWatchedRes =
+          response['videoWatched'] as List<dynamic>;
+      videoWatchedRes.forEach((element) {
+        element as Map<String, dynamic>;
+        videoWatched[element['topic']] = element['count'] ?? 0;
+      });
+
+      var lastFiveCount = Map<String, int>();
+      var lastFiveCountRes =
+          response['lastFiveCount'] as List<dynamic>;
+      lastFiveCountRes.forEach((element) {
+        element as Map<String, dynamic>;
+        videoWatched[element['date']] = element['count'] ?? 0;
+      });
+
+      List<String> selectedTopics = [];
+      (response['selectedTopics'] as List<dynamic> ?? []).forEach((element) {
+        selectedTopics.add(element as String);
+      });
+
+      return UserProfile(
+        name: response['name'],
+        totalWatchTime: response['totalWatchTime'] as int,
+        videoCount: response['videoCount'] as int,
+        userId: response['userId'] as String,
+        id: response['id'] as String,
+        watchHistory: response['WatchHistory'] ?? "",
+        selectedTopics: selectedTopics,
+        videoWatched: videoWatched,
+        lastFiveCount: lastFiveCount,
+      );
+    } catch (e) {
+      print(e);
       return null;
     }
+  }
+}
 
+extension MTopicDTO on MTopic {
+  Topic toTopic() {
     return Topic(
       id: this.id,
       name: this.name,
@@ -92,7 +125,6 @@ extension MTopicDTO on MTopic {
 
 extension TopicDTO on Topic {
   MTopic toMTopic() {
-    if (this == null) return null;
 
     return MTopic(
         id: this.id,
@@ -119,9 +151,9 @@ extension TopicDTO on Topic {
 }
 
 extension PostDTO on Post {
-
   MPost toMPost() {
-    return MPost(id: this.id,
+    return MPost(
+        id: this.id,
         title: this.title,
         description: this.description,
         authorName: this.authorName,
@@ -136,7 +168,7 @@ extension PostDTO on Post {
 
   static KtList<Post> listFromResponse(dynamic response) {
     try {
-      var videoResults = response['videoByTopics'] as List<dynamic>;
+      var videoResults = response as List<dynamic>;
       List<Post> posts = [];
       videoResults.forEach((element) {
         var p = fromResponse(element);
@@ -150,24 +182,31 @@ extension PostDTO on Post {
 
   static Post fromResponse(dynamic response) {
     try {
-      if (response['id'] == null) return null;
-      var videoUrl = response['video_url'] as String;
+      var res = response as Map<String, dynamic>;
+
+      if (!res.containsKey("id") && !res.containsKey("_id")) return null;
+      var videoUrl = res['video_url'] as String;
       if (videoUrl == null || videoUrl.isEmpty || !videoUrl.startsWith('http'))
         return null;
-      var videoId = convertUrlToId(videoUrl);
-      if(videoId == null || videoId.isEmpty) return null;
-
+      // var videoId = convertUrlToId(videoUrl);
+      // if(videoId == null || videoId.isEmpty) return null;
+      var id = res.containsKey("id") ? res["id"] : res["_id"];
+      var topicId = res['topic'] ?? '';
+      // if (res['topic'] is Map) {
+      //   topicId = res['topic']['id'];
+      // } else {
+      //   topicId = res['topic'];
+      // }
       return Post(
-          id: response['id'],
-          videoUrl: response['video_url'],
-          title: response['title'] ?? '',
-          description: response['description'] ?? '',
-          authorName: response['author_name'] ?? '',
+          id: id,
+          videoUrl: res['video_url'],
+          title: res['title'] ?? '',
+          description: res['description'] ?? '',
+          authorName: res['author_name'] ?? '',
           authorAvatar: '',
-          startTimestamp: response['start_timestamp'] as int,
-          endTimestamp: response['end_timestamp'] as int,
-          topicId: response['topic']['id'] ?? ''
-      );
+          startTimestamp: res['start_timestamp'] as int,
+          endTimestamp: res['end_timestamp'] as int,
+          topicId: topicId);
     } catch (_) {
       return null;
     }
@@ -175,7 +214,7 @@ extension PostDTO on Post {
 }
 
 String convertUrlToId(String url, {bool trimWhitespaces = true}) {
-  assert(url?.isNotEmpty ?? false, 'Url cannot be empty');
+  assert(url.isNotEmpty, 'Url cannot be empty');
   if (!url.contains("http") && (url.length == 11)) return url;
   if (trimWhitespaces) url = url.trim();
 
@@ -195,9 +234,9 @@ String convertUrlToId(String url, {bool trimWhitespaces = true}) {
 
 extension MPostDTO on MPost {
   Post toPost() {
-    if (this == null) return null;
 
-    return Post(id: this.id,
+    return Post(
+        id: this.id,
         authorName: this.authorName,
         authorAvatar: this.authorAvatar,
         title: this.title,

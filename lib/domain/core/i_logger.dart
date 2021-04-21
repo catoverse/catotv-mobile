@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
+
 abstract class ILogger {
   void log(String msg);
   void logKeyValue(String key, dynamic value);
   void logError(Error error, {String msg});
   void logException(Exception error, {String msg});
-  void setUserIdentifier({String name, String email, String identifier});
+  void setUserIdentifier({@required String identifier});
   void resetUserIdentifier();
   void logAppOpen();
   void logLogin({String loginProvider});

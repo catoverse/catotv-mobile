@@ -45,7 +45,7 @@ class _SavedPostPageState extends State<SavedPostPage> {
       listeners: [
         BlocListener<UserProfileBloc, UserProfileState>(
           listener: (context, state) {
-            context.bloc<SavedPostsBloc>().add(SavedPostsEvent.refresh());
+            context.read<SavedPostsBloc>().add(SavedPostsEvent.refresh());
           },
         ),
       ],
@@ -53,7 +53,7 @@ class _SavedPostPageState extends State<SavedPostPage> {
         backgroundColor: ColorAssets.black32,
         body: BlocBuilder<SavedPostsBloc, SavedPostsState>(
           builder: (_, state) {
-            var posts = state.savedPosts ?? List();
+            var posts = state.savedPosts ?? [];
             return SafeArea(
               child: PlatformScaffold(
                 backgroundColor: ColorAssets.black32,
@@ -216,7 +216,7 @@ class _SavedPostPageState extends State<SavedPostPage> {
           onTap: () {
             if (selectedPage != list[index]) {
               context
-                  .bloc<SavedPostsBloc>()
+                  .read<SavedPostsBloc>()
                   .add(SavedPostsEvent.updateSelectedPage(list[index]));
             }
           },

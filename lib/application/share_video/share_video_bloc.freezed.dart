@@ -9,6 +9,7 @@ part of 'share_video_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ShareVideoEventTearOff {
   const _$ShareVideoEventTearOff();
 
@@ -27,40 +28,44 @@ class _$ShareVideoEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ShareVideoEvent = _$ShareVideoEventTearOff();
 
+/// @nodoc
 mixin _$ShareVideoEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result share(String postId, String title, String imageUrl),
-    @required Result reset(),
+  TResult when<TResult extends Object>({
+    @required TResult share(String postId, String title, String imageUrl),
+    @required TResult reset(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result share(String postId, String title, String imageUrl),
-    Result reset(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult share(String postId, String title, String imageUrl),
+    TResult reset(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result share(_ShareVideo value),
-    @required Result reset(_ShareReset value),
+  TResult map<TResult extends Object>({
+    @required TResult share(_ShareVideo value),
+    @required TResult reset(_ShareReset value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result share(_ShareVideo value),
-    Result reset(_ShareReset value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult share(_ShareVideo value),
+    TResult reset(_ShareReset value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $ShareVideoEventCopyWith<$Res> {
   factory $ShareVideoEventCopyWith(
           ShareVideoEvent value, $Res Function(ShareVideoEvent) then) =
       _$ShareVideoEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ShareVideoEventCopyWithImpl<$Res>
     implements $ShareVideoEventCopyWith<$Res> {
   _$ShareVideoEventCopyWithImpl(this._value, this._then);
@@ -70,6 +75,7 @@ class _$ShareVideoEventCopyWithImpl<$Res>
   final $Res Function(ShareVideoEvent) _then;
 }
 
+/// @nodoc
 abstract class _$ShareVideoCopyWith<$Res> {
   factory _$ShareVideoCopyWith(
           _ShareVideo value, $Res Function(_ShareVideo) then) =
@@ -77,6 +83,7 @@ abstract class _$ShareVideoCopyWith<$Res> {
   $Res call({String postId, String title, String imageUrl});
 }
 
+/// @nodoc
 class __$ShareVideoCopyWithImpl<$Res>
     extends _$ShareVideoEventCopyWithImpl<$Res>
     implements _$ShareVideoCopyWith<$Res> {
@@ -101,7 +108,8 @@ class __$ShareVideoCopyWithImpl<$Res>
   }
 }
 
-class _$_ShareVideo implements _ShareVideo {
+/// @nodoc
+class _$_ShareVideo with DiagnosticableTreeMixin implements _ShareVideo {
   const _$_ShareVideo(this.postId, this.title, this.imageUrl)
       : assert(postId != null),
         assert(title != null),
@@ -115,8 +123,18 @@ class _$_ShareVideo implements _ShareVideo {
   final String imageUrl;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ShareVideoEvent.share(postId: $postId, title: $title, imageUrl: $imageUrl)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ShareVideoEvent.share'))
+      ..add(DiagnosticsProperty('postId', postId))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('imageUrl', imageUrl));
   }
 
   @override
@@ -139,15 +157,16 @@ class _$_ShareVideo implements _ShareVideo {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(imageUrl);
 
+  @JsonKey(ignore: true)
   @override
   _$ShareVideoCopyWith<_ShareVideo> get copyWith =>
       __$ShareVideoCopyWithImpl<_ShareVideo>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result share(String postId, String title, String imageUrl),
-    @required Result reset(),
+  TResult when<TResult extends Object>({
+    @required TResult share(String postId, String title, String imageUrl),
+    @required TResult reset(),
   }) {
     assert(share != null);
     assert(reset != null);
@@ -156,10 +175,10 @@ class _$_ShareVideo implements _ShareVideo {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result share(String postId, String title, String imageUrl),
-    Result reset(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult share(String postId, String title, String imageUrl),
+    TResult reset(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (share != null) {
@@ -170,9 +189,9 @@ class _$_ShareVideo implements _ShareVideo {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result share(_ShareVideo value),
-    @required Result reset(_ShareReset value),
+  TResult map<TResult extends Object>({
+    @required TResult share(_ShareVideo value),
+    @required TResult reset(_ShareReset value),
   }) {
     assert(share != null);
     assert(reset != null);
@@ -181,10 +200,10 @@ class _$_ShareVideo implements _ShareVideo {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result share(_ShareVideo value),
-    Result reset(_ShareReset value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult share(_ShareVideo value),
+    TResult reset(_ShareReset value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (share != null) {
@@ -201,15 +220,18 @@ abstract class _ShareVideo implements ShareVideoEvent {
   String get postId;
   String get title;
   String get imageUrl;
+  @JsonKey(ignore: true)
   _$ShareVideoCopyWith<_ShareVideo> get copyWith;
 }
 
+/// @nodoc
 abstract class _$ShareResetCopyWith<$Res> {
   factory _$ShareResetCopyWith(
           _ShareReset value, $Res Function(_ShareReset) then) =
       __$ShareResetCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$ShareResetCopyWithImpl<$Res>
     extends _$ShareVideoEventCopyWithImpl<$Res>
     implements _$ShareResetCopyWith<$Res> {
@@ -221,12 +243,19 @@ class __$ShareResetCopyWithImpl<$Res>
   _ShareReset get _value => super._value as _ShareReset;
 }
 
-class _$_ShareReset implements _ShareReset {
+/// @nodoc
+class _$_ShareReset with DiagnosticableTreeMixin implements _ShareReset {
   const _$_ShareReset();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ShareVideoEvent.reset()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'ShareVideoEvent.reset'));
   }
 
   @override
@@ -239,9 +268,9 @@ class _$_ShareReset implements _ShareReset {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result share(String postId, String title, String imageUrl),
-    @required Result reset(),
+  TResult when<TResult extends Object>({
+    @required TResult share(String postId, String title, String imageUrl),
+    @required TResult reset(),
   }) {
     assert(share != null);
     assert(reset != null);
@@ -250,10 +279,10 @@ class _$_ShareReset implements _ShareReset {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result share(String postId, String title, String imageUrl),
-    Result reset(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult share(String postId, String title, String imageUrl),
+    TResult reset(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (reset != null) {
@@ -264,9 +293,9 @@ class _$_ShareReset implements _ShareReset {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result share(_ShareVideo value),
-    @required Result reset(_ShareReset value),
+  TResult map<TResult extends Object>({
+    @required TResult share(_ShareVideo value),
+    @required TResult reset(_ShareReset value),
   }) {
     assert(share != null);
     assert(reset != null);
@@ -275,10 +304,10 @@ class _$_ShareReset implements _ShareReset {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result share(_ShareVideo value),
-    Result reset(_ShareReset value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult share(_ShareVideo value),
+    TResult reset(_ShareReset value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (reset != null) {
@@ -292,6 +321,7 @@ abstract class _ShareReset implements ShareVideoEvent {
   const factory _ShareReset() = _$_ShareReset;
 }
 
+/// @nodoc
 class _$ShareVideoStateTearOff {
   const _$ShareVideoStateTearOff();
 
@@ -304,16 +334,20 @@ class _$ShareVideoStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ShareVideoState = _$ShareVideoStateTearOff();
 
+/// @nodoc
 mixin _$ShareVideoState {
   String get shareText;
   bool get isLoading;
 
+  @JsonKey(ignore: true)
   $ShareVideoStateCopyWith<ShareVideoState> get copyWith;
 }
 
+/// @nodoc
 abstract class $ShareVideoStateCopyWith<$Res> {
   factory $ShareVideoStateCopyWith(
           ShareVideoState value, $Res Function(ShareVideoState) then) =
@@ -321,6 +355,7 @@ abstract class $ShareVideoStateCopyWith<$Res> {
   $Res call({String shareText, bool isLoading});
 }
 
+/// @nodoc
 class _$ShareVideoStateCopyWithImpl<$Res>
     implements $ShareVideoStateCopyWith<$Res> {
   _$ShareVideoStateCopyWithImpl(this._value, this._then);
@@ -341,6 +376,7 @@ class _$ShareVideoStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$ShareVideoStateCopyWith<$Res>
     implements $ShareVideoStateCopyWith<$Res> {
   factory _$ShareVideoStateCopyWith(
@@ -350,6 +386,7 @@ abstract class _$ShareVideoStateCopyWith<$Res>
   $Res call({String shareText, bool isLoading});
 }
 
+/// @nodoc
 class __$ShareVideoStateCopyWithImpl<$Res>
     extends _$ShareVideoStateCopyWithImpl<$Res>
     implements _$ShareVideoStateCopyWith<$Res> {
@@ -372,7 +409,10 @@ class __$ShareVideoStateCopyWithImpl<$Res>
   }
 }
 
-class _$_ShareVideoState implements _ShareVideoState {
+/// @nodoc
+class _$_ShareVideoState
+    with DiagnosticableTreeMixin
+    implements _ShareVideoState {
   const _$_ShareVideoState({this.shareText, this.isLoading});
 
   @override
@@ -381,8 +421,17 @@ class _$_ShareVideoState implements _ShareVideoState {
   final bool isLoading;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ShareVideoState(shareText: $shareText, isLoading: $isLoading)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ShareVideoState'))
+      ..add(DiagnosticsProperty('shareText', shareText))
+      ..add(DiagnosticsProperty('isLoading', isLoading));
   }
 
   @override
@@ -403,6 +452,7 @@ class _$_ShareVideoState implements _ShareVideoState {
       const DeepCollectionEquality().hash(shareText) ^
       const DeepCollectionEquality().hash(isLoading);
 
+  @JsonKey(ignore: true)
   @override
   _$ShareVideoStateCopyWith<_ShareVideoState> get copyWith =>
       __$ShareVideoStateCopyWithImpl<_ShareVideoState>(this, _$identity);
@@ -417,5 +467,6 @@ abstract class _ShareVideoState implements ShareVideoState {
   @override
   bool get isLoading;
   @override
+  @JsonKey(ignore: true)
   _$ShareVideoStateCopyWith<_ShareVideoState> get copyWith;
 }

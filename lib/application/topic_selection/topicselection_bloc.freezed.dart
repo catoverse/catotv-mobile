@@ -9,6 +9,7 @@ part of 'topicselection_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$TopicSelectionEventTearOff {
   const _$TopicSelectionEventTearOff();
 
@@ -41,48 +42,52 @@ class _$TopicSelectionEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $TopicSelectionEvent = _$TopicSelectionEventTearOff();
 
+/// @nodoc
 mixin _$TopicSelectionEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedTopics(KtList<String> topicIds),
-    @required Result selectTopic(String topicId),
-    @required Result unSelectTopic(String topicId),
-    @required Result saveTopics(User user),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedTopics(KtList<String> topicIds),
+    @required TResult selectTopic(String topicId),
+    @required TResult unSelectTopic(String topicId),
+    @required TResult saveTopics(User user),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedTopics(KtList<String> topicIds),
-    Result selectTopic(String topicId),
-    Result unSelectTopic(String topicId),
-    Result saveTopics(User user),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedTopics(KtList<String> topicIds),
+    TResult selectTopic(String topicId),
+    TResult unSelectTopic(String topicId),
+    TResult saveTopics(User user),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
-    @required Result selectTopic(_SelectTopic value),
-    @required Result unSelectTopic(_UnSelectTopic value),
-    @required Result saveTopics(_SaveTopics value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    @required TResult selectTopic(_SelectTopic value),
+    @required TResult unSelectTopic(_UnSelectTopic value),
+    @required TResult saveTopics(_SaveTopics value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedTopics(_UpdateSelectedTopic value),
-    Result selectTopic(_SelectTopic value),
-    Result unSelectTopic(_UnSelectTopic value),
-    Result saveTopics(_SaveTopics value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    TResult selectTopic(_SelectTopic value),
+    TResult unSelectTopic(_UnSelectTopic value),
+    TResult saveTopics(_SaveTopics value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $TopicSelectionEventCopyWith<$Res> {
   factory $TopicSelectionEventCopyWith(
           TopicSelectionEvent value, $Res Function(TopicSelectionEvent) then) =
       _$TopicSelectionEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$TopicSelectionEventCopyWithImpl<$Res>
     implements $TopicSelectionEventCopyWith<$Res> {
   _$TopicSelectionEventCopyWithImpl(this._value, this._then);
@@ -92,6 +97,7 @@ class _$TopicSelectionEventCopyWithImpl<$Res>
   final $Res Function(TopicSelectionEvent) _then;
 }
 
+/// @nodoc
 abstract class _$UpdateSelectedTopicCopyWith<$Res> {
   factory _$UpdateSelectedTopicCopyWith(_UpdateSelectedTopic value,
           $Res Function(_UpdateSelectedTopic) then) =
@@ -99,6 +105,7 @@ abstract class _$UpdateSelectedTopicCopyWith<$Res> {
   $Res call({KtList<String> topicIds});
 }
 
+/// @nodoc
 class __$UpdateSelectedTopicCopyWithImpl<$Res>
     extends _$TopicSelectionEventCopyWithImpl<$Res>
     implements _$UpdateSelectedTopicCopyWith<$Res> {
@@ -119,15 +126,27 @@ class __$UpdateSelectedTopicCopyWithImpl<$Res>
   }
 }
 
-class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
+/// @nodoc
+class _$_UpdateSelectedTopic
+    with DiagnosticableTreeMixin
+    implements _UpdateSelectedTopic {
   const _$_UpdateSelectedTopic(this.topicIds) : assert(topicIds != null);
 
   @override
   final KtList<String> topicIds;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicSelectionEvent.updateSelectedTopics(topicIds: $topicIds)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'TopicSelectionEvent.updateSelectedTopics'))
+      ..add(DiagnosticsProperty('topicIds', topicIds));
   }
 
   @override
@@ -143,6 +162,7 @@ class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(topicIds);
 
+  @JsonKey(ignore: true)
   @override
   _$UpdateSelectedTopicCopyWith<_UpdateSelectedTopic> get copyWith =>
       __$UpdateSelectedTopicCopyWithImpl<_UpdateSelectedTopic>(
@@ -150,11 +170,11 @@ class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedTopics(KtList<String> topicIds),
-    @required Result selectTopic(String topicId),
-    @required Result unSelectTopic(String topicId),
-    @required Result saveTopics(User user),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedTopics(KtList<String> topicIds),
+    @required TResult selectTopic(String topicId),
+    @required TResult unSelectTopic(String topicId),
+    @required TResult saveTopics(User user),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -165,12 +185,12 @@ class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedTopics(KtList<String> topicIds),
-    Result selectTopic(String topicId),
-    Result unSelectTopic(String topicId),
-    Result saveTopics(User user),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedTopics(KtList<String> topicIds),
+    TResult selectTopic(String topicId),
+    TResult unSelectTopic(String topicId),
+    TResult saveTopics(User user),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateSelectedTopics != null) {
@@ -181,11 +201,11 @@ class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
-    @required Result selectTopic(_SelectTopic value),
-    @required Result unSelectTopic(_UnSelectTopic value),
-    @required Result saveTopics(_SaveTopics value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    @required TResult selectTopic(_SelectTopic value),
+    @required TResult unSelectTopic(_UnSelectTopic value),
+    @required TResult saveTopics(_SaveTopics value),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -196,12 +216,12 @@ class _$_UpdateSelectedTopic implements _UpdateSelectedTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedTopics(_UpdateSelectedTopic value),
-    Result selectTopic(_SelectTopic value),
-    Result unSelectTopic(_UnSelectTopic value),
-    Result saveTopics(_SaveTopics value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    TResult selectTopic(_SelectTopic value),
+    TResult unSelectTopic(_UnSelectTopic value),
+    TResult saveTopics(_SaveTopics value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateSelectedTopics != null) {
@@ -216,9 +236,11 @@ abstract class _UpdateSelectedTopic implements TopicSelectionEvent {
       _$_UpdateSelectedTopic;
 
   KtList<String> get topicIds;
+  @JsonKey(ignore: true)
   _$UpdateSelectedTopicCopyWith<_UpdateSelectedTopic> get copyWith;
 }
 
+/// @nodoc
 abstract class _$SelectTopicCopyWith<$Res> {
   factory _$SelectTopicCopyWith(
           _SelectTopic value, $Res Function(_SelectTopic) then) =
@@ -226,6 +248,7 @@ abstract class _$SelectTopicCopyWith<$Res> {
   $Res call({String topicId});
 }
 
+/// @nodoc
 class __$SelectTopicCopyWithImpl<$Res>
     extends _$TopicSelectionEventCopyWithImpl<$Res>
     implements _$SelectTopicCopyWith<$Res> {
@@ -246,15 +269,24 @@ class __$SelectTopicCopyWithImpl<$Res>
   }
 }
 
-class _$_SelectTopic implements _SelectTopic {
+/// @nodoc
+class _$_SelectTopic with DiagnosticableTreeMixin implements _SelectTopic {
   const _$_SelectTopic(this.topicId) : assert(topicId != null);
 
   @override
   final String topicId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicSelectionEvent.selectTopic(topicId: $topicId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TopicSelectionEvent.selectTopic'))
+      ..add(DiagnosticsProperty('topicId', topicId));
   }
 
   @override
@@ -269,17 +301,18 @@ class _$_SelectTopic implements _SelectTopic {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(topicId);
 
+  @JsonKey(ignore: true)
   @override
   _$SelectTopicCopyWith<_SelectTopic> get copyWith =>
       __$SelectTopicCopyWithImpl<_SelectTopic>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedTopics(KtList<String> topicIds),
-    @required Result selectTopic(String topicId),
-    @required Result unSelectTopic(String topicId),
-    @required Result saveTopics(User user),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedTopics(KtList<String> topicIds),
+    @required TResult selectTopic(String topicId),
+    @required TResult unSelectTopic(String topicId),
+    @required TResult saveTopics(User user),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -290,12 +323,12 @@ class _$_SelectTopic implements _SelectTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedTopics(KtList<String> topicIds),
-    Result selectTopic(String topicId),
-    Result unSelectTopic(String topicId),
-    Result saveTopics(User user),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedTopics(KtList<String> topicIds),
+    TResult selectTopic(String topicId),
+    TResult unSelectTopic(String topicId),
+    TResult saveTopics(User user),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (selectTopic != null) {
@@ -306,11 +339,11 @@ class _$_SelectTopic implements _SelectTopic {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
-    @required Result selectTopic(_SelectTopic value),
-    @required Result unSelectTopic(_UnSelectTopic value),
-    @required Result saveTopics(_SaveTopics value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    @required TResult selectTopic(_SelectTopic value),
+    @required TResult unSelectTopic(_UnSelectTopic value),
+    @required TResult saveTopics(_SaveTopics value),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -321,12 +354,12 @@ class _$_SelectTopic implements _SelectTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedTopics(_UpdateSelectedTopic value),
-    Result selectTopic(_SelectTopic value),
-    Result unSelectTopic(_UnSelectTopic value),
-    Result saveTopics(_SaveTopics value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    TResult selectTopic(_SelectTopic value),
+    TResult unSelectTopic(_UnSelectTopic value),
+    TResult saveTopics(_SaveTopics value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (selectTopic != null) {
@@ -340,9 +373,11 @@ abstract class _SelectTopic implements TopicSelectionEvent {
   const factory _SelectTopic(String topicId) = _$_SelectTopic;
 
   String get topicId;
+  @JsonKey(ignore: true)
   _$SelectTopicCopyWith<_SelectTopic> get copyWith;
 }
 
+/// @nodoc
 abstract class _$UnSelectTopicCopyWith<$Res> {
   factory _$UnSelectTopicCopyWith(
           _UnSelectTopic value, $Res Function(_UnSelectTopic) then) =
@@ -350,6 +385,7 @@ abstract class _$UnSelectTopicCopyWith<$Res> {
   $Res call({String topicId});
 }
 
+/// @nodoc
 class __$UnSelectTopicCopyWithImpl<$Res>
     extends _$TopicSelectionEventCopyWithImpl<$Res>
     implements _$UnSelectTopicCopyWith<$Res> {
@@ -370,15 +406,24 @@ class __$UnSelectTopicCopyWithImpl<$Res>
   }
 }
 
-class _$_UnSelectTopic implements _UnSelectTopic {
+/// @nodoc
+class _$_UnSelectTopic with DiagnosticableTreeMixin implements _UnSelectTopic {
   const _$_UnSelectTopic(this.topicId) : assert(topicId != null);
 
   @override
   final String topicId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicSelectionEvent.unSelectTopic(topicId: $topicId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TopicSelectionEvent.unSelectTopic'))
+      ..add(DiagnosticsProperty('topicId', topicId));
   }
 
   @override
@@ -393,17 +438,18 @@ class _$_UnSelectTopic implements _UnSelectTopic {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(topicId);
 
+  @JsonKey(ignore: true)
   @override
   _$UnSelectTopicCopyWith<_UnSelectTopic> get copyWith =>
       __$UnSelectTopicCopyWithImpl<_UnSelectTopic>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedTopics(KtList<String> topicIds),
-    @required Result selectTopic(String topicId),
-    @required Result unSelectTopic(String topicId),
-    @required Result saveTopics(User user),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedTopics(KtList<String> topicIds),
+    @required TResult selectTopic(String topicId),
+    @required TResult unSelectTopic(String topicId),
+    @required TResult saveTopics(User user),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -414,12 +460,12 @@ class _$_UnSelectTopic implements _UnSelectTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedTopics(KtList<String> topicIds),
-    Result selectTopic(String topicId),
-    Result unSelectTopic(String topicId),
-    Result saveTopics(User user),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedTopics(KtList<String> topicIds),
+    TResult selectTopic(String topicId),
+    TResult unSelectTopic(String topicId),
+    TResult saveTopics(User user),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unSelectTopic != null) {
@@ -430,11 +476,11 @@ class _$_UnSelectTopic implements _UnSelectTopic {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
-    @required Result selectTopic(_SelectTopic value),
-    @required Result unSelectTopic(_UnSelectTopic value),
-    @required Result saveTopics(_SaveTopics value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    @required TResult selectTopic(_SelectTopic value),
+    @required TResult unSelectTopic(_UnSelectTopic value),
+    @required TResult saveTopics(_SaveTopics value),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -445,12 +491,12 @@ class _$_UnSelectTopic implements _UnSelectTopic {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedTopics(_UpdateSelectedTopic value),
-    Result selectTopic(_SelectTopic value),
-    Result unSelectTopic(_UnSelectTopic value),
-    Result saveTopics(_SaveTopics value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    TResult selectTopic(_SelectTopic value),
+    TResult unSelectTopic(_UnSelectTopic value),
+    TResult saveTopics(_SaveTopics value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (unSelectTopic != null) {
@@ -464,9 +510,11 @@ abstract class _UnSelectTopic implements TopicSelectionEvent {
   const factory _UnSelectTopic(String topicId) = _$_UnSelectTopic;
 
   String get topicId;
+  @JsonKey(ignore: true)
   _$UnSelectTopicCopyWith<_UnSelectTopic> get copyWith;
 }
 
+/// @nodoc
 abstract class _$SaveTopicsCopyWith<$Res> {
   factory _$SaveTopicsCopyWith(
           _SaveTopics value, $Res Function(_SaveTopics) then) =
@@ -476,6 +524,7 @@ abstract class _$SaveTopicsCopyWith<$Res> {
   $UserCopyWith<$Res> get user;
 }
 
+/// @nodoc
 class __$SaveTopicsCopyWithImpl<$Res>
     extends _$TopicSelectionEventCopyWithImpl<$Res>
     implements _$SaveTopicsCopyWith<$Res> {
@@ -506,15 +555,24 @@ class __$SaveTopicsCopyWithImpl<$Res>
   }
 }
 
-class _$_SaveTopics implements _SaveTopics {
+/// @nodoc
+class _$_SaveTopics with DiagnosticableTreeMixin implements _SaveTopics {
   const _$_SaveTopics(this.user) : assert(user != null);
 
   @override
   final User user;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicSelectionEvent.saveTopics(user: $user)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TopicSelectionEvent.saveTopics'))
+      ..add(DiagnosticsProperty('user', user));
   }
 
   @override
@@ -529,17 +587,18 @@ class _$_SaveTopics implements _SaveTopics {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(user);
 
+  @JsonKey(ignore: true)
   @override
   _$SaveTopicsCopyWith<_SaveTopics> get copyWith =>
       __$SaveTopicsCopyWithImpl<_SaveTopics>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedTopics(KtList<String> topicIds),
-    @required Result selectTopic(String topicId),
-    @required Result unSelectTopic(String topicId),
-    @required Result saveTopics(User user),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedTopics(KtList<String> topicIds),
+    @required TResult selectTopic(String topicId),
+    @required TResult unSelectTopic(String topicId),
+    @required TResult saveTopics(User user),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -550,12 +609,12 @@ class _$_SaveTopics implements _SaveTopics {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedTopics(KtList<String> topicIds),
-    Result selectTopic(String topicId),
-    Result unSelectTopic(String topicId),
-    Result saveTopics(User user),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedTopics(KtList<String> topicIds),
+    TResult selectTopic(String topicId),
+    TResult unSelectTopic(String topicId),
+    TResult saveTopics(User user),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (saveTopics != null) {
@@ -566,11 +625,11 @@ class _$_SaveTopics implements _SaveTopics {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedTopics(_UpdateSelectedTopic value),
-    @required Result selectTopic(_SelectTopic value),
-    @required Result unSelectTopic(_UnSelectTopic value),
-    @required Result saveTopics(_SaveTopics value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    @required TResult selectTopic(_SelectTopic value),
+    @required TResult unSelectTopic(_UnSelectTopic value),
+    @required TResult saveTopics(_SaveTopics value),
   }) {
     assert(updateSelectedTopics != null);
     assert(selectTopic != null);
@@ -581,12 +640,12 @@ class _$_SaveTopics implements _SaveTopics {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedTopics(_UpdateSelectedTopic value),
-    Result selectTopic(_SelectTopic value),
-    Result unSelectTopic(_UnSelectTopic value),
-    Result saveTopics(_SaveTopics value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedTopics(_UpdateSelectedTopic value),
+    TResult selectTopic(_SelectTopic value),
+    TResult unSelectTopic(_UnSelectTopic value),
+    TResult saveTopics(_SaveTopics value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (saveTopics != null) {
@@ -600,15 +659,17 @@ abstract class _SaveTopics implements TopicSelectionEvent {
   const factory _SaveTopics(User user) = _$_SaveTopics;
 
   User get user;
+  @JsonKey(ignore: true)
   _$SaveTopicsCopyWith<_SaveTopics> get copyWith;
 }
 
+/// @nodoc
 class _$TopicSelectionStateTearOff {
   const _$TopicSelectionStateTearOff();
 
 // ignore: unused_element
   _TopicSelectionState call(
-      {KtList<String> selectedTopicIds,
+      {@required KtList<String> selectedTopicIds,
       bool topicSavedSuccess,
       Failure failure}) {
     return _TopicSelectionState(
@@ -619,17 +680,21 @@ class _$TopicSelectionStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $TopicSelectionState = _$TopicSelectionStateTearOff();
 
+/// @nodoc
 mixin _$TopicSelectionState {
   KtList<String> get selectedTopicIds;
   bool get topicSavedSuccess;
   Failure get failure;
 
+  @JsonKey(ignore: true)
   $TopicSelectionStateCopyWith<TopicSelectionState> get copyWith;
 }
 
+/// @nodoc
 abstract class $TopicSelectionStateCopyWith<$Res> {
   factory $TopicSelectionStateCopyWith(
           TopicSelectionState value, $Res Function(TopicSelectionState) then) =
@@ -642,6 +707,7 @@ abstract class $TopicSelectionStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class _$TopicSelectionStateCopyWithImpl<$Res>
     implements $TopicSelectionStateCopyWith<$Res> {
   _$TopicSelectionStateCopyWithImpl(this._value, this._then);
@@ -678,6 +744,7 @@ class _$TopicSelectionStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$TopicSelectionStateCopyWith<$Res>
     implements $TopicSelectionStateCopyWith<$Res> {
   factory _$TopicSelectionStateCopyWith(_TopicSelectionState value,
@@ -693,6 +760,7 @@ abstract class _$TopicSelectionStateCopyWith<$Res>
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$TopicSelectionStateCopyWithImpl<$Res>
     extends _$TopicSelectionStateCopyWithImpl<$Res>
     implements _$TopicSelectionStateCopyWith<$Res> {
@@ -721,9 +789,13 @@ class __$TopicSelectionStateCopyWithImpl<$Res>
   }
 }
 
-class _$_TopicSelectionState implements _TopicSelectionState {
+/// @nodoc
+class _$_TopicSelectionState
+    with DiagnosticableTreeMixin
+    implements _TopicSelectionState {
   const _$_TopicSelectionState(
-      {this.selectedTopicIds, this.topicSavedSuccess, this.failure});
+      {@required this.selectedTopicIds, this.topicSavedSuccess, this.failure})
+      : assert(selectedTopicIds != null);
 
   @override
   final KtList<String> selectedTopicIds;
@@ -733,8 +805,18 @@ class _$_TopicSelectionState implements _TopicSelectionState {
   final Failure failure;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicSelectionState(selectedTopicIds: $selectedTopicIds, topicSavedSuccess: $topicSavedSuccess, failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TopicSelectionState'))
+      ..add(DiagnosticsProperty('selectedTopicIds', selectedTopicIds))
+      ..add(DiagnosticsProperty('topicSavedSuccess', topicSavedSuccess))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override
@@ -758,6 +840,7 @@ class _$_TopicSelectionState implements _TopicSelectionState {
       const DeepCollectionEquality().hash(topicSavedSuccess) ^
       const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$TopicSelectionStateCopyWith<_TopicSelectionState> get copyWith =>
       __$TopicSelectionStateCopyWithImpl<_TopicSelectionState>(
@@ -766,7 +849,7 @@ class _$_TopicSelectionState implements _TopicSelectionState {
 
 abstract class _TopicSelectionState implements TopicSelectionState {
   const factory _TopicSelectionState(
-      {KtList<String> selectedTopicIds,
+      {@required KtList<String> selectedTopicIds,
       bool topicSavedSuccess,
       Failure failure}) = _$_TopicSelectionState;
 
@@ -777,5 +860,6 @@ abstract class _TopicSelectionState implements TopicSelectionState {
   @override
   Failure get failure;
   @override
+  @JsonKey(ignore: true)
   _$TopicSelectionStateCopyWith<_TopicSelectionState> get copyWith;
 }

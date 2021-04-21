@@ -1,132 +1,184 @@
-import 'package:cato_feed/application/auth/auth.dart';
-import 'package:cato_feed/application/user_profile/user_profile.dart';
+import 'package:cato_feed/application/video_player/video_player_bloc.dart';
 import 'package:cato_feed/injection.dart';
-import 'package:cato_feed/presentation/routes/Router.gr.dart';
-import 'package:cato_feed/presentation/screens/home/main_feed.dart';
-import 'package:cato_feed/presentation/screens/home/saved_post_feed.dart';
-import 'package:cato_feed/presentation/screens/profile/profile.dart';
+import 'package:cato_feed/presentation/screens/home_feed/home_feed_screen.dart';
+import 'package:cato_feed/presentation/screens/playground/playground.dart';
+import 'package:cato_feed/presentation/screens/profile/user_profile.dart';
+import 'package:cato_feed/presentation/screens/search/search.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:cato_feed/presentation/utils/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:cato_feed/domain/core/i_logger.dart';
+import 'package:youtube_player_webview/core/youtube_player.dart';
+import 'package:youtube_player_webview/utils/youtube_player_controller.dart';
+import 'package:youtube_player_webview/utils/youtube_player_flags.dart';
+import 'package:youtube_player_webview/widgets/widgets.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  Widget build(BuildContext context) {
+    makeStatusBarWhite();
+    return BlocProvider(create: (context) => getIt<VideoPlayerBloc>(), child: HomeScreenPage(),);
+  }
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenPage extends StatefulWidget {
   @override
-  void initState() {
-    super.initState();
-    initDynamicLinks();
-  }
+  _HomeScreenPageState createState() => _HomeScreenPageState();
+}
 
-  void initDynamicLinks() async {
-    FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData dynamicLink) async {
-      var isAuthenticated = context
-          .bloc<AuthBloc>()
-          .state
-          .maybeWhen(orElse: () => false, authenticated: (_) => true);
+class _HomeScreenPageState extends State<HomeScreenPage> {
 
-      if (isAuthenticated) {
-        final Uri deepLink = dynamicLink?.link;
 
-        if (deepLink != null) {
-          context.navigator.push(deepLink.path);
-        }
-      } else {
-        context.navigator.push(CatoRoutes.onboardingScreen);
-      }
-    }, onError: (OnLinkErrorException e) async {
-      getIt<ILogger>().logException(e);
-    });
-  }
-
-  List<Widget> _pages = [
-    MainFeedScreen(
-      key: PageStorageKey('feedScreen'),
-    ),
-    SavedPostScreen(
-      key: PageStorageKey('savedPosts'),
-    ),
-    ProfileScreen(
-      key: PageStorageKey('profileScreen'),
-    )
-  ];
   int _currentPage = 0;
   final PageStorageBucket _bucket = PageStorageBucket();
+  YoutubePlayerController _controller;
+  bool _isPlayerReady = false;
+
+  @override
+  void initState() {
+    _controller = YoutubePlayerController(
+      initialVideoId: '',
+      flags: YoutubePlayerFlags(
+        autoPlay: true,
+        enableCaption: false,
+        controlsVisibleAtStart: false,
+        hideControls: false,
+        loop: false,
+        disableDragSeek: false,
+        startAt: 0,
+      ),
+    );
+    super.initState();
+  }
+
+  @override
+  void deactivate() {
+    _controller.pause();
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    _controller = null;
+    super.dispose();
+  }
+
+  HomeFeedScreen _homeFeedScreen;
+  Widget _getPage(int index, Container player) {
+    switch(index) {
+      case 0: {
+        if(_homeFeedScreen == null) {
+          _homeFeedScreen = HomeFeedScreen(player: player, controller: _controller,);
+        } else {
+          _homeFeedScreen.updatePlayer(player: player);
+        }
+
+        return _homeFeedScreen;
+      }
+      case 1: return SearchScreen();
+      case 2: return PlaygroundScreen();
+      case 3: return UserProfileScreen();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var photoUrl = context
-        .bloc<AuthBloc>()
-        .state
-        .maybeWhen(orElse: () => '', authenticated: (user) => user.photoUrl);
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarBrightness: Brightness.dark));
-    return BlocProvider(
-      create: (_) => getIt<UserProfileBloc>()..add(UserProfileEvent.refresh()),
-      child: PlatformScaffold(
-        backgroundColor: ColorAssets.black32,
-        body: Container(
-          child: PageStorage(
-            bucket: _bucket,
-            child: _pages[_currentPage],
+    makeStatusBarWhite();
+    return YoutubePlayerBuilder(
+      player: YoutubePlayer(
+        controller: _controller,
+        onReady: () {
+          _isPlayerReady = true;
+        },
+        bottomActions: [
+          const SizedBox(width: 14.0),
+          CurrentPosition(),
+          const SizedBox(width: 8.0),
+          ProgressBar(
+            controller: _controller,
+            isExpanded: true,
           ),
-        ),
-        bottomNavBar: PlatformNavBar(
-          items: _buildNavBar(context, photoUrl),
-          currentIndex: _currentPage,
-          backgroundColor: ColorAssets.black21,
-          material: (_, __) => MaterialNavBarData(
-            selectedItemColor: Colors.white,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-          ),
-          cupertino: (_, __) => CupertinoTabBarData(
-            activeColor: Colors.white,
-          ),
-          itemChanged: (value) {
-            setState(() {
-              _currentPage = value;
-            });
-          },
-        ),
+          RemainingDuration(),
+          const SizedBox(width: 14.0),
+          FullScreenButton(),
+        ],
+        onEnded: (e) {
+          context
+              .read<VideoPlayerBloc>()
+              .add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
+        },
+        showVideoProgressIndicator: true,
       ),
+      onEnterFullScreen: () async {
+        await Future.delayed(Duration(milliseconds: 500));
+        _controller.play();
+      },
+      onExitFullScreen: () async {
+        await Future.delayed(Duration(milliseconds: 500));
+        _controller.play();
+      },
+      builder: (context, player) {
+        return PlatformScaffold(
+          backgroundColor: ColorAssets.black32,
+          body: SafeArea(
+            child: Container(
+              child: PageStorage(
+                bucket: _bucket,
+                child: _getPage(_currentPage, player),
+              ),
+            ),
+          ),
+          bottomNavBar: PlatformNavBar(
+            items: _buildNavBar(context),
+            currentIndex: _currentPage,
+            backgroundColor: Colors.white,
+            material: (_, __) => MaterialNavBarData(
+              selectedItemColor: Color(0xFF51DED6),
+              showSelectedLabels: true,
+              showUnselectedLabels: true,
+              unselectedItemColor: Color(0xFF323232),
+              type: BottomNavigationBarType.fixed,
+            ),
+            cupertino: (_, __) => CupertinoTabBarData(
+              activeColor: Color(0xFF51DED6),
+              backgroundColor: Colors.white,
+              inactiveColor: Color(0xFF323232),
+            ),
+            itemChanged: (value) {
+              setState(() {
+                _currentPage = value;
+              });
+            },
+          ),
+        );
+      },
     );
   }
 
-  List<BottomNavigationBarItem> _buildNavBar(context, photoUrl) {
+  List<BottomNavigationBarItem> _buildNavBar(context) {
     return [
       BottomNavigationBarItem(
-        icon: Icon(CupertinoIcons.home, color: Colors.white),
-        activeIcon: Icon(CupertinoIcons.home, color: Colors.white),
-        title: Text('Home'),
+        icon: Icon(Icons.home_outlined, color: Color(0xFF323232)),
+        activeIcon: Icon(Icons.home, color: Color(0xFF51DED6)),
+        label: 'Home',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.bookmark_border, color: Colors.white),
-        title: Text('Bookmarks'),
-        activeIcon: Icon(Icons.bookmark, color: Colors.white),
+        icon: Icon(Icons.search_outlined, color: Color(0xFF323232)),
+        label: 'Explore',
+        activeIcon: Icon(Icons.search, color: Color(0xFF51DED6)),
       ),
       BottomNavigationBarItem(
-        icon: Container(
-          width: 24,
-          height: 24,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: NetworkImage(photoUrl),
-            ),
-          ),
-        ),
-        title: Text('Profile'),
+        icon: Icon(Icons.widgets_outlined, color: Color(0xFF323232)),
+        label: 'Playground',
+        activeIcon: Icon(Icons.widgets_rounded, color: Color(0xFF51DED6)),
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.account_circle_outlined, color: Color(0xFF323232)),
+        label: 'My Profile',
+        activeIcon: Icon(Icons.account_circle, color: Color(0xFF51DED6)),
       ),
     ];
   }

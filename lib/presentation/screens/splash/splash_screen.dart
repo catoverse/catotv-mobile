@@ -45,13 +45,13 @@ class SplashPage extends StatelessWidget {
             state.when(
               initial: () {},
               updateRequired: () {
-                context.bloc<SplashBloc>().add(SplashEvent.updateRequired());
+                context.read<SplashBloc>().add(SplashEvent.updateRequired());
               },
               failure: (failure) {
-                context.bloc<SplashBloc>().add(SplashEvent.failure(failure));
+                context.read<SplashBloc>().add(SplashEvent.failure(failure));
               },
               success: () {
-                context.bloc<AuthBloc>().add(AuthEvent.authCheckRequested());
+                context.read<AuthBloc>().add(AuthEvent.authCheckRequested());
               },
             );
           },
@@ -64,21 +64,22 @@ class SplashPage extends StatelessWidget {
                 // Extract the invitation code
                 var inviteCode = await getInviteCodeFromDynamicLink();
                 if (inviteCode == null || inviteCode.isEmpty) {
-                  context.navigator.replace(CatoRoutes.onboardInviteScreen);
+                  // context.navigator.replace(CatoRoutes.onboardInviteScreen);
+                  context.navigator.replace(CatoRoutes.onboardLoginScreen);
                 } else {
-                  context.bloc<AuthBloc>().add(
+                  context.read<AuthBloc>().add(
                       AuthEvent.sessionLogin(name: '', inviteCode: inviteCode));
                 }
               },
               authenticated: (user) {
-                context.bloc<TopicBloc>().add(TopicEvent.get());
+                context.read<TopicBloc>().add(TopicEvent.get());
               },
               sessionLoggedIn: (user) {
-                context.bloc<TopicBloc>().add(TopicEvent.get());
+                context.read<TopicBloc>().add(TopicEvent.get());
               },
               failure: (message) {
                 context
-                    .bloc<SplashBloc>()
+                    .read<SplashBloc>()
                     .add(SplashEvent.failure(Failure.message(message)));
               },
             );
@@ -87,15 +88,15 @@ class SplashPage extends StatelessWidget {
         BlocListener<TopicBloc, TopicState>(
           listener: (_, state) async {
             // ignore: close_sinks
-            var bloc = context.bloc<SplashBloc>();
+            var bloc = context.read<SplashBloc>();
 
             if (state.failure != null) {
               bloc.add(SplashEvent.failure(state.failure));
             } else if (state.allTopics != null) {
-              context.bloc<AuthBloc>().state.maybeMap(
+              context.read<AuthBloc>().state.maybeMap(
                   authenticated: (e) {
                     // Get the user profile
-                    context.bloc<UserProfileBloc>().add(UserProfileEvent.get());
+                    context.read<UserProfileBloc>().add(UserProfileEvent.get(e.user.id));
                   },
                   sessionLoggedIn: (e) {
                     // Jump to onboard login
@@ -112,8 +113,9 @@ class SplashPage extends StatelessWidget {
             // Navigate to the onboard selection
             context.navigator.replace(CatoRoutes.onboardScreen);
           } else {
+            context.read<UserProfileBloc>().add(UserProfileEvent.refresh());
             // Request for posts
-            context.bloc<PostBloc>().add(PostEvent.loadRecommendedVideos());
+            context.read<PostBloc>().add(PostEvent.loadRecommendedVideos(context.read<AuthBloc>().state.getUserId() ?? ''));
             // Navigate to home screen
             await openDynamicLinkOr(context,
                 otherScreen: CatoRoutes.homeScreen);
@@ -133,7 +135,6 @@ class SplashPage extends StatelessWidget {
             child: Container(
               margin: EdgeInsets.only(left: 16, right: 16, bottom: 20),
               child: BlocBuilder<SplashBloc, SplashState>(
-                cubit: context.bloc<SplashBloc>(),
                 builder: (_, state) {
                   return state.maybeWhen(
                     forceUpdateRequired: () => Column(
@@ -161,8 +162,8 @@ class SplashPage extends StatelessWidget {
                             getIt<ILogger>()
                                 .logEvent(LogEvents.EVENT_UPDATE_APP_CLICKED);
                             var url = (Platform.isAndroid)
-                                ? getIt.get(instanceName: 'PlayStoreUrl')
-                                : getIt.get(instanceName: 'AppStoreUrl');
+                                ? getIt.get(instanceName: 'PlayStoreUrl') as String
+                                : getIt.get(instanceName: 'AppStoreUrl') as String;
                             if (await canLaunch(url)) {
                               await launch(url);
                             }
@@ -171,11 +172,7 @@ class SplashPage extends StatelessWidget {
                       ],
                     ),
                     failure: (failure) {
-                      var message = failure.map(
-                        error: (err) => err.error.toString(),
-                        exception: (_) => 'Unknown error',
-                        message: (e) => e.message,
-                      );
+                      var message = failure.toString();
 
                       return Column(
                         mainAxisSize: MainAxisSize.min,
@@ -200,10 +197,10 @@ class SplashPage extends StatelessWidget {
                               getIt<ILogger>().logEvent(
                                   LogEvents.EVENT_SPLASH_ERROR_RETRY_CLICK);
                               context
-                                  .bloc<InitBloc>()
+                                  .read<InitBloc>()
                                   .add(InitEvent.requestAppVersionCheck());
                               context
-                                  .bloc<SplashBloc>()
+                                  .read<SplashBloc>()
                                   .add(SplashEvent.loading());
                             },
                           ),

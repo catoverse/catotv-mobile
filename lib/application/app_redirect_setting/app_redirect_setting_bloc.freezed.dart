@@ -9,6 +9,7 @@ part of 'app_redirect_setting_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AppRedirectSettingEventTearOff {
   const _$AppRedirectSettingEventTearOff();
 
@@ -23,40 +24,44 @@ class _$AppRedirectSettingEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AppRedirectSettingEvent = _$AppRedirectSettingEventTearOff();
 
+/// @nodoc
 mixin _$AppRedirectSettingEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result toggleAppRedirect(),
-    @required Result initialize(),
+  TResult when<TResult extends Object>({
+    @required TResult toggleAppRedirect(),
+    @required TResult initialize(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result toggleAppRedirect(),
-    Result initialize(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult toggleAppRedirect(),
+    TResult initialize(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result toggleAppRedirect(_Toggle value),
-    @required Result initialize(_Init value),
+  TResult map<TResult extends Object>({
+    @required TResult toggleAppRedirect(_Toggle value),
+    @required TResult initialize(_Init value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result toggleAppRedirect(_Toggle value),
-    Result initialize(_Init value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult toggleAppRedirect(_Toggle value),
+    TResult initialize(_Init value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $AppRedirectSettingEventCopyWith<$Res> {
   factory $AppRedirectSettingEventCopyWith(AppRedirectSettingEvent value,
           $Res Function(AppRedirectSettingEvent) then) =
       _$AppRedirectSettingEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AppRedirectSettingEventCopyWithImpl<$Res>
     implements $AppRedirectSettingEventCopyWith<$Res> {
   _$AppRedirectSettingEventCopyWithImpl(this._value, this._then);
@@ -66,11 +71,13 @@ class _$AppRedirectSettingEventCopyWithImpl<$Res>
   final $Res Function(AppRedirectSettingEvent) _then;
 }
 
+/// @nodoc
 abstract class _$ToggleCopyWith<$Res> {
   factory _$ToggleCopyWith(_Toggle value, $Res Function(_Toggle) then) =
       __$ToggleCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$ToggleCopyWithImpl<$Res>
     extends _$AppRedirectSettingEventCopyWithImpl<$Res>
     implements _$ToggleCopyWith<$Res> {
@@ -81,12 +88,21 @@ class __$ToggleCopyWithImpl<$Res>
   _Toggle get _value => super._value as _Toggle;
 }
 
-class _$_Toggle implements _Toggle {
+/// @nodoc
+class _$_Toggle with DiagnosticableTreeMixin implements _Toggle {
   const _$_Toggle();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AppRedirectSettingEvent.toggleAppRedirect()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'AppRedirectSettingEvent.toggleAppRedirect'));
   }
 
   @override
@@ -99,9 +115,9 @@ class _$_Toggle implements _Toggle {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result toggleAppRedirect(),
-    @required Result initialize(),
+  TResult when<TResult extends Object>({
+    @required TResult toggleAppRedirect(),
+    @required TResult initialize(),
   }) {
     assert(toggleAppRedirect != null);
     assert(initialize != null);
@@ -110,10 +126,10 @@ class _$_Toggle implements _Toggle {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result toggleAppRedirect(),
-    Result initialize(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult toggleAppRedirect(),
+    TResult initialize(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (toggleAppRedirect != null) {
@@ -124,9 +140,9 @@ class _$_Toggle implements _Toggle {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result toggleAppRedirect(_Toggle value),
-    @required Result initialize(_Init value),
+  TResult map<TResult extends Object>({
+    @required TResult toggleAppRedirect(_Toggle value),
+    @required TResult initialize(_Init value),
   }) {
     assert(toggleAppRedirect != null);
     assert(initialize != null);
@@ -135,10 +151,10 @@ class _$_Toggle implements _Toggle {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result toggleAppRedirect(_Toggle value),
-    Result initialize(_Init value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult toggleAppRedirect(_Toggle value),
+    TResult initialize(_Init value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (toggleAppRedirect != null) {
@@ -152,11 +168,13 @@ abstract class _Toggle implements AppRedirectSettingEvent {
   const factory _Toggle() = _$_Toggle;
 }
 
+/// @nodoc
 abstract class _$InitCopyWith<$Res> {
   factory _$InitCopyWith(_Init value, $Res Function(_Init) then) =
       __$InitCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$InitCopyWithImpl<$Res>
     extends _$AppRedirectSettingEventCopyWithImpl<$Res>
     implements _$InitCopyWith<$Res> {
@@ -167,12 +185,20 @@ class __$InitCopyWithImpl<$Res>
   _Init get _value => super._value as _Init;
 }
 
-class _$_Init implements _Init {
+/// @nodoc
+class _$_Init with DiagnosticableTreeMixin implements _Init {
   const _$_Init();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AppRedirectSettingEvent.initialize()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AppRedirectSettingEvent.initialize'));
   }
 
   @override
@@ -185,9 +211,9 @@ class _$_Init implements _Init {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result toggleAppRedirect(),
-    @required Result initialize(),
+  TResult when<TResult extends Object>({
+    @required TResult toggleAppRedirect(),
+    @required TResult initialize(),
   }) {
     assert(toggleAppRedirect != null);
     assert(initialize != null);
@@ -196,10 +222,10 @@ class _$_Init implements _Init {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result toggleAppRedirect(),
-    Result initialize(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult toggleAppRedirect(),
+    TResult initialize(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initialize != null) {
@@ -210,9 +236,9 @@ class _$_Init implements _Init {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result toggleAppRedirect(_Toggle value),
-    @required Result initialize(_Init value),
+  TResult map<TResult extends Object>({
+    @required TResult toggleAppRedirect(_Toggle value),
+    @required TResult initialize(_Init value),
   }) {
     assert(toggleAppRedirect != null);
     assert(initialize != null);
@@ -221,10 +247,10 @@ class _$_Init implements _Init {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result toggleAppRedirect(_Toggle value),
-    Result initialize(_Init value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult toggleAppRedirect(_Toggle value),
+    TResult initialize(_Init value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initialize != null) {
@@ -238,6 +264,7 @@ abstract class _Init implements AppRedirectSettingEvent {
   const factory _Init() = _$_Init;
 }
 
+/// @nodoc
 class _$AppRedirectSettingStateTearOff {
   const _$AppRedirectSettingStateTearOff();
 
@@ -249,15 +276,19 @@ class _$AppRedirectSettingStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AppRedirectSettingState = _$AppRedirectSettingStateTearOff();
 
+/// @nodoc
 mixin _$AppRedirectSettingState {
   bool get isEnabled;
 
+  @JsonKey(ignore: true)
   $AppRedirectSettingStateCopyWith<AppRedirectSettingState> get copyWith;
 }
 
+/// @nodoc
 abstract class $AppRedirectSettingStateCopyWith<$Res> {
   factory $AppRedirectSettingStateCopyWith(AppRedirectSettingState value,
           $Res Function(AppRedirectSettingState) then) =
@@ -265,6 +296,7 @@ abstract class $AppRedirectSettingStateCopyWith<$Res> {
   $Res call({bool isEnabled});
 }
 
+/// @nodoc
 class _$AppRedirectSettingStateCopyWithImpl<$Res>
     implements $AppRedirectSettingStateCopyWith<$Res> {
   _$AppRedirectSettingStateCopyWithImpl(this._value, this._then);
@@ -283,6 +315,7 @@ class _$AppRedirectSettingStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$AppRedirectSettingStateCopyWith<$Res>
     implements $AppRedirectSettingStateCopyWith<$Res> {
   factory _$AppRedirectSettingStateCopyWith(_AppRedirectSettingState value,
@@ -292,6 +325,7 @@ abstract class _$AppRedirectSettingStateCopyWith<$Res>
   $Res call({bool isEnabled});
 }
 
+/// @nodoc
 class __$AppRedirectSettingStateCopyWithImpl<$Res>
     extends _$AppRedirectSettingStateCopyWithImpl<$Res>
     implements _$AppRedirectSettingStateCopyWith<$Res> {
@@ -313,15 +347,26 @@ class __$AppRedirectSettingStateCopyWithImpl<$Res>
   }
 }
 
-class _$_AppRedirectSettingState implements _AppRedirectSettingState {
+/// @nodoc
+class _$_AppRedirectSettingState
+    with DiagnosticableTreeMixin
+    implements _AppRedirectSettingState {
   const _$_AppRedirectSettingState({this.isEnabled});
 
   @override
   final bool isEnabled;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AppRedirectSettingState(isEnabled: $isEnabled)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AppRedirectSettingState'))
+      ..add(DiagnosticsProperty('isEnabled', isEnabled));
   }
 
   @override
@@ -337,6 +382,7 @@ class _$_AppRedirectSettingState implements _AppRedirectSettingState {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(isEnabled);
 
+  @JsonKey(ignore: true)
   @override
   _$AppRedirectSettingStateCopyWith<_AppRedirectSettingState> get copyWith =>
       __$AppRedirectSettingStateCopyWithImpl<_AppRedirectSettingState>(
@@ -350,5 +396,6 @@ abstract class _AppRedirectSettingState implements AppRedirectSettingState {
   @override
   bool get isEnabled;
   @override
+  @JsonKey(ignore: true)
   _$AppRedirectSettingStateCopyWith<_AppRedirectSettingState> get copyWith;
 }

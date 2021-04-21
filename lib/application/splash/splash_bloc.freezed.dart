@@ -100,12 +100,18 @@ class __$EventLoadingCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_EventLoading implements _EventLoading {
+class _$_EventLoading with DiagnosticableTreeMixin implements _EventLoading {
   const _$_EventLoading();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashEvent.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'SplashEvent.loading'));
   }
 
   @override
@@ -218,15 +224,23 @@ class __$EventFailureCopyWithImpl<$Res> extends _$SplashEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_EventFailure implements _EventFailure {
+class _$_EventFailure with DiagnosticableTreeMixin implements _EventFailure {
   const _$_EventFailure(this.failure) : assert(failure != null);
 
   @override
   final Failure failure;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashEvent.failure(failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashEvent.failure'))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override
@@ -331,12 +345,20 @@ class __$EventUpdateRequiredCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_EventUpdateRequired implements _EventUpdateRequired {
+class _$_EventUpdateRequired
+    with DiagnosticableTreeMixin
+    implements _EventUpdateRequired {
   const _$_EventUpdateRequired();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashEvent.updateRequired()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'SplashEvent.updateRequired'));
   }
 
   @override
@@ -497,12 +519,18 @@ class __$LoadingCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Loading implements _Loading {
+class _$_Loading with DiagnosticableTreeMixin implements _Loading {
   const _$_Loading();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'SplashState.loading'));
   }
 
   @override
@@ -594,12 +622,21 @@ class __$ForceUpdateRequiredCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_ForceUpdateRequired implements _ForceUpdateRequired {
+class _$_ForceUpdateRequired
+    with DiagnosticableTreeMixin
+    implements _ForceUpdateRequired {
   const _$_ForceUpdateRequired();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashState.forceUpdateRequired()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashState.forceUpdateRequired'));
   }
 
   @override
@@ -710,15 +747,23 @@ class __$FailureCopyWithImpl<$Res> extends _$SplashStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Failure implements _Failure {
+class _$_Failure with DiagnosticableTreeMixin implements _Failure {
   const _$_Failure(this.failure) : assert(failure != null);
 
   @override
   final Failure failure;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SplashState.failure(failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SplashState.failure'))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override

@@ -12,8 +12,8 @@ class Logger implements ILogger {
 
   @override
   void log(String msg) {
-    if(kReleaseMode) {
-      Crashlytics.instance.log(msg);
+    if (kReleaseMode) {
+      FirebaseCrashlytics.instance.log(msg);
     } else {
       print(msg);
     }
@@ -21,9 +21,9 @@ class Logger implements ILogger {
 
   @override
   void logError(Error error, {String msg}) {
-    if(kReleaseMode) {
+    if (kReleaseMode) {
       if (msg != null) log(msg);
-      Crashlytics.instance.recordError(error, error.stackTrace);
+      FirebaseCrashlytics.instance.recordError(error, error.stackTrace);
     } else {
       print(error);
     }
@@ -31,9 +31,9 @@ class Logger implements ILogger {
 
   @override
   void logException(Exception error, {String msg}) {
-    if(kReleaseMode) {
+    if (kReleaseMode) {
       if (msg != null) log(msg);
-      Crashlytics.instance
+      FirebaseCrashlytics.instance
           .recordError(error, StackTrace.fromString(error.toString()));
     } else {
       print(error);
@@ -42,16 +42,8 @@ class Logger implements ILogger {
 
   @override
   void logKeyValue(String key, dynamic value) {
-    if(kReleaseMode) {
-      if (value.runtimeType == bool) {
-        Crashlytics.instance.setBool(key, value);
-      } else if (value.runtimeType == int) {
-        Crashlytics.instance.setInt(key, value);
-      } else if (value.runtimeType == double) {
-        Crashlytics.instance.setDouble(key, value);
-      } else {
-        Crashlytics.instance.setString(key, value.toString());
-      }
+    if (kReleaseMode) {
+      FirebaseCrashlytics.instance.setCustomKey(key, value);
     } else {
       print(key + ': $value');
     }
@@ -59,36 +51,30 @@ class Logger implements ILogger {
 
   @override
   void resetUserIdentifier() {
-    if(kReleaseMode) {
-      Crashlytics.instance.setUserName('');
-      Crashlytics.instance.setUserEmail('');
-      Crashlytics.instance.setUserIdentifier('');
+    if (kReleaseMode) {
+      FirebaseCrashlytics.instance.setUserIdentifier('');
       _analytics.setUserId('');
     }
   }
 
   @override
-  void setUserIdentifier({String name, String email, String identifier}) {
-    if(kReleaseMode) {
-      if (name != null) Crashlytics.instance.setUserName(name);
-      if (email != null) Crashlytics.instance.setUserEmail(email);
-      if (identifier != null) {
-        Crashlytics.instance.setUserIdentifier(identifier);
-        _analytics.setUserId(identifier);
-      }
+  void setUserIdentifier({@required String identifier}) {
+    if (kReleaseMode) {
+      FirebaseCrashlytics.instance.setUserIdentifier(identifier);
+      _analytics.setUserId(identifier);
     }
   }
 
   @override
   void logAppOpen() {
-    if(kReleaseMode) {
+    if (kReleaseMode) {
       _analytics.logAppOpen();
     }
   }
 
   @override
   void logLogin({String loginProvider = 'google'}) {
-    if(kReleaseMode) {
+    if (kReleaseMode) {
       _analytics.logLogin(loginMethod: loginProvider);
     }
   }
@@ -96,7 +82,7 @@ class Logger implements ILogger {
   @override
   void logShare(String itemId,
       {String contentType = 'Post', String method = 'in_app_share'}) {
-    if(kReleaseMode) {
+    if (kReleaseMode) {
       _analytics.logShare(
         contentType: contentType,
         itemId: itemId,
@@ -107,7 +93,7 @@ class Logger implements ILogger {
 
   @override
   void logEvent(String name, {Map<String, dynamic> params}) {
-    if(kReleaseMode) {
+    if (kReleaseMode) {
       _analytics.logEvent(
         name: name,
         parameters: params,

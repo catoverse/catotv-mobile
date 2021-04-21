@@ -7,8 +7,9 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
+import '../../domain/topic/topic.dart';
 import '../screens/app_redirect/app_redirect.dart';
 import '../screens/app_redirect/no_distraction_settings.dart';
 import '../screens/home/home.dart';
@@ -20,6 +21,7 @@ import '../screens/onboard_login/onbord_login.dart';
 import '../screens/onboard_login/onbord_login_back.dart';
 import '../screens/onboard_selection/onboard_selection.dart';
 import '../screens/profile/profile.dart';
+import '../screens/search/videos_by_category.dart';
 import '../screens/single_post/single_post.dart';
 import '../screens/splash/splash_screen.dart';
 import '../screens/topic_selection/topic_selection.dart';
@@ -40,9 +42,8 @@ class CatoRoutes {
   static const String noDistractionSettingsScreen =
       '/no-distraction-settings-screen';
   static const String appRedirectScreen = '/app-redirect-screen';
-  static const String _singlePostScreen = '/video/:postId';
-  static String singlePostScreen({@required dynamic postId}) =>
-      '/video/$postId';
+  static const String videosByCategoryScreen = '/videos-by-category-screen';
+  static const String singlePostScreen = '/single-post-screen';
   static const all = <String>{
     splashScreen,
     onboardScreen,
@@ -57,7 +58,8 @@ class CatoRoutes {
     notificationSettingScreen,
     noDistractionSettingsScreen,
     appRedirectScreen,
-    _singlePostScreen,
+    videosByCategoryScreen,
+    singlePostScreen,
   };
 }
 
@@ -80,7 +82,8 @@ class CatoRouter extends RouterBase {
     RouteDef(CatoRoutes.noDistractionSettingsScreen,
         page: NoDistractionSettingsScreen),
     RouteDef(CatoRoutes.appRedirectScreen, page: AppRedirectScreen),
-    RouteDef(CatoRoutes._singlePostScreen, page: SinglePostScreen),
+    RouteDef(CatoRoutes.videosByCategoryScreen, page: VideosByCategoryScreen),
+    RouteDef(CatoRoutes.singlePostScreen, page: SinglePostScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -173,10 +176,22 @@ class CatoRouter extends RouterBase {
         settings: data,
       );
     },
-    SinglePostScreen: (data) {
+    VideosByCategoryScreen: (data) {
+      final args = data.getArgs<VideosByCategoryScreenArguments>(
+        orElse: () => VideosByCategoryScreenArguments(),
+      );
       return buildAdaptivePageRoute<dynamic>(
-        builder: (context) =>
-            SinglePostScreen(postId: data.pathParams['postId'].stringValue),
+        builder: (context) => VideosByCategoryScreen(
+          key: args.key,
+          topic: args.topic,
+        ),
+        settings: data,
+      );
+    },
+    SinglePostScreen: (data) {
+      final args = data.getArgs<SinglePostScreenArguments>(nullOk: false);
+      return buildAdaptivePageRoute<dynamic>(
+        builder: (context) => SinglePostScreen(postId: args.postId),
         settings: data,
       );
     },
@@ -203,4 +218,17 @@ class ProfileOverviewScreenArguments {
 class AppRedirectScreenArguments {
   final int startStep;
   AppRedirectScreenArguments({this.startStep = 1});
+}
+
+/// VideosByCategoryScreen arguments holder class
+class VideosByCategoryScreenArguments {
+  final Key key;
+  final Topic topic;
+  VideosByCategoryScreenArguments({this.key, this.topic});
+}
+
+/// SinglePostScreen arguments holder class
+class SinglePostScreenArguments {
+  final String postId;
+  SinglePostScreenArguments({@required this.postId});
 }

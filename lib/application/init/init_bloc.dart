@@ -5,6 +5,7 @@ import 'package:cato_feed/domain/core/failure.dart';
 import 'package:cato_feed/domain/core/i_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'init_event.dart';
 

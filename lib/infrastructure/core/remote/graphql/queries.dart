@@ -15,7 +15,7 @@ class GqlQueries {
   static final String queryUserRecommendation = r'''
     query userRecommendation($userId: ID!){
       userRecommendation(userId: $userId) {
-        _id
+        id
         title
         video_url
         topic
@@ -29,9 +29,9 @@ class GqlQueries {
 
   // Complete
   static final String queryUserRecommendationByTopic = r'''
-    query userRecommendationByTopic($userId: ID!, $topicId: ID!){
-      userRecommendationByTopic(userId: $userId, topicId: $topicId) {
-        _id
+    query userRecommendationByTopic($userId: ID!, $topicId: ID!, $limit: Int){
+      userRecommendationByTopic(userId: $userId, topicId: $topicId, limit: $limit) {
+        id
         title
         video_url
         topic
@@ -68,7 +68,7 @@ class GqlQueries {
   static final String queryUserProfile = r'''
     query userProfile($userId: ID!) {
       userProfile(userId: $userId) {
-        _id
+        id
         name
         selectedTopics
         totalWatchTime
@@ -96,10 +96,6 @@ class GqlQueries {
           description
           author_name
           video_url
-          topic {
-              id
-              name
-          }
           start_timestamp
           end_timestamp
       }
@@ -275,7 +271,7 @@ class GqlQueries {
 
   // Complete
   static final String mutationCreateUserProfile = r'''
-    mutation createUserProfile($name: String!, $userId: ID!, $selectedTopics: [TopicInput]!) {
+    mutation createUserProfile($name: String!, $userId: ID!, $selectedTopics: [ID]!) {
       createUserProfile(user: {
         name: $name,
         userId: $userId,
@@ -294,7 +290,7 @@ class GqlQueries {
           count
         }
         userId
-        _id
+        id
         WatchHistory
       }
     }
@@ -302,7 +298,7 @@ class GqlQueries {
 
   // Complete
   static final String mutationUpdateUserProfile = r'''
-    mutation updateUserProfile($name: String!, $userId: ID!, $selectedTopics: [TopicInput]!) {
+    mutation updateUserProfile($name: String!, $userId: ID!, $selectedTopics: [ID]!) {
       updateUserProfile(userId: $userId, user: {
         name: $name,
         userId: $userId,
@@ -321,7 +317,7 @@ class GqlQueries {
           count
         }
         userId
-        _id
+        id
         WatchHistory
       }
     }
@@ -351,7 +347,7 @@ class GqlQueries {
           count
         }
         userId
-        _id
+        id
         WatchHistory
       }
     }
@@ -366,8 +362,8 @@ class GqlQueries {
   }
 
   static Map<String, dynamic> createMapForUserRecommendationByTopic(
-      String userId, String topicId) {
-    return {"userId": userId, "topicId": topicId};
+      String userId, String topicId, int limit) {
+    return {"userId": userId, "topicId": topicId, "limit": limit};
   }
 
   static Map<String, dynamic> createMapForUserProfile(String userId) {
@@ -446,12 +442,12 @@ class GqlQueries {
   }
 
   static Map<String, dynamic> createMapForCreateUserProfile(String name,
-      String userId, List<Map<String, dynamic>> selectedTopics) {
+      String userId, List<String> selectedTopics) {
     return {"name": name, "userId": userId, "selectedTopics": selectedTopics};
   }
 
   static Map<String, dynamic> createMapForUpdateUserProfile(String name,
-      String userId, List<Map<String, dynamic>> selectedTopics) {
+      String userId, List<String> selectedTopics) {
     return {"name": name, "userId": userId, "selectedTopics": selectedTopics};
   }
 

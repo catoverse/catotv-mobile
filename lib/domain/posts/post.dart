@@ -1,6 +1,6 @@
-import 'package:cato_feed/domain/posts/post_thumbnail.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/collection.dart';
+import 'package:flutter/foundation.dart';
+import 'package:meta/meta.dart';
 
 part 'post.freezed.dart';
 

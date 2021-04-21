@@ -1,3 +1,4 @@
+import 'package:cato_feed/domain/posts/post.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:flutter/material.dart';
 
@@ -11,12 +12,12 @@ class SearchResult extends StatelessWidget {
         child: _buildEmptySearchResult());
   }
 
-  Widget _buildSearchResult() {
+  Widget _buildSearchResult(List<Post> posts) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          '12 Results found',
+          '${posts.length} Results found',
           maxLines: 2,
           softWrap: true,
           style: TextStyle(
@@ -32,9 +33,9 @@ class SearchResult extends StatelessWidget {
         Expanded(
           child: ListView.separated(
             itemBuilder: (context, index) {
-              return HorizontalVideoTile();
+              return HorizontalVideoTile(index: index, post: posts[index],);
             },
-            itemCount: 10,
+            itemCount: posts.length,
             separatorBuilder: (context, index) {
               return SizedBox(
                 height: 16,

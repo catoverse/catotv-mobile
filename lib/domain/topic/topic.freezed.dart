@@ -108,7 +108,7 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Topic extends _Topic {
+class _$_Topic extends _Topic with DiagnosticableTreeMixin {
   const _$_Topic(
       {@required this.id,
       @required this.name,
@@ -130,8 +130,19 @@ class _$_Topic extends _Topic {
   final String image;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'Topic(id: $id, name: $name, color: $color, image: $image)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Topic'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('color', color))
+      ..add(DiagnosticsProperty('image', image));
   }
 
   @override

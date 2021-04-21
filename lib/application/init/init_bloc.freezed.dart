@@ -80,12 +80,21 @@ class __$RequestAppVersionCheckCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_RequestAppVersionCheck implements _RequestAppVersionCheck {
+class _$_RequestAppVersionCheck
+    with DiagnosticableTreeMixin
+    implements _RequestAppVersionCheck {
   const _$_RequestAppVersionCheck();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InitEvent.requestAppVersionCheck()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'InitEvent.requestAppVersionCheck'));
   }
 
   @override
@@ -242,12 +251,18 @@ class __$InitialCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Initial implements _Initial {
+class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   const _$_Initial();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InitState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'InitState.initial'));
   }
 
   @override
@@ -344,12 +359,20 @@ class __$UpdateRequiredCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_UpdateRequired implements _UpdateRequired {
+class _$_UpdateRequired
+    with DiagnosticableTreeMixin
+    implements _UpdateRequired {
   const _$_UpdateRequired();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InitState.updateRequired()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'InitState.updateRequired'));
   }
 
   @override
@@ -468,15 +491,23 @@ class __$InitFailureCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_InitFailure implements _InitFailure {
+class _$_InitFailure with DiagnosticableTreeMixin implements _InitFailure {
   const _$_InitFailure(this.failure) : assert(failure != null);
 
   @override
   final Failure failure;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InitState.failure(failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'InitState.failure'))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override
@@ -586,12 +617,18 @@ class __$InitSuccessCopyWithImpl<$Res> extends _$InitStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_InitSuccess implements _InitSuccess {
+class _$_InitSuccess with DiagnosticableTreeMixin implements _InitSuccess {
   const _$_InitSuccess();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InitState.success()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'InitState.success'));
   }
 
   @override

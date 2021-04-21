@@ -18,10 +18,11 @@ void _appBlockerSetupBackgroundChannel(
     if (call.method == 'handleBackgroundMessage') {
       final CallbackHandle handle =
           CallbackHandle.fromRawHandle(call.arguments['handle']);
-      final Function handlerFunction =
-          PluginUtilities.getCallbackFromHandle(handle);
+      Function handlerFunction;
+      // TODO: Fix this
+      //= PluginUtilities.getCallbackFromHandle(handle);
       try {
-        await handlerFunction(call.arguments['appPackage']);
+        //await handlerFunction(call.arguments['appPackage']);
       } catch (e) {
         print('Unable to handle incoming background message.');
         print(e);
@@ -49,48 +50,49 @@ class AppBlocker {
 
   final MethodChannel _channel;
 
-  MessageHandler _onResume;
-  MessageHandler _onBackgroundMessage;
+  // MessageHandler _onResume;
+  // MessageHandler _onBackgroundMessage;
 
-  void configure({
-    MessageHandler onResume,
-    MessageHandler onBackgroundMessage,
-  }) {
-    _onResume = onResume;
-
-    _channel.setMethodCallHandler(_handleMethod);
-    _channel.invokeMethod<void>('configure');
-
-    if (onBackgroundMessage != null) {
-      _onBackgroundMessage = onBackgroundMessage;
-      final CallbackHandle backgroundSetupHandle =
-          PluginUtilities.getCallbackHandle(_appBlockerSetupBackgroundChannel);
-
-      final CallbackHandle backgroundMessageHandle =
-          PluginUtilities.getCallbackHandle(_onBackgroundMessage);
-
-      if (backgroundMessageHandle == null) {
-        throw ArgumentError('''
-          Failed to setup background message handler!
-          ''');
-      }
-
-      _channel.invokeMethod<bool>(
-        'AppBlockerService#start',
-        <String, dynamic>{
-          'setupHandle': backgroundSetupHandle.toRawHandle(),
-          'backgroundHandle': backgroundMessageHandle.toRawHandle()
-        },
-      );
+  void configure(
+    // MessageHandler onResume,
+    // MessageHandler onBackgroundMessage,
+  ) {
+    // _onResume = onResume;
+    //
+    // _channel.setMethodCallHandler(_handleMethod);
+    // _channel.invokeMethod<void>('configure');
+    //
+    // if (onBackgroundMessage != null) {
+    //   _onBackgroundMessage = onBackgroundMessage;
+    //   // final CallbackHandle backgroundSetupHandle =
+    //   //     PluginUtilities.getCallbackHandle(_appBlockerSetupBackgroundChannel);
+    //   //
+    //   // final CallbackHandle backgroundMessageHandle =
+    //   //     PluginUtilities.getCallbackHandle(_onBackgroundMessage);
+    //   //
+    //   // if (backgroundMessageHandle == null) {
+    //   //   throw ArgumentError('''
+    //   //     Failed to setup background message handler!
+    //   //     ''');
+    //   // }
+    //   //
+    //   // _channel.invokeMethod<bool>(
+    //   //   'AppBlockerService#start',
+    //   //   <String, dynamic>{
+    //   //     'setupHandle': backgroundSetupHandle.toRawHandle(),
+    //   //     'backgroundHandle': backgroundMessageHandle.toRawHandle()
+    //   //   },
+    //   // );
     }
-  }
+
 
   Future<dynamic> _handleMethod(MethodCall call) async {
     switch (call.method) {
       case 'onResume':
         {
           print("onResume called with args ${call.arguments.toString()}");
-          return _onResume(call.arguments.toString());
+          return 0;
+          //return _onResume(call.arguments.toString());
         }
 
       default:
@@ -100,17 +102,23 @@ class AppBlocker {
 
   /// Return AppBlocker state
   Future<bool> isEnabled() async {
-    return await _channel.invokeMethod('isEnabled');
+    // TODO: Fix this
+    return false;
+    //return await _channel.invokeMethod('isEnabled');
   }
 
   /// Enables the appBlocker to block the apps
   Future<bool> enableAppBlocker() async {
-    return await _channel.invokeMethod('enableAppBlocker');
+    // TODO: Fix this
+    return false;
+    //return await _channel.invokeMethod('enableAppBlocker');
   }
 
   /// Disables the appBlocker
   Future<bool> disableAppBlocker() async {
-    return await _channel.invokeMethod('disableAppBlocker');
+    // TODO: Fix this
+    return false;
+    // return await _channel.invokeMethod('disableAppBlocker');
   }
 
   /// Set the restriction time window for the appBlocker.
@@ -118,10 +126,12 @@ class AppBlocker {
   /// The appBlocker will only block apps between time [startTime] and [endTime]
   /// startTime and endTime must be in the format "HH:MM:SS" in 24 hours time.
   Future<bool> setRestrictionTime(String startTime, String endTime) async {
-    return await _channel.invokeMethod(
-      'setTime',
-      {'startTime': startTime, 'endTime': endTime},
-    );
+    // TODO: Fix this
+    return false;
+    // return await _channel.invokeMethod(
+    //   'setTime',
+    //   {'startTime': startTime, 'endTime': endTime},
+    // );
   }
 
   /// Resets the restriction time window for the appBlocker to block app
@@ -131,22 +141,28 @@ class AppBlocker {
   }
 
   Future<Map<String, String>> getRestrictionTime() async {
-    return await _channel.invokeMapMethod('getTime');
+    // TODO: Fix this
+    return {};
+    //return await _channel.invokeMapMethod('getTime');
   }
 
   /// Set the weekdays when you want to appBlocker to block apps.
   Future<bool> setRestrictionWeekDays(List<int> weekDays) async {
     List<String> weekDaysInt = weekDays.map((e) => e.toString()).toList();
-    return await _channel.invokeMethod('setWeekDays', weekDaysInt);
+    // TODO: Fix this
+    return false;
+    //return await _channel.invokeMethod('setWeekDays', weekDaysInt);
   }
 
   Future<List<int>> getRestrictedWeekDays() async {
-    return await _channel.invokeListMethod('getWeekDays');
+    // TODO: Fix this
+    return [];
+    //return await _channel.invokeListMethod('getWeekDays');
   }
 
   /// Resets the weekdays to be restricted to restrict without weekdays
   Future<bool> resetRestrictionWeekDays() async {
-    return await setRestrictionWeekDays(List());
+    return await setRestrictionWeekDays([]);
   }
 
   /// Blocks the given list of packages.
@@ -154,39 +170,50 @@ class AppBlocker {
   /// To reset the blocked packages send an empty list.
   /// Each time send a full list of packages to be blocked.
   Future<bool> updateBlockedPackages(List<String> packages) async {
-    return await _channel.invokeMethod('updateBlockedPackages', packages);
+    // TODO: Fix this
+    return false;
+    //return await _channel.invokeMethod('updateBlockedPackages', packages);
   }
 
   Future<List<String>> getBlockedPackages() async {
-    List<String> packages =  await _channel.invokeListMethod('getBlockedPackages');
-    return List()..addAll(packages);
+    // TODO: Fix this
+    /*List<String> packages =  await _channel.invokeListMethod('getBlockedPackages');
+    return List()..addAll(packages);*/
+    return [];
   }
 
   void bringAppToFront() {
-    _channel.invokeMethod("bringAppToForeground");
+    //_channel.invokeMethod("bringAppToForeground");
   }
 
   Future<bool> isAppUsagePermissionGranted() async {
-    return await _channel.invokeMethod("isAppUsagePermissionGranted");
+    // TODO: Fix this
+    return false;
+  //return await _channel.invokeMethod("isAppUsagePermissionGranted");
   }
 
   void openAppUsageSettings() {
-    _channel.invokeMethod("openAppUsageSettings");
+
+  //_channel.invokeMethod("openAppUsageSettings");
   }
 
   Future<bool> isBatteryOptimizationIgnored() async {
-    return await _channel.invokeMethod("isBatteryOptimizationBypass");
+    // TODO: Fix this
+    return false;
+  //return await _channel.invokeMethod("isBatteryOptimizationBypass");
   }
   
   void openBatteryOptimizationSettings() {
-    _channel.invokeMethod("openBatteryOptimization");
+    //_channel.invokeMethod("openBatteryOptimization");
   }
   
   Future<bool> isOverlayPermissionGranted() async {
-    return await _channel.invokeMethod("isOverlayPermissionGranted");
+    // TODO: Fix this
+    return false;
+  //return await _channel.invokeMethod("isOverlayPermissionGranted");
   }
   
   void requestOverlayPermission() {
-    _channel.invokeMethod("requestOverlayPermission");
+    //_channel.invokeMethod("requestOverlayPermission");
   }
 }

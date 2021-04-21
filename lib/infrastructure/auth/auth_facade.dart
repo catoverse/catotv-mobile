@@ -8,7 +8,6 @@ import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/domain/core/result.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 
 @LazySingleton(as: IAuthFacade)
 class AuthFacade implements IAuthFacade {
@@ -36,14 +35,13 @@ class AuthFacade implements IAuthFacade {
       }
 
       final googleAuthentication = await googleUser.authentication;
-      KtMap<String, dynamic> details = KtMap.from({
+      Map<String, dynamic> details = {
         IUserRepository.KEY_GOOGLE_ID: googleUser.id,
         IUserRepository.KEY_EMAIL: googleUser.email,
         IUserRepository.KEY_PHOTO_URL: googleUser.photoUrl,
         IUserRepository.KEY_NAME: googleUser.displayName,
         IUserRepository.KEY_ACCESS_TOKEN: googleAuthentication.accessToken
-      });
-
+      };
       return await _userRepository.googleLogin(details);
     } on Exception catch (error) {
       logger.logException(error);
@@ -71,7 +69,6 @@ class AuthFacade implements IAuthFacade {
   @override
   Future<Result<Failure, bool>> signOut() async {
     try {
-      var googleId = _googleSignIn.currentUser.id;
       await _googleSignIn.signOut();
       return await _userRepository.signOut();
     } on Exception catch (error) {

@@ -99,7 +99,7 @@ class _NotificationItem {
   final String subTitle;
   bool isChecked = false;
 
-  _NotificationItem({@required this.title, @required this.subTitle, this.isChecked});
+  _NotificationItem({@required this.title, @required this.subTitle, @required this.isChecked});
 
   Widget buildWidget(ValueChanged<bool> onChanged) {
     return Container(

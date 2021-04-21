@@ -8,7 +8,7 @@ import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 import 'package:cato_feed/domain/core/result.dart';
 
-typedef JwtResolver = Future<String> Function();
+typedef JwtResolver = FutureOr<String> Function();
 typedef IsInternetAvailable = Future<bool> Function();
 
 /// A base client for network that wraps graphQl library
@@ -29,21 +29,20 @@ class NetworkClient {
     @required this.jwtResolver,
     @required this.logger,
     @required this.isConnected,
-    this.jwtHeaderKey = "Authorization",
+    @required this.jwtHeaderKey,
   }) {
     _initializeClient();
   }
 
   /// Initializes the [NetworkClient]'s internal states.
   void _initializeClient() async {
-    _httpLink = HttpLink(uri: apiEndpoint);
+    _httpLink = HttpLink(apiEndpoint);
     _authLink = CustomAuthLink(getToken: jwtResolver, headerKey: jwtHeaderKey);
-    _errorLink = ErrorLink(errorHandler: (ErrorResponse response) {
-      logger.logException(response.exception);
-    });
+    _errorLink = ErrorLink();
+
     final Link link = _authLink.concat(_httpLink).concat(_errorLink);
 
-    _client = GraphQLClient(link: link, cache: InMemoryCache());
+    _client = GraphQLClient(link: link, cache: GraphQLCache());
   }
 
   /// Wrapper around graphQl library's query function with error handling support.
@@ -57,14 +56,14 @@ class NetworkClient {
     }
 
     final QueryOptions options = QueryOptions(
-        documentNode: gql(query),
+        document: gql(query),
         variables: variables,
         fetchPolicy: FetchPolicy.networkOnly);
     try {
       final QueryResult result = await _client.query(options);
       return _processResult(result);
     } catch (err) {
-      logger.logException(err,  msg: 'On network_client.dart mutation');
+      logger.logException(err,  msg: 'On network_client.dart query');
       return Result.fail(Failure.error(ServerError(detail: 'Error while connecting to server.')));
     }
   }
@@ -80,7 +79,7 @@ class NetworkClient {
     }
 
     final MutationOptions options = MutationOptions(
-        documentNode: gql(mutationQuery),
+        document: gql(mutationQuery),
         variables: variables,
         fetchPolicy: FetchPolicy.networkOnly);
 
@@ -95,7 +94,7 @@ class NetworkClient {
 
   // For internal use case to handle common exception from query and mutation.
   Future<Result<Failure, dynamic>> _processResult(QueryResult result) async {
-    if (result.hasException) {
+    if (result.hasException && result.exception != null) {
       logger.logException(result.exception);
       return Result.fail(Failure.exception(result.exception));
     }

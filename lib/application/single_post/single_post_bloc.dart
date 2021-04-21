@@ -6,6 +6,7 @@ import 'package:cato_feed/domain/posts/i_post_repository.dart';
 import 'package:cato_feed/domain/posts/post.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'single_post_event.dart';
 part 'single_post_state.dart';

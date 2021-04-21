@@ -7,7 +7,7 @@ abstract class SavedPostsState with _$SavedPostsState {
     List<Post> likedPosts,
     SelectedPage selectedPage
   }) = _SavedPostsState;
-  factory SavedPostsState.initial() => SavedPostsState(savedPosts: List(), likedPosts: List(), selectedPage: SelectedPage.None);
+  factory SavedPostsState.initial() => SavedPostsState(savedPosts: [], likedPosts: [], selectedPage: SelectedPage.None);
 }
 
 enum SelectedPage {

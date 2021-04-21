@@ -10,7 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class RegisterModule {
   
   @Named('ApiEndpoint')
-  String get apiEndpoint => 'http://api.cato.club:5000/graphql';
+  String get apiEndpoint => 'http://18.224.135.76:4000/graphql';
 
   @Named('PlayStoreUrl')
   String get playStoreUrl => 'https://play.google.com/store/apps/details?id=cato.tv.feed';

@@ -9,53 +9,58 @@ part of 'video_player_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$VideoPlayerEventTearOff {
   const _$VideoPlayerEventTearOff();
 
 // ignore: unused_element
-  _SetPlayingPost setCurrentPlayablePlayingId(@nullable String postId) {
+  _SetPlayingPost setCurrentPlayablePlayingId(String postId) {
     return _SetPlayingPost(
       postId,
     );
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $VideoPlayerEvent = _$VideoPlayerEventTearOff();
 
+/// @nodoc
 mixin _$VideoPlayerEvent {
-  @nullable
   String get postId;
 
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result setCurrentPlayablePlayingId(@nullable String postId),
+  TResult when<TResult extends Object>({
+    @required TResult setCurrentPlayablePlayingId(String postId),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result setCurrentPlayablePlayingId(@nullable String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult setCurrentPlayablePlayingId(String postId),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result setCurrentPlayablePlayingId(_SetPlayingPost value),
+  TResult map<TResult extends Object>({
+    @required TResult setCurrentPlayablePlayingId(_SetPlayingPost value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result setCurrentPlayablePlayingId(_SetPlayingPost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult setCurrentPlayablePlayingId(_SetPlayingPost value),
+    @required TResult orElse(),
   });
 
+  @JsonKey(ignore: true)
   $VideoPlayerEventCopyWith<VideoPlayerEvent> get copyWith;
 }
 
+/// @nodoc
 abstract class $VideoPlayerEventCopyWith<$Res> {
   factory $VideoPlayerEventCopyWith(
           VideoPlayerEvent value, $Res Function(VideoPlayerEvent) then) =
       _$VideoPlayerEventCopyWithImpl<$Res>;
-  $Res call({@nullable String postId});
+  $Res call({String postId});
 }
 
+/// @nodoc
 class _$VideoPlayerEventCopyWithImpl<$Res>
     implements $VideoPlayerEventCopyWith<$Res> {
   _$VideoPlayerEventCopyWithImpl(this._value, this._then);
@@ -74,15 +79,17 @@ class _$VideoPlayerEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$SetPlayingPostCopyWith<$Res>
     implements $VideoPlayerEventCopyWith<$Res> {
   factory _$SetPlayingPostCopyWith(
           _SetPlayingPost value, $Res Function(_SetPlayingPost) then) =
       __$SetPlayingPostCopyWithImpl<$Res>;
   @override
-  $Res call({@nullable String postId});
+  $Res call({String postId});
 }
 
+/// @nodoc
 class __$SetPlayingPostCopyWithImpl<$Res>
     extends _$VideoPlayerEventCopyWithImpl<$Res>
     implements _$SetPlayingPostCopyWith<$Res> {
@@ -103,16 +110,27 @@ class __$SetPlayingPostCopyWithImpl<$Res>
   }
 }
 
-class _$_SetPlayingPost implements _SetPlayingPost {
-  const _$_SetPlayingPost(@nullable this.postId);
+/// @nodoc
+class _$_SetPlayingPost
+    with DiagnosticableTreeMixin
+    implements _SetPlayingPost {
+  const _$_SetPlayingPost(this.postId) : assert(postId != null);
 
   @override
-  @nullable
   final String postId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'VideoPlayerEvent.setCurrentPlayablePlayingId(postId: $postId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'VideoPlayerEvent.setCurrentPlayablePlayingId'))
+      ..add(DiagnosticsProperty('postId', postId));
   }
 
   @override
@@ -127,14 +145,15 @@ class _$_SetPlayingPost implements _SetPlayingPost {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(postId);
 
+  @JsonKey(ignore: true)
   @override
   _$SetPlayingPostCopyWith<_SetPlayingPost> get copyWith =>
       __$SetPlayingPostCopyWithImpl<_SetPlayingPost>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result setCurrentPlayablePlayingId(@nullable String postId),
+  TResult when<TResult extends Object>({
+    @required TResult setCurrentPlayablePlayingId(String postId),
   }) {
     assert(setCurrentPlayablePlayingId != null);
     return setCurrentPlayablePlayingId(postId);
@@ -142,9 +161,9 @@ class _$_SetPlayingPost implements _SetPlayingPost {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result setCurrentPlayablePlayingId(@nullable String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult setCurrentPlayablePlayingId(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (setCurrentPlayablePlayingId != null) {
@@ -155,8 +174,8 @@ class _$_SetPlayingPost implements _SetPlayingPost {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result setCurrentPlayablePlayingId(_SetPlayingPost value),
+  TResult map<TResult extends Object>({
+    @required TResult setCurrentPlayablePlayingId(_SetPlayingPost value),
   }) {
     assert(setCurrentPlayablePlayingId != null);
     return setCurrentPlayablePlayingId(this);
@@ -164,9 +183,9 @@ class _$_SetPlayingPost implements _SetPlayingPost {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result setCurrentPlayablePlayingId(_SetPlayingPost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult setCurrentPlayablePlayingId(_SetPlayingPost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (setCurrentPlayablePlayingId != null) {
@@ -177,15 +196,16 @@ class _$_SetPlayingPost implements _SetPlayingPost {
 }
 
 abstract class _SetPlayingPost implements VideoPlayerEvent {
-  const factory _SetPlayingPost(@nullable String postId) = _$_SetPlayingPost;
+  const factory _SetPlayingPost(String postId) = _$_SetPlayingPost;
 
   @override
-  @nullable
   String get postId;
   @override
+  @JsonKey(ignore: true)
   _$SetPlayingPostCopyWith<_SetPlayingPost> get copyWith;
 }
 
+/// @nodoc
 class _$VideoPlayerStateTearOff {
   const _$VideoPlayerStateTearOff();
 
@@ -197,15 +217,19 @@ class _$VideoPlayerStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $VideoPlayerState = _$VideoPlayerStateTearOff();
 
+/// @nodoc
 mixin _$VideoPlayerState {
   String get currentPlayingPostId;
 
+  @JsonKey(ignore: true)
   $VideoPlayerStateCopyWith<VideoPlayerState> get copyWith;
 }
 
+/// @nodoc
 abstract class $VideoPlayerStateCopyWith<$Res> {
   factory $VideoPlayerStateCopyWith(
           VideoPlayerState value, $Res Function(VideoPlayerState) then) =
@@ -213,6 +237,7 @@ abstract class $VideoPlayerStateCopyWith<$Res> {
   $Res call({String currentPlayingPostId});
 }
 
+/// @nodoc
 class _$VideoPlayerStateCopyWithImpl<$Res>
     implements $VideoPlayerStateCopyWith<$Res> {
   _$VideoPlayerStateCopyWithImpl(this._value, this._then);
@@ -233,6 +258,7 @@ class _$VideoPlayerStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$VideoPlayerStateCopyWith<$Res>
     implements $VideoPlayerStateCopyWith<$Res> {
   factory _$VideoPlayerStateCopyWith(
@@ -242,6 +268,7 @@ abstract class _$VideoPlayerStateCopyWith<$Res>
   $Res call({String currentPlayingPostId});
 }
 
+/// @nodoc
 class __$VideoPlayerStateCopyWithImpl<$Res>
     extends _$VideoPlayerStateCopyWithImpl<$Res>
     implements _$VideoPlayerStateCopyWith<$Res> {
@@ -264,15 +291,26 @@ class __$VideoPlayerStateCopyWithImpl<$Res>
   }
 }
 
-class _$_VideoPlayerState implements _VideoPlayerState {
+/// @nodoc
+class _$_VideoPlayerState
+    with DiagnosticableTreeMixin
+    implements _VideoPlayerState {
   const _$_VideoPlayerState({this.currentPlayingPostId});
 
   @override
   final String currentPlayingPostId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'VideoPlayerState(currentPlayingPostId: $currentPlayingPostId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'VideoPlayerState'))
+      ..add(DiagnosticsProperty('currentPlayingPostId', currentPlayingPostId));
   }
 
   @override
@@ -289,6 +327,7 @@ class _$_VideoPlayerState implements _VideoPlayerState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(currentPlayingPostId);
 
+  @JsonKey(ignore: true)
   @override
   _$VideoPlayerStateCopyWith<_VideoPlayerState> get copyWith =>
       __$VideoPlayerStateCopyWithImpl<_VideoPlayerState>(this, _$identity);
@@ -301,5 +340,6 @@ abstract class _VideoPlayerState implements VideoPlayerState {
   @override
   String get currentPlayingPostId;
   @override
+  @JsonKey(ignore: true)
   _$VideoPlayerStateCopyWith<_VideoPlayerState> get copyWith;
 }

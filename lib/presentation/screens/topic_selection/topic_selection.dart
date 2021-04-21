@@ -49,7 +49,7 @@ class TopicSelectionScreen extends StatelessWidget {
                   Card(
                     elevation: 0.0,
                     margin: EdgeInsets.only(right: 0, top: 4),
-                    child: (context.navigator.canPop())
+                    child: (context.navigator?.canPop() ?? false)
                         ? GestureDetector(
                       child: InkWell(
                         child: Icon(
@@ -60,7 +60,7 @@ class TopicSelectionScreen extends StatelessWidget {
                       onTap: () {
                         getIt<ILogger>()
                             .logEvent(LogEvents.EVENT_TOPIC_PICK_CANCEL);
-                        context.navigator.pop();
+                        context.navigator?.pop();
                       },
                     )
                         : null,
@@ -85,12 +85,13 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
   @override
   void initState() {
     super.initState();
-    var state = context.bloc<TopicBloc>().state;
-    if (state.selectedTopicIds?.isNotEmpty == true) {
-      context.bloc<TopicSelectionBloc>().add(
+    var state = context.read<TopicBloc>().state;
+    // TODO: Fix this
+    /*if (state.selectedTopicIds?.isNotEmpty == true) {
+      context.read<TopicSelectionBloc>().add(
           TopicSelectionEvent.updateSelectedTopics(
               KtList.from(state.selectedTopicIds)));
-    }
+    }*/
   }
 
   @override
@@ -99,9 +100,10 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
       listeners: [
         BlocListener<TopicBloc, TopicState>(
           listener: (context, state) {
-            if (state.selectedTopicIds != null ||
+            // TODO: Fix this
+            /*if (state.selectedTopicIds != null ||
                 state.selectedTopicIds.isNotEmpty) {
-              context.bloc<TopicSelectionBloc>().add(
+              context.read<TopicSelectionBloc>().add(
                   TopicSelectionEvent.updateSelectedTopics(
                       KtList.from(state.selectedTopicIds)));
             }
@@ -115,33 +117,30 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                 message: msg,
                 duration: Duration(seconds: 3),
               )..show(context);
-            }
+            }*/
           },
         ),
         BlocListener<TopicSelectionBloc, TopicSelectionState>(
           listener: (context, state) async {
             if (state.topicSavedSuccess == true) {
-              if (context.navigator.canPop()) {
-                context.navigator.pop();
+              if (context.navigator?.canPop() ?? false) {
+                context.navigator?.pop();
               } else {
                 await openDynamicLinkOr(context,
                     otherScreen: CatoRoutes.homeScreen);
               }
-              User user = context
-                  .bloc<AuthBloc>()
-                  .state
-                  .maybeWhen(orElse: () => null, authenticated: (user) => user);
-              if (user != null) {
-                context
-                    .bloc<TopicBloc>()
-                    .add(TopicEvent.refreshSelectedTopics(user));
-              }
+              // User user = context
+              //     .read<AuthBloc>()
+              //     .state
+              //     .maybeWhen(orElse: () => null, authenticated: (user) => user);
+              // if (user != null) {
+              //   // TODO: Fix this
+              //   /*context
+              //       .read<TopicBloc>()
+              //       .add(TopicEvent.refreshSelectedTopics(user));*/
+              // }
             } else if (state.failure != null) {
-              var msg = state.failure.map(
-                error: (e) => e.toString(),
-                exception: (e) => 'Unknown error occurred.',
-                message: (m) => m,
-              );
+              var msg = state.failure?.toString();
               Flushbar(
                 message: msg,
                 duration: Duration(seconds: 3),
@@ -151,10 +150,9 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
         ),
       ],
       child: BlocBuilder<TopicSelectionBloc, TopicSelectionState>(
-        cubit: context.bloc<TopicSelectionBloc>(),
         builder: (_, state) {
           // ignore: close_sinks
-          var topicBloc = context.bloc<TopicBloc>();
+          var topicBloc = context.read<TopicBloc>();
           var allTopics = topicBloc.state.allTopics;
           return Container(
             margin: EdgeInsets.only(top: 20),
@@ -186,7 +184,7 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                             onTap: () {
                               var item = allTopics[index];
                               // ignore: close_sinks
-                              var bloc = context.bloc<TopicSelectionBloc>();
+                              var bloc = context.read<TopicSelectionBloc>();
                               if (state.selectedTopicIds.contains(item.id)) {
                                 bloc.add(
                                     TopicSelectionEvent.unSelectTopic(item.id));
@@ -235,10 +233,10 @@ class _TopicSelectionPageState extends State<TopicSelectionPage> {
                             params: LogEvents.getTopicPickDoneVariables(
                                 state.selectedTopicIds.asList()));
                         // ignore: close_sinks
-                        var bloc = context.bloc<AuthBloc>();
+                        var bloc = context.read<AuthBloc>();
                         bloc.state.maybeWhen(
                           authenticated: (user) => context
-                              .bloc<TopicSelectionBloc>()
+                              .read<TopicSelectionBloc>()
                               .add(TopicSelectionEvent.saveTopics(user)),
                           orElse: () {},
                         );

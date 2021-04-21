@@ -36,6 +36,7 @@ class _Release {
 
   // Backgrounds
   final String abstract_bg = _releasePath + 'abstract_bg.png';
+  final String icon_playground_abstract = _releasePath + 'playground_abstract.png';
 
   // Icons
   final String icon_timing = _releasePath + 'icon_timing.png';

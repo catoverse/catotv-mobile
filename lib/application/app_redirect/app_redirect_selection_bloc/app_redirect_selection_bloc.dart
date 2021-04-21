@@ -6,6 +6,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
+
 
 part 'app_redirect_selection_event.dart';
 
@@ -37,7 +39,7 @@ class AppRedirectSelectionBloc
           packages?.add(e.package);
         }
         yield state.copyWith(selectedPackages: packages);
-        await _helper.appBlocker.updateBlockedPackages(packages.asList());
+        await _helper.appBlocker.updateBlockedPackages(packages?.asList() ?? []);
       },
     );
   }

@@ -14,6 +14,7 @@ import 'package:cato_feed/domain/core/failure.dart';
 import 'package:cato_feed/domain/auth/user.dart';
 import 'package:cato_feed/domain/topic/topic.dart';
 import 'package:kt_dart/collection.dart';
+import 'package:flutter/foundation.dart';
 
 @lazySingleton
 class Network {
@@ -23,7 +24,7 @@ class Network {
   /// JWT token for the authenticated queries.
   /// Set this to null if don't want to add auth header.
   String _jwtToken;
-  String _jwtHeaderKey = "x-auth-token";
+  String _jwtHeaderKey = "authToken";
   Connectivity _connectivity;
   ILogger logger;
 
@@ -38,7 +39,7 @@ class Network {
         apiEndpoint: _apiEndpoint,
         jwtHeaderKey: _jwtHeaderKey,
         logger: logger,
-        jwtResolver: () async {
+        jwtResolver: () {
           return _jwtToken;
         },
         isConnected: () async {
@@ -111,10 +112,13 @@ class Network {
 
   /// Returns list of recommended videos for the user by topic.
   Future<Result<Failure, KtList<Post>>> getUserRecommendationVideosByTopic(
-      String userId, String topicId) async {
+      String userId, String topicId, int limit) async {
     var result = await _client.query(GqlQueries.queryUserRecommendationByTopic,
-        variables:
-            GqlQueries.createMapForUserRecommendationByTopic(userId, topicId));
+        variables: GqlQueries.createMapForUserRecommendationByTopic(
+          userId,
+          topicId,
+          limit,
+        ));
 
     if (result.hasFailed()) return Result.fail(result.failure);
 
@@ -128,8 +132,8 @@ class Network {
 
     var posts = PostDTO.listFromResponse(response['userRecommendationByTopic']);
     if (posts == null) {
-      return Result.fail(Failure.error(
-          ParserError(detail: "Unable to parse recommended posts for the topic.")));
+      return Result.fail(Failure.error(ParserError(
+          detail: "Unable to parse recommended posts for the topic.")));
     }
     return Result.data(posts);
   }
@@ -163,22 +167,28 @@ class Network {
 
     if (result.hasFailed()) return Result.fail(result.failure);
 
-    return _processUserProfileResponse(result.data, 'createUserProfile');
+    return _processUserProfileResponse(result.data, 'userProfile');
   }
 
   /// Returns the list of posts by topics
   Future<Result<Failure, KtList<Post>>> getVideosByTopics(
-      List<String> topics, int skip, int limit) async {
+      List<String> topics, {int skip, int limit}) async {
+    var variables = GqlQueries.createMapForVideoByTopics(topics, skip, limit);
+    print(variables);
     var result = await _client.query(GqlQueries.queryVideoByTopics,
-        variables: GqlQueries.createMapForVideoByTopics(topics, skip, limit));
+        variables: variables);
+
+    if(result.hasFailed()) {
+      print(1);
+    }
 
     if (result.hasFailed()) return Result.fail(result.failure);
 
     dynamic response = result.data;
 
     if (response == null) {
-      return Result.fail(Failure.error(
-          ServerError(detail: 'Unable to get posts by topics.')));
+      return Result.fail(
+          Failure.error(ServerError(detail: 'Unable to get posts by topics.')));
     }
 
     var posts = PostDTO.listFromResponse(response["videoByTopics"]);
@@ -191,7 +201,7 @@ class Network {
 
   /// Returns the post based on videoId
   Future<Result<Failure, Post>> getVideoById(String videoId) async {
-    var result = await _client.query(GqlQueries.queryVideoByTopics,
+    var result = await _client.query(GqlQueries.queryVideoById,
         variables: GqlQueries.createMapForVideoById(videoId));
 
     if (result.hasFailed()) return Result.fail(result.failure);
@@ -205,12 +215,12 @@ class Network {
 
     var posts = PostDTO.fromResponse(response["videoById"]);
     if (posts == null) {
-      return Result.fail(Failure.error(
-          ParserError(detail: "Unable to parse post.")));
+      return Result.fail(
+          Failure.error(ParserError(detail: "Unable to parse post.")));
     }
     return Result.data(posts);
   }
-  
+
   Future<Result<Failure, String>> generateNewAuthToken() async {
     var result = await _client.query(GqlQueries.queryGenerateNewToken);
 
@@ -222,7 +232,7 @@ class Network {
       return Result.fail(Failure.error(
           ServerError(detail: 'Unable to generate new auth token for user.')));
     }
-    
+
     return Result.data(response['generateNewToken']['token']);
   }
 
@@ -265,12 +275,13 @@ class Network {
   }
 
   /// Google login Authenticates to backend and returns [User]
-  Future<Result<Failure, User>> googleLogin(
-      {String name,
-      String email,
-      String googleId,
-      String avatar,
-      String accessToken}) async {
+  Future<Result<Failure, User>> googleLogin({
+    @required String name,
+    @required String email,
+    @required String googleId,
+    @required String avatar,
+    @required String accessToken,
+  }) async {
     var result = await _client.mutation(GqlQueries.mutationGoogleLogin,
         variables: GqlQueries.createMapForGoogleLogin(
             name, email, googleId, avatar, accessToken));
@@ -281,8 +292,12 @@ class Network {
   }
 
   /// Apple login Authenticates to backend and returns [User]
-  Future<Result<Failure, User>> appleLogin(
-      {String name, String email, String authCode, bool useBundleId}) async {
+  Future<Result<Failure, User>> appleLogin({
+    @required String name,
+    @required String email,
+    @required String authCode,
+    @required bool useBundleId,
+  }) async {
     var result = await _client.mutation(GqlQueries.mutationAppleLogin,
         variables: GqlQueries.createMapForAppleLogin(
             name, email, authCode, useBundleId));
@@ -290,21 +305,21 @@ class Network {
     if (result.hasFailed()) return Result.fail(result.failure);
 
     return _processUserResponse(result.data, 'appleLogin', 'Apple');
-
   }
 
   /// Create the user session based on the invite code.
-  Future<Result<Failure, User>> sessionLogin({String name, String code}) async {
+  Future<Result<Failure, User>> sessionLogin(
+      {@required String name, @required String code}) async {
     var result = await _client.mutation(GqlQueries.mutationSessionLogin,
         variables: GqlQueries.createMapForSessionLogin(name, code));
 
     if (result.hasFailed()) return Result.fail(result.failure);
 
     return _processUserResponse(result.data, 'sessionLogin', 'Session');
-
   }
 
-  Result<Failure, User> _processUserResponse(dynamic response, String key, String tag) {
+  Result<Failure, User> _processUserResponse(
+      dynamic response, String key, String tag) {
     if (response == null) {
       return Result.fail(
           Failure.error(ServerError(detail: '$tag login response failed.')));
@@ -355,8 +370,8 @@ class Network {
   }
 
   /// Creates and returns user profile.
-  Future<Result<Failure, dynamic>> createUserProfile(String name, String userId,
-      List<Map<String, dynamic>> selectedTopics) async {
+  Future<Result<Failure, UserProfile>> createUserProfile(
+      String name, String userId, List<String> selectedTopics) async {
     var result = await _client.mutation(GqlQueries.mutationCreateUserProfile,
         variables: GqlQueries.createMapForCreateUserProfile(
             name, userId, selectedTopics));
@@ -367,20 +382,20 @@ class Network {
   }
 
   /// Updates and returns user profile.
-  Future<Result<Failure, dynamic>> updateUserProfile(String name, String userId,
-      List<Map<String, dynamic>> selectedTopics) async {
+  Future<Result<Failure, UserProfile>> updateUserProfile(
+      String name, String userId, List<String> selectedTopics) async {
+    var variables =
+        GqlQueries.createMapForUpdateUserProfile(name, userId, selectedTopics);
     var result = await _client.mutation(GqlQueries.mutationUpdateUserProfile,
-        variables: GqlQueries.createMapForUpdateUserProfile(
-            name, userId, selectedTopics));
+        variables: variables);
 
     if (result.hasFailed()) return Result.fail(result.failure);
 
     return _processUserProfileResponse(result.data, 'updateUserProfile');
-
   }
 
   /// Updates userProfileCounters
-  Future<Result<Failure, dynamic>> updateUserProfileCounters(
+  Future<Result<Failure, UserProfile>> updateUserProfileCounters(
       String userId, String category, int duration, String data) async {
     var result = await _client.mutation(
         GqlQueries.mutationUpdateProfileCounters,
@@ -392,17 +407,18 @@ class Network {
     return _processUserProfileResponse(result.data, 'updateProfileCounters');
   }
 
-  Result<Failure, UserProfile> _processUserProfileResponse(dynamic response, String key) {
+  Result<Failure, UserProfile> _processUserProfileResponse(
+      dynamic response, String key) {
     if (response == null) {
       return Result.fail(
           Failure.error(ServerError(detail: 'Unable to get the userProfile')));
     }
 
     var userProfile = UserProfileDTO.fromResponse(response[key]);
-    if(userProfile == null) {
-      return Result.fail(Failure.error(ParserError(detail: 'Unable to parse user profile response.')));
+    if (userProfile == null) {
+      return Result.fail(Failure.error(
+          ParserError(detail: 'Unable to parse user profile response.')));
     }
     return Result.data(userProfile);
   }
-
 }

@@ -1,38 +1,56 @@
 import 'dart:async';
-import 'package:graphql/client.dart' show FetchResult, Operation, Link, NextLink;
+
+import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 
-typedef GetToken = FutureOr<String> Function();
+typedef _RequestTransformer = FutureOr<Request> Function(Request request);
 
-/// CustomAuthLink is similar to library's AuthLink with headerKey fix.
-class CustomAuthLink extends Link {
-  CustomAuthLink({@required this.getToken, this.headerKey = 'Authorization'})
-      : super(
-          request: (Operation operation, [NextLink forward]) {
-            StreamController<FetchResult> controller;
+class CustomAuthLink extends _AsyncReqTransformLink {
+  CustomAuthLink({
+    @required this.getToken,
+    this.headerKey = 'Authorization',
+  }) : super(requestTransformer: transform(headerKey, getToken));
 
-            Future<void> onListen() async {
-              try {
-                final String token = await getToken();
-                if (token != null) {
-                  operation.setContext(<String, Map<String, String>>{
-                    'headers': <String, String>{headerKey: token}
-                  });
-                }
-              } catch (error) {
-                controller.addError(error);
-              }
+  /// Authentication callback. Note – must include prefixes, e.g. `'Bearer $token'`
+  final FutureOr<String> Function() getToken;
 
-              await controller.addStream(forward(operation));
-              await controller.close();
-            }
+  /// Header key to set to the result of [getToken]
+  final String headerKey;
 
-            controller = StreamController<FetchResult>(onListen: onListen);
-
-            return controller.stream;
-          },
+  static _RequestTransformer transform(
+    String headerKey,
+    FutureOr<String> Function() getToken,
+  ) =>
+      (Request request) async {
+        final token = await getToken();
+        return request.updateContextEntry<HttpLinkHeaders>(
+          (headers) => HttpLinkHeaders(
+            headers: <String, String>{
+              ...headers?.headers ?? <String, String>{},
+              if (token != null) headerKey: token,
+            },
+          ),
         );
+      };
+}
 
-  GetToken getToken;
-  String headerKey;
+/// Version of [TransformLink] that handles async transforms
+class _AsyncReqTransformLink extends Link {
+  final _RequestTransformer requestTransformer;
+
+  _AsyncReqTransformLink({
+    this.requestTransformer,
+  }) : assert(requestTransformer != null);
+
+  @override
+  Stream<Response> request(
+    Request request, [
+    NextLink forward,
+  ]) async* {
+    final req = requestTransformer != null
+        ? await requestTransformer(request)
+        : request;
+
+    yield* forward(req);
+  }
 }

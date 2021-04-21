@@ -14,8 +14,10 @@ class _$UserProfileEventTearOff {
   const _$UserProfileEventTearOff();
 
 // ignore: unused_element
-  _UserProfile get() {
-    return const _UserProfile();
+  _UserProfile get(String userId) {
+    return _UserProfile(
+      userId,
+    );
   }
 
 // ignore: unused_element
@@ -50,6 +52,16 @@ class _$UserProfileEventTearOff {
       postId,
     );
   }
+
+// ignore: unused_element
+  _UpdateTopicSelection updateTopicSelection(
+      String name, String userId, List<String> selectedTopics) {
+    return _UpdateTopicSelection(
+      name,
+      userId,
+      selectedTopics,
+    );
+  }
 }
 
 /// @nodoc
@@ -60,21 +72,26 @@ const $UserProfileEvent = _$UserProfileEventTearOff();
 mixin _$UserProfileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   });
   @optionalTypeArgs
@@ -85,6 +102,7 @@ mixin _$UserProfileEvent {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
@@ -94,6 +112,7 @@ mixin _$UserProfileEvent {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   });
 }
@@ -120,6 +139,7 @@ abstract class _$UserProfileCopyWith<$Res> {
   factory _$UserProfileCopyWith(
           _UserProfile value, $Res Function(_UserProfile) then) =
       __$UserProfileCopyWithImpl<$Res>;
+  $Res call({String userId});
 }
 
 /// @nodoc
@@ -132,34 +152,66 @@ class __$UserProfileCopyWithImpl<$Res>
 
   @override
   _UserProfile get _value => super._value as _UserProfile;
+
+  @override
+  $Res call({
+    Object userId = freezed,
+  }) {
+    return _then(_UserProfile(
+      userId == freezed ? _value.userId : userId as String,
+    ));
+  }
 }
 
 /// @nodoc
-class _$_UserProfile implements _UserProfile {
-  const _$_UserProfile();
+class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
+  const _$_UserProfile(this.userId) : assert(userId != null);
 
   @override
-  String toString() {
-    return 'UserProfileEvent.get()';
+  final String userId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserProfileEvent.get(userId: $userId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileEvent.get'))
+      ..add(DiagnosticsProperty('userId', userId));
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UserProfile);
+    return identical(this, other) ||
+        (other is _UserProfile &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(userId);
+
+  @JsonKey(ignore: true)
+  @override
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+      __$UserProfileCopyWithImpl<_UserProfile>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -167,23 +219,26 @@ class _$_UserProfile implements _UserProfile {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
-    return get();
+    assert(updateTopicSelection != null);
+    return get(userId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (get != null) {
-      return get();
+      return get(userId);
     }
     return orElse();
   }
@@ -197,6 +252,7 @@ class _$_UserProfile implements _UserProfile {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -204,6 +260,7 @@ class _$_UserProfile implements _UserProfile {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return get(this);
   }
 
@@ -216,6 +273,7 @@ class _$_UserProfile implements _UserProfile {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -227,7 +285,11 @@ class _$_UserProfile implements _UserProfile {
 }
 
 abstract class _UserProfile implements UserProfileEvent {
-  const factory _UserProfile() = _$_UserProfile;
+  const factory _UserProfile(String userId) = _$_UserProfile;
+
+  String get userId;
+  @JsonKey(ignore: true)
+  _$UserProfileCopyWith<_UserProfile> get copyWith;
 }
 
 /// @nodoc
@@ -247,12 +309,18 @@ class __$RefreshCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_Refresh implements _Refresh {
+class _$_Refresh with DiagnosticableTreeMixin implements _Refresh {
   const _$_Refresh();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfileEvent.refresh()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'UserProfileEvent.refresh'));
   }
 
   @override
@@ -266,12 +334,15 @@ class _$_Refresh implements _Refresh {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -279,18 +350,21 @@ class _$_Refresh implements _Refresh {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return refresh();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -309,6 +383,7 @@ class _$_Refresh implements _Refresh {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -316,6 +391,7 @@ class _$_Refresh implements _Refresh {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return refresh(this);
   }
 
@@ -328,6 +404,7 @@ class _$_Refresh implements _Refresh {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -369,15 +446,23 @@ class __$LikePostCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_LikePost implements _LikePost {
+class _$_LikePost with DiagnosticableTreeMixin implements _LikePost {
   const _$_LikePost(this.postId) : assert(postId != null);
 
   @override
   final String postId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfileEvent.likePost(postId: $postId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileEvent.likePost'))
+      ..add(DiagnosticsProperty('postId', postId));
   }
 
   @override
@@ -400,12 +485,15 @@ class _$_LikePost implements _LikePost {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -413,18 +501,21 @@ class _$_LikePost implements _LikePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return likePost(postId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -443,6 +534,7 @@ class _$_LikePost implements _LikePost {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -450,6 +542,7 @@ class _$_LikePost implements _LikePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return likePost(this);
   }
 
@@ -462,6 +555,7 @@ class _$_LikePost implements _LikePost {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -510,15 +604,23 @@ class __$UnLikePostCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_UnLikePost implements _UnLikePost {
+class _$_UnLikePost with DiagnosticableTreeMixin implements _UnLikePost {
   const _$_UnLikePost(this.postId) : assert(postId != null);
 
   @override
   final String postId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfileEvent.unlikePost(postId: $postId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileEvent.unlikePost'))
+      ..add(DiagnosticsProperty('postId', postId));
   }
 
   @override
@@ -541,12 +643,15 @@ class _$_UnLikePost implements _UnLikePost {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -554,18 +659,21 @@ class _$_UnLikePost implements _UnLikePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return unlikePost(postId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -584,6 +692,7 @@ class _$_UnLikePost implements _UnLikePost {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -591,6 +700,7 @@ class _$_UnLikePost implements _UnLikePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return unlikePost(this);
   }
 
@@ -603,6 +713,7 @@ class _$_UnLikePost implements _UnLikePost {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -648,15 +759,23 @@ class __$SavePostCopyWithImpl<$Res> extends _$UserProfileEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_SavePost implements _SavePost {
+class _$_SavePost with DiagnosticableTreeMixin implements _SavePost {
   const _$_SavePost(this.postId) : assert(postId != null);
 
   @override
   final String postId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfileEvent.savePost(postId: $postId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileEvent.savePost'))
+      ..add(DiagnosticsProperty('postId', postId));
   }
 
   @override
@@ -679,12 +798,15 @@ class _$_SavePost implements _SavePost {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -692,18 +814,21 @@ class _$_SavePost implements _SavePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return savePost(postId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -722,6 +847,7 @@ class _$_SavePost implements _SavePost {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -729,6 +855,7 @@ class _$_SavePost implements _SavePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return savePost(this);
   }
 
@@ -741,6 +868,7 @@ class _$_SavePost implements _SavePost {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -789,15 +917,23 @@ class __$UnSavePostCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_UnSavePost implements _UnSavePost {
+class _$_UnSavePost with DiagnosticableTreeMixin implements _UnSavePost {
   const _$_UnSavePost(this.postId) : assert(postId != null);
 
   @override
   final String postId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfileEvent.unSavePost(postId: $postId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileEvent.unSavePost'))
+      ..add(DiagnosticsProperty('postId', postId));
   }
 
   @override
@@ -820,12 +956,15 @@ class _$_UnSavePost implements _UnSavePost {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult get(),
+    @required TResult get(String userId),
     @required TResult refresh(),
     @required TResult likePost(String postId),
     @required TResult unlikePost(String postId),
     @required TResult savePost(String postId),
     @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -833,18 +972,21 @@ class _$_UnSavePost implements _UnSavePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return unSavePost(postId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult get(),
+    TResult get(String userId),
     TResult refresh(),
     TResult likePost(String postId),
     TResult unlikePost(String postId),
     TResult savePost(String postId),
     TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -863,6 +1005,7 @@ class _$_UnSavePost implements _UnSavePost {
     @required TResult unlikePost(_UnLikePost value),
     @required TResult savePost(_SavePost value),
     @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
   }) {
     assert(get != null);
     assert(refresh != null);
@@ -870,6 +1013,7 @@ class _$_UnSavePost implements _UnSavePost {
     assert(unlikePost != null);
     assert(savePost != null);
     assert(unSavePost != null);
+    assert(updateTopicSelection != null);
     return unSavePost(this);
   }
 
@@ -882,6 +1026,7 @@ class _$_UnSavePost implements _UnSavePost {
     TResult unlikePost(_UnLikePost value),
     TResult savePost(_SavePost value),
     TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
     @required TResult orElse(),
   }) {
     assert(orElse != null);
@@ -901,6 +1046,195 @@ abstract class _UnSavePost implements UserProfileEvent {
 }
 
 /// @nodoc
+abstract class _$UpdateTopicSelectionCopyWith<$Res> {
+  factory _$UpdateTopicSelectionCopyWith(_UpdateTopicSelection value,
+          $Res Function(_UpdateTopicSelection) then) =
+      __$UpdateTopicSelectionCopyWithImpl<$Res>;
+  $Res call({String name, String userId, List<String> selectedTopics});
+}
+
+/// @nodoc
+class __$UpdateTopicSelectionCopyWithImpl<$Res>
+    extends _$UserProfileEventCopyWithImpl<$Res>
+    implements _$UpdateTopicSelectionCopyWith<$Res> {
+  __$UpdateTopicSelectionCopyWithImpl(
+      _UpdateTopicSelection _value, $Res Function(_UpdateTopicSelection) _then)
+      : super(_value, (v) => _then(v as _UpdateTopicSelection));
+
+  @override
+  _UpdateTopicSelection get _value => super._value as _UpdateTopicSelection;
+
+  @override
+  $Res call({
+    Object name = freezed,
+    Object userId = freezed,
+    Object selectedTopics = freezed,
+  }) {
+    return _then(_UpdateTopicSelection(
+      name == freezed ? _value.name : name as String,
+      userId == freezed ? _value.userId : userId as String,
+      selectedTopics == freezed
+          ? _value.selectedTopics
+          : selectedTopics as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+class _$_UpdateTopicSelection
+    with DiagnosticableTreeMixin
+    implements _UpdateTopicSelection {
+  const _$_UpdateTopicSelection(this.name, this.userId, this.selectedTopics)
+      : assert(name != null),
+        assert(userId != null),
+        assert(selectedTopics != null);
+
+  @override
+  final String name;
+  @override
+  final String userId;
+  @override
+  final List<String> selectedTopics;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserProfileEvent.updateTopicSelection(name: $name, userId: $userId, selectedTopics: $selectedTopics)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'UserProfileEvent.updateTopicSelection'))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('userId', userId))
+      ..add(DiagnosticsProperty('selectedTopics', selectedTopics));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _UpdateTopicSelection &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.selectedTopics, selectedTopics) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedTopics, selectedTopics)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(selectedTopics);
+
+  @JsonKey(ignore: true)
+  @override
+  _$UpdateTopicSelectionCopyWith<_UpdateTopicSelection> get copyWith =>
+      __$UpdateTopicSelectionCopyWithImpl<_UpdateTopicSelection>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object>({
+    @required TResult get(String userId),
+    @required TResult refresh(),
+    @required TResult likePost(String postId),
+    @required TResult unlikePost(String postId),
+    @required TResult savePost(String postId),
+    @required TResult unSavePost(String postId),
+    @required
+        TResult updateTopicSelection(
+            String name, String userId, List<String> selectedTopics),
+  }) {
+    assert(get != null);
+    assert(refresh != null);
+    assert(likePost != null);
+    assert(unlikePost != null);
+    assert(savePost != null);
+    assert(unSavePost != null);
+    assert(updateTopicSelection != null);
+    return updateTopicSelection(name, userId, selectedTopics);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object>({
+    TResult get(String userId),
+    TResult refresh(),
+    TResult likePost(String postId),
+    TResult unlikePost(String postId),
+    TResult savePost(String postId),
+    TResult unSavePost(String postId),
+    TResult updateTopicSelection(
+        String name, String userId, List<String> selectedTopics),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateTopicSelection != null) {
+      return updateTopicSelection(name, userId, selectedTopics);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object>({
+    @required TResult get(_UserProfile value),
+    @required TResult refresh(_Refresh value),
+    @required TResult likePost(_LikePost value),
+    @required TResult unlikePost(_UnLikePost value),
+    @required TResult savePost(_SavePost value),
+    @required TResult unSavePost(_UnSavePost value),
+    @required TResult updateTopicSelection(_UpdateTopicSelection value),
+  }) {
+    assert(get != null);
+    assert(refresh != null);
+    assert(likePost != null);
+    assert(unlikePost != null);
+    assert(savePost != null);
+    assert(unSavePost != null);
+    assert(updateTopicSelection != null);
+    return updateTopicSelection(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object>({
+    TResult get(_UserProfile value),
+    TResult refresh(_Refresh value),
+    TResult likePost(_LikePost value),
+    TResult unlikePost(_UnLikePost value),
+    TResult savePost(_SavePost value),
+    TResult unSavePost(_UnSavePost value),
+    TResult updateTopicSelection(_UpdateTopicSelection value),
+    @required TResult orElse(),
+  }) {
+    assert(orElse != null);
+    if (updateTopicSelection != null) {
+      return updateTopicSelection(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UpdateTopicSelection implements UserProfileEvent {
+  const factory _UpdateTopicSelection(
+          String name, String userId, List<String> selectedTopics) =
+      _$_UpdateTopicSelection;
+
+  String get name;
+  String get userId;
+  List<String> get selectedTopics;
+  @JsonKey(ignore: true)
+  _$UpdateTopicSelectionCopyWith<_UpdateTopicSelection> get copyWith;
+}
+
+/// @nodoc
 class _$UserProfileStateTearOff {
   const _$UserProfileStateTearOff();
 
@@ -908,11 +1242,13 @@ class _$UserProfileStateTearOff {
   _UserProfileState call(
       {UserProfile profile,
       List<String> likedVideosId,
-      List<String> savedVideosId}) {
+      List<String> savedVideosId,
+      Failure failure}) {
     return _UserProfileState(
       profile: profile,
       likedVideosId: likedVideosId,
       savedVideosId: savedVideosId,
+      failure: failure,
     );
   }
 }
@@ -926,6 +1262,7 @@ mixin _$UserProfileState {
   UserProfile get profile;
   List<String> get likedVideosId;
   List<String> get savedVideosId;
+  Failure get failure;
 
   @JsonKey(ignore: true)
   $UserProfileStateCopyWith<UserProfileState> get copyWith;
@@ -939,9 +1276,11 @@ abstract class $UserProfileStateCopyWith<$Res> {
   $Res call(
       {UserProfile profile,
       List<String> likedVideosId,
-      List<String> savedVideosId});
+      List<String> savedVideosId,
+      Failure failure});
 
   $UserProfileCopyWith<$Res> get profile;
+  $FailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -958,6 +1297,7 @@ class _$UserProfileStateCopyWithImpl<$Res>
     Object profile = freezed,
     Object likedVideosId = freezed,
     Object savedVideosId = freezed,
+    Object failure = freezed,
   }) {
     return _then(_value.copyWith(
       profile: profile == freezed ? _value.profile : profile as UserProfile,
@@ -967,6 +1307,7 @@ class _$UserProfileStateCopyWithImpl<$Res>
       savedVideosId: savedVideosId == freezed
           ? _value.savedVideosId
           : savedVideosId as List<String>,
+      failure: failure == freezed ? _value.failure : failure as Failure,
     ));
   }
 
@@ -977,6 +1318,16 @@ class _$UserProfileStateCopyWithImpl<$Res>
     }
     return $UserProfileCopyWith<$Res>(_value.profile, (value) {
       return _then(_value.copyWith(profile: value));
+    });
+  }
+
+  @override
+  $FailureCopyWith<$Res> get failure {
+    if (_value.failure == null) {
+      return null;
+    }
+    return $FailureCopyWith<$Res>(_value.failure, (value) {
+      return _then(_value.copyWith(failure: value));
     });
   }
 }
@@ -991,10 +1342,13 @@ abstract class _$UserProfileStateCopyWith<$Res>
   $Res call(
       {UserProfile profile,
       List<String> likedVideosId,
-      List<String> savedVideosId});
+      List<String> savedVideosId,
+      Failure failure});
 
   @override
   $UserProfileCopyWith<$Res> get profile;
+  @override
+  $FailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
@@ -1013,6 +1367,7 @@ class __$UserProfileStateCopyWithImpl<$Res>
     Object profile = freezed,
     Object likedVideosId = freezed,
     Object savedVideosId = freezed,
+    Object failure = freezed,
   }) {
     return _then(_UserProfileState(
       profile: profile == freezed ? _value.profile : profile as UserProfile,
@@ -1022,14 +1377,16 @@ class __$UserProfileStateCopyWithImpl<$Res>
       savedVideosId: savedVideosId == freezed
           ? _value.savedVideosId
           : savedVideosId as List<String>,
+      failure: failure == freezed ? _value.failure : failure as Failure,
     ));
   }
 }
 
 /// @nodoc
-class _$_UserProfileState extends _UserProfileState {
+class _$_UserProfileState extends _UserProfileState
+    with DiagnosticableTreeMixin {
   const _$_UserProfileState(
-      {this.profile, this.likedVideosId, this.savedVideosId})
+      {this.profile, this.likedVideosId, this.savedVideosId, this.failure})
       : super._();
 
   @override
@@ -1038,10 +1395,23 @@ class _$_UserProfileState extends _UserProfileState {
   final List<String> likedVideosId;
   @override
   final List<String> savedVideosId;
+  @override
+  final Failure failure;
 
   @override
-  String toString() {
-    return 'UserProfileState(profile: $profile, likedVideosId: $likedVideosId, savedVideosId: $savedVideosId)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UserProfileState(profile: $profile, likedVideosId: $likedVideosId, savedVideosId: $savedVideosId, failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfileState'))
+      ..add(DiagnosticsProperty('profile', profile))
+      ..add(DiagnosticsProperty('likedVideosId', likedVideosId))
+      ..add(DiagnosticsProperty('savedVideosId', savedVideosId))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override
@@ -1056,7 +1426,9 @@ class _$_UserProfileState extends _UserProfileState {
                     .equals(other.likedVideosId, likedVideosId)) &&
             (identical(other.savedVideosId, savedVideosId) ||
                 const DeepCollectionEquality()
-                    .equals(other.savedVideosId, savedVideosId)));
+                    .equals(other.savedVideosId, savedVideosId)) &&
+            (identical(other.failure, failure) ||
+                const DeepCollectionEquality().equals(other.failure, failure)));
   }
 
   @override
@@ -1064,7 +1436,8 @@ class _$_UserProfileState extends _UserProfileState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(profile) ^
       const DeepCollectionEquality().hash(likedVideosId) ^
-      const DeepCollectionEquality().hash(savedVideosId);
+      const DeepCollectionEquality().hash(savedVideosId) ^
+      const DeepCollectionEquality().hash(failure);
 
   @JsonKey(ignore: true)
   @override
@@ -1077,7 +1450,8 @@ abstract class _UserProfileState extends UserProfileState {
   const factory _UserProfileState(
       {UserProfile profile,
       List<String> likedVideosId,
-      List<String> savedVideosId}) = _$_UserProfileState;
+      List<String> savedVideosId,
+      Failure failure}) = _$_UserProfileState;
 
   @override
   UserProfile get profile;
@@ -1085,6 +1459,8 @@ abstract class _UserProfileState extends UserProfileState {
   List<String> get likedVideosId;
   @override
   List<String> get savedVideosId;
+  @override
+  Failure get failure;
   @override
   @JsonKey(ignore: true)
   _$UserProfileStateCopyWith<_UserProfileState> get copyWith;

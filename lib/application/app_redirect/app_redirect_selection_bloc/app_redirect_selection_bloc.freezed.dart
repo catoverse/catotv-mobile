@@ -9,6 +9,7 @@ part of 'app_redirect_selection_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$AppRedirectSelectionEventTearOff {
   const _$AppRedirectSelectionEventTearOff();
 
@@ -27,40 +28,44 @@ class _$AppRedirectSelectionEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AppRedirectSelectionEvent = _$AppRedirectSelectionEventTearOff();
 
+/// @nodoc
 mixin _$AppRedirectSelectionEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedPackages(List<String> packages),
-    @required Result selectOrRemovePackage(String package),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedPackages(List<String> packages),
+    @required TResult selectOrRemovePackage(String package),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedPackages(List<String> packages),
-    Result selectOrRemovePackage(String package),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedPackages(List<String> packages),
+    TResult selectOrRemovePackage(String package),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedPackages(_UpdateSelectedPackages value),
-    @required Result selectOrRemovePackage(_SelectOrRemovePackage value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedPackages(_UpdateSelectedPackages value),
+    @required TResult selectOrRemovePackage(_SelectOrRemovePackage value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedPackages(_UpdateSelectedPackages value),
-    Result selectOrRemovePackage(_SelectOrRemovePackage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedPackages(_UpdateSelectedPackages value),
+    TResult selectOrRemovePackage(_SelectOrRemovePackage value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $AppRedirectSelectionEventCopyWith<$Res> {
   factory $AppRedirectSelectionEventCopyWith(AppRedirectSelectionEvent value,
           $Res Function(AppRedirectSelectionEvent) then) =
       _$AppRedirectSelectionEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$AppRedirectSelectionEventCopyWithImpl<$Res>
     implements $AppRedirectSelectionEventCopyWith<$Res> {
   _$AppRedirectSelectionEventCopyWithImpl(this._value, this._then);
@@ -70,6 +75,7 @@ class _$AppRedirectSelectionEventCopyWithImpl<$Res>
   final $Res Function(AppRedirectSelectionEvent) _then;
 }
 
+/// @nodoc
 abstract class _$UpdateSelectedPackagesCopyWith<$Res> {
   factory _$UpdateSelectedPackagesCopyWith(_UpdateSelectedPackages value,
           $Res Function(_UpdateSelectedPackages) then) =
@@ -77,6 +83,7 @@ abstract class _$UpdateSelectedPackagesCopyWith<$Res> {
   $Res call({List<String> packages});
 }
 
+/// @nodoc
 class __$UpdateSelectedPackagesCopyWithImpl<$Res>
     extends _$AppRedirectSelectionEventCopyWithImpl<$Res>
     implements _$UpdateSelectedPackagesCopyWith<$Res> {
@@ -97,15 +104,27 @@ class __$UpdateSelectedPackagesCopyWithImpl<$Res>
   }
 }
 
-class _$_UpdateSelectedPackages implements _UpdateSelectedPackages {
+/// @nodoc
+class _$_UpdateSelectedPackages
+    with DiagnosticableTreeMixin
+    implements _UpdateSelectedPackages {
   const _$_UpdateSelectedPackages(this.packages) : assert(packages != null);
 
   @override
   final List<String> packages;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AppRedirectSelectionEvent.updateSelectedPackages(packages: $packages)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'AppRedirectSelectionEvent.updateSelectedPackages'))
+      ..add(DiagnosticsProperty('packages', packages));
   }
 
   @override
@@ -121,6 +140,7 @@ class _$_UpdateSelectedPackages implements _UpdateSelectedPackages {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(packages);
 
+  @JsonKey(ignore: true)
   @override
   _$UpdateSelectedPackagesCopyWith<_UpdateSelectedPackages> get copyWith =>
       __$UpdateSelectedPackagesCopyWithImpl<_UpdateSelectedPackages>(
@@ -128,9 +148,9 @@ class _$_UpdateSelectedPackages implements _UpdateSelectedPackages {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedPackages(List<String> packages),
-    @required Result selectOrRemovePackage(String package),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedPackages(List<String> packages),
+    @required TResult selectOrRemovePackage(String package),
   }) {
     assert(updateSelectedPackages != null);
     assert(selectOrRemovePackage != null);
@@ -139,10 +159,10 @@ class _$_UpdateSelectedPackages implements _UpdateSelectedPackages {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedPackages(List<String> packages),
-    Result selectOrRemovePackage(String package),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedPackages(List<String> packages),
+    TResult selectOrRemovePackage(String package),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateSelectedPackages != null) {
@@ -153,9 +173,9 @@ class _$_UpdateSelectedPackages implements _UpdateSelectedPackages {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedPackages(_UpdateSelectedPackages value),
-    @required Result selectOrRemovePackage(_SelectOrRemovePackage value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedPackages(_UpdateSelectedPackages value),
+    @required TResult selectOrRemovePackage(_SelectOrRemovePackage value),
   }) {
     assert(updateSelectedPackages != null);
     assert(selectOrRemovePackage != null);
@@ -164,10 +184,10 @@ class _$_UpdateSelectedPackages implements _UpdateSelectedPackages {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedPackages(_UpdateSelectedPackages value),
-    Result selectOrRemovePackage(_SelectOrRemovePackage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedPackages(_UpdateSelectedPackages value),
+    TResult selectOrRemovePackage(_SelectOrRemovePackage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateSelectedPackages != null) {
@@ -182,9 +202,11 @@ abstract class _UpdateSelectedPackages implements AppRedirectSelectionEvent {
       _$_UpdateSelectedPackages;
 
   List<String> get packages;
+  @JsonKey(ignore: true)
   _$UpdateSelectedPackagesCopyWith<_UpdateSelectedPackages> get copyWith;
 }
 
+/// @nodoc
 abstract class _$SelectOrRemovePackageCopyWith<$Res> {
   factory _$SelectOrRemovePackageCopyWith(_SelectOrRemovePackage value,
           $Res Function(_SelectOrRemovePackage) then) =
@@ -192,6 +214,7 @@ abstract class _$SelectOrRemovePackageCopyWith<$Res> {
   $Res call({String package});
 }
 
+/// @nodoc
 class __$SelectOrRemovePackageCopyWithImpl<$Res>
     extends _$AppRedirectSelectionEventCopyWithImpl<$Res>
     implements _$SelectOrRemovePackageCopyWith<$Res> {
@@ -212,15 +235,27 @@ class __$SelectOrRemovePackageCopyWithImpl<$Res>
   }
 }
 
-class _$_SelectOrRemovePackage implements _SelectOrRemovePackage {
+/// @nodoc
+class _$_SelectOrRemovePackage
+    with DiagnosticableTreeMixin
+    implements _SelectOrRemovePackage {
   const _$_SelectOrRemovePackage(this.package) : assert(package != null);
 
   @override
   final String package;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AppRedirectSelectionEvent.selectOrRemovePackage(package: $package)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'AppRedirectSelectionEvent.selectOrRemovePackage'))
+      ..add(DiagnosticsProperty('package', package));
   }
 
   @override
@@ -235,6 +270,7 @@ class _$_SelectOrRemovePackage implements _SelectOrRemovePackage {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(package);
 
+  @JsonKey(ignore: true)
   @override
   _$SelectOrRemovePackageCopyWith<_SelectOrRemovePackage> get copyWith =>
       __$SelectOrRemovePackageCopyWithImpl<_SelectOrRemovePackage>(
@@ -242,9 +278,9 @@ class _$_SelectOrRemovePackage implements _SelectOrRemovePackage {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result updateSelectedPackages(List<String> packages),
-    @required Result selectOrRemovePackage(String package),
+  TResult when<TResult extends Object>({
+    @required TResult updateSelectedPackages(List<String> packages),
+    @required TResult selectOrRemovePackage(String package),
   }) {
     assert(updateSelectedPackages != null);
     assert(selectOrRemovePackage != null);
@@ -253,10 +289,10 @@ class _$_SelectOrRemovePackage implements _SelectOrRemovePackage {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result updateSelectedPackages(List<String> packages),
-    Result selectOrRemovePackage(String package),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult updateSelectedPackages(List<String> packages),
+    TResult selectOrRemovePackage(String package),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (selectOrRemovePackage != null) {
@@ -267,9 +303,9 @@ class _$_SelectOrRemovePackage implements _SelectOrRemovePackage {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result updateSelectedPackages(_UpdateSelectedPackages value),
-    @required Result selectOrRemovePackage(_SelectOrRemovePackage value),
+  TResult map<TResult extends Object>({
+    @required TResult updateSelectedPackages(_UpdateSelectedPackages value),
+    @required TResult selectOrRemovePackage(_SelectOrRemovePackage value),
   }) {
     assert(updateSelectedPackages != null);
     assert(selectOrRemovePackage != null);
@@ -278,10 +314,10 @@ class _$_SelectOrRemovePackage implements _SelectOrRemovePackage {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result updateSelectedPackages(_UpdateSelectedPackages value),
-    Result selectOrRemovePackage(_SelectOrRemovePackage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult updateSelectedPackages(_UpdateSelectedPackages value),
+    TResult selectOrRemovePackage(_SelectOrRemovePackage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (selectOrRemovePackage != null) {
@@ -296,9 +332,11 @@ abstract class _SelectOrRemovePackage implements AppRedirectSelectionEvent {
       _$_SelectOrRemovePackage;
 
   String get package;
+  @JsonKey(ignore: true)
   _$SelectOrRemovePackageCopyWith<_SelectOrRemovePackage> get copyWith;
 }
 
+/// @nodoc
 class _$AppRedirectSelectionStateTearOff {
   const _$AppRedirectSelectionStateTearOff();
 
@@ -310,15 +348,19 @@ class _$AppRedirectSelectionStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $AppRedirectSelectionState = _$AppRedirectSelectionStateTearOff();
 
+/// @nodoc
 mixin _$AppRedirectSelectionState {
   KtList<String> get selectedPackages;
 
+  @JsonKey(ignore: true)
   $AppRedirectSelectionStateCopyWith<AppRedirectSelectionState> get copyWith;
 }
 
+/// @nodoc
 abstract class $AppRedirectSelectionStateCopyWith<$Res> {
   factory $AppRedirectSelectionStateCopyWith(AppRedirectSelectionState value,
           $Res Function(AppRedirectSelectionState) then) =
@@ -326,6 +368,7 @@ abstract class $AppRedirectSelectionStateCopyWith<$Res> {
   $Res call({KtList<String> selectedPackages});
 }
 
+/// @nodoc
 class _$AppRedirectSelectionStateCopyWithImpl<$Res>
     implements $AppRedirectSelectionStateCopyWith<$Res> {
   _$AppRedirectSelectionStateCopyWithImpl(this._value, this._then);
@@ -346,6 +389,7 @@ class _$AppRedirectSelectionStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$AppRedirectSelectionStateCopyWith<$Res>
     implements $AppRedirectSelectionStateCopyWith<$Res> {
   factory _$AppRedirectSelectionStateCopyWith(_AppRedirectSelectionState value,
@@ -355,6 +399,7 @@ abstract class _$AppRedirectSelectionStateCopyWith<$Res>
   $Res call({KtList<String> selectedPackages});
 }
 
+/// @nodoc
 class __$AppRedirectSelectionStateCopyWithImpl<$Res>
     extends _$AppRedirectSelectionStateCopyWithImpl<$Res>
     implements _$AppRedirectSelectionStateCopyWith<$Res> {
@@ -378,15 +423,26 @@ class __$AppRedirectSelectionStateCopyWithImpl<$Res>
   }
 }
 
-class _$_AppRedirectSelectionState implements _AppRedirectSelectionState {
+/// @nodoc
+class _$_AppRedirectSelectionState
+    with DiagnosticableTreeMixin
+    implements _AppRedirectSelectionState {
   const _$_AppRedirectSelectionState({this.selectedPackages});
 
   @override
   final KtList<String> selectedPackages;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'AppRedirectSelectionState(selectedPackages: $selectedPackages)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'AppRedirectSelectionState'))
+      ..add(DiagnosticsProperty('selectedPackages', selectedPackages));
   }
 
   @override
@@ -403,6 +459,7 @@ class _$_AppRedirectSelectionState implements _AppRedirectSelectionState {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(selectedPackages);
 
+  @JsonKey(ignore: true)
   @override
   _$AppRedirectSelectionStateCopyWith<_AppRedirectSelectionState>
       get copyWith =>
@@ -417,5 +474,6 @@ abstract class _AppRedirectSelectionState implements AppRedirectSelectionState {
   @override
   KtList<String> get selectedPackages;
   @override
+  @JsonKey(ignore: true)
   _$AppRedirectSelectionStateCopyWith<_AppRedirectSelectionState> get copyWith;
 }

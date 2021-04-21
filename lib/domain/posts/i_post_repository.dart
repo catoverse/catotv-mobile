@@ -9,18 +9,21 @@ abstract class IPostRepository {
       {@required String userId});
 
   Future<Result<Failure, KtList<Post>>> getRecommendedPostsByTopic(
-      {@required String userId, @required String topicId});
+      {@required String userId, @required String topicId, @required int limit});
+
+  Future<Result<Failure, KtList<Post>>> getPostsByTopic(
+      {@required String topicId, @required int skip, @required int limit});
 
   Future<Result<Failure, Post>> getPostById(String postId);
 
-  Future<Result<Failure, KtList<Post>>> getPosts(
-      int skip, int limit, String topicId);
+  // Future<Result<Failure, KtList<Post>>> getPosts(
+  //     int skip, int limit, String topicId);
 
   Future<bool> likePost(String postId);
 
   Future<bool> unlikePost(String postId);
 
-  Future<bool> bookmarkPost(String postId, KtList<String> topicIds);
+  Future<bool> bookmarkPost(String postId);
 
   Future<bool> removePostBookmark(String postId);
 

@@ -6,6 +6,7 @@ import 'package:cato_feed/infrastructure/core/logger/log_events.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:flutter/foundation.dart';
 
 part 'share_video_event.dart';
 

@@ -113,11 +113,19 @@ class __$GenericErrorCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_GenericError implements _GenericError {
+class _$_GenericError with DiagnosticableTreeMixin implements _GenericError {
   const _$_GenericError(this.error) : assert(error != null);
 
   @override
   final Error error;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Failure.error'))
+      ..add(DiagnosticsProperty('error', error));
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -230,11 +238,21 @@ class __$RaisedExceptionCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_RaisedException implements _RaisedException {
+class _$_RaisedException
+    with DiagnosticableTreeMixin
+    implements _RaisedException {
   const _$_RaisedException(this.exception) : assert(exception != null);
 
   @override
   final Exception exception;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Failure.exception'))
+      ..add(DiagnosticsProperty('exception', exception));
+  }
 
   @override
   bool operator ==(dynamic other) {
@@ -348,11 +366,21 @@ class __$FailureMessageCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_FailureMessage implements _FailureMessage {
+class _$_FailureMessage
+    with DiagnosticableTreeMixin
+    implements _FailureMessage {
   const _$_FailureMessage(this.message) : assert(message != null);
 
   @override
   final String message;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Failure.message'))
+      ..add(DiagnosticsProperty('message', message));
+  }
 
   @override
   bool operator ==(dynamic other) {

@@ -9,6 +9,7 @@ part of 'installed_apps_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$InstalledAppsEventTearOff {
   const _$InstalledAppsEventTearOff();
 
@@ -18,36 +19,40 @@ class _$InstalledAppsEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $InstalledAppsEvent = _$InstalledAppsEventTearOff();
 
+/// @nodoc
 mixin _$InstalledAppsEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initialize(),
+  TResult when<TResult extends Object>({
+    @required TResult initialize(),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initialize(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initialize(),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initialize(_Initialize value),
+  TResult map<TResult extends Object>({
+    @required TResult initialize(_Initialize value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initialize(_Initialize value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initialize(_Initialize value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $InstalledAppsEventCopyWith<$Res> {
   factory $InstalledAppsEventCopyWith(
           InstalledAppsEvent value, $Res Function(InstalledAppsEvent) then) =
       _$InstalledAppsEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$InstalledAppsEventCopyWithImpl<$Res>
     implements $InstalledAppsEventCopyWith<$Res> {
   _$InstalledAppsEventCopyWithImpl(this._value, this._then);
@@ -57,12 +62,14 @@ class _$InstalledAppsEventCopyWithImpl<$Res>
   final $Res Function(InstalledAppsEvent) _then;
 }
 
+/// @nodoc
 abstract class _$InitializeCopyWith<$Res> {
   factory _$InitializeCopyWith(
           _Initialize value, $Res Function(_Initialize) then) =
       __$InitializeCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$InitializeCopyWithImpl<$Res>
     extends _$InstalledAppsEventCopyWithImpl<$Res>
     implements _$InitializeCopyWith<$Res> {
@@ -74,12 +81,20 @@ class __$InitializeCopyWithImpl<$Res>
   _Initialize get _value => super._value as _Initialize;
 }
 
-class _$_Initialize implements _Initialize {
+/// @nodoc
+class _$_Initialize with DiagnosticableTreeMixin implements _Initialize {
   const _$_Initialize();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InstalledAppsEvent.initialize()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'InstalledAppsEvent.initialize'));
   }
 
   @override
@@ -92,8 +107,8 @@ class _$_Initialize implements _Initialize {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initialize(),
+  TResult when<TResult extends Object>({
+    @required TResult initialize(),
   }) {
     assert(initialize != null);
     return initialize();
@@ -101,9 +116,9 @@ class _$_Initialize implements _Initialize {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initialize(),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult initialize(),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initialize != null) {
@@ -114,8 +129,8 @@ class _$_Initialize implements _Initialize {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initialize(_Initialize value),
+  TResult map<TResult extends Object>({
+    @required TResult initialize(_Initialize value),
   }) {
     assert(initialize != null);
     return initialize(this);
@@ -123,9 +138,9 @@ class _$_Initialize implements _Initialize {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initialize(_Initialize value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult initialize(_Initialize value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initialize != null) {
@@ -139,6 +154,7 @@ abstract class _Initialize implements InstalledAppsEvent {
   const factory _Initialize() = _$_Initialize;
 }
 
+/// @nodoc
 class _$InstalledAppsStateTearOff {
   const _$InstalledAppsStateTearOff();
 
@@ -150,15 +166,19 @@ class _$InstalledAppsStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $InstalledAppsState = _$InstalledAppsStateTearOff();
 
+/// @nodoc
 mixin _$InstalledAppsState {
   KtList<Application> get installedApps;
 
+  @JsonKey(ignore: true)
   $InstalledAppsStateCopyWith<InstalledAppsState> get copyWith;
 }
 
+/// @nodoc
 abstract class $InstalledAppsStateCopyWith<$Res> {
   factory $InstalledAppsStateCopyWith(
           InstalledAppsState value, $Res Function(InstalledAppsState) then) =
@@ -166,6 +186,7 @@ abstract class $InstalledAppsStateCopyWith<$Res> {
   $Res call({KtList<Application> installedApps});
 }
 
+/// @nodoc
 class _$InstalledAppsStateCopyWithImpl<$Res>
     implements $InstalledAppsStateCopyWith<$Res> {
   _$InstalledAppsStateCopyWithImpl(this._value, this._then);
@@ -186,6 +207,7 @@ class _$InstalledAppsStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$InstalledAppsStateCopyWith<$Res>
     implements $InstalledAppsStateCopyWith<$Res> {
   factory _$InstalledAppsStateCopyWith(
@@ -195,6 +217,7 @@ abstract class _$InstalledAppsStateCopyWith<$Res>
   $Res call({KtList<Application> installedApps});
 }
 
+/// @nodoc
 class __$InstalledAppsStateCopyWithImpl<$Res>
     extends _$InstalledAppsStateCopyWithImpl<$Res>
     implements _$InstalledAppsStateCopyWith<$Res> {
@@ -217,15 +240,26 @@ class __$InstalledAppsStateCopyWithImpl<$Res>
   }
 }
 
-class _$_InstalledAppsState implements _InstalledAppsState {
+/// @nodoc
+class _$_InstalledAppsState
+    with DiagnosticableTreeMixin
+    implements _InstalledAppsState {
   const _$_InstalledAppsState({this.installedApps});
 
   @override
   final KtList<Application> installedApps;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'InstalledAppsState(installedApps: $installedApps)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'InstalledAppsState'))
+      ..add(DiagnosticsProperty('installedApps', installedApps));
   }
 
   @override
@@ -241,6 +275,7 @@ class _$_InstalledAppsState implements _InstalledAppsState {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(installedApps);
 
+  @JsonKey(ignore: true)
   @override
   _$InstalledAppsStateCopyWith<_InstalledAppsState> get copyWith =>
       __$InstalledAppsStateCopyWithImpl<_InstalledAppsState>(this, _$identity);
@@ -253,5 +288,6 @@ abstract class _InstalledAppsState implements InstalledAppsState {
   @override
   KtList<Application> get installedApps;
   @override
+  @JsonKey(ignore: true)
   _$InstalledAppsStateCopyWith<_InstalledAppsState> get copyWith;
 }

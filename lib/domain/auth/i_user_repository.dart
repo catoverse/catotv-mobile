@@ -1,8 +1,8 @@
 import 'package:cato_feed/domain/auth/user.dart';
 import 'package:cato_feed/domain/auth/user_profile.dart';
 import 'package:cato_feed/domain/core/failure.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:cato_feed/domain/core/result.dart';
+import 'package:flutter/foundation.dart';
 
 
 abstract class IUserRepository {
@@ -14,17 +14,21 @@ abstract class IUserRepository {
 
   Future<Result<Failure, User>> googleLogin(Map<String, dynamic> data);
   Future<Result<Failure, User>> appleLogin();
-  Future<Result<Failure, User>> sessionLogin({String name, String inviteCode});
-  Future<Result<Failure, User>> refreshAuthToken();
-  Future<Result<Failure, User>> generateInvite();
+  Future<Result<Failure, User>> sessionLogin({@required String name, @required String inviteCode});
+  Future<Result<Failure, String>> refreshAuthToken();
+  Future<Result<Failure, String>> generateInvite({@required String email});
   //Future<Result<Failure, User>> getUser(KtMap<String, dynamic> details);
   //Future<Result<Failure, User>> updateTopics(User user, KtList<String> topicIds);
   Future<Result<Failure, bool>> signOut();
   //Future<List<String>> getSelectedTopics(User user);
 
-  Future<Result<Failure, UserProfile>> getUserProfile();
-  Future<Result<Failure, UserProfile>> createUserProfile();
-  Future<Result<Failure, UserProfile>> updateUserProfile();
+  Future<Result<Failure, UserProfile>> getUserProfile({@required String userId});
+  Future<Result<Failure, UserProfile>> createUserProfile({@required String name,
+    @required String userId,
+    @required List<String> selectedTopics});
+  Future<Result<Failure, UserProfile>> updateUserProfile({@required String name,
+    @required String userId,
+    @required List<String> selectedTopics});
 
   Future<bool> eventUserLoggedIn();
   Future<bool> eventUserLoggedOut();

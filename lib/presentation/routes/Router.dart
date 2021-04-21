@@ -5,12 +5,12 @@ import 'package:cato_feed/presentation/screens/onboard_invite/onbord_invite.dart
 import 'package:cato_feed/presentation/screens/onboard_login/onbord_login.dart';
 import 'package:cato_feed/presentation/screens/onboard_login/onbord_login_back.dart';
 import 'package:cato_feed/presentation/screens/onboard_selection/onboard_selection.dart';
+import 'package:cato_feed/presentation/screens/search/videos_by_category.dart';
 import 'package:cato_feed/presentation/screens/single_post/single_post.dart';
 import 'package:cato_feed/presentation/screens/topic_selection/topic_selection.dart';
 import 'package:cato_feed/presentation/screens/home/home.dart';
 import 'package:cato_feed/presentation/screens/app_redirect/no_distraction_settings.dart';
 import 'package:cato_feed/presentation/screens/notification_settings.dart';
-import 'package:cato_feed/presentation/screens/onboard/onboard_screen.dart';
 import 'package:cato_feed/presentation/screens/profile/profile.dart';
 import 'package:cato_feed/presentation/screens/home/profile_overview.dart';
 import 'package:cato_feed/presentation/screens/splash/splash_screen.dart';
@@ -29,6 +29,7 @@ import 'package:cato_feed/presentation/screens/splash/splash_screen.dart';
   AdaptiveRoute(page: NotificationSettingScreen),
   AdaptiveRoute(page: NoDistractionSettingsScreen),
   AdaptiveRoute(page: AppRedirectScreen),
-  AdaptiveRoute(page: SinglePostScreen, path: '/video/:postId' )
+  AdaptiveRoute(page: VideosByCategoryScreen),
+  AdaptiveRoute(page: SinglePostScreen),
 ], routesClassName: 'CatoRoutes')
 class $CatoRouter {}

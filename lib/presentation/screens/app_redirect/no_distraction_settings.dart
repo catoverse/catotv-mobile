@@ -49,7 +49,7 @@ class NoDistractionSettingPage extends StatelessWidget {
                         color: ColorAssets.blueHaiti,
                       ),
                       onTap: () {
-                        ExtendedNavigator.of(context).pop();
+                        ExtendedNavigator.of(context)?.pop();
                       },
                     ),
                   ),
@@ -110,7 +110,7 @@ class NoDistractionSettingPage extends StatelessWidget {
                     return CupertinoSwitch(
                       value: state.isEnabled,
                       onChanged: (value) {
-                        context.bloc<AppRedirectSettingBloc>()
+                        context.read<AppRedirectSettingBloc>()
                             .add(AppRedirectSettingEvent.toggleAppRedirect());
                       },
                       activeColor: ColorAssets.teal,
@@ -133,7 +133,7 @@ class NoDistractionSettingPage extends StatelessWidget {
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return _noDistractionItems[index]._buildWidget(() {
-                  ExtendedNavigator.of(context).push(
+                  context.navigator.push(
                       CatoRoutes.appRedirectScreen, arguments: AppRedirectScreenArguments(startStep: index+1));
                 });
               },

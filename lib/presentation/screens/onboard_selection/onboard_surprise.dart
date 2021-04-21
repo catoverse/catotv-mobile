@@ -1,10 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/presentation/screens/onboard_selection/onboard_category_card.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 import 'onboard_selection.dart';
@@ -19,7 +21,8 @@ class OnboardSurpriseScreen extends StatelessWidget {
 class OnboardSurprisePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var onboardItems = OnboardSelectionCategory.getAll().getRange(0, 3).toList();
+    //var onboardItems = OnboardSelectionCategory.getAll().getRange(0, 3).toList()
+    var topics = context.read<TopicBloc>().state.allTopics;
     var cardWidth = (MediaQuery.of(context).size.width - 40) / 2.0;
     var cardHeight = 96.0;
     var buttonWidth = (MediaQuery.of(context).size.width - 48.0) / 2.0;
@@ -50,11 +53,11 @@ class OnboardSurprisePage extends StatelessWidget {
                     physics: NeverScrollableScrollPhysics(),
                     crossAxisCount: 1,
                     childAspectRatio: 2.5,
-                    children: List.generate(onboardItems.length, (index) {
+                    children: List.generate(topics.length, (index) {
                       var borderColor = Color(0xFF51DFD7);
                       return Align(
                         child: OnboardCategoryCard(
-                          cardData: onboardItems[index],
+                          cardData: topics[index],
                           cardWidth: cardWidth,
                           cardHeight: cardHeight,
                           cardBorderColor: borderColor,

@@ -1,11 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cato_feed/presentation/screens/onboard/onboard.dart';
-import 'package:cato_feed/presentation/screens/onboard_selection/onboard_selection.dart';
+import 'package:cato_feed/domain/topic/topic.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:flutter/material.dart';
 
 class OnboardCategoryCard extends StatelessWidget {
-  final OnboardSelectionCategory cardData;
+  final Topic cardData;
   final double cardWidth;
   final double cardHeight;
   final Color cardBorderColor;
@@ -13,11 +12,11 @@ class OnboardCategoryCard extends StatelessWidget {
 
   const OnboardCategoryCard({
     Key key,
-    this.cardData,
-    this.cardWidth,
-    this.cardHeight,
-    this.cardBorderColor,
-    this.isSelected,
+    @required this.cardData,
+    @required this.cardWidth,
+    @required this.cardHeight,
+    @required this.cardBorderColor,
+    @required this.isSelected,
   }) : super(key: key);
 
   @override
@@ -40,13 +39,13 @@ class OnboardCategoryCard extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(left: 4.0, right: 4.0, top: 16.0),
                   child: Image.asset(
-                    cardData.imagePath,
+                    cardData.getImage(),
                     height: 48,
                     width: 48,
                     fit: BoxFit.contain,
                   ),
                 ),
-                if (isSelected) // TODO: Update Selection
+                if (isSelected)
                   Padding(
                     padding: const EdgeInsets.only(top: 2.0, left: 2.0),
                     child: Icon(
@@ -67,7 +66,7 @@ class OnboardCategoryCard extends StatelessWidget {
                     height: 8,
                   ),
                   AutoSizeText(
-                    cardData.title,
+                    cardData.name,
                     style: TextStyle(
                       fontFamily: FontAssets.Poppins,
                       fontWeight: FontWeight.w500,
@@ -77,7 +76,7 @@ class OnboardCategoryCard extends StatelessWidget {
                     maxLines: 1,
                   ),
                   Text(
-                    cardData.body,
+                    '',
                     maxLines: 5,
                     softWrap: true,
                     style: TextStyle(

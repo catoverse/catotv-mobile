@@ -8,6 +8,7 @@ import 'package:cato_feed/domain/topic/topic.dart';
 import 'package:cato_feed/domain/auth/user.dart';
 import 'package:injectable/injectable.dart';
 import 'package:cato_feed/domain/core/failure.dart';
+import 'package:flutter/foundation.dart';
 
 part 'topic_event.dart';
 part 'topic_state.dart';
@@ -33,7 +34,7 @@ class TopicBloc extends Bloc<TopicEvent, TopicState> {
         if(topicResult.hasFailed()) {
           yield state.copyWith(failure: topicResult.failure);
         } else {
-          yield state.copyWith(allTopics: topicResult.data.asList());
+          yield state.copyWith(allTopics: topicResult.data?.asList() ?? []);
         }
       }
     );

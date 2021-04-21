@@ -17,9 +17,9 @@ class AppRedirectHelper {
       blockedPackages = await getBlockedPackages();
     }
     List<Application> apps = await DeviceApps.getInstalledApplications(includeSystemApps: false, includeAppIcons: true);
-    List<Application> blockedApps = List();
+    List<Application> blockedApps = [];
     apps.forEach((element) {
-      if(blockedPackages.contains(element.packageName)) {
+      if(blockedPackages?.contains(element.packageName) ?? false) {
         blockedApps.add(element);
       }
     });

@@ -185,7 +185,7 @@ class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_UserProfile implements _UserProfile {
+class _$_UserProfile with DiagnosticableTreeMixin implements _UserProfile {
   const _$_UserProfile(
       {@required this.name,
       @required this.totalWatchTime,
@@ -226,8 +226,24 @@ class _$_UserProfile implements _UserProfile {
   final Map<String, int> lastFiveCount;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'UserProfile(name: $name, totalWatchTime: $totalWatchTime, videoCount: $videoCount, userId: $userId, id: $id, watchHistory: $watchHistory, selectedTopics: $selectedTopics, videoWatched: $videoWatched, lastFiveCount: $lastFiveCount)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UserProfile'))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('totalWatchTime', totalWatchTime))
+      ..add(DiagnosticsProperty('videoCount', videoCount))
+      ..add(DiagnosticsProperty('userId', userId))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('watchHistory', watchHistory))
+      ..add(DiagnosticsProperty('selectedTopics', selectedTopics))
+      ..add(DiagnosticsProperty('videoWatched', videoWatched))
+      ..add(DiagnosticsProperty('lastFiveCount', lastFiveCount));
   }
 
   @override

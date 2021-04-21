@@ -25,7 +25,7 @@ class ProfileOverviewScreen extends StatelessWidget {
                 height: 90,
               ),
               onTap: () {
-                ExtendedNavigator.of(context).push(CatoRoutes.profileScreen);
+                context.navigator.push(CatoRoutes.profileScreen);
               },
             ),
             Positioned(
@@ -46,7 +46,6 @@ class ProfileOverviewScreen extends StatelessWidget {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                       image: AssetImage(ImageAssets.Debug.google_logo),
-                      // TODO: Update this also
                       fit: BoxFit.fill),
                 ),
               ),
@@ -91,7 +90,8 @@ class ProfileOverviewScreen extends StatelessWidget {
                   },
                   itemCount: 10,
                   itemBuilder: (_, index) {
-                    return PostWidget();
+                    return Container();
+                    //return PostWidget(index: index, post: posts[index],);
                   },
                 ),
               ],

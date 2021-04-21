@@ -12,6 +12,7 @@
     <application
         android:name=".MainApplication"
         android:label="Cato"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"

@@ -9,6 +9,7 @@ part of 'single_post_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$SinglePostEventTearOff {
   const _$SinglePostEventTearOff();
 
@@ -20,34 +21,38 @@ class _$SinglePostEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SinglePostEvent = _$SinglePostEventTearOff();
 
+/// @nodoc
 mixin _$SinglePostEvent {
   String get postId;
 
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loadPost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult loadPost(String postId),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loadPost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loadPost(String postId),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loadPost(_LoadPost value),
+  TResult map<TResult extends Object>({
+    @required TResult loadPost(_LoadPost value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loadPost(_LoadPost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loadPost(_LoadPost value),
+    @required TResult orElse(),
   });
 
+  @JsonKey(ignore: true)
   $SinglePostEventCopyWith<SinglePostEvent> get copyWith;
 }
 
+/// @nodoc
 abstract class $SinglePostEventCopyWith<$Res> {
   factory $SinglePostEventCopyWith(
           SinglePostEvent value, $Res Function(SinglePostEvent) then) =
@@ -55,6 +60,7 @@ abstract class $SinglePostEventCopyWith<$Res> {
   $Res call({String postId});
 }
 
+/// @nodoc
 class _$SinglePostEventCopyWithImpl<$Res>
     implements $SinglePostEventCopyWith<$Res> {
   _$SinglePostEventCopyWithImpl(this._value, this._then);
@@ -73,6 +79,7 @@ class _$SinglePostEventCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$LoadPostCopyWith<$Res>
     implements $SinglePostEventCopyWith<$Res> {
   factory _$LoadPostCopyWith(_LoadPost value, $Res Function(_LoadPost) then) =
@@ -81,6 +88,7 @@ abstract class _$LoadPostCopyWith<$Res>
   $Res call({String postId});
 }
 
+/// @nodoc
 class __$LoadPostCopyWithImpl<$Res> extends _$SinglePostEventCopyWithImpl<$Res>
     implements _$LoadPostCopyWith<$Res> {
   __$LoadPostCopyWithImpl(_LoadPost _value, $Res Function(_LoadPost) _then)
@@ -99,15 +107,24 @@ class __$LoadPostCopyWithImpl<$Res> extends _$SinglePostEventCopyWithImpl<$Res>
   }
 }
 
-class _$_LoadPost implements _LoadPost {
+/// @nodoc
+class _$_LoadPost with DiagnosticableTreeMixin implements _LoadPost {
   const _$_LoadPost(this.postId) : assert(postId != null);
 
   @override
   final String postId;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SinglePostEvent.loadPost(postId: $postId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SinglePostEvent.loadPost'))
+      ..add(DiagnosticsProperty('postId', postId));
   }
 
   @override
@@ -122,14 +139,15 @@ class _$_LoadPost implements _LoadPost {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(postId);
 
+  @JsonKey(ignore: true)
   @override
   _$LoadPostCopyWith<_LoadPost> get copyWith =>
       __$LoadPostCopyWithImpl<_LoadPost>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result loadPost(String postId),
+  TResult when<TResult extends Object>({
+    @required TResult loadPost(String postId),
   }) {
     assert(loadPost != null);
     return loadPost(postId);
@@ -137,9 +155,9 @@ class _$_LoadPost implements _LoadPost {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result loadPost(String postId),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult loadPost(String postId),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadPost != null) {
@@ -150,8 +168,8 @@ class _$_LoadPost implements _LoadPost {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result loadPost(_LoadPost value),
+  TResult map<TResult extends Object>({
+    @required TResult loadPost(_LoadPost value),
   }) {
     assert(loadPost != null);
     return loadPost(this);
@@ -159,9 +177,9 @@ class _$_LoadPost implements _LoadPost {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result loadPost(_LoadPost value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult loadPost(_LoadPost value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (loadPost != null) {
@@ -177,9 +195,11 @@ abstract class _LoadPost implements SinglePostEvent {
   @override
   String get postId;
   @override
+  @JsonKey(ignore: true)
   _$LoadPostCopyWith<_LoadPost> get copyWith;
 }
 
+/// @nodoc
 class _$SinglePostStateTearOff {
   const _$SinglePostStateTearOff();
 
@@ -192,16 +212,20 @@ class _$SinglePostStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SinglePostState = _$SinglePostStateTearOff();
 
+/// @nodoc
 mixin _$SinglePostState {
   Post get post;
   Failure get failure;
 
+  @JsonKey(ignore: true)
   $SinglePostStateCopyWith<SinglePostState> get copyWith;
 }
 
+/// @nodoc
 abstract class $SinglePostStateCopyWith<$Res> {
   factory $SinglePostStateCopyWith(
           SinglePostState value, $Res Function(SinglePostState) then) =
@@ -212,6 +236,7 @@ abstract class $SinglePostStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class _$SinglePostStateCopyWithImpl<$Res>
     implements $SinglePostStateCopyWith<$Res> {
   _$SinglePostStateCopyWithImpl(this._value, this._then);
@@ -252,6 +277,7 @@ class _$SinglePostStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$SinglePostStateCopyWith<$Res>
     implements $SinglePostStateCopyWith<$Res> {
   factory _$SinglePostStateCopyWith(
@@ -266,6 +292,7 @@ abstract class _$SinglePostStateCopyWith<$Res>
   $FailureCopyWith<$Res> get failure;
 }
 
+/// @nodoc
 class __$SinglePostStateCopyWithImpl<$Res>
     extends _$SinglePostStateCopyWithImpl<$Res>
     implements _$SinglePostStateCopyWith<$Res> {
@@ -288,7 +315,10 @@ class __$SinglePostStateCopyWithImpl<$Res>
   }
 }
 
-class _$_SinglePostState implements _SinglePostState {
+/// @nodoc
+class _$_SinglePostState
+    with DiagnosticableTreeMixin
+    implements _SinglePostState {
   const _$_SinglePostState({this.post, this.failure});
 
   @override
@@ -297,8 +327,17 @@ class _$_SinglePostState implements _SinglePostState {
   final Failure failure;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SinglePostState(post: $post, failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SinglePostState'))
+      ..add(DiagnosticsProperty('post', post))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override
@@ -317,6 +356,7 @@ class _$_SinglePostState implements _SinglePostState {
       const DeepCollectionEquality().hash(post) ^
       const DeepCollectionEquality().hash(failure);
 
+  @JsonKey(ignore: true)
   @override
   _$SinglePostStateCopyWith<_SinglePostState> get copyWith =>
       __$SinglePostStateCopyWithImpl<_SinglePostState>(this, _$identity);
@@ -331,5 +371,6 @@ abstract class _SinglePostState implements SinglePostState {
   @override
   Failure get failure;
   @override
+  @JsonKey(ignore: true)
   _$SinglePostStateCopyWith<_SinglePostState> get copyWith;
 }

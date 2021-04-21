@@ -9,6 +9,7 @@ import 'package:cato_feed/domain/auth/i_user_repository.dart';
 import 'package:cato_feed/domain/auth/user.dart';
 import 'package:cato_feed/domain/core/failure.dart';
 import 'package:cato_feed/domain/topic/i_topic_repository.dart';
+import 'package:flutter/foundation.dart';
 
 part 'topicselection_event.dart';
 part 'topicselection_state.dart';
@@ -40,10 +41,11 @@ class TopicSelectionBloc
           yield state.copyWith(selectedTopicIds: topicIds);
         },
         saveTopics: (user) async* {
-          var result = await _userRepository.updateTopics(user, state.selectedTopicIds);
+          // TODO: Fix this
+          var result; //= await _userRepository.updateTopics(user, state.selectedTopicIds);
 
           if(result.hasFailed()) {
-            yield state.copyWith(failure: result.failure, topicSavedSuccess: null);
+            yield state.copyWith(failure: result.failure, topicSavedSuccess: false);
           } else {
             yield state.copyWith(topicSavedSuccess: true, failure: null);
           }

@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 part 'installed_apps_bloc.freezed.dart';
 

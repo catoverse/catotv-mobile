@@ -74,6 +74,8 @@ class _AppRedirectPageState extends State<AppRedirectPage>
         child: Image.asset(ImageAssets.Release.permission_lock),
         padding: EdgeInsets.only(right: 40, bottom: 10),
       );
+    } else {
+      return Container();
     }
   }
 
@@ -89,14 +91,14 @@ class _AppRedirectPageState extends State<AppRedirectPage>
         }
         return Expanded(
           child: StaggeredGridView.builder(
-            itemCount: state.installedApps.size,
+            itemCount: state.installedApps?.size,
             padding: EdgeInsets.only(left: 32, right: 32, bottom: 40),
             gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
               staggeredTileBuilder: (__) {
                 return StaggeredTile.fit(1);
               },
-              staggeredTileCount: state.installedApps.size,
+              staggeredTileCount: state.installedApps?.size,
               mainAxisSpacing: 14,
               crossAxisSpacing: 14,
             ),
@@ -131,7 +133,6 @@ class _AppRedirectPageState extends State<AppRedirectPage>
                     ),
                     BlocBuilder<AppRedirectSelectionBloc,
                         AppRedirectSelectionState>(
-                      cubit: context.bloc<AppRedirectSelectionBloc>(),
                       builder: (context, state) {
                         var isSelected = state.isAppSelected(app.packageName);
                         return Positioned.fill(
@@ -155,7 +156,7 @@ class _AppRedirectPageState extends State<AppRedirectPage>
                   ],
                 ),
                 onTap: () {
-                  context.bloc<AppRedirectSelectionBloc>().add(
+                  context.read()<AppRedirectSelectionBloc>().add(
                       AppRedirectSelectionEvent.selectOrRemovePackage(
                           app.packageName));
                 },
@@ -180,7 +181,7 @@ class _AppRedirectPageState extends State<AppRedirectPage>
       mainAxisSize: MainAxisSize.max,
       children: [
         // Clock
-        CustomClock(state.startTime, state.endTime, (startTime, endTime) {
+        CustomClock(state.startTime ?? '', state.endTime ?? '', (startTime, endTime) {
           clockStartTime = startTime;
           clockEndTime = endTime;
         }),
@@ -239,7 +240,7 @@ class _AppRedirectPageState extends State<AppRedirectPage>
                   ),
                   onTap: () {
                     context
-                        .bloc<AppRedirectBloc>()
+                        .read()<AppRedirectBloc>()
                         .add(AppRedirectEvent.addOrRemoveWeekDay(index + 1));
                   },
                 );
@@ -257,12 +258,12 @@ class _AppRedirectPageState extends State<AppRedirectPage>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
   }
 
   @override
   void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
+    WidgetsBinding.instance?.removeObserver(this);
     super.dispose();
   }
 
@@ -301,22 +302,22 @@ class _AppRedirectPageState extends State<AppRedirectPage>
       case 3:
         {
           if (state.appUsagePermission == PermissionState.NOT_ALLOWED) {
-            bloc.add(AppRedirectEvent.requestAppUsagePermission());
+            bloc?.add(AppRedirectEvent.requestAppUsagePermission());
             return;
           }
 
           if (state.batteryPermission == PermissionState.NOT_ALLOWED) {
-            bloc.add(AppRedirectEvent.requestBatteryPermission());
+            bloc?.add(AppRedirectEvent.requestBatteryPermission());
             return;
           }
 
           if(state.overlayPermission == PermissionState.NOT_ALLOWED) {
-            bloc.add(AppRedirectEvent.requestOverlayPermission());
+            bloc?.add(AppRedirectEvent.requestOverlayPermission());
             return;
           }
 
-          bloc.add(AppRedirectEvent.startAppRedirect());
-          ExtendedNavigator.of(context).pop();
+          bloc?.add(AppRedirectEvent.startAppRedirect());
+          ExtendedNavigator.of(context)?.pop();
           return;
         }
     }
@@ -325,18 +326,18 @@ class _AppRedirectPageState extends State<AppRedirectPage>
   @override
   Widget build(BuildContext context) {
     // ignore: close_sinks
-    if (bloc == null) bloc = context.bloc<AppRedirectBloc>();
+    if (bloc == null) bloc = context.read<AppRedirectBloc>();
     return PlatformScaffold(
       backgroundColor: ColorAssets.black21,
       body: BlocConsumer<AppRedirectBloc, AppRedirectState>(
         listener: (_, state) {
           if (state.blockedPackages != null) {
             // ignore: close_sinks
-            var bloc = context.bloc<AppRedirectSelectionBloc>();
+            var bloc = context.read()<AppRedirectSelectionBloc>();
             if (bloc.state.selectedPackages == null) {
-              context.bloc<AppRedirectSelectionBloc>().add(
+              context.read<AppRedirectSelectionBloc>().add(
                   AppRedirectSelectionEvent.updateSelectedPackages(
-                      state.blockedPackages));
+                      state.blockedPackages ?? []));
             }
           }
           if (state.startTime != null &&
@@ -456,9 +457,9 @@ class _AppRedirectPageState extends State<AppRedirectPage>
                                 ),
                                 onPressed: () {
                                   if (state.currentStep == 1) {
-                                    ExtendedNavigator.of(context).pop();
+                                    ExtendedNavigator.of(context)?.pop();
                                   } else {
-                                    bloc.add(AppRedirectEvent.changeStep(
+                                    bloc?.add(AppRedirectEvent.changeStep(
                                         state.currentStep - 1));
                                   }
                                 },

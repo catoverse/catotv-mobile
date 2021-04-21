@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 part 'app_redirect_bloc.freezed.dart';
 
@@ -42,9 +42,9 @@ class AppRedirectBloc extends Bloc<AppRedirectEvent, AppRedirectState> {
           await _appRedirectHelper.appBlocker.isOverlayPermissionGranted();
 
       var blockedPackages =
-          await _appRedirectHelper.getBlockedPackages() ?? List();
+          await _appRedirectHelper.getBlockedPackages() ?? [];
       var selectedWeekDays =
-          await _appRedirectHelper.appBlocker.getRestrictedWeekDays() ?? List();
+          await _appRedirectHelper.appBlocker.getRestrictedWeekDays() ?? [];
 
       var time = await _appRedirectHelper.appBlocker.getRestrictionTime();
       var startTime = time['startTime'];

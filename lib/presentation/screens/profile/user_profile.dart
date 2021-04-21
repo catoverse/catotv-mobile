@@ -1,4 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cato_feed/application/auth/auth.dart';
+import 'package:cato_feed/application/user_profile/user_profile.dart';
+import 'package:cato_feed/domain/auth/user_profile.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
 import 'package:cato_feed/presentation/utils/common.dart';
@@ -6,6 +9,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -59,64 +63,68 @@ class _UserProfilePageState extends State<UserProfilePage>
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (overScroll) {
             overScroll.disallowGlow();
-            return;
+            return false;
           },
-          child: NestedScrollView(
-            controller: _scrollController,
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                MediaQuery.removePadding(
-                  context: context,
-                  removeLeft: true,
-                  child: SliverAppBar(
-                    titleSpacing: 0,
-                    title: ProfileHeaderWidget(),
-                    toolbarHeight: 172,
-                    backgroundColor: Colors.white,
-                    floating: true,
-                    snap: false,
-                    pinned: true,
-                    bottom: TabBar(
-                      controller: _tabController,
-                      tabs: [
-                        Tab(
-                          text: 'Progress',
-                        ),
-                        Tab(
-                          text: 'Friends',
-                        )
-                      ],
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicator: BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            width: 4,
-                            color: Color(0xFFFF8364),
+          child: BlocBuilder<UserProfileBloc, UserProfileState>(
+            builder: (ctx, state) {
+              return NestedScrollView(
+                controller: _scrollController,
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  return <Widget>[
+                    MediaQuery.removePadding(
+                      context: context,
+                      removeLeft: true,
+                      child: SliverAppBar(
+                        titleSpacing: 0,
+                        title: ProfileHeaderWidget(userProfile: state.profile),
+                        toolbarHeight: 172,
+                        backgroundColor: Colors.white,
+                        floating: true,
+                        snap: false,
+                        pinned: true,
+                        bottom: TabBar(
+                          controller: _tabController,
+                          tabs: [
+                            Tab(
+                              text: 'Progress',
+                            ),
+                            Tab(
+                              text: 'Friends',
+                            )
+                          ],
+                          indicatorSize: TabBarIndicatorSize.tab,
+                          indicator: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                width: 4,
+                                color: Color(0xFFFF8364),
+                              ),
+                            ),
+                          ),
+                          labelColor: Color(0xFF082D42),
+                          unselectedLabelColor: Color(0x66082D42),
+                          labelStyle: TextStyle(
+                            fontFamily: FontAssets.Poppins,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          unselectedLabelStyle: TextStyle(
+                            fontFamily: FontAssets.Poppins,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
-                      labelColor: Color(0xFF082D42),
-                      unselectedLabelColor: Color(0x66082D42),
-                      labelStyle: TextStyle(
-                        fontFamily: FontAssets.Poppins,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                      unselectedLabelStyle: TextStyle(
-                        fontFamily: FontAssets.Poppins,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                )
-              ];
+                    )
+                  ];
+                },
+                body: TabBarView(
+                  controller: _tabController,
+                  children: [ProfileProgressPage(), ProfileFriendsPage()],
+                ),
+              );
             },
-            body: TabBarView(
-              controller: _tabController,
-              children: [ProfileProgressPage(), ProfileFriendsPage()],
-            ),
           ),
         ),
       ),
@@ -125,8 +133,23 @@ class _UserProfilePageState extends State<UserProfilePage>
 }
 
 class ProfileHeaderWidget extends StatelessWidget {
+  final UserProfile userProfile;
+
+  const ProfileHeaderWidget({this.userProfile});
+
+  Widget _getAvatar(BuildContext context) {
+    var avatarLink = context.read<AuthBloc>().state.getAvatarLink();
+    if(avatarLink.isNotEmpty && avatarLink.startsWith('http')) {
+      return CircleAvatar(backgroundImage: NetworkImage(avatarLink), radius: 24,);
+    }
+
+    return Image.asset(ImageAssets.Release.icon_profile, height:48, width: 48,);
+
+
+  }
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         SizedBox(
@@ -138,11 +161,7 @@ class ProfileHeaderWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                ImageAssets.Release.icon_profile,
-                height: 48,
-                width: 48,
-              ),
+              _getAvatar(context),
               SizedBox(
                 width: 16,
               ),
@@ -150,7 +169,7 @@ class ProfileHeaderWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Rahul Garg',
+                    userProfile?.name ?? '',
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: FontAssets.Poppins,
@@ -256,7 +275,7 @@ class ProfileStatNumberWidget extends StatelessWidget {
   final String value;
   final String title;
 
-  const ProfileStatNumberWidget({Key key, this.value, this.title})
+  const ProfileStatNumberWidget({Key key, @required this.value, @required this.title})
       : super(key: key);
 
   @override

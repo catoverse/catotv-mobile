@@ -6,5 +6,11 @@ abstract class TopicState with _$TopicState {
     List<Topic> allTopics,
     Failure failure,
   }) = _TopicState;
-  factory TopicState.initial() => TopicState();
+  factory TopicState.initial() => TopicState(allTopics: [], failure: null);
+}
+
+extension TopicStateX on TopicState {
+  String getName(String topicId) {
+    return allTopics.where((element) => element.id == topicId).first?.name ?? " ";
+  }
 }

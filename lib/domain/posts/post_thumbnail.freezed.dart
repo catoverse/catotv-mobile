@@ -9,11 +9,13 @@ part of 'post_thumbnail.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$PostThumbnailTearOff {
   const _$PostThumbnailTearOff();
 
 // ignore: unused_element
-  _PostThumbnail call({String thumbnailUrl, String thumbnailBlurHash}) {
+  _PostThumbnail call(
+      {@required String thumbnailUrl, @required String thumbnailBlurHash}) {
     return _PostThumbnail(
       thumbnailUrl: thumbnailUrl,
       thumbnailBlurHash: thumbnailBlurHash,
@@ -21,16 +23,20 @@ class _$PostThumbnailTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $PostThumbnail = _$PostThumbnailTearOff();
 
+/// @nodoc
 mixin _$PostThumbnail {
   String get thumbnailUrl;
   String get thumbnailBlurHash;
 
+  @JsonKey(ignore: true)
   $PostThumbnailCopyWith<PostThumbnail> get copyWith;
 }
 
+/// @nodoc
 abstract class $PostThumbnailCopyWith<$Res> {
   factory $PostThumbnailCopyWith(
           PostThumbnail value, $Res Function(PostThumbnail) then) =
@@ -38,6 +44,7 @@ abstract class $PostThumbnailCopyWith<$Res> {
   $Res call({String thumbnailUrl, String thumbnailBlurHash});
 }
 
+/// @nodoc
 class _$PostThumbnailCopyWithImpl<$Res>
     implements $PostThumbnailCopyWith<$Res> {
   _$PostThumbnailCopyWithImpl(this._value, this._then);
@@ -62,6 +69,7 @@ class _$PostThumbnailCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$PostThumbnailCopyWith<$Res>
     implements $PostThumbnailCopyWith<$Res> {
   factory _$PostThumbnailCopyWith(
@@ -71,6 +79,7 @@ abstract class _$PostThumbnailCopyWith<$Res>
   $Res call({String thumbnailUrl, String thumbnailBlurHash});
 }
 
+/// @nodoc
 class __$PostThumbnailCopyWithImpl<$Res>
     extends _$PostThumbnailCopyWithImpl<$Res>
     implements _$PostThumbnailCopyWith<$Res> {
@@ -97,8 +106,12 @@ class __$PostThumbnailCopyWithImpl<$Res>
   }
 }
 
-class _$_PostThumbnail implements _PostThumbnail {
-  const _$_PostThumbnail({this.thumbnailUrl, this.thumbnailBlurHash});
+/// @nodoc
+class _$_PostThumbnail with DiagnosticableTreeMixin implements _PostThumbnail {
+  const _$_PostThumbnail(
+      {@required this.thumbnailUrl, @required this.thumbnailBlurHash})
+      : assert(thumbnailUrl != null),
+        assert(thumbnailBlurHash != null);
 
   @override
   final String thumbnailUrl;
@@ -106,8 +119,17 @@ class _$_PostThumbnail implements _PostThumbnail {
   final String thumbnailBlurHash;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PostThumbnail(thumbnailUrl: $thumbnailUrl, thumbnailBlurHash: $thumbnailBlurHash)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PostThumbnail'))
+      ..add(DiagnosticsProperty('thumbnailUrl', thumbnailUrl))
+      ..add(DiagnosticsProperty('thumbnailBlurHash', thumbnailBlurHash));
   }
 
   @override
@@ -128,6 +150,7 @@ class _$_PostThumbnail implements _PostThumbnail {
       const DeepCollectionEquality().hash(thumbnailUrl) ^
       const DeepCollectionEquality().hash(thumbnailBlurHash);
 
+  @JsonKey(ignore: true)
   @override
   _$PostThumbnailCopyWith<_PostThumbnail> get copyWith =>
       __$PostThumbnailCopyWithImpl<_PostThumbnail>(this, _$identity);
@@ -135,12 +158,14 @@ class _$_PostThumbnail implements _PostThumbnail {
 
 abstract class _PostThumbnail implements PostThumbnail {
   const factory _PostThumbnail(
-      {String thumbnailUrl, String thumbnailBlurHash}) = _$_PostThumbnail;
+      {@required String thumbnailUrl,
+      @required String thumbnailBlurHash}) = _$_PostThumbnail;
 
   @override
   String get thumbnailUrl;
   @override
   String get thumbnailBlurHash;
   @override
+  @JsonKey(ignore: true)
   _$PostThumbnailCopyWith<_PostThumbnail> get copyWith;
 }

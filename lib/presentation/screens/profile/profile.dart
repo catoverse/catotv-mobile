@@ -77,7 +77,7 @@ class ProfilePage extends StatelessWidget {
         listener: (_, state) {
           state.maybeWhen(
               unauthenticated: () =>
-                  context.navigator.replace(CatoRoutes.onboardingScreen),
+              context.navigator.replace(CatoRoutes.onboardLoginBackScreen),
               orElse: () {});
         },
         builder: (context, state) {
@@ -135,15 +135,15 @@ class ProfilePage extends StatelessWidget {
                       width: avatarSize,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: DecorationImage(
-                          image: (user?.photoUrl == null ||
-                                  user?.photoUrl?.isEmpty == true)
-                              ? AssetImage(ImageAssets.Release.google_logo)
-                              : NetworkImage(
-                                  user?.photoUrl ?? '',
-                                ),
-                          fit: BoxFit.fitHeight,
-                        ),
+                        // image: DecorationImage(
+                        //   image: (user?.photoUrl == null ||
+                        //           user?.photoUrl?.isEmpty == true)
+                        //       ? AssetImage(ImageAssets.Release.google_logo)
+                        //       : NetworkImage(
+                        //           user?.photoUrl ?? '',
+                        //         ),
+                        //   fit: BoxFit.fitHeight,
+                        // ),
                       ),
                     ),
                   ),
@@ -200,8 +200,7 @@ class ProfilePage extends StatelessWidget {
                       if (index == 0) {
                         getIt<ILogger>()
                             .logEvent(LogEvents.EVENT_PROFILE_PICK_TOPIC);
-                        ExtendedNavigator.of(context)
-                            .push(CatoRoutes.topicSelectionScreen);
+                        context.navigator.push(CatoRoutes.topicSelectionScreen);
                       } else if (index == 1) {
                         getIt<ILogger>()
                             .logEvent(LogEvents.EVENT_LOGOUT_PRESSED);
@@ -235,38 +234,38 @@ class ProfilePage extends StatelessWidget {
   Future<void> _appRedirectClick(BuildContext context) async {
     var packages = await getIt<AppRedirectHelper>().getBlockedPackages();
     var screen = (packages == null || packages.isEmpty)
-        ? CatoRoutes.appRedirectScreen
-        : CatoRoutes.noDistractionSettingsScreen;
+        ? CatoRoutes.appRedirectScreen : CatoRoutes.noDistractionSettingsScreen;
 
-    ExtendedNavigator.of(context).push(screen);
+    context.navigator.push(screen);
   }
 
-  Future<bool> _logout(BuildContext context) {
-    return showPlatformDialog(
-          context: context,
-          builder: (_) => PlatformAlertDialog(
-            title: Text('Are you sure to Logout?'),
-            content: Text('We hate to see you leave...'),
-            actions: [
-              PlatformDialogAction(
-                child: Text('Cancel'),
-                onPressed: () {
-                  getIt<ILogger>()
-                      .logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
-                  Navigator.of(context).pop(false);
-                },
-              ),
-              PlatformDialogAction(
-                child: Text('Logout'),
-                onPressed: () {
-                  getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
-                  context.bloc<AuthBloc>().add(AuthEvent.signedOut());
-                },
-              ),
-            ],
-          ),
-        ) ??
-        false;
+  Future<bool> _logout(BuildContext context) async{
+    return false;
+    // return showPlatformDialog(
+    //       context: context,
+    //       builder: (_) => PlatformAlertDialog(
+    //         title: Text('Are you sure to Logout?'),
+    //         content: Text('We hate to see you leave...'),
+    //         actions: [
+    //           PlatformDialogAction(
+    //             child: Text('Cancel'),
+    //             onPressed: () {
+    //               getIt<ILogger>()
+    //                   .logEvent(LogEvents.EVENT_LOGOUT_DIALOG_CANCEL);
+    //               Navigator.of(context).pop(false);
+    //             },
+    //           ),
+    //           PlatformDialogAction(
+    //             child: Text('Logout'),
+    //             onPressed: () {
+    //               getIt<ILogger>().logEvent(LogEvents.EVENT_LOGOUT_DIALOG_OK);
+    //               context.read<AuthBloc>().add(AuthEvent.signedOut());
+    //             },
+    //           ),
+    //         ],
+    //       ),
+    //     ) ??
+    //     false;
   }
 }
 

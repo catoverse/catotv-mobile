@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:cato_feed/domain/core/failure.dart';
 import 'package:cato_feed/domain/core/i_logger.dart';
 import 'package:cato_feed/domain/core/i_repository.dart';
 import 'package:cato_feed/infrastructure/core/remote/network.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get_version/get_version.dart';
 import 'package:injectable/injectable.dart';
 import 'package:cato_feed/domain/core/result.dart';
@@ -15,7 +17,7 @@ class Repository implements IRepository {
 
   Repository(this._network, this._logger);
 
-  /// Returns whether force update is required or not.
+  /// Returns whether force update is @required or not.
   @override
   Future<Result<Failure, bool>> isForceUpdateRequired() async {
     var result  = Platform.isAndroid
@@ -27,9 +29,16 @@ class Repository implements IRepository {
       var currentVersion = int.parse(await GetVersion.projectCode);
       return Result.data(result.data > currentVersion);
     } catch (err) {
-      _logger.logException(err);
+      //_logger.logException(err);
       return Result.fail(
           Failure.message('Error while checking for the app update.'));
     }
   }
+
+  @override
+  Future<Result<Failure, String>> addToWaitlist({@required String email}) async {
+    return await _network.addToWaitlist(email);
+  }
+
+
 }

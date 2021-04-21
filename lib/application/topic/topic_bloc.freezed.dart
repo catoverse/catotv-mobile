@@ -79,12 +79,18 @@ class __$GetTopicsCopyWithImpl<$Res> extends _$TopicEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_GetTopics implements _GetTopics {
+class _$_GetTopics with DiagnosticableTreeMixin implements _GetTopics {
   const _$_GetTopics();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicEvent.get()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'TopicEvent.get'));
   }
 
   @override
@@ -247,7 +253,7 @@ class __$TopicStateCopyWithImpl<$Res> extends _$TopicStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_TopicState implements _TopicState {
+class _$_TopicState with DiagnosticableTreeMixin implements _TopicState {
   const _$_TopicState({this.allTopics, this.failure});
 
   @override
@@ -256,8 +262,17 @@ class _$_TopicState implements _TopicState {
   final Failure failure;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TopicState(allTopics: $allTopics, failure: $failure)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TopicState'))
+      ..add(DiagnosticsProperty('allTopics', allTopics))
+      ..add(DiagnosticsProperty('failure', failure));
   }
 
   @override

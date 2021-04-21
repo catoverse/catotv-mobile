@@ -9,6 +9,7 @@ part of 'saved_posts_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$SavedPostsEventTearOff {
   const _$SavedPostsEventTearOff();
 
@@ -25,40 +26,44 @@ class _$SavedPostsEventTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SavedPostsEvent = _$SavedPostsEventTearOff();
 
+/// @nodoc
 mixin _$SavedPostsEvent {
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result updateSelectedPage(SelectedPage selectedPage),
+  TResult when<TResult extends Object>({
+    @required TResult refresh(),
+    @required TResult updateSelectedPage(SelectedPage selectedPage),
   });
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result updateSelectedPage(SelectedPage selectedPage),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult refresh(),
+    TResult updateSelectedPage(SelectedPage selectedPage),
+    @required TResult orElse(),
   });
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result updateSelectedPage(_UpdateSelectedPage value),
+  TResult map<TResult extends Object>({
+    @required TResult refresh(_Refresh value),
+    @required TResult updateSelectedPage(_UpdateSelectedPage value),
   });
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result updateSelectedPage(_UpdateSelectedPage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult refresh(_Refresh value),
+    TResult updateSelectedPage(_UpdateSelectedPage value),
+    @required TResult orElse(),
   });
 }
 
+/// @nodoc
 abstract class $SavedPostsEventCopyWith<$Res> {
   factory $SavedPostsEventCopyWith(
           SavedPostsEvent value, $Res Function(SavedPostsEvent) then) =
       _$SavedPostsEventCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$SavedPostsEventCopyWithImpl<$Res>
     implements $SavedPostsEventCopyWith<$Res> {
   _$SavedPostsEventCopyWithImpl(this._value, this._then);
@@ -68,11 +73,13 @@ class _$SavedPostsEventCopyWithImpl<$Res>
   final $Res Function(SavedPostsEvent) _then;
 }
 
+/// @nodoc
 abstract class _$RefreshCopyWith<$Res> {
   factory _$RefreshCopyWith(_Refresh value, $Res Function(_Refresh) then) =
       __$RefreshCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class __$RefreshCopyWithImpl<$Res> extends _$SavedPostsEventCopyWithImpl<$Res>
     implements _$RefreshCopyWith<$Res> {
   __$RefreshCopyWithImpl(_Refresh _value, $Res Function(_Refresh) _then)
@@ -82,12 +89,19 @@ class __$RefreshCopyWithImpl<$Res> extends _$SavedPostsEventCopyWithImpl<$Res>
   _Refresh get _value => super._value as _Refresh;
 }
 
-class _$_Refresh implements _Refresh {
+/// @nodoc
+class _$_Refresh with DiagnosticableTreeMixin implements _Refresh {
   const _$_Refresh();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SavedPostsEvent.refresh()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'SavedPostsEvent.refresh'));
   }
 
   @override
@@ -100,9 +114,9 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result updateSelectedPage(SelectedPage selectedPage),
+  TResult when<TResult extends Object>({
+    @required TResult refresh(),
+    @required TResult updateSelectedPage(SelectedPage selectedPage),
   }) {
     assert(refresh != null);
     assert(updateSelectedPage != null);
@@ -111,10 +125,10 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result updateSelectedPage(SelectedPage selectedPage),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult refresh(),
+    TResult updateSelectedPage(SelectedPage selectedPage),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refresh != null) {
@@ -125,9 +139,9 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result updateSelectedPage(_UpdateSelectedPage value),
+  TResult map<TResult extends Object>({
+    @required TResult refresh(_Refresh value),
+    @required TResult updateSelectedPage(_UpdateSelectedPage value),
   }) {
     assert(refresh != null);
     assert(updateSelectedPage != null);
@@ -136,10 +150,10 @@ class _$_Refresh implements _Refresh {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result updateSelectedPage(_UpdateSelectedPage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult refresh(_Refresh value),
+    TResult updateSelectedPage(_UpdateSelectedPage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refresh != null) {
@@ -153,6 +167,7 @@ abstract class _Refresh implements SavedPostsEvent {
   const factory _Refresh() = _$_Refresh;
 }
 
+/// @nodoc
 abstract class _$UpdateSelectedPageCopyWith<$Res> {
   factory _$UpdateSelectedPageCopyWith(
           _UpdateSelectedPage value, $Res Function(_UpdateSelectedPage) then) =
@@ -160,6 +175,7 @@ abstract class _$UpdateSelectedPageCopyWith<$Res> {
   $Res call({SelectedPage selectedPage});
 }
 
+/// @nodoc
 class __$UpdateSelectedPageCopyWithImpl<$Res>
     extends _$SavedPostsEventCopyWithImpl<$Res>
     implements _$UpdateSelectedPageCopyWith<$Res> {
@@ -182,15 +198,26 @@ class __$UpdateSelectedPageCopyWithImpl<$Res>
   }
 }
 
-class _$_UpdateSelectedPage implements _UpdateSelectedPage {
+/// @nodoc
+class _$_UpdateSelectedPage
+    with DiagnosticableTreeMixin
+    implements _UpdateSelectedPage {
   const _$_UpdateSelectedPage(this.selectedPage) : assert(selectedPage != null);
 
   @override
   final SelectedPage selectedPage;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SavedPostsEvent.updateSelectedPage(selectedPage: $selectedPage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SavedPostsEvent.updateSelectedPage'))
+      ..add(DiagnosticsProperty('selectedPage', selectedPage));
   }
 
   @override
@@ -206,15 +233,16 @@ class _$_UpdateSelectedPage implements _UpdateSelectedPage {
   int get hashCode =>
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(selectedPage);
 
+  @JsonKey(ignore: true)
   @override
   _$UpdateSelectedPageCopyWith<_UpdateSelectedPage> get copyWith =>
       __$UpdateSelectedPageCopyWithImpl<_UpdateSelectedPage>(this, _$identity);
 
   @override
   @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result refresh(),
-    @required Result updateSelectedPage(SelectedPage selectedPage),
+  TResult when<TResult extends Object>({
+    @required TResult refresh(),
+    @required TResult updateSelectedPage(SelectedPage selectedPage),
   }) {
     assert(refresh != null);
     assert(updateSelectedPage != null);
@@ -223,10 +251,10 @@ class _$_UpdateSelectedPage implements _UpdateSelectedPage {
 
   @override
   @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result refresh(),
-    Result updateSelectedPage(SelectedPage selectedPage),
-    @required Result orElse(),
+  TResult maybeWhen<TResult extends Object>({
+    TResult refresh(),
+    TResult updateSelectedPage(SelectedPage selectedPage),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateSelectedPage != null) {
@@ -237,9 +265,9 @@ class _$_UpdateSelectedPage implements _UpdateSelectedPage {
 
   @override
   @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result refresh(_Refresh value),
-    @required Result updateSelectedPage(_UpdateSelectedPage value),
+  TResult map<TResult extends Object>({
+    @required TResult refresh(_Refresh value),
+    @required TResult updateSelectedPage(_UpdateSelectedPage value),
   }) {
     assert(refresh != null);
     assert(updateSelectedPage != null);
@@ -248,10 +276,10 @@ class _$_UpdateSelectedPage implements _UpdateSelectedPage {
 
   @override
   @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result refresh(_Refresh value),
-    Result updateSelectedPage(_UpdateSelectedPage value),
-    @required Result orElse(),
+  TResult maybeMap<TResult extends Object>({
+    TResult refresh(_Refresh value),
+    TResult updateSelectedPage(_UpdateSelectedPage value),
+    @required TResult orElse(),
   }) {
     assert(orElse != null);
     if (updateSelectedPage != null) {
@@ -266,9 +294,11 @@ abstract class _UpdateSelectedPage implements SavedPostsEvent {
       _$_UpdateSelectedPage;
 
   SelectedPage get selectedPage;
+  @JsonKey(ignore: true)
   _$UpdateSelectedPageCopyWith<_UpdateSelectedPage> get copyWith;
 }
 
+/// @nodoc
 class _$SavedPostsStateTearOff {
   const _$SavedPostsStateTearOff();
 
@@ -285,17 +315,21 @@ class _$SavedPostsStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $SavedPostsState = _$SavedPostsStateTearOff();
 
+/// @nodoc
 mixin _$SavedPostsState {
   List<Post> get savedPosts;
   List<Post> get likedPosts;
   SelectedPage get selectedPage;
 
+  @JsonKey(ignore: true)
   $SavedPostsStateCopyWith<SavedPostsState> get copyWith;
 }
 
+/// @nodoc
 abstract class $SavedPostsStateCopyWith<$Res> {
   factory $SavedPostsStateCopyWith(
           SavedPostsState value, $Res Function(SavedPostsState) then) =
@@ -306,6 +340,7 @@ abstract class $SavedPostsStateCopyWith<$Res> {
       SelectedPage selectedPage});
 }
 
+/// @nodoc
 class _$SavedPostsStateCopyWithImpl<$Res>
     implements $SavedPostsStateCopyWith<$Res> {
   _$SavedPostsStateCopyWithImpl(this._value, this._then);
@@ -332,6 +367,7 @@ class _$SavedPostsStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 abstract class _$SavedPostsStateCopyWith<$Res>
     implements $SavedPostsStateCopyWith<$Res> {
   factory _$SavedPostsStateCopyWith(
@@ -344,6 +380,7 @@ abstract class _$SavedPostsStateCopyWith<$Res>
       SelectedPage selectedPage});
 }
 
+/// @nodoc
 class __$SavedPostsStateCopyWithImpl<$Res>
     extends _$SavedPostsStateCopyWithImpl<$Res>
     implements _$SavedPostsStateCopyWith<$Res> {
@@ -372,7 +409,10 @@ class __$SavedPostsStateCopyWithImpl<$Res>
   }
 }
 
-class _$_SavedPostsState implements _SavedPostsState {
+/// @nodoc
+class _$_SavedPostsState
+    with DiagnosticableTreeMixin
+    implements _SavedPostsState {
   const _$_SavedPostsState(
       {this.savedPosts, this.likedPosts, this.selectedPage});
 
@@ -384,8 +424,18 @@ class _$_SavedPostsState implements _SavedPostsState {
   final SelectedPage selectedPage;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'SavedPostsState(savedPosts: $savedPosts, likedPosts: $likedPosts, selectedPage: $selectedPage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SavedPostsState'))
+      ..add(DiagnosticsProperty('savedPosts', savedPosts))
+      ..add(DiagnosticsProperty('likedPosts', likedPosts))
+      ..add(DiagnosticsProperty('selectedPage', selectedPage));
   }
 
   @override
@@ -410,6 +460,7 @@ class _$_SavedPostsState implements _SavedPostsState {
       const DeepCollectionEquality().hash(likedPosts) ^
       const DeepCollectionEquality().hash(selectedPage);
 
+  @JsonKey(ignore: true)
   @override
   _$SavedPostsStateCopyWith<_SavedPostsState> get copyWith =>
       __$SavedPostsStateCopyWithImpl<_SavedPostsState>(this, _$identity);
@@ -428,5 +479,6 @@ abstract class _SavedPostsState implements SavedPostsState {
   @override
   SelectedPage get selectedPage;
   @override
+  @JsonKey(ignore: true)
   _$SavedPostsStateCopyWith<_SavedPostsState> get copyWith;
 }

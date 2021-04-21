@@ -5,6 +5,7 @@ import 'package:cato_feed/application/app_redirect/plugin/AppRedirectHelper.dart
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 part 'app_redirect_setting_event.dart';
 
