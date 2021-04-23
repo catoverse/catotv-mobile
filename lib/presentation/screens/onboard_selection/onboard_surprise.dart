@@ -2,14 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/presentation/screens/onboard_selection/onboard_category_card.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
-import 'package:cato_feed/presentation/utils/assets/image_assets.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
-
-import 'onboard_selection.dart';
 
 class OnboardSurpriseScreen extends StatelessWidget {
   @override

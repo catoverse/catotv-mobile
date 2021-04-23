@@ -1,0 +1,23 @@
+** Refractor checklist **
+- strings.dart to store every hard coded string
+- wrapper for safeArea and padding
+- style constants 
+    - padding
+    - font
+    - colors
+    - decorations
+    - height and width
+    - sizedBox as verticalSpace, horizontalSpace
+
+--------
+** Commit Format **
+
+[Emoji] [Type] [Message]
+
+Emoji to indicate the domain of work - ui(🖌️), logic(⚙️), test(🧪)
+Type - Add, Remove, Update, Fix, Rework, Polish
+Message - anything to the context
+
+Eg. 🖌️ Polish onboarding screen
+
+--------
