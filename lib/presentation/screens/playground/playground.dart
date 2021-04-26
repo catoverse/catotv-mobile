@@ -4,9 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
 class PlaygroundScreen extends StatelessWidget {
+  const PlaygroundScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return PlatformScaffold(body: Center(child: PlaygroundPage(),),);
+    return PlatformScaffold(
+      body: Center(
+        child: PlaygroundPage(),
+      ),
+    );
   }
 }
 
@@ -28,10 +34,11 @@ class PlaygroundPage extends StatelessWidget {
               color: Color(0xA80C3C57),
             ),
           ),
-          SizedBox(height: 96,)
+          SizedBox(
+            height: 96,
+          )
         ],
       ),
     );
   }
 }
-

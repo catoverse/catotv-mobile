@@ -1,13 +1,11 @@
 import 'package:cato_feed/presentation/screens/search/search_category_and_liked_page.dart';
-import 'package:cato_feed/presentation/screens/search/search_result.dart';
-import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:cato_feed/presentation/utils/common.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 
-
 class SearchScreen extends StatelessWidget {
+  const SearchScreen({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SearchPage();
@@ -75,4 +73,3 @@ class SearchPage extends StatelessWidget {
     );
   }
 }
-

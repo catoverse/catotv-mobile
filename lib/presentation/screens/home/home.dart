@@ -2,7 +2,6 @@ import 'package:cato_feed/application/video_player/video_player_bloc.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/screens/home_feed/home_feed_screen.dart';
 import 'package:cato_feed/presentation/screens/playground/playground.dart';
-import 'package:cato_feed/presentation/screens/profile/user_profile.dart';
 import 'package:cato_feed/presentation/screens/search/search.dart';
 import 'package:cato_feed/presentation/utils/assets/color_assets.dart';
 import 'package:cato_feed/presentation/utils/common.dart';
@@ -19,7 +18,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     makeStatusBarWhite();
-    return BlocProvider(create: (context) => getIt<VideoPlayerBloc>(), child: HomeScreenPage(),);
+    return BlocProvider(
+      create: (context) => getIt<VideoPlayerBloc>(),
+      child: HomeScreenPage(),
+    );
   }
 }
 
@@ -29,8 +31,6 @@ class HomeScreenPage extends StatefulWidget {
 }
 
 class _HomeScreenPageState extends State<HomeScreenPage> {
-
-
   int _currentPage = 0;
   final PageStorageBucket _bucket = PageStorageBucket();
   YoutubePlayerController _controller;
@@ -38,7 +38,9 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
   @override
   void initState() {
-    context.read<VideoPlayerBloc>().add(VideoPlayerEvent.setCurrentPlayablePlayingId(';-1'));
+    context
+        .read<VideoPlayerBloc>()
+        .add(VideoPlayerEvent.setCurrentPlayablePlayingId(';-1'));
     _controller = YoutubePlayerController(
       initialVideoId: '',
       flags: YoutubePlayerFlags(
@@ -69,19 +71,25 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
   HomeFeedScreen _homeFeedScreen;
   Widget _getPage(int index, Container player) {
-    switch(index) {
-      case 0: {
-        if(_homeFeedScreen == null) {
-          _homeFeedScreen = HomeFeedScreen(player: player, controller: _controller,);
-        } else {
-          _homeFeedScreen.updatePlayer(player: player);
-        }
+    switch (index) {
+      case 0:
+        {
+          if (_homeFeedScreen == null) {
+            _homeFeedScreen = HomeFeedScreen(
+              key: PageStorageKey<String>('homeFeed'),
+              player: player,
+              controller: _controller,
+            );
+          } else {
+            _homeFeedScreen.updatePlayer(player: player);
+          }
 
-        return _homeFeedScreen;
-      }
-      case 1: return SearchScreen();
-      case 2: return PlaygroundScreen();
-      case 3: return UserProfileScreen();
+          return _homeFeedScreen;
+        }
+      case 1:
+        return SearchScreen(key: PageStorageKey<String>('searchScreen'));
+      case 2:
+        return PlaygroundScreen(key: PageStorageKey<String>('playGround'));
     }
   }
 
@@ -175,11 +183,6 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
         icon: Icon(Icons.widgets_outlined, color: Color(0xFF323232)),
         label: 'Playground',
         activeIcon: Icon(Icons.widgets_rounded, color: Color(0xFF51DED6)),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.account_circle_outlined, color: Color(0xFF323232)),
-        label: 'My Profile',
-        activeIcon: Icon(Icons.account_circle, color: Color(0xFF51DED6)),
       ),
     ];
   }
