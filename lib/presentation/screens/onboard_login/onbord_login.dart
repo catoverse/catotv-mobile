@@ -141,22 +141,22 @@ class OnboardLoginPage extends StatelessWidget {
                   child: Container(),
                   flex: 1,
                 ),
-                Center(
-                  child: GestureDetector(
-                    onTap: () {
-                      context.navigator.replace(CatoRoutes.onboardScreen);
-                    },
-                    child: Text(
-                      'Skip for now',
-                      style: TextStyle(
-                        color: Color(0xFF8F8F8F),
-                        fontSize: 16,
-                        fontFamily: FontAssets.Poppins,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ),
+                // Center(
+                //   child: GestureDetector(
+                //     onTap: () {
+                //       context.navigator.replace(CatoRoutes.onboardScreen);
+                //     },
+                //     child: Text(
+                //       'Skip for now',
+                //       style: TextStyle(
+                //         color: Color(0xFF8F8F8F),
+                //         fontSize: 16,
+                //         fontFamily: FontAssets.Poppins,
+                //         fontWeight: FontWeight.w500,
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SizedBox(
                   height: 32.0,
                 ),

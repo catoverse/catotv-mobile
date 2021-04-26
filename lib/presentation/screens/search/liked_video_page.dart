@@ -17,24 +17,24 @@ class LikedVideoPage extends StatelessWidget {
       child: BlocBuilder<SavedPostsBloc, SavedPostsState>(
         builder: (ctx, state) {
           if(state.likedPosts.length == 0) {
-            return Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(ImageAssets.Release.icon_playground_abstract),
-                  Text(
-                    'Your Like Videos will show here.',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontFamily: FontAssets.Poppins,
-                      fontSize: 14,
-                      color: Color(0xA80C3C57),
-                    ),
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Spacer(flex: 1,),
+                Image.asset(ImageAssets.Release.icon_playground_abstract),
+                Text(
+                  'Your Like Videos will show here.',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontFamily: FontAssets.Poppins,
+                    fontSize: 14,
+                    color: Color(0xA80C3C57),
                   ),
-                  SizedBox(height: 96,)
-                ],
-              ),
+                ),
+                SizedBox(height: 96,),
+                Spacer(flex: 1,),
+              ],
             );
           }
           return ListView.separated(

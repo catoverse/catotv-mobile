@@ -74,13 +74,6 @@ class _SinglePostPageState extends State<SinglePostPage> {
           )..show(context);
         }
 
-        if (state.post != null) {
-          await Future.delayed(Duration(
-              milliseconds:
-                  100)); // Wait for at least 100 milliseconds ~6 frames
-          context.read<VideoPlayerBloc>().add(
-              VideoPlayerEvent.setCurrentPlayablePlayingId(state.post?.id));
-        }
       },
       builder: (_, state) {
         var isPostLoading = state.post == null;
@@ -117,9 +110,7 @@ class _SinglePostPageState extends State<SinglePostPage> {
               FullScreenButton(),
             ],
             onEnded: (e) {
-              context
-                  .read<VideoPlayerBloc>()
-                  .add(VideoPlayerEvent.setCurrentPlayablePlayingId(null));
+
             },
             showVideoProgressIndicator: true,
           ),

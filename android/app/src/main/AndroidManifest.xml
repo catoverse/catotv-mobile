@@ -11,7 +11,7 @@
 
     <application
         android:name=".MainApplication"
-        android:label="Cato"
+        android:label="Cato.tv"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher_round">
         <activity

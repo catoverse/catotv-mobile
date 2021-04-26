@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cato_feed/application/auth/auth.dart';
 import 'package:cato_feed/application/post/post.dart';
@@ -7,6 +8,7 @@ import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/application/video_player/video_player_bloc.dart';
 import 'package:cato_feed/domain/posts/post.dart';
 import 'package:cato_feed/injection.dart';
+import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/utils/assets/font_assets.dart';
 import 'package:cato_feed/presentation/utils/common.dart';
 import 'package:flutter/material.dart';
@@ -71,6 +73,7 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
 
   @override
   void deactivate() {
+    widget.controller.pause();
     super.deactivate();
   }
 
@@ -160,7 +163,7 @@ class FeedPost extends StatelessWidget {
       child: Stack(
         children: [
           if(index == 0 && isFirstLoad)
-            Visibility(child: youtubePlayer, maintainInteractivity: false, ),
+            Opacity(child: youtubePlayer, opacity: 0.01,),
           AspectRatio(
             aspectRatio: 16.0 / 9.0,
             child: Image.network(
@@ -277,20 +280,30 @@ class FeedPost extends StatelessWidget {
                   SizedBox(
                     width: 16.0,
                   ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Color(0x47C4C4C4),
-                      borderRadius: BorderRadius.circular(4.0)),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 4.0, horizontal: 8.0),
-                    child: Text(
-                      context.read<TopicBloc>().state.getName(post.topicId),
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontFamily: FontAssets.Poppins,
-                        fontSize: 12,
-                        color: Color(0xFF8F8F8F),
+                GestureDetector(
+                  onTap: () {
+                    var topic = context.read<TopicBloc>().state.getTopic(post.topicId);
+                    if(topic != null) {
+                      context.navigator.push(CatoRoutes.videosByCategoryScreen,
+                          arguments: VideosByCategoryScreenArguments(
+                              topic: topic));
+                    }
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(0x47C4C4C4),
+                        borderRadius: BorderRadius.circular(4.0)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 4.0, horizontal: 8.0),
+                      child: Text(
+                        context.read<TopicBloc>().state.getName(post.topicId),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontFamily: FontAssets.Poppins,
+                          fontSize: 12,
+                          color: Color(0xFF8F8F8F),
+                        ),
                       ),
                     ),
                   ),
