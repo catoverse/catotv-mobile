@@ -114,7 +114,7 @@ class OnboardSelectionPage extends StatelessWidget {
                     mainAxisSpacing: 20.0,
                     childAspectRatio: (cardWidth * 1.0) / cardHeight,
                     shrinkWrap: true,
-                    children: List.generate(1, (index) {
+                    children: List.generate(topics.length, (index) {
                       var borderColor = Color(0xFF51DFD7);
 
                       return Align(
