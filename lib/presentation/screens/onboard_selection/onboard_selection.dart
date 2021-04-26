@@ -4,6 +4,7 @@ import 'package:cato_feed/application/post/post_bloc.dart';
 import 'package:cato_feed/application/topic/topic.dart';
 import 'package:cato_feed/application/user_profile/user_profile.dart';
 import 'package:cato_feed/domain/auth/user.dart';
+import 'package:cato_feed/domain/topic/topic.dart';
 import 'package:cato_feed/injection.dart';
 import 'package:cato_feed/presentation/routes/Router.gr.dart';
 import 'package:cato_feed/presentation/screens/onboard_selection/onboard_category_card.dart';
@@ -95,54 +96,58 @@ class OnboardSelectionPage extends StatelessWidget {
                       ),
                     ),
                   ])),
-                  topics.length == 0
-                      ? Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                              color: Color(0xFF51DFD7).withOpacity(.1),
-                              border: Border.all(
-                                  color: Color(0xFF51DFD7),
-                                  style: BorderStyle.solid,
-                                  width: 1),
-                              borderRadius: BorderRadius.circular(8.0)),
-                          child: Text("No Topics at this moment"),
-                        )
-                      : GridView.count(
-                          crossAxisSpacing: 8.0,
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 20.0,
-                          childAspectRatio: (cardWidth * 1.0) / cardHeight,
-                          shrinkWrap: true,
-                          children: List.generate(topics.length, (index) {
-                            var borderColor = Color(0xFF51DFD7);
+                  // topics.length == 0
+                  //     ? Container(
+                  //         padding: EdgeInsets.all(8.0),
+                  //         decoration: BoxDecoration(
+                  //             color: Color(0xFF51DFD7).withOpacity(.1),
+                  //             border: Border.all(
+                  //                 color: Color(0xFF51DFD7),
+                  //                 style: BorderStyle.solid,
+                  //                 width: 1),
+                  //             borderRadius: BorderRadius.circular(8.0)),
+                  //         child: Text("No Topics at this moment"),
+                  //       ) :
+                  GridView.count(
+                    crossAxisSpacing: 8.0,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 20.0,
+                    childAspectRatio: (cardWidth * 1.0) / cardHeight,
+                    shrinkWrap: true,
+                    children: List.generate(1, (index) {
+                      var borderColor = Color(0xFF51DFD7);
 
-                            return Align(
-                              child: GestureDetector(
-                                onTap: () {
-                                  // ignore: close_sinks
-                                  var bloc =
-                                      context.read<OnboardSelectionBloc>();
-                                  if (state.isSelected(topics[index])) {
-                                    bloc.add(
-                                        OnboardSelectionEvent.unSelectTopic(
-                                            topics[index]));
-                                  } else {
-                                    bloc.add(OnboardSelectionEvent.selectTopic(
-                                        topics[index]));
-                                  }
-                                },
-                                child: OnboardCategoryCard(
-                                  cardData: topics[index],
-                                  cardWidth: cardWidth,
-                                  cardHeight: cardHeight,
-                                  cardBorderColor: borderColor,
-                                  isSelected: state.isSelected(topics[index]),
-                                ),
-                              ),
-                              alignment: Alignment.topCenter,
-                            );
-                          }),
+                      return Align(
+                        child: GestureDetector(
+                          // onTap: () {
+                          //   // ignore: close_sinks
+                          //   var bloc =
+                          //       context.read<OnboardSelectionBloc>();
+                          //   if (state.isSelected(topics[index])) {
+                          //     bloc.add(
+                          //         OnboardSelectionEvent.unSelectTopic(
+                          //             topics[index]));
+                          //   } else {
+                          //     bloc.add(OnboardSelectionEvent.selectTopic(
+                          //         topics[index]));
+                          //   }
+                          // },
+                          child: OnboardCategoryCard(
+                            cardData: Topic(
+                                color: "borderColor",
+                                id: "121",
+                                image: "Social",
+                                name: "Career"),
+                            cardWidth: cardWidth,
+                            cardHeight: cardHeight,
+                            cardBorderColor: borderColor,
+                            isSelected: true,
+                          ),
                         ),
+                        alignment: Alignment.topCenter,
+                      );
+                    }),
+                  ),
                 ],
               ),
               bottomNavigationBar: Container(

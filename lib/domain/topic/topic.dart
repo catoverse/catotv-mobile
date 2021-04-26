@@ -21,27 +21,56 @@ abstract class Topic with _$Topic {
     switch (name) {
       case "Career":
         {
-          return ImageAssets.Release.topicImageCareer;
+          return ImageAssets.Release.icon_career;
         }
       case "Social":
         {
-          return ImageAssets.Release.topicImageSocial;
+          return ImageAssets.Release.icon_relationships;
         }
       case "Health & Nutrition":
         {
-          return ImageAssets.Release.topicImageHealth;
+          return ImageAssets.Release.icon_health;
         }
       case "Intellectual":
         {
-          return ImageAssets.Release.topicImageIntellectual;
+          return ImageAssets.Release.icon_fundamentals;
         }
       case "Emotional":
         {
-          return ImageAssets.Release.topicImageEmotional;
+          return ImageAssets.Release.icon_mind;
         }
       default:
         {
-          return ImageAssets.Release.topicImageProductivity;
+          return ImageAssets.Release.icon_startups;
+        }
+    }
+  }
+
+  String getDiscription() {
+    switch (name) {
+      case "Career":
+        {
+          return "Storytelling, Creating Wealth, Empathy & More";
+        }
+      case "Social":
+        {
+          return "Conflicts, Family, Friends, Love & More";
+        }
+      case "Health & Nutrition":
+        {
+          return "Biohacking, Nutrition, Fitness & More";
+        }
+      case "Intellectual":
+        {
+          return "First Principles of Knowledge & More";
+        }
+      case "Emotional":
+        {
+          return "Mental Health, Critical Thinking & More.";
+        }
+      default:
+        {
+          return "Productivity, Digital Hygiene & More";
         }
     }
   }
