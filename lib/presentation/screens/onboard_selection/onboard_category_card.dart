@@ -32,7 +32,7 @@ class OnboardCategoryCard extends StatelessWidget {
           color: Colors.white,
         ),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
               children: [
@@ -76,7 +76,7 @@ class OnboardCategoryCard extends StatelessWidget {
                     maxLines: 1,
                   ),
                   Text(
-                    '',
+                    cardData.getDiscription(),
                     maxLines: 5,
                     softWrap: true,
                     style: TextStyle(
