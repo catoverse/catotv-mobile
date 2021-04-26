@@ -29,6 +29,7 @@ class _OnboardPageState extends State<OnboardPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Colors.transparent,
           actions: [
