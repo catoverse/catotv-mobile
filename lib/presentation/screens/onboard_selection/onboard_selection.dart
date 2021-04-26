@@ -119,29 +119,23 @@ class OnboardSelectionPage extends StatelessWidget {
 
                       return Align(
                         child: GestureDetector(
-                          // onTap: () {
-                          //   // ignore: close_sinks
-                          //   var bloc =
-                          //       context.read<OnboardSelectionBloc>();
-                          //   if (state.isSelected(topics[index])) {
-                          //     bloc.add(
-                          //         OnboardSelectionEvent.unSelectTopic(
-                          //             topics[index]));
-                          //   } else {
-                          //     bloc.add(OnboardSelectionEvent.selectTopic(
-                          //         topics[index]));
-                          //   }
-                          // },
+                          onTap: () {
+                            // ignore: close_sinks
+                            var bloc = context.read<OnboardSelectionBloc>();
+                            if (state.isSelected(topics[index])) {
+                              bloc.add(OnboardSelectionEvent.unSelectTopic(
+                                  topics[index]));
+                            } else {
+                              bloc.add(OnboardSelectionEvent.selectTopic(
+                                  topics[index]));
+                            }
+                          },
                           child: OnboardCategoryCard(
-                            cardData: Topic(
-                                color: "borderColor",
-                                id: "121",
-                                image: "Social",
-                                name: "Career"),
+                            cardData: topics[index],
                             cardWidth: cardWidth,
                             cardHeight: cardHeight,
                             cardBorderColor: borderColor,
-                            isSelected: true,
+                            isSelected: state.isSelected(topics[index]),
                           ),
                         ),
                         alignment: Alignment.topCenter,
