@@ -58,6 +58,10 @@ class _HomeFeedPageState extends State<HomeFeedPage> {
 
   @override
   void initState() {
+    var posts = context.read<PostBloc>().state.allPosts;
+    if(posts.isNotEmpty) {
+     _pagingController.appendPage(posts, 0);
+    }
     _pagingController.addPageRequestListener((pageKey) {
       context.read<PostBloc>().add(PostEvent.loadRecommendedVideos(
           context.read<AuthBloc>().state.getUserId() ?? ''));
@@ -142,17 +146,21 @@ class FeedPost extends StatelessWidget {
   }) : super(key: key);
 
   Widget _getThumbnailWidget(BuildContext context) {
+    var isFirstLoad = context.read<VideoPlayerBloc>().state.currentPlayingPostId == ';-1';
     return GestureDetector(
       onTap: () async {
-        context.read<VideoPlayerBloc>().add(
-            VideoPlayerEvent.setCurrentPlayablePlayingId('${post.id};$index'));
-
         if (controller != null) {
           controller.load(YoutubePlayer.convertUrlToId(post.videoUrl));
         }
+
+        context.read<VideoPlayerBloc>().add(
+            VideoPlayerEvent.setCurrentPlayablePlayingId('${post.id};$index'));
+        
       },
       child: Stack(
         children: [
+          if(index == 0 && isFirstLoad)
+            Visibility(child: youtubePlayer, maintainInteractivity: false, ),
           AspectRatio(
             aspectRatio: 16.0 / 9.0,
             child: Image.network(
@@ -191,13 +199,7 @@ class FeedPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<VideoPlayerBloc, VideoPlayerState>(
-      buildWhen: (previous, current) {
-        if (previous.currentPlayingPostId == current.currentPlayingPostId)
-          return false;
-        if (previous.currentPlayingPostId == '${post.id};$index') return true;
-        if (current.currentPlayingPostId == '${post.id};$index') return true;
-        return false;
-      },
+
       builder: (ctx, state) {
         var split = (state.currentPlayingPostId ?? ';-1').split(';');
         var playingPostId = split[0];
