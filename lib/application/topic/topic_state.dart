@@ -13,4 +13,8 @@ extension TopicStateX on TopicState {
   String getName(String topicId) {
     return allTopics.where((element) => element.id == topicId).first?.name ?? " ";
   }
+
+  Topic getTopic(String topicId) {
+    return allTopics.where((element) => element.id == topicId).first ?? null;
+  }
 }
