@@ -38,6 +38,7 @@ class _HomeScreenPageState extends State<HomeScreenPage> {
 
   @override
   void initState() {
+    context.read<VideoPlayerBloc>().add(VideoPlayerEvent.setCurrentPlayablePlayingId(';-1'));
     _controller = YoutubePlayerController(
       initialVideoId: '',
       flags: YoutubePlayerFlags(
