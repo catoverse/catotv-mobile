@@ -28,7 +28,7 @@ class OnboardCategoryCard extends StatelessWidget {
         height: cardHeight,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
-          border: Border.all(color: cardBorderColor, width: 1.5),
+          border: Border.all(color: isSelected ? cardBorderColor : Colors.white, width: 1.5),
           color: Colors.white,
         ),
         child: Row(
