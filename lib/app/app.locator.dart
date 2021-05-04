@@ -9,10 +9,14 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../core/services/user_service/user_service.dart';
+import '../core/services/user_service/user_service_impl.dart';
+
 final locator = StackedLocator.instance;
 
 void setupLocator() {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton<UserService>(() => UserServiceImpl());
 }

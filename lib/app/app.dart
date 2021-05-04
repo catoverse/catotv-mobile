@@ -1,4 +1,8 @@
+import 'package:feed/core/services/user_service/user_service.dart';
+import 'package:feed/core/services/user_service/user_service_impl.dart';
 import 'package:feed/ui/home/home_view.dart';
+import 'package:feed/ui/login/login_view.dart';
+import 'package:feed/ui/startup/startup_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -10,13 +14,18 @@ import 'package:stacked/stacked_annotations.dart';
 /// c. A beautiful [Logger] useful to log information, progress, exceptions and errors
 @StackedApp(
   routes: [
-    MaterialRoute(page: HomeView, initial: true),
+    MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: HomeView),
+    MaterialRoute(page: LoginView),
   ],
   dependencies: [
     /// Stacked Services to use readily made services
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: SnackbarService),
+
+    /// Actual Services that are required for our application
+    LazySingleton(classType: UserServiceImpl, asType: UserService),
   ],
   logger: StackedLogger(),
 )
