@@ -1,3 +1,4 @@
+import 'package:feed/app/injection.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/core/services/user_service/user_service_impl.dart';
 import 'package:feed/ui/home/home_view.dart';
@@ -19,6 +20,11 @@ import 'package:stacked/stacked_annotations.dart';
     MaterialRoute(page: LoginView),
   ],
   dependencies: [
+    Presolve(
+      classType: HiveInjection,
+      presolveUsing: HiveInjection.getInstance,
+    ),
+
     /// Stacked Services to use readily made services
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: DialogService),

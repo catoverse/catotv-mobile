@@ -22,6 +22,8 @@ dependencies:
   # checks connectivity - [mobile][wifi][offline]
   connectivity: ^3.0.3
   logger: ^1.0.0
+  hive: ^2.0.4
+  path_provider: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +32,7 @@ dev_dependencies:
   # code generators
   build_runner: ^2.0.2
   stacked_generator: ^0.4.1
+  hive_generator: ^1.1.0
 
   # data models
   freezed: ^0.14.1+3

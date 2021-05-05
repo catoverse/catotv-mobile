@@ -11,10 +11,14 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
+import 'injection.dart';
 
 final locator = StackedLocator.instance;
 
-void setupLocator() {
+Future setupLocator() async {
+  final hiveInjection = await HiveInjection.getInstance();
+  locator.registerSingleton(hiveInjection);
+
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());

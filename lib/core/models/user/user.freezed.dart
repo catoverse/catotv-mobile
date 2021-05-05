@@ -21,12 +21,12 @@ class _$UserTearOff {
   const _$UserTearOff();
 
   _User call(
-      {required String id,
-      required String name,
-      required String email,
-      required String avatar,
-      required String token,
-      @JsonKey(ignore: true) int? invites}) {
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @HiveField(2) required String email,
+      @HiveField(3) required String avatar,
+      @HiveField(4) required String token,
+      @JsonKey(ignore: true) @HiveField(5) int? invites}) {
     return _User(
       id: id,
       name: name,
@@ -47,14 +47,20 @@ const $User = _$UserTearOff();
 
 /// @nodoc
 mixin _$User {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get email => throw _privateConstructorUsedError;
+  @HiveField(3)
   String get avatar => throw _privateConstructorUsedError;
+  @HiveField(4)
   String get token => throw _privateConstructorUsedError;
 
   ///TODO: Change GQL Query to fetch [invites]
   @JsonKey(ignore: true)
+  @HiveField(5)
   int? get invites => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -67,12 +73,12 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String name,
-      String email,
-      String avatar,
-      String token,
-      @JsonKey(ignore: true) int? invites});
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @HiveField(2) String email,
+      @HiveField(3) String avatar,
+      @HiveField(4) String token,
+      @JsonKey(ignore: true) @HiveField(5) int? invites});
 }
 
 /// @nodoc
@@ -127,12 +133,12 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$UserCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String name,
-      String email,
-      String avatar,
-      String token,
-      @JsonKey(ignore: true) int? invites});
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @HiveField(2) String email,
+      @HiveField(3) String avatar,
+      @HiveField(4) String token,
+      @JsonKey(ignore: true) @HiveField(5) int? invites});
 }
 
 /// @nodoc
@@ -184,33 +190,40 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 0)
 class _$_User extends _User {
   _$_User(
-      {required this.id,
-      required this.name,
-      required this.email,
-      required this.avatar,
-      required this.token,
-      @JsonKey(ignore: true) this.invites})
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.name,
+      @HiveField(2) required this.email,
+      @HiveField(3) required this.avatar,
+      @HiveField(4) required this.token,
+      @JsonKey(ignore: true) @HiveField(5) this.invites})
       : super._();
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String name;
   @override
+  @HiveField(2)
   final String email;
   @override
+  @HiveField(3)
   final String avatar;
   @override
+  @HiveField(4)
   final String token;
   @override
 
   ///TODO: Change GQL Query to fetch [invites]
   @JsonKey(ignore: true)
+  @HiveField(5)
   final int? invites;
 
   @override
@@ -259,30 +272,36 @@ class _$_User extends _User {
 
 abstract class _User extends User {
   factory _User(
-      {required String id,
-      required String name,
-      required String email,
-      required String avatar,
-      required String token,
-      @JsonKey(ignore: true) int? invites}) = _$_User;
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @HiveField(2) required String email,
+      @HiveField(3) required String avatar,
+      @HiveField(4) required String token,
+      @JsonKey(ignore: true) @HiveField(5) int? invites}) = _$_User;
   _User._() : super._();
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @override
+  @HiveField(2)
   String get email => throw _privateConstructorUsedError;
   @override
+  @HiveField(3)
   String get avatar => throw _privateConstructorUsedError;
   @override
+  @HiveField(4)
   String get token => throw _privateConstructorUsedError;
   @override
 
   ///TODO: Change GQL Query to fetch [invites]
   @JsonKey(ignore: true)
+  @HiveField(5)
   int? get invites => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
