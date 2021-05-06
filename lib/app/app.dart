@@ -24,6 +24,13 @@ import 'package:stacked/stacked_annotations.dart';
       classType: HiveInjection,
       presolveUsing: HiveInjection.getInstance,
     ),
+    Presolve(
+      classType: PackageInjection,
+      presolveUsing: PackageInjection.getInstance,
+    ),
+
+    LazySingleton(
+        classType: GQLInjection, resolveUsing: GQLInjection.getInstance),
 
     /// Stacked Services to use readily made services
     LazySingleton(classType: NavigationService),

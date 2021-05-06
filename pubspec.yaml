@@ -1,6 +1,6 @@
 name: feed
 description: A new Flutter project.
-publish_to: 'none' 
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -24,6 +24,9 @@ dependencies:
   logger: ^1.0.0
   hive: ^2.0.4
   path_provider: ^2.0.1
+  graphql: ^5.0.0-nullsafety.4
+  flutter_dotenv: ^4.0.0-nullsafety.1
+  package_info: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +43,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - .env
+
   fonts:
     - family: Archivo
       fonts:
