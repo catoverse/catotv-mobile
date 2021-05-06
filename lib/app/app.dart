@@ -1,9 +1,12 @@
 import 'package:feed/app/injection.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/core/services/user_service/user_service_impl.dart';
+import 'package:feed/remote/api/api_service.dart';
+import 'package:feed/remote/api/api_service_impl.dart';
 import 'package:feed/ui/home/home_view.dart';
 import 'package:feed/ui/login/login_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
+import 'package:feed/ui/update/update_view.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -18,6 +21,7 @@ import 'package:stacked/stacked_annotations.dart';
     MaterialRoute(page: StartUpView, initial: true),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: LoginView),
+    MaterialRoute(page: UpdateView),
   ],
   dependencies: [
     Presolve(
@@ -31,6 +35,8 @@ import 'package:stacked/stacked_annotations.dart';
 
     LazySingleton(
         classType: GQLInjection, resolveUsing: GQLInjection.getInstance),
+
+    LazySingleton(classType: APIServiceImpl, asType: APIService),
 
     /// Stacked Services to use readily made services
     LazySingleton(classType: NavigationService),
