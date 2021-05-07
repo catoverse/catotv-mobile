@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/models/result/failure.dart';
+import 'package:feed/core/models/result/result.dart';
+import 'package:feed/core/models/user/user.dart';
 import 'package:feed/remote/api/api_service.dart';
+import 'package:feed/remote/client.dart';
 import 'package:feed/remote/queries.dart';
-import 'package:graphql/client.dart';
 import 'package:package_info/package_info.dart';
 
 class APIServiceImpl implements APIService {
-  final GraphQLClient _client = locator<GraphQLClient>();
+  final RemoteClient _client = locator<RemoteClient>();
   final PackageInfo _packageInfo = locator<PackageInfo>();
   final _log = getLogger("API Service");
 
@@ -14,15 +19,13 @@ class APIServiceImpl implements APIService {
   Future checkUpdateRequired() async {
     _log.v("Checking If there's update required");
 
-    final QueryOptions options = QueryOptions(
-        document: gql(GQLQueries.queryAndroidVersionCode),
-        fetchPolicy: FetchPolicy.networkOnly);
+    Result result = Platform.isAndroid
+        ? await _client.processQuery(query: GQLQueries.queryAndroidVersionCode)
+        : await _client.processQuery(query: GQLQueries.mutationIosVersionCode);
 
-    var result = await _client.query(options);
+    if (result.isFailed) return result.failure;
 
-    if (result.hasException) return "Failed";
-
-    int version = result.data!["androidVersionCode"]["data"];
+    int version = result.success["androidVersionCode"]["data"];
 
     var currentVersion = _convertVersionCode(_packageInfo.version);
 
@@ -42,12 +45,28 @@ class APIServiceImpl implements APIService {
     required String accessToken,
   }) async {
     _log.v("Performing Google Login");
-    throw UnimplementedError();
+
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.mutationGoogleLogin,
+        variables: GQLQueries.createMapForGoogleLogin(
+            name, email, googleId, avatar, accessToken));
+
+    if (result.isFailed) return result.failure;
+
+    Map<String, dynamic> json = result.success["googleLogin"]["user"];
+    json["token"] = result.success["googleLogin"]["token"];
+
+    return User.fromJson(json);
   }
 
   @override
   Future getTopics() async {
     _log.v("Fetching Topics from GraphQL");
-    throw UnimplementedError();
+
+    Result result = await _client.processQuery(query: GQLQueries.queryAllTopic);
+
+    if (result.isFailed) return result.failure;
+
+    _log.v(result.success);
   }
 }
