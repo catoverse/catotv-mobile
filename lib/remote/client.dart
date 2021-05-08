@@ -1,9 +1,12 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/app/strings.dart';
+import 'package:feed/core/exceptions/api_exception.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/custom_link.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql/client.dart';
 
 /// The [RemoteClient] is a wrapper class to abstract [GraphQLClient]
@@ -14,7 +17,7 @@ import 'package:graphql/client.dart';
 ///   (b) Handling exceptions by writing custom classes for exceptions
 ///   (c) Extracting Result to required types
 ///
-class RemoteClient {
+class RemoteClient with AppStrings {
   final _log = getLogger("RemoteClient");
   final _connectivity = locator<ConnectivityService>();
 
@@ -26,7 +29,9 @@ class RemoteClient {
   }
 
   GraphQLClient getInstance() {
-    final _httpLink = HttpLink("http://18.224.135.76:4000/graphql");
+    String url = env[apiURL]!;
+
+    final _httpLink = HttpLink(url);
 
     final _authLink = CustomAuthLink(
         getToken: () {
@@ -97,7 +102,8 @@ class RemoteClient {
   Future<Result<Failure, dynamic>> _processResult(QueryResult result) async {
     if (result.hasException && result.exception != null) {
       _log.e(result.exception);
-      return Result.failed(Failure.exception(GraphQLException()));
+      return Result.failed(Failure.exception(
+          GraphQLException(message: "Failed to fetch result from graphql")));
     }
 
     if (result.data == null) {
@@ -107,9 +113,3 @@ class RemoteClient {
     return Result.success(result.data);
   }
 }
-
-class GraphQLException implements Exception {}
-
-class ServerError extends Error {}
-
-class NoConnectivityError extends Error {}

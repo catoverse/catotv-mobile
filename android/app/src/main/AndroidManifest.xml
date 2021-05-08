@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cato.tv.feed">
    <application
-        android:label="feed"
+        android:label="Cato TV"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
