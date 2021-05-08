@@ -10,6 +10,12 @@ class HomeView extends StatelessWidget {
         viewModel: HomeViewModel(),
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(),
+              body: Center(
+                child: ElevatedButton(
+                  onPressed: () => model.getTopics(),
+                  child: Text("Get Topics"),
+                ),
+              ),
             ));
   }
 }

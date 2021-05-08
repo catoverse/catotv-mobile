@@ -12,7 +12,12 @@ class LoginView extends StatelessWidget {
               appBar: AppBar(
                 automaticallyImplyLeading: false,
               ),
-              body: Text("Please Login here"),
+              body: Center(
+                child: ElevatedButton(
+                  onPressed: () => model.performLogin(),
+                  child: Text("Login"),
+                ),
+              ),
             ));
   }
 }

@@ -1,6 +1,9 @@
 import 'package:feed/app/app.locator.dart';
+import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
+import 'package:feed/remote/connectivity/connectivity_service.dart';
+import 'package:feed/remote/custom_link.dart';
 import 'package:graphql/client.dart';
 
 /// The [RemoteClient] is a wrapper class to abstract [GraphQLClient]
@@ -12,8 +15,34 @@ import 'package:graphql/client.dart';
 ///   (c) Extracting Result to required types
 ///
 class RemoteClient {
-  final GraphQLClient _graphQLClient = locator<GraphQLClient>();
+  final _log = getLogger("RemoteClient");
+  final _connectivity = locator<ConnectivityService>();
+
+  late GraphQLClient _graphQLClient;
   String jwtToken = "";
+
+  RemoteClient() {
+    _graphQLClient = getInstance();
+  }
+
+  GraphQLClient getInstance() {
+    final _httpLink = HttpLink("http://18.224.135.76:4000/graphql");
+
+    final _authLink = CustomAuthLink(
+        getToken: () {
+          return jwtToken;
+        },
+        headerKey: "authToken");
+
+    final _errorLink = ErrorLink();
+
+    final Link _link = _authLink.concat(_httpLink).concat(_errorLink);
+
+    return GraphQLClient(
+      cache: GraphQLCache(),
+      link: _link,
+    );
+  }
 
   updateToken({required String newToken}) {
     this.jwtToken = newToken;
@@ -24,31 +53,63 @@ class RemoteClient {
   Future<Result<Failure, dynamic>> processQuery(
       {required String query,
       Map<String, dynamic> variables = const {}}) async {
-    final QueryOptions options = QueryOptions(
-        document: gql(query),
-        variables: variables,
-        fetchPolicy: FetchPolicy.networkOnly);
+    bool hasInternet = await _connectivity.isConnected;
 
-    var result = await _graphQLClient.query(options);
+    if (hasInternet) {
+      final QueryOptions options = QueryOptions(
+          document: gql(query),
+          variables: variables,
+          fetchPolicy: FetchPolicy.networkOnly);
 
-    if (!result.hasException)
-      return Result.success(result.data);
-    else
-      return Result.failed(Failure.exception(result.exception!));
+      var result = await _graphQLClient.query(options);
+
+      return _processResult(result);
+    }
+
+    return Result.failed(Failure.error(NoConnectivityError()));
   }
 
   /// Handles the given [mutation]
   Future<Result<Failure, dynamic>> mutation(String mutationQuery,
       {Map<String, dynamic> variables = const {}}) async {
+    bool hasInternet = await _connectivity.isConnected;
+
+    if (!hasInternet) {
+      return Result.failed(Failure.error(NoConnectivityError()));
+    }
+
     final MutationOptions options = MutationOptions(
         document: gql(mutationQuery),
         variables: variables,
         fetchPolicy: FetchPolicy.networkOnly);
 
-    final QueryResult result = await _graphQLClient.mutate(options);
-    if (!result.hasException)
-      return Result.success(result.data);
-    else
-      return Result.failed(Failure.exception(result.exception!));
+    try {
+      final QueryResult result = await _graphQLClient.mutate(options);
+      return _processResult(result);
+    } catch (err) {
+      _log.e('Server Error while performing Mutation');
+      return Result.failed(Failure.error(ServerError()));
+    }
+  }
+
+  /// A helper function to process result
+  /// Checks if there's an [Error] or [Exception]
+  Future<Result<Failure, dynamic>> _processResult(QueryResult result) async {
+    if (result.hasException && result.exception != null) {
+      _log.e(result.exception);
+      return Result.failed(Failure.exception(GraphQLException()));
+    }
+
+    if (result.data == null) {
+      return Result.failed(Failure.error(ServerError()));
+    }
+
+    return Result.success(result.data);
   }
 }
+
+class GraphQLException implements Exception {}
+
+class ServerError extends Error {}
+
+class NoConnectivityError extends Error {}
