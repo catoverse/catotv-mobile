@@ -2,10 +2,11 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
+import 'package:feed/core/mixins/snackbar_helper.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class RestrictedHomeViewModel extends BaseViewModel {
+class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   final NavigationService _navigationService = locator<NavigationService>();
 

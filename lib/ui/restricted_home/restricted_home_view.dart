@@ -8,27 +8,30 @@ class RestrictedHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<RestrictedHomeViewModel>(
         viewModel: RestrictedHomeViewModel(),
-        builder: (context, uiHelpers, model) => Scaffold(
-              appBar: AppBar(
-                automaticallyImplyLeading: false,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                actions: [
-                  Container(
-                    margin: EdgeInsets.only(right: 20.0),
-                    child: GestureDetector(
-                      onTap: () => model.showConstraint(),
-                      child: CircleAvatar(
-                        child: Text("O"),
+        builder: (context, uiHelpers, model) => WillPopScope(
+              onWillPop: model.showExitSnackbar,
+              child: Scaffold(
+                appBar: AppBar(
+                  automaticallyImplyLeading: false,
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  actions: [
+                    Container(
+                      margin: EdgeInsets.only(right: 20.0),
+                      child: GestureDetector(
+                        onTap: () => model.showConstraint(),
+                        child: CircleAvatar(
+                          child: Text("O"),
+                        ),
                       ),
-                    ),
-                  )
-                ],
-              ),
-              body: Scaffold(
-                body: ListView(
-                  padding: EdgeInsets.all(20.0),
-                  children: [Container()],
+                    )
+                  ],
+                ),
+                body: Scaffold(
+                  body: ListView(
+                    padding: EdgeInsets.all(20.0),
+                    children: [Container()],
+                  ),
                 ),
               ),
             ));
