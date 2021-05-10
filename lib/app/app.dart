@@ -9,6 +9,8 @@ import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service_impl.dart';
 import 'package:feed/ui/home/home_view.dart';
 import 'package:feed/ui/login/login_view.dart';
+import 'package:feed/ui/onboarding/onboarding_view.dart';
+import 'package:feed/ui/restricted_home/restricted_home_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
 import 'package:feed/ui/update/update_view.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -24,10 +26,12 @@ import 'injection.dart';
 /// c. A beautiful [Logger] useful to log information, progress, exceptions and errors
 @StackedApp(
   routes: [
-    MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: StartUpView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: UpdateView),
     MaterialRoute(page: LoginView),
+    MaterialRoute(page: OnboardingView, initial: true),
+    MaterialRoute(page: RestrictedHomeView),
   ],
   dependencies: [
     Presolve(
@@ -54,6 +58,7 @@ import 'injection.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: SnackbarService),
+    LazySingleton(classType: BottomSheetService),
 
     /// Actual Services that are required for our application
     LazySingleton(classType: UserServiceImpl, asType: UserService),

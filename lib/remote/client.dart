@@ -17,7 +17,7 @@ import 'package:graphql/client.dart';
 ///   (b) Handling exceptions by writing custom classes for exceptions
 ///   (c) Extracting Result to required types
 ///
-class RemoteClient with AppStrings {
+class RemoteClient {
   final _log = getLogger("RemoteClient");
   final _connectivity = locator<ConnectivityService>();
 
@@ -29,7 +29,7 @@ class RemoteClient with AppStrings {
   }
 
   GraphQLClient getInstance() {
-    String url = env[apiURL]!;
+    String url = env[AppStrings.apiURL]!;
 
     final _httpLink = HttpLink(url);
 

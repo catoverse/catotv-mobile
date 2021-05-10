@@ -6,11 +6,11 @@
 
 // ignore_for_file: public_member_api_docs
 
-import 'package:feed/core/services/hive_service/hive_service_impl.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../core/services/hive_service/hive_service.dart';
+import '../core/services/hive_service/hive_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
 import '../remote/api/api_service.dart';
@@ -37,5 +37,6 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
+  locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
 }

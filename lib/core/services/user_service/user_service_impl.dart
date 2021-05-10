@@ -8,11 +8,12 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
 
-class UserServiceImpl with AppStrings implements UserService {
+class UserServiceImpl implements UserService {
   final _hiveService = locator<HiveService>();
   final _apiService = locator<APIService>();
   final _remoteClient = locator<RemoteClient>();
   final _log = getLogger("UserService");
+  final String userAuthBox = AppStrings.userAuthBox;
 
   @override
   User? currentUser;

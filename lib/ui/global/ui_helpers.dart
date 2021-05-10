@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'dart:math';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 
 class ScalingHelper {
@@ -71,9 +72,9 @@ class UIHelpers {
   ScalingHelper? scalingHelper;
 
   // Text Styles
-  TextStyle? headline;
-  TextStyle? title;
-  TextStyle? body;
+  TextStyle? heading;
+  TextStyle? subheading;
+  TextStyle? button;
 
   //Vertical Spaces that change accordingly
   SizedBox? verticalSpaceLow;
@@ -93,20 +94,24 @@ class UIHelpers {
 
     scalingHelper = ScalingHelper(width: screenWidth);
 
-    headline = TextStyle(
-        fontWeight: FontWeight.bold,
-        fontFamily: 'Quicksand',
-        fontSize: scalingHelper!.size(28));
+    heading = Theme.of(context)
+        .textTheme
+        .headline5!
+        .copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold);
 
-    title = TextStyle(
-        fontWeight: FontWeight.w600,
-        fontFamily: 'Quicksand',
-        fontSize: scalingHelper!.size(20));
+    //subheading = Theme.of(context).textTheme.headline6!.copyWith(
+    //         color: AppColors.textSecondary, fontWeight: FontWeight.normal);
 
-    body = TextStyle(
-        fontWeight: FontWeight.w600,
-        fontFamily: 'Quicksand',
+    subheading = TextStyle(
+        fontWeight: FontWeight.w400,
+        fontFamily: 'Archivo',
+        color: AppColors.textSecondary,
         fontSize: scalingHelper!.size(18));
+
+    button = TextStyle(
+        fontWeight: FontWeight.w600,
+        fontFamily: 'Archivo',
+        fontSize: scalingHelper!.size(16));
 
     blockSizeHorizontal = screenWidth / 100;
     blockSizeVertical = screenHeight / 100;
