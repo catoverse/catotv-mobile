@@ -11,6 +11,25 @@ class RestrictedHomeView extends StatelessWidget {
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(
                 automaticallyImplyLeading: false,
+                elevation: 0,
+                backgroundColor: Colors.transparent,
+                actions: [
+                  Container(
+                    margin: EdgeInsets.only(right: 20.0),
+                    child: GestureDetector(
+                      onTap: () => model.showConstraint(),
+                      child: CircleAvatar(
+                        child: Text("O"),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              body: Scaffold(
+                body: ListView(
+                  padding: EdgeInsets.all(20.0),
+                  children: [],
+                ),
               ),
             ));
   }

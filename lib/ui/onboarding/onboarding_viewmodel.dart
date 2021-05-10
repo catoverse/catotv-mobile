@@ -34,6 +34,6 @@ class OnboardingViewModel extends BaseViewModel {
   }
 
   Future navigateToRestrictedHome() async {
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.navigateTo(Routes.restrictedHomeView);
   }
 }
