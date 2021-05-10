@@ -38,7 +38,7 @@ class StartUpViewModel extends BaseViewModel {
       _navigationService.navigateTo(Routes.homeView);
     } else {
       log.v('No user on disk, navigate to the LoginView');
-      _navigationService.navigateTo(Routes.loginView);
+      _navigationService.navigateTo(Routes.onboardingView);
     }
   }
 }

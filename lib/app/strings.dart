@@ -11,4 +11,7 @@ class AppStrings {
       "Learn from the experts, all for free! Seen\na better deal than this? Please send it our\nway too.";
   static const onboardingItemSubTitle3 =
       "Play games with friends to practice,\nimplement and improve upon what you learn";
+
+  static const String confirmExitMessage = "Are you sure to exit?";
+  static const String confirmExitInfo = "Bye!";
 }

@@ -28,7 +28,7 @@ class RestrictedHomeView extends StatelessWidget {
               body: Scaffold(
                 body: ListView(
                   padding: EdgeInsets.all(20.0),
-                  children: [],
+                  children: [Container()],
                 ),
               ),
             ));
