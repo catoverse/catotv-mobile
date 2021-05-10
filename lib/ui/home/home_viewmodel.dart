@@ -1,10 +1,12 @@
-import 'package:feed/app/app.locator.dart';
-import 'package:feed/remote/api/api_service.dart';
+import 'package:feed/core/mixins/snackbar_helper.dart';
 import 'package:stacked/stacked.dart';
 
-class HomeViewModel extends BaseViewModel {
-  final APIService apiService = locator<APIService>();
-  getTopics() async {
-    await apiService.getTopics();
+class HomeViewModel extends BaseViewModel with SnackbarHelper {
+  int _index = 0;
+  int get index => _index;
+
+  void changeTab(int index) {
+    _index = index;
+    notifyListeners();
   }
 }
