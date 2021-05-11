@@ -1,4 +1,5 @@
 import 'package:feed/app/stacked_setup.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
         fontFamily: 'Archivo',
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        backgroundColor: AppColors.background,
       ),
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,

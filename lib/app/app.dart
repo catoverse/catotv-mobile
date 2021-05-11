@@ -26,10 +26,10 @@ import 'injection.dart';
 /// c. A beautiful [Logger] useful to log information, progress, exceptions and errors
 @StackedApp(
   routes: [
-    MaterialRoute(page: StartUpView, initial: true),
+    MaterialRoute(page: StartUpView),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: UpdateView),
-    MaterialRoute(page: LoginView),
+    MaterialRoute(page: LoginView, initial: true),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: RestrictedHomeView),
   ],
