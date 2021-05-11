@@ -1,5 +1,6 @@
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/strings.dart';
+import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
 import 'package:feed/core/models/user/user.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -7,11 +8,14 @@ import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class UserServiceImpl implements UserService {
   final _hiveService = locator<HiveService>();
   final _apiService = locator<APIService>();
   final _remoteClient = locator<RemoteClient>();
+  final _googleLogin = locator<GoogleSignIn>();
+
   final _log = getLogger("UserService");
   final String userAuthBox = AppStrings.userAuthBox;
 
@@ -31,13 +35,16 @@ class UserServiceImpl implements UserService {
   }
 
   @override
-  Future loginUser() async {
+  Future loginWithEmailPassword(
+      {required String name,
+      required String email,
+      required String password}) async {
     _log.v("Performing User Login");
 
     String email = "themightyking117@gmail.com";
 
     var result = await _apiService.performLogin(
-        name: "Mohan",
+        name: name,
         email: email,
         googleId: _generateGoogleId(email),
         avatar:
@@ -69,11 +76,44 @@ class UserServiceImpl implements UserService {
     }
   }
 
+  //TODO: generate token by taking both email and password
   String _generateToken(String email) {
     return email + "token1212121";
   }
 
   String _generateGoogleId(String email) {
     return email.split("@")[0] + "google";
+  }
+
+  @override
+  Future loginWithGoogle() async {
+    try {
+      var googleUser = await _googleLogin.signIn();
+
+      if (googleUser == null) {
+        return Failure.message("Google Login Failed");
+      }
+
+      var auth = await googleUser.authentication;
+
+      var result = await _apiService.performLogin(
+          name: googleUser.displayName!,
+          email: googleUser.email,
+          googleId: googleUser.id,
+          avatar: googleUser.photoUrl!,
+          accessToken: auth.accessToken!);
+
+      if (result is User) {
+        await _populateCurrentUser(user: result);
+        await _hiveService.insertItem<User>(item: result, boxName: userAuthBox);
+        _remoteClient.updateToken(newToken: currentUser!.token);
+        return currentUser;
+      }
+
+      return result;
+    } on Exception catch (exception) {
+      _log.v(exception);
+      return Result.failed(Failure.exception(exception));
+    }
   }
 }

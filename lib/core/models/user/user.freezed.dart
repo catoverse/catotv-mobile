@@ -58,6 +58,7 @@ mixin _$User {
   @HiveField(4)
   String get token => throw _privateConstructorUsedError;
 
+  ///TODO: Change GQL Query to fetch [invites]
   @JsonKey(ignore: true)
   @HiveField(5)
   int? get invites => throw _privateConstructorUsedError;
@@ -219,6 +220,8 @@ class _$_User extends _User {
   @HiveField(4)
   final String token;
   @override
+
+  ///TODO: Change GQL Query to fetch [invites]
   @JsonKey(ignore: true)
   @HiveField(5)
   final int? invites;
@@ -295,6 +298,8 @@ abstract class _User extends User {
   @HiveField(4)
   String get token => throw _privateConstructorUsedError;
   @override
+
+  ///TODO: Change GQL Query to fetch [invites]
   @JsonKey(ignore: true)
   @HiveField(5)
   int? get invites => throw _privateConstructorUsedError;

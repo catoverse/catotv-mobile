@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:feed/app/strings.dart';
 import 'package:feed/core/models/user/user.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hive/hive.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
@@ -28,5 +31,12 @@ class PackageInjection {
   static Future<PackageInfo> getInstance() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo;
+  }
+}
+
+class GoogleLoginInjection {
+  static GoogleSignIn getInstance() {
+    return GoogleSignIn(
+        scopes: ['email', 'profile'], clientId: env[AppStrings.googleClient]);
   }
 }

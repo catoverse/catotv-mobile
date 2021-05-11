@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
+  
   # stacked state management
   stacked: ^2.1.1
   stacked_services: ^0.8.5
@@ -19,14 +20,27 @@ dependencies:
   freezed_annotation: ^0.14.1
   json_annotation: ^4.0.1
 
+  # logger for debugging
+  logger: ^1.0.0
+
   # checks connectivity - [mobile][wifi][offline]
   connectivity: ^3.0.3
-  logger: ^1.0.0
+  
+  # A secure internal NoSQL Database
   hive: ^2.0.4
   path_provider: ^2.0.1
+
+  # graphql for fetching data from API
   graphql: ^5.0.0-nullsafety.4
+  
+  # could be handy for hiding keys in [.env] file
   flutter_dotenv: ^4.0.0-nullsafety.1
+  
+  # fetches [version][build-info]..
   package_info: ^2.0.0
+
+  # google login
+  google_sign_in: ^5.0.2
 
 dev_dependencies:
   flutter_test:

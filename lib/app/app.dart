@@ -59,6 +59,9 @@ import 'injection.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: BottomSheetService),
+    LazySingleton(
+        classType: GoogleLoginInjection,
+        resolveUsing: GoogleLoginInjection.getInstance),
 
     /// Actual Services that are required for our application
     LazySingleton(classType: UserServiceImpl, asType: UserService),

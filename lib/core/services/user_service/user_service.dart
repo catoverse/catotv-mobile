@@ -5,5 +5,7 @@ import 'package:feed/core/models/user/user.dart';
 abstract class UserService {
   User? currentUser;
   Future hasLoggedInUser();
-  Future loginUser();
+  Future loginWithEmailPassword(
+      {required String name, required String email, required String password});
+  Future loginWithGoogle();
 }

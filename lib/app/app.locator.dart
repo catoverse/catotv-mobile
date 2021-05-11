@@ -38,5 +38,6 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => BottomSheetService());
+  locator.registerLazySingleton(() => GoogleLoginInjection.getInstance());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
 }
