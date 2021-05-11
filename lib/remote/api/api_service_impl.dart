@@ -69,4 +69,18 @@ class APIServiceImpl implements APIService {
 
     _log.v(result.success);
   }
+
+  @override
+  Future fetchVideosForUser({required String userID}) async {
+    _log.v("Fetching videos for User(id:$userID)");
+
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.queryUserRecommendation,
+        variables: GQLQueries.createMapForUserRecommendation(userID));
+
+    if (result.isFailed) return result.failure;
+
+    List json = result.success["userRecommendation"];
+    return json;
+  }
 }

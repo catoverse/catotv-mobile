@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
-  final _views = [FeedView()];
+  final _views = [FeedView(), Container(), Container()];
 
   @override
   Widget build(BuildContext context) {

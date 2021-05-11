@@ -9,12 +9,14 @@ class FeedView extends StatelessWidget {
     return ScreenBuilder<FeedViewModel>(
         viewModel: FeedViewModel(),
         builder: (context, uiHelpers, model) => Scaffold(
-              appBar: AppBar(
-                automaticallyImplyLeading: false,
-                elevation: 0,
-                backgroundColor: Colors.transparent,
+              body: ListView(
+                children: model.videos
+                    .map((e) => ListTile(
+                          title: Text(e.title),
+                          subtitle: Text(e.video_url),
+                        ))
+                    .toList(),
               ),
-              body: Container(),
             ));
   }
 }

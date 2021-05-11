@@ -17,10 +17,10 @@ import '../ui/startup/startup_view.dart';
 import '../ui/update/update_view.dart';
 
 class Routes {
-  static const String startUpView = '/start-up-view';
+  static const String startUpView = '/';
   static const String homeView = '/home-view';
   static const String updateView = '/update-view';
-  static const String loginView = '/';
+  static const String loginView = '/login-view';
   static const String onboardingView = '/onboarding-view';
   static const String restrictedHomeView = '/restricted-home-view';
   static const all = <String>{

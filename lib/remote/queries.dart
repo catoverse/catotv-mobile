@@ -18,6 +18,21 @@ class GQLQueries {
     }
   ''';
 
+  static final String queryUserRecommendation = r'''
+    query userRecommendation($userId: ID!){
+      userRecommendation(userId: $userId) {
+        id
+        title
+        video_url
+        topic
+        start_timestamp
+        end_timestamp
+        createdAt
+        modifiedAt
+      }
+    }
+  ''';
+
   static final String mutationIosVersionCode = r'''
     mutation iosVersionCode {
       iosVersionCode {
@@ -61,5 +76,9 @@ class GQLQueries {
       "avatarLink": avatar,
       "googleToken": accessToken
     };
+  }
+
+  static Map<String, dynamic> createMapForUserRecommendation(String userId) {
+    return {"userId": userId};
   }
 }
