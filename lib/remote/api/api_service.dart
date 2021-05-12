@@ -7,6 +7,6 @@ abstract class APIService {
     required String avatar,
     required String accessToken,
   });
-  Future getTopics();
+  Future fetchTopics();
   Future fetchVideosForUser({required String userID});
 }

@@ -219,7 +219,7 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class _$_Video extends _Video {
   _$_Video(
       {@HiveField(0) required this.id,

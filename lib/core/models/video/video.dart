@@ -8,7 +8,7 @@ part 'video.g.dart';
 class Video with _$Video {
   Video._();
 
-  @HiveType(typeId: 0)
+  @HiveType(typeId: 1)
   factory Video({
     @HiveField(0) required String id,
     @HiveField(1) required String title,

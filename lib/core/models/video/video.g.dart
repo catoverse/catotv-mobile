@@ -8,7 +8,7 @@ part of 'video.dart';
 
 class VideoAdapter extends TypeAdapter<_$_Video> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   _$_Video read(BinaryReader reader) {

@@ -1,3 +1,4 @@
+import 'package:feed/ui/explore/explore_view.dart';
 import 'package:feed/ui/feed/feed_view.dart';
 import 'package:feed/ui/global/lazy_indexed_stack.dart';
 import 'package:feed/ui/global/screen.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
-  final _views = [FeedView(), Container(), Container()];
+  final _views = [FeedView(), ExploreView(), Container()];
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +21,13 @@ class HomeView extends StatelessWidget {
                     automaticallyImplyLeading: false,
                     elevation: 0,
                     backgroundColor: Colors.transparent,
+                    actions: [
+                      CircleAvatar(
+                        backgroundImage:
+                            NetworkImage(model.currentUser!.avatar),
+                      ),
+                      uiHelpers.horizontalSpaceLow!,
+                    ],
                   ),
                   body: LazyIndexedStack(
                     reuse: true,
@@ -69,7 +77,7 @@ List<HomeViewItem> homeViewItems = [
   HomeViewItem(
     title: "Explore",
     activeIcon: Icons.search,
-    inactiveIcon: Icons.compass_calibration,
+    inactiveIcon: Icons.search_outlined,
   ),
   HomeViewItem(
     title: "Playground",

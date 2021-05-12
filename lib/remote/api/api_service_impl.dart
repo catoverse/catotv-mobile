@@ -60,14 +60,14 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future getTopics() async {
+  Future fetchTopics() async {
     _log.v("Fetching Topics from GraphQL");
 
     Result result = await _client.processQuery(query: GQLQueries.queryAllTopic);
 
     if (result.isFailed) return result.failure;
 
-    _log.v(result.success);
+    return result.success["allTopic"];
   }
 
   @override
@@ -80,7 +80,6 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    List json = result.success["userRecommendation"];
-    return json;
+    return result.success["userRecommendation"];
   }
 }

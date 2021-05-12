@@ -11,6 +11,8 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
+import '../core/services/topic_service/topic_service.dart';
+import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
 import '../remote/api/api_service.dart';
@@ -40,4 +42,5 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => GoogleLoginInjection.getInstance());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
+  locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
 }
