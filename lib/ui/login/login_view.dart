@@ -1,6 +1,6 @@
 import 'package:feed/ui/custom/auth_layout.dart';
+import 'package:feed/ui/custom/input_field.dart';
 import 'package:feed/ui/global/screen.dart';
-import 'package:feed/ui/global/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -27,24 +27,17 @@ class LoginView extends StatelessWidget with $LoginView {
             form: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  margin: EdgeInsets.only(bottom: 10.0),
-                  decoration: textFieldStyle,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Your email here', border: InputBorder.none),
-                    controller: emailController,
-                  ),
+                InputField(
+                  title: "Your email here..",
+                  keyboardType: TextInputType.emailAddress,
+                  controller: emailController,
                 ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  decoration: textFieldStyle,
-                  child: TextField(
-                    decoration: InputDecoration(
-                        labelText: 'Password', border: InputBorder.none),
-                    controller: passwordController,
-                  ),
+                InputField(
+                  title: "Password",
+                  keyboardType: TextInputType.visiblePassword,
+                  isSecure: true,
+                  controller: passwordController,
+                  hintText: "Password should be at least 8 characters",
                 ),
               ],
             )));
