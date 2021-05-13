@@ -32,7 +32,7 @@ class FeedViewModel extends FutureViewModel {
     return "http://img.youtube.com/vi/" + id + "/hqdefault.jpg";
   }
 
-  playVideo(String url) {
-    return _navigationService.navigateToView(VideoPlayer(videoID: url));
+  playVideo(Video video) {
+    return _navigationService.navigateToView(VideoPlayer(video: video));
   }
 }

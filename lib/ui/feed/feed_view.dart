@@ -12,7 +12,7 @@ class FeedView extends StatelessWidget {
               body: ListView(
                 children: model.videos
                     .map((e) => GestureDetector(
-                          onTap: () => model.playVideo(e.video_url),
+                          onTap: () => model.playVideo(e),
                           child: Container(
                             width: double.infinity,
                             margin: EdgeInsets.symmetric(vertical: 10.0),
