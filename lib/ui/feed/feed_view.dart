@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:feed/ui/custom/swipe_detector.dart';
 import 'package:feed/ui/feed/widgets/controls.dart';
 import 'package:feed/ui/feed/widgets/player.dart';
 import 'package:feed/ui/global/screen.dart';
@@ -19,18 +20,15 @@ class FeedView extends StatelessWidget {
                 ? Center(
                     child: CircularProgressIndicator(),
                   )
-                : GestureDetector(
-                    onVerticalDragUpdate: (details) {
-                      int sensitivity = 8;
-                      if (details.delta.dy > sensitivity) {
-                        // Down Swipe
-                      } else if (details.delta.dy < -sensitivity) {
-                        model.playNextVideo();
-                      }
+                : CustomSwipeDetector(
+                    onVerticalSwipe: (details) {
+                      if (details == SwipeDirection.up) model.playNextVideo();
+                      if (details == SwipeDirection.down)
+                        model.playPreviousVideo();
                     },
                     child: Stack(fit: StackFit.expand, children: [
                       if (model.videos.isNotEmpty)
-                        Container(
+                        AnimatedContainer(
                           height: double.infinity,
                           width: double.infinity,
                           decoration: BoxDecoration(
@@ -40,6 +38,7 @@ class FeedView extends StatelessWidget {
                               alignment: Alignment.center,
                             ),
                           ),
+                          duration: Duration(microseconds: 300),
                           child: BackdropFilter(
                             filter:
                                 ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -49,19 +48,9 @@ class FeedView extends StatelessWidget {
                             ),
                           ),
                         ),
-                      // Positioned(
-                      //     top: uiHelpers.blockSizeVertical! * 28,
-                      //     right: 0,
-                      //     child: IconButton(
-                      //         color: AppColors.onPrimary,
-                      //         icon: Icon(Icons.fullscreen),
-                      //         onPressed: () {})),
-                      Container(
-                        alignment: Alignment.center,
-                        child: VideoPlayer(),
-                      ),
+                      Center(child: VideoPlayer()),
                       Positioned(
-                        bottom: uiHelpers.blockSizeVertical! * 10,
+                        bottom: uiHelpers.blockSizeVertical! * 7,
                         right: 5,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,

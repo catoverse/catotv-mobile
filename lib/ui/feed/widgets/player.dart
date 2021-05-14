@@ -18,7 +18,12 @@ class VideoPlayer extends ViewModelWidget<FeedViewModel> {
               Container(),
               FullScreenButton()
             ],
-            bottomActions: [Container(), Container(), Container(), Container()],
+            bottomActions: [
+              Container(),
+              Container(),
+              Container(),
+              Container(),
+            ],
           ),
           onEnterFullScreen: model.onEnterFullScreen,
           onExitFullScreen: model.onExitFullScreen,

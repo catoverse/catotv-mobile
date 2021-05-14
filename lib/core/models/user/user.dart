@@ -4,6 +4,8 @@ import 'package:hive/hive.dart';
 part 'user.freezed.dart';
 part 'user.g.dart';
 
+// TODO: Change GQL Query to fetch [invites]
+
 @freezed
 class User with _$User {
   User._();
@@ -15,8 +17,6 @@ class User with _$User {
     @HiveField(2) required String email,
     @HiveField(3) required String avatar,
     @HiveField(4) required String token,
-
-    ///TODO: Change GQL Query to fetch [invites]
     @JsonKey(ignore: true) @HiveField(5) int? invites,
   }) = _User;
 

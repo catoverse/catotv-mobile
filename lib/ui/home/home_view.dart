@@ -27,10 +27,16 @@ class HomeView extends StatelessWidget {
                   bottomNavigationBar: Visibility(
                     visible: model.showNav(),
                     child: Theme(
-                        data: ThemeData(canvasColor: AppColors.surface),
+                        data: model.index == 0
+                            ? ThemeData(canvasColor: AppColors.canvasDark)
+                            : ThemeData(canvasColor: AppColors.surface),
                         child: BottomNavigationBar(
-                          fixedColor: AppColors.primary,
-                          unselectedItemColor: AppColors.textSecondary,
+                          fixedColor: model.index == 0
+                              ? AppColors.surface
+                              : AppColors.primary,
+                          unselectedItemColor: model.index == 0
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondary,
                           currentIndex: model.index,
                           onTap: model.changeTab,
                           items: homeViewItems

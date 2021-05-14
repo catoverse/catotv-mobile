@@ -32,14 +32,29 @@ class FeedViewModel extends ReactiveViewModel {
 
       _controller = YoutubePlayerController(
           initialVideoId: _getYoutubeID(youtubeURL),
-          flags: YoutubePlayerFlags(hideControls: false, hideThumbnail: false));
+          flags: YoutubePlayerFlags(
+              hideControls: false,
+              hideThumbnail: false,
+              disableDragSeek: true));
     }
 
     setBusy(false);
   }
 
   void playNextVideo() {
+    if (currentVideo == videos.length - 1) return;
+
     currentVideo = (currentVideo + 1) % videos.length;
+    String youtubeURL = videos[currentVideo].video_url;
+    _controller.load(_getYoutubeID(youtubeURL));
+
+    notifyListeners();
+  }
+
+  void playPreviousVideo() {
+    if (currentVideo == 0) return;
+
+    currentVideo--;
     String youtubeURL = videos[currentVideo].video_url;
     _controller.load(_getYoutubeID(youtubeURL));
 
@@ -52,6 +67,12 @@ class FeedViewModel extends ReactiveViewModel {
 
   String getThumbnail() {
     String youtubeURL = videos[currentVideo].video_url;
+    return "https://img.youtube.com/vi/" +
+        _getYoutubeID(youtubeURL) +
+        "/hqdefault.jpg";
+  }
+
+  String fetchThumbnail(String youtubeURL) {
     return "https://img.youtube.com/vi/" +
         _getYoutubeID(youtubeURL) +
         "/hqdefault.jpg";

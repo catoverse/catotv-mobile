@@ -10,6 +10,8 @@ class AppColors {
   // Text Colors
   static const textPrimary = Color(0xFF101010);
   static const textSecondary = Color(0xFF555555);
+  static const textSecondaryDark = Color(0xFF909090);
+  static const canvasDark = Color(0xFF111111);
   static const onPrimary = Colors.white;
 }
 // Add your app theme here

@@ -18,11 +18,6 @@ class OnboardingViewModel extends BaseViewModel with SnackbarHelper {
     currentPage = page;
     notifyListeners();
   }
-
-  @override
-  void setFormStatus() {
-    // TODO: implement setFormStatus
-  }
 }
 
 // class OnboardingViewModel extends BaseViewModel with SnackbarHelper {
