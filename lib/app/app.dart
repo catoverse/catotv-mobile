@@ -4,6 +4,8 @@ import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/core/services/topic_service/topic_service_impl.dart';
 import 'package:feed/core/services/user_service/user_service_impl.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
+import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
+import 'package:feed/core/services/videofeed_service/videofeed_service_impl.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
 import 'package:feed/remote/client.dart';
@@ -68,6 +70,7 @@ import 'injection.dart';
     /// Actual Services that are required for our application
     LazySingleton(classType: UserServiceImpl, asType: UserService),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
+    LazySingleton(classType: VideoFeedServiceImpl, asType: VideoFeedService),
   ],
   logger: StackedLogger(),
 )

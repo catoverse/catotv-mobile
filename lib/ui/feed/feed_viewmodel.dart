@@ -1,38 +1,54 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
-import 'package:feed/remote/api/api_service.dart';
-import 'package:feed/ui/feed/player.dart';
+import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
 import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class FeedViewModel extends FutureViewModel {
-  final APIService _apiService = locator<APIService>();
+class FeedViewModel extends BaseViewModel {
+  final VideoFeedService _videoFeedService = locator<VideoFeedService>();
   final UserService _userService = locator<UserService>();
-  final NavigationService _navigationService = locator<NavigationService>();
+
+  late YoutubePlayerController _controller;
+
+  YoutubePlayerController get controller => _controller;
 
   List<Video> videos = [];
+  int currentVideo = 0;
 
-  @override
-  Future futureToRun() async {
-    var list = await _apiService.fetchVideosForUser(
-        userID: _userService.currentUser!.id);
+  void initPlayer() async {
+    setBusy(true);
 
-    if (list is List) {
-      for (var jsonItem in list) {
-        videos.add(Video.fromJson(jsonItem));
-      }
+    var res = await _videoFeedService.fetchVideos(_userService.currentUser!.id);
+
+    if (res is bool && res) {
+      videos = _videoFeedService.videos;
+
+      String youtubeURL = videos[currentVideo].video_url;
+
+      _controller =
+          YoutubePlayerController(initialVideoId: _getYoutubeID(youtubeURL));
     }
+
+    setBusy(false);
   }
 
-  String getThumbnail(String youtubeURL) {
-    String id = YoutubePlayer.convertUrlToId(youtubeURL)!;
+  void playNextVideo() {
+    currentVideo = (currentVideo + 1) % videos.length;
+    String youtubeURL = videos[currentVideo].video_url;
+    _controller.load(_getYoutubeID(youtubeURL));
 
-    return "http://img.youtube.com/vi/" + id + "/hqdefault.jpg";
+    notifyListeners();
   }
 
-  playVideo(Video video) {
-    return _navigationService.navigateToView(VideoPlayer(video: video));
+  String _getYoutubeID(String youtubeURL) {
+    return YoutubePlayer.convertUrlToId(youtubeURL)!;
+  }
+
+  String getThumbnail() {
+    String youtubeURL = videos[currentVideo].video_url;
+    return "https://img.youtube.com/vi/" +
+        _getYoutubeID(youtubeURL) +
+        "/hqdefault.jpg";
   }
 }

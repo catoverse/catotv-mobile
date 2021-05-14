@@ -15,6 +15,8 @@ import '../core/services/topic_service/topic_service.dart';
 import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
+import '../core/services/videofeed_service/videofeed_service.dart';
+import '../core/services/videofeed_service/videofeed_service_impl.dart';
 import '../remote/api/api_service.dart';
 import '../remote/api/api_service_impl.dart';
 import '../remote/client.dart';
@@ -43,4 +45,5 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => GoogleLoginInjection.getInstance());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
+  locator.registerLazySingleton<VideoFeedService>(() => VideoFeedServiceImpl());
 }

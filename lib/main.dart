@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       title: 'Cato TV',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
-        fontFamily: 'Archivo',
+        fontFamily: 'AppFont',
         visualDensity: VisualDensity.adaptivePlatformDensity,
         backgroundColor: AppColors.background,
       ),

@@ -17,18 +17,6 @@ class HomeView extends StatelessWidget {
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: model.showExitSnackbar,
               child: Scaffold(
-                  appBar: AppBar(
-                    automaticallyImplyLeading: false,
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                    actions: [
-                      CircleAvatar(
-                        backgroundImage:
-                            NetworkImage(model.currentUser!.avatar),
-                      ),
-                      uiHelpers.horizontalSpaceLow!,
-                    ],
-                  ),
                   body: LazyIndexedStack(
                     reuse: true,
                     index: model.index,

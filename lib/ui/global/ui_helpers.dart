@@ -97,20 +97,20 @@ class UIHelpers {
     heading = Theme.of(context)
         .textTheme
         .headline5!
-        .copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.bold);
+        .copyWith(color: AppColors.textPrimary, fontWeight: FontWeight.w800);
 
     //subheading = Theme.of(context).textTheme.headline6!.copyWith(
     //         color: AppColors.textSecondary, fontWeight: FontWeight.normal);
 
     subheading = TextStyle(
-        fontWeight: FontWeight.w400,
-        fontFamily: 'Archivo',
+        fontWeight: FontWeight.w500,
+        fontFamily: 'AppFont',
         color: AppColors.textSecondary,
         fontSize: scalingHelper!.size(18));
 
     button = TextStyle(
         fontWeight: FontWeight.w600,
-        fontFamily: 'Archivo',
+        fontFamily: 'AppFont',
         fontSize: scalingHelper!.size(16));
 
     blockSizeHorizontal = screenWidth / 100;

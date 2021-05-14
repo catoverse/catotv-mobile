@@ -1,5 +1,9 @@
+import 'dart:ui';
+import 'package:feed/ui/feed/player.dart';
 import 'package:feed/ui/global/screen.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'feed_viewmodel.dart';
 
@@ -8,66 +12,81 @@ class FeedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<FeedViewModel>(
         viewModel: FeedViewModel(),
+        onModelReady: (model) => model.initPlayer(),
         builder: (context, uiHelpers, model) => Scaffold(
-              body: ListView(
-                children: model.videos
-                    .map((e) => GestureDetector(
-                          onTap: () => model.playVideo(e),
+              backgroundColor: AppColors.textPrimary,
+              body: model.isBusy
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : GestureDetector(
+                      onVerticalDragUpdate: (details) {
+                        int sensitivity = 8;
+                        if (details.delta.dy > sensitivity) {
+                          // Down Swipe
+                        } else if (details.delta.dy < -sensitivity) {
+                          model.playNextVideo();
+                        }
+                      },
+                      child: Stack(fit: StackFit.expand, children: [
+                        Container(
+                          height: double.infinity,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(model.getThumbnail()),
+                              fit: BoxFit.cover,
+                              alignment: Alignment.center,
+                            ),
+                          ),
+                          child: BackdropFilter(
+                            filter:
+                                ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(0.0)),
+                            ),
+                          ),
+                        ),
+                        Container(
+                            height: double.infinity,
+                            alignment: Alignment.center,
+                            child: VideoPlayer()),
+                        Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
                           child: Container(
+                            padding: EdgeInsets.only(right: 10.0),
+                            height: 50,
                             width: double.infinity,
-                            margin: EdgeInsets.symmetric(vertical: 10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            child: Row(
                               children: [
-                                Image.network(
-                                  model.getThumbnail(e.video_url),
-                                  alignment: Alignment.centerLeft,
-                                  height: uiHelpers.blockSizeVertical! * 34,
-                                  width: double.infinity,
-                                  fit: BoxFit.fitWidth,
-                                  repeat: ImageRepeat.noRepeat,
+                                IconButton(
+                                  color: AppColors.onPrimary,
+                                  icon: model.controller.value.isPlaying
+                                      ? Icon(Icons.pause)
+                                      : Icon(Icons.play_arrow),
+                                  onPressed: () {},
                                 ),
-                                Container(
-                                  margin: EdgeInsets.only(left: 10.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.only(top: 10.0),
-                                            child: Text(
-                                              e.title,
-                                              style: TextStyle(fontSize: 14.0),
-                                            ),
-                                          ),
-                                          Container(
-                                            margin: EdgeInsets.only(top: 5.0),
-                                            padding: EdgeInsets.all(4.0),
-                                            decoration: BoxDecoration(
-                                                color: Colors.black12),
-                                            child: Text(
-                                              e.topic,
-                                              style: TextStyle(fontSize: 12.0),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      IconButton(
-                                          icon: Icon(Icons.bookmark_outline),
-                                          onPressed: () {})
-                                    ],
-                                  ),
+                                ProgressBar(
+                                  controller: model.controller,
+                                  isExpanded: true,
+                                  colors: ProgressBarColors(
+                                      handleColor: AppColors.onPrimary,
+                                      backgroundColor: AppColors.primary[200],
+                                      playedColor: AppColors.primary[100]),
                                 ),
+                                SizedBox(
+                                  width: 10.0,
+                                ),
+                                RemainingDuration(controller: model.controller),
                               ],
                             ),
                           ),
-                        ))
-                    .toList(),
-              ),
+                        ),
+                      ]),
+                    ),
             ));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:feed/core/mixins/willpopscope.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/styles.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'items.dart';
 import 'onboarding_viewmodel.dart';
 
-class OnboardingView extends StatelessWidget with WillPopHelper {
+class OnboardingView extends StatelessWidget {
   List<Widget> _buildPageIndicator(int selectedindex) {
     List<Widget> list = [];
     for (int i = 0; i < onboardingItems.length; i++) {
@@ -21,7 +20,6 @@ class OnboardingView extends StatelessWidget with WillPopHelper {
   Widget build(BuildContext context) {
     return ScreenBuilder<OnboardingViewModel>(
       viewModel: OnboardingViewModel(),
-      onModelReady: (model) => model.makePagesLoop(),
       builder: (context, uiHelpers, model) => WillPopScope(
           onWillPop: model.showExitSnackbar,
           child: Scaffold(
@@ -29,7 +27,6 @@ class OnboardingView extends StatelessWidget with WillPopHelper {
               children: [
                 Expanded(
                   child: PageView.builder(
-                    controller: model.controller,
                     onPageChanged: model.onPageChanged,
                     itemBuilder: (BuildContext context, int index) =>
                         OnboardingBodyListItem(item: onboardingItems[index]),
@@ -39,7 +36,7 @@ class OnboardingView extends StatelessWidget with WillPopHelper {
                 Container(
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: _buildPageIndicator(model.currentIndex)
+                      children: _buildPageIndicator(model.currentPage)
                           .map((e) => e)
                           .toList()),
                 ),
