@@ -24,23 +24,26 @@ class HomeView extends StatelessWidget {
                     itemCount: _views.length,
                     itemBuilder: (_, index) => _views[index],
                   ),
-                  bottomNavigationBar: Theme(
-                      data: ThemeData(canvasColor: AppColors.surface),
-                      child: BottomNavigationBar(
-                        fixedColor: AppColors.primary,
-                        unselectedItemColor: AppColors.textSecondary,
-                        currentIndex: model.index,
-                        onTap: model.changeTab,
-                        items: homeViewItems
-                            .map(
-                              (homeViewItem) => BottomNavigationBarItem(
-                                activeIcon: Icon(homeViewItem.activeIcon),
-                                icon: Icon(homeViewItem.inactiveIcon),
-                                label: (homeViewItem.title),
-                              ),
-                            )
-                            .toList(),
-                      ))),
+                  bottomNavigationBar: Visibility(
+                    visible: model.showNav(),
+                    child: Theme(
+                        data: ThemeData(canvasColor: AppColors.surface),
+                        child: BottomNavigationBar(
+                          fixedColor: AppColors.primary,
+                          unselectedItemColor: AppColors.textSecondary,
+                          currentIndex: model.index,
+                          onTap: model.changeTab,
+                          items: homeViewItems
+                              .map(
+                                (homeViewItem) => BottomNavigationBarItem(
+                                  activeIcon: Icon(homeViewItem.activeIcon),
+                                  icon: Icon(homeViewItem.inactiveIcon),
+                                  label: (homeViewItem.title),
+                                ),
+                              )
+                              .toList(),
+                        )),
+                  )),
             ));
   }
 }

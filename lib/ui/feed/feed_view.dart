@@ -1,9 +1,9 @@
 import 'dart:ui';
-import 'package:feed/ui/feed/player.dart';
+import 'package:feed/ui/feed/widgets/controls.dart';
+import 'package:feed/ui/feed/widgets/player.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'feed_viewmodel.dart';
 
@@ -14,21 +14,22 @@ class FeedView extends StatelessWidget {
         viewModel: FeedViewModel(),
         onModelReady: (model) => model.initPlayer(),
         builder: (context, uiHelpers, model) => Scaffold(
-              backgroundColor: AppColors.textPrimary,
-              body: model.isBusy
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : GestureDetector(
-                      onVerticalDragUpdate: (details) {
-                        int sensitivity = 8;
-                        if (details.delta.dy > sensitivity) {
-                          // Down Swipe
-                        } else if (details.delta.dy < -sensitivity) {
-                          model.playNextVideo();
-                        }
-                      },
-                      child: Stack(fit: StackFit.expand, children: [
+            backgroundColor: AppColors.textPrimary,
+            body: model.isBusy
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : GestureDetector(
+                    onVerticalDragUpdate: (details) {
+                      int sensitivity = 8;
+                      if (details.delta.dy > sensitivity) {
+                        // Down Swipe
+                      } else if (details.delta.dy < -sensitivity) {
+                        model.playNextVideo();
+                      }
+                    },
+                    child: Stack(fit: StackFit.expand, children: [
+                      if (model.videos.isNotEmpty)
                         Container(
                           height: double.infinity,
                           width: double.infinity,
@@ -48,45 +49,44 @@ class FeedView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Container(
-                            height: double.infinity,
-                            alignment: Alignment.center,
-                            child: VideoPlayer()),
-                        Positioned(
+                      // Positioned(
+                      //     top: uiHelpers.blockSizeVertical! * 28,
+                      //     right: 0,
+                      //     child: IconButton(
+                      //         color: AppColors.onPrimary,
+                      //         icon: Icon(Icons.fullscreen),
+                      //         onPressed: () {})),
+                      Container(
+                        alignment: Alignment.center,
+                        child: VideoPlayer(),
+                      ),
+                      Positioned(
+                        bottom: uiHelpers.blockSizeVertical! * 10,
+                        right: 5,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                                color: AppColors.onPrimary,
+                                icon: Icon(Icons.thumb_up_alt_outlined),
+                                onPressed: () {}),
+                            IconButton(
+                                color: AppColors.onPrimary,
+                                icon: Icon(Icons.bookmark_outline),
+                                onPressed: () {}),
+                            IconButton(
+                                color: AppColors.onPrimary,
+                                icon: Icon(Icons.ios_share),
+                                onPressed: () {}),
+                          ],
+                        ),
+                      ),
+                      Positioned(
                           bottom: 0,
                           left: 0,
                           right: 0,
-                          child: Container(
-                            padding: EdgeInsets.only(right: 10.0),
-                            height: 50,
-                            width: double.infinity,
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  color: AppColors.onPrimary,
-                                  icon: model.controller.value.isPlaying
-                                      ? Icon(Icons.pause)
-                                      : Icon(Icons.play_arrow),
-                                  onPressed: () {},
-                                ),
-                                ProgressBar(
-                                  controller: model.controller,
-                                  isExpanded: true,
-                                  colors: ProgressBarColors(
-                                      handleColor: AppColors.onPrimary,
-                                      backgroundColor: AppColors.primary[200],
-                                      playedColor: AppColors.primary[100]),
-                                ),
-                                SizedBox(
-                                  width: 10.0,
-                                ),
-                                RemainingDuration(controller: model.controller),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ),
-            ));
+                          child: VideoPlayerControls()),
+                    ]),
+                  )));
   }
 }

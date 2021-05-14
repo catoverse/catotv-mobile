@@ -42,6 +42,7 @@ dependencies:
   # google login
   google_sign_in: ^5.0.2
   youtube_player_flutter: ^8.0.0
+  observable_ish: ^3.0.0
 
 dev_dependencies:
   flutter_test:

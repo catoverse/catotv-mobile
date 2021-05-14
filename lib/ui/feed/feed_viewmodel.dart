@@ -2,12 +2,14 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
+import 'package:feed/core/utils/full_screen.dart';
 import 'package:stacked/stacked.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class FeedViewModel extends BaseViewModel {
+class FeedViewModel extends ReactiveViewModel {
   final VideoFeedService _videoFeedService = locator<VideoFeedService>();
   final UserService _userService = locator<UserService>();
+  final FullScreenHelper _fullScreenHelper = locator<FullScreenHelper>();
 
   late YoutubePlayerController _controller;
 
@@ -15,6 +17,8 @@ class FeedViewModel extends BaseViewModel {
 
   List<Video> videos = [];
   int currentVideo = 0;
+
+  bool isPlaying = true;
 
   void initPlayer() async {
     setBusy(true);
@@ -26,8 +30,9 @@ class FeedViewModel extends BaseViewModel {
 
       String youtubeURL = videos[currentVideo].video_url;
 
-      _controller =
-          YoutubePlayerController(initialVideoId: _getYoutubeID(youtubeURL));
+      _controller = YoutubePlayerController(
+          initialVideoId: _getYoutubeID(youtubeURL),
+          flags: YoutubePlayerFlags(hideControls: false, hideThumbnail: false));
     }
 
     setBusy(false);
@@ -51,4 +56,33 @@ class FeedViewModel extends BaseViewModel {
         _getYoutubeID(youtubeURL) +
         "/hqdefault.jpg";
   }
+
+  void onEnterFullScreen() {
+    _fullScreenHelper.setFullScreen(status: true);
+  }
+
+  void onExitFullScreen() {
+    _fullScreenHelper.setFullScreen(status: false);
+  }
+
+  void playPauseVideo() {
+    PlayerState playerState = _controller.value.playerState;
+
+    switch (playerState) {
+      case PlayerState.playing:
+        _controller.pause();
+        isPlaying = false;
+        break;
+      case PlayerState.paused:
+        _controller.play();
+        isPlaying = true;
+        break;
+      default:
+    }
+
+    notifyListeners();
+  }
+
+  @override
+  List<ReactiveServiceMixin> get reactiveServices => [_fullScreenHelper];
 }
