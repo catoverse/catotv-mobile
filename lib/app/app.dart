@@ -1,5 +1,6 @@
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/hive_service/hive_service_impl.dart';
+import 'package:feed/core/services/profile_service/profile_service.dart';
 import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/core/services/topic_service/topic_service_impl.dart';
 import 'package:feed/core/services/user_service/user_service_impl.dart';
@@ -75,6 +76,7 @@ import 'injection.dart';
     ),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
     LazySingleton(classType: VideoFeedServiceImpl, asType: VideoFeedService),
+    LazySingleton(classType: ProfileService),
   ],
   logger: StackedLogger(),
 )

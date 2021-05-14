@@ -1,5 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/services/profile_service/profile_service.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
 import 'package:feed/core/utils/full_screen.dart';
@@ -10,15 +11,17 @@ class FeedViewModel extends ReactiveViewModel {
   final VideoFeedService _videoFeedService = locator<VideoFeedService>();
   final UserService _userService = locator<UserService>();
   final FullScreenHelper _fullScreenHelper = locator<FullScreenHelper>();
+  final ProfileService _profileService = locator<ProfileService>();
 
   late YoutubePlayerController _controller;
-
   YoutubePlayerController get controller => _controller;
 
   List<Video> videos = [];
   int currentVideo = 0;
 
   bool isPlaying = true;
+
+  late DateTime videoStartTime;
 
   void initPlayer() async {
     setBusy(true);
@@ -41,12 +44,14 @@ class FeedViewModel extends ReactiveViewModel {
     setBusy(false);
   }
 
-  void playNextVideo() {
+  void playNextVideo() async {
     if (currentVideo == videos.length - 1) return;
 
     currentVideo = (currentVideo + 1) % videos.length;
     String youtubeURL = videos[currentVideo].video_url;
     _controller.load(_getYoutubeID(youtubeURL));
+
+    await updateProfile();
 
     notifyListeners();
   }
@@ -104,6 +109,21 @@ class FeedViewModel extends ReactiveViewModel {
     notifyListeners();
   }
 
+  onVideoStarted() {
+    videoStartTime = DateTime.now();
+  }
+
+  onVideoEnded(YoutubeMetaData metaData) async {
+    playNextVideo();
+  }
+
+  updateProfile() async {
+    print("Updating video watch time");
+    Duration watchTime = DateTime.now().difference(videoStartTime);
+    await _profileService.updateWatchTime(watchTime);
+  }
+
   @override
-  List<ReactiveServiceMixin> get reactiveServices => [_fullScreenHelper];
+  List<ReactiveServiceMixin> get reactiveServices =>
+      [_fullScreenHelper, _profileService];
 }

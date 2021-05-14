@@ -11,6 +11,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
+import '../core/services/profile_service/profile_service.dart';
 import '../core/services/topic_service/topic_service.dart';
 import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
@@ -48,4 +49,5 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => FullScreenHelper());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<VideoFeedService>(() => VideoFeedServiceImpl());
+  locator.registerLazySingleton(() => ProfileService());
 }

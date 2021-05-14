@@ -3,17 +3,19 @@ import 'package:feed/ui/feed/feed_view.dart';
 import 'package:feed/ui/global/lazy_indexed_stack.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/theme.dart';
+import 'package:feed/ui/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
-  final _views = [FeedView(), ExploreView(), Container()];
+  final _views = [FeedView(), ExploreView(), ProfileView()];
 
   @override
   Widget build(BuildContext context) {
     return ScreenBuilder<HomeViewModel>(
         viewModel: HomeViewModel(),
+        onModelReady: (model) => model.init(),
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: model.showExitSnackbar,
               child: Scaffold(
@@ -77,7 +79,7 @@ List<HomeViewItem> homeViewItems = [
     inactiveIcon: Icons.search_outlined,
   ),
   HomeViewItem(
-    title: "Playground",
+    title: "Profile",
     activeIcon: Icons.person,
     inactiveIcon: Icons.person_outline,
   ),

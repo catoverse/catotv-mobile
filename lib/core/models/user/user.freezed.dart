@@ -57,7 +57,6 @@ mixin _$User {
   String get avatar => throw _privateConstructorUsedError;
   @HiveField(4)
   String get token => throw _privateConstructorUsedError;
-
   @JsonKey(ignore: true)
   @HiveField(5)
   int? get invites => throw _privateConstructorUsedError;

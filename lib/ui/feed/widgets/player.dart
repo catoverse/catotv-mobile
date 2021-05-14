@@ -10,6 +10,8 @@ class VideoPlayer extends ViewModelWidget<FeedViewModel> {
       onDoubleTap: model.playPauseVideo,
       child: YoutubePlayerBuilder(
           player: YoutubePlayer(
+            onReady: model.onVideoStarted,
+            onEnded: model.onVideoEnded,
             controller: model.controller,
             showVideoProgressIndicator: false,
             topActions: [

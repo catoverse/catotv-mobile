@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:feed/app/strings.dart';
 import 'package:feed/core/models/topic/topic.dart';
 import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/userprofile/profilemodels.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -26,6 +27,7 @@ class HiveInjection {
     hive.registerAdapter(UserAdapter());
     hive.registerAdapter(VideoAdapter());
     hive.registerAdapter(TopicAdapter());
+    hive.registerAdapter(WatchTimeAdapter());
     return Hive;
   }
 }
