@@ -82,4 +82,19 @@ class APIServiceImpl implements APIService {
 
     return result.success["userRecommendation"];
   }
+
+  @override
+  Future requestInvite({required String email}) async {
+    _log.v("Adding $email to the waitlist");
+
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.mutationAddToWaitlist,
+        variables: GQLQueries.createMapForRequestInvite(email));
+
+    if (result.isFailed) return result.failure;
+
+    _log.v(result.success);
+
+    return true;
+  }
 }

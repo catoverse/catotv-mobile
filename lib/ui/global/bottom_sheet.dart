@@ -52,7 +52,9 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
                           responseData: ThreeButtonResponseData.Primary)),
-                      style: raisedButtonStyle,
+                      style: raisedButtonStyle.copyWith(
+                          side: MaterialStateProperty.all(
+                              BorderSide(width: 2, color: AppColors.primary))),
                       child: Text(
                         request.mainButtonTitle!,
                       ),
@@ -155,5 +157,83 @@ class FloatingBoxBottomSheet extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ConstraintBottomSheet extends StatelessWidget {
+  final SheetRequest request;
+  final Function(SheetResponse) completer;
+  const ConstraintBottomSheet({
+    Key? key,
+    required this.request,
+    required this.completer,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final _uiHelpers = UIHelpers.fromContext(context);
+
+    return BottomSheet(
+        onClosing: () => completer(SheetResponse(confirmed: false)),
+        builder: (BuildContext context) => Container(
+              padding: EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text.rich(TextSpan(children: [
+                    TextSpan(
+                      text: request.title!,
+                      style: _uiHelpers.subheading!.copyWith(
+                          color: AppColors.textPrimary,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    TextSpan(text: "\n\n"),
+                    TextSpan(
+                      text: request.description!,
+                      style: _uiHelpers.button!.copyWith(
+                          color: AppColors.textSecondary,
+                          fontWeight: FontWeight.normal),
+                    ),
+                  ])),
+                  _uiHelpers.verticalSpaceLow!,
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 20.0),
+                    child: ElevatedButton.icon(
+                      onPressed: () => completer(SheetResponse(
+                          confirmed: true,
+                          responseData: ThreeButtonResponseData.Primary)),
+                      style: raisedButtonStyle.copyWith(
+                          backgroundColor:
+                              MaterialStateProperty.all(AppColors.google)),
+                      icon: Icon(Icons.translate),
+                      label: Text(
+                        request.mainButtonTitle!,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: double.infinity,
+                    margin: EdgeInsets.only(bottom: 20.0),
+                    child: OutlinedButton(
+                      onPressed: () => completer(SheetResponse(
+                          confirmed: true,
+                          responseData: ThreeButtonResponseData.Secondary)),
+                      style: raisedButtonStyle.copyWith(
+                          side: MaterialStateProperty.all(
+                              BorderSide(width: 2, color: AppColors.primary))),
+                      child: Text(
+                        request.secondaryButtonTitle!,
+                        style: TextStyle(color: Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ));
   }
 }

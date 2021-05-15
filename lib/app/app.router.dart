@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
 import '../ui/home/home_view.dart';
+import '../ui/invite/invite_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/restricted_home/restricted_home_view.dart';
 import '../ui/startup/startup_view.dart';
@@ -17,16 +18,18 @@ import '../ui/update/update_view.dart';
 
 class Routes {
   static const String startUpView = '/';
-  static const String homeView = '/home-view';
   static const String updateView = '/update-view';
   static const String onboardingView = '/onboarding-view';
   static const String restrictedHomeView = '/restricted-home-view';
+  static const String inviteView = '/invite-view';
+  static const String homeView = '/home-view';
   static const all = <String>{
     startUpView,
-    homeView,
     updateView,
     onboardingView,
     restrictedHomeView,
+    inviteView,
+    homeView,
   };
 }
 
@@ -35,10 +38,11 @@ class StackedRouter extends RouterBase {
   List<RouteDef> get routes => _routes;
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
-    RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.updateView, page: UpdateView),
     RouteDef(Routes.onboardingView, page: OnboardingView),
     RouteDef(Routes.restrictedHomeView, page: RestrictedHomeView),
+    RouteDef(Routes.inviteView, page: InviteView),
+    RouteDef(Routes.homeView, page: HomeView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -46,12 +50,6 @@ class StackedRouter extends RouterBase {
     StartUpView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const StartUpView(),
-        settings: data,
-      );
-    },
-    HomeView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(),
         settings: data,
       );
     },
@@ -70,6 +68,18 @@ class StackedRouter extends RouterBase {
     RestrictedHomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => RestrictedHomeView(),
+        settings: data,
+      );
+    },
+    InviteView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => InviteView(),
+        settings: data,
+      );
+    },
+    HomeView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomeView(),
         settings: data,
       );
     },

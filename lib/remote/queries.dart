@@ -1,7 +1,7 @@
 /// GraphQL [Queries] and [Mutations]
 ///
 class GQLQueries {
-  static final String queryAndroidVersionCode = r'''
+  static const String queryAndroidVersionCode = r'''
     query {
       androidVersionCode {
         data
@@ -9,7 +9,7 @@ class GQLQueries {
     }
   ''';
 
-  static final String queryAllTopic = r'''
+  static const String queryAllTopic = r'''
     query {
       allTopic {
         id
@@ -18,7 +18,7 @@ class GQLQueries {
     }
   ''';
 
-  static final String queryUserRecommendation = r'''
+  static const String queryUserRecommendation = r'''
     query userRecommendation($userId: ID!){
       userRecommendation(userId: $userId) {
         id
@@ -33,7 +33,7 @@ class GQLQueries {
     }
   ''';
 
-  static final String mutationIosVersionCode = r'''
+  static const String mutationIosVersionCode = r'''
     mutation iosVersionCode {
       iosVersionCode {
         data
@@ -41,7 +41,7 @@ class GQLQueries {
     }
   ''';
 
-  static final String mutationGoogleLogin = r'''
+  static const String mutationGoogleLogin = r'''
     mutation GoogleLogin($name: String!, $email: String!, $googleId: String!, $avatarLink: String!, $googleToken: String!){
       googleLogin(user: {
           name: $name,
@@ -58,6 +58,15 @@ class GQLQueries {
               invites
           }
           token
+      }
+    }
+  ''';
+
+  static const String mutationAddToWaitlist = r'''
+    mutation requestInvite($email: String!){
+      addToWaitlist(email: $email){
+        data
+        message
       }
     }
   ''';
@@ -80,5 +89,9 @@ class GQLQueries {
 
   static Map<String, dynamic> createMapForUserRecommendation(String userId) {
     return {"userId": userId};
+  }
+
+  static Map<String, dynamic> createMapForRequestInvite(String email) {
+    return {"email": email};
   }
 }

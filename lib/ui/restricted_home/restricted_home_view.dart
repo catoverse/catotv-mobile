@@ -1,4 +1,10 @@
+import 'dart:ui';
+
+import 'package:feed/ui/custom/swipe_detector.dart';
 import 'package:feed/ui/global/screen.dart';
+import 'package:feed/ui/global/theme.dart';
+import 'package:feed/ui/restricted_home/widgets/controls.dart';
+import 'package:feed/ui/restricted_home/widgets/player.dart';
 import 'package:flutter/material.dart';
 
 import 'restricted_home_viewmodel.dart';
@@ -8,6 +14,7 @@ class RestrictedHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<RestrictedHomeViewModel>(
         viewModel: RestrictedHomeViewModel(),
+        onModelReady: (model) => model.initPlayer(),
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: model.showExitSnackbar,
               child: Scaffold(
@@ -27,12 +34,68 @@ class RestrictedHomeView extends StatelessWidget {
                     )
                   ],
                 ),
-                body: Scaffold(
-                  body: ListView(
-                    padding: EdgeInsets.all(20.0),
-                    children: [Container()],
-                  ),
-                ),
+                body: model.isBusy
+                    ? Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : CustomSwipeDetector(
+                        onVerticalSwipe: (details) {
+                          if (details == SwipeDirection.up)
+                            model.playNextVideo();
+                          if (details == SwipeDirection.down)
+                            model.playPreviousVideo();
+                        },
+                        child: Stack(fit: StackFit.expand, children: [
+                          if (model.videos.isNotEmpty)
+                            AnimatedContainer(
+                              height: double.infinity,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(model.getThumbnail()),
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.center,
+                                ),
+                              ),
+                              duration: Duration(microseconds: 300),
+                              child: BackdropFilter(
+                                filter: ImageFilter.blur(
+                                    sigmaX: 10.0, sigmaY: 10.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.0)),
+                                ),
+                              ),
+                            ),
+                          Center(child: $VideoPlayer()),
+                          Positioned(
+                            bottom: uiHelpers.blockSizeVertical! * 7,
+                            right: 5,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                    color: AppColors.onPrimary,
+                                    icon: Icon(Icons.thumb_up_alt_outlined),
+                                    onPressed: () {}),
+                                IconButton(
+                                    color: AppColors.onPrimary,
+                                    icon: Icon(Icons.bookmark_outline),
+                                    onPressed: () {}),
+                                IconButton(
+                                    color: AppColors.onPrimary,
+                                    icon: Icon(Icons.ios_share),
+                                    onPressed: () {}),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                              bottom: 0,
+                              left: 0,
+                              right: 0,
+                              child: $VideoPlayerControls()),
+                        ]),
+                      ),
               ),
             ));
   }

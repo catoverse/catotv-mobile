@@ -9,4 +9,5 @@ abstract class APIService {
   });
   Future fetchTopics();
   Future fetchVideosForUser({required String userID});
+  Future requestInvite({required String email});
 }

@@ -14,6 +14,7 @@ import 'package:feed/remote/client.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service_impl.dart';
 import 'package:feed/ui/home/home_view.dart';
+import 'package:feed/ui/invite/invite_view.dart';
 import 'package:feed/ui/onboarding/onboarding_view.dart';
 import 'package:feed/ui/restricted_home/restricted_home_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
@@ -33,10 +34,11 @@ import 'injection.dart';
 @StackedApp(
   routes: [
     MaterialRoute(page: StartUpView, initial: true),
-    MaterialRoute(page: HomeView),
     MaterialRoute(page: UpdateView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: RestrictedHomeView),
+    MaterialRoute(page: InviteView),
+    MaterialRoute(page: HomeView),
   ],
   dependencies: [
     Presolve(
