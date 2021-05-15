@@ -14,11 +14,11 @@ import 'package:feed/remote/client.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service_impl.dart';
 import 'package:feed/ui/home/home_view.dart';
-import 'package:feed/ui/login/login_view.dart';
 import 'package:feed/ui/onboarding/onboarding_view.dart';
 import 'package:feed/ui/restricted_home/restricted_home_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
 import 'package:feed/ui/update/update_view.dart';
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -35,7 +35,6 @@ import 'injection.dart';
     MaterialRoute(page: StartUpView, initial: true),
     MaterialRoute(page: HomeView),
     MaterialRoute(page: UpdateView),
-    MaterialRoute(page: LoginView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: RestrictedHomeView),
   ],
@@ -65,9 +64,7 @@ import 'injection.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: BottomSheetService),
-    LazySingleton(
-        classType: GoogleLoginInjection,
-        resolveUsing: GoogleLoginInjection.getInstance),
+    LazySingleton(classType: FirebaseAuthenticationService),
 
     /// Actual Services that are required for our application
     LazySingleton(classType: UserServiceImpl, asType: UserService),

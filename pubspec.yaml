@@ -40,9 +40,11 @@ dependencies:
   package_info: ^2.0.0
 
   # google login
-  google_sign_in: ^5.0.2
   youtube_player_flutter: ^8.0.0
   observable_ish: ^3.0.0
+  firebase_auth: ^1.1.4
+  stacked_firebase_auth: ^0.2.5
+  firebase_core: ^1.1.1
 
 dev_dependencies:
   flutter_test:

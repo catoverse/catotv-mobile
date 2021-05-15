@@ -3,12 +3,15 @@ import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/mixins/snackbar_helper.dart';
+import 'package:feed/core/models/result/failure.dart';
+import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
   final NavigationService _navigationService = locator<NavigationService>();
+  final UserService _userService = locator<UserService>();
 
   final _log = getLogger("Restricted Home");
 
@@ -28,18 +31,24 @@ class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
 
       switch (responseData) {
         case ThreeButtonResponseData.Primary:
-          //TODO: navigate to request login
-          _navigationService.navigateTo(Routes.loginView);
           break;
         case ThreeButtonResponseData.Secondary:
           //TODO: navigate to enter invite code
-          _navigationService.navigateTo(Routes.loginView);
           break;
         case ThreeButtonResponseData.Teritary:
-          _navigationService.navigateTo(Routes.loginView);
+          await loginWithGoogle();
           break;
         default:
       }
+    }
+  }
+
+  loginWithGoogle() async {
+    var user = await _userService.loginWithGoogle();
+
+    if (user is Failure) {
+    } else {
+      _log.i("user: $user");
     }
   }
 }

@@ -26,7 +26,7 @@ class FeedViewModel extends ReactiveViewModel {
   void initPlayer() async {
     setBusy(true);
 
-    var res = await _videoFeedService.fetchVideos(_userService.currentUser!.id);
+    var res = await _videoFeedService.fetchVideos(_userService.currentUser.id);
 
     if (res is bool && res) {
       videos = _videoFeedService.videos;

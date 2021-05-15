@@ -7,6 +7,7 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:stacked/stacked.dart';
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import '../core/services/hive_service/hive_service.dart';
@@ -44,7 +45,7 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => DialogService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => BottomSheetService());
-  locator.registerLazySingleton(() => GoogleLoginInjection.getInstance());
+  locator.registerLazySingleton(() => FirebaseAuthenticationService());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
   locator.registerLazySingleton(() => FullScreenHelper());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
