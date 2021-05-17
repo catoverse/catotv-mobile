@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:feed/ui/custom/swipe_detector.dart';
 import 'package:feed/ui/global/screen.dart';
-import 'package:feed/ui/global/theme.dart';
 import 'package:feed/ui/restricted_home/widgets/controls.dart';
 import 'package:feed/ui/restricted_home/widgets/player.dart';
 import 'package:flutter/material.dart';
@@ -68,27 +67,6 @@ class RestrictedHomeView extends StatelessWidget {
                               ),
                             ),
                           Center(child: $VideoPlayer()),
-                          Positioned(
-                            bottom: uiHelpers.blockSizeVertical! * 7,
-                            right: 5,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                    color: AppColors.onPrimary,
-                                    icon: Icon(Icons.thumb_up_alt_outlined),
-                                    onPressed: () {}),
-                                IconButton(
-                                    color: AppColors.onPrimary,
-                                    icon: Icon(Icons.bookmark_outline),
-                                    onPressed: () {}),
-                                IconButton(
-                                    color: AppColors.onPrimary,
-                                    icon: Icon(Icons.ios_share),
-                                    onPressed: () {}),
-                              ],
-                            ),
-                          ),
                           Positioned(
                               bottom: 0,
                               left: 0,
