@@ -1,11 +1,8 @@
 import 'dart:async';
-
-import 'package:feed/app/strings.dart';
 import 'package:feed/core/models/topic/topic.dart';
 import 'package:feed/core/models/user/user.dart';
 import 'package:feed/core/models/userprofile/profilemodels.dart';
 import 'package:feed/core/models/video/video.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;

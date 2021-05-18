@@ -25,6 +25,8 @@ class ProfileService with ReactiveServiceMixin {
       await _hiveService.insertItem(item: watchTime, boxName: UserProfileBox);
     }
 
+    print(res);
+
     totalWatchTime.value = res.success!.minutesWatched;
   }
 

@@ -1,4 +1,3 @@
-import 'package:feed/ui/custom/input_field.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/styles.dart';
 import 'package:feed/ui/global/theme.dart';
@@ -11,39 +10,41 @@ class ExploreView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<ExploreViewModel>(
         viewModel: ExploreViewModel(),
-        builder: (context, uiHelpers, model) => ListView(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
+        builder: (context, uiHelpers, model) => Column(
               children: [
-                Text(
-                  "Search",
-                  style: uiHelpers.heading,
-                ),
                 Container(
-                  padding: EdgeInsets.all(20.0),
-                  margin: EdgeInsets.symmetric(vertical: 10.0),
+                  width: double.infinity,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                   decoration: textFieldStyle,
+                  margin:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                   child: Text(
                     "What would you like to know? ",
                     style: uiHelpers.button,
                   ),
                 ),
-                Wrap(
-                  spacing: 5,
-                  runSpacing: 5,
+                GridView.count(
+                  padding: EdgeInsets.all(10.0),
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  shrinkWrap: true,
+                  childAspectRatio: 4 / 2,
                   children: model.topics
-                      .map((e) => Card(
-                            child: Container(
-                              width: uiHelpers.blockSizeHorizontal! * 45,
-                              height: uiHelpers.blockSizeVertical! * 15,
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                e.name,
-                                style: uiHelpers.subheading,
-                              ),
+                      .map((e) => Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4.0),
+                                gradient: LinearGradient(colors: [
+                                  AppColors.primary,
+                                  AppColors.google
+                                ])),
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              e.name,
+                              style: uiHelpers.subheading!
+                                  .copyWith(color: AppColors.onPrimary),
                             ),
-                            elevation: 2.0,
-                            color: AppColors.surface,
                           ))
                       .toList(),
                 ),
