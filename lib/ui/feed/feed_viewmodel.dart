@@ -3,14 +3,14 @@ import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/profile_service/profile_service.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
-import 'package:feed/core/utils/full_screen.dart';
+import 'package:feed/core/utils/videoplayer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class FeedViewModel extends ReactiveViewModel {
   final VideoFeedService _videoFeedService = locator<VideoFeedService>();
   final UserService _userService = locator<UserService>();
-  final FullScreenHelper _fullScreenHelper = locator<FullScreenHelper>();
+  final VideoPlayerUtils _fullScreenHelper = locator<VideoPlayerUtils>();
   final ProfileService _profileService = locator<ProfileService>();
 
   late YoutubePlayerController _controller;
@@ -39,6 +39,10 @@ class FeedViewModel extends ReactiveViewModel {
               hideControls: false,
               hideThumbnail: false,
               disableDragSeek: true));
+
+      _fullScreenHelper.showScreenStatus.listen((v) {
+        if (!v) _controller.pause();
+      });
     }
 
     setBusy(false);
