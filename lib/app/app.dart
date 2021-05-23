@@ -68,7 +68,7 @@ import 'injection.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: FirebaseAuthenticationService),
 
-    /// Actual Services that are required for our application
+    /// Custom services to make things work for the application
     LazySingleton(classType: UserServiceImpl, asType: UserService),
     LazySingleton(
       classType: VideoPlayerUtils,

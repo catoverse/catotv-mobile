@@ -35,10 +35,3 @@ class PackageInjection {
     return packageInfo;
   }
 }
-
-// class GoogleLoginInjection {
-//   static GoogleSignIn getInstance() {
-//     return GoogleSignIn(
-//         scopes: ['email', 'profile'], clientId: env[AppStrings.googleClient]);
-//   }
-// }

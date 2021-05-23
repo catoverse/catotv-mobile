@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/enums/connectivity_status.dart';
 
 import 'connectivity_service.dart';
-import 'connectivity_status.dart';
 
 class ConnectivityServiceImpl implements ConnectivityService {
   final _log = getLogger('ConnectivityServiceImpl');

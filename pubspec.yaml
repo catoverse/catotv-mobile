@@ -15,6 +15,7 @@ dependencies:
   # stacked state management
   stacked: ^2.1.1
   stacked_services: ^0.8.5
+  observable_ish: ^3.0.0
 
   # data models
   freezed_annotation: ^0.14.1
@@ -39,9 +40,10 @@ dependencies:
   # fetches [version][build-info]..
   package_info: ^2.0.0
 
-  # google login
+  # a videoplayer to play youtube videos
   youtube_player_flutter: ^8.0.0
-  observable_ish: ^3.0.0
+
+  # firebase integration
   firebase_auth: ^1.1.4
   stacked_firebase_auth: ^0.2.5
   firebase_core: ^1.1.1
