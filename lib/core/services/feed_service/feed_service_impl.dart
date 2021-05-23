@@ -1,9 +1,9 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
-import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
+import 'package:feed/core/services/feed_service/feed_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 
-class VideoFeedServiceImpl implements VideoFeedService {
+class FeedServiceImpl implements FeedService {
   final APIService _apiService = locator<APIService>();
 
   @override

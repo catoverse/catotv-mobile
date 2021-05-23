@@ -38,14 +38,22 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
 
     return (isReactive)
         ? ViewModelBuilder<T>.reactive(
-            builder: (context, model, child) =>
-                SafeArea(child: builder(context, uiHelpers, model)),
+            builder: (context, model, child) => SafeArea(
+                left: true,
+                right: true,
+                top: false,
+                bottom: false,
+                child: builder(context, uiHelpers, model)),
             disposeViewModel: disposeViewModel,
             onModelReady: onModelReady,
             viewModelBuilder: () => viewModel)
         : ViewModelBuilder<T>.nonReactive(
-            builder: (context, model, child) =>
-                SafeArea(child: builder(context, uiHelpers, model)),
+            builder: (context, model, child) => SafeArea(
+                left: true,
+                right: true,
+                top: false,
+                bottom: false,
+                child: builder(context, uiHelpers, model)),
             disposeViewModel: disposeViewModel,
             onModelReady: onModelReady,
             viewModelBuilder: () => viewModel);

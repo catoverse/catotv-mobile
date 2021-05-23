@@ -1,11 +1,11 @@
 import 'package:feed/ui/explore/explore_view.dart';
-import 'package:feed/ui/feed/feed_view.dart';
 import 'package:feed/ui/global/lazy_indexed_stack.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:feed/ui/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
+import 'feed_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
@@ -15,10 +15,19 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<HomeViewModel>(
         viewModel: HomeViewModel(),
-        onModelReady: (model) => model.init(),
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: model.showExitSnackbar,
               child: Scaffold(
+                  appBar: AppBar(
+                    automaticallyImplyLeading: false,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    centerTitle: true,
+                    title: Text(
+                      homeViewItems[model.index].title,
+                      style: TextStyle(color: AppColors.textPrimary),
+                    ),
+                  ),
                   body: LazyIndexedStack(
                     reuse: true,
                     index: model.index,
@@ -29,16 +38,10 @@ class HomeView extends StatelessWidget {
                   bottomNavigationBar: Visibility(
                     visible: model.showNav(),
                     child: Theme(
-                        data: model.index == 0
-                            ? ThemeData(canvasColor: AppColors.canvasDark)
-                            : ThemeData(canvasColor: AppColors.surface),
+                        data: ThemeData(canvasColor: AppColors.surface),
                         child: BottomNavigationBar(
-                          fixedColor: model.index == 0
-                              ? AppColors.surface
-                              : AppColors.primary,
-                          unselectedItemColor: model.index == 0
-                              ? AppColors.textSecondaryDark
-                              : AppColors.textSecondary,
+                          fixedColor: AppColors.primary,
+                          unselectedItemColor: AppColors.textSecondary,
                           currentIndex: model.index,
                           onTap: model.changeTab,
                           items: homeViewItems

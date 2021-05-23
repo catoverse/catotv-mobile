@@ -17,8 +17,8 @@ import '../core/services/topic_service/topic_service.dart';
 import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
-import '../core/services/videofeed_service/videofeed_service.dart';
-import '../core/services/videofeed_service/videofeed_service_impl.dart';
+import '../core/services/feed_service/feed_service.dart';
+import '../core/services/feed_service/feed_service_impl.dart';
 import '../core/utils/videoplayer.dart';
 import '../remote/api/api_service.dart';
 import '../remote/api/api_service_impl.dart';
@@ -49,6 +49,6 @@ Future setupLocator() async {
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
   locator.registerLazySingleton(() => VideoPlayerUtils());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
-  locator.registerLazySingleton<VideoFeedService>(() => VideoFeedServiceImpl());
+  locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
   locator.registerLazySingleton(() => ProfileService());
 }

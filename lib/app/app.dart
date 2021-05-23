@@ -5,8 +5,8 @@ import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/core/services/topic_service/topic_service_impl.dart';
 import 'package:feed/core/services/user_service/user_service_impl.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
-import 'package:feed/core/services/videofeed_service/videofeed_service.dart';
-import 'package:feed/core/services/videofeed_service/videofeed_service_impl.dart';
+import 'package:feed/core/services/feed_service/feed_service.dart';
+import 'package:feed/core/services/feed_service/feed_service_impl.dart';
 import 'package:feed/core/utils/videoplayer.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
@@ -74,7 +74,7 @@ import 'injection.dart';
       classType: VideoPlayerUtils,
     ),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
-    LazySingleton(classType: VideoFeedServiceImpl, asType: VideoFeedService),
+    LazySingleton(classType: FeedServiceImpl, asType: FeedService),
     LazySingleton(classType: ProfileService),
   ],
   logger: StackedLogger(),
