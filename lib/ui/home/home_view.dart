@@ -5,7 +5,7 @@ import 'package:feed/ui/global/theme.dart';
 import 'package:feed/ui/profile/profile_view.dart';
 import 'package:flutter/material.dart';
 
-import 'feed_view.dart';
+import '../feed/feed_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
