@@ -1,6 +1,7 @@
 import 'package:feed/ui/global/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import 'widgets/videoplayer.dart';
 import 'feed_viewmodel.dart';
@@ -20,6 +21,7 @@ class _FeedViewState extends State<FeedView> {
     return ScreenBuilder<FeedViewModel>(
         viewModel: FeedViewModel(),
         isReactive: true,
+        disposeViewModel: false,
         onModelReady: (model) {
           model.updateCallBack(() {
             setState(() {
@@ -43,21 +45,40 @@ class _FeedViewState extends State<FeedView> {
                   ? Center(child: CircularProgressIndicator())
                   : Center(
                       child: ListView.builder(
+                        addAutomaticKeepAlives: true,
                         scrollDirection: Axis.vertical,
                         itemCount: model.videos.length,
                         itemBuilder: (BuildContext context, int index) =>
-                            VideoPlayer(
-                          video: model.videos[index],
-                          player: player,
-                          onPlay: () {
-                            if (model.currentPlayingIndex == index)
-                              return pauseVideo();
-                            model.updateCurrentPlayingIndex(index);
-                            playVideo(model.videos[index].video_url);
+                            VisibilityDetector(
+                          key: ValueKey(index),
+                          onVisibilityChanged: (visibilityInfo) {
+                            var visiblePercentage =
+                                visibilityInfo.visibleFraction * 100;
+
+                            if (visibilityInfo.key ==
+                                    ValueKey(model.currentPlayingIndex) &&
+                                visiblePercentage < 60.0) {
+                              //increase the currentPlaying index to 1
+                              int newIndex = index + 1;
+                              if (model.currentPlayingIndex != newIndex) {
+                                model.updateCurrentPlayingIndex(newIndex);
+                                playVideo(model.videos[newIndex].video_url);
+                              }
+                            }
                           },
-                          showHiddenPlayer:
-                              index == 0 && model.currentPlayingIndex == -1,
-                          isPlaying: model.currentPlayingIndex == index,
+                          child: VideoPlayer(
+                            video: model.videos[index],
+                            player: player,
+                            onPlay: () {
+                              // if (model.currentPlayingIndex == index)
+                              //   return pauseVideo();
+                              // model.updateCurrentPlayingIndex(index);
+                              // playVideo(model.videos[index].video_url);
+                            },
+                            showHiddenPlayer:
+                                index == 0 && model.currentPlayingIndex == -1,
+                            isPlaying: model.currentPlayingIndex == index,
+                          ),
                         ),
                       ),
                     ),

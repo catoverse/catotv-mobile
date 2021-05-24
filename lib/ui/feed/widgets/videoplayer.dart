@@ -38,7 +38,11 @@ class _VideoPlayerState extends State<VideoPlayer>
           // Header of the video card
           _displayTitleTopic(context, widget.video.title, "Productivity"),
 
-          (widget.isPlaying) ? _showVideoPlayer() : _showThumbnail(),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 500),
+            child: (widget.isPlaying) ? _showVideoPlayer() : _showThumbnail(),
+            curve: Curves.linear,
+          ),
 
           // Footer of the video card
           _displayFooter()
@@ -48,37 +52,34 @@ class _VideoPlayerState extends State<VideoPlayer>
   }
 
   Widget _showThumbnail() {
-    return GestureDetector(
-      onTap: () => widget.onPlay(),
-      child: Stack(
-        children: [
-          if (widget.showHiddenPlayer)
-            Opacity(
-              child: widget.player,
-              opacity: 0.01,
-            ),
-          AspectRatio(
-            aspectRatio: 16.0 / 9.0,
-            child: Image.network(
-              _getThumbnail(widget.video.video_url),
-              fit: BoxFit.cover,
-              loadingBuilder: (_, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-              errorBuilder: (_, obj, trace) => Text("${obj.toString()}"),
-            ),
+    return Stack(
+      children: [
+        if (widget.showHiddenPlayer)
+          Opacity(
+            child: widget.player,
+            opacity: 0.01,
           ),
-          AspectRatio(
-            aspectRatio: 16 / 9.0,
-            child: Container(
-              color: Color(0x4D000000),
-            ),
+        AspectRatio(
+          aspectRatio: 16.0 / 9.0,
+          child: Image.network(
+            _getThumbnail(widget.video.video_url),
+            fit: BoxFit.cover,
+            loadingBuilder: (_, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+            errorBuilder: (_, obj, trace) => Text("${obj.toString()}"),
           ),
-        ],
-      ),
+        ),
+        AspectRatio(
+          aspectRatio: 16 / 9.0,
+          child: Container(
+            color: Color(0x4D000000),
+          ),
+        ),
+      ],
     );
   }
 
