@@ -44,42 +44,42 @@ class _FeedViewState extends State<FeedView> {
               builder: (BuildContext context, Widget player) => model.isBusy
                   ? Center(child: CircularProgressIndicator())
                   : Center(
-                      child: ListView.builder(
-                        addAutomaticKeepAlives: true,
+                      child: ListView(
                         scrollDirection: Axis.vertical,
-                        itemCount: model.videos.length,
-                        itemBuilder: (BuildContext context, int index) =>
-                            VisibilityDetector(
-                          key: ValueKey(index),
-                          onVisibilityChanged: (visibilityInfo) {
-                            var visiblePercentage =
-                                visibilityInfo.visibleFraction * 100;
+                        children: model.videos.map((e) {
+                          int index = model.videos.indexOf(e);
+                          return VisibilityDetector(
+                            key: ValueKey(index),
+                            onVisibilityChanged: (visibilityInfo) {
+                              var visiblePercentage =
+                                  visibilityInfo.visibleFraction * 100;
 
-                            if (visibilityInfo.key ==
-                                    ValueKey(model.currentPlayingIndex) &&
-                                visiblePercentage < 60.0) {
-                              //increase the currentPlaying index to 1
-                              int newIndex = index + 1;
-                              if (model.currentPlayingIndex != newIndex) {
-                                model.updateCurrentPlayingIndex(newIndex);
-                                playVideo(model.videos[newIndex].video_url);
+                              if (visibilityInfo.key ==
+                                      ValueKey(model.currentPlayingIndex) &&
+                                  visiblePercentage < 60.0) {
+                                //increase the currentPlaying index to 1
+                                int newIndex = index + 1;
+                                if (model.currentPlayingIndex != newIndex) {
+                                  model.updateCurrentPlayingIndex(newIndex);
+                                  playVideo(model.videos[newIndex].video_url);
+                                }
                               }
-                            }
-                          },
-                          child: VideoPlayer(
-                            video: model.videos[index],
-                            player: player,
-                            onPlay: () {
-                              // if (model.currentPlayingIndex == index)
-                              //   return pauseVideo();
-                              // model.updateCurrentPlayingIndex(index);
-                              // playVideo(model.videos[index].video_url);
                             },
-                            showHiddenPlayer:
-                                index == 0 && model.currentPlayingIndex == -1,
-                            isPlaying: model.currentPlayingIndex == index,
-                          ),
-                        ),
+                            child: VideoPlayer(
+                              video: model.videos[index],
+                              player: player,
+                              onPlay: () {
+                                // if (model.currentPlayingIndex == index)
+                                //   return pauseVideo();
+                                // model.updateCurrentPlayingIndex(index);
+                                // playVideo(model.videos[index].video_url);
+                              },
+                              showHiddenPlayer:
+                                  index == 0 && model.currentPlayingIndex == -1,
+                              isPlaying: model.currentPlayingIndex == index,
+                            ),
+                          );
+                        }).toList(),
                       ),
                     ),
               player: YoutubePlayer(

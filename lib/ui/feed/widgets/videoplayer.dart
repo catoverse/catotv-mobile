@@ -3,6 +3,7 @@ import 'package:feed/core/models/video/video.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class VideoPlayer extends StatefulWidget {
   final Widget player;
@@ -38,11 +39,7 @@ class _VideoPlayerState extends State<VideoPlayer>
           // Header of the video card
           _displayTitleTopic(context, widget.video.title, "Productivity"),
 
-          AnimatedContainer(
-            duration: Duration(milliseconds: 500),
-            child: (widget.isPlaying) ? _showVideoPlayer() : _showThumbnail(),
-            curve: Curves.linear,
-          ),
+          (widget.isPlaying) ? _showVideoPlayer() : _showThumbnail(),
 
           // Footer of the video card
           _displayFooter()
@@ -61,16 +58,18 @@ class _VideoPlayerState extends State<VideoPlayer>
           ),
         AspectRatio(
           aspectRatio: 16.0 / 9.0,
-          child: Image.network(
-            _getThumbnail(widget.video.video_url),
+          child: FadeInImage.memoryNetwork(
+            placeholder: kTransparentImage,
+            image: _getThumbnail(widget.video.video_url),
             fit: BoxFit.cover,
-            loadingBuilder: (_, child, loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-            errorBuilder: (_, obj, trace) => Text("${obj.toString()}"),
+
+            // loadingBuilder: (_, child, loadingProgress) {
+            //   if (loadingProgress == null) return child;
+            //   return Center(
+            //     child: CircularProgressIndicator(),
+            //   );
+            // },
+            imageErrorBuilder: (_, obj, trace) => Text("${obj.toString()}"),
           ),
         ),
         AspectRatio(
