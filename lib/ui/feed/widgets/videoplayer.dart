@@ -10,14 +10,14 @@ class VideoPlayer extends StatefulWidget {
   final Video video;
   final bool isPlaying;
   final bool showHiddenPlayer;
-  final Function onPlay;
+  final Function onShare;
 
   const VideoPlayer(
       {Key? key,
       required this.player,
       required this.showHiddenPlayer,
       required this.video,
-      required this.onPlay,
+      required this.onShare,
       required this.isPlaying})
       : super(key: key);
 
@@ -41,7 +41,7 @@ class _VideoPlayerState extends State<VideoPlayer>
 
           (widget.isPlaying) ? _showVideoPlayer() : _showThumbnail(),
 
-          // Footer of the video card
+          // Footer of the video card'Example of a Dynamic Link'
           _displayFooter()
         ],
       ),
@@ -91,7 +91,9 @@ class _VideoPlayerState extends State<VideoPlayer>
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(icon: Icon(Icons.thumb_up_alt_outlined), onPressed: () {}),
-          IconButton(icon: Icon(Icons.share_outlined), onPressed: () {})
+          IconButton(
+              icon: Icon(Icons.share_outlined),
+              onPressed: () => widget.onShare())
         ],
       ),
     );

@@ -68,12 +68,7 @@ class _FeedViewState extends State<FeedView> {
                             child: VideoPlayer(
                               video: model.videos[index],
                               player: player,
-                              onPlay: () {
-                                // if (model.currentPlayingIndex == index)
-                                //   return pauseVideo();
-                                // model.updateCurrentPlayingIndex(index);
-                                // playVideo(model.videos[index].video_url);
-                              },
+                              onShare: () => model.shareVideo(index),
                               showHiddenPlayer:
                                   index == 0 && model.currentPlayingIndex == -1,
                               isPlaying: model.currentPlayingIndex == index,
