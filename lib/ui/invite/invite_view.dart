@@ -1,4 +1,4 @@
-import 'package:feed/ui/custom/input_field.dart';
+import 'package:feed/ui/global/input_field.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';

@@ -6,12 +6,11 @@ class DynamicLinksService {
   Future<String> shareVideo(Video video) async {
     String videoID = YoutubePlayer.convertUrlToId(video.video_url)!;
 
-    Uri fallbackURL =
-        Uri.parse("https://goofy-poincare-3976e9.netlify.app/video/$videoID");
+    Uri fallbackURL = Uri.parse("https://cato.tv/video/$videoID");
 
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://catoverse.page.link',
-      link: Uri.parse('https://app.cato.tv/video?id=$videoID'),
+      link: fallbackURL,
       androidParameters: AndroidParameters(
           packageName: 'cato.tv.feed', fallbackUrl: fallbackURL),
       iosParameters: IosParameters(
