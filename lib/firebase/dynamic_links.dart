@@ -2,11 +2,12 @@ import 'package:feed/core/models/video/video.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-class DynamicService {
+class DynamicLinksService {
   Future<String> shareVideo(Video video) async {
     String videoID = YoutubePlayer.convertUrlToId(video.video_url)!;
 
-    Uri fallbackURL = Uri.parse("https://www.cato.tv/video?id=$videoID");
+    Uri fallbackURL =
+        Uri.parse("https://goofy-poincare-3976e9.netlify.app/video/$videoID");
 
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://catoverse.page.link',
@@ -20,8 +21,8 @@ class DynamicService {
           fallbackUrl: fallbackURL),
     );
 
-    final Uri dynamicUrl = await parameters.buildUrl();
+    final ShortDynamicLink dynamicUrl = await parameters.buildShortLink();
 
-    return dynamicUrl.toString();
+    return dynamicUrl.shortUrl.toString();
   }
 }

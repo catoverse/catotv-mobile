@@ -6,11 +6,11 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:feed/firebase/dynamic_links.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../core/services/dynamic_links_service.dart';
 import '../core/services/feed_service/feed_service.dart';
 import '../core/services/feed_service/feed_service_impl.dart';
 import '../core/services/hive_service/hive_service.dart';
@@ -52,5 +52,5 @@ Future setupLocator() async {
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
   locator.registerLazySingleton(() => ProfileService());
-  locator.registerLazySingleton(() => DynamicService());
+  locator.registerLazySingleton(() => DynamicLinksService());
 }

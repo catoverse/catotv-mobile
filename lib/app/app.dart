@@ -1,4 +1,4 @@
-import 'package:feed/core/services/dynamic_links_service.dart';
+import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/hive_service/hive_service_impl.dart';
 import 'package:feed/core/services/profile_service/profile_service.dart';
@@ -77,7 +77,7 @@ import 'injection.dart';
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
     LazySingleton(classType: FeedServiceImpl, asType: FeedService),
     LazySingleton(classType: ProfileService),
-    LazySingleton(classType: DynamicService),
+    LazySingleton(classType: DynamicLinksService),
   ],
   logger: StackedLogger(),
 )

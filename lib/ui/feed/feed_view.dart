@@ -1,6 +1,6 @@
 import 'package:feed/ui/global/screen.dart';
 import 'package:flutter/material.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_webview/youtube_player_webview.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import 'widgets/videoplayer.dart';

@@ -6,28 +6,23 @@ import 'package:feed/app/app.locator.dart';
 
 import 'hive_service.dart';
 
-/// A WrapperService around [Hive] to add custom
-/// functionality and proper error handling
 class HiveServiceImpl implements HiveService {
   final _hiveInterface = locator<HiveInterface>();
   final _log = getLogger('HiveService');
 
-  /// Checks if the box exists
   @override
   Future<Result<Failure, bool>> isBoxExists({required String boxName}) async {
     _log.v("Checking whether $boxName exists in Hive");
 
     try {
-      final openBox = await _hiveInterface.openBox(boxName);
-      int length = openBox.length;
+      final isExists = await _hiveInterface.boxExists(boxName);
 
-      return Result.success(length != 0);
+      return Result.success(isExists);
     } catch (error) {
       return Result.failed(Failure.message(error.toString()));
     }
   }
 
-  /// Adds item to the box
   @override
   Future<Result<Failure, bool>> insertItem<T>(
       {required T item, required String boxName}) async {
@@ -57,7 +52,6 @@ class HiveServiceImpl implements HiveService {
     }
   }
 
-  /// Removes all entries from the box
   @override
   Future<Result<Failure, bool>> removeBox({required String boxName}) async {
     _log.v("Removing the contents of $boxName from Hive");
@@ -72,7 +66,6 @@ class HiveServiceImpl implements HiveService {
     }
   }
 
-  /// Inserts [List] of items to the box
   @override
   Future<Result<Failure, bool>> insertList<T>(
       {required List<T> items, required String boxName}) async {
@@ -91,7 +84,6 @@ class HiveServiceImpl implements HiveService {
     }
   }
 
-  /// Returns the [List] of item from box.
   @override
   Future<Result<Failure, List<T>>> fetchList<T>(
       {required String boxName}) async {
@@ -113,7 +105,6 @@ class HiveServiceImpl implements HiveService {
     }
   }
 
-  /// Returns the item from [index]
   @override
   Future<Result<Failure, T>> fetchItemAtIndex<T>(
       {required String boxName, required int index}) async {
