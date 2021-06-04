@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:feed/app/app.locator.dart';
-import 'package:feed/app/strings.dart';
+import 'package:feed/core/constants/strings.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 mixin SnackbarHelper {

@@ -1,6 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/app/strings.dart';
+import 'package:feed/core/constants/strings.dart';
 import 'package:feed/core/exceptions/api_exception.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';

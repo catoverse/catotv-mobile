@@ -1,6 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/app/strings.dart';
+import 'package:feed/core/constants/strings.dart';
 import 'package:feed/core/models/topic/topic.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/topic_service/topic_service.dart';

@@ -1,5 +1,5 @@
-import 'package:feed/app/assets.dart';
-import 'package:feed/app/strings.dart';
+import 'package:feed/core/constants/assets.dart';
+import 'package:feed/core/constants/strings.dart';
 import 'package:feed/ui/global/ui_helpers.dart';
 import 'package:flutter/material.dart';
 
