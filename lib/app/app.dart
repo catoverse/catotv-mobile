@@ -8,6 +8,7 @@ import 'package:feed/core/services/user_service/user_service_impl.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/core/services/feed_service/feed_service.dart';
 import 'package:feed/core/services/feed_service/feed_service_impl.dart';
+import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/core/utils/videoplayer.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
@@ -76,6 +77,7 @@ import 'injection.dart';
       classType: VideoPlayerUtils,
     ),
     LazySingleton(classType: YoutubeExplode),
+    LazySingleton(classType: YoutubeService),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
     LazySingleton(classType: FeedServiceImpl, asType: FeedService),
     LazySingleton(classType: ProfileService),

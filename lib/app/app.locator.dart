@@ -20,6 +20,7 @@ import '../core/services/topic_service/topic_service.dart';
 import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
+import '../core/services/youtube_service/youtube_service.dart';
 import '../core/utils/videoplayer.dart';
 import '../firebase/dynamic_links.dart';
 import '../remote/api/api_service.dart';
@@ -51,6 +52,7 @@ Future setupLocator() async {
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
   locator.registerLazySingleton(() => VideoPlayerUtils());
   locator.registerLazySingleton(() => YoutubeExplode());
+  locator.registerLazySingleton(() => YoutubeService());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
   locator.registerLazySingleton(() => ProfileService());

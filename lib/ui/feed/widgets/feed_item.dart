@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:feed/core/models/video/video.dart';
-import 'package:feed/core/utils/youtube.dart';
+import 'package:feed/ui/feed/widgets/feed_item.shimmer.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -65,9 +65,7 @@ class _FeedItemState extends State<FeedItem>
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (!mounted) {
-      return CircularProgressIndicator();
-    }
+    if (!mounted) return $ShimmerFeedItem();
 
     return Container(
       width: double.infinity,
@@ -185,13 +183,6 @@ class _FeedItemState extends State<FeedItem>
         ],
       ),
     );
-  }
-
-  String getThumbnail() {
-    String youtubeUrl = widget.video.youtubeUrl;
-    String videoId = YoutubeUtils.convertUrlToId(youtubeUrl)!;
-
-    return "https://i3.ytimg.com/vi_webp/$videoId/sddefault.webp";
   }
 
   @override

@@ -53,6 +53,7 @@ dependencies:
   share: ^2.0.1
   inview_notifier_list: ^2.0.0
   youtube_explode_dart: ^1.9.4
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:

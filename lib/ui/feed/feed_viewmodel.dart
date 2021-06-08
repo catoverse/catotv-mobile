@@ -2,13 +2,12 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/models/video/video.dart';
-import 'package:feed/core/utils/youtube.dart';
+import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/ui/restricted_home/data/feed_data.dart';
 import 'package:stacked/stacked.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart' as yt;
 
 class FeedViewModel extends FutureViewModel<List<Video>> {
-  final yt.YoutubeExplode _youtubeExplode = locator<yt.YoutubeExplode>();
+  final YoutubeService _youtubeUtils = locator<YoutubeService>();
   final _log = getLogger("FeedViewModel");
   // final DynamicLinksService _dynamicLinksService =
   //     locator<DynamicLinksService>();
@@ -18,42 +17,32 @@ class FeedViewModel extends FutureViewModel<List<Video>> {
     // Share.share("Checkout ${videos[index].title} at $url");
   }
 
-  Future<String> getStream(String youtubeVideoUrl) async {
-    String videoID = YoutubeUtils.convertUrlToId(youtubeVideoUrl)!;
-    var quality = yt.VideoQuality.medium480;
-
-    try {
-      var manifest =
-          await _youtubeExplode.videos.streamsClient.getManifest(videoID);
-
-      late Uri videoUri = manifest.muxed.first.url;
-
-      manifest.muxed.forEach((m) {
-        if (quality == m.videoQuality) {
-          videoUri = m.url;
-        }
-      });
-
-      _log.v("Here's the stream link ${videoUri.toString()}");
-
-      return videoUri.toString();
-    } catch (e) {
-      return e.toString();
-    }
-  }
-
   @override
   Future<List<Video>> futureToRun() async {
+    var started = DateTime.now();
+
+    _log.v("Getting videos from Fake API");
+
     await Future.delayed(Duration(seconds: 1));
 
     List<Video> ytVideos =
         feedData.map((json) => Video.fromJson(json)).toList();
+
+    _log.v("Fetched videos from Fake API");
+
     List<Video> videos = [];
 
+    _log.v("Getting videos from Explode API");
+
     for (var video in ytVideos) {
-      String streamUrl = await getStream(video.youtubeUrl);
+      var videoStarted = DateTime.now();
+      String streamUrl = await _youtubeUtils.getStream(video.youtubeUrl);
+      _log.v(
+          "It took ${DateTime.now().difference(videoStarted).inSeconds} seconds for $video");
       videos.add(video.copyWith(videoUrl: streamUrl));
     }
+
+    _log.v("It took ${DateTime.now().difference(started).inSeconds} seconds");
 
     return videos;
   }
