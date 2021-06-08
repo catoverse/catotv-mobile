@@ -1,7 +1,14 @@
+import 'package:feed/ui/feed/widgets/feed_item.dart';
 import 'package:feed/ui/global/screen.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:inview_notifier_list/inview_notifier_list.dart';
 
 import 'feed_viewmodel.dart';
+
+bool isInView(double deltaTop, double deltaBottom, double viewPortDimension) =>
+    deltaTop < (0.5 * viewPortDimension) &&
+    deltaBottom > (0.5 * viewPortDimension);
 
 class FeedView extends StatelessWidget {
   @override
@@ -13,8 +20,37 @@ class FeedView extends StatelessWidget {
                 automaticallyImplyLeading: false,
                 elevation: 0,
                 backgroundColor: Colors.transparent,
+                foregroundColor: AppColors.textPrimary,
+                iconTheme: IconThemeData(color: AppColors.textPrimary),
+                leading: IconButton(
+                    icon: Icon(Icons.notifications), onPressed: () {}),
+                actions: [
+                  IconButton(
+                      icon: Icon(Icons.supervised_user_circle),
+                      onPressed: () {}),
+                ],
+                centerTitle: true,
+                title: Text(
+                  "Home",
+                  style: TextStyle(color: AppColors.textPrimary),
+                ),
               ),
-              body: Container(),
+              body: model.isBusy
+                  ? Center(child: CircularProgressIndicator())
+                  : InViewNotifierList(
+                      itemCount: model.data!.length,
+                      builder: (BuildContext context, int index) =>
+                          InViewNotifierWidget(
+                        id: '$index',
+                        builder: (BuildContext context, bool isInView,
+                                Widget? child) =>
+                            FeedItem(
+                          isPlaying: isInView,
+                          video: model.data![index],
+                        ),
+                      ),
+                      isInViewPortCondition: isInView,
+                    ),
             ));
   }
 }

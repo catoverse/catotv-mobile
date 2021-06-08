@@ -23,6 +23,7 @@ import 'package:feed/ui/update/update_view.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import 'injection.dart';
 
@@ -74,6 +75,7 @@ import 'injection.dart';
     LazySingleton(
       classType: VideoPlayerUtils,
     ),
+    LazySingleton(classType: YoutubeExplode),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
     LazySingleton(classType: FeedServiceImpl, asType: FeedService),
     LazySingleton(classType: ProfileService),

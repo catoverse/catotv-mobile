@@ -19,35 +19,38 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
     return _$_Video(
       id: fields[0] as String,
       title: fields[1] as String,
-      video_url: fields[2] as String,
+      youtubeUrl: fields[2] as String,
       topic: fields[3] as String,
-      start_timestamp: fields[4] as int,
-      end_timestamp: fields[5] as int,
+      startTimestamp: fields[4] as int,
+      endTimestamp: fields[5] as int,
       createdAt: fields[6] as String,
       modifiedAt: fields[7] as String,
+      videoUrl: fields[8] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_Video obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.video_url)
+      ..write(obj.youtubeUrl)
       ..writeByte(3)
       ..write(obj.topic)
       ..writeByte(4)
-      ..write(obj.start_timestamp)
+      ..write(obj.startTimestamp)
       ..writeByte(5)
-      ..write(obj.end_timestamp)
+      ..write(obj.endTimestamp)
       ..writeByte(6)
       ..write(obj.createdAt)
       ..writeByte(7)
-      ..write(obj.modifiedAt);
+      ..write(obj.modifiedAt)
+      ..writeByte(8)
+      ..write(obj.videoUrl);
   }
 
   @override
@@ -69,10 +72,10 @@ _$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
   return _$_Video(
     id: json['id'] as String,
     title: json['title'] as String,
-    video_url: json['video_url'] as String,
+    youtubeUrl: json['video_url'] as String,
     topic: json['topic'] as String,
-    start_timestamp: json['start_timestamp'] as int,
-    end_timestamp: json['end_timestamp'] as int,
+    startTimestamp: json['start_timestamp'] as int,
+    endTimestamp: json['end_timestamp'] as int,
     createdAt: json['createdAt'] as String,
     modifiedAt: json['modifiedAt'] as String,
   );
@@ -81,10 +84,10 @@ _$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
-      'video_url': instance.video_url,
+      'video_url': instance.youtubeUrl,
       'topic': instance.topic,
-      'start_timestamp': instance.start_timestamp,
-      'end_timestamp': instance.end_timestamp,
+      'start_timestamp': instance.startTimestamp,
+      'end_timestamp': instance.endTimestamp,
       'createdAt': instance.createdAt,
       'modifiedAt': instance.modifiedAt,
     };

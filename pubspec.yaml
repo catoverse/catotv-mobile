@@ -41,7 +41,7 @@ dependencies:
   package_info: ^2.0.0
 
   # a videoplayer to play youtube videos
-  youtube_player_flutter: ^8.0.0
+  video_player: ^2.1.5
 
   # firebase integration
   firebase_auth: ^1.1.4
@@ -51,6 +51,8 @@ dependencies:
   
   auto_size_text: ^3.0.0-nullsafety.0
   share: ^2.0.1
+  inview_notifier_list: ^2.0.0
+  youtube_explode_dart: ^1.9.4
 
 dev_dependencies:
   flutter_test:

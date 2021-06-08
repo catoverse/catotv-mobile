@@ -21,23 +21,43 @@ class _$VideoTearOff {
   const _$VideoTearOff();
 
   _Video call(
-      {@HiveField(0) required String id,
-      @HiveField(1) required String title,
-      @HiveField(2) required String video_url,
-      @HiveField(3) required String topic,
-      @HiveField(4) required int start_timestamp,
-      @HiveField(5) required int end_timestamp,
-      @HiveField(6) required String createdAt,
-      @HiveField(7) required String modifiedAt}) {
+      {@HiveField(0)
+      @JsonKey(name: "id")
+          required String id,
+      @HiveField(1)
+      @JsonKey(name: "title")
+          required String title,
+      @HiveField(2)
+      @JsonKey(name: "video_url")
+          required String youtubeUrl,
+      @HiveField(3)
+      @JsonKey(name: "topic")
+          required String topic,
+      @HiveField(4)
+      @JsonKey(name: "start_timestamp")
+          required int startTimestamp,
+      @HiveField(5)
+      @JsonKey(name: "end_timestamp")
+          required int endTimestamp,
+      @HiveField(6)
+      @JsonKey(name: "createdAt")
+          required String createdAt,
+      @HiveField(7)
+      @JsonKey(name: "modifiedAt")
+          required String modifiedAt,
+      @HiveField(8)
+      @JsonKey(ignore: true)
+          String? videoUrl}) {
     return _Video(
       id: id,
       title: title,
-      video_url: video_url,
+      youtubeUrl: youtubeUrl,
       topic: topic,
-      start_timestamp: start_timestamp,
-      end_timestamp: end_timestamp,
+      startTimestamp: startTimestamp,
+      endTimestamp: endTimestamp,
       createdAt: createdAt,
       modifiedAt: modifiedAt,
+      videoUrl: videoUrl,
     );
   }
 
@@ -52,21 +72,32 @@ const $Video = _$VideoTearOff();
 /// @nodoc
 mixin _$Video {
   @HiveField(0)
+  @JsonKey(name: "id")
   String get id => throw _privateConstructorUsedError;
   @HiveField(1)
+  @JsonKey(name: "title")
   String get title => throw _privateConstructorUsedError;
   @HiveField(2)
-  String get video_url => throw _privateConstructorUsedError;
+  @JsonKey(name: "video_url")
+  String get youtubeUrl => throw _privateConstructorUsedError;
   @HiveField(3)
+  @JsonKey(name: "topic")
   String get topic => throw _privateConstructorUsedError;
   @HiveField(4)
-  int get start_timestamp => throw _privateConstructorUsedError;
+  @JsonKey(name: "start_timestamp")
+  int get startTimestamp => throw _privateConstructorUsedError;
   @HiveField(5)
-  int get end_timestamp => throw _privateConstructorUsedError;
+  @JsonKey(name: "end_timestamp")
+  int get endTimestamp => throw _privateConstructorUsedError;
   @HiveField(6)
+  @JsonKey(name: "createdAt")
   String get createdAt => throw _privateConstructorUsedError;
   @HiveField(7)
+  @JsonKey(name: "modifiedAt")
   String get modifiedAt => throw _privateConstructorUsedError;
+  @HiveField(8)
+  @JsonKey(ignore: true)
+  String? get videoUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -78,14 +109,15 @@ abstract class $VideoCopyWith<$Res> {
   factory $VideoCopyWith(Video value, $Res Function(Video) then) =
       _$VideoCopyWithImpl<$Res>;
   $Res call(
-      {@HiveField(0) String id,
-      @HiveField(1) String title,
-      @HiveField(2) String video_url,
-      @HiveField(3) String topic,
-      @HiveField(4) int start_timestamp,
-      @HiveField(5) int end_timestamp,
-      @HiveField(6) String createdAt,
-      @HiveField(7) String modifiedAt});
+      {@HiveField(0) @JsonKey(name: "id") String id,
+      @HiveField(1) @JsonKey(name: "title") String title,
+      @HiveField(2) @JsonKey(name: "video_url") String youtubeUrl,
+      @HiveField(3) @JsonKey(name: "topic") String topic,
+      @HiveField(4) @JsonKey(name: "start_timestamp") int startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") int endTimestamp,
+      @HiveField(6) @JsonKey(name: "createdAt") String createdAt,
+      @HiveField(7) @JsonKey(name: "modifiedAt") String modifiedAt,
+      @HiveField(8) @JsonKey(ignore: true) String? videoUrl});
 }
 
 /// @nodoc
@@ -100,12 +132,13 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? video_url = freezed,
+    Object? youtubeUrl = freezed,
     Object? topic = freezed,
-    Object? start_timestamp = freezed,
-    Object? end_timestamp = freezed,
+    Object? startTimestamp = freezed,
+    Object? endTimestamp = freezed,
     Object? createdAt = freezed,
     Object? modifiedAt = freezed,
+    Object? videoUrl = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -116,21 +149,21 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      video_url: video_url == freezed
-          ? _value.video_url
-          : video_url // ignore: cast_nullable_to_non_nullable
+      youtubeUrl: youtubeUrl == freezed
+          ? _value.youtubeUrl
+          : youtubeUrl // ignore: cast_nullable_to_non_nullable
               as String,
       topic: topic == freezed
           ? _value.topic
           : topic // ignore: cast_nullable_to_non_nullable
               as String,
-      start_timestamp: start_timestamp == freezed
-          ? _value.start_timestamp
-          : start_timestamp // ignore: cast_nullable_to_non_nullable
+      startTimestamp: startTimestamp == freezed
+          ? _value.startTimestamp
+          : startTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      end_timestamp: end_timestamp == freezed
-          ? _value.end_timestamp
-          : end_timestamp // ignore: cast_nullable_to_non_nullable
+      endTimestamp: endTimestamp == freezed
+          ? _value.endTimestamp
+          : endTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -140,6 +173,10 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.modifiedAt
           : modifiedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      videoUrl: videoUrl == freezed
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -150,14 +187,15 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
       __$VideoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@HiveField(0) String id,
-      @HiveField(1) String title,
-      @HiveField(2) String video_url,
-      @HiveField(3) String topic,
-      @HiveField(4) int start_timestamp,
-      @HiveField(5) int end_timestamp,
-      @HiveField(6) String createdAt,
-      @HiveField(7) String modifiedAt});
+      {@HiveField(0) @JsonKey(name: "id") String id,
+      @HiveField(1) @JsonKey(name: "title") String title,
+      @HiveField(2) @JsonKey(name: "video_url") String youtubeUrl,
+      @HiveField(3) @JsonKey(name: "topic") String topic,
+      @HiveField(4) @JsonKey(name: "start_timestamp") int startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") int endTimestamp,
+      @HiveField(6) @JsonKey(name: "createdAt") String createdAt,
+      @HiveField(7) @JsonKey(name: "modifiedAt") String modifiedAt,
+      @HiveField(8) @JsonKey(ignore: true) String? videoUrl});
 }
 
 /// @nodoc
@@ -173,12 +211,13 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
-    Object? video_url = freezed,
+    Object? youtubeUrl = freezed,
     Object? topic = freezed,
-    Object? start_timestamp = freezed,
-    Object? end_timestamp = freezed,
+    Object? startTimestamp = freezed,
+    Object? endTimestamp = freezed,
     Object? createdAt = freezed,
     Object? modifiedAt = freezed,
+    Object? videoUrl = freezed,
   }) {
     return _then(_Video(
       id: id == freezed
@@ -189,21 +228,21 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      video_url: video_url == freezed
-          ? _value.video_url
-          : video_url // ignore: cast_nullable_to_non_nullable
+      youtubeUrl: youtubeUrl == freezed
+          ? _value.youtubeUrl
+          : youtubeUrl // ignore: cast_nullable_to_non_nullable
               as String,
       topic: topic == freezed
           ? _value.topic
           : topic // ignore: cast_nullable_to_non_nullable
               as String,
-      start_timestamp: start_timestamp == freezed
-          ? _value.start_timestamp
-          : start_timestamp // ignore: cast_nullable_to_non_nullable
+      startTimestamp: startTimestamp == freezed
+          ? _value.startTimestamp
+          : startTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      end_timestamp: end_timestamp == freezed
-          ? _value.end_timestamp
-          : end_timestamp // ignore: cast_nullable_to_non_nullable
+      endTimestamp: endTimestamp == freezed
+          ? _value.endTimestamp
+          : endTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
       createdAt: createdAt == freezed
           ? _value.createdAt
@@ -213,6 +252,10 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.modifiedAt
           : modifiedAt // ignore: cast_nullable_to_non_nullable
               as String,
+      videoUrl: videoUrl == freezed
+          ? _value.videoUrl
+          : videoUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -222,14 +265,33 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
 @HiveType(typeId: 1)
 class _$_Video extends _Video {
   _$_Video(
-      {@HiveField(0) required this.id,
-      @HiveField(1) required this.title,
-      @HiveField(2) required this.video_url,
-      @HiveField(3) required this.topic,
-      @HiveField(4) required this.start_timestamp,
-      @HiveField(5) required this.end_timestamp,
-      @HiveField(6) required this.createdAt,
-      @HiveField(7) required this.modifiedAt})
+      {@HiveField(0)
+      @JsonKey(name: "id")
+          required this.id,
+      @HiveField(1)
+      @JsonKey(name: "title")
+          required this.title,
+      @HiveField(2)
+      @JsonKey(name: "video_url")
+          required this.youtubeUrl,
+      @HiveField(3)
+      @JsonKey(name: "topic")
+          required this.topic,
+      @HiveField(4)
+      @JsonKey(name: "start_timestamp")
+          required this.startTimestamp,
+      @HiveField(5)
+      @JsonKey(name: "end_timestamp")
+          required this.endTimestamp,
+      @HiveField(6)
+      @JsonKey(name: "createdAt")
+          required this.createdAt,
+      @HiveField(7)
+      @JsonKey(name: "modifiedAt")
+          required this.modifiedAt,
+      @HiveField(8)
+      @JsonKey(ignore: true)
+          this.videoUrl})
       : super._();
 
   factory _$_Video.fromJson(Map<String, dynamic> json) =>
@@ -237,32 +299,44 @@ class _$_Video extends _Video {
 
   @override
   @HiveField(0)
+  @JsonKey(name: "id")
   final String id;
   @override
   @HiveField(1)
+  @JsonKey(name: "title")
   final String title;
   @override
   @HiveField(2)
-  final String video_url;
+  @JsonKey(name: "video_url")
+  final String youtubeUrl;
   @override
   @HiveField(3)
+  @JsonKey(name: "topic")
   final String topic;
   @override
   @HiveField(4)
-  final int start_timestamp;
+  @JsonKey(name: "start_timestamp")
+  final int startTimestamp;
   @override
   @HiveField(5)
-  final int end_timestamp;
+  @JsonKey(name: "end_timestamp")
+  final int endTimestamp;
   @override
   @HiveField(6)
+  @JsonKey(name: "createdAt")
   final String createdAt;
   @override
   @HiveField(7)
+  @JsonKey(name: "modifiedAt")
   final String modifiedAt;
+  @override
+  @HiveField(8)
+  @JsonKey(ignore: true)
+  final String? videoUrl;
 
   @override
   String toString() {
-    return 'Video(id: $id, title: $title, video_url: $video_url, topic: $topic, start_timestamp: $start_timestamp, end_timestamp: $end_timestamp, createdAt: $createdAt, modifiedAt: $modifiedAt)';
+    return 'Video(id: $id, title: $title, youtubeUrl: $youtubeUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, createdAt: $createdAt, modifiedAt: $modifiedAt, videoUrl: $videoUrl)';
   }
 
   @override
@@ -273,23 +347,26 @@ class _$_Video extends _Video {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.video_url, video_url) ||
+            (identical(other.youtubeUrl, youtubeUrl) ||
                 const DeepCollectionEquality()
-                    .equals(other.video_url, video_url)) &&
+                    .equals(other.youtubeUrl, youtubeUrl)) &&
             (identical(other.topic, topic) ||
                 const DeepCollectionEquality().equals(other.topic, topic)) &&
-            (identical(other.start_timestamp, start_timestamp) ||
+            (identical(other.startTimestamp, startTimestamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.start_timestamp, start_timestamp)) &&
-            (identical(other.end_timestamp, end_timestamp) ||
+                    .equals(other.startTimestamp, startTimestamp)) &&
+            (identical(other.endTimestamp, endTimestamp) ||
                 const DeepCollectionEquality()
-                    .equals(other.end_timestamp, end_timestamp)) &&
+                    .equals(other.endTimestamp, endTimestamp)) &&
             (identical(other.createdAt, createdAt) ||
                 const DeepCollectionEquality()
                     .equals(other.createdAt, createdAt)) &&
             (identical(other.modifiedAt, modifiedAt) ||
                 const DeepCollectionEquality()
-                    .equals(other.modifiedAt, modifiedAt)));
+                    .equals(other.modifiedAt, modifiedAt)) &&
+            (identical(other.videoUrl, videoUrl) ||
+                const DeepCollectionEquality()
+                    .equals(other.videoUrl, videoUrl)));
   }
 
   @override
@@ -297,12 +374,13 @@ class _$_Video extends _Video {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(video_url) ^
+      const DeepCollectionEquality().hash(youtubeUrl) ^
       const DeepCollectionEquality().hash(topic) ^
-      const DeepCollectionEquality().hash(start_timestamp) ^
-      const DeepCollectionEquality().hash(end_timestamp) ^
+      const DeepCollectionEquality().hash(startTimestamp) ^
+      const DeepCollectionEquality().hash(endTimestamp) ^
       const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(modifiedAt);
+      const DeepCollectionEquality().hash(modifiedAt) ^
+      const DeepCollectionEquality().hash(videoUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -317,42 +395,73 @@ class _$_Video extends _Video {
 
 abstract class _Video extends Video {
   factory _Video(
-      {@HiveField(0) required String id,
-      @HiveField(1) required String title,
-      @HiveField(2) required String video_url,
-      @HiveField(3) required String topic,
-      @HiveField(4) required int start_timestamp,
-      @HiveField(5) required int end_timestamp,
-      @HiveField(6) required String createdAt,
-      @HiveField(7) required String modifiedAt}) = _$_Video;
+      {@HiveField(0)
+      @JsonKey(name: "id")
+          required String id,
+      @HiveField(1)
+      @JsonKey(name: "title")
+          required String title,
+      @HiveField(2)
+      @JsonKey(name: "video_url")
+          required String youtubeUrl,
+      @HiveField(3)
+      @JsonKey(name: "topic")
+          required String topic,
+      @HiveField(4)
+      @JsonKey(name: "start_timestamp")
+          required int startTimestamp,
+      @HiveField(5)
+      @JsonKey(name: "end_timestamp")
+          required int endTimestamp,
+      @HiveField(6)
+      @JsonKey(name: "createdAt")
+          required String createdAt,
+      @HiveField(7)
+      @JsonKey(name: "modifiedAt")
+          required String modifiedAt,
+      @HiveField(8)
+      @JsonKey(ignore: true)
+          String? videoUrl}) = _$_Video;
   _Video._() : super._();
 
   factory _Video.fromJson(Map<String, dynamic> json) = _$_Video.fromJson;
 
   @override
   @HiveField(0)
+  @JsonKey(name: "id")
   String get id => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
+  @JsonKey(name: "title")
   String get title => throw _privateConstructorUsedError;
   @override
   @HiveField(2)
-  String get video_url => throw _privateConstructorUsedError;
+  @JsonKey(name: "video_url")
+  String get youtubeUrl => throw _privateConstructorUsedError;
   @override
   @HiveField(3)
+  @JsonKey(name: "topic")
   String get topic => throw _privateConstructorUsedError;
   @override
   @HiveField(4)
-  int get start_timestamp => throw _privateConstructorUsedError;
+  @JsonKey(name: "start_timestamp")
+  int get startTimestamp => throw _privateConstructorUsedError;
   @override
   @HiveField(5)
-  int get end_timestamp => throw _privateConstructorUsedError;
+  @JsonKey(name: "end_timestamp")
+  int get endTimestamp => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
+  @JsonKey(name: "createdAt")
   String get createdAt => throw _privateConstructorUsedError;
   @override
   @HiveField(7)
+  @JsonKey(name: "modifiedAt")
   String get modifiedAt => throw _privateConstructorUsedError;
+  @override
+  @HiveField(8)
+  @JsonKey(ignore: true)
+  String? get videoUrl => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VideoCopyWith<_Video> get copyWith => throw _privateConstructorUsedError;

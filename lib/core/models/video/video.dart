@@ -10,14 +10,15 @@ class Video with _$Video {
 
   @HiveType(typeId: 1)
   factory Video({
-    @HiveField(0) required String id,
-    @HiveField(1) required String title,
-    @HiveField(2) required String video_url,
-    @HiveField(3) required String topic,
-    @HiveField(4) required int start_timestamp,
-    @HiveField(5) required int end_timestamp,
-    @HiveField(6) required String createdAt,
-    @HiveField(7) required String modifiedAt,
+    @HiveField(0) @JsonKey(name: "id") required String id,
+    @HiveField(1) @JsonKey(name: "title") required String title,
+    @HiveField(2) @JsonKey(name: "video_url") required String youtubeUrl,
+    @HiveField(3) @JsonKey(name: "topic") required String topic,
+    @HiveField(4) @JsonKey(name: "start_timestamp") required int startTimestamp,
+    @HiveField(5) @JsonKey(name: "end_timestamp") required int endTimestamp,
+    @HiveField(6) @JsonKey(name: "createdAt") required String createdAt,
+    @HiveField(7) @JsonKey(name: "modifiedAt") required String modifiedAt,
+    @HiveField(8) @JsonKey(ignore: true) String? videoUrl,
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);

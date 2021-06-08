@@ -6,10 +6,10 @@
 
 // ignore_for_file: public_member_api_docs
 
-import 'package:feed/firebase/dynamic_links.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../core/services/feed_service/feed_service.dart';
 import '../core/services/feed_service/feed_service_impl.dart';
@@ -21,6 +21,7 @@ import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
 import '../core/utils/videoplayer.dart';
+import '../firebase/dynamic_links.dart';
 import '../remote/api/api_service.dart';
 import '../remote/api/api_service_impl.dart';
 import '../remote/client.dart';
@@ -49,6 +50,7 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
   locator.registerLazySingleton(() => VideoPlayerUtils());
+  locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
   locator.registerLazySingleton(() => ProfileService());
