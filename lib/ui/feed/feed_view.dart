@@ -38,6 +38,7 @@ class FeedView extends StatelessWidget {
               body: model.isBusy
                   ? Center(child: CircularProgressIndicator())
                   : InViewNotifierList(
+                      initialInViewIds: ['0'],
                       itemCount: model.data!.length,
                       builder: (BuildContext context, int index) =>
                           InViewNotifierWidget(

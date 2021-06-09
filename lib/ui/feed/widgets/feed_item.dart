@@ -1,9 +1,14 @@
+import 'dart:ui';
+
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
-import 'package:feed/ui/feed/widgets/feed_item.shimmer.dart';
+import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+final yt = locator<YoutubeService>();
 
 class FeedItem extends StatefulWidget {
   final Video video;
@@ -27,8 +32,9 @@ class _FeedItemState extends State<FeedItem>
 
   /// Initialise player with the [video_url]
   Future startPlayer() async {
-    _videoPlayerController =
-        VideoPlayerController.network(widget.video.videoUrl!);
+    String streamUrl = await yt.getStream(widget.video.youtubeUrl);
+
+    _videoPlayerController = VideoPlayerController.network(streamUrl);
 
     await _videoPlayerController.initialize();
   }
@@ -53,9 +59,9 @@ class _FeedItemState extends State<FeedItem>
   void didUpdateWidget(FeedItem oldWidget) {
     if (oldWidget.isPlaying != widget.isPlaying) {
       if (widget.isPlaying) {
-        _videoPlayerController.play();
+        if (mounted) _videoPlayerController.play();
       } else {
-        _videoPlayerController.pause();
+        if (mounted) _videoPlayerController.pause();
       }
     }
     super.didUpdateWidget(oldWidget);
@@ -65,7 +71,7 @@ class _FeedItemState extends State<FeedItem>
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (!mounted) return $ShimmerFeedItem();
+    // if (!mounted) return $ShimmerFeedItem();
 
     return Container(
       width: double.infinity,
@@ -77,45 +83,64 @@ class _FeedItemState extends State<FeedItem>
           // Header of the video card
           _displayTitleTopic(context, widget.video.title, "Productivity"),
 
-          AspectRatio(
-            aspectRatio: _videoPlayerController.value.aspectRatio,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                VideoPlayer(_videoPlayerController),
-                // if (!widget.isPlaying)
-                //   Image.network(
-                //     getThumbnail(),
-                //     fit: BoxFit.cover,
-                //   ),
-                IconButton(
-                  color: Colors.white,
-                  onPressed: () {
-                    setState(() {
-                      _videoPlayerController.value.isPlaying
-                          ? _videoPlayerController.pause()
-                          : _videoPlayerController.play();
-                    });
-                  },
-                  icon: Icon(
-                    _videoPlayerController.value.isPlaying
-                        ? Icons.pause
-                        : Icons.play_arrow,
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: VideoProgressIndicator(
-                    _videoPlayerController,
-                    allowScrubbing: false,
-                    colors: VideoProgressColors(playedColor: AppColors.primary),
+          !mounted
+              ? AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Image.network(
+                        YoutubeService.getThumbnail(widget.video.youtubeUrl),
+                        fit: BoxFit.cover,
+                      ),
+                      ClipRRect(
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Container(
+                            color: Colors.grey.withOpacity(0.1),
+                            alignment: Alignment.center,
+                            // child: Text('CHOCOLATE'),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
-              ],
-            ),
-          ),
+              : AspectRatio(
+                  aspectRatio: _videoPlayerController.value.aspectRatio,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      if (mounted) VideoPlayer(_videoPlayerController),
+                      IconButton(
+                        color: Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            _videoPlayerController.value.isPlaying
+                                ? _videoPlayerController.pause()
+                                : _videoPlayerController.play();
+                          });
+                        },
+                        icon: Icon(
+                          _videoPlayerController.value.isPlaying
+                              ? Icons.pause
+                              : Icons.play_arrow,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        child: VideoProgressIndicator(
+                          _videoPlayerController,
+                          allowScrubbing: false,
+                          colors: VideoProgressColors(
+                              playedColor: AppColors.primary),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
 
           // Footer of the video card'Example of a Dynamic Link'
           _displayFooter()

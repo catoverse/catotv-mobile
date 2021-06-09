@@ -19,8 +19,6 @@ class FeedViewModel extends FutureViewModel<List<Video>> {
 
   @override
   Future<List<Video>> futureToRun() async {
-    var started = DateTime.now();
-
     _log.v("Getting videos from Fake API");
 
     await Future.delayed(Duration(seconds: 1));
@@ -30,20 +28,6 @@ class FeedViewModel extends FutureViewModel<List<Video>> {
 
     _log.v("Fetched videos from Fake API");
 
-    List<Video> videos = [];
-
-    _log.v("Getting videos from Explode API");
-
-    for (var video in ytVideos) {
-      var videoStarted = DateTime.now();
-      String streamUrl = await _youtubeUtils.getStream(video.youtubeUrl);
-      _log.v(
-          "It took ${DateTime.now().difference(videoStarted).inSeconds} seconds for $video");
-      videos.add(video.copyWith(videoUrl: streamUrl));
-    }
-
-    _log.v("It took ${DateTime.now().difference(started).inSeconds} seconds");
-
-    return videos;
+    return ytVideos;
   }
 }
