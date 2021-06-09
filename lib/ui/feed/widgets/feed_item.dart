@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
+import 'package:feed/ui/global/blurred_image.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -86,24 +85,9 @@ class _FeedItemState extends State<FeedItem>
           !mounted
               ? AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Image.network(
-                        YoutubeService.getThumbnail(widget.video.youtubeUrl),
-                        fit: BoxFit.cover,
-                      ),
-                      ClipRRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                          child: Container(
-                            color: Colors.grey.withOpacity(0.1),
-                            alignment: Alignment.center,
-                            // child: Text('CHOCOLATE'),
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: BlurredImage.network(
+                    YoutubeService.getThumbnail(widget.video.youtubeUrl),
+                    showBlur: true,
                   ),
                 )
               : AspectRatio(
@@ -125,6 +109,7 @@ class _FeedItemState extends State<FeedItem>
                           _videoPlayerController.value.isPlaying
                               ? Icons.pause
                               : Icons.play_arrow,
+                          size: 50,
                         ),
                       ),
                       Positioned(
