@@ -39,7 +39,7 @@ class FeedView extends StatelessWidget {
                   ? Center(child: CircularProgressIndicator())
                   : InViewNotifierList(
                       initialInViewIds: ['0'],
-                      itemCount: model.data!.length,
+                      itemCount: model.videos.length,
                       builder: (BuildContext context, int index) =>
                           InViewNotifierWidget(
                         id: '$index',
@@ -47,7 +47,8 @@ class FeedView extends StatelessWidget {
                                 Widget? child) =>
                             FeedItem(
                           isPlaying: isInView,
-                          video: model.data![index],
+                          index: index,
+                          video: model.videos[index],
                         ),
                       ),
                       isInViewPortCondition: isInView,

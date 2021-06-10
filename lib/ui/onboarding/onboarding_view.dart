@@ -20,6 +20,7 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<OnboardingViewModel>(
       viewModel: OnboardingViewModel(),
+      onModelReady: (model) => model.getPosts(),
       builder: (context, uiHelpers, model) => WillPopScope(
           onWillPop: model.showExitSnackbar,
           child: Scaffold(

@@ -12,10 +12,15 @@ final yt = locator<YoutubeService>();
 class FeedItem extends StatefulWidget {
   final Video video;
   final bool isPlaying;
+  final int index;
   final VoidCallback? onShare;
 
   const FeedItem(
-      {Key? key, required this.video, required this.isPlaying, this.onShare})
+      {Key? key,
+      required this.index,
+      required this.video,
+      required this.isPlaying,
+      this.onShare})
       : super(key: key);
 
   @override
@@ -31,9 +36,8 @@ class _FeedItemState extends State<FeedItem>
 
   /// Initialise player with the [video_url]
   Future startPlayer() async {
-    String streamUrl = await yt.getStream(widget.video.youtubeUrl);
-
-    _videoPlayerController = VideoPlayerController.network(streamUrl);
+    _videoPlayerController =
+        VideoPlayerController.network(widget.video.youtubeUrl);
 
     await _videoPlayerController.initialize();
   }
@@ -87,7 +91,6 @@ class _FeedItemState extends State<FeedItem>
                   aspectRatio: 16 / 9,
                   child: BlurredImage.network(
                     YoutubeService.getThumbnail(widget.video.youtubeUrl),
-                    showBlur: true,
                   ),
                 )
               : AspectRatio(

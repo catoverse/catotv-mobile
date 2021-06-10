@@ -10,7 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-
+import 'package:feed/core/services/fakefeed_service.dart';
 import '../core/services/feed_service/feed_service.dart';
 import '../core/services/feed_service/feed_service_impl.dart';
 import '../core/services/hive_service/hive_service.dart';
@@ -55,6 +55,7 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => YoutubeService());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
+  locator.registerLazySingleton(() => FakeFeedImpl());
   locator.registerLazySingleton(() => ProfileService());
   locator.registerLazySingleton(() => DynamicLinksService());
 }
