@@ -7,10 +7,11 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-import 'package:feed/core/services/fakefeed_service.dart';
+
+import '../core/services/fakefeed_service.dart';
 import '../core/services/feed_service/feed_service.dart';
 import '../core/services/feed_service/feed_service_impl.dart';
 import '../core/services/hive_service/hive_service.dart';
@@ -32,7 +33,13 @@ import 'injection.dart';
 
 final locator = StackedLocator.instance;
 
-Future setupLocator() async {
+Future setupLocator(
+    {String? environment, EnvironmentFilter? environmentFilter}) async {
+// Register environments
+  locator.registerEnvironment(
+      environment: environment, environmentFilter: environmentFilter);
+
+// Register dependencies
   final hiveInjection = await HiveInjection.getInstance();
   locator.registerSingleton(hiveInjection);
 
@@ -51,7 +58,6 @@ Future setupLocator() async {
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
   locator.registerLazySingleton(() => VideoPlayerUtils());
-  locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton(() => YoutubeService());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());

@@ -83,7 +83,7 @@ import 'injection.dart';
     LazySingleton(classType: ProfileService),
     LazySingleton(classType: DynamicLinksService),
   ],
-  // logger: StackedLogger(),
+  logger: StackedLogger(),
 )
 class AppSetup {
   /** Serves no purpose besides having an annotation attached to it */

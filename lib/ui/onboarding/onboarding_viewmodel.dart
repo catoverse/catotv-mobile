@@ -1,7 +1,7 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/mixins/snackbar_helper.dart';
 import 'package:feed/core/services/fakefeed_service.dart';
-import 'package:feed/ui/feed/feed_view.dart';
+import 'package:feed/ui/restricted_home/restricted_home_view.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -11,7 +11,7 @@ class OnboardingViewModel extends ReactiveViewModel with SnackbarHelper {
   final FakeFeedImpl _feedImpl = locator<FakeFeedImpl>();
 
   Future navigateToRestrictedHome() async {
-    _navigationService.navigateToView(FeedView());
+    _navigationService.navigateToView(RestrictedHomeView());
   }
 
   onPageChanged(int page) {

@@ -10,18 +10,15 @@ class StartUpViewModel extends BaseViewModel {
   final _log = getLogger('StartUpViewModel');
   final UserService _userService = locator<UserService>();
   final APIService _apiService = locator<APIService>();
-
   final NavigationService _navigationService = locator<NavigationService>();
 
   Future<void> runStartupLogic() async {
     bool isLoggedIn = _userService.hasLoggedInUser();
     var forceUpdateRequired = await _apiService.checkUpdateRequired();
 
-    _log.v(forceUpdateRequired);
-
     if (forceUpdateRequired is bool && forceUpdateRequired) {
       _log.v('The app needs to be updated, So redirect to update app screen');
-      return _navigationService.navigateTo(Routes.updateView);
+      _navigationService.replaceWith(Routes.updateView);
     }
 
     if (isLoggedIn) {
@@ -31,10 +28,10 @@ class StartUpViewModel extends BaseViewModel {
       final currentUser = _userService.currentUser;
       _log.v('User sync complete. User profile: $currentUser');
 
-      _navigationService.navigateTo(Routes.homeView);
+      _navigationService.replaceWith(Routes.homeView);
     } else {
       _log.v('No user on disk, navigate to the LoginView');
-      _navigationService.navigateTo(Routes.onboardingView);
+      _navigationService.replaceWith(Routes.onboardingView);
     }
   }
 }

@@ -28,6 +28,9 @@ class RemoteClient {
     _graphQLClient = getInstance();
   }
 
+  /// Returns [GraphQLClient] with CustomAuthLink
+  ///
+  /// The [CustomAuthLink] is used to pass authToken for API calls
   GraphQLClient getInstance() {
     String url = env[AppStrings.apiURL]!;
 
@@ -49,7 +52,9 @@ class RemoteClient {
     );
   }
 
+  /// Updates the [authToken] on User Login or Signup
   updateToken({required String newToken}) {
+    _log.v("Updated authToken to $newToken");
     this.jwtToken = newToken;
   }
 
