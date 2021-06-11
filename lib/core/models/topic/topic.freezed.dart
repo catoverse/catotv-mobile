@@ -21,10 +21,13 @@ class _$TopicTearOff {
   const _$TopicTearOff();
 
   _Topic call(
-      {@HiveField(0) required String id, @HiveField(1) required String name}) {
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @JsonKey(defaultValue: false) bool? isSelected}) {
     return _Topic(
       id: id,
       name: name,
+      isSelected: isSelected,
     );
   }
 
@@ -42,6 +45,8 @@ mixin _$Topic {
   String get id => throw _privateConstructorUsedError;
   @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(defaultValue: false)
+  bool? get isSelected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,7 +57,10 @@ mixin _$Topic {
 abstract class $TopicCopyWith<$Res> {
   factory $TopicCopyWith(Topic value, $Res Function(Topic) then) =
       _$TopicCopyWithImpl<$Res>;
-  $Res call({@HiveField(0) String id, @HiveField(1) String name});
+  $Res call(
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @JsonKey(defaultValue: false) bool? isSelected});
 }
 
 /// @nodoc
@@ -67,6 +75,7 @@ class _$TopicCopyWithImpl<$Res> implements $TopicCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? isSelected = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -77,6 +86,10 @@ class _$TopicCopyWithImpl<$Res> implements $TopicCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isSelected: isSelected == freezed
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -86,7 +99,10 @@ abstract class _$TopicCopyWith<$Res> implements $TopicCopyWith<$Res> {
   factory _$TopicCopyWith(_Topic value, $Res Function(_Topic) then) =
       __$TopicCopyWithImpl<$Res>;
   @override
-  $Res call({@HiveField(0) String id, @HiveField(1) String name});
+  $Res call(
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @JsonKey(defaultValue: false) bool? isSelected});
 }
 
 /// @nodoc
@@ -102,6 +118,7 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? isSelected = freezed,
   }) {
     return _then(_Topic(
       id: id == freezed
@@ -112,6 +129,10 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isSelected: isSelected == freezed
+          ? _value.isSelected
+          : isSelected // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -120,7 +141,10 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
 @JsonSerializable()
 @HiveType(typeId: 2)
 class _$_Topic extends _Topic {
-  _$_Topic({@HiveField(0) required this.id, @HiveField(1) required this.name})
+  _$_Topic(
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.name,
+      @JsonKey(defaultValue: false) this.isSelected})
       : super._();
 
   factory _$_Topic.fromJson(Map<String, dynamic> json) =>
@@ -132,10 +156,13 @@ class _$_Topic extends _Topic {
   @override
   @HiveField(1)
   final String name;
+  @override
+  @JsonKey(defaultValue: false)
+  final bool? isSelected;
 
   @override
   String toString() {
-    return 'Topic(id: $id, name: $name)';
+    return 'Topic(id: $id, name: $name, isSelected: $isSelected)';
   }
 
   @override
@@ -145,14 +172,18 @@ class _$_Topic extends _Topic {
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)));
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.isSelected, isSelected) ||
+                const DeepCollectionEquality()
+                    .equals(other.isSelected, isSelected)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name);
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(isSelected);
 
   @JsonKey(ignore: true)
   @override
@@ -168,7 +199,8 @@ class _$_Topic extends _Topic {
 abstract class _Topic extends Topic {
   factory _Topic(
       {@HiveField(0) required String id,
-      @HiveField(1) required String name}) = _$_Topic;
+      @HiveField(1) required String name,
+      @JsonKey(defaultValue: false) bool? isSelected}) = _$_Topic;
   _Topic._() : super._();
 
   factory _Topic.fromJson(Map<String, dynamic> json) = _$_Topic.fromJson;
@@ -179,6 +211,9 @@ abstract class _Topic extends Topic {
   @override
   @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(defaultValue: false)
+  bool? get isSelected => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TopicCopyWith<_Topic> get copyWith => throw _privateConstructorUsedError;

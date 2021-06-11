@@ -51,10 +51,12 @@ _$_Topic _$_$_TopicFromJson(Map<String, dynamic> json) {
   return _$_Topic(
     id: json['id'] as String,
     name: json['name'] as String,
+    isSelected: json['isSelected'] as bool? ?? false,
   );
 }
 
 Map<String, dynamic> _$_$_TopicToJson(_$_Topic instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'isSelected': instance.isSelected,
     };

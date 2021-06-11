@@ -19,6 +19,7 @@ class FeedViewModel extends ReactiveViewModel {
 
   Future getPosts() async {
     await _feedService.fetchVideos();
+    notifyListeners();
   }
 
   @override
