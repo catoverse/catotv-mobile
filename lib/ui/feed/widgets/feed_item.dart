@@ -2,24 +2,22 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
-import 'package:feed/ui/global/blurred_image.dart';
+import 'package:feed/core/utils/multi_manager.dart';
+import 'package:feed/ui/feed/widgets/player.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
 
 final yt = locator<YoutubeService>();
 
 class FeedItem extends StatefulWidget {
   final Video video;
-  final bool isPlaying;
-  final int index;
   final VoidCallback? onShare;
+  final FlickMultiManager flickMultiManager;
 
   const FeedItem(
       {Key? key,
-      required this.index,
       required this.video,
-      required this.isPlaying,
+      required this.flickMultiManager,
       this.onShare})
       : super(key: key);
 
@@ -29,52 +27,32 @@ class FeedItem extends StatefulWidget {
 
 class _FeedItemState extends State<FeedItem>
     with AutomaticKeepAliveClientMixin {
-  late VideoPlayerController _videoPlayerController;
+  late String videoUrl;
 
-  /// Returns [true] if the player is initialized
   bool mounted = false;
-
-  /// Initialise player with the [video_url]
-  Future startPlayer() async {
-    _videoPlayerController =
-        VideoPlayerController.network(widget.video.youtubeUrl);
-
-    await _videoPlayerController.initialize();
-  }
 
   @override
   void initState() {
-    startPlayer().then((value) {
-      setState(() {
-        mounted = true;
-      });
-
-      /// autoplays video based on the scroll position
-      /// If the video is in view it starts playing...
-      if (widget.isPlaying) {
-        _videoPlayerController.play();
-      }
-    });
+    getStreamUrl().then((value) => setState(() {
+          videoUrl = value;
+          mounted = true;
+        }));
     super.initState();
   }
 
-  @override
-  void didUpdateWidget(FeedItem oldWidget) {
-    if (oldWidget.isPlaying != widget.isPlaying) {
-      if (widget.isPlaying) {
-        if (mounted) _videoPlayerController.play();
-      } else {
-        if (mounted) _videoPlayerController.pause();
-      }
-    }
-    super.didUpdateWidget(oldWidget);
+  Future getStreamUrl() async {
+    YoutubeService youtubeService = locator<YoutubeService>();
+
+    String streamUrl = await youtubeService.getStream(widget.video.youtubeUrl);
+
+    return streamUrl;
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    // if (!mounted) return $ShimmerFeedItem();
+    if (!mounted) return LinearProgressIndicator();
 
     return Container(
       width: double.infinity,
@@ -86,49 +64,11 @@ class _FeedItemState extends State<FeedItem>
           // Header of the video card
           _displayTitleTopic(context, widget.video.title, "Productivity"),
 
-          !mounted
-              ? AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: BlurredImage.network(
-                    YoutubeService.getThumbnail(widget.video.youtubeUrl),
-                  ),
-                )
-              : AspectRatio(
-                  aspectRatio: _videoPlayerController.value.aspectRatio,
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      if (mounted) VideoPlayer(_videoPlayerController),
-                      IconButton(
-                        color: Colors.white,
-                        onPressed: () {
-                          setState(() {
-                            _videoPlayerController.value.isPlaying
-                                ? _videoPlayerController.pause()
-                                : _videoPlayerController.play();
-                          });
-                        },
-                        icon: Icon(
-                          _videoPlayerController.value.isPlaying
-                              ? Icons.pause
-                              : Icons.play_arrow,
-                          size: 50,
-                        ),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        child: VideoProgressIndicator(
-                          _videoPlayerController,
-                          allowScrubbing: false,
-                          colors: VideoProgressColors(
-                              playedColor: AppColors.primary),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+          FlickMultiPlayer(
+            url: videoUrl,
+            flickMultiManager: widget.flickMultiManager,
+            thumbnail: YoutubeService.getThumbnail(widget.video.youtubeUrl),
+          ),
 
           // Footer of the video card'Example of a Dynamic Link'
           _displayFooter()

@@ -17,6 +17,10 @@ class FeedViewModel extends ReactiveViewModel {
     // Share.share("Checkout ${videos[index].title} at $url");
   }
 
+  Future getPosts() async {
+    await _feedService.fetchVideos();
+  }
+
   @override
   List<ReactiveServiceMixin> get reactiveServices => [_feedService];
 }
