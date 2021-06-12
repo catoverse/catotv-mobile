@@ -20,7 +20,6 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<OnboardingViewModel>(
       viewModel: OnboardingViewModel(),
-      onModelReady: (model) => model.getPosts(),
       builder: (context, uiHelpers, model) => WillPopScope(
           onWillPop: model.showExitSnackbar,
           child: Scaffold(
@@ -28,7 +27,7 @@ class OnboardingView extends StatelessWidget {
               children: [
                 Expanded(
                   child: PageView.builder(
-                    onPageChanged: model.onPageChanged,
+                    onPageChanged: model.setIndex,
                     itemBuilder: (BuildContext context, int index) =>
                         OnboardingBodyListItem(item: onboardingItems[index]),
                     itemCount: onboardingItems.length,
@@ -37,7 +36,7 @@ class OnboardingView extends StatelessWidget {
                 Container(
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: _buildPageIndicator(model.currentPage)
+                      children: _buildPageIndicator(model.currentIndex)
                           .map((e) => e)
                           .toList()),
                 ),

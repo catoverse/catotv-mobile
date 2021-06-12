@@ -1,26 +1,23 @@
 import 'dart:async';
 import 'package:connectivity/connectivity.dart';
-import 'package:feed/app/app.logger.dart';
+import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/enums/connectivity_status.dart';
 
 import 'connectivity_service.dart';
 
 class ConnectivityServiceImpl implements ConnectivityService {
-  final _log = getLogger('ConnectivityServiceImpl');
-  final _connectivityResultController = StreamController<ConnectivityStatus>();
-  final _connectivity = Connectivity();
-
-  late StreamSubscription<ConnectivityResult> _subscription;
-  late ConnectivityResult _lastResult = ConnectivityResult.none;
+  StreamController<ConnectivityStatus> connectionStatusController =
+      StreamController<ConnectivityStatus>();
+  final _connectivity = locator<Connectivity>();
 
   @override
-  Stream<ConnectivityStatus> get connectivity$ =>
-      _connectivityResultController.stream;
+  Stream<ConnectivityStatus> get connectivity =>
+      connectionStatusController.stream;
 
   ConnectivityServiceImpl() {
-    // Subscribe to the connectivity Chanaged Steam
-    _subscription =
-        _connectivity.onConnectivityChanged.listen(_emitConnectivity);
+    connectionStatusController.add(ConnectivityStatus.Init);
+    _connectivity.onConnectivityChanged.listen((ConnectivityResult result) =>
+        connectionStatusController.add(_getStatusFromResult(result)));
   }
 
   // Returns whether you have an active internet connection
@@ -38,17 +35,8 @@ class ConnectivityServiceImpl implements ConnectivityService {
     }
   }
 
-  // To watch connectivity changes
-  void _emitConnectivity(ConnectivityResult event) {
-    if (event == _lastResult) return;
-
-    _log.v('Connectivity status changed to $event');
-    _connectivityResultController.add(_convertResult(event));
-    _lastResult = event;
-  }
-
   // Convert from the third part enum to our own enum
-  ConnectivityStatus _convertResult(ConnectivityResult result) {
+  ConnectivityStatus _getStatusFromResult(ConnectivityResult result) {
     switch (result) {
       case ConnectivityResult.mobile:
         return ConnectivityStatus.Cellular;

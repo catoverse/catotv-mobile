@@ -6,6 +6,7 @@
 
 // ignore_for_file: public_member_api_docs
 
+import 'package:connectivity/connectivity.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
@@ -47,6 +48,7 @@ Future setupLocator(
   final packageInjection = await PackageInjection.getInstance();
   locator.registerSingleton(packageInjection);
 
+  locator.registerLazySingleton(() => Connectivity());
   locator.registerLazySingleton<ConnectivityService>(
       () => ConnectivityServiceImpl());
   locator.registerLazySingleton(() => RemoteClient());

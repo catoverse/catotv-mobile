@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:feed/core/services/fakefeed_service.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -53,6 +54,7 @@ import 'injection.dart';
       classType: PackageInjection,
       presolveUsing: PackageInjection.getInstance,
     ),
+    LazySingleton(classType: Connectivity),
     LazySingleton(
         classType: ConnectivityServiceImpl, asType: ConnectivityService),
 
