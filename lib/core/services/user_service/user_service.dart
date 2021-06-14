@@ -19,4 +19,10 @@ abstract class UserService {
   ///
   /// Also updates the [authToken] for [RemoteClient]
   Future populateCurrentUser({User? user});
+
+  /// Returns [true] if there's existing profile available
+  Future isUserProfileExists();
+
+  /// Creates Profile for user
+  Future createProfile({required List<String> topicIds});
 }

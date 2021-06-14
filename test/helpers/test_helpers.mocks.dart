@@ -40,6 +40,10 @@ class MockUserService extends _i1.Mock implements _i3.UserService {
   _i4.Future<dynamic> populateCurrentUser({_i2.User? user}) => (super
       .noSuchMethod(Invocation.method(#populateCurrentUser, [], {#user: user}),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> isUserProfileExists() =>
+      (super.noSuchMethod(Invocation.method(#isUserProfileExists, []),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 
 /// A class which mocks [APIService].
@@ -79,6 +83,11 @@ class MockAPIService extends _i1.Mock implements _i5.APIService {
   _i4.Future<dynamic> requestInvite({String? email}) => (super.noSuchMethod(
       Invocation.method(#requestInvite, [], {#email: email}),
       returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> checkProfileExists({String? userID}) =>
+      (super.noSuchMethod(
+          Invocation.method(#checkProfileExists, [], {#userID: userID}),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 
 /// A class which mocks [NavigationService].

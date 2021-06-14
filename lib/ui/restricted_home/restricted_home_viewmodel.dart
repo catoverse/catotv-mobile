@@ -19,15 +19,6 @@ class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
 
   List<Video> videos = feedData.map((e) => Video.fromJson(e)).toList();
 
-  //TODO: How to fix repeated code
-  int currentVideo = 0;
-
-  void initPlayer() async {
-    setBusy(true);
-
-    setBusy(false);
-  }
-
   Future showConstraint() async {
     var sheetResponse = await _bottomSheetService.showCustomSheet(
         variant: BottomSheetType.Constraint,
@@ -55,14 +46,19 @@ class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
 
   loginWithGoogle() async {
     setBusy(true);
+    bool isProfileExists = false;
+
     var user = await _userService.loginWithGoogle();
 
     if (user is Failure) {
     } else {
       _log.i("user: $user");
+      isProfileExists = await _userService.isUserProfileExists();
     }
 
     setBusy(false);
-    _navigationService.navigateTo(Routes.homeView);
+    isProfileExists
+        ? _navigationService.replaceWith(Routes.homeView)
+        : _navigationService.replaceWith(Routes.topicSelectionView);
   }
 }

@@ -33,6 +33,38 @@ class GQLQueries {
     }
   ''';
 
+  static const String queryUserProfile = r'''
+    query getUserProfile($userId: ID!) {
+      userProfile(userId: $userId) {
+        name
+        selectedTopics
+        totalWatchTime
+        videoWatched {
+          topic
+          count
+        }
+        videoCount
+        lastFiveCount {
+          date
+          count
+        }
+        userId
+        id
+        WatchHistory
+      }
+    }
+  ''';
+
+  static const String mutationCreateUserProfile = r'''
+    mutation createProfile($userId: ID!, $name: String!, $selectedTopics: [ID]!) {
+      createUserProfile(
+        user: { name: $name, userId: $userId, selectedTopics: $selectedTopics }
+      ) {
+        name
+      }
+    }
+  ''';
+
   static const String mutationIosVersionCode = r'''
     mutation iosVersionCode {
       iosVersionCode {
@@ -93,5 +125,14 @@ class GQLQueries {
 
   static Map<String, dynamic> createMapForRequestInvite(String email) {
     return {"email": email};
+  }
+
+  static Map<String, dynamic> createMapForGetUserProfile(String userId) {
+    return {"userId": userId};
+  }
+
+  static Map<String, dynamic> createUserProfileVariables(
+      String userId, String name, List<String> topicIds) {
+    return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 }

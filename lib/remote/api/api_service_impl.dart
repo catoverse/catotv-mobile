@@ -97,4 +97,35 @@ class APIServiceImpl implements APIService {
 
     return true;
   }
+
+  @override
+  Future checkProfileExists({required String userID}) async {
+    _log.v("Fetching profile for User(id: $userID)");
+
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.queryUserProfile,
+        variables: GQLQueries.createMapForGetUserProfile(userID));
+
+    if (result.isFailed) return false;
+
+    _log.v(result.success);
+
+    return true;
+  }
+
+  Future createUserProfile(
+      {required String userId,
+      required String name,
+      required List<String> topicIds}) async {
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.mutationCreateUserProfile,
+        variables:
+            GQLQueries.createUserProfileVariables(userId, name, topicIds));
+
+    if (result.isFailed) return false;
+
+    _log.v(result.success);
+
+    return true;
+  }
 }

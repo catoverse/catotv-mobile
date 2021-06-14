@@ -14,6 +14,7 @@ import '../ui/invite/invite_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/restricted_home/restricted_home_view.dart';
 import '../ui/startup/startup_view.dart';
+import '../ui/topic_selection/topic_selection_view.dart';
 import '../ui/update/update_view.dart';
 
 class Routes {
@@ -21,6 +22,7 @@ class Routes {
   static const String updateView = '/update-view';
   static const String onboardingView = '/onboarding-view';
   static const String restrictedHomeView = '/restricted-home-view';
+  static const String topicSelectionView = '/topic-selection-view';
   static const String inviteView = '/invite-view';
   static const String homeView = '/home-view';
   static const all = <String>{
@@ -28,6 +30,7 @@ class Routes {
     updateView,
     onboardingView,
     restrictedHomeView,
+    topicSelectionView,
     inviteView,
     homeView,
   };
@@ -41,6 +44,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.updateView, page: UpdateView),
     RouteDef(Routes.onboardingView, page: OnboardingView),
     RouteDef(Routes.restrictedHomeView, page: RestrictedHomeView),
+    RouteDef(Routes.topicSelectionView, page: TopicSelectionView),
     RouteDef(Routes.inviteView, page: InviteView),
     RouteDef(Routes.homeView, page: HomeView),
   ];
@@ -68,6 +72,12 @@ class StackedRouter extends RouterBase {
     RestrictedHomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => RestrictedHomeView(),
+        settings: data,
+      );
+    },
+    TopicSelectionView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => TopicSelectionView(),
         settings: data,
       );
     },

@@ -72,4 +72,17 @@ class UserServiceImpl implements UserService {
 
   @override
   bool hasLoggedInUser() => _firebaseAuthenticationService.hasUser;
+
+  @override
+  Future isUserProfileExists() async {
+    var result = await _apiService.checkProfileExists(userID: currentUser.id);
+
+    return result as bool;
+  }
+
+  Future createProfile({required List<String> topicIds}) async {
+    var result = await _apiService.createUserProfile(
+        userId: currentUser.id, name: currentUser.name, topicIds: topicIds);
+    return result as bool;
+  }
 }

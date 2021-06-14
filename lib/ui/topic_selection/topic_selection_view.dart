@@ -18,10 +18,7 @@ class TopicSelectionView extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 actions: [
                   TextButton(
-                      onPressed: () {
-                        //TODO: Implement Skip
-                      },
-                      child: Text("Skip"))
+                      onPressed: () => model.gotoHome(), child: Text("Skip"))
                 ],
               ),
               body: ListView(
@@ -64,7 +61,7 @@ class TopicSelectionView extends StatelessWidget {
                           style: raisedButtonStyle.copyWith(
                               textStyle: MaterialStateProperty.all<TextStyle>(
                                   uiHelpers.button!)),
-                          onPressed: () {},
+                          onPressed: () => model.storeSelectedTopics(),
                           child: Text("Continue"),
                         ),
                 ),

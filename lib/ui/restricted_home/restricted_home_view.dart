@@ -8,7 +8,6 @@ class RestrictedHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<RestrictedHomeViewModel>(
         viewModel: RestrictedHomeViewModel(),
-        onModelReady: (model) => model.initPlayer(),
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: model.showExitSnackbar,
               child: Scaffold(

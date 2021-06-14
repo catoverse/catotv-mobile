@@ -1,9 +1,18 @@
+import 'package:feed/app/app.locator.dart';
+import 'package:feed/app/app.router.dart';
 import 'package:feed/core/models/topic/topic.dart';
+import 'package:feed/core/services/topic_service/topic_service.dart';
+import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class TopicSelectionViewModel extends BaseViewModel {
   List<String> selectedTopics = [];
   List<Topic> topicCheckList = [];
+
+  final TopicService _topicService = locator<TopicService>();
+  final UserService _userService = locator<UserService>();
+  final NavigationService _navigationService = locator<NavigationService>();
 
   bool get hasTopics => selectedTopics.isNotEmpty;
 
@@ -25,27 +34,29 @@ class TopicSelectionViewModel extends BaseViewModel {
   }
 
   Future getTopics() async {
-    await Future.delayed(Duration(seconds: 1));
+    setBusy(true);
+    var result = await _topicService.getTopics();
+    setBusy(false);
 
-    List<Topic> topics = [];
-
-    topicData.forEach((json) => topics.add(Topic.fromJson(json)));
-
-    topicCheckList = topics;
-
+    topicCheckList = result;
     notifyListeners();
   }
 
   Future storeSelectedTopics() async {
-    //TODO: Profile Service update Topics
-  }
-}
+    setBusy(true);
 
-const List<Map<String, dynamic>> topicData = [
-  {"id": "5f5273e59aa66f1d8c150489", "name": "Social"},
-  {"id": "5f5273e59aa66f1d8c15048d", "name": "Productivity"},
-  {"id": "5f5273e59aa66f1d8c150488", "name": "Career"},
-  {"id": "5f5273e59aa66f1d8c15048a", "name": "Health & Nutrition"},
-  {"id": "5f5273e59aa66f1d8c15048b", "name": "Intellectual"},
-  {"id": "5f5273e59aa66f1d8c15048c", "name": "Emotional"}
-];
+    var result = await _userService.isUserProfileExists();
+
+    setBusy(false);
+
+    if (!result)
+      _userService.createProfile(topicIds: selectedTopics);
+    else
+      _topicService.updateSelectedTopics(
+          _userService.currentUser, selectedTopics);
+
+    return gotoHome();
+  }
+
+  void gotoHome() => _navigationService.replaceWith(Routes.homeView);
+}
