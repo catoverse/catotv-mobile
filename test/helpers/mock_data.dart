@@ -8,3 +8,11 @@ final User defaultUser = User(
     email: "default_user@cato.tv",
     invites: 0,
     token: "generatedToken");
+
+const bottomSheetInput = <String, String>{
+  "title": 'You need an account to continue',
+  "description":
+      'We’re currently in early access mode, you can’t enter unless you have an invite.',
+  "mainButtonTitle": 'Continue with Google',
+  "secondaryButtonTitle": 'Request Invite'
+};

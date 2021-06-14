@@ -37,7 +37,7 @@ class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
           await loginWithGoogle();
           break;
         case ThreeButtonResponseData.Secondary:
-          _navigationService.navigateTo(Routes.inviteView);
+          _navigationService.replaceWith(Routes.inviteView);
           break;
         default:
       }
@@ -51,13 +51,15 @@ class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
     var user = await _userService.loginWithGoogle();
 
     if (user is Failure) {
+      return;
     } else {
-      _log.i("user: $user");
+      _log.i("User Login Successful : Logged in user: $user");
       isProfileExists = await _userService.isUserProfileExists();
     }
 
     setBusy(false);
-    isProfileExists
+
+    return isProfileExists
         ? _navigationService.replaceWith(Routes.homeView)
         : _navigationService.replaceWith(Routes.topicSelectionView);
   }

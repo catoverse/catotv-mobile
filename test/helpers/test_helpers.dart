@@ -1,8 +1,10 @@
 import 'package:feed/app/app.locator.dart';
+import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
 import 'package:feed/core/models/user/user.dart';
 import 'package:feed/remote/api/api_service.dart';
+import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:feed/core/exceptions/api_exception.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
@@ -14,12 +16,17 @@ import 'test_helpers.mocks.dart';
 @GenerateMocks([], customMocks: [
   MockSpec<UserService>(returnNullOnMissingStub: true),
   MockSpec<APIService>(returnNullOnMissingStub: true),
-  MockSpec<NavigationService>(returnNullOnMissingStub: true)
+  MockSpec<NavigationService>(returnNullOnMissingStub: true),
+  MockSpec<BottomSheetService>(returnNullOnMissingStub: true),
+  MockSpec<SnackbarService>(returnNullOnMissingStub: true),
+  MockSpec<ConnectivityService>(returnNullOnMissingStub: true)
 ])
 
 /// For testing UserService
 MockUserService getAndRegisterUserService({
   bool hasLoggedInUser = false,
+  bool profileExists = true,
+  bool failLogin = false,
   User? currentUser,
 }) {
   _removeRegistrationIfExists<UserService>();
@@ -33,6 +40,13 @@ MockUserService getAndRegisterUserService({
     return Future.delayed(Duration(milliseconds: 100));
   });
 
+  when(service.loginWithGoogle()).thenAnswer((realInvocation) => failLogin
+      ? Future.value(Failure.message("Server error"))
+      : Future.value(defaultUser));
+
+  when(service.isUserProfileExists())
+      .thenAnswer((realInvocation) => Future.value(profileExists));
+
   locator.registerSingleton<UserService>(service);
   return service;
 }
@@ -41,6 +55,32 @@ MockNavigationService getAndRegisterNavigationService() {
   _removeRegistrationIfExists<NavigationService>();
   final service = MockNavigationService();
   locator.registerSingleton<NavigationService>(service);
+  return service;
+}
+
+MockSnackbarService getAndRegisterSnackbarService() {
+  _removeRegistrationIfExists<SnackbarService>();
+  final service = MockSnackbarService();
+  locator.registerSingleton<SnackbarService>(service);
+  return service;
+}
+
+MockBottomSheetService getAndRegisterBottomSheetService(
+    {bool confirmed = true,
+    ThreeButtonResponseData? responseData = ThreeButtonResponseData.Primary}) {
+  _removeRegistrationIfExists<BottomSheetService>();
+  final service = MockBottomSheetService();
+
+  when(service.showCustomSheet(
+    variant: anyNamed("variant"),
+    title: anyNamed("title"),
+    description: anyNamed("description"),
+    mainButtonTitle: anyNamed("mainButtonTitle"),
+    secondaryButtonTitle: anyNamed("secondaryButtonTitle"),
+  )).thenAnswer((realInvocation) => Future.value(
+      SheetResponse(confirmed: confirmed, responseData: responseData)));
+
+  locator.registerSingleton<BottomSheetService>(service);
   return service;
 }
 
@@ -61,10 +101,20 @@ MockAPIService getAndRegisterAPIService(
   return service;
 }
 
+MockConnectivityService getAndRegisterConnectivityService() {
+  _removeRegistrationIfExists<ConnectivityService>();
+  final service = MockConnectivityService();
+  locator.registerSingleton<ConnectivityService>(service);
+  return service;
+}
+
 void registerServices() {
   getAndRegisterUserService();
   getAndRegisterAPIService();
   getAndRegisterNavigationService();
+  getAndRegisterSnackbarService();
+  getAndRegisterBottomSheetService();
+  getAndRegisterConnectivityService();
 }
 
 void unregisterServices() {

@@ -3,14 +3,22 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i4;
+import 'dart:ui' as _i11;
 
+import 'package:feed/core/enums/connectivity_status.dart' as _i15;
 import 'package:feed/core/models/user/user.dart' as _i2;
 import 'package:feed/core/services/user_service/user_service.dart' as _i3;
 import 'package:feed/remote/api/api_service.dart' as _i5;
+import 'package:feed/remote/connectivity/connectivity_service.dart' as _i14;
 import 'package:flutter/src/widgets/framework.dart' as _i7;
 import 'package:flutter/src/widgets/navigator.dart' as _i8;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:stacked_services/src/bottom_sheet/bottom_sheet_service.dart'
+    as _i9;
+import 'package:stacked_services/src/models/overlay_response.dart' as _i10;
 import 'package:stacked_services/src/navigation_service.dart' as _i6;
+import 'package:stacked_services/src/snackbar/snackbar_config.dart' as _i13;
+import 'package:stacked_services/src/snackbar/snackbar_service.dart' as _i12;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -43,6 +51,11 @@ class MockUserService extends _i1.Mock implements _i3.UserService {
   @override
   _i4.Future<dynamic> isUserProfileExists() =>
       (super.noSuchMethod(Invocation.method(#isUserProfileExists, []),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> createProfile({List<String>? topicIds}) =>
+      (super.noSuchMethod(
+          Invocation.method(#createProfile, [], {#topicIds: topicIds}),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 
@@ -87,6 +100,13 @@ class MockAPIService extends _i1.Mock implements _i5.APIService {
   _i4.Future<dynamic> checkProfileExists({String? userID}) =>
       (super.noSuchMethod(
           Invocation.method(#checkProfileExists, [], {#userID: userID}),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> createUserProfile(
+          {String? userId, String? name, List<String>? topicIds}) =>
+      (super.noSuchMethod(
+          Invocation.method(#createUserProfile, [],
+              {#userId: userId, #name: name, #topicIds: topicIds}),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 
@@ -245,4 +265,182 @@ class MockNavigationService extends _i1.Mock implements _i6.NavigationService {
         #arguments: arguments,
         #id: id
       })) as _i4.Future<dynamic>?);
+}
+
+/// A class which mocks [BottomSheetService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockBottomSheetService extends _i1.Mock
+    implements _i9.BottomSheetService {
+  @override
+  void setCustomSheetBuilders(Map<dynamic, _i9.SheetBuilder>? builders) =>
+      super.noSuchMethod(Invocation.method(#setCustomSheetBuilders, [builders]),
+          returnValueForMissingStub: null);
+  @override
+  _i4.Future<_i10.SheetResponse?> showBottomSheet(
+          {String? title,
+          String? description,
+          String? confirmButtonTitle = r'Ok',
+          String? cancelButtonTitle,
+          bool? enableDrag = true,
+          bool? barrierDismissible = true,
+          bool? isScrollControlled = false,
+          Duration? exitBottomSheetDuration,
+          Duration? enterBottomSheetDuration}) =>
+      (super.noSuchMethod(
+              Invocation.method(#showBottomSheet, [], {
+                #title: title,
+                #description: description,
+                #confirmButtonTitle: confirmButtonTitle,
+                #cancelButtonTitle: cancelButtonTitle,
+                #enableDrag: enableDrag,
+                #barrierDismissible: barrierDismissible,
+                #isScrollControlled: isScrollControlled,
+                #exitBottomSheetDuration: exitBottomSheetDuration,
+                #enterBottomSheetDuration: enterBottomSheetDuration
+              }),
+              returnValue: Future<_i10.SheetResponse?>.value())
+          as _i4.Future<_i10.SheetResponse?>);
+  @override
+  _i4.Future<_i10.SheetResponse?> showCustomSheet(
+          {dynamic variant,
+          String? title,
+          String? description,
+          bool? hasImage = false,
+          String? imageUrl,
+          bool? showIconInMainButton = false,
+          String? mainButtonTitle,
+          bool? showIconInSecondaryButton = false,
+          String? secondaryButtonTitle,
+          bool? showIconInAdditionalButton = false,
+          String? additionalButtonTitle,
+          bool? takesInput = false,
+          _i11.Color? barrierColor = const _i11.Color(2315255808),
+          bool? barrierDismissible = true,
+          bool? isScrollControlled = false,
+          String? barrierLabel = r'',
+          dynamic customData,
+          bool? enableDrag = true,
+          Duration? exitBottomSheetDuration,
+          Duration? enterBottomSheetDuration}) =>
+      (super.noSuchMethod(
+              Invocation.method(#showCustomSheet, [], {
+                #variant: variant,
+                #title: title,
+                #description: description,
+                #hasImage: hasImage,
+                #imageUrl: imageUrl,
+                #showIconInMainButton: showIconInMainButton,
+                #mainButtonTitle: mainButtonTitle,
+                #showIconInSecondaryButton: showIconInSecondaryButton,
+                #secondaryButtonTitle: secondaryButtonTitle,
+                #showIconInAdditionalButton: showIconInAdditionalButton,
+                #additionalButtonTitle: additionalButtonTitle,
+                #takesInput: takesInput,
+                #barrierColor: barrierColor,
+                #barrierDismissible: barrierDismissible,
+                #isScrollControlled: isScrollControlled,
+                #barrierLabel: barrierLabel,
+                #customData: customData,
+                #enableDrag: enableDrag,
+                #exitBottomSheetDuration: exitBottomSheetDuration,
+                #enterBottomSheetDuration: enterBottomSheetDuration
+              }),
+              returnValue: Future<_i10.SheetResponse?>.value())
+          as _i4.Future<_i10.SheetResponse?>);
+  @override
+  void completeSheet(_i10.SheetResponse? response) =>
+      super.noSuchMethod(Invocation.method(#completeSheet, [response]),
+          returnValueForMissingStub: null);
+}
+
+/// A class which mocks [SnackbarService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSnackbarService extends _i1.Mock implements _i12.SnackbarService {
+  @override
+  void registerSnackbarConfig(_i13.SnackbarConfig? config) =>
+      super.noSuchMethod(Invocation.method(#registerSnackbarConfig, [config]),
+          returnValueForMissingStub: null);
+  @override
+  void registerCustomSnackbarconfig(
+          {dynamic customData, _i13.SnackbarConfig? config}) =>
+      super.noSuchMethod(
+          Invocation.method(#registerCustomSnackbarconfig, [],
+              {#customData: customData, #config: config}),
+          returnValueForMissingStub: null);
+  @override
+  void registerCustomMainButtonBuilder(
+          {dynamic variant,
+          _i7.Widget Function(String?, Function?)? builder}) =>
+      super.noSuchMethod(
+          Invocation.method(#registerCustomMainButtonBuilder, [],
+              {#variant: variant, #builder: builder}),
+          returnValueForMissingStub: null);
+  @override
+  void registerCustomSnackbarConfig(
+          {dynamic variant,
+          _i13.SnackbarConfig? config,
+          _i13.SnackbarConfig Function()? configBuilder}) =>
+      super.noSuchMethod(
+          Invocation.method(#registerCustomSnackbarConfig, [], {
+            #variant: variant,
+            #config: config,
+            #configBuilder: configBuilder
+          }),
+          returnValueForMissingStub: null);
+  @override
+  void showSnackbar(
+          {String? title = r'',
+          String? message,
+          dynamic Function(dynamic)? onTap,
+          Duration? duration = const Duration(seconds: 3),
+          String? mainButtonTitle,
+          void Function()? onMainButtonTapped}) =>
+      super.noSuchMethod(
+          Invocation.method(#showSnackbar, [], {
+            #title: title,
+            #message: message,
+            #onTap: onTap,
+            #duration: duration,
+            #mainButtonTitle: mainButtonTitle,
+            #onMainButtonTapped: onMainButtonTapped
+          }),
+          returnValueForMissingStub: null);
+  @override
+  _i4.Future<dynamic>? showCustomSnackBar(
+          {String? message,
+          dynamic customData,
+          dynamic variant,
+          String? title,
+          String? mainButtonTitle,
+          void Function()? onMainButtonTapped,
+          Function? onTap,
+          Duration? duration = const Duration(seconds: 1)}) =>
+      (super.noSuchMethod(Invocation.method(#showCustomSnackBar, [], {
+        #message: message,
+        #customData: customData,
+        #variant: variant,
+        #title: title,
+        #mainButtonTitle: mainButtonTitle,
+        #onMainButtonTapped: onMainButtonTapped,
+        #onTap: onTap,
+        #duration: duration
+      })) as _i4.Future<dynamic>?);
+}
+
+/// A class which mocks [ConnectivityService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockConnectivityService extends _i1.Mock
+    implements _i14.ConnectivityService {
+  @override
+  _i4.Stream<_i15.ConnectivityStatus> get connectivity =>
+      (super.noSuchMethod(Invocation.getter(#connectivity),
+              returnValue: Stream<_i15.ConnectivityStatus>.empty())
+          as _i4.Stream<_i15.ConnectivityStatus>);
+  @override
+  _i4.Future<bool> get isConnected =>
+      (super.noSuchMethod(Invocation.getter(#isConnected),
+          returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
 }
