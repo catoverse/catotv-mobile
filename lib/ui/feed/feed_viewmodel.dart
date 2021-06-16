@@ -1,14 +1,9 @@
 // import 'package:feed/app/app.locator.dart';
-import 'package:feed/app/app.locator.dart';
-import 'package:feed/core/models/video/video.dart';
-import 'package:feed/core/services/fakefeed_service.dart';
-import 'package:stacked/stacked.dart';
+// import 'package:feed/core/models/video/video.dart';
 
-class FeedViewModel extends ReactiveViewModel {
-  final FakeFeedImpl _feedService = locator<FakeFeedImpl>();
+import 'package:feed/ui/base/feed_viewmodel.dart';
 
-  List<Video> get videos => _feedService.videos;
-
+class BaseFeedViewModel extends FeedViewModel {
   // final DynamicLinksService _dynamicLinksService =
   //     locator<DynamicLinksService>();
 
@@ -16,12 +11,4 @@ class FeedViewModel extends ReactiveViewModel {
     // String url = await _dynamicLinksService.shareVideo(videos[index]);
     // Share.share("Checkout ${videos[index].title} at $url");
   }
-
-  Future getPosts() async {
-    await _feedService.fetchVideos();
-    notifyListeners();
-  }
-
-  @override
-  List<ReactiveServiceMixin> get reactiveServices => [_feedService];
 }

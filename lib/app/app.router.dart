@@ -76,8 +76,14 @@ class StackedRouter extends RouterBase {
       );
     },
     TopicSelectionView: (data) {
+      var args = data.getArgs<TopicSelectionViewArguments>(
+        orElse: () => TopicSelectionViewArguments(),
+      );
       return MaterialPageRoute<dynamic>(
-        builder: (context) => TopicSelectionView(),
+        builder: (context) => TopicSelectionView(
+          key: args.key,
+          updateTopicSelection: args.updateTopicSelection,
+        ),
         settings: data,
       );
     },
@@ -94,4 +100,15 @@ class StackedRouter extends RouterBase {
       );
     },
   };
+}
+
+/// ************************************************************************
+/// Arguments holder classes
+/// *************************************************************************
+
+/// TopicSelectionView arguments holder class
+class TopicSelectionViewArguments {
+  final Key? key;
+  final bool updateTopicSelection;
+  TopicSelectionViewArguments({this.key, this.updateTopicSelection = false});
 }

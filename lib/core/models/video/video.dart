@@ -16,8 +16,6 @@ class Video with _$Video {
     @HiveField(3) @JsonKey(name: "topic") required String topic,
     @HiveField(4) @JsonKey(name: "start_timestamp") required int startTimestamp,
     @HiveField(5) @JsonKey(name: "end_timestamp") required int endTimestamp,
-    @HiveField(6) @JsonKey(name: "createdAt") required String createdAt,
-    @HiveField(7) @JsonKey(name: "modifiedAt") required String modifiedAt,
     @HiveField(8) @JsonKey(ignore: true) String? videoUrl,
   }) = _Video;
 

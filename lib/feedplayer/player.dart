@@ -1,13 +1,13 @@
-import 'package:feed/core/utils/multi_manager.dart';
-import 'package:feed/ui/feed/widgets/control.dart';
+import 'package:feed/feedplayer/controller.dart';
+import 'package:feed/feedplayer/controls.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
-class FlickMultiPlayer extends StatefulWidget {
-  const FlickMultiPlayer(
+class FeedPlayer extends StatefulWidget {
+  const FeedPlayer(
       {Key? key,
       required this.url,
       required this.thumbnail,
@@ -16,13 +16,13 @@ class FlickMultiPlayer extends StatefulWidget {
 
   final String url;
   final String thumbnail;
-  final FlickMultiManager flickMultiManager;
+  final FeedPlayerController flickMultiManager;
 
   @override
-  _FlickMultiPlayerState createState() => _FlickMultiPlayerState();
+  _FeedPlayerState createState() => _FeedPlayerState();
 }
 
-class _FlickMultiPlayerState extends State<FlickMultiPlayer> {
+class _FeedPlayerState extends State<FeedPlayer> {
   late FlickManager flickManager;
 
   @override

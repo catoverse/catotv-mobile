@@ -39,12 +39,6 @@ class _$VideoTearOff {
       @HiveField(5)
       @JsonKey(name: "end_timestamp")
           required int endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "createdAt")
-          required String createdAt,
-      @HiveField(7)
-      @JsonKey(name: "modifiedAt")
-          required String modifiedAt,
       @HiveField(8)
       @JsonKey(ignore: true)
           String? videoUrl}) {
@@ -55,8 +49,6 @@ class _$VideoTearOff {
       topic: topic,
       startTimestamp: startTimestamp,
       endTimestamp: endTimestamp,
-      createdAt: createdAt,
-      modifiedAt: modifiedAt,
       videoUrl: videoUrl,
     );
   }
@@ -89,12 +81,6 @@ mixin _$Video {
   @HiveField(5)
   @JsonKey(name: "end_timestamp")
   int get endTimestamp => throw _privateConstructorUsedError;
-  @HiveField(6)
-  @JsonKey(name: "createdAt")
-  String get createdAt => throw _privateConstructorUsedError;
-  @HiveField(7)
-  @JsonKey(name: "modifiedAt")
-  String get modifiedAt => throw _privateConstructorUsedError;
   @HiveField(8)
   @JsonKey(ignore: true)
   String? get videoUrl => throw _privateConstructorUsedError;
@@ -115,8 +101,6 @@ abstract class $VideoCopyWith<$Res> {
       @HiveField(3) @JsonKey(name: "topic") String topic,
       @HiveField(4) @JsonKey(name: "start_timestamp") int startTimestamp,
       @HiveField(5) @JsonKey(name: "end_timestamp") int endTimestamp,
-      @HiveField(6) @JsonKey(name: "createdAt") String createdAt,
-      @HiveField(7) @JsonKey(name: "modifiedAt") String modifiedAt,
       @HiveField(8) @JsonKey(ignore: true) String? videoUrl});
 }
 
@@ -136,8 +120,6 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
     Object? topic = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
-    Object? createdAt = freezed,
-    Object? modifiedAt = freezed,
     Object? videoUrl = freezed,
   }) {
     return _then(_value.copyWith(
@@ -165,14 +147,6 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.endTimestamp
           : endTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      modifiedAt: modifiedAt == freezed
-          ? _value.modifiedAt
-          : modifiedAt // ignore: cast_nullable_to_non_nullable
-              as String,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -193,8 +167,6 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
       @HiveField(3) @JsonKey(name: "topic") String topic,
       @HiveField(4) @JsonKey(name: "start_timestamp") int startTimestamp,
       @HiveField(5) @JsonKey(name: "end_timestamp") int endTimestamp,
-      @HiveField(6) @JsonKey(name: "createdAt") String createdAt,
-      @HiveField(7) @JsonKey(name: "modifiedAt") String modifiedAt,
       @HiveField(8) @JsonKey(ignore: true) String? videoUrl});
 }
 
@@ -215,8 +187,6 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
     Object? topic = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
-    Object? createdAt = freezed,
-    Object? modifiedAt = freezed,
     Object? videoUrl = freezed,
   }) {
     return _then(_Video(
@@ -244,14 +214,6 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.endTimestamp
           : endTimestamp // ignore: cast_nullable_to_non_nullable
               as int,
-      createdAt: createdAt == freezed
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      modifiedAt: modifiedAt == freezed
-          ? _value.modifiedAt
-          : modifiedAt // ignore: cast_nullable_to_non_nullable
-              as String,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -283,12 +245,6 @@ class _$_Video extends _Video {
       @HiveField(5)
       @JsonKey(name: "end_timestamp")
           required this.endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "createdAt")
-          required this.createdAt,
-      @HiveField(7)
-      @JsonKey(name: "modifiedAt")
-          required this.modifiedAt,
       @HiveField(8)
       @JsonKey(ignore: true)
           this.videoUrl})
@@ -322,21 +278,13 @@ class _$_Video extends _Video {
   @JsonKey(name: "end_timestamp")
   final int endTimestamp;
   @override
-  @HiveField(6)
-  @JsonKey(name: "createdAt")
-  final String createdAt;
-  @override
-  @HiveField(7)
-  @JsonKey(name: "modifiedAt")
-  final String modifiedAt;
-  @override
   @HiveField(8)
   @JsonKey(ignore: true)
   final String? videoUrl;
 
   @override
   String toString() {
-    return 'Video(id: $id, title: $title, youtubeUrl: $youtubeUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, createdAt: $createdAt, modifiedAt: $modifiedAt, videoUrl: $videoUrl)';
+    return 'Video(id: $id, title: $title, youtubeUrl: $youtubeUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, videoUrl: $videoUrl)';
   }
 
   @override
@@ -358,12 +306,6 @@ class _$_Video extends _Video {
             (identical(other.endTimestamp, endTimestamp) ||
                 const DeepCollectionEquality()
                     .equals(other.endTimestamp, endTimestamp)) &&
-            (identical(other.createdAt, createdAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.createdAt, createdAt)) &&
-            (identical(other.modifiedAt, modifiedAt) ||
-                const DeepCollectionEquality()
-                    .equals(other.modifiedAt, modifiedAt)) &&
             (identical(other.videoUrl, videoUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.videoUrl, videoUrl)));
@@ -378,8 +320,6 @@ class _$_Video extends _Video {
       const DeepCollectionEquality().hash(topic) ^
       const DeepCollectionEquality().hash(startTimestamp) ^
       const DeepCollectionEquality().hash(endTimestamp) ^
-      const DeepCollectionEquality().hash(createdAt) ^
-      const DeepCollectionEquality().hash(modifiedAt) ^
       const DeepCollectionEquality().hash(videoUrl);
 
   @JsonKey(ignore: true)
@@ -413,12 +353,6 @@ abstract class _Video extends Video {
       @HiveField(5)
       @JsonKey(name: "end_timestamp")
           required int endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "createdAt")
-          required String createdAt,
-      @HiveField(7)
-      @JsonKey(name: "modifiedAt")
-          required String modifiedAt,
       @HiveField(8)
       @JsonKey(ignore: true)
           String? videoUrl}) = _$_Video;
@@ -450,14 +384,6 @@ abstract class _Video extends Video {
   @HiveField(5)
   @JsonKey(name: "end_timestamp")
   int get endTimestamp => throw _privateConstructorUsedError;
-  @override
-  @HiveField(6)
-  @JsonKey(name: "createdAt")
-  String get createdAt => throw _privateConstructorUsedError;
-  @override
-  @HiveField(7)
-  @JsonKey(name: "modifiedAt")
-  String get modifiedAt => throw _privateConstructorUsedError;
   @override
   @HiveField(8)
   @JsonKey(ignore: true)

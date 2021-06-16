@@ -1,6 +1,6 @@
 import 'package:flick_video_player/flick_video_player.dart';
 
-class FlickMultiManager {
+class FeedPlayerController {
   List<FlickManager> _flickManagers = [];
   FlickManager? _activeManager;
   bool _isMute = false;

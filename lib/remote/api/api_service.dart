@@ -8,9 +8,9 @@ abstract class APIService {
     required String accessToken,
   });
   Future fetchTopics();
-  Future fetchVideosForUser({required String userID});
+  Future fetchVideos(int skip, int limit, List<String> selectedTopics);
   Future requestInvite({required String email});
-  Future checkProfileExists({required String userID});
+  Future getProfile({required String userID});
   Future createUserProfile(
       {required String userId,
       required String name,

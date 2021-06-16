@@ -44,7 +44,7 @@ class APIServiceImpl implements APIService {
     required String avatar,
     required String accessToken,
   }) async {
-    _log.v("Performing Google Login");
+    _log.v("Performing Google Login with $name $googleId $avatar $accessToken");
 
     Result<Failure, dynamic> result = await _client.mutation(
         GQLQueries.mutationGoogleLogin,
@@ -71,19 +71,6 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future fetchVideosForUser({required String userID}) async {
-    _log.v("Fetching videos for User(id:$userID)");
-
-    Result<Failure, dynamic> result = await _client.processQuery(
-        query: GQLQueries.queryUserRecommendation,
-        variables: GQLQueries.createMapForUserRecommendation(userID));
-
-    if (result.isFailed) return result.failure;
-
-    return result.success["userRecommendation"];
-  }
-
-  @override
   Future requestInvite({required String email}) async {
     _log.v("Adding $email to the waitlist");
 
@@ -99,18 +86,16 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future checkProfileExists({required String userID}) async {
+  Future getProfile({required String userID}) async {
     _log.v("Fetching profile for User(id: $userID)");
 
     Result<Failure, dynamic> result = await _client.processQuery(
         query: GQLQueries.queryUserProfile,
         variables: GQLQueries.createMapForGetUserProfile(userID));
 
-    if (result.isFailed) return false;
+    if (result.isFailed) return result.failure;
 
-    _log.v(result.success);
-
-    return true;
+    return result.success['userProfile']['selectedTopics'];
   }
 
   Future createUserProfile(
@@ -127,5 +112,19 @@ class APIServiceImpl implements APIService {
     _log.v(result.success);
 
     return true;
+  }
+
+  @override
+  Future fetchVideos(int skip, int limit, List<String> selectedTopics) async {
+    _log.i("Getting videos for topics: $selectedTopics");
+
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.queryVideosByTopics,
+        variables: GQLQueries.createVideosByTopicsVariables(
+            skip, limit, selectedTopics));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["videoByTopics"];
   }
 }

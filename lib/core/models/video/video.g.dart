@@ -23,8 +23,6 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       topic: fields[3] as String,
       startTimestamp: fields[4] as int,
       endTimestamp: fields[5] as int,
-      createdAt: fields[6] as String,
-      modifiedAt: fields[7] as String,
       videoUrl: fields[8] as String?,
     );
   }
@@ -32,7 +30,7 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
   @override
   void write(BinaryWriter writer, _$_Video obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -45,10 +43,6 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       ..write(obj.startTimestamp)
       ..writeByte(5)
       ..write(obj.endTimestamp)
-      ..writeByte(6)
-      ..write(obj.createdAt)
-      ..writeByte(7)
-      ..write(obj.modifiedAt)
       ..writeByte(8)
       ..write(obj.videoUrl);
   }
@@ -73,11 +67,9 @@ _$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     title: json['title'] as String,
     youtubeUrl: json['video_url'] as String,
-    topic: json['topic'] as String,
+    topic: json['topic']['id'] as String,
     startTimestamp: json['start_timestamp'] as int,
     endTimestamp: json['end_timestamp'] as int,
-    createdAt: json['createdAt'] as String,
-    modifiedAt: json['modifiedAt'] as String,
   );
 }
 
@@ -88,6 +80,4 @@ Map<String, dynamic> _$_$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'topic': instance.topic,
       'start_timestamp': instance.startTimestamp,
       'end_timestamp': instance.endTimestamp,
-      'createdAt': instance.createdAt,
-      'modifiedAt': instance.modifiedAt,
     };

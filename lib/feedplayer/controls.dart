@@ -1,4 +1,4 @@
-import 'package:feed/core/utils/multi_manager.dart';
+import 'package:feed/feedplayer/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 
@@ -7,7 +7,7 @@ class FeedPlayerPortraitControls extends StatelessWidget {
       {Key? key, this.flickMultiManager, this.flickManager})
       : super(key: key);
 
-  final FlickMultiManager? flickMultiManager;
+  final FeedPlayerController? flickMultiManager;
   final FlickManager? flickManager;
 
   @override

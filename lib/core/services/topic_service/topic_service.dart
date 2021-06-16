@@ -9,7 +9,7 @@ abstract class TopicService {
   /// gets the topics selected by the user
   ///
   /// if there are no topics selected, it returns all available topics
-  Future<List<Topic>> getSelectedTopics(String userId);
+  Future<List<String>> getSelectedTopics(String userId);
 
   /// sends the selected topics to the API
   Future updateSelectedTopics(User user, List<String> topicIds);

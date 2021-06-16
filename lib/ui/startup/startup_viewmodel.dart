@@ -30,15 +30,21 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
     if (isLoggedIn) {
       _log.v('We have a user session on disk. Sync the user profile ...');
 
-      await _userService.populateCurrentUser();
+      bool isProfileStored = await _userService.populateCurrentUser();
+
+      if (!isProfileStored) redirectToLogin();
+
       final currentUser = _userService.currentUser;
       _log.v('User sync complete. User profile: $currentUser');
 
       _navigationService.replaceWith(Routes.homeView);
-    } else {
-      _log.v('No user on disk, navigate to the onboarding');
-      _navigationService.replaceWith(Routes.onboardingView);
-    }
+    } else
+      return redirectToLogin();
+  }
+
+  void redirectToLogin() {
+    _log.v('No user on disk, navigate to the onboarding');
+    _navigationService.replaceWith(Routes.onboardingView);
   }
 
   @override

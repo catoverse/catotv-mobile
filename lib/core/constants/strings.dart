@@ -1,5 +1,6 @@
 class AppStrings {
   static const userAuthBox = "USER_AUTH_BOX";
+  static const userSelectedTopics = "USER_SELECTED_TOPICS_BOX";
   static const topicBox = "VIDEO_TOPICS";
   static const googleClient = "GOOGLE_CLIENT";
   static const apiURL = "API_URL";

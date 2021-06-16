@@ -1,32 +1,33 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/feed_service/feed_service.dart';
+import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 
 class FeedServiceImpl implements FeedService {
   final APIService _apiService = locator<APIService>();
   final UserService _userService = locator<UserService>();
+  final TopicService _topicService = locator<TopicService>();
 
   @override
   List<Video> videos = [];
 
-  ///TODO: Implement [Pagination]
   @override
-  Future<bool> fetchVideos() async {
-    String userID = _userService.currentUser.id;
+  Future<List<Video>> fetchVideos({int skip = 0, int limit = 10}) async {
+    String userId = _userService.currentUser.id;
+    var selectedTopics = await _topicService.getSelectedTopics(userId);
 
-    var list = await _apiService.fetchVideosForUser(userID: userID);
+    var list = await _apiService.fetchVideos(skip, limit, selectedTopics);
+
+    List<Video> apiVideos = [];
 
     if (list is List) {
-      for (var jsonItem in list) {
-        videos.add(Video.fromJson(jsonItem));
-      }
-
-      return true;
+      list.forEach((jsonItem) => apiVideos.add(Video.fromJson(jsonItem)));
+      return apiVideos;
     }
 
-    return false;
+    return videos;
   }
 
   @override

@@ -55,6 +55,7 @@ dependencies:
   youtube_explode_dart: ^1.9.4
   shimmer: ^2.0.0
   visibility_detector: ^0.2.0
+  infinite_scroll_pagination: ^3.0.1+1
 
 dev_dependencies:
   flutter_test:

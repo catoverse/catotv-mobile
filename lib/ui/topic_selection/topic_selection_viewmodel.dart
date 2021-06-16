@@ -42,20 +42,31 @@ class TopicSelectionViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future storeSelectedTopics() async {
+  Future storeSelectedTopics({bool isUpdate = false}) async {
     setBusy(true);
-
-    var result = await _userService.isUserProfileExists();
-
+    await _userService.createProfile(topicIds: selectedTopics);
     setBusy(false);
 
-    if (!result)
-      _userService.createProfile(topicIds: selectedTopics);
-    else
-      _topicService.updateSelectedTopics(
-          _userService.currentUser, selectedTopics);
+    //TODO: Indicate the topics are stored successfully
 
     return gotoHome();
+  }
+
+  Future getSelectedTopics() async {
+    var result =
+        await _topicService.getSelectedTopics(_userService.currentUser.id);
+
+    selectedTopics = result;
+
+    for (var item in result) {
+      var selectedTopic =
+          topicCheckList.firstWhere((element) => element.id == item);
+      int index = topicCheckList.indexOf(selectedTopic);
+
+      topicCheckList[index] = selectedTopic.copyWith(isSelected: true);
+    }
+
+    notifyListeners();
   }
 
   void gotoHome() => _navigationService.replaceWith(Routes.homeView);

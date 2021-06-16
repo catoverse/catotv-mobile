@@ -59,8 +59,12 @@ class RestrictedHomeViewModel extends BaseViewModel with SnackbarHelper {
 
     setBusy(false);
 
-    return isProfileExists
-        ? _navigationService.replaceWith(Routes.homeView)
-        : _navigationService.replaceWith(Routes.topicSelectionView);
+    if (isProfileExists) {
+      _log.i("We hava a profile for user, redirect to home");
+      return _navigationService.replaceWith(Routes.homeView);
+    } else {
+      _log.i("We don't hava a profile for user, redirect to select topics");
+      return _navigationService.replaceWith(Routes.topicSelectionView);
+    }
   }
 }

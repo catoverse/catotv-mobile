@@ -8,7 +8,7 @@ abstract class FeedService {
   /// Fetches videos from API
   ///
   /// If data returned from [GraphQL], stores it in [videos]
-  Future<bool> fetchVideos();
+  Future<List<Video>> fetchVideos({int skip = 0, int limit = 10});
 
   /// Fetches video with given [id]
   Future<Video> fetchVideoById(String id);

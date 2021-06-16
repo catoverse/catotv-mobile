@@ -88,18 +88,18 @@ class MockAPIService extends _i1.Mock implements _i5.APIService {
       (super.noSuchMethod(Invocation.method(#fetchTopics, []),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i4.Future<dynamic> fetchVideosForUser({String? userID}) =>
+  _i4.Future<dynamic> fetchVideos(
+          int? skip, int? limit, List<String>? selectedTopics) =>
       (super.noSuchMethod(
-          Invocation.method(#fetchVideosForUser, [], {#userID: userID}),
+          Invocation.method(#fetchVideos, [skip, limit, selectedTopics]),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
   _i4.Future<dynamic> requestInvite({String? email}) => (super.noSuchMethod(
       Invocation.method(#requestInvite, [], {#email: email}),
       returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i4.Future<dynamic> checkProfileExists({String? userID}) =>
-      (super.noSuchMethod(
-          Invocation.method(#checkProfileExists, [], {#userID: userID}),
+  _i4.Future<dynamic> getProfile({String? userID}) =>
+      (super.noSuchMethod(Invocation.method(#getProfile, [], {#userID: userID}),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
   _i4.Future<dynamic> createUserProfile(

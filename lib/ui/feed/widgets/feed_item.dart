@@ -2,8 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
-import 'package:feed/core/utils/multi_manager.dart';
-import 'package:feed/ui/feed/widgets/player.dart';
+import 'package:feed/feedplayer/controller.dart';
+import 'package:feed/feedplayer/player.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ final yt = locator<YoutubeService>();
 class FeedItem extends StatefulWidget {
   final Video video;
   final VoidCallback? onShare;
-  final FlickMultiManager flickMultiManager;
+  final FeedPlayerController flickMultiManager;
 
   const FeedItem(
       {Key? key,
@@ -64,7 +64,7 @@ class _FeedItemState extends State<FeedItem>
           // Header of the video card
           _displayTitleTopic(context, widget.video.title, "Productivity"),
 
-          FlickMultiPlayer(
+          FeedPlayer(
             url: videoUrl,
             flickMultiManager: widget.flickMultiManager,
             thumbnail: YoutubeService.getThumbnail(widget.video.youtubeUrl),

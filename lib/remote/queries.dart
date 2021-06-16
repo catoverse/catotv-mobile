@@ -33,6 +33,24 @@ class GQLQueries {
     }
   ''';
 
+  static const String queryVideosByTopics = r'''
+    query VideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
+      videoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
+        id
+        title
+        description
+        author_name
+        video_url
+        topic {
+          id
+          name
+        }
+        start_timestamp
+        end_timestamp
+      }
+    }
+  ''';
+
   static const String queryUserProfile = r'''
     query getUserProfile($userId: ID!) {
       userProfile(userId: $userId) {
@@ -134,5 +152,10 @@ class GQLQueries {
   static Map<String, dynamic> createUserProfileVariables(
       String userId, String name, List<String> topicIds) {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
+  }
+
+  static Map<String, dynamic> createVideosByTopicsVariables(
+      int skip, int limit, List<String> topicIds) {
+    return {"skip": skip, "limit": limit, "selectedTopics": topicIds};
   }
 }
