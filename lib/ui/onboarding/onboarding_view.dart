@@ -22,37 +22,44 @@ class OnboardingView extends StatelessWidget {
       viewModel: OnboardingViewModel(),
       builder: (context, uiHelpers, model) => WillPopScope(
           onWillPop: model.showExitSnackbar,
-          child: Scaffold(
-            body: Column(
-              children: [
-                Expanded(
-                  child: PageView.builder(
-                    onPageChanged: model.setIndex,
-                    itemBuilder: (BuildContext context, int index) =>
-                        OnboardingBodyListItem(item: onboardingItems[index]),
-                    itemCount: onboardingItems.length,
+          child: model.isBusy
+              ? Scaffold(
+                  body: Center(
+                    child: CircularProgressIndicator(),
                   ),
-                ),
-                Container(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: _buildPageIndicator(model.currentIndex)
-                          .map((e) => e)
-                          .toList()),
-                ),
-              ],
-            ),
-            bottomNavigationBar: Container(
-              padding: EdgeInsets.all(20.0),
-              child: ElevatedButton(
-                style: raisedButtonStyle.copyWith(
-                    textStyle: MaterialStateProperty.all<TextStyle>(
-                        uiHelpers.button!)),
-                onPressed: () => model.navigateToRestrictedHome(),
-                child: Text("Get Started"),
-              ),
-            ),
-          )),
+                )
+              : Scaffold(
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: PageView.builder(
+                          onPageChanged: model.setIndex,
+                          itemBuilder: (BuildContext context, int index) =>
+                              OnboardingBodyListItem(
+                                  item: onboardingItems[index]),
+                          itemCount: onboardingItems.length,
+                        ),
+                      ),
+                      Container(
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: _buildPageIndicator(model.currentIndex)
+                                .map((e) => e)
+                                .toList()),
+                      ),
+                    ],
+                  ),
+                  bottomNavigationBar: Container(
+                    padding: EdgeInsets.all(20.0),
+                    child: ElevatedButton(
+                      style: raisedButtonStyle.copyWith(
+                          textStyle: MaterialStateProperty.all<TextStyle>(
+                              uiHelpers.button!)),
+                      onPressed: () => model.navigateToRestrictedHome(),
+                      child: Text("Get Started"),
+                    ),
+                  ),
+                )),
     );
   }
 

@@ -210,7 +210,9 @@ class ConstraintBottomSheet extends StatelessWidget {
                       style: raisedButtonStyle.copyWith(
                           backgroundColor:
                               MaterialStateProperty.all(AppColors.google)),
-                      icon: Icon(Icons.translate),
+                      icon: request.mainButtonTitle == "Continue with Google"
+                          ? Icon(Icons.person_add)
+                          : Icon(Icons.person),
                       label: Text(
                         request.mainButtonTitle!,
                       ),

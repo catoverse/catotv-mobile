@@ -1,13 +1,19 @@
-import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/mixins/snackbar_helper.dart';
-import 'package:stacked/stacked.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:feed/ui/base/auth_viewmodel.dart';
 
-class OnboardingViewModel extends IndexTrackingViewModel with SnackbarHelper {
-  final NavigationService _navigationService = locator<NavigationService>();
+class OnboardingViewModel extends AuthenticationViewModel with SnackbarHelper {
+  int currentIndex = 0;
 
-  Future navigateToRestrictedHome() async {
-    _navigationService.replaceWith(Routes.restrictedHomeView);
+  void navigateToRestrictedHome() => showConstraint(
+      title: "Hi There!",
+      description: "Welcome and we're happy to have you onboard",
+      mainButton: "I already have an account",
+      secondaryButton: "I'm new here",
+      secondaryRoute: Routes.restrictedHomeView);
+
+  void setIndex(int index) {
+    currentIndex = index;
+    notifyListeners();
   }
 }

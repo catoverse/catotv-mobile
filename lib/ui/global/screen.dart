@@ -23,11 +23,14 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
   /// Fires once when the ViewModel is created or set for the first time
   final Function(T)? onModelReady;
 
+  final VoidCallback? onDispose;
+
   ScreenBuilder(
       {Key? key,
       required this.builder,
       required this.viewModel,
       this.onModelReady,
+      this.onDispose,
       this.disposeViewModel: true,
       this.isReactive: true})
       : super(key: key);
@@ -46,6 +49,7 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
                 child: builder(context, uiHelpers, model)),
             disposeViewModel: disposeViewModel,
             onModelReady: onModelReady,
+            onDispose: () => onDispose?.call(),
             viewModelBuilder: () => viewModel)
         : ViewModelBuilder<T>.nonReactive(
             builder: (context, model, child) => SafeArea(
@@ -56,6 +60,7 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
                 child: builder(context, uiHelpers, model)),
             disposeViewModel: disposeViewModel,
             onModelReady: onModelReady,
+            onDispose: () => onDispose?.call(),
             viewModelBuilder: () => viewModel);
   }
 }

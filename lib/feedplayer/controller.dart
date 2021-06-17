@@ -75,4 +75,9 @@ class FeedPlayerController {
   toggleControls() {
     _activeManager!.flickDisplayManager!.showPlayerControls;
   }
+
+  dispose() {
+    _flickManagers.forEach((flickManager) => flickManager.dispose());
+    _flickManagers.clear();
+  }
 }
