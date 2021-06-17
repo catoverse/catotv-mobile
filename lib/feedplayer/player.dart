@@ -11,12 +11,12 @@ class FeedPlayer extends StatefulWidget {
       {Key? key,
       required this.url,
       required this.thumbnail,
-      required this.flickMultiManager})
+      required this.feedPlayerController})
       : super(key: key);
 
   final String url;
   final String thumbnail;
-  final FeedPlayerController flickMultiManager;
+  final FeedPlayerController feedPlayerController;
 
   @override
   _FeedPlayerState createState() => _FeedPlayerState();
@@ -31,14 +31,14 @@ class _FeedPlayerState extends State<FeedPlayer> {
       videoPlayerController: VideoPlayerController.network(widget.url),
       autoPlay: false,
     );
-    widget.flickMultiManager.init(flickManager);
+    widget.feedPlayerController.init(flickManager);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    widget.flickMultiManager.remove(flickManager);
+    widget.feedPlayerController.remove(flickManager);
     super.dispose();
   }
 
@@ -48,42 +48,41 @@ class _FeedPlayerState extends State<FeedPlayer> {
       key: ObjectKey(flickManager),
       onVisibilityChanged: (visiblityInfo) {
         if (visiblityInfo.visibleFraction > 0.9) {
-          widget.flickMultiManager.play(flickManager);
+          widget.feedPlayerController.play(flickManager);
         }
       },
       child: Container(
         child: FlickVideoPlayer(
           flickManager: flickManager,
           flickVideoWithControls: FlickVideoWithControls(
-            playerLoadingFallback: Positioned.fill(
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                    child: Image.network(
-                      widget.thumbnail,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                        strokeWidth: 4,
+              playerLoadingFallback: Positioned.fill(
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: Image.network(
+                        widget.thumbnail,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      right: 10,
+                      top: 10,
+                      child: Container(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(
+                          backgroundColor: Colors.white,
+                          strokeWidth: 4,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            controls: FeedPlayerPortraitControls(
-              flickMultiManager: widget.flickMultiManager,
-              flickManager: flickManager,
-            ),
-          ),
+              controls: FeedPlayerPortraitControls(
+                feedPlayerController: widget.feedPlayerController,
+                flickManager: flickManager,
+              )),
           flickVideoWithControlsFullscreen: FlickVideoWithControls(
             playerLoadingFallback: Center(
                 child: Image.network(

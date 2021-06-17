@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/video/video.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/player.dart';
-import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 
 final yt = locator<YoutubeService>();
@@ -12,14 +10,16 @@ final yt = locator<YoutubeService>();
 class FeedItem extends StatefulWidget {
   final Video video;
   final VoidCallback? onShare;
-  final FeedPlayerController flickMultiManager;
+  final VoidCallback? onTopicTapped;
+  final FeedPlayerController feedPlayerController;
 
-  const FeedItem(
-      {Key? key,
-      required this.video,
-      required this.flickMultiManager,
-      this.onShare})
-      : super(key: key);
+  const FeedItem({
+    Key? key,
+    required this.video,
+    required this.feedPlayerController,
+    this.onShare,
+    this.onTopicTapped,
+  }) : super(key: key);
 
   @override
   _FeedItemState createState() => _FeedItemState();
@@ -52,8 +52,6 @@ class _FeedItemState extends State<FeedItem>
   Widget build(BuildContext context) {
     super.build(context);
 
-    if (!mounted) return LinearProgressIndicator();
-
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 8.0),
@@ -62,28 +60,35 @@ class _FeedItemState extends State<FeedItem>
       child: Column(
         children: [
           // Header of the video card
-          _displayTitleTopic(context, widget.video.title, "Productivity"),
+          _displayTitleTopic(context, widget.video.title),
 
-          FeedPlayer(
-            url: videoUrl,
-            flickMultiManager: widget.flickMultiManager,
-            thumbnail: YoutubeService.getThumbnail(widget.video.youtubeUrl),
-          ),
+          mounted
+              ? FeedPlayer(
+                  url: videoUrl,
+                  feedPlayerController: widget.feedPlayerController,
+                  thumbnail:
+                      YoutubeService.getThumbnail(widget.video.youtubeUrl),
+                )
+              : Image.network(
+                  YoutubeService.getThumbnail(widget.video.youtubeUrl)),
 
           // Footer of the video card'Example of a Dynamic Link'
-          _displayFooter()
+          _displayFooter(widget.video.topicName)
         ],
       ),
     );
   }
 
-  Widget _displayFooter() {
+  Widget _displayFooter(String topic) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          IconButton(icon: Icon(Icons.thumb_up_alt_outlined), onPressed: () {}),
+          InputChip(
+            label: Text(topic),
+            onPressed: () => widget.onTopicTapped?.call(),
+          ),
           IconButton(
               icon: Icon(Icons.share_outlined),
               onPressed: () => widget.onShare?.call())
@@ -92,48 +97,18 @@ class _FeedItemState extends State<FeedItem>
     );
   }
 
-  Widget _displayTitleTopic(BuildContext context, String title, String topic) {
-    return Padding(
-      padding: EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AutoSizeText(
-                  widget.video.title,
-                  maxLines: 3,
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.normal),
-                ),
-                GestureDetector(
-                  child: Text(
-                    topic,
-                    style: TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  onTap: () {
-                    /// TODO: Fetch all the videos with [Topic]
-                  },
-                ),
-              ],
-            ),
-          ),
-          IconButton(
-              icon: Icon(Icons.bookmark_outline),
-              onPressed: () {
-                /// TODO: Store the Video in [Hive]
-              })
-        ],
+  Widget _displayTitleTopic(BuildContext context, String title) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        title,
+        maxLines: 3,
+        style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            fontStyle: FontStyle.normal),
       ),
     );
   }

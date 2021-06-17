@@ -20,17 +20,18 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       id: fields[0] as String,
       title: fields[1] as String,
       youtubeUrl: fields[2] as String,
-      topic: fields[3] as String,
-      startTimestamp: fields[4] as int,
-      endTimestamp: fields[5] as int,
-      videoUrl: fields[8] as String?,
+      topicId: fields[3] as String,
+      topicName: fields[4] as String,
+      startTimestamp: fields[5] as int,
+      endTimestamp: fields[6] as int,
+      videoUrl: fields[7] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_Video obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,12 +39,14 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       ..writeByte(2)
       ..write(obj.youtubeUrl)
       ..writeByte(3)
-      ..write(obj.topic)
+      ..write(obj.topicId)
       ..writeByte(4)
-      ..write(obj.startTimestamp)
+      ..write(obj.topicName)
       ..writeByte(5)
+      ..write(obj.startTimestamp)
+      ..writeByte(6)
       ..write(obj.endTimestamp)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.videoUrl);
   }
 
@@ -67,7 +70,8 @@ _$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     title: json['title'] as String,
     youtubeUrl: json['video_url'] as String,
-    topic: json['topic']['id'] as String,
+    topicId: json['topic']['id'] as String,
+    topicName: json['topic']['name'] as String,
     startTimestamp: json['start_timestamp'] as int,
     endTimestamp: json['end_timestamp'] as int,
   );
@@ -77,7 +81,8 @@ Map<String, dynamic> _$_$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'video_url': instance.youtubeUrl,
-      'topic': instance.topic,
+      'topic_id': instance.topicId,
+      'topic_name': instance.topicName,
       'start_timestamp': instance.startTimestamp,
       'end_timestamp': instance.endTimestamp,
     };

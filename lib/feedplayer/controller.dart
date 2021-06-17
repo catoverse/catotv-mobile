@@ -63,4 +63,16 @@ class FeedPlayerController {
           .forEach((manager) => manager.flickControlManager?.unmute());
     }
   }
+
+  seekForward(FlickManager flickManager) async {
+    await flickManager.flickControlManager!.seekForward(Duration(seconds: 10));
+  }
+
+  seekBackward(FlickManager flickManager) async {
+    await flickManager.flickControlManager!.seekBackward(Duration(seconds: 10));
+  }
+
+  toggleControls() {
+    _activeManager!.flickDisplayManager!.showPlayerControls;
+  }
 }
