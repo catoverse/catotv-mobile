@@ -7,13 +7,13 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:connectivity/connectivity.dart';
+import 'package:feed/firebase/analytics.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
-import '../core/services/fakefeed_service.dart';
 import '../core/services/feed_service/feed_service.dart';
 import '../core/services/feed_service/feed_service_impl.dart';
 import '../core/services/hive_service/hive_service.dart';
@@ -23,7 +23,6 @@ import '../core/services/topic_service/topic_service_impl.dart';
 import '../core/services/user_service/user_service.dart';
 import '../core/services/user_service/user_service_impl.dart';
 import '../core/services/youtube_service/youtube_service.dart';
-import '../core/utils/videoplayer.dart';
 import '../firebase/dynamic_links.dart';
 import '../remote/api/api_service.dart';
 import '../remote/api/api_service_impl.dart';
@@ -59,11 +58,10 @@ Future setupLocator(
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
   locator.registerLazySingleton<UserService>(() => UserServiceImpl());
-  locator.registerLazySingleton(() => VideoPlayerUtils());
   locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton(() => YoutubeService());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
   locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
-  locator.registerLazySingleton(() => FakeFeedImpl());
   locator.registerLazySingleton(() => DynamicLinksService());
+  locator.registerLazySingleton(() => AnalyticsService());
 }

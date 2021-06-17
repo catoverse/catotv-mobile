@@ -1,4 +1,5 @@
 import 'package:feed/app/stacked_setup.dart';
+import 'package:feed/firebase/analytics.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: StackedService.navigatorKey,
       onGenerateRoute: StackedRouter().onGenerateRoute,
+      navigatorObservers: [locator<AnalyticsService>().getAnalyticsObserver()],
       debugShowCheckedModeBanner: false,
     );
   }
