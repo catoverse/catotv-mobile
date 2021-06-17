@@ -2,7 +2,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
-import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:mockito/annotations.dart';

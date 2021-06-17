@@ -1,4 +1,4 @@
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 
 /// Interface to manage all things related to [Video]
 abstract class FeedService {

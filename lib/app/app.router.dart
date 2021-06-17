@@ -109,6 +109,6 @@ class StackedRouter extends RouterBase {
 /// TopicSelectionView arguments holder class
 class TopicSelectionViewArguments {
   final Key? key;
-  final bool updateTopicSelection;
-  TopicSelectionViewArguments({this.key, this.updateTopicSelection = false});
+  final bool? updateTopicSelection;
+  TopicSelectionViewArguments({this.key, this.updateTopicSelection});
 }

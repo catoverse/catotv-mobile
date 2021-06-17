@@ -1,5 +1,5 @@
 import 'package:feed/app/app.locator.dart';
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 
 import 'package:feed/ui/base/feed_viewmodel.dart';

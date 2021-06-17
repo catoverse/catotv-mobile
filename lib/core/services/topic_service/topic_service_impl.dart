@@ -1,8 +1,7 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/constants/strings.dart';
 import 'package:feed/core/models/result/failure.dart';
-import 'package:feed/core/models/topic/topic.dart';
-import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/remote/api/api_service.dart';
@@ -43,7 +42,7 @@ class TopicServiceImpl implements TopicService {
     if (result.isFailed || result.success!.isEmpty) {
       var profile = await _apiService.getProfile(userID: userId);
 
-      if (!(profile is Failure)) topics = profile;
+      if (!(profile is Failure)) topics = List<String>.from(profile);
     }
 
     /// The topics are selected and stored in Hive, so we can get them from Hive.

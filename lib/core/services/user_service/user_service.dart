@@ -1,4 +1,4 @@
-import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/app_models.dart';
 
 /// Interface to manage all things related to [User]
 abstract class UserService {

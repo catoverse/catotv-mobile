@@ -6,7 +6,7 @@ import 'dart:async' as _i4;
 import 'dart:ui' as _i11;
 
 import 'package:feed/core/enums/connectivity_status.dart' as _i15;
-import 'package:feed/core/models/user/user.dart' as _i2;
+import 'package:feed/core/models/app_models.dart' as _i2;
 import 'package:feed/core/services/user_service/user_service.dart' as _i3;
 import 'package:feed/remote/api/api_service.dart' as _i5;
 import 'package:feed/remote/connectivity/connectivity_service.dart' as _i14;

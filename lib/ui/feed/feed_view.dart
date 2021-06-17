@@ -1,4 +1,4 @@
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/ui/feed/feed_view.page.dart';
 import 'package:feed/ui/feed/widgets/feed_item.dart';

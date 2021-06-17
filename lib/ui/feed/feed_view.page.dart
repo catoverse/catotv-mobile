@@ -1,4 +1,4 @@
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/ui/base/feed_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';

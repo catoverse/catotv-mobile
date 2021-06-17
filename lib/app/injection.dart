@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'package:feed/core/models/topic/topic.dart';
-import 'package:feed/core/models/user/user.dart';
-import 'package:feed/core/models/userprofile/profilemodels.dart';
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:hive/hive.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
@@ -22,8 +19,6 @@ class HiveInjection {
     /// Register Adapters
     hive.registerAdapter(UserAdapter());
     hive.registerAdapter(VideoAdapter());
-    hive.registerAdapter(TopicAdapter());
-    hive.registerAdapter(WatchTimeAdapter());
     return Hive;
   }
 }

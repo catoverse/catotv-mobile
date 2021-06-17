@@ -1,5 +1,5 @@
 import 'package:feed/app/app.locator.dart';
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/ui/restricted_home/data/feed_data.dart';
 import 'package:observable_ish/observable_ish.dart';

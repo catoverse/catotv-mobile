@@ -1,4 +1,4 @@
-import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/app_models.dart';
 
 final User defaultUser = User(
     id: 'default_test_user',

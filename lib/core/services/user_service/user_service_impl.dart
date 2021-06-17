@@ -2,7 +2,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/strings.dart';
 import 'package:feed/core/models/result/failure.dart';
-import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';

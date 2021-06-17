@@ -1,5 +1,4 @@
-import 'package:feed/core/models/topic/topic.dart';
-import 'package:feed/core/models/user/user.dart';
+import 'package:feed/core/models/app_models.dart';
 
 /// Interface to manage all things related to [Topic]
 abstract class TopicService {

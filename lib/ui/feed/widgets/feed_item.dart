@@ -1,5 +1,5 @@
 import 'package:feed/app/app.locator.dart';
-import 'package:feed/core/models/video/video.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/player.dart';
@@ -73,20 +73,20 @@ class _FeedItemState extends State<FeedItem>
                   YoutubeService.getThumbnail(widget.video.youtubeUrl)),
 
           // Footer of the video card'Example of a Dynamic Link'
-          _displayFooter(widget.video.topicName)
+          _displayFooter()
         ],
       ),
     );
   }
 
-  Widget _displayFooter(String topic) {
+  Widget _displayFooter() {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           InputChip(
-            label: Text(topic),
+            label: Text(widget.video.topic.name),
             onPressed: () => widget.onTopicTapped?.call(),
           ),
           IconButton(
