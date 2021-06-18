@@ -507,27 +507,13 @@ class _$VideoTearOff {
   const _$VideoTearOff();
 
   _Video call(
-      {@HiveField(0)
-      @JsonKey(name: "id")
-          required String id,
-      @HiveField(1)
-      @JsonKey(name: "title")
-          required String title,
-      @HiveField(2)
-      @JsonKey(name: "video_url")
-          required String youtubeUrl,
-      @HiveField(3)
-      @JsonKey(name: "topic")
-          required Topic topic,
-      @HiveField(4)
-      @JsonKey(name: "start_timestamp")
-          required int startTimestamp,
-      @HiveField(5)
-      @JsonKey(name: "end_timestamp")
-          required int endTimestamp,
-      @HiveField(6)
-      @JsonKey(ignore: true)
-          String? videoUrl}) {
+      {@HiveField(0) @JsonKey(name: "id") required String id,
+      @HiveField(1) @JsonKey(name: "title") required String title,
+      @HiveField(2) @JsonKey(name: "video_url") required String youtubeUrl,
+      @HiveField(3) @JsonKey(name: "topic") required Topic topic,
+      @HiveField(4) @JsonKey(name: "start_timestamp") int? startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
+      @HiveField(6) @JsonKey(ignore: true) String? videoUrl}) {
     return _Video(
       id: id,
       title: title,
@@ -563,10 +549,10 @@ mixin _$Video {
   Topic get topic => throw _privateConstructorUsedError;
   @HiveField(4)
   @JsonKey(name: "start_timestamp")
-  int get startTimestamp => throw _privateConstructorUsedError;
+  int? get startTimestamp => throw _privateConstructorUsedError;
   @HiveField(5)
   @JsonKey(name: "end_timestamp")
-  int get endTimestamp => throw _privateConstructorUsedError;
+  int? get endTimestamp => throw _privateConstructorUsedError;
   @HiveField(6)
   @JsonKey(ignore: true)
   String? get videoUrl => throw _privateConstructorUsedError;
@@ -585,8 +571,8 @@ abstract class $VideoCopyWith<$Res> {
       @HiveField(1) @JsonKey(name: "title") String title,
       @HiveField(2) @JsonKey(name: "video_url") String youtubeUrl,
       @HiveField(3) @JsonKey(name: "topic") Topic topic,
-      @HiveField(4) @JsonKey(name: "start_timestamp") int startTimestamp,
-      @HiveField(5) @JsonKey(name: "end_timestamp") int endTimestamp,
+      @HiveField(4) @JsonKey(name: "start_timestamp") int? startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
       @HiveField(6) @JsonKey(ignore: true) String? videoUrl});
 
   $TopicCopyWith<$Res> get topic;
@@ -630,11 +616,11 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
       startTimestamp: startTimestamp == freezed
           ? _value.startTimestamp
           : startTimestamp // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       endTimestamp: endTimestamp == freezed
           ? _value.endTimestamp
           : endTimestamp // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -660,8 +646,8 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
       @HiveField(1) @JsonKey(name: "title") String title,
       @HiveField(2) @JsonKey(name: "video_url") String youtubeUrl,
       @HiveField(3) @JsonKey(name: "topic") Topic topic,
-      @HiveField(4) @JsonKey(name: "start_timestamp") int startTimestamp,
-      @HiveField(5) @JsonKey(name: "end_timestamp") int endTimestamp,
+      @HiveField(4) @JsonKey(name: "start_timestamp") int? startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
       @HiveField(6) @JsonKey(ignore: true) String? videoUrl});
 
   @override
@@ -707,11 +693,11 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
       startTimestamp: startTimestamp == freezed
           ? _value.startTimestamp
           : startTimestamp // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       endTimestamp: endTimestamp == freezed
           ? _value.endTimestamp
           : endTimestamp // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -725,27 +711,13 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
 @HiveType(typeId: 1)
 class _$_Video extends _Video {
   _$_Video(
-      {@HiveField(0)
-      @JsonKey(name: "id")
-          required this.id,
-      @HiveField(1)
-      @JsonKey(name: "title")
-          required this.title,
-      @HiveField(2)
-      @JsonKey(name: "video_url")
-          required this.youtubeUrl,
-      @HiveField(3)
-      @JsonKey(name: "topic")
-          required this.topic,
-      @HiveField(4)
-      @JsonKey(name: "start_timestamp")
-          required this.startTimestamp,
-      @HiveField(5)
-      @JsonKey(name: "end_timestamp")
-          required this.endTimestamp,
-      @HiveField(6)
-      @JsonKey(ignore: true)
-          this.videoUrl})
+      {@HiveField(0) @JsonKey(name: "id") required this.id,
+      @HiveField(1) @JsonKey(name: "title") required this.title,
+      @HiveField(2) @JsonKey(name: "video_url") required this.youtubeUrl,
+      @HiveField(3) @JsonKey(name: "topic") required this.topic,
+      @HiveField(4) @JsonKey(name: "start_timestamp") this.startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") this.endTimestamp,
+      @HiveField(6) @JsonKey(ignore: true) this.videoUrl})
       : super._();
 
   factory _$_Video.fromJson(Map<String, dynamic> json) =>
@@ -770,11 +742,11 @@ class _$_Video extends _Video {
   @override
   @HiveField(4)
   @JsonKey(name: "start_timestamp")
-  final int startTimestamp;
+  final int? startTimestamp;
   @override
   @HiveField(5)
   @JsonKey(name: "end_timestamp")
-  final int endTimestamp;
+  final int? endTimestamp;
   @override
   @HiveField(6)
   @JsonKey(ignore: true)
@@ -833,27 +805,13 @@ class _$_Video extends _Video {
 
 abstract class _Video extends Video {
   factory _Video(
-      {@HiveField(0)
-      @JsonKey(name: "id")
-          required String id,
-      @HiveField(1)
-      @JsonKey(name: "title")
-          required String title,
-      @HiveField(2)
-      @JsonKey(name: "video_url")
-          required String youtubeUrl,
-      @HiveField(3)
-      @JsonKey(name: "topic")
-          required Topic topic,
-      @HiveField(4)
-      @JsonKey(name: "start_timestamp")
-          required int startTimestamp,
-      @HiveField(5)
-      @JsonKey(name: "end_timestamp")
-          required int endTimestamp,
-      @HiveField(6)
-      @JsonKey(ignore: true)
-          String? videoUrl}) = _$_Video;
+      {@HiveField(0) @JsonKey(name: "id") required String id,
+      @HiveField(1) @JsonKey(name: "title") required String title,
+      @HiveField(2) @JsonKey(name: "video_url") required String youtubeUrl,
+      @HiveField(3) @JsonKey(name: "topic") required Topic topic,
+      @HiveField(4) @JsonKey(name: "start_timestamp") int? startTimestamp,
+      @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
+      @HiveField(6) @JsonKey(ignore: true) String? videoUrl}) = _$_Video;
   _Video._() : super._();
 
   factory _Video.fromJson(Map<String, dynamic> json) = _$_Video.fromJson;
@@ -877,11 +835,11 @@ abstract class _Video extends Video {
   @override
   @HiveField(4)
   @JsonKey(name: "start_timestamp")
-  int get startTimestamp => throw _privateConstructorUsedError;
+  int? get startTimestamp => throw _privateConstructorUsedError;
   @override
   @HiveField(5)
   @JsonKey(name: "end_timestamp")
-  int get endTimestamp => throw _privateConstructorUsedError;
+  int? get endTimestamp => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
   @JsonKey(ignore: true)

@@ -70,8 +70,8 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       title: fields[1] as String,
       youtubeUrl: fields[2] as String,
       topic: fields[3] as Topic,
-      startTimestamp: fields[4] as int,
-      endTimestamp: fields[5] as int,
+      startTimestamp: fields[4] as int?,
+      endTimestamp: fields[5] as int?,
       videoUrl: fields[6] as String?,
     );
   }
@@ -149,8 +149,8 @@ _$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
     title: json['title'] as String,
     youtubeUrl: json['video_url'] as String,
     topic: Topic.fromJson(json['topic'] as Map<String, dynamic>),
-    startTimestamp: json['start_timestamp'] as int,
-    endTimestamp: json['end_timestamp'] as int,
+    startTimestamp: json['start_timestamp'] as int?,
+    endTimestamp: json['end_timestamp'] as int?,
   );
 }
 
