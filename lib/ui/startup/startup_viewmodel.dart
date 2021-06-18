@@ -1,14 +1,13 @@
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
-import 'package:feed/core/enums/connectivity_status.dart';
 import 'package:feed/core/services/user_service/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
+class StartUpViewModel extends FutureViewModel<bool> {
   final _log = getLogger('StartUpViewModel');
   final UserService _userService = locator<UserService>();
   final APIService _apiService = locator<APIService>();
@@ -16,9 +15,13 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
       locator<ConnectivityService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  bool get isOffline => data == ConnectivityStatus.Offline;
+  Future<void> runStartupLogic({bool? connectivityPassed}) async {
+    if (connectivityPassed == null) {
+      var isOnline = await _connectivityService.isConnected;
 
-  Future<void> runStartupLogic() async {
+      if (!isOnline) return;
+    }
+
     bool isLoggedIn = _userService.hasLoggedInUser();
     var forceUpdateRequired = await _apiService.checkUpdateRequired();
 
@@ -48,15 +51,11 @@ class StartUpViewModel extends StreamViewModel<ConnectivityStatus> {
   }
 
   @override
-  void onData(ConnectivityStatus? data) {
-    if (data == ConnectivityStatus.Offline) return;
-
-    if (data == ConnectivityStatus.WiFi || data == ConnectivityStatus.Cellular)
-      runStartupLogic();
-
+  void onData(bool? data) {
+    if (data != null && data) runStartupLogic(connectivityPassed: data);
     super.onData(data);
   }
 
   @override
-  Stream<ConnectivityStatus> get stream => _connectivityService.connectivity;
+  Future<bool> futureToRun() => _connectivityService.isConnected;
 }

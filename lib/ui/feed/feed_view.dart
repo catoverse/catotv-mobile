@@ -26,6 +26,7 @@ class FeedView extends StatelessWidget with $FeedView {
                   }
                 },
                 child: PagedListView<int, Video>(
+                  cacheExtent: 1000,
                   pagingController: pagingController,
                   builderDelegate: PagedChildBuilderDelegate<Video>(
                     itemBuilder: (context, item, index) => FeedItem(

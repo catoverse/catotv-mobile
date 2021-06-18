@@ -23,42 +23,44 @@ class StartUpView extends StatelessWidget {
         bottomNavigationBar: AnimatedContainer(
           padding: EdgeInsets.all(20.0),
           duration: Duration(milliseconds: 200),
-          child: model.isOffline
-              ? Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "You're offline",
-                      style: uiHelpers.heading!
-                          .copyWith(color: AppColors.onPrimary),
+          child: model.isBusy
+              ? CircularProgressIndicator()
+              : model.data!
+                  ? Text(
+                      "FROM\nCATOVERSE",
+                      style: TextStyle(
+                          color: AppColors.onPrimary,
+                          fontSize: 14,
+                          letterSpacing: 1.45,
+                          fontWeight: FontWeight.w500),
                       textAlign: TextAlign.center,
-                    ),
-                    Text(
-                      "You seem to have no internet connection\n",
-                      style: uiHelpers.button!
-                          .copyWith(color: AppColors.onPrimary),
-                      textAlign: TextAlign.center,
-                    ),
-                    OutlinedButton(
-                        onPressed: () {},
-                        style: raisedButtonStyle,
-                        child: Text(
-                          "Retry",
+                    )
+                  : Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "You're offline",
+                          style: uiHelpers.heading!
+                              .copyWith(color: AppColors.onPrimary),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          "You seem to have no internet connection\n",
                           style: uiHelpers.button!
                               .copyWith(color: AppColors.onPrimary),
-                        ))
-                  ],
-                )
-              : Text(
-                  "FROM\nCATOVERSE",
-                  style: TextStyle(
-                      color: AppColors.onPrimary,
-                      fontSize: 14,
-                      letterSpacing: 1.45,
-                      fontWeight: FontWeight.w500),
-                  textAlign: TextAlign.center,
-                ),
+                          textAlign: TextAlign.center,
+                        ),
+                        OutlinedButton(
+                            onPressed: () => model.runStartupLogic(),
+                            style: raisedButtonStyle,
+                            child: Text(
+                              "Retry",
+                              style: uiHelpers.button!
+                                  .copyWith(color: AppColors.onPrimary),
+                            ))
+                      ],
+                    ),
         ),
       ),
       viewModel: StartUpViewModel(),
