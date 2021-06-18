@@ -43,6 +43,12 @@ class _FeedPlayerState extends State<FeedPlayer> {
   }
 
   @override
+  void deactivate() {
+    widget.feedPlayerController.pause();
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
       key: ObjectKey(flickManager),

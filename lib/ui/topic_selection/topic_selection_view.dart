@@ -7,7 +7,7 @@ import 'topic_selection_viewmodel.dart';
 
 class TopicSelectionView extends StatelessWidget {
   /// Indicates whether this view is used to select new topics or to update existing topics
-  final bool? updateTopicSelection;
+  final bool updateTopicSelection;
 
   const TopicSelectionView({Key? key, this.updateTopicSelection = false})
       : super(key: key);
@@ -18,7 +18,7 @@ class TopicSelectionView extends StatelessWidget {
         viewModel: TopicSelectionViewModel(),
         onModelReady: (model) {
           model.getTopics();
-          if (updateTopicSelection!) model.getSelectedTopics();
+          if (updateTopicSelection) model.getSelectedTopics();
         },
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(
@@ -71,7 +71,7 @@ class TopicSelectionView extends StatelessWidget {
                               textStyle: MaterialStateProperty.all<TextStyle>(
                                   uiHelpers.button!)),
                           onPressed: () => model.storeSelectedTopics(
-                              isUpdate: updateTopicSelection!),
+                              isUpdate: updateTopicSelection),
                           child: Text("Continue"),
                         ),
                 ),

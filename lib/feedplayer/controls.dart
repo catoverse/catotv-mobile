@@ -17,15 +17,13 @@ class FeedPlayerPortraitControls extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        Expanded(
-          child: FlickSeekVideoAction(
-            child: Center(
-                child: FlickVideoBuffer(
-              child: FlickPlayToggle(
-                size: 50,
-              ),
-            )),
-          ),
+        FlickSeekVideoAction(
+          child: Center(
+              child: FlickVideoBuffer(
+            child: FlickPlayToggle(
+              size: 50,
+            ),
+          )),
         ),
         Positioned(
           bottom: 0,

@@ -16,6 +16,7 @@ class FeedView extends StatelessWidget with $FeedView {
     return ScreenBuilder<BaseFeedViewModel>(
         viewModel: BaseFeedViewModel(),
         onModelReady: (model) => listenToPageRequests(model),
+        onDispose: feedPlayerController.dispose(),
         builder: (context, uiHelpers, model) => Scaffold(
               body: VisibilityDetector(
                 key: ObjectKey(feedPlayerController),
