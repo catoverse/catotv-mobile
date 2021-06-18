@@ -19,8 +19,10 @@ class YoutubeService {
       if (response.statusCode == 200)
         return _parseResponse(response.body);
       else
-        return "Error";
+        _log.e("Error: ${response.body}");
+      return "Error";
     } catch (e) {
+      _log.e(e);
       return e.toString();
     }
   }
@@ -54,6 +56,6 @@ class YoutubeService {
   static String getThumbnail(String youtubeUrl) {
     String videoId = convertUrlToId(youtubeUrl)!;
 
-    return "https://i3.ytimg.com/vi_webp/$videoId/sddefault.webp";
+    return "https://i.ytimg.com/vi/$videoId/sddefault.jpg";
   }
 }
