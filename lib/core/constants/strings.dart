@@ -4,6 +4,7 @@ class AppStrings {
   static const topicBox = "VIDEO_TOPICS";
   static const googleClient = "GOOGLE_CLIENT";
   static const apiURL = "API_URL";
+  static const ytApi = "YT_API_URL";
   static const onboardingItemTitle1 = "Learn. Everyday.\nEffortlessly.";
   static const onboardingItemTitle2 =
       "Learn what matters. From\nthe best. For Free.";

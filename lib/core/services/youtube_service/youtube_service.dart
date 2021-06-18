@@ -1,33 +1,36 @@
+import 'dart:convert';
+
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
+import 'package:feed/core/constants/strings.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart';
 
 class YoutubeService {
   final _log = getLogger("Youtube Utils");
-  final YoutubeExplode _youtubeExplode = locator<YoutubeExplode>();
+  final _client = locator<Client>();
 
   Future<String> getStream(String youtubeVideoUrl) async {
-    String videoID = convertUrlToId(youtubeVideoUrl)!;
-    var quality = VideoQuality.medium480;
-
     try {
-      var manifest =
-          await _youtubeExplode.videos.streamsClient.getManifest(videoID);
+      String apiUrl = env[AppStrings.ytApi]!;
 
-      late Uri videoUri = manifest.muxed.first.url;
+      var response = await _client.get(Uri.parse("$apiUrl$youtubeVideoUrl"));
 
-      manifest.muxed.forEach((m) {
-        if (quality == m.videoQuality) {
-          videoUri = m.url;
-        }
-      });
-
-      _log.v("Here's the stream link ${videoUri.toString()}");
-
-      return videoUri.toString();
+      if (response.statusCode == 200)
+        return _parseResponse(response.body);
+      else
+        return "Error";
     } catch (e) {
       return e.toString();
     }
+  }
+
+  String _parseResponse(String body) {
+    var res = json.decode(body);
+
+    _log.i("Here's the response: $res");
+
+    return res["links"][0] as String;
   }
 
   static String? convertUrlToId(String url, {bool trimWhitespaces = true}) {

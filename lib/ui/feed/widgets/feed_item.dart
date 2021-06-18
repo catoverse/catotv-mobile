@@ -27,8 +27,8 @@ class FeedItem extends StatefulWidget {
 
 class _FeedItemState extends State<FeedItem>
     with AutomaticKeepAliveClientMixin {
+  YoutubeService youtubeService = locator<YoutubeService>();
   late String videoUrl;
-
   bool mounted = false;
 
   @override
@@ -41,8 +41,6 @@ class _FeedItemState extends State<FeedItem>
   }
 
   Future getStreamUrl() async {
-    YoutubeService youtubeService = locator<YoutubeService>();
-
     String streamUrl = await youtubeService.getStream(widget.video.youtubeUrl);
 
     return streamUrl;

@@ -22,10 +22,10 @@ import 'package:feed/ui/restricted_home/restricted_home_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
 import 'package:feed/ui/topic_selection/topic_selection_view.dart';
 import 'package:feed/ui/update/update_view.dart';
+import 'package:http/http.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import 'injection.dart';
 
@@ -76,7 +76,7 @@ import 'injection.dart';
 
     /// Custom services to make things work for the application
     LazySingleton(classType: UserServiceImpl, asType: UserService),
-    LazySingleton(classType: YoutubeExplode),
+    LazySingleton(classType: Client),
     LazySingleton(classType: YoutubeService),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
     LazySingleton(classType: FeedServiceImpl, asType: FeedService),

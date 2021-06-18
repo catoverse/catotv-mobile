@@ -54,6 +54,7 @@ dependencies:
   visibility_detector: ^0.2.0
   infinite_scroll_pagination: ^3.0.1+1
   firebase_analytics: ^8.1.2
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:

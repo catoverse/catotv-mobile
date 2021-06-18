@@ -39,6 +39,7 @@ class RestrictedHomeView extends StatelessWidget {
                       ? Center(child: CircularProgressIndicator())
                       : ListView(
                           controller: _controller,
+                          cacheExtent: 1000,
                           children: model.videos
                               .map((video) => FeedItem(
                                   video: video,
