@@ -54,8 +54,8 @@ class YoutubeService {
   }
 
   static String getThumbnail(String youtubeUrl) {
-    String videoId = convertUrlToId(youtubeUrl)!;
+    String videoId = convertUrlToId(youtubeUrl) ?? "";
 
-    return "https://i.ytimg.com/vi/$videoId/sddefault.jpg";
+    return "https://img.youtube.com/vi/$videoId/hqdefault.jpg";
   }
 }

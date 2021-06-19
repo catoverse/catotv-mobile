@@ -1,5 +1,5 @@
 import 'package:feed/feedplayer/controller.dart';
-import 'package:feed/ui/feed/widgets/feed_item.dart';
+// import 'package:feed/ui/feed/widgets/feed_item.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -40,11 +40,8 @@ class RestrictedHomeView extends StatelessWidget {
                       : ListView(
                           controller: _controller,
                           cacheExtent: 1000,
-                          children: model.videos
-                              .map((video) => FeedItem(
-                                  video: video,
-                                  feedPlayerController: feedPlayerController))
-                              .toList()),
+                          children:
+                              model.videos.map((video) => ListTile()).toList()),
                 ),
               ),
             ));

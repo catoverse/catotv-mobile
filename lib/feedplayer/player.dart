@@ -1,5 +1,8 @@
+import 'package:feed/core/constants/assets.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
+import 'package:feed/ui/global/blurred_image.dart';
+import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 
 import 'package:flutter/material.dart';
@@ -63,6 +66,8 @@ class _FeedPlayerState extends State<FeedPlayer> {
             playerLoadingFallback: Positioned.fill(
               child: Stack(
                 children: <Widget>[
+                  Positioned.fill(
+                      child: ThumbnailImage(thumbnail: widget.thumbnail)),
                   Positioned(
                     right: 10,
                     top: 10,
@@ -84,9 +89,8 @@ class _FeedPlayerState extends State<FeedPlayer> {
             )),
         flickVideoWithControlsFullscreen: FlickVideoWithControls(
           playerLoadingFallback: Center(
-              child: Image.network(
-            widget.thumbnail,
-            fit: BoxFit.fitWidth,
+              child: ThumbnailImage(
+            thumbnail: widget.thumbnail,
           )),
           controls: FlickLandscapeControls(),
           iconThemeData: IconThemeData(

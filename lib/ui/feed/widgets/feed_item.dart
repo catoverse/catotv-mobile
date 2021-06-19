@@ -3,6 +3,7 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/player.dart';
+import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flutter/material.dart';
 
 final yt = locator<YoutubeService>();
@@ -29,6 +30,7 @@ class _FeedItemState extends State<FeedItem>
     with AutomaticKeepAliveClientMixin {
   YoutubeService youtubeService = locator<YoutubeService>();
   late String videoUrl;
+  late String thumbnail;
   bool mounted = false;
 
   @override
@@ -37,6 +39,7 @@ class _FeedItemState extends State<FeedItem>
           videoUrl = value;
           mounted = true;
         }));
+    thumbnail = YoutubeService.getThumbnail(widget.video.youtubeUrl);
     super.initState();
   }
 
@@ -64,11 +67,9 @@ class _FeedItemState extends State<FeedItem>
               ? FeedPlayer(
                   url: videoUrl,
                   feedPlayerController: widget.feedPlayerController,
-                  thumbnail:
-                      YoutubeService.getThumbnail(widget.video.youtubeUrl),
+                  thumbnail: thumbnail,
                 )
-              : Image.network(
-                  YoutubeService.getThumbnail(widget.video.youtubeUrl)),
+              : ThumbnailImage(thumbnail: thumbnail),
 
           // Footer of the video card'Example of a Dynamic Link'
           _displayFooter()

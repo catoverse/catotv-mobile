@@ -1,10 +1,13 @@
 class AppStrings {
+  // Keys
   static const userAuthBox = "USER_AUTH_BOX";
   static const userSelectedTopics = "USER_SELECTED_TOPICS_BOX";
   static const topicBox = "VIDEO_TOPICS";
   static const googleClient = "GOOGLE_CLIENT";
   static const apiURL = "API_URL";
   static const ytApi = "YT_API_URL";
+
+  // Text
   static const onboardingItemTitle1 = "Learn. Everyday.\nEffortlessly.";
   static const onboardingItemTitle2 =
       "Learn what matters. From\nthe best. For Free.";
@@ -15,7 +18,9 @@ class AppStrings {
       "Learn from the experts, all for free! Seen\na better deal than this? Please send it our\nway too.";
   static const onboardingItemSubTitle3 =
       "Play games with friends to practice,\nimplement and improve upon what you learn";
-
   static const String confirmExitMessage = "Are you sure to exit?";
   static const String confirmExitInfo = "👋 Bye!";
+
+  // Numbers
+  static const int VideoFetchThreshold = 10;
 }

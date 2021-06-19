@@ -8,4 +8,5 @@ class Assets {
   static const topicHealthImage = "assets/images/health.png";
   static const topicIntellectualImage = "assets/images/intellectual.png";
   static const topicProductivityImage = "assets/images/productivity.png";
+  static const placeholderImage = "assets/images/placeholder.jpg";
 }

@@ -1,41 +1,55 @@
-import 'package:feed/core/models/app_models.dart';
-import 'package:feed/feedplayer/controller.dart';
-import 'package:feed/ui/feed/feed_view.page.dart';
 import 'package:feed/ui/feed/widgets/feed_item.dart';
 import 'package:feed/ui/global/screen.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 
 import 'feed_viewmodel.dart';
 
-class FeedView extends StatelessWidget with $FeedView {
-  final feedPlayerController = FeedPlayerController();
+class FeedView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenBuilder<BaseFeedViewModel>(
-        viewModel: BaseFeedViewModel(),
-        onModelReady: (model) => listenToPageRequests(model),
-        onDispose: feedPlayerController.dispose(),
+    return ScreenBuilder<FeedViewModel>(
+        viewModel: FeedViewModel(),
+        onModelReady: (model) => model.getVideos(),
         builder: (context, uiHelpers, model) => Scaffold(
-              body: VisibilityDetector(
-                key: ObjectKey(feedPlayerController),
-                onVisibilityChanged: (visibility) {
-                  if (visibility.visibleFraction == 0) {
-                    feedPlayerController.pause();
-                  }
-                },
-                child: PagedListView<int, Video>(
-                  cacheExtent: 1000,
-                  pagingController: pagingController,
-                  builderDelegate: PagedChildBuilderDelegate<Video>(
-                    itemBuilder: (context, item, index) => FeedItem(
-                        onShare: () => model.shareVideo(item),
-                        video: item,
-                        feedPlayerController: feedPlayerController),
-                  ),
-                ),
-              ),
+              body: model.isBusy
+                  ? Center(child: CircularProgressIndicator())
+                  : RefreshIndicator(
+                      onRefresh: () => model.refresh(),
+                      child: ListView(
+                        children: [
+                          ...model.videos
+                              .map(
+                                (video) => FeedItem(
+                                  onShare: () => model.shareVideo(video),
+                                  video: video,
+                                  feedPlayerController: model.controller,
+                                ),
+                              )
+                              .toList(),
+                          Container(
+                            padding: const EdgeInsets.all(20.0),
+                            decoration: BoxDecoration(
+                                color: AppColors.surface,
+                                borderRadius: BorderRadius.circular(5.0)),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Woow! You covered all the videos and reached the end of the list\n",
+                                  style: uiHelpers.button,
+                                  textAlign: TextAlign.center,
+                                ),
+                                ElevatedButton(
+                                    onPressed: () => model.refresh(),
+                                    child: Text("Want More?")),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
             ));
   }
 }

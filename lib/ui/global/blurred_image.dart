@@ -13,6 +13,10 @@ class BlurredImage extends StatelessWidget {
       : this.imageProvider = NetworkImage(imageUrl),
         this.showBlur = showBlur;
 
+  BlurredImage.asset(String assetName, {bool showBlur = false})
+      : this.imageProvider = AssetImage(assetName),
+        this.showBlur = showBlur;
+
   @override
   Widget build(BuildContext context) {
     return Stack(
