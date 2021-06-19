@@ -3,24 +3,45 @@ import 'dart:convert';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/strings.dart';
+import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart';
 
 class YoutubeService {
   final _log = getLogger("Youtube Utils");
   final _client = locator<Client>();
+  final _hiveService = locator<HiveService>();
 
   Future<String> getStream(String youtubeVideoUrl) async {
+    var videoId = convertUrlToId(youtubeVideoUrl)!;
+    var isItemCached = await _hiveService.fetchItem<String>(boxName: videoId);
+
+    if (isItemCached.isFailed) return _getUrlFromAPI(youtubeVideoUrl);
+
+    var epoch = isItemCached.success!.split("expire=")[1].substring(0, 10);
+    var currentEpoch = DateTime.now().microsecondsSinceEpoch / 1000000;
+
+    if (currentEpoch > double.parse(epoch))
+      return _getUrlFromAPI(youtubeVideoUrl);
+
+    return isItemCached.success!;
+  }
+
+  Future<String> _getUrlFromAPI(String url) async {
     try {
       String apiUrl = env[AppStrings.ytApi]!;
 
-      var response = await _client.get(Uri.parse("$apiUrl$youtubeVideoUrl"));
+      var response = await _client.get(Uri.parse("$apiUrl$url"));
+      var videoId = convertUrlToId(url)!;
 
-      if (response.statusCode == 200)
-        return _parseResponse(response.body);
-      else
+      if (response.statusCode == 200) {
+        var res = _parseResponse(response.body);
+        await _hiveService.insertItem<String>(item: res, boxName: videoId);
+        return res;
+      } else
         _log.e("Error: ${response.body}");
-      return "Error";
+
+      return response.body;
     } catch (e) {
       _log.e(e);
       return e.toString();
