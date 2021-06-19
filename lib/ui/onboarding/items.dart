@@ -12,17 +12,17 @@ class OnboardingItem {
 
 final List<OnboardingItem> onboardingItems = [
   OnboardingItem(
-      heading: AppStrings.onboardingItemTitle1,
+      heading: OnboardingItemTitle1,
       image: Assets.onboardingImage1,
-      subheading: AppStrings.onboardingItemSubTitle1),
+      subheading: OnboardingItemSubtitle1),
   OnboardingItem(
-      heading: AppStrings.onboardingItemTitle2,
+      heading: OnboardingItemTitle2,
       image: Assets.onboardingImage2,
-      subheading: AppStrings.onboardingItemSubTitle2),
+      subheading: OnboardingItemSubtitle2),
   OnboardingItem(
-      heading: AppStrings.onboardingItemTitle3,
+      heading: OnboardingItemTitle3,
       image: Assets.onboardingImage3,
-      subheading: AppStrings.onboardingItemSubTitle3),
+      subheading: OnboardingItemSubtitle3),
 ];
 
 class OnboardingBodyListItem extends StatelessWidget {

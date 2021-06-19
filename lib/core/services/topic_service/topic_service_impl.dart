@@ -1,5 +1,5 @@
 import 'package:feed/app/app.locator.dart';
-import 'package:feed/core/constants/strings.dart';
+import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -35,8 +35,8 @@ class TopicServiceImpl implements TopicService {
   Future<List<String>> getSelectedTopics(String userId) async {
     List<String> topics = [];
 
-    var result = await _hiveService.fetchList<String>(
-        boxName: AppStrings.userSelectedTopics);
+    var result =
+        await _hiveService.fetchList<String>(boxName: UserSelectedTopicsBox);
 
     /// There's no selected topics from Hive, So fetch them from API Call
     if (result.isFailed || result.success!.isEmpty) {

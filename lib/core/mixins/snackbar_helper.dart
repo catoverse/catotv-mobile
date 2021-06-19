@@ -9,9 +9,9 @@ mixin SnackbarHelper {
 
   Future<bool> showExitSnackbar() async {
     _snackbarService.showSnackbar(
-      title: AppStrings.confirmExitInfo,
+      title: ConfirmExitTitle,
       duration: Duration(seconds: 5),
-      message: AppStrings.confirmExitMessage,
+      message: ConfirmExitDescription,
       mainButtonTitle: "Yes",
       onMainButtonTapped: () {
         exit(0);

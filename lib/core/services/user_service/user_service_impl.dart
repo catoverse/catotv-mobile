@@ -1,6 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/core/constants/strings.dart';
+import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -44,8 +44,7 @@ class UserServiceImpl implements UserService {
 
     if (result is User) {
       await populateCurrentUser(user: result);
-      await _hiveService.insertItem<User>(
-          item: result, boxName: AppStrings.userAuthBox);
+      await _hiveService.insertItem<User>(item: result, boxName: AuthUserBox);
       return currentUser;
     }
 
@@ -60,8 +59,7 @@ class UserServiceImpl implements UserService {
       return;
     }
 
-    var hiveUser =
-        await _hiveService.fetchItem<User>(boxName: AppStrings.userAuthBox);
+    var hiveUser = await _hiveService.fetchItem<User>(boxName: AuthUserBox);
 
     if (hiveUser.isFailed) return false;
 
@@ -95,7 +93,7 @@ class UserServiceImpl implements UserService {
 
     if (result is bool && result) {
       await _hiveService.insertList<String>(
-          items: topicIds, boxName: AppStrings.userSelectedTopics);
+          items: topicIds, boxName: UserSelectedTopicsBox);
     }
 
     return result as bool;

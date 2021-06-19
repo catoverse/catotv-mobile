@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/core/constants/strings.dart';
+import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart';
@@ -29,7 +29,7 @@ class YoutubeService {
 
   Future<String> _getUrlFromAPI(String url) async {
     try {
-      String apiUrl = env[AppStrings.ytApi]!;
+      String apiUrl = env[VideoApiEnvKey]!;
 
       var response = await _client.get(Uri.parse("$apiUrl$url"));
       var videoId = convertUrlToId(url)!;

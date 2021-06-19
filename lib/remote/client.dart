@@ -1,5 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/constants/strings.dart';
 import 'package:feed/core/exceptions/api_exception.dart';
 import 'package:feed/core/models/result/failure.dart';
@@ -32,7 +33,7 @@ class RemoteClient {
   ///
   /// The [CustomAuthLink] is used to pass authToken for API calls
   GraphQLClient getInstance() {
-    String url = env[AppStrings.apiURL]!;
+    String url = env[GraphqlApiEnvKey]!;
 
     final _httpLink = HttpLink(url);
 

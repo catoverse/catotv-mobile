@@ -4,6 +4,7 @@
    <application
         android:label="Cato TV"
         android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
         >
         <activity
             android:name=".MainActivity"
