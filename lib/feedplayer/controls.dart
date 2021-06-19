@@ -35,6 +35,7 @@ class FeedPlayerPortraitControls extends StatelessWidget {
                 playedColor: Colors.indigoAccent,
                 handleColor: Colors.indigo,
                 bufferedColor: Colors.indigo,
+                height: 5,
                 backgroundColor: Colors.indigo.shade100),
           ),
         ),

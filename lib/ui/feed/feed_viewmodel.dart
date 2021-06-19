@@ -41,4 +41,10 @@ class FeedViewModel extends BaseViewModel {
   }
 
   Future<void> refresh() async => await getVideos(dispose: true);
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 }
