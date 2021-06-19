@@ -1,6 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/core/services/feed_service/feed_service.dart';
+import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:share/share.dart';

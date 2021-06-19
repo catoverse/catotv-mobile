@@ -8,19 +8,18 @@
 
 import 'package:connectivity/connectivity.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../core/services/feed_service/feed_service.dart';
-import '../core/services/feed_service/feed_service_impl.dart';
+import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
 import '../core/services/topic_service/topic_service.dart';
 import '../core/services/topic_service/topic_service_impl.dart';
-import '../core/services/user_service/user_service.dart';
-import '../core/services/user_service/user_service_impl.dart';
+import '../core/services/user_service.dart';
 import '../core/services/youtube_service/youtube_service.dart';
 import '../firebase/analytics.dart';
 import '../firebase/dynamic_links.dart';
@@ -46,6 +45,9 @@ Future setupLocator(
   final packageInjection = await PackageInjection.getInstance();
   locator.registerSingleton(packageInjection);
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+  locator.registerSingleton(sharedPreferences);
+
   locator.registerLazySingleton(() => Connectivity());
   locator.registerLazySingleton<ConnectivityService>(
       () => ConnectivityServiceImpl());
@@ -57,11 +59,11 @@ Future setupLocator(
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
-  locator.registerLazySingleton<UserService>(() => UserServiceImpl());
+  locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => Client());
   locator.registerLazySingleton(() => YoutubeService());
   locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
-  locator.registerLazySingleton<FeedService>(() => FeedServiceImpl());
+  locator.registerLazySingleton(() => FeedService());
   locator.registerLazySingleton(() => DynamicLinksService());
   locator.registerLazySingleton(() => AnalyticsService());
 }

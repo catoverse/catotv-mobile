@@ -5,10 +5,8 @@ import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/hive_service/hive_service_impl.dart';
 import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/core/services/topic_service/topic_service_impl.dart';
-import 'package:feed/core/services/user_service/user_service_impl.dart';
-import 'package:feed/core/services/user_service/user_service.dart';
-import 'package:feed/core/services/feed_service/feed_service.dart';
-import 'package:feed/core/services/feed_service/feed_service_impl.dart';
+import 'package:feed/core/services/user_service.dart';
+import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
@@ -23,6 +21,7 @@ import 'package:feed/ui/startup/startup_view.dart';
 import 'package:feed/ui/topic_selection/topic_selection_view.dart';
 import 'package:feed/ui/update/update_view.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -54,6 +53,10 @@ import 'injection.dart';
       classType: PackageInjection,
       presolveUsing: PackageInjection.getInstance,
     ),
+    Presolve(
+      classType: SharedPreferences,
+      presolveUsing: SharedPreferences.getInstance,
+    ),
     LazySingleton(classType: Connectivity),
     LazySingleton(
         classType: ConnectivityServiceImpl, asType: ConnectivityService),
@@ -75,11 +78,11 @@ import 'injection.dart';
     LazySingleton(classType: FirebaseAuthenticationService),
 
     /// Custom services to make things work for the application
-    LazySingleton(classType: UserServiceImpl, asType: UserService),
+    LazySingleton(classType: UserService),
     LazySingleton(classType: Client),
     LazySingleton(classType: YoutubeService),
     LazySingleton(classType: TopicServiceImpl, asType: TopicService),
-    LazySingleton(classType: FeedServiceImpl, asType: FeedService),
+    LazySingleton(classType: FeedService),
     LazySingleton(classType: DynamicLinksService),
     LazySingleton(classType: AnalyticsService),
   ],

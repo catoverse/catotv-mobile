@@ -107,7 +107,7 @@ class APIServiceImpl implements APIService {
         variables:
             GQLQueries.createUserProfileVariables(userId, name, topicIds));
 
-    if (result.isFailed) return false;
+    if (result.isFailed) return result.failure;
 
     _log.v(result.success);
 

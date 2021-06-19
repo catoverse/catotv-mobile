@@ -1,7 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
-import 'package:feed/core/constants/strings.dart';
 import 'package:feed/core/exceptions/api_exception.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
@@ -108,8 +107,8 @@ class RemoteClient {
   Future<Result<Failure, dynamic>> _processResult(QueryResult result) async {
     if (result.hasException && result.exception != null) {
       _log.e(result.exception);
-      return Result.failed(Failure.exception(
-          GraphQLException(message: "Failed to fetch result from graphql")));
+      return Result.failed(Failure.exception(GraphQLException(
+          message: "Failed to fetch result from graphql ${result.exception}")));
     }
 
     if (result.data == null) {

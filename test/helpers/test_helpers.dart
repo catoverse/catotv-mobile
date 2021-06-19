@@ -3,12 +3,16 @@ import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
 import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/remote/api/api_service.dart';
+import 'package:feed/remote/client.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:mockito/annotations.dart';
 import 'package:feed/core/exceptions/api_exception.dart';
-import 'package:feed/core/services/user_service/user_service.dart';
+import 'package:feed/core/services/user_service.dart';
 import 'package:mockito/mockito.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'mock_data.dart';
 import 'test_helpers.mocks.dart';
@@ -19,7 +23,11 @@ import 'test_helpers.mocks.dart';
   MockSpec<NavigationService>(returnNullOnMissingStub: true),
   MockSpec<BottomSheetService>(returnNullOnMissingStub: true),
   MockSpec<SnackbarService>(returnNullOnMissingStub: true),
-  MockSpec<ConnectivityService>(returnNullOnMissingStub: true)
+  MockSpec<ConnectivityService>(returnNullOnMissingStub: true),
+  MockSpec<SharedPreferences>(returnNullOnMissingStub: true),
+  MockSpec<RemoteClient>(returnNullOnMissingStub: true),
+  MockSpec<HiveService>(returnNullOnMissingStub: true),
+  MockSpec<FirebaseAuthenticationService>(returnNullOnMissingStub: true),
 ])
 
 /// For testing UserService
@@ -31,13 +39,11 @@ MockUserService getAndRegisterUserService({
 }) {
   _removeRegistrationIfExists<UserService>();
   final service = MockUserService();
-  when(service.hasLoggedInUser()).thenAnswer((_) => hasLoggedInUser);
+  when(service.hasLoggedInUser).thenAnswer((_) => hasLoggedInUser);
   when(service.currentUser).thenReturn(currentUser ?? defaultUser);
 
-  when(service.populateCurrentUser()).thenAnswer((realInvocation) {
-    if (hasLoggedInUser) return Future.value(defaultUser);
-
-    return Future.delayed(Duration(milliseconds: 100));
+  when(service.syncUser()).thenAnswer((realInvocation) {
+    return Future.value(hasLoggedInUser);
   });
 
   when(service.loginWithGoogle()).thenAnswer((realInvocation) => failLogin
@@ -55,6 +61,13 @@ MockNavigationService getAndRegisterNavigationService() {
   _removeRegistrationIfExists<NavigationService>();
   final service = MockNavigationService();
   locator.registerSingleton<NavigationService>(service);
+  return service;
+}
+
+MockSharedPreferences getAndRegisterSharedPrefsService() {
+  _removeRegistrationIfExists<SharedPreferences>();
+  final service = MockSharedPreferences();
+  locator.registerSingleton<SharedPreferences>(service);
   return service;
 }
 
@@ -85,7 +98,9 @@ MockBottomSheetService getAndRegisterBottomSheetService(
 }
 
 MockAPIService getAndRegisterAPIService(
-    {bool hasInternet = true, bool isUpdateRequired = false}) {
+    {bool hasInternet = true,
+    bool isUpdateRequired = false,
+    bool createProfileError = false}) {
   _removeRegistrationIfExists<APIService>();
   final service = MockAPIService();
 
@@ -95,6 +110,24 @@ MockAPIService getAndRegisterAPIService(
 
     return Future.value(isUpdateRequired);
   });
+
+  when(service.createUserProfile(
+      name: defaultUser.name,
+      userId: defaultUser.id,
+      topicIds: [
+        "topic1",
+        "topic2"
+      ])).thenAnswer((realInvocation) => Future.value(
+      createProfileError ? Failure.message("failed to create profile") : true));
+
+  when(service.createUserProfile(
+          name: defaultUser.name, userId: defaultUser.id, topicIds: []))
+      .thenAnswer((realInvocation) =>
+          Future.value(Failure.message("Topic IDs should not be empty")));
+
+  when(service.createUserProfile(name: null, userId: null, topicIds: []))
+      .thenAnswer((realInvocation) => Future.value(Failure.message(
+          "You must pass name and userId. Topic IDs should not be null")));
 
   locator.registerSingleton<APIService>(service);
 
@@ -108,6 +141,27 @@ MockConnectivityService getAndRegisterConnectivityService() {
   return service;
 }
 
+MockHiveService getAndRegisterHiveService() {
+  _removeRegistrationIfExists<HiveService>();
+  final service = MockHiveService();
+  locator.registerSingleton<HiveService>(service);
+  return service;
+}
+
+MockRemoteClient getAndRegisterRemoteClient() {
+  _removeRegistrationIfExists<RemoteClient>();
+  final service = MockRemoteClient();
+  locator.registerSingleton<RemoteClient>(service);
+  return service;
+}
+
+MockFirebaseAuthenticationService getAndRegisterFirebaseAuthService() {
+  _removeRegistrationIfExists<FirebaseAuthenticationService>();
+  final service = MockFirebaseAuthenticationService();
+  locator.registerSingleton<FirebaseAuthenticationService>(service);
+  return service;
+}
+
 void registerServices() {
   getAndRegisterUserService();
   getAndRegisterAPIService();
@@ -115,12 +169,23 @@ void registerServices() {
   getAndRegisterSnackbarService();
   getAndRegisterBottomSheetService();
   getAndRegisterConnectivityService();
+  getAndRegisterSharedPrefsService();
+  getAndRegisterHiveService();
+  getAndRegisterRemoteClient();
+  getAndRegisterFirebaseAuthService();
 }
 
 void unregisterServices() {
   locator.unregister<UserService>();
-  locator.unregister<NavigationService>();
   locator.unregister<APIService>();
+  locator.unregister<NavigationService>();
+  locator.unregister<BottomSheetService>();
+  locator.unregister<SnackbarService>();
+  locator.unregister<ConnectivityService>();
+  locator.unregister<SharedPreferences>();
+  locator.unregister<RemoteClient>();
+  locator.unregister<HiveService>();
+  locator.unregister<FirebaseAuthenticationService>();
 }
 
 void _removeRegistrationIfExists<T extends Object>() {

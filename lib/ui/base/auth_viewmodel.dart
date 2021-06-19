@@ -2,8 +2,8 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
-import 'package:feed/core/models/result/failure.dart';
-import 'package:feed/core/services/user_service/user_service.dart';
+import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -49,11 +49,11 @@ abstract class AuthenticationViewModel extends BaseViewModel {
 
     var user = await _userService.loginWithGoogle();
 
-    if (user is Failure) {
-      return setBusy(false);
-    } else {
+    if (user is User) {
       _log.i("User Login Successful : Logged in user: $user");
       isProfileExists = await _userService.isUserProfileExists();
+    } else {
+      return setBusy(false);
     }
 
     setBusy(false);

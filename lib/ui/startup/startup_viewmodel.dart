@@ -1,7 +1,7 @@
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
-import 'package:feed/core/services/user_service/user_service.dart';
+import 'package:feed/core/services/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:stacked/stacked.dart';
@@ -22,7 +22,7 @@ class StartUpViewModel extends FutureViewModel<bool> {
       if (!isOnline) return;
     }
 
-    bool isLoggedIn = _userService.hasLoggedInUser();
+    bool isLoggedIn = _userService.hasLoggedInUser;
     var forceUpdateRequired = await _apiService.checkUpdateRequired();
 
     if (forceUpdateRequired is bool && forceUpdateRequired) {
@@ -33,7 +33,7 @@ class StartUpViewModel extends FutureViewModel<bool> {
     if (isLoggedIn) {
       _log.v('We have a user session on disk. Sync the user profile ...');
 
-      bool isProfileStored = await _userService.populateCurrentUser();
+      bool isProfileStored = await _userService.syncUser();
 
       if (!isProfileStored) redirectToLogin();
 

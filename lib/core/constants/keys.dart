@@ -7,3 +7,6 @@ const String GoogleClientEnvKey = "GOOGLE_CLIENT";
 const String AuthUserBox = "USER_AUTH_BOX";
 const String UserSelectedTopicsBox = "USER_SELECTED_TOPICS_BOX";
 const String AllTopicsBox = "VIDEO_TOPICS";
+
+// Shared Preferences keys
+const String LoginStatusKey = "LOGIN_STATUS";

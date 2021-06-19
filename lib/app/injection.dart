@@ -3,6 +3,7 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:hive/hive.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HiveInjection {
   /// To setup [Hive], you need to configure path and adapater registrations
@@ -28,5 +29,13 @@ class PackageInjection {
   static Future<PackageInfo> getInstance() async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     return packageInfo;
+  }
+}
+
+class SharedPrefsInjection {
+  /// Injects the regular [SharedPreferences] instance instead of [Future]
+  static Future<SharedPreferences> getInstance() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences;
   }
 }
