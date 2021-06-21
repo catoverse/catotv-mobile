@@ -4,9 +4,9 @@ import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/exceptions/api_exception.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/result/result.dart';
+import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/custom_link.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:graphql/client.dart';
 
 /// The [RemoteClient] is a wrapper class to abstract [GraphQLClient]
@@ -20,6 +20,7 @@ import 'package:graphql/client.dart';
 class RemoteClient {
   final _log = getLogger("Graphql Client");
   final _connectivity = locator<ConnectivityService>();
+  final _environmentService = locator<EnvironmentService>();
 
   late GraphQLClient _graphQLClient;
   String jwtToken = "";
@@ -32,7 +33,7 @@ class RemoteClient {
   ///
   /// The [CustomAuthLink] is used to pass authToken for API calls
   GraphQLClient getInstance() {
-    String url = env[GraphqlApiEnvKey]!;
+    String url = _environmentService.getValue(GraphqlApiEnvKey);
 
     final _httpLink = HttpLink(url);
 

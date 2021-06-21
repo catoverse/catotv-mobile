@@ -1,6 +1,7 @@
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
+import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
@@ -11,6 +12,7 @@ class StartUpViewModel extends FutureViewModel<bool> {
   final _log = getLogger('StartUpViewModel');
   final UserService _userService = locator<UserService>();
   final APIService _apiService = locator<APIService>();
+  final EnvironmentService _environmentService = locator<EnvironmentService>();
   final ConnectivityService _connectivityService =
       locator<ConnectivityService>();
   final NavigationService _navigationService = locator<NavigationService>();

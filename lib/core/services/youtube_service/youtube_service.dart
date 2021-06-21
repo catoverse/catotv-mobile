@@ -3,13 +3,14 @@ import 'dart:convert';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
+import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart';
 
 class YoutubeService {
   final _log = getLogger("Youtube Utils");
   final _client = locator<Client>();
+  final _environmentService = locator<EnvironmentService>();
   final _hiveService = locator<HiveService>();
 
   Future<String> getStream(String youtubeVideoUrl) async {
@@ -29,7 +30,7 @@ class YoutubeService {
 
   Future<String> _getUrlFromAPI(String url) async {
     try {
-      String apiUrl = env[VideoApiEnvKey]!;
+      String apiUrl = _environmentService.getValue(VideoApiEnvKey);
 
       var response = await _client.get(Uri.parse("$apiUrl$url"));
       var videoId = convertUrlToId(url)!;

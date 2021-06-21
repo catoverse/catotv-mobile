@@ -1,4 +1,5 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -45,6 +46,10 @@ import 'injection.dart';
     MaterialRoute(page: HomeView),
   ],
   dependencies: [
+    Presolve(
+      classType: EnvironmentService,
+      presolveUsing: EnvironmentService.getInstance,
+    ),
     Presolve(
       classType: HiveInjection,
       presolveUsing: HiveInjection.getInstance,

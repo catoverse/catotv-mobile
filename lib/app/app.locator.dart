@@ -14,6 +14,7 @@ import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../core/services/environment_service.dart';
 import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
@@ -39,6 +40,9 @@ Future setupLocator(
       environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
+  final environmentService = await EnvironmentService.getInstance();
+  locator.registerSingleton(environmentService);
+
   final hiveInjection = await HiveInjection.getInstance();
   locator.registerSingleton(hiveInjection);
 
