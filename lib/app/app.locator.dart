@@ -20,7 +20,7 @@ import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
 import '../core/services/topic_service.dart';
 import '../core/services/user_service.dart';
-import '../core/services/youtube_service/youtube_service.dart';
+import '../core/services/youtube_service.dart';
 import '../firebase/analytics.dart';
 import '../firebase/dynamic_links.dart';
 import '../remote/api/api_service.dart';

@@ -7,7 +7,7 @@ import 'package:feed/core/services/hive_service/hive_service_impl.dart';
 import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/core/services/feed_service.dart';
-import 'package:feed/core/services/youtube_service/youtube_service.dart';
+import 'package:feed/core/services/youtube_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
 import 'package:feed/remote/client.dart';

@@ -1,6 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/core/services/youtube_service/youtube_service.dart';
+import 'package:feed/core/services/youtube_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/player.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';

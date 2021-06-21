@@ -1,5 +1,5 @@
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/core/services/youtube_service/youtube_service.dart';
+import 'package:feed/core/services/youtube_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class DynamicLinksService {
