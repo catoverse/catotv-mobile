@@ -3,10 +3,9 @@ import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
-import 'package:feed/core/services/topic_service/topic_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 
-class TopicServiceImpl implements TopicService {
+class TopicService {
   final APIService _apiService = locator<APIService>();
   final HiveService _hiveService = locator<HiveService>();
 
@@ -14,7 +13,7 @@ class TopicServiceImpl implements TopicService {
 
   List<Topic> get topics => _allTopics;
 
-  @override
+  /// Fetches all the available [Topic] from API
   Future<List<Topic>> getTopics() async {
     List<Topic> topics = [];
 
@@ -31,7 +30,9 @@ class TopicServiceImpl implements TopicService {
     return topics;
   }
 
-  @override
+  /// fetches all the [Topic] selected by [User]
+  ///
+  /// if there are no topics selected, it returns all available [Topic]
   Future<List<String>> getSelectedTopics(String userId) async {
     List<String> topics = [];
 
@@ -53,7 +54,6 @@ class TopicServiceImpl implements TopicService {
     return topics;
   }
 
-  @override
   Future updateSelectedTopics(User user, List<String> topicIds) {
     // TODO: implement updateSelectedTopics
     throw UnimplementedError();

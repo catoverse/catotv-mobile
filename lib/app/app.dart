@@ -4,8 +4,7 @@ import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/hive_service/hive_service_impl.dart';
-import 'package:feed/core/services/topic_service/topic_service.dart';
-import 'package:feed/core/services/topic_service/topic_service_impl.dart';
+import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/core/services/youtube_service/youtube_service.dart';
@@ -86,7 +85,7 @@ import 'injection.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: Client),
     LazySingleton(classType: YoutubeService),
-    LazySingleton(classType: TopicServiceImpl, asType: TopicService),
+    LazySingleton(classType: TopicService),
     LazySingleton(classType: FeedService),
     LazySingleton(classType: DynamicLinksService),
     LazySingleton(classType: AnalyticsService),

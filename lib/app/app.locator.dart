@@ -18,8 +18,7 @@ import '../core/services/environment_service.dart';
 import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
-import '../core/services/topic_service/topic_service.dart';
-import '../core/services/topic_service/topic_service_impl.dart';
+import '../core/services/topic_service.dart';
 import '../core/services/user_service.dart';
 import '../core/services/youtube_service/youtube_service.dart';
 import '../firebase/analytics.dart';
@@ -66,7 +65,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => Client());
   locator.registerLazySingleton(() => YoutubeService());
-  locator.registerLazySingleton<TopicService>(() => TopicServiceImpl());
+  locator.registerLazySingleton(() => TopicService());
   locator.registerLazySingleton(() => FeedService());
   locator.registerLazySingleton(() => DynamicLinksService());
   locator.registerLazySingleton(() => AnalyticsService());
