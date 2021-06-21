@@ -10,6 +10,7 @@ class StartUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenBuilder<StartUpViewModel>(
+      onModelReady: (model) => model.onModelReady(),
       builder: (context, uiHelpers, model) => Scaffold(
         backgroundColor: Colors.indigo,
         body: Center(
@@ -25,7 +26,7 @@ class StartUpView extends StatelessWidget {
           duration: Duration(milliseconds: 200),
           child: model.isBusy
               ? CircularProgressIndicator()
-              : model.data!
+              : model.isConnected
                   ? Text(
                       "FROM\nCATOVERSE",
                       style: TextStyle(

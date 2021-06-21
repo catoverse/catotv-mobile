@@ -6,49 +6,75 @@ import 'package:mockito/mockito.dart';
 import '../helpers/test_helpers.dart';
 
 StartUpViewModel _getModel() => StartUpViewModel();
-
 void main() {
-  group('StartupViewmodelTest -', () {
+  group('StartupViewmodel Test -', () {
     setUp(() => registerServices());
     tearDown(() => unregisterServices());
 
-    group('runStartupLogic -', () {
-      test('When there is an update required, should navigate to update view',
+    group('onModelReady -', () {
+      test('when model is ready, it should check for connection status',
           () async {
-        getAndRegisterAPIService(isUpdateRequired: true);
-        final navigationService = getAndRegisterNavigationService();
-        final model = _getModel();
-        await model.runStartupLogic();
-        verify(navigationService.replaceWith(Routes.updateView));
+        final service = getAndRegisterConnectivityService();
+        var model = _getModel();
+        model.onModelReady();
+        verify(service.isConnected);
       });
 
-      test('When we have no logged in user, should navigate to onboarding view',
+      test('when model is ready and if no connection it should return',
           () async {
-        final navigationService = getAndRegisterNavigationService();
-        final model = _getModel();
-        await model.runStartupLogic();
-
-        verify(navigationService.replaceWith(Routes.onboardingView));
-      });
-
-      test('When we have a logged in user, should navigate to home view',
-          () async {
-        getAndRegisterUserService(hasLoggedInUser: true);
-        final navigationService = getAndRegisterNavigationService();
-        final model = _getModel();
-        await model.runStartupLogic();
-
-        verify(navigationService.replaceWith(Routes.homeView));
+        getAndRegisterConnectivityService(isConnected: false);
+        final service = getAndRegisterUserService();
+        var model = _getModel();
+        await model.onModelReady();
+        verifyNever(service.hasLoggedInUser);
       });
 
       test(
-          'When hasLoggedInUser is true, should get currentUser from userService',
+          'when model is ready with active connection it should runStartupLogic',
           () async {
-        final userService = getAndRegisterUserService(hasLoggedInUser: true);
-        final model = _getModel();
-        await model.runStartupLogic();
+        final service = getAndRegisterUserService();
+        var model = _getModel();
+        await model.onModelReady();
+        verify(service.hasLoggedInUser);
+      });
+    });
 
-        verify(userService.currentUser);
+    group("runStartupLogic - ", () {
+      test('when there is an update, it should redirect to update view',
+          () async {
+        getAndRegisterAPIService(isUpdateRequired: true);
+        final service = getAndRegisterNavigationService();
+        var model = _getModel();
+        await model.runStartupLogic();
+        verify(service.replaceWith(Routes.updateView));
+      });
+
+      test(
+          'when user logged in and profile available in hive, it should redirect to home',
+          () async {
+        final service = getAndRegisterNavigationService();
+        var model = _getModel();
+        await model.runStartupLogic();
+        verify(service.replaceWith(Routes.homeView));
+      });
+
+      test(
+          'when user logged in and profile is not available in hive, it should redirect to onboarding',
+          () async {
+        getAndRegisterUserService(hasProfile: false);
+        final service = getAndRegisterNavigationService();
+        var model = _getModel();
+        await model.runStartupLogic();
+        verify(service.replaceWith(Routes.onboardingView));
+      });
+
+      test('when there is no user logged in, it should redirect to onboarding',
+          () async {
+        getAndRegisterUserService(hasLoggedInUser: false);
+        final service = getAndRegisterNavigationService();
+        var model = _getModel();
+        await model.runStartupLogic();
+        verify(service.replaceWith(Routes.onboardingView));
       });
     });
   });
