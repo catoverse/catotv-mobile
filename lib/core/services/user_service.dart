@@ -29,12 +29,12 @@ class UserService {
   /// Returns [true] if the user is signed on the device
   bool get hasLoggedInUser => _sharedPrefs.getBool(LoginStatusKey) ?? false;
 
-  Future loginWithGoogle() async {
+  Future<bool> loginWithGoogle() async {
     final authResult = await _authService.signInWithGoogle();
 
     if (authResult.hasError) {
       _log.e('Local google signin error: ${authResult.errorMessage}');
-      return;
+      return false;
     }
 
     var googleUser = authResult.user;
@@ -49,7 +49,7 @@ class UserService {
 
     if (result is Failure) {
       _log.e('Gql Google signin error: $result');
-      return;
+      return false;
     }
 
     _log.i("User signed in successful");
@@ -62,7 +62,7 @@ class UserService {
       _sharedPrefs.setBool(LoginStatusKey, true)
     ]);
 
-    return currentUser;
+    return true;
   }
 
   /// Stores the loggedin user and updates
@@ -97,7 +97,7 @@ class UserService {
   ///
   /// Returns [true] if there's existing profile available
   Future<bool> isUserProfileExists() async {
-    var result = await _apiService.getProfile(userID: currentUser.id);
+    var result = await _apiService.getProfile(userId: currentUser.id);
     return !(result is Failure);
   }
 

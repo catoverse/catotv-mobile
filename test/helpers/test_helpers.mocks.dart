@@ -62,9 +62,9 @@ class MockUserService extends _i1.Mock implements _i7.UserService {
           .noSuchMethod(Invocation.getter(#hasLoggedInUser), returnValue: false)
       as bool);
   @override
-  _i8.Future<dynamic> loginWithGoogle() =>
+  _i8.Future<bool> loginWithGoogle() =>
       (super.noSuchMethod(Invocation.method(#loginWithGoogle, []),
-          returnValue: Future<dynamic>.value()) as _i8.Future<dynamic>);
+          returnValue: Future<bool>.value(false)) as _i8.Future<bool>);
   @override
   _i8.Future<bool> syncUser({_i2.User? user}) =>
       (super.noSuchMethod(Invocation.method(#syncUser, [], {#user: user}),
@@ -119,8 +119,8 @@ class MockAPIService extends _i1.Mock implements _i9.APIService {
       Invocation.method(#requestInvite, [], {#email: email}),
       returnValue: Future<dynamic>.value()) as _i8.Future<dynamic>);
   @override
-  _i8.Future<dynamic> getProfile({String? userID}) =>
-      (super.noSuchMethod(Invocation.method(#getProfile, [], {#userID: userID}),
+  _i8.Future<dynamic> getProfile({String? userId}) =>
+      (super.noSuchMethod(Invocation.method(#getProfile, [], {#userId: userId}),
           returnValue: Future<dynamic>.value()) as _i8.Future<dynamic>);
   @override
   _i8.Future<dynamic> createUserProfile(

@@ -46,9 +46,8 @@ MockUserService getAndRegisterUserService({
     return Future.value(hasLoggedInUser);
   });
 
-  when(service.loginWithGoogle()).thenAnswer((realInvocation) => failLogin
-      ? Future.value(Failure.message("Server error"))
-      : Future.value(defaultUser));
+  when(service.loginWithGoogle())
+      .thenAnswer((realInvocation) => Future.value(!failLogin));
 
   when(service.isUserProfileExists())
       .thenAnswer((realInvocation) => Future.value(profileExists));

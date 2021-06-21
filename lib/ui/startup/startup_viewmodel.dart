@@ -31,14 +31,12 @@ class StartUpViewModel extends FutureViewModel<bool> {
     }
 
     if (isLoggedIn) {
-      _log.v('We have a user session on disk. Sync the user profile ...');
-
       bool isProfileStored = await _userService.syncUser();
 
       if (!isProfileStored) redirectToLogin();
 
       final currentUser = _userService.currentUser;
-      _log.v('User sync complete. User profile: $currentUser');
+      _log.v('There is a user logged in with profile: $currentUser');
 
       _navigationService.replaceWith(Routes.homeView);
     } else

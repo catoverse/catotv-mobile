@@ -40,7 +40,7 @@ class TopicServiceImpl implements TopicService {
 
     /// There's no selected topics from Hive, So fetch them from API Call
     if (result.isFailed || result.success!.isEmpty) {
-      var profile = await _apiService.getProfile(userID: userId);
+      var profile = await _apiService.getProfile(userId: userId);
 
       if (!(profile is Failure)) topics = List<String>.from(profile);
     }

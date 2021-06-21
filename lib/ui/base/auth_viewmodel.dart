@@ -2,13 +2,13 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
-import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 abstract class AuthenticationViewModel extends BaseViewModel {
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  final SnackbarService _snackbarService = locator<SnackbarService>();
   final NavigationService _navigationService = locator<NavigationService>();
   final UserService _userService = locator<UserService>();
   final _log = getLogger("Authentication ViewModel");
@@ -44,17 +44,21 @@ abstract class AuthenticationViewModel extends BaseViewModel {
   }
 
   loginWithGoogle() async {
-    setBusy(true);
     bool isProfileExists = false;
+    setBusy(true);
 
-    var user = await _userService.loginWithGoogle();
+    var loginSuccess = await _userService.loginWithGoogle();
 
-    if (user is User) {
-      _log.i("User Login Successful : Logged in user: $user");
-      isProfileExists = await _userService.isUserProfileExists();
-    } else {
-      return setBusy(false);
+    if (!loginSuccess) {
+      setBusy(false);
+      _snackbarService.showSnackbar(
+          title: "Aww, Sorry", message: "Something went wrong from our side.");
+      return;
     }
+
+    _log.i(
+        "User Login Successful : Logged in user: ${_userService.currentUser}");
+    isProfileExists = await _userService.isUserProfileExists();
 
     setBusy(false);
 

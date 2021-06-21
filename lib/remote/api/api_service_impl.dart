@@ -17,23 +17,21 @@ class APIServiceImpl implements APIService {
 
   @override
   Future checkUpdateRequired() async {
-    _log.v("Checking If there's update required");
+    _log.v("checking if there's an app update required");
 
     Result result = Platform.isAndroid
         ? await _client.processQuery(query: GQLQueries.queryAndroidVersionCode)
-        : await _client.processQuery(query: GQLQueries.mutationIosVersionCode);
+        : await _client.mutation(GQLQueries.mutationIosVersionCode);
 
     if (result.isFailed) return result.failure;
 
-    int version = result.success["androidVersionCode"]["data"];
-
-    var currentVersion = _convertVersionCode(_packageInfo.version);
-
-    return version > currentVersion;
+    return _handleVersionUpdate(result.success["androidVersionCode"]["data"]);
   }
 
-  int _convertVersionCode(String version) {
-    return int.parse(version.split(".")[0]);
+  bool _handleVersionUpdate(int apiVersion) {
+    var currentVersion = int.parse(_packageInfo.version.split(".")[0]);
+
+    return apiVersion > currentVersion;
   }
 
   @override
@@ -44,7 +42,7 @@ class APIServiceImpl implements APIService {
     required String avatar,
     required String accessToken,
   }) async {
-    _log.v("Performing Google Login with $name $googleId $avatar $accessToken");
+    _log.v("performing google login");
 
     Result<Failure, dynamic> result = await _client.mutation(
         GQLQueries.mutationGoogleLogin,
@@ -61,7 +59,7 @@ class APIServiceImpl implements APIService {
 
   @override
   Future fetchTopics() async {
-    _log.v("Fetching Topics from GraphQL");
+    _log.v("fetching allTopics from GraphQL");
 
     Result result = await _client.processQuery(query: GQLQueries.queryAllTopic);
 
@@ -72,7 +70,7 @@ class APIServiceImpl implements APIService {
 
   @override
   Future requestInvite({required String email}) async {
-    _log.v("Adding $email to the waitlist");
+    _log.v("adding $email to the waitlist");
 
     Result<Failure, dynamic> result = await _client.mutation(
         GQLQueries.mutationAddToWaitlist,
@@ -80,18 +78,16 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    _log.v(result.success);
-
     return true;
   }
 
   @override
-  Future getProfile({required String userID}) async {
-    _log.v("Fetching profile for User(id: $userID)");
+  Future getProfile({required String userId}) async {
+    _log.v("fetching profile for User(id: $userId)");
 
     Result<Failure, dynamic> result = await _client.processQuery(
         query: GQLQueries.queryUserProfile,
-        variables: GQLQueries.createMapForGetUserProfile(userID));
+        variables: GQLQueries.createMapForGetUserProfile(userId));
 
     if (result.isFailed) return result.failure;
 
@@ -102,6 +98,7 @@ class APIServiceImpl implements APIService {
       {required String userId,
       required String name,
       required List<String> topicIds}) async {
+    _log.v("creating profile for User(id: $userId, topics: $topicIds)");
     Result<Failure, dynamic> result = await _client.mutation(
         GQLQueries.mutationCreateUserProfile,
         variables:
@@ -109,14 +106,12 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    _log.v(result.success);
-
     return true;
   }
 
   @override
   Future fetchVideos(int skip, int limit, List<String> selectedTopics) async {
-    _log.i("Getting videos for topics: $selectedTopics");
+    _log.i("getting videos for topics: $selectedTopics");
 
     Result<Failure, dynamic> result = await _client.processQuery(
         query: GQLQueries.queryVideosByTopics,

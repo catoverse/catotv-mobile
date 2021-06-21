@@ -18,7 +18,7 @@ import 'package:graphql/client.dart';
 ///   (c) Extracting Result to required types
 ///
 class RemoteClient {
-  final _log = getLogger("RemoteClient");
+  final _log = getLogger("Graphql Client");
   final _connectivity = locator<ConnectivityService>();
 
   late GraphQLClient _graphQLClient;
@@ -65,18 +65,21 @@ class RemoteClient {
       Map<String, dynamic> variables = const {}}) async {
     bool hasInternet = await _connectivity.isConnected;
 
-    if (hasInternet) {
-      final QueryOptions options = QueryOptions(
-          document: gql(query),
-          variables: variables,
-          fetchPolicy: FetchPolicy.networkOnly);
+    if (!hasInternet)
+      return Result.failed(Failure.error(NoConnectivityError()));
 
-      var result = await _graphQLClient.query(options);
+    final QueryOptions options = QueryOptions(
+        document: gql(query),
+        variables: variables,
+        fetchPolicy: FetchPolicy.networkOnly);
 
+    try {
+      final QueryResult result = await _graphQLClient.query(options);
       return _processResult(result);
+    } catch (err) {
+      _log.e('failed to perform graphql query due to server error');
+      return Result.failed(Failure.error(ServerError()));
     }
-
-    return Result.failed(Failure.error(NoConnectivityError()));
   }
 
   /// Handles the given [mutation]
@@ -97,7 +100,7 @@ class RemoteClient {
       final QueryResult result = await _graphQLClient.mutate(options);
       return _processResult(result);
     } catch (err) {
-      _log.e('Server Error while performing Mutation');
+      _log.e('failed to perform mutation due to server error');
       return Result.failed(Failure.error(ServerError()));
     }
   }

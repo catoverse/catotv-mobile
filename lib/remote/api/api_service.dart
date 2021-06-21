@@ -10,7 +10,7 @@ abstract class APIService {
   Future fetchTopics();
   Future fetchVideos(int skip, int limit, List<String> selectedTopics);
   Future requestInvite({required String email});
-  Future getProfile({required String userID});
+  Future getProfile({required String userId});
   Future createUserProfile(
       {required String userId,
       required String name,
