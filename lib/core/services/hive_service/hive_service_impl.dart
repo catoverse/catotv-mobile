@@ -1,6 +1,5 @@
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/core/models/result/failure.dart';
-import 'package:feed/core/models/result/result.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:hive/hive.dart';
 import 'package:feed/app/app.locator.dart';
 

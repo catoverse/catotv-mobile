@@ -1,5 +1,4 @@
-import 'package:feed/core/models/result/failure.dart';
-import 'package:feed/core/models/result/result.dart';
+import 'package:feed/core/models/app_models.dart';
 
 /// Interface around [Hive] with custom error handling to abstract
 /// the third party dependency

@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/core/models/result/failure.dart';
-import 'package:feed/core/models/result/result.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';

@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 part 'app_models.freezed.dart';
 part 'app_models.g.dart';
 
+/// Freezed Models
 @freezed
 class User with _$User {
   User._();
@@ -53,6 +54,40 @@ class Video with _$Video {
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 }
 
+@freezed
+class Failure with _$Failure {
+  const factory Failure.error(Error error) = _GenericError;
+  const factory Failure.exception(Exception exception) = _RaisedException;
+  const factory Failure.message(String message) = _FailureMessage;
+
+  String toString() {
+    return this.map(
+      error: (e) => e.error.toString(),
+      exception: (e) => e.exception.toString(),
+      message: (e) => e.message,
+    );
+  }
+}
+
+/// Regular Models
+class Result<F, S> {
+  final F? failure;
+  final S? success;
+
+  Result({this.failure, this.success});
+
+  factory Result.failed(F fail) => Result(failure: fail, success: null);
+  factory Result.success(S result) => Result(failure: null, success: result);
+
+  bool isSuccess() {
+    if (failure != null || success == null) return false;
+    return true;
+  }
+
+  bool get isFailed => !isSuccess();
+}
+
+/// Extensions for Models
 extension ImageProperty on Topic {
   String getAssetImage() {
     switch (name) {

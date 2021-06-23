@@ -1,7 +1,5 @@
-import 'package:feed/core/constants/assets.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
-import 'package:feed/ui/global/blurred_image.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 
