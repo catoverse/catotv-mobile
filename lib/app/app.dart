@@ -8,7 +8,7 @@ import 'package:feed/core/services/hive_service/hive_service_impl.dart';
 import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/core/services/feed_service.dart';
-import 'package:feed/core/services/youtube_service.dart';
+import 'package:feed/core/services/video_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
 import 'package:feed/remote/client.dart';
@@ -86,7 +86,7 @@ import 'injection.dart';
     LazySingleton(classType: KeyStorageService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: Client),
-    LazySingleton(classType: YoutubeService),
+    LazySingleton(classType: VideoService),
     LazySingleton(classType: TopicService),
     LazySingleton(classType: FeedService),
     LazySingleton(classType: DynamicLinksService),

@@ -3,7 +3,7 @@ import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
-import 'package:feed/core/services/youtube_service.dart';
+import 'package:feed/core/services/video_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 
 class FeedService {
@@ -29,7 +29,7 @@ class FeedService {
       _log.v("Videos with length ${list.length} fetched successfully");
 
       list.forEach((json) {
-        var isYoutubeVideo = YoutubeService.convertUrlToId(json["video_url"]);
+        var isYoutubeVideo = VideoService.convertUrlToId(json["video_url"]);
 
         if (isYoutubeVideo != null) apiVideos.add(Video.fromJson(json));
       });

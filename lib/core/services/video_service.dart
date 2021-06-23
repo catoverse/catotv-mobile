@@ -7,8 +7,8 @@ import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:http/http.dart';
 
-class YoutubeService {
-  final _log = getLogger("Youtube Utils");
+class VideoService {
+  final _log = getLogger("VideoService");
   final _client = locator<Client>();
   final _environmentService = locator<EnvironmentService>();
   final _hiveService = locator<HiveService>();
@@ -51,9 +51,7 @@ class YoutubeService {
 
   String _parseResponse(String body) {
     var res = json.decode(body);
-
-    _log.i("Here's the response: $res");
-
+    //TODO: Log custom property : VideoFetched
     return res["links"][0] as String;
   }
 

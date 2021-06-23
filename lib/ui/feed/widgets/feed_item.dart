@@ -1,12 +1,12 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/core/services/youtube_service.dart';
+import 'package:feed/core/services/video_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/player.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flutter/material.dart';
 
-final yt = locator<YoutubeService>();
+final yt = locator<VideoService>();
 
 class FeedItem extends StatefulWidget {
   final Video video;
@@ -28,7 +28,7 @@ class FeedItem extends StatefulWidget {
 
 class _FeedItemState extends State<FeedItem>
     with AutomaticKeepAliveClientMixin {
-  YoutubeService youtubeService = locator<YoutubeService>();
+  final _videoService = locator<VideoService>();
   late String videoUrl;
   late String thumbnail;
   bool mounted = false;
@@ -39,12 +39,12 @@ class _FeedItemState extends State<FeedItem>
           videoUrl = value;
           mounted = true;
         }));
-    thumbnail = YoutubeService.getThumbnail(widget.video.youtubeUrl);
+    thumbnail = VideoService.getThumbnail(widget.video.youtubeUrl);
     super.initState();
   }
 
   Future getStreamUrl() async {
-    String streamUrl = await youtubeService.getStream(widget.video.youtubeUrl);
+    String streamUrl = await _videoService.getStream(widget.video.youtubeUrl);
 
     return streamUrl;
   }

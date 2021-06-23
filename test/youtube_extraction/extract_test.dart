@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
-import 'package:feed/core/services/youtube_service.dart';
+import 'package:feed/core/services/video_service.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
@@ -18,7 +18,7 @@ void main() {
   });
 
   Future getExplodeStream(String youtubeVideoUrl) async {
-    String videoID = YoutubeService.convertUrlToId(youtubeVideoUrl)!;
+    String videoID = VideoService.convertUrlToId(youtubeVideoUrl)!;
 
     try {
       var start = DateTime.now();
