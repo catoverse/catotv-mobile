@@ -7,21 +7,22 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:connectivity/connectivity.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../core/services/environment_service.dart';
+import '../core/services/explode_service.dart';
 import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
 import '../core/services/key_storage_service.dart';
 import '../core/services/topic_service.dart';
 import '../core/services/user_service.dart';
-import '../core/services/youtube_service.dart';
+import '../core/services/video_service.dart';
 import '../firebase/analytics.dart';
 import '../firebase/dynamic_links.dart';
 import '../remote/api/api_service.dart';
@@ -65,8 +66,9 @@ Future setupLocator(
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
   locator.registerLazySingleton(() => KeyStorageService());
   locator.registerLazySingleton(() => UserService());
-  locator.registerLazySingleton(() => Client());
-  locator.registerLazySingleton(() => YoutubeService());
+  locator.registerLazySingleton(() => YoutubeExplode());
+  locator.registerLazySingleton(() => ExplodeService());
+  locator.registerLazySingleton(() => VideoService());
   locator.registerLazySingleton(() => TopicService());
   locator.registerLazySingleton(() => FeedService());
   locator.registerLazySingleton(() => DynamicLinksService());

@@ -14,12 +14,12 @@ class APIServiceImpl implements APIService {
   final _log = getLogger("API Service");
 
   @override
-  Future checkUpdateRequired() async {
-    _log.v("checking if there's an app update required");
+  Future isUpdateRequired() async {
+    _log.i("checking if there's an app update required");
 
     Result result = Platform.isAndroid
-        ? await _client.processQuery(query: GQLQueries.queryAndroidVersionCode)
-        : await _client.mutation(GQLQueries.mutationIosVersionCode);
+        ? await _client.processQuery(query: GQLQueries.getAndroidVersion)
+        : await _client.mutation(GQLQueries.getIosVersion);
 
     if (result.isFailed) return result.failure;
 
@@ -33,18 +33,18 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future performLogin({
+  Future signIn({
     required String name,
     required String email,
     required String googleId,
     required String avatar,
     required String accessToken,
   }) async {
-    _log.v("performing google login");
+    _log.i("performing google login");
 
     Result<Failure, dynamic> result = await _client.mutation(
-        GQLQueries.mutationGoogleLogin,
-        variables: GQLQueries.createMapForGoogleLogin(
+        GQLQueries.signInWithGoogle,
+        variables: GQLQueries.googleLoginVariables(
             name, email, googleId, avatar, accessToken));
 
     if (result.isFailed) return result.failure;
@@ -56,10 +56,10 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future fetchTopics() async {
-    _log.v("fetching allTopics from GraphQL");
+  Future getTopics() async {
+    _log.i("fetching allTopics from GraphQL");
 
-    Result result = await _client.processQuery(query: GQLQueries.queryAllTopic);
+    Result result = await _client.processQuery(query: GQLQueries.getAllTopics);
 
     if (result.isFailed) return result.failure;
 
@@ -68,11 +68,11 @@ class APIServiceImpl implements APIService {
 
   @override
   Future requestInvite({required String email}) async {
-    _log.v("adding $email to the waitlist");
+    _log.i("adding $email to the waitlist");
 
     Result<Failure, dynamic> result = await _client.mutation(
-        GQLQueries.mutationAddToWaitlist,
-        variables: GQLQueries.createMapForRequestInvite(email));
+        GQLQueries.requestInvite,
+        variables: GQLQueries.requestInviteVariables(email));
 
     if (result.isFailed) return result.failure;
 
@@ -80,12 +80,12 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future getProfile({required String userId}) async {
-    _log.v("fetching profile for User(id: $userId)");
+  Future getUserProfile({required String userId}) async {
+    _log.i("fetching profile for User(id: $userId)");
 
     Result<Failure, dynamic> result = await _client.processQuery(
-        query: GQLQueries.queryUserProfile,
-        variables: GQLQueries.createMapForGetUserProfile(userId));
+        query: GQLQueries.getUserProfile,
+        variables: GQLQueries.getUserProfileVariables(userId));
 
     if (result.isFailed) return result.failure;
 
@@ -96,9 +96,9 @@ class APIServiceImpl implements APIService {
       {required String userId,
       required String name,
       required List<String> topicIds}) async {
-    _log.v("creating profile for User(id: $userId, topics: $topicIds)");
+    _log.i("creating profile for User(id: $userId, topics: $topicIds)");
     Result<Failure, dynamic> result = await _client.mutation(
-        GQLQueries.mutationCreateUserProfile,
+        GQLQueries.createUserProfile,
         variables:
             GQLQueries.createUserProfileVariables(userId, name, topicIds));
 
@@ -108,16 +108,42 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future fetchVideos(int skip, int limit, List<String> selectedTopics) async {
+  Future getVideos(int skip, int limit, List<String> selectedTopics) async {
     _log.i("getting videos for topics: $selectedTopics");
 
     Result<Failure, dynamic> result = await _client.processQuery(
-        query: GQLQueries.queryVideosByTopics,
-        variables: GQLQueries.createVideosByTopicsVariables(
-            skip, limit, selectedTopics));
+        query: GQLQueries.getVideosByTopics,
+        variables:
+            GQLQueries.videosByTopicsVariables(skip, limit, selectedTopics));
 
     if (result.isFailed) return result.failure;
 
     return result.success["videoByTopics"];
+  }
+
+  @override
+  Future getVideoStream(String watchId) async {
+    _log.i("getting streaming link for video: $watchId");
+
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.getStreamLink,
+        variables: GQLQueries.getStreamLinkVariables(watchId));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["getStreamLink"];
+  }
+
+  @override
+  Future postVideoStream(String watchId, String streamUrl) async {
+    _log.i("adding stream link for video $watchId");
+
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.postStreamLink,
+        variables: GQLQueries.postStreamLinkVariables(watchId, streamUrl));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["postStreamLink"];
   }
 }
