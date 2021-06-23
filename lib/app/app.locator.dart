@@ -15,6 +15,7 @@ import 'package:stacked_services/stacked_services.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../core/services/environment_service.dart';
+import '../core/services/explode_service.dart';
 import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
@@ -66,6 +67,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => KeyStorageService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => YoutubeExplode());
+  locator.registerLazySingleton(() => ExplodeService());
   locator.registerLazySingleton(() => VideoService());
   locator.registerLazySingleton(() => TopicService());
   locator.registerLazySingleton(() => FeedService());

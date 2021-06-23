@@ -1,5 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:feed/core/services/environment_service.dart';
+import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/core/services/key_storage_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
@@ -86,6 +87,7 @@ import 'injection.dart';
     LazySingleton(classType: KeyStorageService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: YoutubeExplode),
+    LazySingleton(classType: ExplodeService),
     LazySingleton(classType: VideoService),
     LazySingleton(classType: TopicService),
     LazySingleton(classType: FeedService),

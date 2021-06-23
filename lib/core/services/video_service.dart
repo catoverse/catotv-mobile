@@ -1,13 +1,13 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/remote/api/api_service.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class VideoService {
   final _log = getLogger("VideoService");
   final _apiService = locator<APIService>();
-  final _explode = locator<YoutubeExplode>();
+  final _explodeService = locator<ExplodeService>();
 
   /// #1. Fetch the [watchId] from videoUrl
   /// #2. See if there's link available in API with [getStreamLink]
@@ -21,34 +21,19 @@ class VideoService {
 
     if (streamUrl is Failure) {
       _log.v("Getting video from explode");
-      return _getUrlFromAPI(videoUrl);
+      return getUrlFromAPI(videoUrl);
     }
 
     _log.v("Getting video from API");
     return streamUrl;
   }
 
-  Future<String> _getUrlFromAPI(String url) async {
+  Future<String> getUrlFromAPI(String url) async {
+    var streamUrl = await _explodeService.getStreamUrl(url);
     var watchId = convertUrlToId(url)!;
-    var defaultQuality = VideoQuality.medium480;
 
-    try {
-      var manifest = await _explode.videos.streamsClient.getManifest(watchId);
-
-      late Uri videoUri = manifest.muxed.first.url;
-
-      manifest.muxed.forEach((m) {
-        if (defaultQuality == m.videoQuality) {
-          videoUri = m.url;
-        }
-      });
-
-      var streamUrl = videoUri.toString();
-      await _apiService.postVideoStream(watchId, streamUrl);
-      return streamUrl;
-    } catch (e) {
-      return e.toString();
-    }
+    await _apiService.postVideoStream(watchId, streamUrl);
+    return streamUrl;
   }
 
   static String? convertUrlToId(String url, {bool trimWhitespaces = true}) {

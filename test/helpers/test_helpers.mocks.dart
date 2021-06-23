@@ -3,22 +3,23 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i4;
-import 'dart:ui' as _i13;
+import 'dart:ui' as _i14;
 
 import 'package:feed/core/enums/connectivity_status.dart' as _i7;
 import 'package:feed/core/models/app_models.dart' as _i2;
+import 'package:feed/core/services/explode_service.dart' as _i8;
 import 'package:feed/core/services/user_service.dart' as _i3;
 import 'package:feed/remote/api/api_service.dart' as _i5;
 import 'package:feed/remote/connectivity/connectivity_service.dart' as _i6;
-import 'package:flutter/src/widgets/framework.dart' as _i9;
-import 'package:flutter/src/widgets/navigator.dart' as _i10;
+import 'package:flutter/src/widgets/framework.dart' as _i10;
+import 'package:flutter/src/widgets/navigator.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/src/bottom_sheet/bottom_sheet_service.dart'
-    as _i11;
-import 'package:stacked_services/src/models/overlay_response.dart' as _i12;
-import 'package:stacked_services/src/navigation_service.dart' as _i8;
-import 'package:stacked_services/src/snackbar/snackbar_config.dart' as _i15;
-import 'package:stacked_services/src/snackbar/snackbar_service.dart' as _i14;
+    as _i12;
+import 'package:stacked_services/src/models/overlay_response.dart' as _i13;
+import 'package:stacked_services/src/navigation_service.dart' as _i9;
+import 'package:stacked_services/src/snackbar/snackbar_config.dart' as _i16;
+import 'package:stacked_services/src/snackbar/snackbar_service.dart' as _i15;
 
 // ignore_for_file: avoid_redundant_argument_values
 // ignore_for_file: comment_references
@@ -135,10 +136,20 @@ class MockConnectivityService extends _i1.Mock
           returnValue: Future<bool>.value(false)) as _i4.Future<bool>);
 }
 
+/// A class which mocks [ExplodeService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockExplodeService extends _i1.Mock implements _i8.ExplodeService {
+  @override
+  _i4.Future<String> getStreamUrl(String? url) =>
+      (super.noSuchMethod(Invocation.method(#getStreamUrl, [url]),
+          returnValue: Future<String>.value('')) as _i4.Future<String>);
+}
+
 /// A class which mocks [NavigationService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
+class MockNavigationService extends _i1.Mock implements _i9.NavigationService {
   @override
   String get previousRoute =>
       (super.noSuchMethod(Invocation.getter(#previousRoute), returnValue: '')
@@ -148,9 +159,9 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
       (super.noSuchMethod(Invocation.getter(#currentRoute), returnValue: '')
           as String);
   @override
-  _i9.GlobalKey<_i10.NavigatorState>? nestedNavigationKey(int? index) =>
+  _i10.GlobalKey<_i11.NavigatorState>? nestedNavigationKey(int? index) =>
       (super.noSuchMethod(Invocation.method(#nestedNavigationKey, [index]))
-          as _i9.GlobalKey<_i10.NavigatorState>?);
+          as _i10.GlobalKey<_i11.NavigatorState>?);
   @override
   void config(
           {bool? enableLog,
@@ -170,7 +181,7 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
           }),
           returnValueForMissingStub: null);
   @override
-  _i4.Future<dynamic>? navigateWithTransition(_i9.Widget? page,
+  _i4.Future<dynamic>? navigateWithTransition(_i10.Widget? page,
           {bool? opaque,
           String? transition = r'',
           Duration? duration,
@@ -186,7 +197,7 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
         #id: id
       })) as _i4.Future<dynamic>?);
   @override
-  _i4.Future<dynamic>? replaceWithTransition(_i9.Widget? page,
+  _i4.Future<dynamic>? replaceWithTransition(_i10.Widget? page,
           {bool? opaque,
           String? transition = r'',
           Duration? duration,
@@ -206,7 +217,7 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
       Invocation.method(#back, [], {#result: result, #id: id}),
       returnValue: false) as bool);
   @override
-  void popUntil(_i10.RoutePredicate? predicate) =>
+  void popUntil(_i11.RoutePredicate? predicate) =>
       super.noSuchMethod(Invocation.method(#popUntil, [predicate]),
           returnValueForMissingStub: null);
   @override
@@ -228,7 +239,7 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
         #parameters: parameters
       })) as _i4.Future<dynamic>?);
   @override
-  _i4.Future<dynamic>? navigateToView(_i9.Widget? view,
+  _i4.Future<dynamic>? navigateToView(_i10.Widget? view,
           {dynamic arguments, int? id, bool? preventDuplicates = true}) =>
       (super.noSuchMethod(Invocation.method(#navigateToView, [
         view
@@ -276,13 +287,13 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
         #parameters: parameters
       })) as _i4.Future<dynamic>?);
   @override
-  _i4.Future<dynamic>? clearTillFirstAndShowView(_i9.Widget? view,
+  _i4.Future<dynamic>? clearTillFirstAndShowView(_i10.Widget? view,
           {dynamic arguments, int? id}) =>
       (super.noSuchMethod(Invocation.method(#clearTillFirstAndShowView, [view],
           {#arguments: arguments, #id: id})) as _i4.Future<dynamic>?);
   @override
   _i4.Future<dynamic>? pushNamedAndRemoveUntil(String? routeName,
-          {_i10.RoutePredicate? predicate, dynamic arguments, int? id}) =>
+          {_i11.RoutePredicate? predicate, dynamic arguments, int? id}) =>
       (super.noSuchMethod(Invocation.method(#pushNamedAndRemoveUntil, [
         routeName
       ], {
@@ -296,13 +307,13 @@ class MockNavigationService extends _i1.Mock implements _i8.NavigationService {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockBottomSheetService extends _i1.Mock
-    implements _i11.BottomSheetService {
+    implements _i12.BottomSheetService {
   @override
-  void setCustomSheetBuilders(Map<dynamic, _i11.SheetBuilder>? builders) =>
+  void setCustomSheetBuilders(Map<dynamic, _i12.SheetBuilder>? builders) =>
       super.noSuchMethod(Invocation.method(#setCustomSheetBuilders, [builders]),
           returnValueForMissingStub: null);
   @override
-  _i4.Future<_i12.SheetResponse?> showBottomSheet(
+  _i4.Future<_i13.SheetResponse?> showBottomSheet(
           {String? title,
           String? description,
           String? confirmButtonTitle = r'Ok',
@@ -324,10 +335,10 @@ class MockBottomSheetService extends _i1.Mock
                 #exitBottomSheetDuration: exitBottomSheetDuration,
                 #enterBottomSheetDuration: enterBottomSheetDuration
               }),
-              returnValue: Future<_i12.SheetResponse?>.value())
-          as _i4.Future<_i12.SheetResponse?>);
+              returnValue: Future<_i13.SheetResponse?>.value())
+          as _i4.Future<_i13.SheetResponse?>);
   @override
-  _i4.Future<_i12.SheetResponse?> showCustomSheet(
+  _i4.Future<_i13.SheetResponse?> showCustomSheet(
           {dynamic variant,
           String? title,
           String? description,
@@ -340,7 +351,7 @@ class MockBottomSheetService extends _i1.Mock
           bool? showIconInAdditionalButton = false,
           String? additionalButtonTitle,
           bool? takesInput = false,
-          _i13.Color? barrierColor = const _i13.Color(2315255808),
+          _i14.Color? barrierColor = const _i14.Color(2315255808),
           bool? barrierDismissible = true,
           bool? isScrollControlled = false,
           String? barrierLabel = r'',
@@ -371,10 +382,10 @@ class MockBottomSheetService extends _i1.Mock
                 #exitBottomSheetDuration: exitBottomSheetDuration,
                 #enterBottomSheetDuration: enterBottomSheetDuration
               }),
-              returnValue: Future<_i12.SheetResponse?>.value())
-          as _i4.Future<_i12.SheetResponse?>);
+              returnValue: Future<_i13.SheetResponse?>.value())
+          as _i4.Future<_i13.SheetResponse?>);
   @override
-  void completeSheet(_i12.SheetResponse? response) =>
+  void completeSheet(_i13.SheetResponse? response) =>
       super.noSuchMethod(Invocation.method(#completeSheet, [response]),
           returnValueForMissingStub: null);
 }
@@ -382,14 +393,14 @@ class MockBottomSheetService extends _i1.Mock
 /// A class which mocks [SnackbarService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSnackbarService extends _i1.Mock implements _i14.SnackbarService {
+class MockSnackbarService extends _i1.Mock implements _i15.SnackbarService {
   @override
-  void registerSnackbarConfig(_i15.SnackbarConfig? config) =>
+  void registerSnackbarConfig(_i16.SnackbarConfig? config) =>
       super.noSuchMethod(Invocation.method(#registerSnackbarConfig, [config]),
           returnValueForMissingStub: null);
   @override
   void registerCustomSnackbarconfig(
-          {dynamic customData, _i15.SnackbarConfig? config}) =>
+          {dynamic customData, _i16.SnackbarConfig? config}) =>
       super.noSuchMethod(
           Invocation.method(#registerCustomSnackbarconfig, [],
               {#customData: customData, #config: config}),
@@ -397,7 +408,7 @@ class MockSnackbarService extends _i1.Mock implements _i14.SnackbarService {
   @override
   void registerCustomMainButtonBuilder(
           {dynamic variant,
-          _i9.Widget Function(String?, Function?)? builder}) =>
+          _i10.Widget Function(String?, Function?)? builder}) =>
       super.noSuchMethod(
           Invocation.method(#registerCustomMainButtonBuilder, [],
               {#variant: variant, #builder: builder}),
@@ -405,8 +416,8 @@ class MockSnackbarService extends _i1.Mock implements _i14.SnackbarService {
   @override
   void registerCustomSnackbarConfig(
           {dynamic variant,
-          _i15.SnackbarConfig? config,
-          _i15.SnackbarConfig Function()? configBuilder}) =>
+          _i16.SnackbarConfig? config,
+          _i16.SnackbarConfig Function()? configBuilder}) =>
       super.noSuchMethod(
           Invocation.method(#registerCustomSnackbarConfig, [], {
             #variant: variant,

@@ -1,4 +1,6 @@
 import 'package:feed/app/app.locator.dart';
+import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:mockito/annotations.dart';
@@ -12,6 +14,8 @@ import 'test_helpers.mocks.dart';
   MockSpec<UserService>(returnNullOnMissingStub: true),
   MockSpec<APIService>(returnNullOnMissingStub: true),
   MockSpec<ConnectivityService>(returnNullOnMissingStub: true),
+  MockSpec<ExplodeService>(returnNullOnMissingStub: true),
+  // Stacked Services
   MockSpec<NavigationService>(returnNullOnMissingStub: true),
   MockSpec<BottomSheetService>(returnNullOnMissingStub: true),
   MockSpec<SnackbarService>(returnNullOnMissingStub: true),
@@ -39,12 +43,20 @@ MockUserService getAndRegisterUserService(
   return service;
 }
 
-MockAPIService getAndRegisterAPIService({bool isUpdateRequired = false}) {
+MockAPIService getAndRegisterAPIService(
+    {bool isUpdateRequired = false, bool isVideoCached = true}) {
   _removeRegistrationIfExists<APIService>();
   final service = MockAPIService();
 
   when(service.isUpdateRequired())
       .thenAnswer((realInvocation) => Future.value(isUpdateRequired));
+
+  when(service.getVideoStream(SampleWatchId)).thenAnswer((realInvocation) =>
+      Future.value(
+          isVideoCached ? SampleStreamUrl : Failure.message("Link Not Found")));
+
+  when(service.postVideoStream(SampleWatchId, SampleStreamUrl)).thenAnswer(
+      (realInvocation) => Future.delayed(Duration(milliseconds: 500)));
 
   locator.registerSingleton<APIService>(service);
   return service;
@@ -71,6 +83,17 @@ MockBottomSheetService getAndRegisterBottomSheetService() {
   return service;
 }
 
+MockExplodeService getAndRegisterExplodeService({bool hasError = false}) {
+  _removeRegistrationIfExists<ExplodeService>();
+  final service = MockExplodeService();
+
+  when(service.getStreamUrl(SampleVideoUrl)).thenAnswer(
+      (realInvocation) => Future.value(hasError ? "" : SampleStreamUrl));
+
+  locator.registerSingleton<ExplodeService>(service);
+  return service;
+}
+
 MockConnectivityService getAndRegisterConnectivityService(
     {bool isConnected = true}) {
   _removeRegistrationIfExists<ConnectivityService>();
@@ -87,6 +110,7 @@ void registerServices() {
   getAndRegisterUserService();
   getAndRegisterAPIService();
   getAndRegisterConnectivityService();
+  getAndRegisterExplodeService();
   getAndRegisterNavigationService();
   getAndRegisterBottomSheetService();
   getAndRegisterSnackbarService();
@@ -96,6 +120,7 @@ void unregisterServices() {
   locator.unregister<UserService>();
   locator.unregister<APIService>();
   locator.unregister<ConnectivityService>();
+  locator.unregister<ExplodeService>();
   locator.unregister<NavigationService>();
   locator.unregister<BottomSheetService>();
   locator.unregister<SnackbarService>();
