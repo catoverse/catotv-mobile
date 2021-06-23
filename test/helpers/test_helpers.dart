@@ -43,7 +43,7 @@ MockAPIService getAndRegisterAPIService({bool isUpdateRequired = false}) {
   _removeRegistrationIfExists<APIService>();
   final service = MockAPIService();
 
-  when(service.checkUpdateRequired())
+  when(service.isUpdateRequired())
       .thenAnswer((realInvocation) => Future.value(isUpdateRequired));
 
   locator.registerSingleton<APIService>(service);

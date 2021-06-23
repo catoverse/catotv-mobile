@@ -25,7 +25,7 @@ class StartUpViewModel extends BaseViewModel {
       return;
     }
 
-    var forceUpdateRequired = await _apiService.checkUpdateRequired();
+    var forceUpdateRequired = await _apiService.isUpdateRequired();
 
     if (forceUpdateRequired is bool && forceUpdateRequired) {
       _log.v('The app needs to be updated, navigate to update screen');

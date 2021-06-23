@@ -1,16 +1,15 @@
-/// GraphQL [Queries] and [Mutations]
-///
 class GQLQueries {
-  static const String queryAndroidVersionCode = r'''
-    query {
+  // Queries - we use queries to fetch data
+  static const String getAndroidVersion = r'''
+    query GetAndroidVersion{
       androidVersionCode {
         data
       }
     }
   ''';
 
-  static const String queryAllTopic = r'''
-    query {
+  static const String getAllTopics = r'''
+    query GetAllTopics{
       allTopic {
         id
         name
@@ -18,22 +17,7 @@ class GQLQueries {
     }
   ''';
 
-  static const String queryUserRecommendation = r'''
-    query userRecommendation($userId: ID!){
-      userRecommendation(userId: $userId) {
-        id
-        title
-        video_url
-        topic
-        start_timestamp
-        end_timestamp
-        createdAt
-        modifiedAt
-      }
-    }
-  ''';
-
-  static const String queryVideosByTopics = r'''
+  static const String getVideosByTopics = r'''
     query VideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
       videoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
         id
@@ -51,8 +35,14 @@ class GQLQueries {
     }
   ''';
 
-  static const String queryUserProfile = r'''
-    query getUserProfile($userId: ID!) {
+  static const String getStreamLink = r'''
+    query GetVideoStreamLink($watchId: String!) {
+      getStreamLink(watchId: $watchId)
+    }
+  ''';
+
+  static const String getUserProfile = r'''
+    query GetUserProfile($userId: ID!) {
       userProfile(userId: $userId) {
         name
         selectedTopics
@@ -73,8 +63,8 @@ class GQLQueries {
     }
   ''';
 
-  static const String mutationCreateUserProfile = r'''
-    mutation createProfile($userId: ID!, $name: String!, $selectedTopics: [ID]!) {
+  static const String createUserProfile = r'''
+    mutation CreateProfile($userId: ID!, $name: String!, $selectedTopics: [ID]!) {
       createUserProfile(
         user: { name: $name, userId: $userId, selectedTopics: $selectedTopics }
       ) {
@@ -83,16 +73,18 @@ class GQLQueries {
     }
   ''';
 
-  static const String mutationIosVersionCode = r'''
-    mutation iosVersionCode {
+  // Mutations - we use mutations to modify server-side data.
+
+  static const String getIosVersion = r'''
+    mutation IosVersionCode {
       iosVersionCode {
         data
       }
     }
   ''';
 
-  static const String mutationGoogleLogin = r'''
-    mutation GoogleLogin($name: String!, $email: String!, $googleId: String!, $avatarLink: String!, $googleToken: String!){
+  static const String signInWithGoogle = r'''
+    mutation SignInWithGoogle($name: String!, $email: String!, $googleId: String!, $avatarLink: String!, $googleToken: String!){
       googleLogin(user: {
           name: $name,
           email: $email,
@@ -112,8 +104,8 @@ class GQLQueries {
     }
   ''';
 
-  static const String mutationAddToWaitlist = r'''
-    mutation requestInvite($email: String!){
+  static const String requestInvite = r'''
+    mutation RequestInvite($email: String!){
       addToWaitlist(email: $email){
         data
         message
@@ -121,7 +113,17 @@ class GQLQueries {
     }
   ''';
 
-  static Map<String, dynamic> createMapForGoogleLogin(
+  static const String postStreamLink = r'''
+    mutation PostStreamLink($watchId: String!, $streamUrl: String!){
+      postStreamLink(watchId: $watchId, streamUrl: $streamUrl){
+        data
+      }
+    }
+  ''';
+
+  /// Variables
+
+  static Map<String, dynamic> googleLoginVariables(
     String name,
     String email,
     String googleId,
@@ -137,15 +139,11 @@ class GQLQueries {
     };
   }
 
-  static Map<String, dynamic> createMapForUserRecommendation(String userId) {
-    return {"userId": userId};
-  }
-
-  static Map<String, dynamic> createMapForRequestInvite(String email) {
+  static Map<String, dynamic> requestInviteVariables(String email) {
     return {"email": email};
   }
 
-  static Map<String, dynamic> createMapForGetUserProfile(String userId) {
+  static Map<String, dynamic> getUserProfileVariables(String userId) {
     return {"userId": userId};
   }
 
@@ -154,8 +152,17 @@ class GQLQueries {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
-  static Map<String, dynamic> createVideosByTopicsVariables(
+  static Map<String, dynamic> videosByTopicsVariables(
       int skip, int limit, List<String> topicIds) {
     return {"skip": skip, "limit": limit, "selectedTopics": topicIds};
+  }
+
+  static Map<String, dynamic> getStreamLinkVariables(String watchId) {
+    return {"watchId": watchId};
+  }
+
+  static Map<String, dynamic> postStreamLinkVariables(
+      String watchId, String streamUrl) {
+    return {"watchId": watchId, "streamUrl": streamUrl};
   }
 }

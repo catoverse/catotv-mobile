@@ -21,7 +21,7 @@ class FeedService {
     String userId = _userService.currentUser.id;
     var selectedTopics = await _topicService.getSelectedTopics(userId);
 
-    var list = await _apiService.fetchVideos(skip, limit, selectedTopics);
+    var list = await _apiService.getVideos(skip, limit, selectedTopics);
 
     List<Video> apiVideos = [];
 

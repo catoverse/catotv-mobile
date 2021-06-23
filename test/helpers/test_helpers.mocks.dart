@@ -64,18 +64,18 @@ class MockUserService extends _i1.Mock implements _i3.UserService {
 /// See the documentation for Mockito's code generation for more information.
 class MockAPIService extends _i1.Mock implements _i5.APIService {
   @override
-  _i4.Future<dynamic> checkUpdateRequired() =>
-      (super.noSuchMethod(Invocation.method(#checkUpdateRequired, []),
+  _i4.Future<dynamic> isUpdateRequired() =>
+      (super.noSuchMethod(Invocation.method(#isUpdateRequired, []),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i4.Future<dynamic> performLogin(
+  _i4.Future<dynamic> signIn(
           {String? name,
           String? email,
           String? googleId,
           String? avatar,
           String? accessToken}) =>
       (super.noSuchMethod(
-          Invocation.method(#performLogin, [], {
+          Invocation.method(#signIn, [], {
             #name: name,
             #email: email,
             #googleId: googleId,
@@ -84,29 +84,38 @@ class MockAPIService extends _i1.Mock implements _i5.APIService {
           }),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i4.Future<dynamic> fetchTopics() =>
-      (super.noSuchMethod(Invocation.method(#fetchTopics, []),
+  _i4.Future<dynamic> getTopics() =>
+      (super.noSuchMethod(Invocation.method(#getTopics, []),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i4.Future<dynamic> fetchVideos(
+  _i4.Future<dynamic> getVideos(
           int? skip, int? limit, List<String>? selectedTopics) =>
       (super.noSuchMethod(
-          Invocation.method(#fetchVideos, [skip, limit, selectedTopics]),
+          Invocation.method(#getVideos, [skip, limit, selectedTopics]),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
   _i4.Future<dynamic> requestInvite({String? email}) => (super.noSuchMethod(
       Invocation.method(#requestInvite, [], {#email: email}),
       returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
-  _i4.Future<dynamic> getProfile({String? userId}) =>
-      (super.noSuchMethod(Invocation.method(#getProfile, [], {#userId: userId}),
-          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  _i4.Future<dynamic> getUserProfile({String? userId}) => (super.noSuchMethod(
+      Invocation.method(#getUserProfile, [], {#userId: userId}),
+      returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
   _i4.Future<dynamic> createUserProfile(
           {String? userId, String? name, List<String>? topicIds}) =>
       (super.noSuchMethod(
           Invocation.method(#createUserProfile, [],
               {#userId: userId, #name: name, #topicIds: topicIds}),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> getVideoStream(String? watchId) =>
+      (super.noSuchMethod(Invocation.method(#getVideoStream, [watchId]),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> postVideoStream(String? watchId, String? streamUrl) =>
+      (super.noSuchMethod(
+          Invocation.method(#postVideoStream, [watchId, streamUrl]),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 

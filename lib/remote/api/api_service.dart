@@ -1,18 +1,20 @@
 abstract class APIService {
-  Future checkUpdateRequired();
-  Future performLogin({
+  Future isUpdateRequired();
+  Future signIn({
     required String name,
     required String email,
     required String googleId,
     required String avatar,
     required String accessToken,
   });
-  Future fetchTopics();
-  Future fetchVideos(int skip, int limit, List<String> selectedTopics);
+  Future getTopics();
+  Future getVideos(int skip, int limit, List<String> selectedTopics);
   Future requestInvite({required String email});
-  Future getProfile({required String userId});
+  Future getUserProfile({required String userId});
   Future createUserProfile(
       {required String userId,
       required String name,
       required List<String> topicIds});
+  Future getVideoStream(String watchId);
+  Future postVideoStream(String watchId, String streamUrl);
 }

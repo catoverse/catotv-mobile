@@ -40,7 +40,7 @@ class UserService {
     var googleUser = authResult.user;
     var authToken = await googleUser!.getIdToken();
 
-    var result = await _apiService.performLogin(
+    var result = await _apiService.signIn(
         name: googleUser.displayName!,
         email: googleUser.email!,
         googleId: googleUser.uid,
@@ -97,7 +97,7 @@ class UserService {
   ///
   /// Returns [true] if there's existing profile available
   Future<bool> isUserProfileExists() async {
-    var result = await _apiService.getProfile(userId: currentUser.id);
+    var result = await _apiService.getUserProfile(userId: currentUser.id);
     return !(result is Failure);
   }
 
