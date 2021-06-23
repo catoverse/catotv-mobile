@@ -18,6 +18,7 @@ import '../core/services/environment_service.dart';
 import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
+import '../core/services/key_storage_service.dart';
 import '../core/services/topic_service.dart';
 import '../core/services/user_service.dart';
 import '../core/services/youtube_service.dart';
@@ -62,6 +63,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
+  locator.registerLazySingleton(() => KeyStorageService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => Client());
   locator.registerLazySingleton(() => YoutubeService());

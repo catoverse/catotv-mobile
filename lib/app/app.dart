@@ -1,5 +1,6 @@
 import 'package:connectivity/connectivity.dart';
 import 'package:feed/core/services/environment_service.dart';
+import 'package:feed/core/services/key_storage_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -82,6 +83,7 @@ import 'injection.dart';
     LazySingleton(classType: FirebaseAuthenticationService),
 
     /// Custom services to make things work for the application
+    LazySingleton(classType: KeyStorageService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: Client),
     LazySingleton(classType: YoutubeService),

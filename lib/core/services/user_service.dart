@@ -4,14 +4,14 @@ import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/models/result/failure.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
+import 'package:feed/core/services/key_storage_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 
 class UserService {
   final _log = getLogger("User Service");
-  final _sharedPrefs = locator<SharedPreferences>();
+  final _keyStorageService = locator<KeyStorageService>();
   final _apiService = locator<APIService>();
   final _remoteClient = locator<RemoteClient>();
   final _hiveService = locator<HiveService>();
@@ -27,7 +27,7 @@ class UserService {
   /// Checks if there's user signed in
   ///
   /// Returns [true] if the user is signed on the device
-  bool get hasLoggedInUser => _sharedPrefs.getBool(LoginStatusKey) ?? false;
+  bool get hasLoggedInUser => _keyStorageService.get(LoginStatusKey) ?? false;
 
   Future<bool> loginWithGoogle() async {
     final authResult = await _authService.signInWithGoogle();
@@ -58,7 +58,7 @@ class UserService {
 
     await Future.wait([
       _hiveService.insertItem<User>(item: result, boxName: AuthUserBox),
-      _sharedPrefs.setBool(LoginStatusKey, true),
+      _keyStorageService.save<bool>(LoginStatusKey, true),
       syncUser(user: result),
     ]);
 
