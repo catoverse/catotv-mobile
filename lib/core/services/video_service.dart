@@ -1,59 +1,60 @@
-import 'dart:convert';
-
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/core/constants/keys.dart';
-import 'package:feed/core/services/environment_service.dart';
-import 'package:feed/core/services/hive_service/hive_service.dart';
-import 'package:http/http.dart';
+import 'package:feed/core/models/app_models.dart';
+import 'package:feed/remote/api/api_service.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 class VideoService {
   final _log = getLogger("VideoService");
-  final _client = locator<Client>();
-  final _environmentService = locator<EnvironmentService>();
-  final _hiveService = locator<HiveService>();
+  final _apiService = locator<APIService>();
+  final _explode = locator<YoutubeExplode>();
 
-  Future<String> getStream(String youtubeVideoUrl) async {
-    var videoId = convertUrlToId(youtubeVideoUrl)!;
-    var isItemCached = await _hiveService.fetchItem<String>(boxName: videoId);
+  /// #1. Fetch the [watchId] from videoUrl
+  /// #2. See if there's link available in API with [getStreamLink]
+  ///     #1. If link exists - use it
+  ///     #2. Fetch the [streamUrl] with Explode or Maadhav's API
+  ///     #3. Post the url to the API
+  Future<String> getStream(String videoUrl) async {
+    var watchId = convertUrlToId(videoUrl)!;
+    var streamUrl = await _apiService.getVideoStream(watchId);
 
-    if (isItemCached.isFailed) return _getUrlFromAPI(youtubeVideoUrl);
+    if (streamUrl is Failure) {
+      _log.v("Getting video from explode");
+      return _getUrlFromAPI(videoUrl);
+    }
 
-    var epoch = isItemCached.success!.split("expire=")[1].substring(0, 10);
-    var currentEpoch = DateTime.now().microsecondsSinceEpoch / 1000000;
-
-    if (currentEpoch > double.parse(epoch))
-      return _getUrlFromAPI(youtubeVideoUrl);
-
-    return isItemCached.success!;
+    _log.v("Getting video from API");
+    return streamUrl;
   }
 
   Future<String> _getUrlFromAPI(String url) async {
+    var watchId = convertUrlToId(url)!;
+    var defaultQuality = VideoQuality.medium480;
+
     try {
-      String apiUrl = _environmentService.getValue(VideoApiEnvKey);
+      var manifest = await _explode.videos.streamsClient.getManifest(watchId);
 
-      var response = await _client.get(Uri.parse("$apiUrl$url"));
-      var videoId = convertUrlToId(url)!;
+      late Uri videoUri = manifest.muxed.first.url;
 
-      if (response.statusCode == 200) {
-        var res = _parseResponse(response.body);
-        await _hiveService.insertItem<String>(item: res, boxName: videoId);
-        return res;
-      } else
-        _log.e("Error: ${response.body}");
+      manifest.muxed.forEach((m) {
+        if (defaultQuality == m.videoQuality) {
+          videoUri = m.url;
+        }
+      });
 
-      return response.body;
+      var streamUrl = videoUri.toString();
+      await _apiService.postVideoStream(watchId, streamUrl);
+      return streamUrl;
     } catch (e) {
-      _log.e(e);
       return e.toString();
     }
   }
 
-  String _parseResponse(String body) {
-    var res = json.decode(body);
-    //TODO: Log custom property : VideoFetched
-    return res["links"][0] as String;
-  }
+  // String _parseResponse(String body) {
+  //   var res = json.decode(body);
+  //   //TODO: Log custom property : VideoFetched
+  //   return res["links"][0] as String;
+  // }
 
   static String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
     if (!url.contains("http") && (url.length == 11)) return url;

@@ -26,6 +26,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import 'injection.dart';
 
@@ -86,6 +87,7 @@ import 'injection.dart';
     LazySingleton(classType: KeyStorageService),
     LazySingleton(classType: UserService),
     LazySingleton(classType: Client),
+    LazySingleton(classType: YoutubeExplode),
     LazySingleton(classType: VideoService),
     LazySingleton(classType: TopicService),
     LazySingleton(classType: FeedService),

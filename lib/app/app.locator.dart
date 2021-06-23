@@ -13,6 +13,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../core/services/environment_service.dart';
 import '../core/services/feed_service.dart';
@@ -66,6 +67,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => KeyStorageService());
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => Client());
+  locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton(() => VideoService());
   locator.registerLazySingleton(() => TopicService());
   locator.registerLazySingleton(() => FeedService());
