@@ -15,6 +15,7 @@ class VideoService {
   ///     #2. Fetch the [streamUrl] with Explode or Maadhav's API
   ///     #3. Post the url to the API
   Future<String> getStream(String videoUrl) async {
+    // TODO: Log custom property : VideoFetched
     var watchId = convertUrlToId(videoUrl)!;
     var streamUrl = await _apiService.getVideoStream(watchId);
 
@@ -49,12 +50,6 @@ class VideoService {
       return e.toString();
     }
   }
-
-  // String _parseResponse(String body) {
-  //   var res = json.decode(body);
-  //   //TODO: Log custom property : VideoFetched
-  //   return res["links"][0] as String;
-  // }
 
   static String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
     if (!url.contains("http") && (url.length == 11)) return url;

@@ -7,7 +7,6 @@
 // ignore_for_file: public_member_api_docs
 
 import 'package:connectivity/connectivity.dart';
-import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
@@ -66,7 +65,6 @@ Future setupLocator(
   locator.registerLazySingleton(() => FirebaseAuthenticationService());
   locator.registerLazySingleton(() => KeyStorageService());
   locator.registerLazySingleton(() => UserService());
-  locator.registerLazySingleton(() => Client());
   locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton(() => VideoService());
   locator.registerLazySingleton(() => TopicService());

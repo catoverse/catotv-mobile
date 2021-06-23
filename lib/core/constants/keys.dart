@@ -1,7 +1,6 @@
 // [.env] keys
 const String GraphqlApiEnvKey = "GRAPHQL_API_URL";
 const String NoKey = "NO_KEY";
-const String VideoApiEnvKey = "VIDEO_API_URL";
 const String GoogleClientEnvKey = "GOOGLE_CLIENT";
 
 // Hive database box names
