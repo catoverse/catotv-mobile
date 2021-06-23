@@ -57,9 +57,9 @@ class UserService {
     //TODO: Log custom event - user login
 
     await Future.wait([
-      syncUser(user: result),
       _hiveService.insertItem<User>(item: result, boxName: AuthUserBox),
-      _sharedPrefs.setBool(LoginStatusKey, true)
+      _sharedPrefs.setBool(LoginStatusKey, true),
+      syncUser(user: result),
     ]);
 
     return true;

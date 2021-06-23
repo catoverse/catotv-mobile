@@ -21,7 +21,7 @@ class StartUpViewModel extends BaseViewModel {
     if (connectivityPassed == null) await checkConnectivity();
 
     if (!_isConnected!) {
-      _log.v("No Internet connection, try again");
+      _log.i("No Internet connection, try again");
       return;
     }
 

@@ -10,16 +10,6 @@ const List<Map<String, dynamic>> feedData = [
     "end_timestamp": 440
   },
   {
-    "id": "5f527ae3859c2126e20ed8f5",
-    "title": "8 Things People Want From A Relationship",
-    "description": null,
-    "author_name": null,
-    "video_url": "https://youtu.be/46pBeVohuAc",
-    "topic": {"id": "5f5273e59aa66f1d8c150489", "name": "Social"},
-    "start_timestamp": 23,
-    "end_timestamp": 299
-  },
-  {
     "id": "5f527ae3859c2126e20ed8e2",
     "title": "Sleep apnea",
     "description": null,
@@ -48,36 +38,6 @@ const List<Map<String, dynamic>> feedData = [
     "topic": {"id": "5f5273e59aa66f1d8c150488", "name": "Career"},
     "start_timestamp": 0,
     "end_timestamp": 508
-  },
-  {
-    "id": "5f527ae3859c2126e20ed8e7",
-    "title": "8 Reasons To Break Up With Someone",
-    "description": null,
-    "author_name": null,
-    "video_url": "https://youtu.be/gtSUHpuxYxw",
-    "topic": {"id": "5f5273e59aa66f1d8c150489", "name": "Social"},
-    "start_timestamp": 6,
-    "end_timestamp": 278
-  },
-  {
-    "id": "5f527ae3859c2126e20ed935",
-    "title": "5 First-Date Moves That Make Him Want More",
-    "description": null,
-    "author_name": null,
-    "video_url": "https://youtu.be/OsNT75zRCDM",
-    "topic": {"id": "5f5273e59aa66f1d8c150489", "name": "Social"},
-    "start_timestamp": 0,
-    "end_timestamp": 230
-  },
-  {
-    "id": "5f527ae3859c2126e20ed924",
-    "title": "6 Ways To Help a Friend in a Toxic Relationship",
-    "description": null,
-    "author_name": null,
-    "video_url": "https://youtu.be/kY2hErhaiUQ",
-    "topic": {"id": "5f5273e59aa66f1d8c150489", "name": "Social"},
-    "start_timestamp": 6,
-    "end_timestamp": 327
   },
   {
     "id": "5f527ae3859c2126e20ed93a",

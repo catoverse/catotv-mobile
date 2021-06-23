@@ -13,15 +13,26 @@ import 'test_helpers.mocks.dart';
   MockSpec<APIService>(returnNullOnMissingStub: true),
   MockSpec<ConnectivityService>(returnNullOnMissingStub: true),
   MockSpec<NavigationService>(returnNullOnMissingStub: true),
+  MockSpec<BottomSheetService>(returnNullOnMissingStub: true),
+  MockSpec<SnackbarService>(returnNullOnMissingStub: true),
 ])
 MockUserService getAndRegisterUserService(
-    {bool hasLoggedInUser = true, bool hasProfile = true}) {
+    {bool hasLoggedInUser = true,
+    bool hasProfile = true,
+    bool syncUser = true,
+    bool loginError = false}) {
   _removeRegistrationIfExists<UserService>();
   final service = MockUserService();
 
   when(service.hasLoggedInUser).thenReturn(hasLoggedInUser);
   when(service.currentUser).thenReturn(defaultUser);
   when(service.syncUser())
+      .thenAnswer((realInvocation) => Future.value(syncUser));
+
+  when(service.loginWithGoogle())
+      .thenAnswer((realInvocation) => Future.value(!loginError));
+
+  when(service.isUserProfileExists())
       .thenAnswer((realInvocation) => Future.value(hasProfile));
 
   locator.registerSingleton<UserService>(service);
@@ -46,6 +57,20 @@ MockNavigationService getAndRegisterNavigationService() {
   return service;
 }
 
+MockSnackbarService getAndRegisterSnackbarService() {
+  _removeRegistrationIfExists<SnackbarService>();
+  final service = MockSnackbarService();
+  locator.registerSingleton<SnackbarService>(service);
+  return service;
+}
+
+MockBottomSheetService getAndRegisterBottomSheetService() {
+  _removeRegistrationIfExists<BottomSheetService>();
+  final service = MockBottomSheetService();
+  locator.registerSingleton<BottomSheetService>(service);
+  return service;
+}
+
 MockConnectivityService getAndRegisterConnectivityService(
     {bool isConnected = true}) {
   _removeRegistrationIfExists<ConnectivityService>();
@@ -61,8 +86,10 @@ MockConnectivityService getAndRegisterConnectivityService(
 void registerServices() {
   getAndRegisterUserService();
   getAndRegisterAPIService();
-  getAndRegisterNavigationService();
   getAndRegisterConnectivityService();
+  getAndRegisterNavigationService();
+  getAndRegisterBottomSheetService();
+  getAndRegisterSnackbarService();
 }
 
 void unregisterServices() {
@@ -70,6 +97,8 @@ void unregisterServices() {
   locator.unregister<APIService>();
   locator.unregister<ConnectivityService>();
   locator.unregister<NavigationService>();
+  locator.unregister<BottomSheetService>();
+  locator.unregister<SnackbarService>();
 }
 
 void _removeRegistrationIfExists<T extends Object>() {

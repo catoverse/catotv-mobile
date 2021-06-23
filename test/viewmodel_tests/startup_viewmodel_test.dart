@@ -61,7 +61,7 @@ void main() {
       test(
           'when user logged in and profile is not available in hive, it should redirect to onboarding',
           () async {
-        getAndRegisterUserService(hasProfile: false);
+        getAndRegisterUserService(syncUser: false);
         final service = getAndRegisterNavigationService();
         var model = _getModel();
         await model.runStartupLogic();

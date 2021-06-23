@@ -45,12 +45,14 @@ abstract class AuthenticationViewModel extends BaseViewModel {
 
   loginWithGoogle() async {
     bool isProfileExists = false;
+
     setBusy(true);
 
     var loginSuccess = await _userService.loginWithGoogle();
 
     if (!loginSuccess) {
       setBusy(false);
+      _log.e("failed to perform login");
       _snackbarService.showSnackbar(
           title: "Aww, Sorry", message: "Something went wrong from our side.");
       return;
@@ -63,10 +65,10 @@ abstract class AuthenticationViewModel extends BaseViewModel {
     setBusy(false);
 
     if (isProfileExists) {
-      _log.i("We hava a profile for user, redirect to home");
+      _log.i("We have profile for user, redirect to home");
       return _navigationService.replaceWith(Routes.homeView);
     } else {
-      _log.i("We don't hava a profile for user, redirect to select topics");
+      _log.i("We don't have profile for user, redirect to select topics");
       return _navigationService.replaceWith(Routes.topicSelectionView);
     }
   }
