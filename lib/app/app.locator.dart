@@ -24,6 +24,7 @@ import '../core/services/topic_service.dart';
 import '../core/services/user_service.dart';
 import '../core/services/video_service.dart';
 import '../firebase/analytics.dart';
+import '../firebase/crashlytics.dart';
 import '../firebase/dynamic_links.dart';
 import '../remote/api/api_service.dart';
 import '../remote/api/api_service_impl.dart';
@@ -73,4 +74,5 @@ Future setupLocator(
   locator.registerLazySingleton(() => FeedService());
   locator.registerLazySingleton(() => DynamicLinksService());
   locator.registerLazySingleton(() => AnalyticsService());
+  locator.registerLazySingleton(() => CrashlyticsService.getInstance());
 }

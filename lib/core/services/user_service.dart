@@ -5,6 +5,7 @@ import 'package:feed/core/models/app_models.dart';
 
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/key_storage_service.dart';
+import 'package:feed/firebase/crashlytics.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
 import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
@@ -15,6 +16,7 @@ class UserService {
   final _apiService = locator<APIService>();
   final _remoteClient = locator<RemoteClient>();
   final _hiveService = locator<HiveService>();
+  final _crashlytics = locator<CrashlyticsService>();
   final _authService = locator<FirebaseAuthenticationService>();
 
   User? _loggedInUser;
@@ -88,6 +90,7 @@ class UserService {
     var authUser = hiveUser.success!;
 
     _loggedInUser = authUser;
+    _crashlytics.setUserIdToCrashlytics(id: currentUser.id);
     _remoteClient.updateToken(newToken: authUser.token);
 
     return true;
