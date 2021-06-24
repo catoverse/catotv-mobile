@@ -1,12 +1,9 @@
-import 'package:feed/app/app.logger.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
 
 class CrashlyticsService {
   static CrashlyticsService? _instance;
-
-  final _log = getLogger("CrashlyticsService");
 
   static CrashlyticsService getInstance() {
     if (_instance == null) {
@@ -23,11 +20,6 @@ class CrashlyticsService {
 
   void recordFlutterErrorToCrashlytics(FlutterErrorDetails details) {
     _crashlyticsService.recordFlutterError(details);
-  }
-
-  Future setUserIdToCrashlytics({String? id}) async {
-    _log.i("Setting $id to Crashlytics");
-    if (id != null) await _crashlyticsService.setUserIdentifier(id);
   }
 
   Future logToCrashlytics(
