@@ -3,14 +3,16 @@ import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/services/user_service.dart';
+import 'package:feed/firebase/analytics.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 abstract class AuthenticationViewModel extends BaseViewModel {
-  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
-  final SnackbarService _snackbarService = locator<SnackbarService>();
-  final NavigationService _navigationService = locator<NavigationService>();
-  final UserService _userService = locator<UserService>();
+  final _bottomSheetService = locator<BottomSheetService>();
+  final _snackbarService = locator<SnackbarService>();
+  final _navigationService = locator<NavigationService>();
+  final _userService = locator<UserService>();
+  final _analytics = locator<AnalyticsService>();
   final _log = getLogger("Authentication ViewModel");
 
   Future showConstraint({
@@ -61,6 +63,7 @@ abstract class AuthenticationViewModel extends BaseViewModel {
     _log.i(
         "User Login Successful : Logged in user: ${_userService.currentUser}");
     isProfileExists = await _userService.isUserProfileExists();
+    _analytics.logLogin();
 
     setBusy(false);
 

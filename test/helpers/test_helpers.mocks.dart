@@ -313,7 +313,7 @@ class MockBottomSheetService extends _i1.Mock
       super.noSuchMethod(Invocation.method(#setCustomSheetBuilders, [builders]),
           returnValueForMissingStub: null);
   @override
-  _i4.Future<_i13.SheetResponse?> showBottomSheet(
+  _i4.Future<_i13.SheetResponse<dynamic>?> showBottomSheet(
           {String? title,
           String? description,
           String? confirmButtonTitle = r'Ok',
@@ -335,10 +335,10 @@ class MockBottomSheetService extends _i1.Mock
                 #exitBottomSheetDuration: exitBottomSheetDuration,
                 #enterBottomSheetDuration: enterBottomSheetDuration
               }),
-              returnValue: Future<_i13.SheetResponse?>.value())
-          as _i4.Future<_i13.SheetResponse?>);
+              returnValue: Future<_i13.SheetResponse<dynamic>?>.value())
+          as _i4.Future<_i13.SheetResponse<dynamic>?>);
   @override
-  _i4.Future<_i13.SheetResponse?> showCustomSheet(
+  _i4.Future<_i13.SheetResponse<T>?> showCustomSheet<T, R>(
           {dynamic variant,
           String? title,
           String? description,
@@ -356,6 +356,7 @@ class MockBottomSheetService extends _i1.Mock
           bool? isScrollControlled = false,
           String? barrierLabel = r'',
           dynamic customData,
+          R? data,
           bool? enableDrag = true,
           Duration? exitBottomSheetDuration,
           Duration? enterBottomSheetDuration}) =>
@@ -378,14 +379,15 @@ class MockBottomSheetService extends _i1.Mock
                 #isScrollControlled: isScrollControlled,
                 #barrierLabel: barrierLabel,
                 #customData: customData,
+                #data: data,
                 #enableDrag: enableDrag,
                 #exitBottomSheetDuration: exitBottomSheetDuration,
                 #enterBottomSheetDuration: enterBottomSheetDuration
               }),
-              returnValue: Future<_i13.SheetResponse?>.value())
-          as _i4.Future<_i13.SheetResponse?>);
+              returnValue: Future<_i13.SheetResponse<T>?>.value())
+          as _i4.Future<_i13.SheetResponse<T>?>);
   @override
-  void completeSheet(_i13.SheetResponse? response) =>
+  void completeSheet(_i13.SheetResponse<dynamic>? response) =>
       super.noSuchMethod(Invocation.method(#completeSheet, [response]),
           returnValueForMissingStub: null);
 }

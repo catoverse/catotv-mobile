@@ -30,30 +30,31 @@ dependencies:
   # A secure internal NoSQL Database
   hive: ^2.0.4
   path_provider: ^2.0.1
+  shared_preferences: ^2.0.6
 
   # graphql for fetching data from API
   graphql: ^5.0.0-nullsafety.4
 
   # could be handy for hiding keys in [.env] file
-  flutter_dotenv: ^4.0.0-nullsafety.1
+  flutter_dotenv: ^5.0.0
 
   # fetches [version][build-info]..
   package_info: ^2.0.0
 
   # a videoplayer to play youtube videos
   flick_video_player: ^0.3.1
-
-  # firebase integration
-  firebase_auth: ^1.1.4
-  stacked_firebase_auth: ^0.2.5
-  firebase_core: ^1.1.1
-  firebase_dynamic_links: ^2.0.4
-  
   share: ^2.0.1
   youtube_explode_dart: ^1.9.4
   visibility_detector: ^0.2.0
+
+  # firebase integration
+  firebase_core: ^1.1.1
+  firebase_auth: ^1.1.4
+  stacked_firebase_auth: ^0.2.5
+  firebase_dynamic_links: ^2.0.4
+  firebase_crashlytics: ^2.0.6
   firebase_analytics: ^8.1.2
-  shared_preferences: ^2.0.6
+  
 
 dev_dependencies:
   flutter_test:

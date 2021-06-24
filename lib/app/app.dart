@@ -3,6 +3,7 @@ import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/core/services/key_storage_service.dart';
 import 'package:feed/firebase/analytics.dart';
+import 'package:feed/firebase/crashlytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/hive_service/hive_service_impl.dart';
@@ -27,7 +28,6 @@ import 'package:stacked_firebase_auth/stacked_firebase_auth.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
-
 import 'injection.dart';
 
 /// The @StackedApp annotation generates
@@ -93,8 +93,11 @@ import 'injection.dart';
     LazySingleton(classType: FeedService),
     LazySingleton(classType: DynamicLinksService),
     LazySingleton(classType: AnalyticsService),
+    LazySingleton(
+        classType: CrashlyticsService,
+        resolveUsing: CrashlyticsService.getInstance),
   ],
-  logger: StackedLogger(),
+  logger: StackedLogger(loggerOutputs: [CrashlyticsOutput]),
 )
 class AppSetup {
   /** Serves no purpose besides having an annotation attached to it */
