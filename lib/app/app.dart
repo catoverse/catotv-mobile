@@ -97,7 +97,7 @@ import 'injection.dart';
         classType: CrashlyticsService,
         resolveUsing: CrashlyticsService.getInstance),
   ],
-  logger: StackedLogger(),
+  logger: StackedLogger(loggerOutputs: [CrashlyticsOutput]),
 )
 class AppSetup {
   /** Serves no purpose besides having an annotation attached to it */

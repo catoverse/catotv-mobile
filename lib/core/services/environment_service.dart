@@ -8,14 +8,14 @@ class EnvironmentService {
 
   /// Returns the value associated with the key
   String getValue(String key, {bool verbose = false}) {
-    final value = env[key] ?? NoKey;
+    final value = dotenv.env[key] ?? NoKey;
     if (verbose) log.v('key:$key value:$value');
     return value;
   }
 
   static Future<EnvironmentService> getInstance() async {
     print('Load environment');
-    await load(fileName: ".env");
+    await dotenv.load(fileName: ".env");
     print('Environement loaded');
     return Future.value(EnvironmentService());
   }
