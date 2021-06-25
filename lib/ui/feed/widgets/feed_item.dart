@@ -39,12 +39,12 @@ class _FeedItemState extends State<FeedItem>
           videoUrl = value;
           mounted = true;
         }));
-    thumbnail = VideoService.getThumbnail(widget.video.youtubeUrl);
+    thumbnail = VideoService.getThumbnail(widget.video.videoUrl);
     super.initState();
   }
 
   Future getStreamUrl() async {
-    String streamUrl = await _videoService.getStream(widget.video.youtubeUrl);
+    String streamUrl = await _videoService.getStream(widget.video.videoUrl);
 
     return streamUrl;
   }

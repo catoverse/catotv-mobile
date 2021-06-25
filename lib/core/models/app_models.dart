@@ -37,6 +37,36 @@ class Topic with _$Topic {
 }
 
 @freezed
+class ChannelInformation with _$ChannelInformation {
+  ChannelInformation._();
+
+  factory ChannelInformation({
+    String? id,
+    String? name,
+    @JsonKey(name: "subscriber_count") int? subscriberCount,
+  }) = _ChannelInformation;
+
+  factory ChannelInformation.fromJson(Map<String, dynamic> json) =>
+      _$ChannelInformationFromJson(json);
+}
+
+@freezed
+class ContentDetails with _$ContentDetails {
+  ContentDetails._();
+
+  factory ContentDetails(
+      {@JsonKey(name: "youtube_category") int? youtubeCategory,
+      @JsonKey(name: "captions_available") bool? hasCaptions,
+      int? dislikes,
+      int? likes,
+      int? duration,
+      int? views}) = _ContentDetails;
+
+  factory ContentDetails.fromJson(Map<String, dynamic> json) =>
+      _$ContentDetailsFromJson(json);
+}
+
+@freezed
 class Video with _$Video {
   Video._();
 
@@ -44,11 +74,16 @@ class Video with _$Video {
   factory Video({
     @HiveField(0) @JsonKey(name: "id") required String id,
     @HiveField(1) @JsonKey(name: "title") required String title,
-    @HiveField(2) @JsonKey(name: "video_url") required String youtubeUrl,
+    @HiveField(2) @JsonKey(name: "video_url") required String videoUrl,
     @HiveField(3) @JsonKey(name: "topic") required Topic topic,
     @HiveField(4) @JsonKey(name: "start_timestamp") int? startTimestamp,
     @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
-    @HiveField(6) @JsonKey(ignore: true) String? videoUrl,
+    @HiveField(6)
+    @JsonKey(name: "channel_information")
+        required ChannelInformation channelInformation,
+    @HiveField(7)
+    @JsonKey(name: "content_details")
+        required ContentDetails contentDetails,
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
