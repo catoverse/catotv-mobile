@@ -1,6 +1,7 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
+import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/analytics.dart';
@@ -57,13 +58,13 @@ abstract class AuthenticationViewModel extends BaseViewModel {
       _log.e("failed to perform login");
       _snackbarService.showSnackbar(
           title: "Aww, Sorry", message: "Something went wrong from our side.");
-      return;
+      return _analytics.logEvent(LoginFailed);
     }
 
     _log.i(
         "User Login Successful : Logged in user: ${_userService.currentUser}");
     isProfileExists = await _userService.isUserProfileExists();
-    _analytics.logLogin();
+    _analytics.logEvent(LoginSuccess);
 
     setBusy(false);
 

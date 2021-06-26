@@ -15,12 +15,6 @@ class AnalyticsService {
     }
   }
 
-  void logLogin() {
-    if (kReleaseMode) {
-      _analytics.logLogin(loginMethod: 'google');
-    }
-  }
-
   Future logShare(String itemId,
       {String contentType = 'Post', String method = 'in_app_share'}) async {
     if (kReleaseMode) {
