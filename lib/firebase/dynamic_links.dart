@@ -4,7 +4,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 
 class DynamicLinksService {
   Future<String> shareVideo(Video video) async {
-    String videoID = VideoService.convertUrlToId(video.youtubeUrl)!;
+    String videoID = VideoService.convertUrlToId(video.videoUrl)!;
 
     Uri fallbackURL = Uri.parse("https://cato.tv/video/$videoID");
 

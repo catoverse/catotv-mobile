@@ -17,13 +17,11 @@ class GQLQueries {
     }
   ''';
 
-  static const String getVideosByTopics = r'''
+  static const String getVideosByTopics = r'''  
     query VideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
       videoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
         id
         title
-        description
-        author_name
         video_url
         topic {
           id
@@ -31,6 +29,18 @@ class GQLQueries {
         }
         start_timestamp
         end_timestamp
+        content_details {
+          youtube_category
+          captions_available
+          dislikes
+          duration
+          views
+        }
+        channel_information {
+          id
+          name
+          subscriber_count
+        }
       }
     }
   ''';
