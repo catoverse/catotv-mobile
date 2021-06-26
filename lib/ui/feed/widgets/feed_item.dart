@@ -39,12 +39,12 @@ class _FeedItemState extends State<FeedItem>
           videoUrl = value;
           mounted = true;
         }));
-    thumbnail = VideoService.getThumbnail(widget.video.youtubeUrl);
+    thumbnail = VideoService.getThumbnail(widget.video.videoUrl);
     super.initState();
   }
 
   Future getStreamUrl() async {
-    String streamUrl = await _videoService.getStream(widget.video.youtubeUrl);
+    String streamUrl = await _videoService.getStream(widget.video.videoUrl);
 
     return streamUrl;
   }
@@ -61,7 +61,8 @@ class _FeedItemState extends State<FeedItem>
       child: Column(
         children: [
           // Header of the video card
-          _displayTitleTopic(context, widget.video.title),
+          _displayTitleTopic(context, widget.video.title,
+              widget.video.channelInformation.name),
 
           mounted
               ? FeedPlayer(
@@ -96,18 +97,33 @@ class _FeedItemState extends State<FeedItem>
     );
   }
 
-  Widget _displayTitleTopic(BuildContext context, String title) {
+  Widget _displayTitleTopic(
+      BuildContext context, String title, String? channelName) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        maxLines: 3,
-        style: TextStyle(
-            color: Colors.black,
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            fontStyle: FontStyle.normal),
+      child: Column(
+        children: [
+          if (channelName != null)
+            Text(
+              channelName,
+              maxLines: 3,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.normal),
+            ),
+          Text(
+            title,
+            maxLines: 3,
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                fontStyle: FontStyle.normal),
+          ),
+        ],
       ),
     );
   }
