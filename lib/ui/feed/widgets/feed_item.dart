@@ -6,8 +6,6 @@ import 'package:feed/feedplayer/player.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flutter/material.dart';
 
-final yt = locator<VideoService>();
-
 class FeedItem extends StatefulWidget {
   final Video video;
   final VoidCallback? onShare;
@@ -103,6 +101,8 @@ class _FeedItemState extends State<FeedItem>
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
       alignment: Alignment.centerLeft,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           if (channelName != null)
             Text(
