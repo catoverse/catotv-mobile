@@ -1,7 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/feed_service.dart';
-import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:share/share.dart';
 import 'package:stacked/stacked.dart';
@@ -10,7 +9,6 @@ class FeedViewModel extends BaseViewModel {
   final DynamicLinksService _dynamicLinksService =
       locator<DynamicLinksService>();
 
-  final FeedPlayerController controller = FeedPlayerController();
   final FeedService _feedService = locator<FeedService>();
 
   int skip = 0;
@@ -22,12 +20,7 @@ class FeedViewModel extends BaseViewModel {
     Share.share("Checkout ${video.title} at $url");
   }
 
-  getVideos({bool dispose = false}) async {
-    // For every new API Fetch the olden videos neeeds to be disposed
-    if (dispose) {
-      controller.dispose();
-    }
-
+  getVideos() async {
     setBusy(true);
 
     var newVideos = await _feedService.fetchVideos(skip: skip);
@@ -40,11 +33,5 @@ class FeedViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  Future<void> refresh() async => await getVideos(dispose: true);
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+  Future<void> refresh() async => await getVideos();
 }

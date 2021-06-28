@@ -68,7 +68,7 @@ class _FeedItemState extends State<FeedItem>
                   feedPlayerController: widget.feedPlayerController,
                   thumbnail: thumbnail,
                 )
-              : ThumbnailImage(thumbnail: thumbnail),
+              : ThumbnailImage(thumbnail: thumbnail, aspectRatio: 1.05),
 
           // Footer of the video card'Example of a Dynamic Link'
           _displayFooter()
@@ -109,14 +109,15 @@ class _FeedItemState extends State<FeedItem>
               channelName,
               maxLines: 3,
               style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.black54,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                   fontStyle: FontStyle.normal),
             ),
           Text(
             title,
-            maxLines: 3,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 18,

@@ -89,10 +89,10 @@ class UIHelpers {
   UIHelpers.fromContext(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
 
-    var screenWidth = mediaQuery.size.width;
-    var screenHeight = mediaQuery.size.height;
+    width = mediaQuery.size.width;
+    height = mediaQuery.size.height;
 
-    scalingHelper = ScalingHelper(width: screenWidth);
+    scalingHelper = ScalingHelper(width: width!);
 
     heading = Theme.of(context)
         .textTheme
@@ -113,8 +113,8 @@ class UIHelpers {
         fontFamily: 'AppFont',
         fontSize: scalingHelper!.size(16));
 
-    blockSizeHorizontal = screenWidth / 100;
-    blockSizeVertical = screenHeight / 100;
+    blockSizeHorizontal = width! / 100;
+    blockSizeVertical = height! / 100;
 
     verticalSpaceLow = SizedBox(
       height: blockSizeVertical! * 3,

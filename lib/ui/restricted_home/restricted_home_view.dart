@@ -28,24 +28,24 @@ class RestrictedHomeView extends StatelessWidget {
                         child: Text('Login')),
                   ],
                 ),
-                body: VisibilityDetector(
-                  key: ObjectKey(feedPlayerController),
-                  onVisibilityChanged: (visibility) {
-                    if (visibility.visibleFraction == 0) {
-                      feedPlayerController.pause();
-                    }
-                  },
-                  child: model.isBusy
-                      ? Center(child: CircularProgressIndicator())
-                      : ListView(
-                          controller: _controller,
-                          cacheExtent: 1000,
-                          children: model.videos
-                              .map((video) => FeedItem(
-                                  video: video,
-                                  feedPlayerController: feedPlayerController))
-                              .toList()),
-                ),
+                body: model.isBusy
+                    ? Center(child: CircularProgressIndicator())
+                    : VisibilityDetector(
+                        key: ObjectKey(feedPlayerController),
+                        onVisibilityChanged: (visibility) {
+                          if (visibility.visibleFraction == 0) {
+                            feedPlayerController.pause();
+                          }
+                        },
+                        child: ListView(
+                            controller: _controller,
+                            cacheExtent: 1000,
+                            children: model.videos
+                                .map((video) => FeedItem(
+                                    video: video,
+                                    feedPlayerController: feedPlayerController))
+                                .toList()),
+                      ),
               ),
             ));
   }
