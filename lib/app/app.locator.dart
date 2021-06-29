@@ -23,6 +23,7 @@ import '../core/services/key_storage_service.dart';
 import '../core/services/topic_service.dart';
 import '../core/services/user_service.dart';
 import '../core/services/video_service.dart';
+import '../feedplayer/controller.dart';
 import '../firebase/analytics.dart';
 import '../firebase/crashlytics.dart';
 import '../firebase/dynamic_links.dart';
@@ -69,6 +70,7 @@ Future setupLocator(
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton(() => ExplodeService());
+  locator.registerSingleton(FeedPlayerController());
   locator.registerLazySingleton(() => VideoService());
   locator.registerLazySingleton(() => TopicService());
   locator.registerLazySingleton(() => FeedService());

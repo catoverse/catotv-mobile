@@ -13,7 +13,7 @@ class ThumbnailImage extends StatelessWidget {
     return AspectRatio(
       aspectRatio: aspectRatio ?? 16 / 9,
       child: Image.network(thumbnail,
-          fit: BoxFit.fill,
+          fit: BoxFit.fitWidth,
           loadingBuilder: (_, child, loadingProgress) {
             if (loadingProgress == null) return child;
             return BlurredImage.asset(

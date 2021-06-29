@@ -59,7 +59,9 @@ class _FeedPlayerState extends State<FeedPlayer> {
         }
       },
       child: AspectRatio(
-        aspectRatio: 1.05,
+        aspectRatio: flickManager.flickVideoManager!.isVideoInitialized
+            ? flickManager.flickVideoManager!.videoPlayerValue!.aspectRatio
+            : 16 / 9,
         child: FlickVideoPlayer(
           flickManager: flickManager,
           flickVideoWithControls: FlickVideoWithControls(

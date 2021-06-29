@@ -1,3 +1,4 @@
+import 'package:feed/app/app.locator.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/ui/feed/widgets/feed_item.dart';
 import 'package:feed/ui/global/screen.dart';
@@ -8,7 +9,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 import 'feed_viewmodel.dart';
 
 class FeedView extends StatelessWidget {
-  final FeedPlayerController controller = FeedPlayerController();
+  final FeedPlayerController controller = locator<FeedPlayerController>();
   @override
   Widget build(BuildContext context) {
     return ScreenBuilder<FeedViewModel>(
@@ -27,6 +28,7 @@ class FeedView extends StatelessWidget {
                           }
                         },
                         child: ListView(
+                          addAutomaticKeepAlives: true,
                           children: [
                             ...model.videos
                                 .map(
@@ -52,7 +54,10 @@ class FeedView extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   ElevatedButton(
-                                      onPressed: () => model.refresh(),
+                                      onPressed: () {
+                                        controller.dispose();
+                                        model.refresh();
+                                      },
                                       child: Text("Want More?")),
                                 ],
                               ),
