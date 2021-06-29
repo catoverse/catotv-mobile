@@ -5,19 +5,22 @@ import 'package:flutter/foundation.dart';
 
 class AnalyticsService {
   final FirebaseAnalytics _analytics = FirebaseAnalytics();
+  final bool appMode;
 
   FirebaseAnalyticsObserver getAnalyticsObserver() =>
       FirebaseAnalyticsObserver(analytics: _analytics);
 
+  AnalyticsService({this.appMode = kReleaseMode});
+
   Future logAppOpen() async {
-    if (kReleaseMode) {
+    if (appMode) {
       await _analytics.logAppOpen();
     }
   }
 
   Future logShare(String itemId,
       {String contentType = 'Post', String method = 'in_app_share'}) async {
-    if (kReleaseMode) {
+    if (appMode) {
       await _analytics.logShare(
         contentType: contentType,
         itemId: itemId,
@@ -27,7 +30,7 @@ class AnalyticsService {
   }
 
   Future logEvent(String name, {Map<String, dynamic> params = const {}}) async {
-    if (kReleaseMode) {
+    if (appMode) {
       await _analytics.logEvent(
         name: name,
         parameters: params,
@@ -36,7 +39,7 @@ class AnalyticsService {
   }
 
   void setUserIdentifier(String userId) {
-    if (kReleaseMode) {
+    if (appMode) {
       FirebaseCrashlytics.instance.setUserIdentifier(userId);
       _analytics.setUserId(userId);
     }

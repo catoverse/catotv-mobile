@@ -1,8 +1,10 @@
 import 'package:feed/app/app.locator.dart';
+import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/player.dart';
+import 'package:feed/firebase/analytics.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,7 @@ class FeedItem extends StatefulWidget {
 class _FeedItemState extends State<FeedItem>
     with AutomaticKeepAliveClientMixin {
   final _videoService = locator<VideoService>();
+  final _analytics = locator<AnalyticsService>();
   late String videoUrl;
   late String thumbnail;
   bool mounted = false;
@@ -42,7 +45,13 @@ class _FeedItemState extends State<FeedItem>
   }
 
   Future getStreamUrl() async {
+    var initialTime = DateTime.now();
+
     String streamUrl = await _videoService.getStream(widget.video.videoUrl);
+
+    await _analytics.logEvent(VideoLoadingTime, params: {
+      "duration": DateTime.now().difference(initialTime).inMilliseconds
+    });
 
     return streamUrl;
   }
