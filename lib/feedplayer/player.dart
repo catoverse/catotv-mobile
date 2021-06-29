@@ -65,6 +65,8 @@ class _FeedPlayerState extends State<FeedPlayer> {
         child: FlickVideoPlayer(
           flickManager: flickManager,
           flickVideoWithControls: FlickVideoWithControls(
+              playerErrorFallback: Positioned.fill(
+                  child: ThumbnailImage(thumbnail: widget.thumbnail)),
               playerLoadingFallback: Positioned.fill(
                 child: Stack(
                   children: <Widget>[
@@ -94,6 +96,8 @@ class _FeedPlayerState extends State<FeedPlayer> {
                 child: ThumbnailImage(
               thumbnail: widget.thumbnail,
             )),
+            playerErrorFallback: Positioned.fill(
+                child: ThumbnailImage(thumbnail: widget.thumbnail)),
             controls: FlickLandscapeControls(),
             iconThemeData: IconThemeData(
               size: 40,
