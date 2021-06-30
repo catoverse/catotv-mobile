@@ -1,14 +1,19 @@
 import 'package:feed/core/mixins/snackbar_helper.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/ui/base/auth_viewmodel.dart';
-import 'package:feed/ui/restricted_home/data/feed_data.dart';
+import 'package:feed/ui/base/feed_viewmodel.dart';
+import 'data/feed_data.dart';
 
 class RestrictedHomeViewModel extends AuthenticationViewModel
-    with SnackbarHelper {
-  List<Video> videos = [];
+    with BaseFeedViewModel, SnackbarHelper {
+  List<Video> _videos = [];
 
-  getVideos() {
-    feedData.forEach((json) => videos.add(Video.fromJson(json)));
+  @override
+  Future getVideos() async {
+    feedData.forEach((json) => _videos.add(Video.fromJson(json)));
     notifyListeners();
   }
+
+  @override
+  List<Video> get videos => _videos;
 }

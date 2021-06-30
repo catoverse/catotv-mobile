@@ -1,22 +1,36 @@
-// import 'package:feed/app/app.locator.dart';
-// import 'package:feed/core/models/app_models.dart';
-// import 'package:feed/core/services/feed_service/feed_service.dart';
-// import 'package:stacked/stacked.dart';
+import 'package:feed/app/app.locator.dart';
+import 'package:feed/core/constants/events.dart';
+import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/video_service.dart';
+import 'package:feed/firebase/analytics.dart';
+import 'package:feed/firebase/dynamic_links.dart';
+import 'package:share/share.dart';
 
-// abstract class FeedViewModel extends BaseViewModel {
-//   final FeedService apiService = locator<FeedService>();
+mixin BaseFeedViewModel {
+  final _videoService = locator<VideoService>();
+  final _analytics = locator<AnalyticsService>();
+  final _dynamicLinksService = locator<DynamicLinksService>();
 
-//   static const int pageSize = 10;
+  List<Video> get videos;
 
-//   Future<void> fetchPage(
-//       int pageKey, PagingController<int, Video> controller) async {
-//     try {
-//       final newItems = await apiService.fetchVideos(skip: pageKey);
+  Future<String> getStreamUrl(String videoUrl) async {
+    var beforeLoading = DateTime.now();
 
-//       final int nextPageKey = pageKey + newItems.length;
-//       controller.appendPage(newItems, nextPageKey);
-//     } catch (error) {
-//       controller.error = error;
-//     }
-//   }
-// }
+    String streamUrl = await _videoService.getStream(videoUrl);
+
+    await _analytics.logEvent(VideoLoadingTime, params: {
+      "duration": DateTime.now().difference(beforeLoading).inMilliseconds
+    });
+
+    return streamUrl;
+  }
+
+  Future shareVideo(Video video) async {
+    String url = await _dynamicLinksService.shareVideo(video);
+    Share.share("Checkout ${video.title} at $url");
+  }
+
+  Future getVideos();
+
+  String getThumbnail(String url) => VideoService.getThumbnail(url);
+}

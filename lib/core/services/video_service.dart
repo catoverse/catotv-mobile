@@ -12,7 +12,7 @@ class VideoService {
   /// #1. Fetch the [watchId] from videoUrl
   /// #2. See if there's link available in API with [getStreamLink]
   ///     #1. If link exists - use it
-  ///     #2. Fetch the [streamUrl] with Explode or Maadhav's API
+  ///     #2. Fetch the [streamUrl] with Explode
   ///     #3. Post the url to the API
   Future<String> getStream(String videoUrl) async {
     // TODO: Log custom property : VideoFetched
