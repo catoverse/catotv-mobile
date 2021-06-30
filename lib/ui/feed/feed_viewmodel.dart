@@ -1,10 +1,10 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/feed_service.dart';
-import 'package:feed/ui/base/feed_viewmodel.dart';
+import 'package:feed/ui/base/base_feedmodel.dart';
 import 'package:stacked/stacked.dart';
 
-class FeedViewModel extends BaseViewModel with BaseFeedViewModel {
+class FeedViewModel extends BaseFeedModel {
   final FeedService _feedService = locator<FeedService>();
 
   int skip = 0;

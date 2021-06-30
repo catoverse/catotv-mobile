@@ -5,8 +5,9 @@ import 'package:feed/core/services/video_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:share/share.dart';
+import 'package:stacked/stacked.dart';
 
-mixin BaseFeedViewModel {
+abstract class BaseFeedModel extends BaseViewModel {
   final _videoService = locator<VideoService>();
   final _analytics = locator<AnalyticsService>();
   final _dynamicLinksService = locator<DynamicLinksService>();

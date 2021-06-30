@@ -8,7 +8,7 @@ import 'package:feed/firebase/analytics.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-abstract class AuthenticationViewModel extends BaseViewModel {
+mixin AuthMixin on BaseViewModel {
   final _bottomSheetService = locator<BottomSheetService>();
   final _snackbarService = locator<SnackbarService>();
   final _navigationService = locator<NavigationService>();

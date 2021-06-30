@@ -1,13 +1,13 @@
-import 'package:feed/core/models/app_models.dart';
 import 'package:feed/feedplayer/list/list.widgets.dart';
 import 'package:feed/feedplayer/player.dart';
+import 'package:feed/ui/base/base_feedmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
+import 'package:stacked/stacked.dart';
 
-class FeedPlayerListView extends StatelessWidget with $FeedPlayerListView {
-  const FeedPlayerListView({Key? key, required this.items}) : super(key: key);
-
-  final List<Video> items;
+class FeedPlayerListView extends ViewModelWidget<BaseFeedModel>
+    with $FeedPlayerListView {
+  const FeedPlayerListView({Key? key}) : super(key: key);
 
   /// Default Viewport visible condition
   /// This function defines the area within which the widgets should be notified as [inView].
@@ -17,15 +17,15 @@ class FeedPlayerListView extends StatelessWidget with $FeedPlayerListView {
       deltaBottom > (0.5 * viewPortDimension);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, BaseFeedModel viewModel) {
     return InViewNotifierList(
         isInViewPortCondition: isInViewPortCondition,
-        itemCount: items.length,
+        itemCount: viewModel.videos.length,
         initialInViewIds: ['0'],
         builder: (BuildContext context, int index) => InViewNotifierWidget(
             id: "$index",
             builder: (BuildContext context, bool isInView, Widget? child) {
-              final video = items[index];
+              final video = viewModel.videos[index];
               return Container(
                 width: double.infinity,
                 alignment: Alignment.center,
@@ -38,7 +38,11 @@ class FeedPlayerListView extends StatelessWidget with $FeedPlayerListView {
                     feedHeader(video.title, video.channelInformation.name),
 
                     // Feed Video Player
-                    FeedPlayer(videoUrl: video.videoUrl, isInView: isInView),
+                    FeedPlayer(
+                      videoUrl: video.videoUrl,
+                      isInView: isInView,
+                      baseFeedModel: viewModel,
+                    ),
 
                     // Feed Footer
                     feedFooter(video.topic.name)

@@ -26,7 +26,7 @@ class RestrictedHomeView extends StatelessWidget {
                   ),
                   body: model.isBusy
                       ? Center(child: CircularProgressIndicator())
-                      : FeedPlayerListView(items: model.videos)),
+                      : FeedPlayerListView()),
             ));
   }
 

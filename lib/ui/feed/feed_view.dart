@@ -19,9 +19,7 @@ class FeedView extends StatelessWidget {
                         model.refresh();
                         return;
                       },
-                      child: FeedPlayerListView(
-                        items: model.videos,
-                      )),
+                      child: FeedPlayerListView()),
             ));
   }
 }

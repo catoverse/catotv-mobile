@@ -1,5 +1,4 @@
-import 'package:feed/core/models/app_models.dart';
-import 'package:feed/ui/base/feed_viewmodel.dart';
+import 'package:feed/ui/base/base_feedmodel.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -7,7 +6,12 @@ import 'package:video_player/video_player.dart';
 class FeedPlayer extends StatefulWidget {
   final bool isInView;
   final String videoUrl;
-  const FeedPlayer({Key? key, required this.videoUrl, required this.isInView})
+  final BaseFeedModel baseFeedModel;
+  const FeedPlayer(
+      {Key? key,
+      required this.videoUrl,
+      required this.isInView,
+      required this.baseFeedModel})
       : super(key: key);
 
   @override
@@ -15,14 +19,14 @@ class FeedPlayer extends StatefulWidget {
 }
 
 class _FeedPlayerState extends State<FeedPlayer>
-    with AutomaticKeepAliveClientMixin, BaseFeedViewModel {
+    with AutomaticKeepAliveClientMixin {
   VideoPlayerController? _controller;
   late Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
     _initializeVideoPlayerFuture =
-        getStreamUrl(widget.videoUrl).then((dataSource) {
+        widget.baseFeedModel.getStreamUrl(widget.videoUrl).then((dataSource) {
       _controller = VideoPlayerController.network(dataSource);
       _controller!.initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
@@ -75,7 +79,7 @@ class _FeedPlayerState extends State<FeedPlayer>
         } else {
           return Center(
             child: ThumbnailImage(
-              thumbnail: getThumbnail(widget.videoUrl),
+              thumbnail: widget.baseFeedModel.getThumbnail(widget.videoUrl),
             ),
           );
         }
@@ -85,10 +89,4 @@ class _FeedPlayerState extends State<FeedPlayer>
 
   @override
   bool get wantKeepAlive => true;
-
-  @override
-  Future getVideos() => Future.value();
-
-  @override
-  List<Video> get videos => throw UnimplementedError();
 }
