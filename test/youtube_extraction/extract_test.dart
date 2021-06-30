@@ -91,5 +91,25 @@ void main() {
         expect(total, isTrue);
       });
     });
+
+    group("loading time test", () {
+      test("only first request is takes more time to fetch", () async {
+        String firstUrl = "https://youtu.be/Fpoa8siZYk0";
+        // String secondUrl = "https://youtu.be/Fpoa8siZYk0";
+        await getExplodeStream(firstUrl);
+        await getExplodeStream(firstUrl);
+        await getExplodeStream(firstUrl);
+        await getExplodeStream(firstUrl);
+      });
+
+      test("First video takes more time to fetch", () async {
+        String firstUrl = "https://youtu.be/Fpoa8siZYk0";
+        // String secondUrl = "https://youtu.be/Fpoa8siZYk0";
+        await getExplodeStream(firstUrl);
+        await getExplodeStream(firstUrl);
+        await getExplodeStream(firstUrl);
+        await getExplodeStream(firstUrl);
+      });
+    });
   });
 }

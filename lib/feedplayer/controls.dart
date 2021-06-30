@@ -31,12 +31,15 @@ class FeedPlayerPortraitControls extends StatelessWidget {
           right: 0,
           child: FlickVideoProgressBar(
             flickProgressBarSettings: FlickProgressBarSettings(
-                padding: EdgeInsets.zero,
-                playedColor: Colors.indigoAccent,
-                handleColor: Colors.indigo,
-                bufferedColor: Colors.indigo,
-                height: 5,
-                backgroundColor: Colors.indigo.shade100),
+              padding: EdgeInsets.zero,
+              playedColor: Colors.indigo,
+              handleColor: Colors.indigo,
+              bufferedColor: Colors.indigo.shade700,
+              backgroundColor: Colors.indigo.shade50,
+              height: 7,
+              curveRadius: 0,
+              handleRadius: 7,
+            ),
           ),
         ),
         Positioned(

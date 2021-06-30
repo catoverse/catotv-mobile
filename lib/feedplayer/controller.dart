@@ -12,9 +12,6 @@ class FeedPlayerController {
     } else {
       flickManager.flickControlManager?.unmute();
     }
-    if (_flickManagers.length == 1) {
-      play(flickManager);
-    }
   }
 
   remove(FlickManager flickManager) {

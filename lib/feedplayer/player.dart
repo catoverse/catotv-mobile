@@ -1,103 +1,148 @@
 import 'package:feed/feedplayer/controller.dart';
-import 'package:feed/feedplayer/controls.dart';
+import 'package:feed/ui/base/base_feedmodel.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
-
 import 'package:flutter/material.dart';
-import 'package:visibility_detector/visibility_detector.dart';
 import 'package:video_player/video_player.dart';
 
+import 'controls.dart';
+
 class FeedPlayer extends StatefulWidget {
+  final bool isInView;
+  final String videoUrl;
+  final BaseFeedModel baseFeedModel;
+  final FeedPlayerController feedPlayerController;
   const FeedPlayer(
       {Key? key,
-      required this.url,
-      required this.thumbnail,
-      required this.feedPlayerController})
+      required this.videoUrl,
+      required this.isInView,
+      required this.feedPlayerController,
+      required this.baseFeedModel})
       : super(key: key);
-
-  final String url;
-  final String thumbnail;
-  final FeedPlayerController feedPlayerController;
 
   @override
   _FeedPlayerState createState() => _FeedPlayerState();
 }
 
-class _FeedPlayerState extends State<FeedPlayer> {
-  late FlickManager flickManager;
+class _FeedPlayerState extends State<FeedPlayer>
+    with AutomaticKeepAliveClientMixin {
+  late Future<void> _initializeVideoPlayerFuture;
+  FlickManager? flickManager;
+  late String thumbnail;
 
   @override
   void initState() {
-    flickManager = FlickManager(
-      videoPlayerController: VideoPlayerController.network(widget.url),
-      autoPlay: false,
-    );
-    widget.feedPlayerController.init(flickManager);
+    thumbnail = widget.baseFeedModel.getThumbnail(widget.videoUrl);
+    _initializeVideoPlayerFuture =
+        widget.baseFeedModel.getStreamUrl(widget.videoUrl).then((dataSource) {
+      // Initalising the video with [streamUrl]
+
+      flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.network(dataSource),
+        autoPlay: widget.isInView,
+      );
+
+      widget.feedPlayerController.init(flickManager!);
+    });
 
     super.initState();
   }
 
   @override
+  void didUpdateWidget(FeedPlayer oldWidget) {
+    if (oldWidget.isInView != widget.isInView) {
+      if (widget.isInView) {
+        if (flickManager != null &&
+            flickManager!.flickVideoManager!.isVideoInitialized)
+          flickManager!.flickControlManager?.play();
+      } else {
+        if (flickManager != null &&
+            flickManager!.flickVideoManager!.isVideoInitialized)
+          flickManager!.flickControlManager?.pause();
+      }
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
-    widget.feedPlayerController.remove(flickManager);
+    flickManager?.dispose();
     super.dispose();
   }
 
   @override
   void deactivate() {
-    widget.feedPlayerController.pause();
+    flickManager?.flickControlManager?.pause();
     super.deactivate();
   }
 
   @override
   Widget build(BuildContext context) {
-    return VisibilityDetector(
-      key: ObjectKey(flickManager),
-      onVisibilityChanged: (visiblityInfo) {
-        if (visiblityInfo.visibleFraction > 0.9) {
-          widget.feedPlayerController.play(flickManager);
-        }
-      },
-      child: FlickVideoPlayer(
-        flickManager: flickManager,
-        flickVideoWithControls: FlickVideoWithControls(
-            playerLoadingFallback: Positioned.fill(
-              child: Stack(
-                children: <Widget>[
-                  Positioned.fill(
-                      child: ThumbnailImage(thumbnail: widget.thumbnail)),
-                  Positioned(
-                    right: 10,
-                    top: 10,
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                        strokeWidth: 4,
+    super.build(context);
+    return FutureBuilder(
+      future: _initializeVideoPlayerFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AspectRatio(
+              aspectRatio: flickManager
+                      ?.flickVideoManager?.videoPlayerValue?.aspectRatio ??
+                  16 / 9,
+              child: FlickVideoPlayer(
+                flickManager: flickManager!,
+                flickVideoWithControls: FlickVideoWithControls(
+                    playerErrorFallback: Positioned.fill(
+                        // TODO: Add blur
+                        child: ThumbnailImage(thumbnail: thumbnail)),
+                    playerLoadingFallback: Positioned.fill(
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                              child: ThumbnailImage(thumbnail: thumbnail)),
+                          Positioned(
+                            right: 10,
+                            top: 10,
+                            child: Container(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                backgroundColor: Colors.white,
+                                strokeWidth: 4,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                    controls: FeedPlayerPortraitControls(
+                      feedPlayerController: widget.feedPlayerController,
+                      flickManager: flickManager!,
+                    )),
+                flickVideoWithControlsFullscreen: FlickVideoWithControls(
+                  playerLoadingFallback: Center(
+                      child: ThumbnailImage(
+                    thumbnail: thumbnail,
+                  )),
+                  playerErrorFallback: Positioned.fill(
+                      child: ThumbnailImage(thumbnail: thumbnail)),
+                  controls: FlickLandscapeControls(),
+                  iconThemeData: IconThemeData(
+                    size: 40,
+                    color: Colors.white,
                   ),
-                ],
-              ),
+                  textStyle: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ));
+        } else {
+          return Center(
+            child: ThumbnailImage(
+              thumbnail: thumbnail,
             ),
-            controls: FeedPlayerPortraitControls(
-              feedPlayerController: widget.feedPlayerController,
-              flickManager: flickManager,
-            )),
-        flickVideoWithControlsFullscreen: FlickVideoWithControls(
-          playerLoadingFallback: Center(
-              child: ThumbnailImage(
-            thumbnail: widget.thumbnail,
-          )),
-          controls: FlickLandscapeControls(),
-          iconThemeData: IconThemeData(
-            size: 40,
-            color: Colors.white,
-          ),
-          textStyle: TextStyle(fontSize: 16, color: Colors.white),
-        ),
-      ),
+          );
+        }
+      },
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

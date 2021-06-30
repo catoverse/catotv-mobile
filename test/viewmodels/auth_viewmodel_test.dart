@@ -1,12 +1,13 @@
 import 'package:feed/app/app.router.dart';
-import 'package:feed/ui/base/auth_viewmodel.dart';
+import 'package:feed/ui/base/auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:stacked/stacked.dart';
 import '../helpers/test_helpers.dart';
 
-class ViewModel extends AuthenticationViewModel {}
+class ViewModel extends BaseViewModel with AuthMixin {}
 
-AuthenticationViewModel _getModel() => ViewModel();
+ViewModel _getModel() => ViewModel();
 
 void main() {
   group('StartupViewmodel Test -', () {
