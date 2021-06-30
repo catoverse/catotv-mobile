@@ -1,5 +1,4 @@
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/feedplayer/list/list.widgets.dart';
 import 'package:feed/ui/base/feed_viewmodel.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +6,8 @@ import 'package:video_player/video_player.dart';
 
 class FeedPlayer extends StatefulWidget {
   final bool isInView;
-  final Video video;
-  const FeedPlayer({Key? key, required this.video, required this.isInView})
+  final String videoUrl;
+  const FeedPlayer({Key? key, required this.videoUrl, required this.isInView})
       : super(key: key);
 
   @override
@@ -16,16 +15,25 @@ class FeedPlayer extends StatefulWidget {
 }
 
 class _FeedPlayerState extends State<FeedPlayer>
-    with AutomaticKeepAliveClientMixin, BaseFeedViewModel, $FeedPlayerListView {
+    with AutomaticKeepAliveClientMixin, BaseFeedViewModel {
   VideoPlayerController? _controller;
-
-  bool mounted = false;
+  late Future<void> _initializeVideoPlayerFuture;
 
   @override
   void initState() {
-    // _initializeVideoPlayerFuture().then((value) => setState(() {
-    //       mounted = true;
-    //     }));
+    _initializeVideoPlayerFuture =
+        getStreamUrl(widget.videoUrl).then((dataSource) {
+      _controller = VideoPlayerController.network(dataSource);
+      _controller!.initialize().then((_) {
+        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
+        setState(() {});
+        if (widget.isInView) {
+          if (_controller != null && _controller!.value.isInitialized)
+            _controller?.play();
+        }
+      });
+    });
+
     super.initState();
   }
 
@@ -55,42 +63,24 @@ class _FeedPlayerState extends State<FeedPlayer>
     super.deactivate();
   }
 
-  Future _initializeVideoPlayerFuture() async {
-    String videoUrl = await getStreamUrl(widget.video.videoUrl);
-    _controller = VideoPlayerController.network(videoUrl);
-    await _controller!.initialize().then((value) => setState);
-
-    if (widget.isInView) {
-      _controller?.play();
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    print("${widget.video.title} I was created");
     super.build(context);
-
-    return Container(
-      width: double.infinity,
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: 30.0),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Feed header to display channelName and Title of the video
-          feedHeader(widget.video.title, widget.video.channelInformation.name),
-
-          // Feed Video Player
-          ThumbnailImage(thumbnail: getThumbnail(widget.video.videoUrl)),
-
-          // Feed Footer
-          feedFooter(widget.video.topic.name)
-        ],
-      ),
+    return FutureBuilder(
+      future: _initializeVideoPlayerFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          return AspectRatio(
+              aspectRatio: 16 / 9, child: VideoPlayer(_controller!));
+        } else {
+          return Center(
+            child: ThumbnailImage(
+              thumbnail: getThumbnail(widget.videoUrl),
+            ),
+          );
+        }
+      },
     );
-
-    // return AspectRatio(aspectRatio: 16 / 9, child: VideoPlayer(_controller));
   }
 
   @override
