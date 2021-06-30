@@ -4,10 +4,14 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
+import 'package:feed/ui/base/snackbar_helper.dart';
 import 'package:share/share.dart';
 import 'package:stacked/stacked.dart';
 
-abstract class BaseFeedModel extends BaseViewModel {
+import 'auth.dart';
+
+abstract class BaseFeedModel extends BaseViewModel
+    with AuthMixin, SnackbarHelper {
   final _videoService = locator<VideoService>();
   final _analytics = locator<AnalyticsService>();
   final _dynamicLinksService = locator<DynamicLinksService>();
@@ -26,7 +30,8 @@ abstract class BaseFeedModel extends BaseViewModel {
     return streamUrl;
   }
 
-  Future shareVideo(Video video) async {
+  Future shareVideo(int index) async {
+    var video = videos[index];
     String url = await _dynamicLinksService.shareVideo(video);
     Share.share("Checkout ${video.title} at $url");
   }

@@ -1,16 +1,22 @@
+import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/ui/base/base_feedmodel.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+import 'controls.dart';
 
 class FeedPlayer extends StatefulWidget {
   final bool isInView;
   final String videoUrl;
   final BaseFeedModel baseFeedModel;
+  final FeedPlayerController feedPlayerController;
   const FeedPlayer(
       {Key? key,
       required this.videoUrl,
       required this.isInView,
+      required this.feedPlayerController,
       required this.baseFeedModel})
       : super(key: key);
 
@@ -20,22 +26,23 @@ class FeedPlayer extends StatefulWidget {
 
 class _FeedPlayerState extends State<FeedPlayer>
     with AutomaticKeepAliveClientMixin {
-  VideoPlayerController? _controller;
   late Future<void> _initializeVideoPlayerFuture;
+  FlickManager? flickManager;
+  late String thumbnail;
 
   @override
   void initState() {
+    thumbnail = widget.baseFeedModel.getThumbnail(widget.videoUrl);
     _initializeVideoPlayerFuture =
         widget.baseFeedModel.getStreamUrl(widget.videoUrl).then((dataSource) {
-      _controller = VideoPlayerController.network(dataSource);
-      _controller!.initialize().then((_) {
-        // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
-        setState(() {});
-        if (widget.isInView) {
-          if (_controller != null && _controller!.value.isInitialized)
-            _controller?.play();
-        }
-      });
+      // Initalising the video with [streamUrl]
+
+      flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.network(dataSource),
+        autoPlay: widget.isInView,
+      );
+
+      widget.feedPlayerController.init(flickManager!);
     });
 
     super.initState();
@@ -45,11 +52,13 @@ class _FeedPlayerState extends State<FeedPlayer>
   void didUpdateWidget(FeedPlayer oldWidget) {
     if (oldWidget.isInView != widget.isInView) {
       if (widget.isInView) {
-        if (_controller != null && _controller!.value.isInitialized)
-          _controller?.play();
+        if (flickManager != null &&
+            flickManager!.flickVideoManager!.isVideoInitialized)
+          flickManager!.flickControlManager?.play();
       } else {
-        if (_controller != null && _controller!.value.isInitialized)
-          _controller?.pause();
+        if (flickManager != null &&
+            flickManager!.flickVideoManager!.isVideoInitialized)
+          flickManager!.flickControlManager?.pause();
       }
     }
     super.didUpdateWidget(oldWidget);
@@ -57,13 +66,13 @@ class _FeedPlayerState extends State<FeedPlayer>
 
   @override
   void dispose() {
-    _controller?.dispose();
+    flickManager?.dispose();
     super.dispose();
   }
 
   @override
   void deactivate() {
-    _controller?.pause();
+    flickManager?.flickControlManager?.pause();
     super.deactivate();
   }
 
@@ -75,11 +84,58 @@ class _FeedPlayerState extends State<FeedPlayer>
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return AspectRatio(
-              aspectRatio: 16 / 9, child: VideoPlayer(_controller!));
+              aspectRatio: flickManager
+                      ?.flickVideoManager?.videoPlayerValue?.aspectRatio ??
+                  16 / 9,
+              child: FlickVideoPlayer(
+                flickManager: flickManager!,
+                flickVideoWithControls: FlickVideoWithControls(
+                    playerErrorFallback: Positioned.fill(
+                        // TODO: Add blur
+                        child: ThumbnailImage(thumbnail: thumbnail)),
+                    playerLoadingFallback: Positioned.fill(
+                      child: Stack(
+                        children: <Widget>[
+                          Positioned.fill(
+                              child: ThumbnailImage(thumbnail: thumbnail)),
+                          Positioned(
+                            right: 10,
+                            top: 10,
+                            child: Container(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                backgroundColor: Colors.white,
+                                strokeWidth: 4,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    controls: FeedPlayerPortraitControls(
+                      feedPlayerController: widget.feedPlayerController,
+                      flickManager: flickManager!,
+                    )),
+                flickVideoWithControlsFullscreen: FlickVideoWithControls(
+                  playerLoadingFallback: Center(
+                      child: ThumbnailImage(
+                    thumbnail: thumbnail,
+                  )),
+                  playerErrorFallback: Positioned.fill(
+                      child: ThumbnailImage(thumbnail: thumbnail)),
+                  controls: FlickLandscapeControls(),
+                  iconThemeData: IconThemeData(
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  textStyle: TextStyle(fontSize: 16, color: Colors.white),
+                ),
+              ));
         } else {
           return Center(
             child: ThumbnailImage(
-              thumbnail: widget.baseFeedModel.getThumbnail(widget.videoUrl),
+              thumbnail: thumbnail,
             ),
           );
         }

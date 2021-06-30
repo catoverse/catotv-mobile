@@ -1,4 +1,5 @@
 import 'package:feed/feedplayer/list/list.dart';
+import 'package:feed/ui/base/base_feedmodel.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class RestrictedHomeView extends StatelessWidget {
   final ScrollController _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return ScreenBuilder<RestrictedHomeViewModel>(
+    return ScreenBuilder<BaseFeedModel>(
         viewModel: RestrictedHomeViewModel(),
         onModelReady: (model) => listenToListScroll(model),
         builder: (context, uiHelpers, model) => WillPopScope(
@@ -35,7 +36,7 @@ class RestrictedHomeView extends StatelessWidget {
         !_controller.position.outOfRange) showConstraint.call();
   }
 
-  void listenToListScroll(RestrictedHomeViewModel model) {
+  void listenToListScroll(BaseFeedModel model) {
     _controller
         .addListener(() => _reachEndListener(() => model.showConstraint()));
 
