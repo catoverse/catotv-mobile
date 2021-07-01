@@ -69,5 +69,5 @@ class TopicSelectionViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  void gotoHome() => _navigationService.replaceWith(Routes.homeView);
+  void gotoHome() => _navigationService.replaceWith(Routes.feedView);
 }

@@ -1,6 +1,7 @@
 import 'package:feed/feedplayer/list/list.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/ui/global/screen.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'restricted_home_viewmodel.dart';
@@ -19,6 +20,9 @@ class RestrictedHomeView extends StatelessWidget {
                     automaticallyImplyLeading: false,
                     elevation: 0,
                     backgroundColor: Colors.transparent,
+                    title: Text("👋 Hello There",
+                        style: uiHelpers.subheading!
+                            .copyWith(color: AppColors.textPrimary)),
                     actions: [
                       TextButton(
                           onPressed: () => model.showConstraint(),

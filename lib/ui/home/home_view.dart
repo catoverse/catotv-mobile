@@ -79,11 +79,6 @@ List<HomeViewItem> homeViewItems = [
     inactiveIcon: Icons.home,
   ),
   HomeViewItem(
-    title: "Explore",
-    activeIcon: Icons.search,
-    inactiveIcon: Icons.search_outlined,
-  ),
-  HomeViewItem(
     title: "Profile",
     activeIcon: Icons.person,
     inactiveIcon: Icons.person_outline,

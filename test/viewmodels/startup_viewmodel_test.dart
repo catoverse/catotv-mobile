@@ -55,7 +55,7 @@ void main() {
         final service = getAndRegisterNavigationService();
         var model = _getModel();
         await model.runStartupLogic();
-        verify(service.replaceWith(Routes.homeView));
+        verify(service.replaceWith(Routes.feedView));
       });
 
       test(

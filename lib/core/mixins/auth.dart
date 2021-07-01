@@ -3,6 +3,7 @@ import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +16,8 @@ mixin AuthMixin on BaseViewModel {
   final _userService = locator<UserService>();
   final _analytics = locator<AnalyticsService>();
   final _log = getLogger("Authentication ViewModel");
+
+  User get currentUser => _userService.currentUser;
 
   Future showConstraint({
     String title: 'You need an account to continue',
@@ -70,7 +73,7 @@ mixin AuthMixin on BaseViewModel {
 
     if (isProfileExists) {
       _log.i("We have profile for user, redirect to home");
-      return _navigationService.replaceWith(Routes.homeView);
+      return _navigationService.replaceWith(Routes.feedView);
     } else {
       _log.i("We don't have profile for user, redirect to select topics");
       return _navigationService.replaceWith(Routes.topicSelectionView);

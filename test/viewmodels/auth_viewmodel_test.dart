@@ -40,7 +40,7 @@ void main() {
         var _navigationService = getAndRegisterNavigationService();
         var model = _getModel();
         await model.loginWithGoogle();
-        verify(_navigationService.replaceWith(Routes.homeView));
+        verify(_navigationService.replaceWith(Routes.feedView));
       });
     });
   });

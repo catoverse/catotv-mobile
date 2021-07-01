@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-import '../ui/home/home_view.dart';
+import '../ui/feed/feed_view.dart';
 import '../ui/invite/invite_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/restricted_home/restricted_home_view.dart';
@@ -24,7 +24,7 @@ class Routes {
   static const String restrictedHomeView = '/restricted-home-view';
   static const String topicSelectionView = '/topic-selection-view';
   static const String inviteView = '/invite-view';
-  static const String homeView = '/home-view';
+  static const String feedView = '/feed-view';
   static const all = <String>{
     startUpView,
     updateView,
@@ -32,7 +32,7 @@ class Routes {
     restrictedHomeView,
     topicSelectionView,
     inviteView,
-    homeView,
+    feedView,
   };
 }
 
@@ -46,7 +46,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.restrictedHomeView, page: RestrictedHomeView),
     RouteDef(Routes.topicSelectionView, page: TopicSelectionView),
     RouteDef(Routes.inviteView, page: InviteView),
-    RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.feedView, page: FeedView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -93,9 +93,9 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
-    HomeView: (data) {
+    FeedView: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(),
+        builder: (context) => FeedView(),
         settings: data,
       );
     },
