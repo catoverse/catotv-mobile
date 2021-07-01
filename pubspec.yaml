@@ -55,6 +55,7 @@ dependencies:
   firebase_crashlytics: ^2.0.6
   firebase_analytics: ^8.1.2
   inview_notifier_list: ^2.0.0
+  flutter_hooks: ^0.18.0
   
 
 dev_dependencies:

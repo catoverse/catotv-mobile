@@ -1,5 +1,6 @@
 import 'package:feed/feedplayer/list/list.dart';
 import 'package:feed/ui/base/feedmodel.dart';
+import 'package:feed/ui/feed/widgets/greeting.dart';
 import 'package:feed/ui/feed_drawer/feed_drawer.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/theme.dart';
@@ -30,29 +31,9 @@ class FeedView extends StatelessWidget {
                   : RefreshIndicator(
                       onRefresh: model.refresh,
                       child: FeedPlayerListView(
-                        header: ListTile(
-                          leading: Container(
-                            margin: EdgeInsets.all(8),
-                            width: 40,
-                            height: 80,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              image: DecorationImage(
-                                image: NetworkImage(model.currentUser.avatar),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          title: Text.rich(TextSpan(children: [
-                            TextSpan(
-                              text: "Good Morning,",
-                            ),
-                            TextSpan(
-                              text: "\n",
-                            ),
-                            TextSpan(
-                                text: "Mohan", style: uiHelpers.subheading),
-                          ])),
+                        header: GreetingWidget(
+                          userImage: model.currentUser.avatar,
+                          userName: model.currentUser.name,
                         ),
                         footer: Container(
                             padding: const EdgeInsets.all(20.0),
