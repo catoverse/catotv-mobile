@@ -1,18 +1,15 @@
-import 'package:feed/app/app.locator.dart';
 import 'package:feed/ui/explore/explore_view.dart';
 import 'package:feed/ui/global/lazy_indexed_stack.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/theme.dart';
 import 'package:feed/ui/profile/profile_view.dart';
 import 'package:flutter/material.dart';
-import 'package:feed/feedplayer/controller.dart';
 
 import '../feed/feed_view.dart';
 import 'home_viewmodel.dart';
 
 class HomeView extends StatelessWidget {
   final _views = [FeedView(), ExploreView(), ProfileView()];
-  final FeedPlayerController controller = locator<FeedPlayerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +44,6 @@ class HomeView extends StatelessWidget {
                           unselectedItemColor: AppColors.textSecondary,
                           currentIndex: model.index,
                           onTap: (index) {
-                            if (index > 0) controller.pause();
                             model.changeTab(index);
                           },
                           items: homeViewItems

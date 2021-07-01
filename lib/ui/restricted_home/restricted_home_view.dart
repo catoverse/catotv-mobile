@@ -13,7 +13,7 @@ class RestrictedHomeView extends StatelessWidget {
         viewModel: RestrictedHomeViewModel(),
         onModelReady: (model) => listenToListScroll(model),
         builder: (context, uiHelpers, model) => WillPopScope(
-              onWillPop: model.showExitSnackbar,
+              onWillPop: () => model.showExitDialog(),
               child: Scaffold(
                   appBar: AppBar(
                     automaticallyImplyLeading: false,
