@@ -1,7 +1,7 @@
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/list/list.widgets.dart';
 import 'package:feed/feedplayer/player.dart';
-import 'package:feed/ui/base/base_feedmodel.dart';
+import 'package:feed/ui/base/feedmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:inview_notifier_list/inview_notifier_list.dart';
 import 'package:stacked/stacked.dart';
@@ -29,7 +29,7 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
               return Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(vertical: 30.0),
+                margin: EdgeInsets.symmetric(vertical: 20.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,

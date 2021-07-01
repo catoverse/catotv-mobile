@@ -1,5 +1,5 @@
 import 'package:feed/feedplayer/controller.dart';
-import 'package:feed/ui/base/base_feedmodel.dart';
+import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
@@ -83,55 +83,52 @@ class _FeedPlayerState extends State<FeedPlayer>
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return AspectRatio(
-              aspectRatio: flickManager
-                      ?.flickVideoManager?.videoPlayerValue?.aspectRatio ??
-                  16 / 9,
+          return Container(
               child: FlickVideoPlayer(
-                flickManager: flickManager!,
-                flickVideoWithControls: FlickVideoWithControls(
-                    playerErrorFallback: Positioned.fill(
-                        // TODO: Add blur
-                        child: ThumbnailImage(thumbnail: thumbnail)),
-                    playerLoadingFallback: Positioned.fill(
-                      child: Stack(
-                        children: <Widget>[
-                          Positioned.fill(
-                              child: ThumbnailImage(thumbnail: thumbnail)),
-                          Positioned(
-                            right: 10,
-                            top: 10,
-                            child: Container(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                backgroundColor: Colors.white,
-                                strokeWidth: 4,
-                              ),
-                            ),
+            flickManager: flickManager!,
+            flickVideoWithControls: FlickVideoWithControls(
+                playerErrorFallback: Positioned.fill(
+                    // TODO: Add blur
+                    child: ThumbnailImage(thumbnail: thumbnail)),
+                playerLoadingFallback: Positioned.fill(
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                          child: ThumbnailImage(thumbnail: thumbnail)),
+                      Positioned(
+                        right: 10,
+                        top: 10,
+                        child: Container(
+                          width: 20,
+                          height: 20,
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.white,
+                            strokeWidth: 4,
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                    controls: FeedPlayerPortraitControls(
-                      feedPlayerController: widget.feedPlayerController,
-                      flickManager: flickManager!,
-                    )),
-                flickVideoWithControlsFullscreen: FlickVideoWithControls(
-                  playerLoadingFallback: Center(
-                      child: ThumbnailImage(
-                    thumbnail: thumbnail,
-                  )),
-                  playerErrorFallback: Positioned.fill(
-                      child: ThumbnailImage(thumbnail: thumbnail)),
-                  controls: FlickLandscapeControls(),
-                  iconThemeData: IconThemeData(
-                    size: 40,
-                    color: Colors.white,
+                    ],
                   ),
-                  textStyle: TextStyle(fontSize: 16, color: Colors.white),
                 ),
-              ));
+                controls: FeedPlayerPortraitControls(
+                  feedPlayerController: widget.feedPlayerController,
+                  flickManager: flickManager!,
+                )),
+            flickVideoWithControlsFullscreen: FlickVideoWithControls(
+              playerLoadingFallback: Center(
+                  child: ThumbnailImage(
+                thumbnail: thumbnail,
+              )),
+              playerErrorFallback:
+                  Positioned.fill(child: ThumbnailImage(thumbnail: thumbnail)),
+              controls: FlickLandscapeControls(),
+              iconThemeData: IconThemeData(
+                size: 40,
+                color: Colors.white,
+              ),
+              textStyle: TextStyle(fontSize: 16, color: Colors.white),
+            ),
+          ));
         } else {
           return Center(
             child: ThumbnailImage(

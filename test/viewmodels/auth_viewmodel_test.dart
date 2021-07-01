@@ -1,5 +1,5 @@
 import 'package:feed/app/app.router.dart';
-import 'package:feed/ui/base/auth.dart';
+import 'package:feed/core/mixins/auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:stacked/stacked.dart';

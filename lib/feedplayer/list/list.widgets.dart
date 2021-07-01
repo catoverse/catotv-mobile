@@ -1,4 +1,4 @@
-import 'package:feed/ui/base/base_feedmodel.dart';
+import 'package:feed/ui/base/feedmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
@@ -39,7 +39,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
     final title = viewModel.videos[index].title;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+      padding: EdgeInsets.all(10.0),
       alignment: Alignment.centerLeft,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

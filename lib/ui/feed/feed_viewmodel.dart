@@ -1,8 +1,7 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/feed_service.dart';
-import 'package:feed/ui/base/base_feedmodel.dart';
-import 'package:stacked/stacked.dart';
+import 'package:feed/ui/base/feedmodel.dart';
 
 class FeedViewModel extends BaseFeedModel {
   final FeedService _feedService = locator<FeedService>();
@@ -28,5 +27,6 @@ class FeedViewModel extends BaseFeedModel {
   @override
   List<Video> get videos => _videos;
 
-  Future<void> refresh() async => await getVideos();
+  @override
+  Future<void> refresh() => getVideos();
 }

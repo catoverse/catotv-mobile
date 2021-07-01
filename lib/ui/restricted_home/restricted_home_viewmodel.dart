@@ -1,4 +1,4 @@
-import 'package:feed/ui/base/base_feedmodel.dart';
+import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'data/feed_data.dart';
 
@@ -13,4 +13,7 @@ class RestrictedHomeViewModel extends BaseFeedModel {
 
   @override
   List<Video> get videos => _videos;
+
+  @override
+  Future<void> refresh() => Future.value();
 }

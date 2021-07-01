@@ -1,5 +1,5 @@
 import 'package:feed/feedplayer/list/list.dart';
-import 'package:feed/ui/base/base_feedmodel.dart';
+import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/ui/global/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,10 +15,7 @@ class FeedView extends StatelessWidget {
               body: model.isBusy
                   ? Center(child: CircularProgressIndicator())
                   : RefreshIndicator(
-                      onRefresh: () async {
-                        return;
-                      },
-                      child: FeedPlayerListView()),
+                      onRefresh: model.refresh, child: FeedPlayerListView()),
             ));
   }
 }

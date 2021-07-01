@@ -1,5 +1,5 @@
 import 'package:feed/app/app.locator.dart';
-import 'package:feed/ui/base/validators.dart';
+import 'package:feed/core/mixins/validators.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';

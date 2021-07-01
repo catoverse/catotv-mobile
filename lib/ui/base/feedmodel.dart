@@ -4,11 +4,10 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
-import 'package:feed/ui/base/snackbar_helper.dart';
+import 'package:feed/core/mixins/snackbar_helper.dart';
+import 'package:feed/core/mixins/auth.dart';
 import 'package:share/share.dart';
 import 'package:stacked/stacked.dart';
-
-import 'auth.dart';
 
 abstract class BaseFeedModel extends BaseViewModel
     with AuthMixin, SnackbarHelper {
@@ -37,6 +36,8 @@ abstract class BaseFeedModel extends BaseViewModel
   }
 
   Future getVideos();
+
+  Future<void> refresh();
 
   String getThumbnail(String url) => VideoService.getThumbnail(url);
 }
