@@ -1,6 +1,8 @@
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
+import 'package:feed/feedplayer/player.widgets.dart';
 import 'package:feed/ui/base/feedmodel.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
@@ -82,54 +84,63 @@ class _FeedPlayerState extends State<FeedPlayer>
       future: _initializeVideoPlayerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return FlickVideoPlayer(
-            flickManager: flickManager!,
-            flickVideoWithControls: FlickVideoWithControls(
-              controls: FeedControls(
-                  feedPlayerController: widget.feedPlayerController,
-                  feedViewModel: widget.baseFeedModel,
-                  flickManager: flickManager!),
-              playerErrorFallback: Positioned.fill(
-                  // TODO: Add blur
-                  child: ThumbnailImage(thumbnail: thumbnail)),
-              playerLoadingFallback: Positioned.fill(
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                        child: ThumbnailImage(thumbnail: thumbnail)),
-                    Positioned(
-                      right: 10,
-                      top: 10,
-                      child: Container(
-                        width: 20,
-                        height: 20,
-                        child: CircularProgressIndicator(
-                          backgroundColor: Colors.white,
-                          strokeWidth: 4,
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FlickVideoPlayer(
+                flickManager: flickManager!,
+                flickVideoWithControls: FlickVideoWithControls(
+                  controls: FeedControls(
+                      feedPlayerController: widget.feedPlayerController,
+                      feedViewModel: widget.baseFeedModel,
+                      flickManager: flickManager!),
+                  playerErrorFallback: Positioned.fill(
+                      // TODO: Add blur
+                      child: ThumbnailImage(thumbnail: thumbnail)),
+                  playerLoadingFallback: Positioned.fill(
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned.fill(
+                            child: ThumbnailImage(thumbnail: thumbnail)),
+                        Positioned(
+                          right: 10,
+                          top: 10,
+                          child: Container(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              backgroundColor: Colors.white,
+                              strokeWidth: 4,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
+                  ),
+                ),
+                flickVideoWithControlsFullscreen: FlickVideoWithControls(
+                  playerLoadingFallback: Center(
+                      child: ThumbnailImage(
+                    thumbnail: thumbnail,
+                  )),
+                  playerErrorFallback: Positioned.fill(
+                      child: ThumbnailImage(thumbnail: thumbnail)),
+                  controls: FeedControls(
+                      feedPlayerController: widget.feedPlayerController,
+                      feedViewModel: widget.baseFeedModel,
+                      flickManager: flickManager!),
+                  iconThemeData: IconThemeData(
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  textStyle: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
-            ),
-            flickVideoWithControlsFullscreen: FlickVideoWithControls(
-              playerLoadingFallback: Center(
-                  child: ThumbnailImage(
-                thumbnail: thumbnail,
-              )),
-              playerErrorFallback:
-                  Positioned.fill(child: ThumbnailImage(thumbnail: thumbnail)),
-              controls: FeedControls(
-                  feedPlayerController: widget.feedPlayerController,
-                  feedViewModel: widget.baseFeedModel,
-                  flickManager: flickManager!),
-              iconThemeData: IconThemeData(
-                size: 40,
-                color: Colors.white,
-              ),
-              textStyle: TextStyle(fontSize: 16, color: Colors.white),
-            ),
+              VideoProgressBar(
+                flickManager: flickManager,
+                progressColor: AppColors.primary,
+              )
+            ],
           );
         } else {
           return Center(
