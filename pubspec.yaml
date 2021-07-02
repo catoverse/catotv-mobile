@@ -56,14 +56,13 @@ dependencies:
   firebase_analytics: ^8.1.2
   inview_notifier_list: ^2.0.0
   flutter_hooks: ^0.18.0
-  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # code generators
-  build_runner: 
+  build_runner:
   stacked_generator: ^0.4.1
   hive_generator: ^1.1.0
 
@@ -72,7 +71,13 @@ dev_dependencies:
   json_serializable: ^4.1.1
 
   # for testing
-  mockito: 
+  mockito:
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
 
 flutter:
   uses-material-design: true
