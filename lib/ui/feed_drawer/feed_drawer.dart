@@ -32,17 +32,17 @@ class DrawerView extends StatelessWidget {
                   ListTile(
                     leading: Icon(Icons.bug_report),
                     title: Text("Report Bug"),
-                    onTap: () {},
+                    onTap: () => model.launchUrl("mailto:dev@cato.tv"),
                   ),
                   ListTile(
                     leading: Icon(Icons.people),
                     title: Text("Invite Friends"),
-                    onTap: () {},
+                    onTap: () => model.inviteFriends(),
                   ),
                   ListTile(
                     leading: Icon(Icons.info),
                     title: Text("About Catoverse"),
-                    onTap: () {},
+                    onTap: () => model.launchUrl("https://www.cato.tv/"),
                   ),
                 ],
               ),

@@ -20,7 +20,9 @@ import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
 import '../core/services/key_storage_service.dart';
+import '../core/services/share_service.dart';
 import '../core/services/topic_service.dart';
+import '../core/services/url_service.dart';
 import '../core/services/user_service.dart';
 import '../core/services/video_service.dart';
 import '../feedplayer/controller.dart';
@@ -70,6 +72,8 @@ Future setupLocator(
   locator.registerLazySingleton(() => UserService());
   locator.registerLazySingleton(() => YoutubeExplode());
   locator.registerLazySingleton(() => ExplodeService());
+  locator.registerLazySingleton(() => OpenLinkService());
+  locator.registerLazySingleton(() => ShareService());
   locator.registerSingleton(FeedPlayerController());
   locator.registerLazySingleton(() => VideoService());
   locator.registerLazySingleton(() => TopicService());

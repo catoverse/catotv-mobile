@@ -13,7 +13,7 @@ class OnboardingViewModel extends BaseViewModel with SnackbarHelper, AuthMixin {
       title: "Hi There!",
       description: "Welcome and we're happy to have you onboard",
       mainButton: "I already have an account",
-      secondaryButton: "I'm new here",
+      secondaryButton: "Continue without logging in",
       secondaryRoute: Routes.restrictedHomeView);
 
   void setIndex(int index) {
