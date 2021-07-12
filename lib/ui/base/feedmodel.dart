@@ -59,7 +59,6 @@ abstract class BaseFeedModel extends BaseViewModel
       _messageQueue.logUserEvent(
         event,
         videoId: videoId,
-        timestamp: timestamp,
         description: description,
         videoDuration: videoDuration,
         sessionDuration: sessionDuration,
