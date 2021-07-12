@@ -9,6 +9,7 @@ class FeedControls extends StatelessWidget {
       required this.feedPlayerController,
       required this.flickManager,
       required this.feedViewModel,
+      required this.index,
       this.iconSize = 20,
       this.fontSize = 12,
       this.progressBarSettings})
@@ -27,6 +28,8 @@ class FeedControls extends StatelessWidget {
   ///
   /// This size is used for all the text.
   final double fontSize;
+
+  final int index;
 
   /// [FlickProgressBarSettings] settings.
   final FlickProgressBarSettings? progressBarSettings;
@@ -56,6 +59,21 @@ class FeedControls extends StatelessWidget {
                         color: Colors.white70,
                         borderRadius: BorderRadius.circular(40),
                       ),
+                      togglePlay: () {
+                        final controlManager =
+                            flickManager.flickControlManager!;
+
+                        final videoManager = flickManager.flickVideoManager!;
+
+                        videoManager.isVideoEnded
+                            ? controlManager.replay()
+                            : controlManager.togglePlay();
+
+                        if (videoManager.isPlaying)
+                          feedViewModel.logPlayVideo(index);
+                        else
+                          feedViewModel.logPauseVideo(index);
+                      },
                     ),
                   ),
                 ),

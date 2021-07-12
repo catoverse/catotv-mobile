@@ -3,7 +3,9 @@ import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
+import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:stacked/stacked.dart';
@@ -15,6 +17,7 @@ mixin AuthMixin on BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _analytics = locator<AnalyticsService>();
+  final _messageQueue = locator<MessageQueueService>();
   final _log = getLogger("Authentication ViewModel");
 
   User get currentUser => _userService.currentUser;
@@ -68,6 +71,7 @@ mixin AuthMixin on BaseViewModel {
         "User Login Successful : Logged in user: ${_userService.currentUser}");
     isProfileExists = await _userService.isUserProfileExists();
     _analytics.logEvent(LoginSuccess);
+    _messageQueue.logUserEvent(UserEvent.login);
 
     setBusy(false);
 

@@ -1,3 +1,5 @@
+import 'package:feed/core/enums/user_events.dart';
+
 abstract class APIService {
   Future isUpdateRequired();
   Future signIn({
@@ -17,4 +19,14 @@ abstract class APIService {
       required List<String> topicIds});
   Future getVideoStream(String watchId);
   Future postVideoStream(String watchId, String streamUrl);
+  Future logUserEventToMessageQueue(
+    String userId,
+    String videoId,
+    String timestamp,
+    String description,
+    int videoDuration,
+    int sessionDuration,
+    int durationWatched,
+    UserEvent event,
+  );
 }

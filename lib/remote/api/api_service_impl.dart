@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
@@ -145,5 +146,35 @@ class APIServiceImpl implements APIService {
     if (result.isFailed) return result.failure;
 
     return result.success["postStreamLink"];
+  }
+
+  @override
+  Future logUserEventToMessageQueue(
+    String userId,
+    String videoId,
+    String timestamp,
+    String description,
+    int videoDuration,
+    int sessionDuration,
+    int durationWatched,
+    UserEvent event,
+  ) async {
+    _log.i("logging userevent : $event");
+
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.logUserEvent,
+        variables: GQLQueries.logUserInputVariables(
+            userId,
+            videoId,
+            timestamp,
+            description,
+            videoDuration,
+            sessionDuration,
+            durationWatched,
+            event.toString().split('.').last));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["MqProducerUser"];
   }
 }
