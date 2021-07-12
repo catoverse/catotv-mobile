@@ -1,3 +1,5 @@
+import 'package:feed/core/enums/user_events.dart';
+import 'package:feed/core/models/app_models.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
 import 'package:feed/feedplayer/player.widgets.dart';
@@ -10,13 +12,15 @@ import 'package:video_player/video_player.dart';
 
 class FeedPlayer extends StatefulWidget {
   final bool isInView;
-  final String videoUrl;
+  final int index;
+  final Video video;
   final BaseFeedModel baseFeedModel;
   final FeedPlayerController feedPlayerController;
   const FeedPlayer(
       {Key? key,
-      required this.videoUrl,
+      required this.video,
       required this.isInView,
+      required this.index,
       required this.feedPlayerController,
       required this.baseFeedModel})
       : super(key: key);
@@ -33,15 +37,32 @@ class _FeedPlayerState extends State<FeedPlayer>
 
   @override
   void initState() {
-    thumbnail = widget.baseFeedModel.getThumbnail(widget.videoUrl);
-    _initializeVideoPlayerFuture =
-        widget.baseFeedModel.getStreamUrl(widget.videoUrl).then((dataSource) {
+    thumbnail = widget.baseFeedModel.getThumbnail(widget.video.videoUrl);
+    _initializeVideoPlayerFuture = widget.baseFeedModel
+        .getStreamUrl(widget.video.videoUrl)
+        .then((dataSource) {
       // Initalising the video with [streamUrl]
 
       flickManager = FlickManager(
-        videoPlayerController: VideoPlayerController.network(dataSource),
-        autoPlay: widget.isInView,
-      );
+          videoPlayerController: VideoPlayerController.network(dataSource),
+          autoPlay: widget.isInView,
+          onVideoEnd: () {
+            final currentPosition = flickManager!
+                .flickVideoManager!.videoPlayerValue!.position.inSeconds;
+
+            if (currentPosition != 0) {
+              final duration = flickManager?.flickVideoManager!
+                      .videoPlayerValue!.duration.inSeconds ??
+                  0;
+
+              widget.baseFeedModel.logUserEvent(
+                UserEvent.completed,
+                durationWatched: duration,
+                videoDuration: duration,
+                videoId: widget.video.videoUrl,
+              );
+            }
+          });
 
       widget.feedPlayerController.init(flickManager!);
     });
@@ -91,6 +112,7 @@ class _FeedPlayerState extends State<FeedPlayer>
                 flickManager: flickManager!,
                 flickVideoWithControls: FlickVideoWithControls(
                   controls: FeedControls(
+                      index: widget.index,
                       feedPlayerController: widget.feedPlayerController,
                       feedViewModel: widget.baseFeedModel,
                       flickManager: flickManager!),
@@ -128,6 +150,7 @@ class _FeedPlayerState extends State<FeedPlayer>
                   controls: FeedControls(
                       feedPlayerController: widget.feedPlayerController,
                       feedViewModel: widget.baseFeedModel,
+                      index: widget.index,
                       flickManager: flickManager!),
                   iconThemeData: IconThemeData(
                     size: 40,

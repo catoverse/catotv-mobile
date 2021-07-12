@@ -2,6 +2,9 @@ import 'package:connectivity/connectivity.dart';
 import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/core/services/key_storage_service.dart';
+import 'package:feed/core/services/message_queue_service.dart';
+import 'package:feed/core/services/share_service.dart';
+import 'package:feed/core/services/url_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/crashlytics.dart';
@@ -89,12 +92,15 @@ import 'injection.dart';
     LazySingleton(classType: UserService),
     LazySingleton(classType: YoutubeExplode),
     LazySingleton(classType: ExplodeService),
+    LazySingleton(classType: OpenLinkService),
+    LazySingleton(classType: ShareService),
     Singleton(classType: FeedPlayerController),
     LazySingleton(classType: VideoService),
     LazySingleton(classType: TopicService),
     LazySingleton(classType: FeedService),
     LazySingleton(classType: DynamicLinksService),
     LazySingleton(classType: AnalyticsService),
+    LazySingleton(classType: MessageQueueService),
     LazySingleton(
         classType: CrashlyticsService,
         resolveUsing: CrashlyticsService.getInstance),

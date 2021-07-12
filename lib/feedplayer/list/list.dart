@@ -51,11 +51,11 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
 
                       // Feed Video Player
                       FeedPlayer(
-                        videoUrl: viewModel.videos[videoIndex].videoUrl,
-                        isInView: isInView,
-                        baseFeedModel: viewModel,
-                        feedPlayerController: controller,
-                      ),
+                          video: viewModel.videos[videoIndex],
+                          isInView: isInView,
+                          baseFeedModel: viewModel,
+                          feedPlayerController: controller,
+                          index: index),
 
                       // Feed Footer
                       FeedFooter(index: videoIndex)
