@@ -10,8 +10,7 @@ class MessageQueueService {
   logUserEvent(
     UserEvent event, {
     String videoId = "",
-    String timestamp = '',
-    String description = '',
+    String description = "",
     int videoDuration = 0,
     int sessionDuration = 0,
     int durationWatched = 0,
@@ -19,7 +18,7 @@ class MessageQueueService {
     await _apiService.logUserEventToMessageQueue(
         _userService.currentUser.id,
         videoId,
-        timestamp,
+        DateTime.now().toString(),
         description,
         videoDuration,
         sessionDuration,
