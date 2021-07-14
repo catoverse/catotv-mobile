@@ -2,6 +2,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';
+import 'package:intl/intl.dart';
 
 class MessageQueueService {
   final _apiService = locator<APIService>();
@@ -18,7 +19,7 @@ class MessageQueueService {
     await _apiService.logUserEventToMessageQueue(
         _userService.currentUser.id,
         videoId,
-        DateTime.now().toString(),
+        DateFormat("y-MM-d h:m:s").format(DateTime.now()).toString(),
         description,
         videoDuration,
         sessionDuration,

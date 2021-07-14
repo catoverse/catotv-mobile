@@ -57,6 +57,7 @@ dependencies:
   inview_notifier_list: ^2.0.0
   flutter_hooks: ^0.18.0
   url_launcher: ^6.0.9
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
