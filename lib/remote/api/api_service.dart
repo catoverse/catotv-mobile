@@ -11,6 +11,7 @@ abstract class APIService {
   });
   Future getTopics();
   Future getVideos(int skip, int limit, List<String> selectedTopics);
+  Future getVideoById(String videoId);
   Future requestInvite({required String email});
   Future getUserProfile({required String userId});
   Future createUserProfile(

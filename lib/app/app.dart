@@ -24,6 +24,7 @@ import 'package:feed/ui/feed/feed_view.dart';
 import 'package:feed/ui/invite/invite_view.dart';
 import 'package:feed/ui/onboarding/onboarding_view.dart';
 import 'package:feed/ui/restricted_home/restricted_home_view.dart';
+import 'package:feed/ui/single_video/single_video_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
 import 'package:feed/ui/topic_selection/topic_selection_view.dart';
 import 'package:feed/ui/update/update_view.dart';
@@ -49,6 +50,7 @@ import 'injection.dart';
     MaterialRoute(page: TopicSelectionView),
     MaterialRoute(page: InviteView),
     MaterialRoute(page: FeedView),
+    MaterialRoute(page: SingleFeedView),
   ],
   dependencies: [
     Presolve(

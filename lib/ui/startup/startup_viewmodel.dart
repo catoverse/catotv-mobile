@@ -2,6 +2,7 @@ import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/services/user_service.dart';
+import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:stacked/stacked.dart';
@@ -10,9 +11,10 @@ import 'package:stacked_services/stacked_services.dart';
 class StartUpViewModel extends BaseViewModel {
   final _log = getLogger('StartUpViewModel');
   final _userService = locator<UserService>();
-  final _apiService = locator<APIService>();
   final _connectivityService = locator<ConnectivityService>();
+  final _apiService = locator<APIService>();
   final _navigationService = locator<NavigationService>();
+  final _dynamicLinks = locator<DynamicLinksService>();
 
   bool? _isConnected;
   bool get isConnected => _isConnected ?? true;
@@ -24,6 +26,8 @@ class StartUpViewModel extends BaseViewModel {
       _log.i("No Internet connection, try again");
       return;
     }
+
+    await _dynamicLinks.handleDynamicLinks();
 
     var forceUpdateRequired = await _apiService.isUpdateRequired();
 

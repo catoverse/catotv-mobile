@@ -177,4 +177,17 @@ class APIServiceImpl implements APIService {
 
     return result.success["MqProducerUser"];
   }
+
+  @override
+  Future getVideoById(String videoId) async {
+    _log.i("getting video with videoId: $videoId");
+
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.getVideoById,
+        variables: GQLQueries.getVideoByIdVariables(videoId));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["videoByWatchId"];
+  }
 }

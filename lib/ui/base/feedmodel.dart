@@ -72,4 +72,6 @@ abstract class BaseFeedModel extends BaseViewModel
   logPauseVideo(int index) {
     logUserEvent(UserEvent.pause, videoId: videos[index].id);
   }
+
+  getVideo(String videoId);
 }
