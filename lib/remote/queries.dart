@@ -45,6 +45,34 @@ class GQLQueries {
     }
   ''';
 
+  static const String getVideoById = r'''
+    query GetVideoById($watchId: String!) {
+      videoByWatchId(watchId: $watchId) {
+        id
+        title
+        video_url
+        topic {
+          id
+          name
+        }
+        start_timestamp
+        end_timestamp
+        content_details {
+          youtube_category
+          captions_available
+          dislikes
+          duration
+          views
+        }
+        channel_information {
+          id
+          name
+          subscriber_count
+        }
+      }
+    }
+  ''';
+
   static const String getStreamLink = r'''
     query GetVideoStreamLink($watchId: String!) {
       getStreamLink(watchId: $watchId)
@@ -197,6 +225,10 @@ class GQLQueries {
   }
 
   static Map<String, dynamic> getStreamLinkVariables(String watchId) {
+    return {"watchId": watchId};
+  }
+
+  static Map<String, dynamic> getVideoByIdVariables(String watchId) {
     return {"watchId": watchId};
   }
 

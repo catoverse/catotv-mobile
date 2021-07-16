@@ -13,6 +13,7 @@ import '../ui/feed/feed_view.dart';
 import '../ui/invite/invite_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
 import '../ui/restricted_home/restricted_home_view.dart';
+import '../ui/single_video/single_video_view.dart';
 import '../ui/startup/startup_view.dart';
 import '../ui/topic_selection/topic_selection_view.dart';
 import '../ui/update/update_view.dart';
@@ -25,6 +26,7 @@ class Routes {
   static const String topicSelectionView = '/topic-selection-view';
   static const String inviteView = '/invite-view';
   static const String feedView = '/feed-view';
+  static const String singleFeedView = '/single-feed-view';
   static const all = <String>{
     startUpView,
     updateView,
@@ -33,6 +35,7 @@ class Routes {
     topicSelectionView,
     inviteView,
     feedView,
+    singleFeedView,
   };
 }
 
@@ -47,6 +50,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.topicSelectionView, page: TopicSelectionView),
     RouteDef(Routes.inviteView, page: InviteView),
     RouteDef(Routes.feedView, page: FeedView),
+    RouteDef(Routes.singleFeedView, page: SingleFeedView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -99,6 +103,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    SingleFeedView: (data) {
+      var args = data.getArgs<SingleFeedViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SingleFeedView(
+          key: args.key,
+          videoId: args.videoId,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -111,4 +125,11 @@ class TopicSelectionViewArguments {
   final Key? key;
   final bool updateTopicSelection;
   TopicSelectionViewArguments({this.key, this.updateTopicSelection = false});
+}
+
+/// SingleFeedView arguments holder class
+class SingleFeedViewArguments {
+  final Key? key;
+  final String videoId;
+  SingleFeedViewArguments({this.key, required this.videoId});
 }

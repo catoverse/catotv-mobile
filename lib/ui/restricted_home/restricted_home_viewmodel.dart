@@ -16,4 +16,9 @@ class RestrictedHomeViewModel extends BaseFeedModel {
 
   @override
   Future<void> refresh() => Future.value();
+
+  @override
+  getVideo(String videoId) {
+    throw UnimplementedError();
+  }
 }

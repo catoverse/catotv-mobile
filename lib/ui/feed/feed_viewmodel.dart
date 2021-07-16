@@ -29,4 +29,9 @@ class FeedViewModel extends BaseFeedModel {
 
   @override
   Future<void> refresh() => getVideos();
+
+  @override
+  getVideo(String videoId) {
+    throw UnimplementedError();
+  }
 }
