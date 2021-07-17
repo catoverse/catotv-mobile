@@ -5,7 +5,7 @@ class OpenLinkService {
   /// Opens the given [url]
   ///
   /// Throws error if the link can't be opened
-  openLink(String url) async {
+  Future openLink(String url) async {
     bool canLaunchUrl = await canLaunch(url);
 
     if (!canLaunchUrl) return Result.failed("Could not launch $url");

@@ -1,5 +1,6 @@
 import 'package:feed/ui/global/screen.dart';
 import 'package:feed/ui/global/styles.dart';
+import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 
 import 'items.dart';
@@ -52,12 +53,50 @@ class OnboardingView extends StatelessWidget {
                   ),
                   bottomNavigationBar: Container(
                     padding: EdgeInsets.all(20.0),
-                    child: ElevatedButton(
-                      style: raisedButtonStyle.copyWith(
-                          textStyle: MaterialStateProperty.all<TextStyle>(
-                              uiHelpers.button!)),
-                      onPressed: () => model.navigateToRestrictedHome(),
-                      child: Text("Get Started"),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Wrap(
+                          children: [
+                            Text(
+                              "By getting started, you’ll be agreed to ",
+                              style: uiHelpers.button!
+                                  .copyWith(fontWeight: FontWeight.normal),
+                            ),
+                            InkWell(
+                                onTap: () => model.openTermsOfService(),
+                                child: Text(
+                                  "Terms of use",
+                                  style: uiHelpers.button!.copyWith(
+                                      fontWeight: FontWeight.normal,
+                                      color: AppColors.primary),
+                                )),
+                            Text(
+                              " and ",
+                              style: uiHelpers.button!
+                                  .copyWith(fontWeight: FontWeight.normal),
+                            ),
+                            InkWell(
+                                onTap: () => model.openPrivacyPolicy(),
+                                child: Text(
+                                  "Privacy Policy",
+                                  style: uiHelpers.button!.copyWith(
+                                      fontWeight: FontWeight.normal,
+                                      color: AppColors.primary),
+                                )),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        ElevatedButton(
+                          style: raisedButtonStyle.copyWith(
+                              textStyle: MaterialStateProperty.all<TextStyle>(
+                                  uiHelpers.button!)),
+                          onPressed: () => model.navigateToRestrictedHome(),
+                          child: Text("Get Started"),
+                        ),
+                      ],
                     ),
                   ),
                 )),
