@@ -28,7 +28,9 @@ class APIServiceImpl implements APIService {
   }
 
   bool _handleVersionUpdate(int apiVersion) {
-    var currentVersion = int.parse(_packageInfo.version.split(".")[0]);
+    var currentVersion = int.parse(_packageInfo.buildNumber);
+
+    _log.v("currentVersion: ${_packageInfo.buildNumber}");
 
     return apiVersion > currentVersion;
   }

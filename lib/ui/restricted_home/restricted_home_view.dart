@@ -31,6 +31,7 @@ class RestrictedHomeView extends StatelessWidget {
                   body: model.isBusy
                       ? Center(child: CircularProgressIndicator())
                       : FeedPlayerListView(
+                          showShare: false,
                           footer: Container(
                             padding: const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(

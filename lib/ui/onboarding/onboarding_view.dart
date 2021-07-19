@@ -66,20 +66,7 @@ class OnboardingView extends StatelessWidget {
                             InkWell(
                                 onTap: () => model.openTermsOfService(),
                                 child: Text(
-                                  "Terms of use",
-                                  style: uiHelpers.button!.copyWith(
-                                      fontWeight: FontWeight.normal,
-                                      color: AppColors.primary),
-                                )),
-                            Text(
-                              " and ",
-                              style: uiHelpers.button!
-                                  .copyWith(fontWeight: FontWeight.normal),
-                            ),
-                            InkWell(
-                                onTap: () => model.openPrivacyPolicy(),
-                                child: Text(
-                                  "Privacy Policy",
+                                  "Terms and Privacy",
                                   style: uiHelpers.button!.copyWith(
                                       fontWeight: FontWeight.normal,
                                       color: AppColors.primary),

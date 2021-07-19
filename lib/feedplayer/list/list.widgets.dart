@@ -4,8 +4,9 @@ import 'package:stacked/stacked.dart';
 
 class FeedFooter extends ViewModelWidget<BaseFeedModel> {
   final int index;
+  final bool showShare;
 
-  const FeedFooter({required this.index});
+  const FeedFooter({required this.index, this.showShare = true});
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
@@ -18,9 +19,12 @@ class FeedFooter extends ViewModelWidget<BaseFeedModel> {
             label: Text(viewModel.videos[index].topic.name),
             onPressed: () {},
           ),
-          IconButton(
-            icon: Icon(Icons.share_outlined),
-            onPressed: () => viewModel.shareVideo(index),
+          Visibility(
+            visible: showShare,
+            child: IconButton(
+              icon: Icon(Icons.share_outlined),
+              onPressed: () => viewModel.shareVideo(index),
+            ),
           )
         ],
       ),

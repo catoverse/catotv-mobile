@@ -7,7 +7,7 @@ import 'package:inview_notifier_list/inview_notifier_list.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
-  FeedPlayerListView({this.header, this.footer})
+  FeedPlayerListView({this.header, this.footer, this.showShare = true})
       : controller = FeedPlayerController();
 
   /// Default Viewport visible condition
@@ -22,6 +22,8 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
   final Widget? header;
 
   final Widget? footer;
+
+  final bool showShare;
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
@@ -58,7 +60,10 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
                           index: index),
 
                       // Feed Footer
-                      FeedFooter(index: videoIndex)
+                      FeedFooter(
+                        index: videoIndex,
+                        showShare: showShare,
+                      )
                     ],
                   ),
                 );

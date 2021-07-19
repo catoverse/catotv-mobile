@@ -29,11 +29,6 @@ class OnboardingViewModel extends BaseViewModel with SnackbarHelper, AuthMixin {
 
   openTermsOfService() async =>
       //TODO: Add terms of service link
-      _urlLauncher
-          .openLink("https://www.notion.so/28ffdd083dc3473e9c2da6ec011b58ac");
-
-  openPrivacyPolicy() async =>
-      //TODO: Add privacy policy
-      _urlLauncher
-          .openLink("https://www.notion.so/28ffdd083dc3473e9c2da6ec011b58ac");
+      _urlLauncher.openLink(
+          "https://catoverse.notion.site/Privacy-Policy-759493db56a34396ae30950028ae978e");
 }
