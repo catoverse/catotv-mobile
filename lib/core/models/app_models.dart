@@ -80,10 +80,10 @@ class Video with _$Video {
     @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
     @HiveField(6)
     @JsonKey(name: "channel_information")
-        required ChannelInformation channelInformation,
+        ChannelInformation? channelInformation,
     @HiveField(7)
     @JsonKey(name: "content_details")
-        required ContentDetails contentDetails,
+        ContentDetails? contentDetails,
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);

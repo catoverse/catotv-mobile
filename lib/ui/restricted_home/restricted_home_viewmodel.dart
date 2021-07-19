@@ -21,4 +21,7 @@ class RestrictedHomeViewModel extends BaseFeedModel {
   getVideo(String videoId) {
     throw UnimplementedError();
   }
+
+  @override
+  Future shareVideo(int index) async {}
 }

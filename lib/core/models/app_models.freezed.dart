@@ -1024,10 +1024,10 @@ class _$VideoTearOff {
           int? endTimestamp,
       @HiveField(6)
       @JsonKey(name: "channel_information")
-          required ChannelInformation channelInformation,
+          ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          required ContentDetails contentDetails}) {
+          ContentDetails? contentDetails}) {
     return _Video(
       id: id,
       title: title,
@@ -1070,11 +1070,11 @@ mixin _$Video {
   int? get endTimestamp => throw _privateConstructorUsedError;
   @HiveField(6)
   @JsonKey(name: "channel_information")
-  ChannelInformation get channelInformation =>
+  ChannelInformation? get channelInformation =>
       throw _privateConstructorUsedError;
   @HiveField(7)
   @JsonKey(name: "content_details")
-  ContentDetails get contentDetails => throw _privateConstructorUsedError;
+  ContentDetails? get contentDetails => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1106,14 +1106,14 @@ abstract class $VideoCopyWith<$Res> {
           int? endTimestamp,
       @HiveField(6)
       @JsonKey(name: "channel_information")
-          ChannelInformation channelInformation,
+          ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          ContentDetails contentDetails});
+          ContentDetails? contentDetails});
 
   $TopicCopyWith<$Res> get topic;
-  $ChannelInformationCopyWith<$Res> get channelInformation;
-  $ContentDetailsCopyWith<$Res> get contentDetails;
+  $ChannelInformationCopyWith<$Res>? get channelInformation;
+  $ContentDetailsCopyWith<$Res>? get contentDetails;
 }
 
 /// @nodoc
@@ -1163,11 +1163,11 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
       channelInformation: channelInformation == freezed
           ? _value.channelInformation
           : channelInformation // ignore: cast_nullable_to_non_nullable
-              as ChannelInformation,
+              as ChannelInformation?,
       contentDetails: contentDetails == freezed
           ? _value.contentDetails
           : contentDetails // ignore: cast_nullable_to_non_nullable
-              as ContentDetails,
+              as ContentDetails?,
     ));
   }
 
@@ -1179,16 +1179,24 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
   }
 
   @override
-  $ChannelInformationCopyWith<$Res> get channelInformation {
-    return $ChannelInformationCopyWith<$Res>(_value.channelInformation,
+  $ChannelInformationCopyWith<$Res>? get channelInformation {
+    if (_value.channelInformation == null) {
+      return null;
+    }
+
+    return $ChannelInformationCopyWith<$Res>(_value.channelInformation!,
         (value) {
       return _then(_value.copyWith(channelInformation: value));
     });
   }
 
   @override
-  $ContentDetailsCopyWith<$Res> get contentDetails {
-    return $ContentDetailsCopyWith<$Res>(_value.contentDetails, (value) {
+  $ContentDetailsCopyWith<$Res>? get contentDetails {
+    if (_value.contentDetails == null) {
+      return null;
+    }
+
+    return $ContentDetailsCopyWith<$Res>(_value.contentDetails!, (value) {
       return _then(_value.copyWith(contentDetails: value));
     });
   }
@@ -1220,17 +1228,17 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
           int? endTimestamp,
       @HiveField(6)
       @JsonKey(name: "channel_information")
-          ChannelInformation channelInformation,
+          ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          ContentDetails contentDetails});
+          ContentDetails? contentDetails});
 
   @override
   $TopicCopyWith<$Res> get topic;
   @override
-  $ChannelInformationCopyWith<$Res> get channelInformation;
+  $ChannelInformationCopyWith<$Res>? get channelInformation;
   @override
-  $ContentDetailsCopyWith<$Res> get contentDetails;
+  $ContentDetailsCopyWith<$Res>? get contentDetails;
 }
 
 /// @nodoc
@@ -1281,11 +1289,11 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
       channelInformation: channelInformation == freezed
           ? _value.channelInformation
           : channelInformation // ignore: cast_nullable_to_non_nullable
-              as ChannelInformation,
+              as ChannelInformation?,
       contentDetails: contentDetails == freezed
           ? _value.contentDetails
           : contentDetails // ignore: cast_nullable_to_non_nullable
-              as ContentDetails,
+              as ContentDetails?,
     ));
   }
 }
@@ -1315,10 +1323,10 @@ class _$_Video extends _Video {
           this.endTimestamp,
       @HiveField(6)
       @JsonKey(name: "channel_information")
-          required this.channelInformation,
+          this.channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          required this.contentDetails})
+          this.contentDetails})
       : super._();
 
   factory _$_Video.fromJson(Map<String, dynamic> json) =>
@@ -1351,11 +1359,11 @@ class _$_Video extends _Video {
   @override
   @HiveField(6)
   @JsonKey(name: "channel_information")
-  final ChannelInformation channelInformation;
+  final ChannelInformation? channelInformation;
   @override
   @HiveField(7)
   @JsonKey(name: "content_details")
-  final ContentDetails contentDetails;
+  final ContentDetails? contentDetails;
 
   @override
   String toString() {
@@ -1434,10 +1442,10 @@ abstract class _Video extends Video {
           int? endTimestamp,
       @HiveField(6)
       @JsonKey(name: "channel_information")
-          required ChannelInformation channelInformation,
+          ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          required ContentDetails contentDetails}) = _$_Video;
+          ContentDetails? contentDetails}) = _$_Video;
   _Video._() : super._();
 
   factory _Video.fromJson(Map<String, dynamic> json) = _$_Video.fromJson;
@@ -1469,12 +1477,12 @@ abstract class _Video extends Video {
   @override
   @HiveField(6)
   @JsonKey(name: "channel_information")
-  ChannelInformation get channelInformation =>
+  ChannelInformation? get channelInformation =>
       throw _privateConstructorUsedError;
   @override
   @HiveField(7)
   @JsonKey(name: "content_details")
-  ContentDetails get contentDetails => throw _privateConstructorUsedError;
+  ContentDetails? get contentDetails => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VideoCopyWith<_Video> get copyWith => throw _privateConstructorUsedError;

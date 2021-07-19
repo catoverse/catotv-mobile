@@ -72,8 +72,8 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       topic: fields[3] as Topic,
       startTimestamp: fields[4] as int?,
       endTimestamp: fields[5] as int?,
-      channelInformation: fields[6] as ChannelInformation,
-      contentDetails: fields[7] as ContentDetails,
+      channelInformation: fields[6] as ChannelInformation?,
+      contentDetails: fields[7] as ContentDetails?,
     );
   }
 
@@ -192,10 +192,14 @@ _$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
     topic: Topic.fromJson(json['topic'] as Map<String, dynamic>),
     startTimestamp: json['start_timestamp'] as int?,
     endTimestamp: json['end_timestamp'] as int?,
-    channelInformation: ChannelInformation.fromJson(
-        json['channel_information'] as Map<String, dynamic>),
-    contentDetails: ContentDetails.fromJson(
-        json['content_details'] as Map<String, dynamic>),
+    channelInformation: json['channel_information'] == null
+        ? null
+        : ChannelInformation.fromJson(
+            json['channel_information'] as Map<String, dynamic>),
+    contentDetails: json['content_details'] == null
+        ? null
+        : ContentDetails.fromJson(
+            json['content_details'] as Map<String, dynamic>),
   );
 }
 

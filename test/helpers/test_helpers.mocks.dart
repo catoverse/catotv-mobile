@@ -96,6 +96,10 @@ class MockAPIService extends _i1.Mock implements _i5.APIService {
           Invocation.method(#getVideos, [skip, limit, selectedTopics]),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
   @override
+  _i4.Future<dynamic> getVideoById(String? videoId) =>
+      (super.noSuchMethod(Invocation.method(#getVideoById, [videoId]),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
   _i4.Future<dynamic> requestInvite({String? email}) => (super.noSuchMethod(
       Invocation.method(#requestInvite, [], {#email: email}),
       returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);

@@ -35,7 +35,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
-    final channelName = viewModel.videos[index].channelInformation.name;
+    final channelName = viewModel.videos[index].channelInformation?.name ?? "";
     final title = viewModel.videos[index].title;
 
     return Container(
@@ -45,16 +45,15 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (channelName != null)
-            Text(
-              channelName,
-              maxLines: 3,
-              style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  fontStyle: FontStyle.normal),
-            ),
+          Text(
+            channelName,
+            maxLines: 3,
+            style: TextStyle(
+                color: Colors.black54,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                fontStyle: FontStyle.normal),
+          ),
           Text(
             title,
             maxLines: 3,
