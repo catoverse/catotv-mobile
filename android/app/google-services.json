@@ -15,6 +15,38 @@
       },
       "oauth_client": [
         {
+          "client_id": "1054751809312-6uce3ejouf1604115fpcqto4810mlaft.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cato.tv.feed",
+            "certificate_hash": "2561ad41164aa7e081acb7106313d9f622d379b7"
+          }
+        },
+        {
+          "client_id": "1054751809312-ba1es7bpof2mkdkivib414f1patuu0e6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cato.tv.feed",
+            "certificate_hash": "68731b7acfb4af24727fa70fc7dd9bcca1fd6bbb"
+          }
+        },
+        {
+          "client_id": "1054751809312-eiaoauvf2gljp9t2f4c3453gtm9jfcgr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cato.tv.feed",
+            "certificate_hash": "7802b120505a76bdb5630eed00027fa6df27ae4e"
+          }
+        },
+        {
+          "client_id": "1054751809312-nuqardid24feouqn3blu4npo86nqs2e8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "cato.tv.feed",
+            "certificate_hash": "da1727e1653ce381c4312e0c52c8de9d08062d5f"
+          }
+        },
+        {
           "client_id": "1054751809312-q6aep1tujfbdsns6rljjnfcl1n550jpg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -36,8 +68,16 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1054751809312-m7udvlccfa4v1jp42bq0qjhshu257j66.apps.googleusercontent.com",
+              "client_id": "1054751809312-1dfobhfs9kj2tc4q49te2i57hl82b2ct.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1054751809312-rgabli18s5scq22m7pgnvndgk14vfs7r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "cato.tv.feed",
+                "app_store_id": "1532006504"
+              }
             }
           ]
         }
