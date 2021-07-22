@@ -36,3 +36,12 @@ platform :android do
     upload_to_play_store
   end
 end
+
+lane :beta do
+  # ...
+  gradle(
+    task: 'assemble',
+    build_type: 'Release'
+  )
+  # ...
+end
