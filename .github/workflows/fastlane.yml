@@ -2,22 +2,28 @@ name: Fastlane Setup
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
+    env:
+      PLAY_STORE_SIGNING: ${{ secrets.PLAY_STORE_SIGNING }}
+
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      
+
+      - name: create playstore signing
+        run: cd ./android && echo '${{ secrets.PLAY_STORE_SIGNING }}' > key.properties
+
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '2.7.2'
-      
+          ruby-version: "2.7.2"
+
       - uses: maierj/fastlane-action@v2.0.1
         with:
-          lane: 'beta'
-          subdirectory: 'android'
+          lane: "beta"
+          subdirectory: "android"
