@@ -1,4 +1,4 @@
-name: Fastlane Setup
+name: Test, Build and Release apk
 
 on:
   push:
@@ -19,16 +19,22 @@ jobs:
       - name: create playstore signing
         run: cd ./android && echo '${{ secrets.PLAY_STORE_SIGNING }}' > key.properties
 
-      - name: set up JDK 1.8
-        uses: actions/setup-java@v1
+      - uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: "12.x"
 
-      - uses: ruby/setup-ruby@v1
+      - uses: subosito/flutter-action@v1
         with:
-          ruby-version: "2.7.2"
+          flutter-version: "2.0.6"
 
-      - uses: maierj/fastlane-action@v2.0.1
+      - run: flutter pub get
+
+      # - run: flutter test
+
+      - run: flutter build appbundle
+
+      - name: Push APK to Releases
+        uses: ncipollo/release-action@v1
         with:
-          lane: "beta"
-          subdirectory: "android"
+          artifacts: "build/app/outputs/bundle/release/*.aab"
+          token: ${{ secrets.GITHUB_TOKEN }}
