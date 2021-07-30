@@ -19,6 +19,11 @@ jobs:
       - name: create playstore signing
         run: cd ./android && echo '${{ secrets.PLAY_STORE_SIGNING }}' > key.properties
 
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "2.7.2"
