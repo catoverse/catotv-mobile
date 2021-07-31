@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: create playstore signing
+      - name: import key.properties
         run: cd ./android && echo '${{ secrets.PLAY_STORE_SIGNING }}' > key.properties
 
       - name: set up JDK 1.8
@@ -28,11 +28,8 @@ jobs:
         with:
           flutter-version: "2.0.6"
 
-      - uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: "2.7.2"
+      - run: flutter pub get
 
-      - uses: maierj/fastlane-action@v2.0.1
-        with:
-          lane: "beta"
-          subdirectory: "android"
+      - run: flutter build appbundle
+      
+      # - run: flutter test
