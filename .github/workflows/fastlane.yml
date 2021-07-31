@@ -10,6 +10,7 @@ jobs:
   build:
     env:
       PLAY_STORE_SIGNING: ${{ secrets.PLAY_STORE_SIGNING }}
+      PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
 
     runs-on: ubuntu-latest
 
@@ -39,9 +40,10 @@ jobs:
           bundler-cache: true
           working-directory: android
 
+      - name: Import service account file
+        run: cd android/fastlane && echo '${{ secrets.PLAY_STORE_CONFIG_JSON }}' > fastlane-play-store-key.json
+
       - run: bundle exec fastlane beta
-        env:
-          PLAY_STORE_CONFIG_JSON: ${{ secrets.PLAY_STORE_CONFIG_JSON }}
         working-directory: android
 
       # - run: flutter build appbundle
