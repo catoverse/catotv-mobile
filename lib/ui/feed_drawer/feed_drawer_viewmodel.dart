@@ -12,6 +12,6 @@ class DrawerViewModel extends BaseViewModel with AuthMixin {
 
   inviteFriends() async {
     await _shareService.share(
-        "Learn what matters. From the best. For Free\nCheck out cato - https://play.google.com/store/apps/details?id=cato.tv.feed");
+        "Learn what matters. From the best. For Free\nCheck out cato - https://play.google.com/store/apps/details?id=cato.tv.app");
   }
 }

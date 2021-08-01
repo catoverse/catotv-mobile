@@ -1,4 +1,4 @@
-package cato.tv.feed
+package cato.tv.app
 
 import io.flutter.embedding.android.FlutterActivity
 
