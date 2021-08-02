@@ -3,12 +3,8 @@ name: Build, Test and Release
 on:
   push:
     branches: [main]
-    tags:
-      - 'v*'
   pull_request:
     branches: [main]
-    tags:
-      - 'v*'
 
 jobs:
   build:
@@ -43,3 +39,4 @@ jobs:
         with:
           artifacts: "build/app/outputs/flutter-apk/app-release.apk"
           token: ${{ secrets.GITHUB_TOKEN }}
+          tag: v0.0.1+${{ github.run_number }}
