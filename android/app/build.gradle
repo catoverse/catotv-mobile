@@ -46,7 +46,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "cato.tv.feed"
+        applicationId "cato.tv.app"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
@@ -58,7 +58,7 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias'] ? keystoreProperties['keyAlias'] : System.getenv("CATO_KEY_ALIAS")
             keyPassword keystoreProperties['keyPassword'] ? keystoreProperties['keyPassword'] : System.getenv("CATO_KEY_PASSWORD")
-            storeFile rootProject.file("cato_feed.jks")
+            storeFile rootProject.file("catotv.jks")
             storePassword keystoreProperties['storePassword'] ? keystoreProperties['storePassword'] : System.getenv("CATO_KEY_STORE_PASSWORD")
         }
     }

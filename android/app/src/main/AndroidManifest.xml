@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cato.tv.feed">
+    package="cato.tv.app">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="Cato TV"

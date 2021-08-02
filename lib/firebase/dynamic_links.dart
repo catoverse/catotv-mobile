@@ -24,9 +24,9 @@ class DynamicLinksService {
       uriPrefix: 'https://catoverse.page.link',
       link: fallbackURL,
       androidParameters: AndroidParameters(
-          packageName: 'cato.tv.feed', fallbackUrl: fallbackURL),
+          packageName: 'cato.tv.app', fallbackUrl: fallbackURL),
       iosParameters: IosParameters(
-          bundleId: 'cato.tv.feed',
+          bundleId: 'cato.tv.app',
           minimumVersion: '1.0.1',
           appStoreId: '123456789',
           fallbackUrl: fallbackURL),
