@@ -6,6 +6,7 @@ platform :android do
     gradle(task: "test")
   end
 
+  desc "Deploys appbundle to beta track"
   lane :beta do
     sh "flutter build appbundle -v"
     upload_to_play_store(
