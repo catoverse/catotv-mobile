@@ -1,4 +1,4 @@
-name: Build, Test and Release
+name: Generate Release Articraft
 
 on:
   push:
