@@ -25,12 +25,12 @@ jobs:
           java-version: 1.8
 
       - name: Install Flutter
-      - uses: subosito/flutter-action@v1
+        uses: subosito/flutter-action@v1
         with:
           flutter-version: "2.0.6"
 
       - name: Init Flutter
-      - run: flutter doctor -v && flutter pub get
+        run: flutter doctor -v && flutter pub get
 
       - run: flutter build apk --release
 
