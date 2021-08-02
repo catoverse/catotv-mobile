@@ -58,7 +58,7 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias'] ? keystoreProperties['keyAlias'] : System.getenv("CATO_KEY_ALIAS")
             keyPassword keystoreProperties['keyPassword'] ? keystoreProperties['keyPassword'] : System.getenv("CATO_KEY_PASSWORD")
-            storeFile rootProject.file("cato_feed.jks")
+            storeFile rootProject.file("catotv.jks")
             storePassword keystoreProperties['storePassword'] ? keystoreProperties['storePassword'] : System.getenv("CATO_KEY_STORE_PASSWORD")
         }
     }
