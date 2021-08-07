@@ -3,6 +3,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/dynamic_links.dart';
+import 'package:feed/firebase/fcm_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:stacked/stacked.dart';
@@ -14,6 +15,7 @@ class StartUpViewModel extends BaseViewModel {
   final _connectivityService = locator<ConnectivityService>();
   final _apiService = locator<APIService>();
   final _navigationService = locator<NavigationService>();
+  final _fcmService = locator<FcmService>();
   final _dynamicLinks = locator<DynamicLinksService>();
 
   bool? _isConnected;
@@ -28,6 +30,7 @@ class StartUpViewModel extends BaseViewModel {
     }
 
     await _dynamicLinks.handleDynamicLinks();
+    await _fcmService.setupFCM();
 
     var forceUpdateRequired = await _apiService.isUpdateRequired();
 

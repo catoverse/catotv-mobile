@@ -48,6 +48,7 @@ class TopicSelectionViewModel extends BaseViewModel {
     setBusy(false);
 
     //TODO: Indicate the topics are stored successfully
+    //TODO: Subscribe to topics
 
     return gotoHome();
   }

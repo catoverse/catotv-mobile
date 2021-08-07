@@ -10,3 +10,6 @@ const String AllTopicsBox = "VIDEO_TOPICS";
 
 // Shared Preferences keys
 const String LoginStatusKey = "LOGIN_STATUS";
+
+// Notification Channel
+const String kVideoNotificationChannel = "video_delights";

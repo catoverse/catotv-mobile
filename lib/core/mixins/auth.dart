@@ -8,6 +8,7 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/analytics.dart';
+import 'package:feed/firebase/fcm_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -18,6 +19,7 @@ mixin AuthMixin on BaseViewModel {
   final _userService = locator<UserService>();
   final _analytics = locator<AnalyticsService>();
   final _messageQueue = locator<MessageQueueService>();
+  final _fcmService = locator<FcmService>();
   final _log = getLogger("Authentication ViewModel");
 
   User get currentUser => _userService.currentUser;
@@ -37,8 +39,8 @@ mixin AuthMixin on BaseViewModel {
         mainButtonTitle: mainButton,
         secondaryButtonTitle: secondaryButton);
 
-    if (sheetResponse?.responseData is ThreeButtonResponseData) {
-      ThreeButtonResponseData responseData = sheetResponse?.responseData;
+    if (sheetResponse?.data is ThreeButtonResponseData) {
+      ThreeButtonResponseData responseData = sheetResponse?.data;
 
       switch (responseData) {
         case ThreeButtonResponseData.Primary:
@@ -69,6 +71,9 @@ mixin AuthMixin on BaseViewModel {
 
     _log.i(
         "User Login Successful : Logged in user: ${_userService.currentUser}");
+
+    await _fcmService.subscribeToTopic("general");
+
     isProfileExists = await _userService.isUserProfileExists();
     _analytics.logEvent(LoginSuccess);
     _messageQueue.logUserEvent(UserEvent.login);
