@@ -72,8 +72,6 @@ mixin AuthMixin on BaseViewModel {
     _log.i(
         "User Login Successful : Logged in user: ${_userService.currentUser}");
 
-    await _fcmService.subscribeToTopic("general");
-
     isProfileExists = await _userService.isUserProfileExists();
     _analytics.logEvent(LoginSuccess);
     _messageQueue.logUserEvent(UserEvent.login);

@@ -15,12 +15,9 @@ class FcmService {
       //TODO: Implement in-app notifications
     });
 
-    await _handleForegroundInteraction();
-  }
+    _fcm.subscribeToTopic("video_delights");
 
-  subscribeToTopic(String topic) async {
-    _log.v("Subscribing to $topic");
-    await _fcm.subscribeToTopic(topic);
+    await _handleForegroundInteraction();
   }
 
   _handleForegroundInteraction() async {
