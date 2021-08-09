@@ -16,6 +16,7 @@ class FcmService {
     });
 
     _fcm.subscribeToTopic("video_delights");
+    _log.v("Subscribed to video_delights");
 
     await _handleForegroundInteraction();
   }

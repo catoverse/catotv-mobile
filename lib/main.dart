@@ -29,6 +29,8 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // make sure you call `initializeApp` before using other Firebase services.
   // await Firebase.initializeApp();
 
+  print("New Background Notification");
+
   await setupLocator();
   await Firebase.initializeApp();
 
