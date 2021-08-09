@@ -41,5 +41,9 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
+        <meta-data
+            android:name="cato.tv.app.video.notifications"
+            android:value="video_delights" />            
     </application>
 </manifest>

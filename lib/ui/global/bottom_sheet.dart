@@ -51,7 +51,7 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          responseData: ThreeButtonResponseData.Primary)),
+                          data: ThreeButtonResponseData.Primary)),
                       style: raisedButtonStyle.copyWith(
                           side: MaterialStateProperty.all(
                               BorderSide(width: 2, color: AppColors.primary))),
@@ -66,7 +66,7 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          responseData: ThreeButtonResponseData.Secondary)),
+                          data: ThreeButtonResponseData.Secondary)),
                       style: raisedButtonStyle,
                       child: Text(
                         request.secondaryButtonTitle!,
@@ -79,7 +79,7 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                       child: TextButton(
                         onPressed: () => completer(SheetResponse(
                             confirmed: true,
-                            responseData: ThreeButtonResponseData.Teritary)),
+                            data: ThreeButtonResponseData.Teritary)),
                         style: raisedButtonStyle,
                         child: Text(
                           request.additionalButtonTitle!,
@@ -136,8 +136,7 @@ class FloatingBoxBottomSheet extends StatelessWidget {
             children: [
               MaterialButton(
                 onPressed: () => completer(SheetResponse(
-                    confirmed: true,
-                    responseData: FloatingResponseData.Primary)),
+                    confirmed: true, data: FloatingResponseData.Primary)),
                 child: Text(
                   request.secondaryButtonTitle!,
                   style: TextStyle(color: Theme.of(context).primaryColor),
@@ -145,8 +144,7 @@ class FloatingBoxBottomSheet extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () => completer(SheetResponse(
-                    confirmed: true,
-                    responseData: FloatingResponseData.Secondary)),
+                    confirmed: true, data: FloatingResponseData.Secondary)),
                 child: Text(
                   request.mainButtonTitle!,
                   style: TextStyle(color: AppColors.primary),
@@ -206,7 +204,7 @@ class ConstraintBottomSheet extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          responseData: ThreeButtonResponseData.Primary)),
+                          data: ThreeButtonResponseData.Primary)),
                       style: raisedButtonStyle.copyWith(
                           backgroundColor:
                               MaterialStateProperty.all(AppColors.google)),
@@ -224,7 +222,7 @@ class ConstraintBottomSheet extends StatelessWidget {
                     child: OutlinedButton(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          responseData: ThreeButtonResponseData.Secondary)),
+                          data: ThreeButtonResponseData.Secondary)),
                       style: raisedButtonStyle.copyWith(
                           side: MaterialStateProperty.all(
                               BorderSide(width: 2, color: AppColors.primary))),

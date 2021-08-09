@@ -3,6 +3,7 @@ import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/core/services/key_storage_service.dart';
 import 'package:feed/core/services/message_queue_service.dart';
+import 'package:feed/core/services/notification_service.dart';
 import 'package:feed/core/services/share_service.dart';
 import 'package:feed/core/services/url_service.dart';
 import 'package:feed/feedplayer/controller.dart';
@@ -15,6 +16,7 @@ import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/core/services/video_service.dart';
+import 'package:feed/firebase/fcm_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/api/api_service_impl.dart';
 import 'package:feed/remote/client.dart';
@@ -81,6 +83,9 @@ import 'injection.dart';
 
     /// Wrapper around [HiveInterface] to access [Database]
     LazySingleton(classType: HiveServiceImpl, asType: HiveService),
+
+    LazySingleton(classType: NotificationService),
+    LazySingleton(classType: FcmService),
 
     /// Stacked Services to use readily made services
     LazySingleton(classType: NavigationService),
