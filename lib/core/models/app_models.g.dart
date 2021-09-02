@@ -110,6 +110,61 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
           typeId == other.typeId;
 }
 
+class MEventqLogAdapter extends TypeAdapter<_$_MEventqLog> {
+  @override
+  final int typeId = 2;
+
+  @override
+  _$_MEventqLog read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_MEventqLog(
+      userId: fields[0] as String,
+      videoId: fields[1] as String,
+      timestamp: fields[2] as String,
+      description: fields[3] as String,
+      videoDuration: fields[4] as int,
+      sessionDuration: fields[5] as int,
+      durationWatched: fields[6] as int,
+      event: fields[7] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_MEventqLog obj) {
+    writer
+      ..writeByte(8)
+      ..writeByte(0)
+      ..write(obj.userId)
+      ..writeByte(1)
+      ..write(obj.videoId)
+      ..writeByte(2)
+      ..write(obj.timestamp)
+      ..writeByte(3)
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.videoDuration)
+      ..writeByte(5)
+      ..write(obj.sessionDuration)
+      ..writeByte(6)
+      ..write(obj.durationWatched)
+      ..writeByte(7)
+      ..write(obj.event);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MEventqLogAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -212,4 +267,29 @@ Map<String, dynamic> _$_$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'end_timestamp': instance.endTimestamp,
       'channel_information': instance.channelInformation,
       'content_details': instance.contentDetails,
+    };
+
+_$_MEventqLog _$_$_MEventqLogFromJson(Map<String, dynamic> json) {
+  return _$_MEventqLog(
+    userId: json['user_id'] as String,
+    videoId: json['video_id'] as String,
+    timestamp: json['timestamp'] as String,
+    description: json['description'] as String,
+    videoDuration: json['video_duration'] as int,
+    sessionDuration: json['session_duration'] as int,
+    durationWatched: json['duration_watched'] as int,
+    event: json['event'] as String,
+  );
+}
+
+Map<String, dynamic> _$_$_MEventqLogToJson(_$_MEventqLog instance) =>
+    <String, dynamic>{
+      'user_id': instance.userId,
+      'video_id': instance.videoId,
+      'timestamp': instance.timestamp,
+      'description': instance.description,
+      'video_duration': instance.videoDuration,
+      'session_duration': instance.sessionDuration,
+      'duration_watched': instance.durationWatched,
+      'event': instance.event,
     };

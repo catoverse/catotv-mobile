@@ -27,8 +27,6 @@ class OnboardingViewModel extends BaseViewModel with SnackbarHelper, AuthMixin {
     await _videoService.getUrlFromAPI("https://youtu.be/lEXBxijQREo");
   }
 
-  openTermsOfService() async =>
-      //TODO: Add terms of service link
-      _urlLauncher.openLink(
-          "https://catoverse.notion.site/Privacy-Policy-759493db56a34396ae30950028ae978e");
+  openTermsOfService() async => _urlLauncher.openLink(
+      "https://catoverse.notion.site/Privacy-Policy-759493db56a34396ae30950028ae978e");
 }

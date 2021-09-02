@@ -56,22 +56,25 @@ class OnboardingView extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Wrap(
-                          children: [
-                            Text(
-                              "By getting started, you’ll be agreed to ",
-                              style: uiHelpers.button!
-                                  .copyWith(fontWeight: FontWeight.normal),
-                            ),
-                            InkWell(
-                                onTap: () => model.openTermsOfService(),
-                                child: Text(
-                                  "Terms and Privacy",
-                                  style: uiHelpers.button!.copyWith(
-                                      fontWeight: FontWeight.normal,
-                                      color: AppColors.primary),
-                                )),
-                          ],
+                        SizedBox(
+                          width: double.infinity,
+                          child: Wrap(
+                            children: [
+                              Text(
+                                "By getting started you agree to our ",
+                                style: uiHelpers.button!
+                                    .copyWith(fontWeight: FontWeight.normal),
+                              ),
+                              InkWell(
+                                  onTap: () => model.openTermsOfService(),
+                                  child: Text(
+                                    "Terms & Privacy",
+                                    style: uiHelpers.button!.copyWith(
+                                        fontWeight: FontWeight.normal,
+                                        color: AppColors.primary),
+                                  )),
+                            ],
+                          ),
                         ),
                         SizedBox(
                           height: 10,

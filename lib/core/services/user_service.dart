@@ -1,5 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/app_models.dart';
 
@@ -16,7 +17,7 @@ class UserService {
   final _apiService = locator<APIService>();
   final _remoteClient = locator<RemoteClient>();
   final _hiveService = locator<HiveService>();
-  final _crashlytics = locator<AnalyticsService>();
+  final _analytics = locator<AnalyticsService>();
   final _authService = locator<FirebaseAuthenticationService>();
 
   User? _loggedInUser;
@@ -36,6 +37,8 @@ class UserService {
 
     if (authResult.hasError) {
       _log.e('Local google signin error: ${authResult.errorMessage}');
+      _analytics
+          .logEvent(LoginFailed, params: {"error": "google_signin_error"});
       return false;
     }
 
@@ -51,6 +54,8 @@ class UserService {
 
     if (result is Failure) {
       _log.e('Gql Google signin error: $result');
+      _analytics
+          .logEvent(LoginFailed, params: {"error": "graphql_signin_error"});
       return false;
     }
 
@@ -61,6 +66,7 @@ class UserService {
     await Future.wait([
       _hiveService.insertItem<User>(item: result, boxName: AuthUserBox),
       _keyStorageService.save<bool>(LoginStatusKey, true),
+      _analytics.logEvent(LoginSuccess),
       syncUser(user: result),
     ]);
 
@@ -91,7 +97,7 @@ class UserService {
 
     _loggedInUser = authUser;
     _remoteClient.updateToken(newToken: authUser.token);
-    _crashlytics.setUserIdentifier(currentUser.id);
+    _analytics.setUserIdentifier(currentUser.id);
 
     return true;
   }

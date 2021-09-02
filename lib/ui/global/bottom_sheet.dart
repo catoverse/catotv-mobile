@@ -206,8 +206,10 @@ class ConstraintBottomSheet extends StatelessWidget {
                           confirmed: true,
                           data: ThreeButtonResponseData.Primary)),
                       style: raisedButtonStyle.copyWith(
-                          backgroundColor:
-                              MaterialStateProperty.all(AppColors.google)),
+                          backgroundColor: MaterialStateProperty.all(
+                              request.mainButtonTitle == "Continue with Google"
+                                  ? AppColors.google
+                                  : AppColors.primary)),
                       icon: request.mainButtonTitle == "Continue with Google"
                           ? Icon(Icons.person_add)
                           : Icon(Icons.person),

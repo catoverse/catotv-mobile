@@ -1,4 +1,5 @@
 import 'package:feed/core/constants/assets.dart';
+import 'package:feed/core/enums/user_events.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 
@@ -102,6 +103,30 @@ class Failure with _$Failure {
       message: (e) => e.message,
     );
   }
+}
+
+@freezed
+class MqEventLog with _$MqEventLog {
+  MqEventLog._();
+
+  @HiveType(typeId: 2)
+  factory MqEventLog({
+    @HiveField(0) @JsonKey(name: "user_id") required String userId,
+    @HiveField(1) @JsonKey(name: "video_id") required String videoId,
+    @HiveField(2) required String timestamp,
+    @HiveField(3) required String description,
+    @HiveField(4) @JsonKey(name: "video_duration") required int videoDuration,
+    @HiveField(5)
+    @JsonKey(name: "session_duration")
+        required int sessionDuration,
+    @HiveField(6)
+    @JsonKey(name: "duration_watched")
+        required int durationWatched,
+    @HiveField(7) required String event,
+  }) = _MEventqLog;
+
+  factory MqEventLog.fromJson(Map<String, dynamic> json) =>
+      _$MqEventLogFromJson(json);
 }
 
 /// Regular Models

@@ -20,6 +20,7 @@ class HiveInjection {
     /// Register Adapters
     hive.registerAdapter(UserAdapter());
     hive.registerAdapter(VideoAdapter());
+    hive.registerAdapter(MEventqLogAdapter());
     return Hive;
   }
 }
