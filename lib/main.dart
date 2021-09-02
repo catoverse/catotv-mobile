@@ -36,7 +36,7 @@ Future main() async {
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
-  setupBottomSheetUi();
+  setupStacked();
 
   await locator<NotificationService>().init();
 
