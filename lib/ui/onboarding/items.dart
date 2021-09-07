@@ -10,6 +10,11 @@ class OnboardingItem {
       {required this.heading, required this.subheading, required this.image});
 }
 
+final kOnboardingItem = OnboardingItem(
+    heading: OnboardingItemTitle1,
+    image: Assets.onboardingImage1,
+    subheading: OnboardingItemSubtitle1);
+
 final List<OnboardingItem> onboardingItems = [
   OnboardingItem(
       heading: OnboardingItemTitle1,
@@ -40,7 +45,7 @@ class OnboardingBodyListItem extends StatelessWidget {
       children: [
         Container(
             width: double.infinity,
-            height: uiHelpers.blockSizeVertical! * 50,
+            height: uiHelpers.blockSizeVertical! * 45,
             padding: EdgeInsets.all(30.0),
             child: Image.asset(
               item.image,

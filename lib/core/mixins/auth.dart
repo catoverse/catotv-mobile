@@ -1,13 +1,11 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
-import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/user_service.dart';
-import 'package:feed/firebase/fcm_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,7 +15,6 @@ mixin AuthMixin on BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
   final _messageQueue = locator<MessageQueueService>();
-  final _fcmService = locator<FcmService>();
   final _log = getLogger("Authentication ViewModel");
 
   User get currentUser => _userService.currentUser;
