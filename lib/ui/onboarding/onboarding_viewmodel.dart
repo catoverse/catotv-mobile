@@ -20,7 +20,7 @@ class OnboardingViewModel extends BaseViewModel with SnackbarHelper, AuthMixin {
     await _videoService.getUrlFromAPI("https://youtu.be/lEXBxijQREo");
   }
 
-  void requestInvite() => _navigationService.navigateTo(Routes.inviteView);
+  void requestInvite() => _navigationService.navigateTo(Routes.bookmarksView);
 
   void showInvite() => _dialogService.showDialog(
       title: "🎉 Welcome",

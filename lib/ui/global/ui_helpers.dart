@@ -117,13 +117,13 @@ class UIHelpers {
     blockSizeVertical = height! / 100;
 
     verticalSpaceLow = SizedBox(
-      height: blockSizeVertical! * 3,
+      height: blockSizeVertical! * 2,
     );
     verticalSpaceMedium = SizedBox(
-      height: blockSizeVertical! * 5,
+      height: blockSizeVertical! * 4,
     );
     verticalSpaceHigh = SizedBox(
-      height: blockSizeVertical! * 10,
+      height: blockSizeVertical! * 8,
     );
 
     horizontalSpaceLow = SizedBox(

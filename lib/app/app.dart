@@ -22,6 +22,7 @@ import 'package:feed/remote/api/api_service_impl.dart';
 import 'package:feed/remote/client.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service_impl.dart';
+import 'package:feed/ui/bookmarks/bookmarks_view.dart';
 import 'package:feed/ui/feed/feed_view.dart';
 import 'package:feed/ui/invite/invite_view.dart';
 import 'package:feed/ui/onboarding/onboarding_view.dart';
@@ -47,6 +48,7 @@ import 'injection.dart';
   routes: [
     MaterialRoute(page: StartUpView, initial: true),
     MaterialRoute(page: UpdateView),
+    MaterialRoute(page: BookmarksView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: RestrictedHomeView),
     MaterialRoute(page: TopicSelectionView),
