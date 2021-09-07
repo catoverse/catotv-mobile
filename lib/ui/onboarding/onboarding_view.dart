@@ -49,19 +49,15 @@ class OnboardingView extends StatelessWidget {
                       children: [
                         TextButton(
                             onPressed: () => model.requestInvite(),
-                            child: Text.rich(TextSpan(children: [
-                              TextSpan(
-                                  text: "Need an invite? ",
-                                  style: uiHelpers.button!
-                                      .copyWith(color: AppColors.textPrimary)),
-                              TextSpan(
-                                  text: "Request",
-                                  style: uiHelpers.button!
-                                      .copyWith(color: AppColors.primary)),
-                            ]))),
-                        SizedBox(
-                          height: 4,
-                        ),
+                            child: Text.rich(TextSpan(
+                                style: TextStyle(color: AppColors.textPrimary),
+                                children: [
+                                  TextSpan(text: "Need an invite? "),
+                                  TextSpan(
+                                      text: "Request",
+                                      style:
+                                          TextStyle(color: AppColors.primary)),
+                                ]))),
                         ElevatedButton(
                           style: raisedButtonStyle.copyWith(
                               textStyle: MaterialStateProperty.all<TextStyle>(
@@ -78,6 +74,8 @@ class OnboardingView extends StatelessWidget {
                             children: [
                               Text(
                                 "By getting started you agree to our ",
+                                style:
+                                    TextStyle(color: AppColors.textSecondary),
                               ),
                               InkWell(
                                   onTap: () => model.openTermsOfService(),
