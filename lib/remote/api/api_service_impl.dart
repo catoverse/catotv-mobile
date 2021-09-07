@@ -176,4 +176,18 @@ class APIServiceImpl implements APIService {
 
     return result.success["MqProducerUser"];
   }
+
+  @override
+  Future addBookmarks(String userId, List<String> bookmarks) async {
+    _log.i('posting bookmarks ${bookmarks.join(', ')} with userId: $userId');
+
+    Result<Failure, dynamic> result = await _client.mutation(
+      GQLQueries.addBookmarks,
+      variables: GQLQueries.addBookmarksVariables(userId, bookmarks),
+    );
+
+    if (result.isFailed) return result.failure;
+
+    return result.success['userProfile'];
+  }
 }
