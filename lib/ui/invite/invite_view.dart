@@ -42,9 +42,11 @@ class InviteView extends StatelessWidget with $InviteView {
               ),
               floatingActionButton: FloatingActionButton(
                 child: model.isBusy
-                    ? CircularProgressIndicator()
+                    ? CircularProgressIndicator(
+                        color: AppColors.onPrimary,
+                      )
                     : Icon(Icons.done),
-                onPressed: model.requestInvite,
+                onPressed: model.isBusy ? () {} : () => model.requestInvite(),
               ),
             ));
   }

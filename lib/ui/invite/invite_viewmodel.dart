@@ -12,17 +12,23 @@ class InviteViewModel extends FormViewModel with Validators {
   final NavigationService _navigationService = locator<NavigationService>();
 
   Future requestInvite() async {
-    if (!hasEmail) return;
+    if (!hasEmail)
+      return _snackbarService.showSnackbar(
+          title: "Oops", message: "Email can't be empty");
     String error = validateEmail(emailValue!);
 
     if (error.isNotEmpty)
-      return _snackbarService.showCustomSnackBar(message: error);
+      return _snackbarService.showSnackbar(title: "Oops", message: error);
 
     if (emailValue!.isEmpty)
-      return _snackbarService.showCustomSnackBar(
-          message: "Email can't be empty");
+      return _snackbarService.showSnackbar(
+          title: "Oops", message: "Email can't be empty");
+
+    setBusy(true);
 
     var res = await _apiService.requestInvite(email: emailValue!);
+
+    setBusy(false);
 
     if (res is bool && res) {
       await _dialogService.showDialog(
@@ -32,12 +38,10 @@ class InviteViewModel extends FormViewModel with Validators {
     }
 
     //TODO: Figure another way around to display this
-    return _snackbarService.showCustomSnackBar(
-        message: "You're already in the waitlist");
+    return _snackbarService.showSnackbar(
+        title: "Woaah!!", message: "You're already in the waitlist");
   }
 
   @override
-  void setFormStatus() {
-    // TODO: implement setFormStatus
-  }
+  void setFormStatus() {}
 }

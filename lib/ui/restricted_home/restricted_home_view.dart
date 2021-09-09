@@ -16,16 +16,20 @@ class RestrictedHomeView extends StatelessWidget {
               onWillPop: () => model.showExitDialog(),
               child: Scaffold(
                   appBar: AppBar(
-                    automaticallyImplyLeading: false,
-                    elevation: 0,
                     backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    automaticallyImplyLeading: false,
                     title: Text("👋 Hello There",
                         style: uiHelpers.subheading!
                             .copyWith(color: AppColors.textPrimary)),
                     actions: [
-                      TextButton(
+                      Container(
+                        margin: EdgeInsets.only(right: 8.0),
+                        child: TextButton(
                           onPressed: () => model.loginWithGoogle(),
-                          child: Text('Login')),
+                          child: Text("Sign in", style: uiHelpers.button),
+                        ),
+                      )
                     ],
                   ),
                   body: model.isBusy

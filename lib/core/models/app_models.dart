@@ -1,5 +1,4 @@
 import 'package:feed/core/constants/assets.dart';
-import 'package:feed/core/enums/user_events.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 

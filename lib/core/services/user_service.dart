@@ -61,8 +61,6 @@ class UserService {
 
     _log.i("User signed in successful");
 
-    //TODO: Log custom event - user login
-
     await Future.wait([
       _hiveService.insertItem<User>(item: result, boxName: AuthUserBox),
       _keyStorageService.save<bool>(LoginStatusKey, true),

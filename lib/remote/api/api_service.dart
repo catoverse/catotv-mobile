@@ -1,4 +1,3 @@
-import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 
 abstract class APIService {
