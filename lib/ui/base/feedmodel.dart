@@ -20,7 +20,6 @@ abstract class BaseFeedModel extends BaseViewModel
   final _dynamicLinksService = locator<DynamicLinksService>();
 
   List<Video> get videos;
-  List<String> get bookmarks => this.bookmarks;
 
   Future<String> getStreamUrl(String videoUrl) async {
     var beforeLoading = DateTime.now();
@@ -42,7 +41,7 @@ abstract class BaseFeedModel extends BaseViewModel
         videoId: videos[index].id);
   }
 
-  Future getVideos();
+  Future getData();
 
   Future<void> refresh();
 
@@ -76,7 +75,5 @@ abstract class BaseFeedModel extends BaseViewModel
 
   getVideo(String videoId);
 
-  Future<void> addBookmarks(int index) async {
-    await _videoService.addBookmarks([videos[index].id]);
-  }
+  Future<void> addBookmarks(int index);
 }

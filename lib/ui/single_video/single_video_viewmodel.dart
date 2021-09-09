@@ -12,11 +12,11 @@ class SingleFeedViewModel extends BaseFeedModel {
   @override
   getVideo(String videoId) {
     this.videoId = videoId;
-    getVideos();
+    getData();
   }
 
   @override
-  Future getVideos() async {
+  Future getData() async {
     setBusy(true);
 
     var video = await _feedService.fetchVideoById(videoId);
@@ -31,4 +31,9 @@ class SingleFeedViewModel extends BaseFeedModel {
 
   @override
   List<Video> get videos => _videos;
+
+  @override
+  Future<void> addBookmarks(int index) {
+    throw UnimplementedError();
+  }
 }

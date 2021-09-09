@@ -65,13 +65,13 @@ class VideoService {
     return "https://img.youtube.com/vi/$videoId/hqdefault.jpg";
   }
 
-  Future<List<String>> getBookmarks() async {
-    final result = await _hiveService.fetchList<String>(boxName: BOOKMARKED_VIDEO_ID_KEY);
+  Future<List<Video>> getBookmarks() async {
+    final result = await _hiveService.fetchList<Video>(boxName: BOOKMARKED_VIDEO_ID_KEY);
     return result.success ?? [];
   }
 
-  Future<void> addBookmarks(List<String> bookmarks) async {
-    await _hiveService.insertList<String>(items: bookmarks, boxName: BOOKMARKED_VIDEO_ID_KEY);
-    await _apiService.addBookmarks(_userService.currentUser.id, bookmarks);
+  Future<void> addBookmarks(List<Video> videos) async {
+    await _hiveService.insertList<Video>(items: videos, boxName: BOOKMARKED_VIDEO_ID_KEY);
+    await _apiService.addBookmarks(_userService.currentUser.id, videos.map((e) => e.id).toList());
   }
 }

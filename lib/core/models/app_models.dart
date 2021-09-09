@@ -27,11 +27,11 @@ class User with _$User {
 @freezed
 class Topic with _$Topic {
   Topic._();
-
+  @HiveType(typeId: 3)
   factory Topic({
-    required String id,
-    required String name,
-    @JsonKey(defaultValue: false) bool? isSelected,
+    @HiveField(0) required String id,
+    @HiveField(1) required String name,
+    @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected,
   }) = _Topic;
 
   factory Topic.fromJson(Map<String, dynamic> json) => _$TopicFromJson(json);
@@ -41,10 +41,11 @@ class Topic with _$Topic {
 class ChannelInformation with _$ChannelInformation {
   ChannelInformation._();
 
+  @HiveType(typeId: 4)
   factory ChannelInformation({
-    String? id,
-    String? name,
-    @JsonKey(name: "subscriber_count") int? subscriberCount,
+    @HiveField(0) String? id,
+    @HiveField(1) String? name,
+    @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount,
   }) = _ChannelInformation;
 
   factory ChannelInformation.fromJson(Map<String, dynamic> json) =>
@@ -55,13 +56,15 @@ class ChannelInformation with _$ChannelInformation {
 class ContentDetails with _$ContentDetails {
   ContentDetails._();
 
-  factory ContentDetails(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views}) = _ContentDetails;
+  @HiveType(typeId: 5)
+  factory ContentDetails({
+    @HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+    @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+    @HiveField(2) int? dislikes,
+    @HiveField(3) int? likes,
+    @HiveField(4) int? duration,
+    @HiveField(5) int? views,
+  }) = _ContentDetails;
 
   factory ContentDetails.fromJson(Map<String, dynamic> json) =>
       _$ContentDetailsFromJson(json);

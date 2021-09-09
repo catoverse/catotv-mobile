@@ -6,7 +6,7 @@ class RestrictedHomeViewModel extends BaseFeedModel {
   List<Video> _videos = [];
 
   @override
-  Future getVideos() async {
+  Future getData() async {
     feedData.forEach((json) => _videos.add(Video.fromJson(json)));
     notifyListeners();
   }
@@ -24,4 +24,9 @@ class RestrictedHomeViewModel extends BaseFeedModel {
 
   @override
   Future shareVideo(int index) async {}
+
+  @override
+  Future<void> addBookmarks(int index) {
+    throw UnimplementedError();
+  }
 }

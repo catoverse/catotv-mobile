@@ -131,6 +131,10 @@ class MockAPIService extends _i1.Mock implements _i5.APIService {
       (super.noSuchMethod(
           Invocation.method(#logUserEventToMessageQueue, [events]),
           returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
+  @override
+  _i4.Future<dynamic> addBookmarks(String? userId, List<String>? bookmarks) =>
+      (super.noSuchMethod(Invocation.method(#addBookmarks, [userId, bookmarks]),
+          returnValue: Future<dynamic>.value()) as _i4.Future<dynamic>);
 }
 
 /// A class which mocks [ConnectivityService].

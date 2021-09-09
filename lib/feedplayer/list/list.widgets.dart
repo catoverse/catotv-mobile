@@ -41,7 +41,6 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
   Widget build(BuildContext context, BaseFeedModel viewModel) {
     final channelName = viewModel.videos[index].channelInformation?.name ?? "";
     final title = viewModel.videos[index].title;
-    final isBookmarked = viewModel.bookmarks.contains(viewModel.videos[index].id);
     return Container(
       padding: EdgeInsets.all(10.0),
       alignment: Alignment.centerLeft,
@@ -76,9 +75,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
           ),
           IconButton(
             onPressed: () => viewModel.addBookmarks(index),
-            icon: Icon(
-              isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-            ),
+            icon: Icon(Icons.bookmark_border),
           ),
         ],
       ),

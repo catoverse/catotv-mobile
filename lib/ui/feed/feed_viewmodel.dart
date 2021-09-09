@@ -11,14 +11,12 @@ class FeedViewModel extends BaseFeedModel {
   int skip = 0;
 
   List<Video> _videos = [];
-  List<String> bookmarks = [];
 
   @override
-  Future getVideos() async {
+  Future getData() async {
     setBusy(true);
 
     var newVideos = await _feedService.fetchVideos(skip: skip);
-    bookmarks = await _videoService.getBookmarks();
 
     setBusy(false);
 
@@ -32,10 +30,15 @@ class FeedViewModel extends BaseFeedModel {
   List<Video> get videos => _videos;
 
   @override
-  Future<void> refresh() => getVideos();
+  Future<void> refresh() => getData();
 
   @override
   getVideo(String videoId) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addBookmarks(int index) async {
+    await _videoService.addBookmarks([videos[index]]);
   }
 }

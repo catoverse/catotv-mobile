@@ -311,9 +311,9 @@ class _$TopicTearOff {
   const _$TopicTearOff();
 
   _Topic call(
-      {required String id,
-      required String name,
-      @JsonKey(defaultValue: false) bool? isSelected}) {
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected}) {
     return _Topic(
       id: id,
       name: name,
@@ -331,9 +331,12 @@ const $Topic = _$TopicTearOff();
 
 /// @nodoc
 mixin _$Topic {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false)
+  @HiveField(2)
   bool? get isSelected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -346,7 +349,9 @@ abstract class $TopicCopyWith<$Res> {
   factory $TopicCopyWith(Topic value, $Res Function(Topic) then) =
       _$TopicCopyWithImpl<$Res>;
   $Res call(
-      {String id, String name, @JsonKey(defaultValue: false) bool? isSelected});
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected});
 }
 
 /// @nodoc
@@ -386,7 +391,9 @@ abstract class _$TopicCopyWith<$Res> implements $TopicCopyWith<$Res> {
       __$TopicCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id, String name, @JsonKey(defaultValue: false) bool? isSelected});
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected});
 }
 
 /// @nodoc
@@ -423,22 +430,26 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 3)
 class _$_Topic extends _Topic {
   _$_Topic(
-      {required this.id,
-      required this.name,
-      @JsonKey(defaultValue: false) this.isSelected})
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.name,
+      @JsonKey(defaultValue: false) @HiveField(2) this.isSelected})
       : super._();
 
   factory _$_Topic.fromJson(Map<String, dynamic> json) =>
       _$_$_TopicFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String name;
   @override
   @JsonKey(defaultValue: false)
+  @HiveField(2)
   final bool? isSelected;
 
   @override
@@ -479,19 +490,22 @@ class _$_Topic extends _Topic {
 
 abstract class _Topic extends Topic {
   factory _Topic(
-      {required String id,
-      required String name,
-      @JsonKey(defaultValue: false) bool? isSelected}) = _$_Topic;
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected}) = _$_Topic;
   _Topic._() : super._();
 
   factory _Topic.fromJson(Map<String, dynamic> json) = _$_Topic.fromJson;
 
   @override
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(defaultValue: false)
+  @HiveField(2)
   bool? get isSelected => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -507,9 +521,9 @@ class _$ChannelInformationTearOff {
   const _$ChannelInformationTearOff();
 
   _ChannelInformation call(
-      {String? id,
-      String? name,
-      @JsonKey(name: "subscriber_count") int? subscriberCount}) {
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount}) {
     return _ChannelInformation(
       id: id,
       name: name,
@@ -527,8 +541,11 @@ const $ChannelInformation = _$ChannelInformationTearOff();
 
 /// @nodoc
 mixin _$ChannelInformation {
+  @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: "subscriber_count")
   int? get subscriberCount => throw _privateConstructorUsedError;
 
@@ -544,9 +561,9 @@ abstract class $ChannelInformationCopyWith<$Res> {
           ChannelInformation value, $Res Function(ChannelInformation) then) =
       _$ChannelInformationCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
-      String? name,
-      @JsonKey(name: "subscriber_count") int? subscriberCount});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount});
 }
 
 /// @nodoc
@@ -589,9 +606,9 @@ abstract class _$ChannelInformationCopyWith<$Res>
       __$ChannelInformationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
-      String? name,
-      @JsonKey(name: "subscriber_count") int? subscriberCount});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount});
 }
 
 /// @nodoc
@@ -630,21 +647,25 @@ class __$ChannelInformationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 4)
 class _$_ChannelInformation extends _ChannelInformation {
   _$_ChannelInformation(
-      {this.id,
-      this.name,
-      @JsonKey(name: "subscriber_count") this.subscriberCount})
+      {@HiveField(0) this.id,
+      @HiveField(1) this.name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") this.subscriberCount})
       : super._();
 
   factory _$_ChannelInformation.fromJson(Map<String, dynamic> json) =>
       _$_$_ChannelInformationFromJson(json);
 
   @override
+  @HiveField(0)
   final String? id;
   @override
+  @HiveField(1)
   final String? name;
   @override
+  @HiveField(3)
   @JsonKey(name: "subscriber_count")
   final int? subscriberCount;
 
@@ -686,20 +707,26 @@ class _$_ChannelInformation extends _ChannelInformation {
 
 abstract class _ChannelInformation extends ChannelInformation {
   factory _ChannelInformation(
-          {String? id,
+      {@HiveField(0)
+          String? id,
+      @HiveField(1)
           String? name,
-          @JsonKey(name: "subscriber_count") int? subscriberCount}) =
-      _$_ChannelInformation;
+      @HiveField(3)
+      @JsonKey(name: "subscriber_count")
+          int? subscriberCount}) = _$_ChannelInformation;
   _ChannelInformation._() : super._();
 
   factory _ChannelInformation.fromJson(Map<String, dynamic> json) =
       _$_ChannelInformation.fromJson;
 
   @override
+  @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
   @override
+  @HiveField(3)
   @JsonKey(name: "subscriber_count")
   int? get subscriberCount => throw _privateConstructorUsedError;
   @override
@@ -717,12 +744,12 @@ class _$ContentDetailsTearOff {
   const _$ContentDetailsTearOff();
 
   _ContentDetails call(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views}) {
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views}) {
     return _ContentDetails(
       youtubeCategory: youtubeCategory,
       hasCaptions: hasCaptions,
@@ -743,13 +770,19 @@ const $ContentDetails = _$ContentDetailsTearOff();
 
 /// @nodoc
 mixin _$ContentDetails {
+  @HiveField(0)
   @JsonKey(name: "youtube_category")
   int? get youtubeCategory => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: "captions_available")
   bool? get hasCaptions => throw _privateConstructorUsedError;
+  @HiveField(2)
   int? get dislikes => throw _privateConstructorUsedError;
+  @HiveField(3)
   int? get likes => throw _privateConstructorUsedError;
+  @HiveField(4)
   int? get duration => throw _privateConstructorUsedError;
+  @HiveField(5)
   int? get views => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -764,12 +797,12 @@ abstract class $ContentDetailsCopyWith<$Res> {
           ContentDetails value, $Res Function(ContentDetails) then) =
       _$ContentDetailsCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views});
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views});
 }
 
 /// @nodoc
@@ -827,12 +860,12 @@ abstract class _$ContentDetailsCopyWith<$Res>
       __$ContentDetailsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views});
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views});
 }
 
 /// @nodoc
@@ -886,32 +919,39 @@ class __$ContentDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 5)
 class _$_ContentDetails extends _ContentDetails {
   _$_ContentDetails(
-      {@JsonKey(name: "youtube_category") this.youtubeCategory,
-      @JsonKey(name: "captions_available") this.hasCaptions,
-      this.dislikes,
-      this.likes,
-      this.duration,
-      this.views})
+      {@HiveField(0) @JsonKey(name: "youtube_category") this.youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") this.hasCaptions,
+      @HiveField(2) this.dislikes,
+      @HiveField(3) this.likes,
+      @HiveField(4) this.duration,
+      @HiveField(5) this.views})
       : super._();
 
   factory _$_ContentDetails.fromJson(Map<String, dynamic> json) =>
       _$_$_ContentDetailsFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: "youtube_category")
   final int? youtubeCategory;
   @override
+  @HiveField(1)
   @JsonKey(name: "captions_available")
   final bool? hasCaptions;
   @override
+  @HiveField(2)
   final int? dislikes;
   @override
+  @HiveField(3)
   final int? likes;
   @override
+  @HiveField(4)
   final int? duration;
   @override
+  @HiveField(5)
   final int? views;
 
   @override
@@ -964,30 +1004,36 @@ class _$_ContentDetails extends _ContentDetails {
 
 abstract class _ContentDetails extends ContentDetails {
   factory _ContentDetails(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views}) = _$_ContentDetails;
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views}) = _$_ContentDetails;
   _ContentDetails._() : super._();
 
   factory _ContentDetails.fromJson(Map<String, dynamic> json) =
       _$_ContentDetails.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: "youtube_category")
   int? get youtubeCategory => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   @JsonKey(name: "captions_available")
   bool? get hasCaptions => throw _privateConstructorUsedError;
   @override
+  @HiveField(2)
   int? get dislikes => throw _privateConstructorUsedError;
   @override
+  @HiveField(3)
   int? get likes => throw _privateConstructorUsedError;
   @override
+  @HiveField(4)
   int? get duration => throw _privateConstructorUsedError;
   @override
+  @HiveField(5)
   int? get views => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
