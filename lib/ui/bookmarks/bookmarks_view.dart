@@ -10,6 +10,9 @@ class BookmarksView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<BookmarksViewModel>(
         viewModel: BookmarksViewModel(),
+        onModelReady: (model) {
+          model.fetchBookmarks();
+        },
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(
                 elevation: 0,
@@ -23,10 +26,10 @@ class BookmarksView extends StatelessWidget {
                     "Bookmarks",
                     style: uiHelpers.heading,
                   ),
-                  if (model.bookmarks.isEmpty)
+                  if (model.bookmarkedVideos.isEmpty)
                     NoBookmarksView()
                   else
-                    ...model.bookmarks.map((e) => Container()).toList()
+                    ...model.bookmarkedVideos.map((e) => Container()).toList()
                 ],
               ),
             ));

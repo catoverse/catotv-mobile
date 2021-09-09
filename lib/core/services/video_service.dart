@@ -65,7 +65,7 @@ class VideoService {
     return "https://img.youtube.com/vi/$videoId/hqdefault.jpg";
   }
 
-  Future<List<Video>> getBookmarks() async {
+  Future<List<Video>> getBookmarkedVideos() async {
     final result = await _hiveService.fetchList<Video>(boxName: BOOKMARKED_VIDEO_ID_KEY);
     return result.success ?? [];
   }
