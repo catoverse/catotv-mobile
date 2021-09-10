@@ -41,31 +41,41 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
   Widget build(BuildContext context, BaseFeedModel viewModel) {
     final channelName = viewModel.videos[index].channelInformation?.name ?? "";
     final title = viewModel.videos[index].title;
-
     return Container(
       padding: EdgeInsets.all(10.0),
       alignment: Alignment.centerLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            channelName,
-            maxLines: 3,
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  channelName,
+                  maxLines: 3,
+                  style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal),
+                ),
+                Text(
+                  title,
+                  maxLines: 3,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal),
+                ),
+              ],
+            ),
           ),
-          Text(
-            title,
-            maxLines: 3,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal),
+          IconButton(
+            onPressed: () => viewModel.addBookmarks(index),
+            icon: Icon(Icons.bookmark_border),
           ),
         ],
       ),

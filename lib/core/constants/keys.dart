@@ -14,3 +14,6 @@ const String LoginStatusKey = "LOGIN_STATUS";
 
 // Notification Channel
 const String kVideoNotificationChannel = "video_delights";
+
+// bookmark list
+const String BOOKMARKED_VIDEO_ID_KEY = 'bookmarked-video-id-key';

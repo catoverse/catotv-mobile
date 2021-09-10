@@ -11,7 +11,7 @@ class RestrictedHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<BaseFeedModel>(
         viewModel: RestrictedHomeViewModel(),
-        onModelReady: (model) => model.getVideos(),
+        onModelReady: (model) => model.getData(),
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: () => model.showExitDialog(),
               child: Scaffold(

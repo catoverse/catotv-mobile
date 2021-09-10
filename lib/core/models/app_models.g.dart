@@ -55,6 +55,135 @@ class UserAdapter extends TypeAdapter<_$_User> {
           typeId == other.typeId;
 }
 
+class TopicAdapter extends TypeAdapter<_$_Topic> {
+  @override
+  final int typeId = 3;
+
+  @override
+  _$_Topic read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_Topic(
+      id: fields[0] as String,
+      name: fields[1] as String,
+      isSelected: fields[2] as bool?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_Topic obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.isSelected);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TopicAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ChannelInformationAdapter extends TypeAdapter<_$_ChannelInformation> {
+  @override
+  final int typeId = 4;
+
+  @override
+  _$_ChannelInformation read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_ChannelInformation(
+      id: fields[0] as String?,
+      name: fields[1] as String?,
+      subscriberCount: fields[3] as int?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_ChannelInformation obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(3)
+      ..write(obj.subscriberCount);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChannelInformationAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class ContentDetailsAdapter extends TypeAdapter<_$_ContentDetails> {
+  @override
+  final int typeId = 5;
+
+  @override
+  _$_ContentDetails read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$_ContentDetails(
+      youtubeCategory: fields[0] as int?,
+      hasCaptions: fields[1] as bool?,
+      dislikes: fields[2] as int?,
+      likes: fields[3] as int?,
+      duration: fields[4] as int?,
+      views: fields[5] as int?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$_ContentDetails obj) {
+    writer
+      ..writeByte(6)
+      ..writeByte(0)
+      ..write(obj.youtubeCategory)
+      ..writeByte(1)
+      ..write(obj.hasCaptions)
+      ..writeByte(2)
+      ..write(obj.dislikes)
+      ..writeByte(3)
+      ..write(obj.likes)
+      ..writeByte(4)
+      ..write(obj.duration)
+      ..writeByte(5)
+      ..write(obj.views);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ContentDetailsAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class VideoAdapter extends TypeAdapter<_$_Video> {
   @override
   final int typeId = 1;

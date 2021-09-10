@@ -21,4 +21,5 @@ abstract class APIService {
   Future getVideoStream(String watchId);
   Future postVideoStream(String watchId, String streamUrl);
   Future logUserEventToMessageQueue(List<MqEventLog> events);
+  Future addBookmarks(String userId, List<String> bookmarks);
 }

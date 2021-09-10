@@ -169,6 +169,19 @@ class GQLQueries {
     }
   ''';
 
+  static const String addBookmarks = r'''
+  mutation addBookmarks(
+    $userId: ID!
+    $bookmarks: [String]!
+  ) {
+
+    addBookmarks(userId: $userId, bookmarks: $bookmarks) {
+      name
+    }
+
+  }
+  ''';
+
   /// Variables
 
   static Map<String, dynamic> googleLoginVariables(
@@ -221,5 +234,13 @@ class GQLQueries {
   static Map<String, dynamic> logUserInputVariables(
       List<Map<String, dynamic>> events) {
     return {"events": events};
+  }
+
+  static Map<String, dynamic> addBookmarksVariables(
+      String userId, List<String> bookmarks) {
+    return {
+      'userId': userId,
+      'bookmarks': bookmarks,
+    };
   }
 }

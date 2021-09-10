@@ -41,7 +41,7 @@ abstract class BaseFeedModel extends BaseViewModel
         videoId: videos[index].id);
   }
 
-  Future getVideos();
+  Future getData();
 
   Future<void> refresh();
 
@@ -74,4 +74,6 @@ abstract class BaseFeedModel extends BaseViewModel
   }
 
   getVideo(String videoId);
+
+  Future<void> addBookmarks(int index);
 }
