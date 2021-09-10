@@ -34,8 +34,9 @@ class FeedFooter extends ViewModelWidget<BaseFeedModel> {
 
 class FeedHeader extends ViewModelWidget<BaseFeedModel> {
   final int index;
+  final bool showBookmark;
 
-  const FeedHeader({required this.index});
+  const FeedHeader({required this.index, this.showBookmark = true});
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
@@ -73,9 +74,12 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
               ],
             ),
           ),
-          IconButton(
-            onPressed: () => viewModel.addBookmarks(index),
-            icon: Icon(Icons.bookmark_border),
+          Visibility(
+            visible: showBookmark,
+            child: IconButton(
+              onPressed: () => viewModel.addBookmarks(index),
+              icon: Icon(Icons.bookmark_border),
+            ),
           ),
         ],
       ),

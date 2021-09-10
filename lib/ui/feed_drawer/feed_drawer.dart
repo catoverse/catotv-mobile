@@ -30,6 +30,11 @@ class DrawerView extends StatelessWidget {
                     ),
                   ),
                   ListTile(
+                    leading: Icon(Icons.bookmark),
+                    title: Text("Bookmarks"),
+                    onTap: () => model.viewBookmakrs(),
+                  ),
+                  ListTile(
                     leading: Icon(Icons.bug_report),
                     title: Text("Report Bug"),
                     onTap: () => model.launchUrl("mailto:dev@cato.tv"),

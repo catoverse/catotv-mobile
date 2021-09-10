@@ -7,7 +7,11 @@ import 'package:inview_notifier_list/inview_notifier_list.dart';
 import 'package:stacked/stacked.dart';
 
 class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
-  FeedPlayerListView({this.header, this.footer, this.showShare = true})
+  FeedPlayerListView(
+      {this.header,
+      this.footer,
+      this.showShare = true,
+      this.showBookmark = true})
       : controller = FeedPlayerController();
 
   /// Default Viewport visible condition
@@ -24,6 +28,8 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
   final Widget? footer;
 
   final bool showShare;
+
+  final bool showBookmark;
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
@@ -49,7 +55,10 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Feed header to display channelName and Title of the video
-                      FeedHeader(index: videoIndex),
+                      FeedHeader(
+                        index: videoIndex,
+                        showBookmark: showBookmark,
+                      ),
 
                       // Feed Video Player
                       FeedPlayer(
