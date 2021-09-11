@@ -35,7 +35,7 @@ class TopicSelectionView extends StatelessWidget {
                 ],
               ),
               body: model.isBusy
-                  ? CircularProgressIndicator()
+                  ? Center(child: CircularProgressIndicator())
                   : ListView(
                       padding: EdgeInsets.all(15.0),
                       children: [
@@ -78,8 +78,10 @@ class TopicSelectionView extends StatelessWidget {
                           style: raisedButtonStyle.copyWith(
                               textStyle: MaterialStateProperty.all<TextStyle>(
                                   uiHelpers.button!)),
-                          onPressed: () => model.storeSelectedTopics(
-                              isUpdate: updateTopicSelection),
+                          onPressed: model.isBusy
+                              ? () {}
+                              : () => model.storeSelectedTopics(
+                                  isUpdate: updateTopicSelection),
                           child: Text("Continue"),
                         ),
                 ),
