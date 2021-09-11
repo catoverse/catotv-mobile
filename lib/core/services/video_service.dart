@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
@@ -66,12 +68,22 @@ class VideoService {
   }
 
   Future<List<Video>> getBookmarkedVideos() async {
-    final result = await _hiveService.fetchList<Video>(boxName: BOOKMARKED_VIDEO_ID_KEY);
+    final result =
+        await _hiveService.fetchList<Video>(boxName: BOOKMARKED_VIDEO_ID_KEY);
     return result.success ?? [];
   }
 
-  Future<void> addBookmarks(List<Video> videos) async {
-    await _hiveService.insertList<Video>(items: videos, boxName: BOOKMARKED_VIDEO_ID_KEY);
-    await _apiService.addBookmarks(_userService.currentUser.id, videos.map((e) => e.id).toList());
+  Future<void> addBookmarks(Video video) async {
+    final bookmarkedVideos = await getBookmarkedVideos();
+
+    var shouldSave = !bookmarkedVideos.contains(video);
+
+    log(shouldSave.toString());
+
+    if (shouldSave) {
+      await _hiveService
+          .insertList<Video>(items: [video], boxName: BOOKMARKED_VIDEO_ID_KEY);
+      await _apiService.addBookmarks(_userService.currentUser.id, video.id);
+    }
   }
 }

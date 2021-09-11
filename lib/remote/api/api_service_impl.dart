@@ -178,12 +178,12 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future addBookmarks(String userId, List<String> bookmarks) async {
-    _log.i('posting bookmarks ${bookmarks.join(', ')} with userId: $userId');
+  Future addBookmarks(String userId, String bookmarkId) async {
+    _log.i('posting bookmarks $bookmarkId with userId: $userId');
 
     Result<Failure, dynamic> result = await _client.mutation(
       GQLQueries.addBookmarks,
-      variables: GQLQueries.addBookmarksVariables(userId, bookmarks),
+      variables: GQLQueries.addBookmarksVariables(userId, [bookmarkId]),
     );
 
     if (result.isFailed) return result.failure;
