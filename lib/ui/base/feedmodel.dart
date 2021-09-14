@@ -26,7 +26,7 @@ abstract class BaseFeedModel extends BaseViewModel
 
     String streamUrl = await _videoService.getStream(videoUrl);
 
-    await _analytics.logEvent(VideoLoadingTime, params: {
+    await _analytics.logEvent(kVideoLoadingTime, params: {
       "duration": DateTime.now().difference(beforeLoading).inMilliseconds
     });
 

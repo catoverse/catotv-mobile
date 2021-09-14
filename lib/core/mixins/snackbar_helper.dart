@@ -10,9 +10,9 @@ mixin SnackbarHelper {
 
   Future<bool> showExitSnackbar() async {
     _snackbarService.showSnackbar(
-      title: ConfirmExitTitle,
-      duration: Duration(seconds: 5),
-      message: ConfirmExitDescription,
+      title: confirmExitTitle,
+      duration: const Duration(seconds: 5),
+      message: confirmExitDescription,
       mainButtonTitle: "Yes",
       onMainButtonTapped: () {
         exit(0);
@@ -24,8 +24,8 @@ mixin SnackbarHelper {
 
   Future<bool> showExitDialog() async {
     var response = await _dialogService.showConfirmationDialog(
-        title: ConfirmExitTitle,
-        description: ConfirmExitDescription,
+        title: confirmExitTitle,
+        description: confirmExitDescription,
         cancelTitle: "No",
         confirmationTitle: "Yes");
 

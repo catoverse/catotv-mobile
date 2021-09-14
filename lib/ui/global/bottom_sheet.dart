@@ -21,8 +21,8 @@ class ThreeButtonBottomSheet extends StatelessWidget {
     return BottomSheet(
         onClosing: () => completer(SheetResponse(confirmed: false)),
         builder: (BuildContext context) => Container(
-              padding: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(20.0),
+              decoration: const BoxDecoration(
                 color: AppColors.surface,
               ),
               child: Column(
@@ -36,7 +36,7 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                           color: AppColors.textPrimary,
                           fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: "\n\n"),
+                    const TextSpan(text: "\n\n"),
                     TextSpan(
                       text: request.description!,
                       style: _uiHelpers.button!.copyWith(
@@ -47,14 +47,14 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                   _uiHelpers.verticalSpaceLow!,
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20.0),
                     child: ElevatedButton(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          data: ThreeButtonResponseData.Primary)),
+                          data: ThreeButtonResponseData.primary)),
                       style: raisedButtonStyle.copyWith(
                           side: MaterialStateProperty.all(
-                              BorderSide(width: 2, color: AppColors.primary))),
+                              const BorderSide(width: 2, color: AppColors.primary))),
                       child: Text(
                         request.mainButtonTitle!,
                       ),
@@ -62,11 +62,11 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20.0),
                     child: OutlinedButton(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          data: ThreeButtonResponseData.Secondary)),
+                          data: ThreeButtonResponseData.secondary)),
                       style: raisedButtonStyle,
                       child: Text(
                         request.secondaryButtonTitle!,
@@ -74,16 +74,16 @@ class ThreeButtonBottomSheet extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                       width: double.infinity,
                       child: TextButton(
                         onPressed: () => completer(SheetResponse(
                             confirmed: true,
-                            data: ThreeButtonResponseData.Teritary)),
+                            data: ThreeButtonResponseData.teritary)),
                         style: raisedButtonStyle,
                         child: Text(
                           request.additionalButtonTitle!,
-                          style: TextStyle(color: AppColors.primary),
+                          style: const TextStyle(color: AppColors.primary),
                         ),
                       )),
                 ],
@@ -121,7 +121,7 @@ class FloatingBoxBottomSheet extends StatelessWidget {
               style: _uiHelpers.subheading!.copyWith(
                   color: AppColors.textPrimary, fontWeight: FontWeight.bold),
             ),
-            TextSpan(text: "\n\n"),
+            const TextSpan(text: "\n\n"),
             TextSpan(
               text: request.description!,
               style: _uiHelpers.button!.copyWith(
@@ -136,7 +136,7 @@ class FloatingBoxBottomSheet extends StatelessWidget {
             children: [
               MaterialButton(
                 onPressed: () => completer(SheetResponse(
-                    confirmed: true, data: FloatingResponseData.Primary)),
+                    confirmed: true, data: FloatingResponseData.primary)),
                 child: Text(
                   request.secondaryButtonTitle!,
                   style: TextStyle(color: Theme.of(context).primaryColor),
@@ -144,10 +144,10 @@ class FloatingBoxBottomSheet extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () => completer(SheetResponse(
-                    confirmed: true, data: FloatingResponseData.Secondary)),
+                    confirmed: true, data: FloatingResponseData.secondary)),
                 child: Text(
                   request.mainButtonTitle!,
-                  style: TextStyle(color: AppColors.primary),
+                  style: const TextStyle(color: AppColors.primary),
                 ),
               )
             ],
@@ -174,8 +174,8 @@ class ConstraintBottomSheet extends StatelessWidget {
     return BottomSheet(
         onClosing: () => completer(SheetResponse(confirmed: false)),
         builder: (BuildContext context) => Container(
-              padding: EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(20.0),
+              decoration: const BoxDecoration(
                 color: AppColors.surface,
               ),
               child: Column(
@@ -189,7 +189,7 @@ class ConstraintBottomSheet extends StatelessWidget {
                           color: AppColors.textPrimary,
                           fontWeight: FontWeight.bold),
                     ),
-                    TextSpan(text: "\n\n"),
+                    const TextSpan(text: "\n\n"),
                     TextSpan(
                       text: request.description!,
                       style: _uiHelpers.button!.copyWith(
@@ -200,19 +200,19 @@ class ConstraintBottomSheet extends StatelessWidget {
                   _uiHelpers.verticalSpaceLow!,
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20.0),
                     child: ElevatedButton.icon(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          data: ThreeButtonResponseData.Primary)),
+                          data: ThreeButtonResponseData.primary)),
                       style: raisedButtonStyle.copyWith(
                           backgroundColor: MaterialStateProperty.all(
                               request.mainButtonTitle == "Continue with Google"
                                   ? AppColors.google
                                   : AppColors.primary)),
                       icon: request.mainButtonTitle == "Continue with Google"
-                          ? Icon(Icons.person_add)
-                          : Icon(Icons.person),
+                          ? const Icon(Icons.person_add)
+                          : const Icon(Icons.person),
                       label: Text(
                         request.mainButtonTitle!,
                       ),
@@ -220,14 +220,14 @@ class ConstraintBottomSheet extends StatelessWidget {
                   ),
                   Container(
                     width: double.infinity,
-                    margin: EdgeInsets.only(bottom: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20.0),
                     child: OutlinedButton(
                       onPressed: () => completer(SheetResponse(
                           confirmed: true,
-                          data: ThreeButtonResponseData.Secondary)),
+                          data: ThreeButtonResponseData.secondary)),
                       style: raisedButtonStyle.copyWith(
                           side: MaterialStateProperty.all(
-                              BorderSide(width: 2, color: AppColors.primary))),
+                              const BorderSide(width: 2, color: AppColors.primary))),
                       child: Text(
                         request.secondaryButtonTitle!,
                         style: TextStyle(color: Theme.of(context).primaryColor),

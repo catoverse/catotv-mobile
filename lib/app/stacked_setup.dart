@@ -10,11 +10,11 @@ void setupBottomSheetUi() {
   final bottomSheetService = locator<BottomSheetService>();
 
   final builders = {
-    BottomSheetType.ThreeButton: (context, sheetRequest, completer) =>
+    BottomSheetType.threeButton: (context, sheetRequest, completer) =>
         ThreeButtonBottomSheet(request: sheetRequest, completer: completer),
-    BottomSheetType.Floating: (context, sheetRequest, completer) =>
+    BottomSheetType.floating: (context, sheetRequest, completer) =>
         FloatingBoxBottomSheet(request: sheetRequest, completer: completer),
-    BottomSheetType.Constraint: (context, sheetRequest, completer) =>
+    BottomSheetType.constraint: (context, sheetRequest, completer) =>
         ConstraintBottomSheet(request: sheetRequest, completer: completer),
   };
 

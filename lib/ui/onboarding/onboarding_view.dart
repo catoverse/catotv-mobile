@@ -14,7 +14,7 @@ class OnboardingView extends StatelessWidget {
       builder: (context, uiHelpers, model) => WillPopScope(
           onWillPop: model.showExitSnackbar,
           child: model.isBusy
-              ? Scaffold(
+              ? const Scaffold(
                   body: Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -25,13 +25,13 @@ class OnboardingView extends StatelessWidget {
                     elevation: 0,
                     leading: IconButton(
                         onPressed: () => model.showInvite(),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.help,
                           color: AppColors.textPrimary,
                         )),
                     actions: [
                       Container(
-                        margin: EdgeInsets.only(right: 8.0),
+                        margin: const EdgeInsets.only(right: 8.0),
                         child: TextButton(
                           onPressed: () => model.loginWithGoogle(),
                           child: Text("Sign in", style: uiHelpers.button),
@@ -43,43 +43,46 @@ class OnboardingView extends StatelessWidget {
                     item: kOnboardingItem,
                   ),
                   bottomNavigationBar: Container(
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextButton(
-                            onPressed: () => model.requestInvite(),
-                            child: Text.rich(TextSpan(
-                                style: TextStyle(color: AppColors.textPrimary),
-                                children: [
-                                  TextSpan(text: "Need an invite? "),
-                                  TextSpan(
-                                      text: "Request",
-                                      style:
-                                          TextStyle(color: AppColors.primary)),
-                                ]))),
+                          onPressed: () => model.requestInvite(),
+                          child: const Text.rich(
+                            TextSpan(
+                              style: TextStyle(color: AppColors.textPrimary),
+                              children: [
+                                TextSpan(text: "Need an invite? "),
+                                TextSpan(
+                                    text: "Request",
+                                    style: TextStyle(color: AppColors.primary)),
+                              ],
+                            ),
+                          ),
+                        ),
                         ElevatedButton(
                           style: raisedButtonStyle.copyWith(
                               textStyle: MaterialStateProperty.all<TextStyle>(
                                   uiHelpers.button!)),
                           onPressed: () => model.navigateToRestrictedHome(),
-                          child: Text("Get Started"),
+                          child: const Text("Get Started"),
                         ),
                         Container(
                           width: double.infinity,
-                          padding: EdgeInsets.all(8.0),
-                          margin: EdgeInsets.symmetric(vertical: 4.0),
+                          padding: const EdgeInsets.all(8.0),
+                          margin: const EdgeInsets.symmetric(vertical: 4.0),
                           child: Wrap(
                             alignment: WrapAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "By getting started you agree to our ",
                                 style:
                                     TextStyle(color: AppColors.textSecondary),
                               ),
                               InkWell(
                                   onTap: () => model.openTermsOfService(),
-                                  child: Text("Terms & Privacy",
+                                  child: const Text("Terms & Privacy",
                                       style:
                                           TextStyle(color: AppColors.primary))),
                             ],

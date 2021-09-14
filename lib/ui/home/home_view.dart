@@ -25,7 +25,7 @@ class HomeView extends StatelessWidget {
                     centerTitle: true,
                     title: Text(
                       homeViewItems[model.index].title,
-                      style: TextStyle(color: AppColors.textPrimary),
+                      style: const TextStyle(color: AppColors.textPrimary),
                     ),
                   ),
                   body: LazyIndexedStack(

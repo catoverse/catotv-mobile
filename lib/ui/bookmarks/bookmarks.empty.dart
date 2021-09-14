@@ -12,7 +12,7 @@ class NoBookmarksView extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
+        SizedBox(
             width: double.infinity,
             height: uiHelpers.blockSizeVertical! * 40,
             child: Image.asset(
@@ -37,7 +37,7 @@ class NoBookmarksView extends StatelessWidget {
               style: uiHelpers.subheading,
               textAlign: TextAlign.center,
             ),
-            Icon(
+            const Icon(
               Icons.bookmark_outline,
               color: AppColors.textSecondary,
             ),

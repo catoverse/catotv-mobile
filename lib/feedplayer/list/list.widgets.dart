@@ -22,7 +22,7 @@ class FeedFooter extends ViewModelWidget<BaseFeedModel> {
           Visibility(
             visible: showShare,
             child: IconButton(
-              icon: Icon(Icons.share_outlined),
+              icon: const Icon(Icons.share_outlined),
               onPressed: () => viewModel.shareVideo(index),
             ),
           )
@@ -43,7 +43,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
     final channelName = viewModel.videos[index].channelInformation?.name ?? "";
     final title = viewModel.videos[index].title;
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       alignment: Alignment.centerLeft,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -56,7 +56,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
                 Text(
                   channelName,
                   maxLines: 3,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black54,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
@@ -65,7 +65,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
                 Text(
                   title,
                   maxLines: 3,
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.black,
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -78,7 +78,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
             visible: showBookmark,
             child: IconButton(
               onPressed: () => viewModel.addBookmarks(index),
-              icon: Icon(Icons.bookmark_border),
+              icon: const Icon(Icons.bookmark_border),
             ),
           ),
         ],

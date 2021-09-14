@@ -25,14 +25,14 @@ class ScreenBuilder<T extends BaseViewModel> extends StatelessWidget {
 
   final Function(T)? onDispose;
 
-  ScreenBuilder(
+  const ScreenBuilder(
       {Key? key,
       required this.builder,
       required this.viewModel,
       this.onModelReady,
       this.onDispose,
-      this.disposeViewModel: true,
-      this.isReactive: true})
+      this.disposeViewModel = true,
+      this.isReactive = true})
       : super(key: key);
 
   @override

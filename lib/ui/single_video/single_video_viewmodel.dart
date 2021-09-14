@@ -7,7 +7,7 @@ class SingleFeedViewModel extends BaseFeedModel {
   final _feedService = locator<FeedService>();
   late String videoId;
 
-  List<Video> _videos = [];
+  final List<Video> _videos = [];
 
   @override
   getVideo(String videoId) {

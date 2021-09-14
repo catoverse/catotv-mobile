@@ -16,17 +16,17 @@ class TopicSelectionListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20.0),
+      margin: const EdgeInsets.only(bottom: 20.0),
       width: MediaQuery.of(context).size.width / 2 - 25,
       child: Material(
         type: MaterialType.card,
         color: isSelected ? AppColors.primary : AppColors.surface,
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
         elevation: 2,
         child: InkWell(
           onTap: () => onSelected(),
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -41,11 +41,11 @@ class TopicSelectionListItem extends StatelessWidget {
                     ),
                     if (isSelected)
                       Container(
-                        padding: EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(2.0),
                         decoration: BoxDecoration(
                             color: Colors.indigo.shade100,
                             borderRadius: BorderRadius.circular(20.0)),
-                        child: Icon(
+                        child: const Icon(
                           Icons.done,
                           size: 20.0,
                           color: AppColors.primary,
@@ -53,7 +53,7 @@ class TopicSelectionListItem extends StatelessWidget {
                       )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(

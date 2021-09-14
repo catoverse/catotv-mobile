@@ -4,7 +4,7 @@ import 'package:feed/core/services/topic_service.dart';
 import 'package:stacked/stacked.dart';
 
 class ExploreViewModel extends FutureViewModel {
-  TopicService _topicService = locator<TopicService>();
+  final TopicService _topicService = locator<TopicService>();
 
   List<Topic> topics = [];
 

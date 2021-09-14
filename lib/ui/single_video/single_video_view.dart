@@ -19,13 +19,13 @@ class SingleFeedView extends StatelessWidget {
               appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Colors.transparent,
-                iconTheme: IconThemeData(color: AppColors.textPrimary),
+                iconTheme: const IconThemeData(color: AppColors.textPrimary),
                 title: Text("Video",
                     style: uiHelpers.button!
                         .copyWith(color: AppColors.textPrimary)),
               ),
               body: model.isBusy
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : FeedPlayerListView(),
             ));
   }

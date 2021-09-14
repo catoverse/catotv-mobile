@@ -32,7 +32,7 @@ class RemoteClient {
   ///
   /// The [CustomAuthLink] is used to pass authToken for API calls
   GraphQLClient getInstance() {
-    String url = _environmentService.getValue(GraphqlApiEnvKey);
+    String url = _environmentService.getValue(kGraphqlApiEnvKey);
 
     final _httpLink = HttpLink(url);
 
@@ -42,7 +42,7 @@ class RemoteClient {
         },
         headerKey: "authToken");
 
-    final _errorLink = ErrorLink();
+    const _errorLink = ErrorLink();
 
     final Link _link = _authLink.concat(_httpLink).concat(_errorLink);
 
@@ -55,7 +55,7 @@ class RemoteClient {
   /// Updates the [authToken] on User Login or Signup
   updateToken({required String newToken}) {
     _log.v("Updated authToken to $newToken");
-    this.jwtToken = newToken;
+    jwtToken = newToken;
   }
 
   /// Process the given [Query] String and fetches data
@@ -65,8 +65,9 @@ class RemoteClient {
       Map<String, dynamic> variables = const {}}) async {
     bool hasInternet = await _connectivity.isConnected;
 
-    if (!hasInternet)
+    if (!hasInternet) {
       return Result.failed(Failure.error(NoConnectivityError()));
+    }
 
     final QueryOptions options = QueryOptions(
         document: gql(query),

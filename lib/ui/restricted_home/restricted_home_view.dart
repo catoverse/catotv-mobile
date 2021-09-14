@@ -24,7 +24,7 @@ class RestrictedHomeView extends StatelessWidget {
                             .copyWith(color: AppColors.textPrimary)),
                     actions: [
                       Container(
-                        margin: EdgeInsets.only(right: 8.0),
+                        margin: const EdgeInsets.only(right: 8.0),
                         child: TextButton(
                           onPressed: () => model.loginWithGoogle(),
                           child: Text("Sign in", style: uiHelpers.button),
@@ -33,7 +33,7 @@ class RestrictedHomeView extends StatelessWidget {
                     ],
                   ),
                   body: model.isBusy
-                      ? Center(child: CircularProgressIndicator())
+                      ? const Center(child: CircularProgressIndicator())
                       : FeedPlayerListView(
                           showShare: false,
                           footer: Container(
@@ -52,7 +52,7 @@ class RestrictedHomeView extends StatelessWidget {
                                 ),
                                 ElevatedButton(
                                     onPressed: () => model.showConstraint(),
-                                    child: Text("Want More?")),
+                                    child: const Text("Want More?")),
                               ],
                             ),
                           ),

@@ -22,12 +22,12 @@ class StartUpView extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: AnimatedContainer(
-          padding: EdgeInsets.all(20.0),
-          duration: Duration(milliseconds: 200),
+          padding: const EdgeInsets.all(20.0),
+          duration: const Duration(milliseconds: 200),
           child: model.isBusy
-              ? CircularProgressIndicator()
+              ? const CircularProgressIndicator()
               : model.isConnected
-                  ? Text(
+                  ? const Text(
                       "FROM\nCATOVERSE",
                       style: TextStyle(
                           color: AppColors.onPrimary,

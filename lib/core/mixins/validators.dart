@@ -21,7 +21,7 @@ mixin Validators {
   }
 
   String validatePhoneNo(String phone) {
-    RegExp regex = new RegExp(r"^[0-9]{10}$");
+    RegExp regex = RegExp(r"^[0-9]{10}$");
     if (phone.isEmpty) {
       return "Please enter your contact details";
     } else if (!regex.hasMatch(phone)) {

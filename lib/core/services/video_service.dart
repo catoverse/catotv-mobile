@@ -67,7 +67,7 @@ class VideoService {
 
   Future<List<Video>> getBookmarkedVideos() async {
     final result =
-        await _hiveService.fetchList<Video>(boxName: BOOKMARKED_VIDEO_ID_KEY);
+        await _hiveService.fetchList<Video>(boxName: kBookmarkedVideoKey);
     return result.success ?? [];
   }
 
@@ -78,7 +78,7 @@ class VideoService {
 
     if (shouldSave) {
       await _hiveService
-          .insertList<Video>(items: [video], boxName: BOOKMARKED_VIDEO_ID_KEY);
+          .insertList<Video>(items: [video], boxName: kBookmarkedVideoKey);
       await _apiService.addBookmarks(_userService.currentUser.id, video.id);
     }
   }

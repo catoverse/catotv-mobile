@@ -10,7 +10,7 @@ class UpdateView extends StatelessWidget {
         viewModel: UpdateViewModel(),
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(),
-              body: Text("Update"),
+              body: const Text("Update"),
             ));
   }
 }

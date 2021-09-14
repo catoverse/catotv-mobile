@@ -51,8 +51,9 @@ class StartUpViewModel extends BaseViewModel {
       _log.v('There is a user logged in with profile: $currentUser');
 
       _navigationService.replaceWith(Routes.feedView);
-    } else
+    } else {
       return redirectToLogin();
+    }
   }
 
   void redirectToLogin() {

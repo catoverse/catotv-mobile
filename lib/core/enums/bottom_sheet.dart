@@ -1,5 +1,5 @@
-enum BottomSheetType { Floating, ThreeButton, Constraint }
+enum BottomSheetType { floating, threeButton, constraint }
 
-enum ThreeButtonResponseData { Primary, Secondary, Teritary }
+enum ThreeButtonResponseData { primary, secondary, teritary }
 
-enum FloatingResponseData { Primary, Secondary }
+enum FloatingResponseData { primary, secondary }
