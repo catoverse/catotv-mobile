@@ -18,14 +18,14 @@ class ProfileView extends StatelessWidget {
                   backgroundColor: Colors.transparent,
                   foregroundColor: AppColors.primary,
                   centerTitle: true,
-                  iconTheme: IconThemeData(color: AppColors.textPrimary),
+                  iconTheme: const IconThemeData(color: AppColors.textPrimary),
                   leading:
-                      IconButton(icon: Icon(Icons.settings), onPressed: () {}),
+                      IconButton(icon: const Icon(Icons.settings), onPressed: () {}),
                   title:
                       Text(model.currentUser.name, style: uiHelpers.subheading),
                   actions: [
                     Container(
-                      margin: EdgeInsets.all(8),
+                      margin: const EdgeInsets.all(8),
                       width: 40,
                       height: 80,
                       decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class ProfileView extends StatelessWidget {
                   //   preferredSize: Size(100, 100),
                   //   child:
                   // ),
-                  bottom: TabBar(
+                  bottom: const TabBar(
                       automaticIndicatorColorAdjustment: true,
                       labelColor: AppColors.primary,
                       indicator: UnderlineTabIndicator(
@@ -62,7 +62,7 @@ class ProfileView extends StatelessWidget {
                         ),
                       ]),
                 ),
-                 body: TabBarView(
+                 body: const TabBarView(
             children: [
               Icon(Icons.directions_car),
               Icon(Icons.directions_transit),

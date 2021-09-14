@@ -13,7 +13,7 @@ class DrawerView extends StatelessWidget {
               child: ListView(
                 children: [
                   UserAccountsDrawerHeader(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
                     currentAccountPicture: CircleAvatar(
@@ -26,27 +26,27 @@ class DrawerView extends StatelessWidget {
                     ),
                     accountEmail: Text(
                       model.currentUser.email,
-                      style: TextStyle(color: AppColors.textSecondary),
+                      style: const TextStyle(color: AppColors.textSecondary),
                     ),
                   ),
                   ListTile(
-                    leading: Icon(Icons.bookmark),
-                    title: Text("Bookmarks"),
+                    leading: const Icon(Icons.bookmark),
+                    title: const Text("Bookmarks"),
                     onTap: () => model.viewBookmakrs(),
                   ),
                   ListTile(
-                    leading: Icon(Icons.bug_report),
-                    title: Text("Report Bug"),
+                    leading: const Icon(Icons.bug_report),
+                    title: const Text("Report Bug"),
                     onTap: () => model.launchUrl("mailto:dev@cato.tv"),
                   ),
                   ListTile(
-                    leading: Icon(Icons.people),
-                    title: Text("Invite Friends"),
+                    leading: const Icon(Icons.people),
+                    title: const Text("Invite Friends"),
                     onTap: () => model.inviteFriends(),
                   ),
                   ListTile(
-                    leading: Icon(Icons.info),
-                    title: Text("About Catoverse"),
+                    leading: const Icon(Icons.info),
+                    title: const Text("About Catoverse"),
                     onTap: () => model.launchUrl("https://www.cato.tv/"),
                   ),
                 ],

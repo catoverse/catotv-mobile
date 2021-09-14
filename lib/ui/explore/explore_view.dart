@@ -15,17 +15,17 @@ class ExploreView extends StatelessWidget {
                 Container(
                   width: double.infinity,
                   padding:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                   decoration: textFieldStyle,
                   margin:
-                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
                   child: Text(
                     "What would you like to know? ",
                     style: uiHelpers.button,
                   ),
                 ),
                 GridView.count(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   crossAxisCount: 2,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
@@ -35,11 +35,11 @@ class ExploreView extends StatelessWidget {
                       .map((e) => Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4.0),
-                                gradient: LinearGradient(colors: [
+                                gradient: const LinearGradient(colors: [
                                   AppColors.primary,
                                   AppColors.google
                                 ])),
-                            padding: EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(10.0),
                             child: Text(
                               e.name,
                               style: uiHelpers.subheading!

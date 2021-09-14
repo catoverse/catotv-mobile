@@ -12,17 +12,20 @@ class InviteViewModel extends FormViewModel with Validators {
   final NavigationService _navigationService = locator<NavigationService>();
 
   Future requestInvite() async {
-    if (!hasEmail)
+    if (!hasEmail) {
       return _snackbarService.showSnackbar(
           title: "Oops", message: "Email can't be empty");
+    }
     String error = validateEmail(emailValue!);
 
-    if (error.isNotEmpty)
+    if (error.isNotEmpty) {
       return _snackbarService.showSnackbar(title: "Oops", message: error);
+    }
 
-    if (emailValue!.isEmpty)
+    if (emailValue!.isEmpty) {
       return _snackbarService.showSnackbar(
           title: "Oops", message: "Email can't be empty");
+    }
 
     setBusy(true);
 

@@ -16,11 +16,11 @@ class ExplodeService {
 
       late Uri videoUri = manifest.muxed.first.url;
 
-      manifest.muxed.forEach((m) {
+      for (var m in manifest.muxed) {
         if (defaultQuality == m.videoQuality) {
           videoUri = m.url;
         }
-      });
+      }
 
       _log.v("Fetched video from explode successfully");
 

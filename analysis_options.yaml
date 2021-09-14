@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - lib/core/models/app_models.dart
+    - lib/core/models/app_models.freezed.dart
+    - lib/core/models/app_models.g.dart
+  errors:
+    todo: warning
+
+linter:
+  rules:
+    use_key_in_widget_constructors: false

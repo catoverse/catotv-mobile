@@ -20,15 +20,15 @@ mixin AuthMixin on BaseViewModel {
   User get currentUser => _userService.currentUser;
 
   Future showConstraint({
-    String title: 'You need an account to continue',
-    String description:
+    String title = 'You need an account to continue',
+    String description =
         'We’re currently in early access mode, you can’t enter unless you have an invite.',
     String secondaryRoute = Routes.inviteView,
     String secondaryButton = 'Request an Invite',
     String mainButton = "Continue with Google",
   }) async {
     var sheetResponse = await _bottomSheetService.showCustomSheet(
-        variant: BottomSheetType.Constraint,
+        variant: BottomSheetType.constraint,
         title: title,
         description: description,
         mainButtonTitle: mainButton,
@@ -38,10 +38,10 @@ mixin AuthMixin on BaseViewModel {
       ThreeButtonResponseData responseData = sheetResponse?.data;
 
       switch (responseData) {
-        case ThreeButtonResponseData.Primary:
+        case ThreeButtonResponseData.primary:
           await loginWithGoogle();
           break;
-        case ThreeButtonResponseData.Secondary:
+        case ThreeButtonResponseData.secondary:
           _navigationService.replaceWith(secondaryRoute);
           break;
         default:

@@ -28,11 +28,11 @@ class FeedService {
     if (list is List) {
       _log.v("Videos with length ${list.length} fetched successfully");
 
-      list.forEach((json) {
+      for (var json in list) {
         var isYoutubeVideo = VideoService.convertUrlToId(json["video_url"]);
 
         if (isYoutubeVideo != null) apiVideos.add(Video.fromJson(json));
-      });
+      }
 
       return apiVideos;
     }

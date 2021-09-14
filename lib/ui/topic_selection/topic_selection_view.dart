@@ -35,9 +35,9 @@ class TopicSelectionView extends StatelessWidget {
                 ],
               ),
               body: model.isBusy
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : ListView(
-                      padding: EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.all(15.0),
                       children: [
                         Text.rich(TextSpan(children: [
                           TextSpan(
@@ -50,28 +50,27 @@ class TopicSelectionView extends StatelessWidget {
                                   .copyWith(fontWeight: FontWeight.normal)),
                         ])),
                         uiHelpers.verticalSpaceMedium!,
-                        Container(
-                            child: Wrap(
+                        Wrap(
                           alignment: WrapAlignment.spaceBetween,
                           children: model.topicCheckList.map((e) {
-                            int index = model.topicCheckList.indexOf(e);
-                            return TopicSelectionListItem(
-                              image: e.getAssetImage(),
-                              topicName: e.name,
-                              isSelected:
-                                  model.topicCheckList[index].isSelected!,
-                              onSelected: () => model.selectTopic(index),
-                            );
+                        int index = model.topicCheckList.indexOf(e);
+                        return TopicSelectionListItem(
+                          image: e.getAssetImage(),
+                          topicName: e.name,
+                          isSelected:
+                              model.topicCheckList[index].isSelected!,
+                          onSelected: () => model.selectTopic(index),
+                        );
                           }).toList(),
-                        ))
+                        )
                       ],
                     ),
               bottomNavigationBar: AnimatedContainer(
                 height: 90,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: Container(
                   color: Colors.transparent,
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: !model.hasTopics
                       ? null
                       : ElevatedButton(
@@ -82,7 +81,7 @@ class TopicSelectionView extends StatelessWidget {
                               ? () {}
                               : () => model.storeSelectedTopics(
                                   isUpdate: updateTopicSelection),
-                          child: Text("Continue"),
+                          child: const Text("Continue"),
                         ),
                 ),
               ),

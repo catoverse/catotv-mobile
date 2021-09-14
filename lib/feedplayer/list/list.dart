@@ -49,7 +49,7 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
                 return Container(
                   width: double.infinity,
                   alignment: Alignment.center,
-                  margin: EdgeInsets.symmetric(vertical: 16.0),
+                  margin: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,

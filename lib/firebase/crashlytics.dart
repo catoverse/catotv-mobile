@@ -6,9 +6,7 @@ class CrashlyticsService {
   static CrashlyticsService? _instance;
 
   static CrashlyticsService getInstance() {
-    if (_instance == null) {
-      _instance = CrashlyticsService._(FirebaseCrashlytics.instance);
-    }
+    _instance ??= CrashlyticsService._(FirebaseCrashlytics.instance);
 
     return _instance!;
   }
@@ -67,7 +65,7 @@ class CrashlyticsOutput extends LogOutput {
           event.level, event.lines, StackTrace.current,
           logwarnings: logWarnings);
     } catch (e) {
-      print('CRASHLYTICS FAILED: $e');
+      debugPrint('CRASHLYTICS FAILED: $e');
     }
   }
 }

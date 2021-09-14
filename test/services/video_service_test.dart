@@ -16,8 +16,8 @@ void main() {
           "when there is link available in the database, it should return the same url",
           () async {
         var service = _getService();
-        var result = await service.getStream(SampleVideoUrl);
-        expect(result, SampleStreamUrl);
+        var result = await service.getStream(kSampleVideoUrl);
+        expect(result, kSampleStreamUrl);
       });
 
       test(
@@ -25,8 +25,8 @@ void main() {
           () async {
         var explode = getAndRegisterExplodeService();
         var service = _getService();
-        await service.getStream(SampleVideoUrl);
-        verifyNever(explode.getStreamUrl(SampleVideoUrl));
+        await service.getStream(kSampleVideoUrl);
+        verifyNever(explode.getStreamUrl(kSampleVideoUrl));
       });
 
       group("when there is no link available in the database", () {
@@ -34,15 +34,15 @@ void main() {
           getAndRegisterAPIService(isVideoCached: false);
           var explode = getAndRegisterExplodeService();
           var service = _getService();
-          await service.getStream(SampleVideoUrl);
-          verify(explode.getStreamUrl(SampleVideoUrl));
+          await service.getStream(kSampleVideoUrl);
+          verify(explode.getStreamUrl(kSampleVideoUrl));
         });
 
         test("it should also post the link to database", () async {
           var apiService = getAndRegisterAPIService(isVideoCached: false);
           var service = _getService();
-          await service.getStream(SampleVideoUrl);
-          verify(apiService.postVideoStream(SampleWatchId, SampleStreamUrl));
+          await service.getStream(kSampleVideoUrl);
+          verify(apiService.postVideoStream(kSampleWatchId, kSampleStreamUrl));
         });
       });
     });

@@ -1,4 +1,4 @@
-const List<Map<String, dynamic>> FakeFeedData = [
+const List<Map<String, dynamic>> fakeFeedData = [
   {
     "id": "5f527ae3859c2126e20ed8c6",
     "title": "How sugar affects the brain",

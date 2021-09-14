@@ -16,7 +16,7 @@ class LazyIndexedStack extends StatefulWidget {
   /// Reuse the created view
   final bool reuse;
 
-  LazyIndexedStack({
+  const LazyIndexedStack({
     Key? key,
     this.alignment = AlignmentDirectional.topStart,
     this.sizing = StackFit.loose,

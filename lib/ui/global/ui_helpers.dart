@@ -4,7 +4,7 @@ import 'package:feed/ui/global/theme.dart';
 import 'package:flutter/material.dart';
 
 class ScalingHelper {
-  ScalingHelper({this.width: 750});
+  ScalingHelper({this.width = 750});
 
   // width of the current device
   double width;
@@ -19,7 +19,7 @@ class ScalingHelper {
   double _scale = 1.0;
 
   double size(double value) {
-    return this._t(value) / window.devicePixelRatio;
+    return _t(value) / window.devicePixelRatio;
   }
 
   EdgeInsets fromLTRB(double left, double top, double right, double bottom) {
@@ -52,7 +52,7 @@ class ScalingHelper {
     double devWidth =
         min(window.physicalSize.width, window.physicalSize.height);
 
-    double s = devWidth / this.width;
+    double s = devWidth / width;
 
     var r = value * s;
 

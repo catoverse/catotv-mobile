@@ -9,13 +9,11 @@ class BlurredImage extends StatelessWidget {
       {Key? key, required this.imageProvider, required this.showBlur})
       : super(key: key);
 
-  BlurredImage.network(String imageUrl, {bool showBlur = false})
-      : this.imageProvider = NetworkImage(imageUrl),
-        this.showBlur = showBlur;
+  BlurredImage.network(String imageUrl, {this.showBlur = false})
+      : imageProvider = NetworkImage(imageUrl);
 
-  BlurredImage.asset(String assetName, {bool showBlur = false})
-      : this.imageProvider = AssetImage(assetName),
-        this.showBlur = showBlur;
+  BlurredImage.asset(String assetName, {this.showBlur = false})
+      : imageProvider = AssetImage(assetName);
 
   @override
   Widget build(BuildContext context) {

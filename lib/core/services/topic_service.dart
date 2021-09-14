@@ -37,13 +37,13 @@ class TopicService {
     List<String> topics = [];
 
     var result =
-        await _hiveService.fetchList<String>(boxName: UserSelectedTopicsBox);
+        await _hiveService.fetchList<String>(boxName: kUserSelectedTopicsBox);
 
     /// There's no selected topics from Hive, So fetch them from API Call
     if (result.isFailed || result.success!.isEmpty) {
       var profile = await _apiService.getUserProfile(userId: userId);
 
-      if (!(profile is Failure)) topics = List<String>.from(profile);
+      if (profile is! Failure) topics = List<String>.from(profile);
     }
 
     /// The topics are selected and stored in Hive, so we can get them from Hive.

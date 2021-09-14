@@ -3,11 +3,13 @@ import 'package:feed/core/models/app_models.dart';
 import 'data/feed_data.dart';
 
 class RestrictedHomeViewModel extends BaseFeedModel {
-  List<Video> _videos = [];
+  final List<Video> _videos = [];
 
   @override
   Future getData() async {
-    feedData.forEach((json) => _videos.add(Video.fromJson(json)));
+    for (var json in feedData) {
+      _videos.add(Video.fromJson(json));
+    }
     notifyListeners();
   }
 

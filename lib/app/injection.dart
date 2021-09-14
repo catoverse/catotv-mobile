@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:feed/core/models/app_models.dart';
 import 'package:hive/hive.dart';
 import 'package:package_info/package_info.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HiveInjection {
@@ -10,7 +10,7 @@ class HiveInjection {
   /// Inorder to presolve the additional config we make use of [HiveInjection]
   static Future<HiveInterface> getInstance() async {
     final appDocumentDir =
-        await pathProvider.getApplicationDocumentsDirectory();
+        await path_provider.getApplicationDocumentsDirectory();
 
     final path = appDocumentDir.path;
     final hive = Hive;

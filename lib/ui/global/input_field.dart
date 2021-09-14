@@ -30,7 +30,7 @@ class InputField extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          margin: EdgeInsets.only(bottom: 10.0),
+          margin: const EdgeInsets.only(bottom: 10.0),
           decoration: textFieldStyle,
           child: TextField(
             decoration:
@@ -44,7 +44,7 @@ class InputField extends StatelessWidget {
         if (hintText.isNotEmpty)
           Text(
             hintText,
-            style: TextStyle(color: AppColors.textSecondary),
+            style: const TextStyle(color: AppColors.textSecondary),
           )
       ],
     );

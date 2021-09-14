@@ -30,7 +30,7 @@ class UserService {
   /// Checks if there's user signed in
   ///
   /// Returns [true] if the user is signed on the device
-  bool get hasLoggedInUser => _keyStorageService.get(LoginStatusKey) ?? false;
+  bool get hasLoggedInUser => _keyStorageService.get(kLoginStatusKey) ?? false;
 
   Future<bool> loginWithGoogle() async {
     final authResult = await _authService.signInWithGoogle();
@@ -38,7 +38,7 @@ class UserService {
     if (authResult.hasError) {
       _log.e('Local google signin error: ${authResult.errorMessage}');
       _analytics
-          .logEvent(LoginFailed, params: {"error": "google_signin_error"});
+          .logEvent(kLoginFailed, params: {"error": "google_signin_error"});
       return false;
     }
 
@@ -55,16 +55,16 @@ class UserService {
     if (result is Failure) {
       _log.e('Gql Google signin error: $result');
       _analytics
-          .logEvent(LoginFailed, params: {"error": "graphql_signin_error"});
+          .logEvent(kLoginFailed, params: {"error": "graphql_signin_error"});
       return false;
     }
 
     _log.i("User signed in successful");
 
     await Future.wait([
-      _hiveService.insertItem<User>(item: result, boxName: AuthUserBox),
-      _keyStorageService.save<bool>(LoginStatusKey, true),
-      _analytics.logEvent(LoginSuccess),
+      _hiveService.insertItem<User>(item: result, boxName: kAuthUserBox),
+      _keyStorageService.save<bool>(kLoginStatusKey, true),
+      _analytics.logEvent(kLoginSuccess),
       syncUser(user: result),
     ]);
 
@@ -84,7 +84,7 @@ class UserService {
 
     //TODO: Log custom event - user login
 
-    var hiveUser = await _hiveService.fetchItem<User>(boxName: AuthUserBox);
+    var hiveUser = await _hiveService.fetchItem<User>(boxName: kAuthUserBox);
 
     if (hiveUser.isFailed) {
       _log.e("Failed to sync user: ${hiveUser.failure}");
@@ -105,7 +105,7 @@ class UserService {
   /// Returns [true] if there's existing profile available
   Future<bool> isUserProfileExists() async {
     var result = await _apiService.getUserProfile(userId: currentUser.id);
-    return !(result is Failure);
+    return result is! Failure;
   }
 
   /// Creates profile for user with [selectedTopics]
@@ -124,7 +124,7 @@ class UserService {
     }
 
     await _hiveService.insertList<String>(
-        items: topicIds, boxName: UserSelectedTopicsBox);
+        items: topicIds, boxName: kUserSelectedTopicsBox);
 
     return true;
   }
