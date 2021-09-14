@@ -11,3 +11,6 @@ const String OnboardingItemSubtitle3 =
     "Play games with friends to practice,\nimplement and improve upon what you learn";
 const String ConfirmExitTitle = "Are you sure to exit?";
 const String ConfirmExitDescription = "👋 Bye!";
+const kNotificationPermissionsTitle = 'A new idea a day to expand your horizons';
+const kNotificationPermissionDescription = 'Trun on notifications to get highly curated video recommendations on your selected topics';
+

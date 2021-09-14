@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
@@ -77,8 +75,6 @@ class VideoService {
     final bookmarkedVideos = await getBookmarkedVideos();
 
     var shouldSave = !bookmarkedVideos.contains(video);
-
-    log(shouldSave.toString());
 
     if (shouldSave) {
       await _hiveService

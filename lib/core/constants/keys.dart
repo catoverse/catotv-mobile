@@ -17,3 +17,6 @@ const String kVideoNotificationChannel = "video_delights";
 
 // bookmark list
 const String BOOKMARKED_VIDEO_ID_KEY = 'bookmarked-video-id-key';
+
+// denied notification permission
+const kDeniedNotificationPermission = 'denied-notification-permission';
