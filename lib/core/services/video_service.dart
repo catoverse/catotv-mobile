@@ -1,13 +1,18 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/explode_service.dart';
+import 'package:feed/core/services/hive_service/hive_service.dart';
+import 'package:feed/core/services/user_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 
 class VideoService {
   final _log = getLogger("VideoService");
   final _apiService = locator<APIService>();
   final _explodeService = locator<ExplodeService>();
+  final _userService = locator<UserService>();
+  final _hiveService = locator<HiveService>();
 
   /// #1. Fetch the [watchId] from videoUrl
   /// #2. See if there's link available in API with [getStreamLink]
@@ -58,5 +63,23 @@ class VideoService {
     String videoId = convertUrlToId(youtubeUrl) ?? "";
 
     return "https://img.youtube.com/vi/$videoId/hqdefault.jpg";
+  }
+
+  Future<List<Video>> getBookmarkedVideos() async {
+    final result =
+        await _hiveService.fetchList<Video>(boxName: kBookmarkedVideoKey);
+    return result.success ?? [];
+  }
+
+  Future<void> addBookmarks(Video video) async {
+    final bookmarkedVideos = await getBookmarkedVideos();
+
+    var shouldSave = !bookmarkedVideos.contains(video);
+
+    if (shouldSave) {
+      await _hiveService
+          .insertList<Video>(items: [video], boxName: kBookmarkedVideoKey);
+      await _apiService.addBookmarks(_userService.currentUser.id, video.id);
+    }
   }
 }

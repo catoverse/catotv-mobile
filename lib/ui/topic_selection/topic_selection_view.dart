@@ -27,52 +27,61 @@ class TopicSelectionView extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 actions: [
                   TextButton(
-                      onPressed: () => model.gotoHome(), child: Text("Skip"))
+                      onPressed: () => model.gotoHome(),
+                      child: Text(
+                        "Skip",
+                        style: uiHelpers.button,
+                      ))
                 ],
               ),
-              body: ListView(
-                padding: EdgeInsets.all(15.0),
-                children: [
-                  Text.rich(TextSpan(children: [
-                    TextSpan(
-                        text: "Choose your Topics\n", style: uiHelpers.heading),
-                    TextSpan(
-                        text:
-                            "\nJust before you continue, please choose the topics to get personalized recommendations",
-                        style: uiHelpers.subheading!
-                            .copyWith(fontWeight: FontWeight.normal)),
-                  ])),
-                  uiHelpers.verticalSpaceMedium!,
-                  Container(
-                      child: Wrap(
-                    alignment: WrapAlignment.spaceBetween,
-                    children: model.topicCheckList.map((e) {
-                      int index = model.topicCheckList.indexOf(e);
-                      return TopicSelectionListItem(
-                        image: e.getAssetImage(),
-                        topicName: e.name,
-                        isSelected: model.topicCheckList[index].isSelected!,
-                        onSelected: () => model.selectTopic(index),
-                      );
-                    }).toList(),
-                  ))
-                ],
-              ),
+              body: model.isBusy
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView(
+                      padding: const EdgeInsets.all(15.0),
+                      children: [
+                        Text.rich(TextSpan(children: [
+                          TextSpan(
+                              text: "Choose your Topics\n",
+                              style: uiHelpers.heading),
+                          TextSpan(
+                              text:
+                                  "\nJust before you continue, please choose the topics to get personalized recommendations",
+                              style: uiHelpers.subheading!
+                                  .copyWith(fontWeight: FontWeight.normal)),
+                        ])),
+                        uiHelpers.verticalSpaceMedium!,
+                        Wrap(
+                          alignment: WrapAlignment.spaceBetween,
+                          children: model.topicCheckList.map((e) {
+                        int index = model.topicCheckList.indexOf(e);
+                        return TopicSelectionListItem(
+                          image: e.getAssetImage(),
+                          topicName: e.name,
+                          isSelected:
+                              model.topicCheckList[index].isSelected!,
+                          onSelected: () => model.selectTopic(index),
+                        );
+                          }).toList(),
+                        )
+                      ],
+                    ),
               bottomNavigationBar: AnimatedContainer(
                 height: 90,
-                duration: Duration(milliseconds: 200),
+                duration: const Duration(milliseconds: 200),
                 child: Container(
                   color: Colors.transparent,
-                  padding: EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(20.0),
                   child: !model.hasTopics
                       ? null
                       : ElevatedButton(
                           style: raisedButtonStyle.copyWith(
                               textStyle: MaterialStateProperty.all<TextStyle>(
                                   uiHelpers.button!)),
-                          onPressed: () => model.storeSelectedTopics(
-                              isUpdate: updateTopicSelection),
-                          child: Text("Continue"),
+                          onPressed: model.isBusy
+                              ? () {}
+                              : () => model.storeSelectedTopics(
+                                  isUpdate: updateTopicSelection),
+                          child: const Text("Continue"),
                         ),
                 ),
               ),

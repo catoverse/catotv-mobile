@@ -9,4 +9,5 @@ class Assets {
   static const topicIntellectualImage = "assets/images/intellectual.png";
   static const topicProductivityImage = "assets/images/productivity.png";
   static const placeholderImage = "assets/images/placeholder.jpg";
+  static const noBookmarksImage = "assets/images/no_bookmarks.png";
 }

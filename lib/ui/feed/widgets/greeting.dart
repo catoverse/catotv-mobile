@@ -28,7 +28,7 @@ class GreetingWidget extends HookWidget {
 
     return ListTile(
       leading: Container(
-        margin: EdgeInsets.all(8),
+        margin: const EdgeInsets.all(8),
         width: 40,
         height: 80,
         decoration: BoxDecoration(
@@ -42,11 +42,11 @@ class GreetingWidget extends HookWidget {
       title: Text.rich(TextSpan(children: [
         TextSpan(
             text: getGreeting(),
-            style: TextStyle(color: AppColors.textSecondary)),
-        TextSpan(
+            style: const TextStyle(color: AppColors.textSecondary)),
+        const TextSpan(
           text: "\n",
         ),
-        TextSpan(text: userName, style: TextStyle(fontSize: 18)),
+        TextSpan(text: userName, style: const TextStyle(fontSize: 18)),
       ])),
     );
   }

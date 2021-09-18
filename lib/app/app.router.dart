@@ -9,6 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
+import '../ui/bookmarks/bookmarks_view.dart';
 import '../ui/feed/feed_view.dart';
 import '../ui/invite/invite_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
@@ -21,6 +22,7 @@ import '../ui/update/update_view.dart';
 class Routes {
   static const String startUpView = '/';
   static const String updateView = '/update-view';
+  static const String bookmarksView = '/bookmarks-view';
   static const String onboardingView = '/onboarding-view';
   static const String restrictedHomeView = '/restricted-home-view';
   static const String topicSelectionView = '/topic-selection-view';
@@ -30,6 +32,7 @@ class Routes {
   static const all = <String>{
     startUpView,
     updateView,
+    bookmarksView,
     onboardingView,
     restrictedHomeView,
     topicSelectionView,
@@ -45,6 +48,7 @@ class StackedRouter extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.startUpView, page: StartUpView),
     RouteDef(Routes.updateView, page: UpdateView),
+    RouteDef(Routes.bookmarksView, page: BookmarksView),
     RouteDef(Routes.onboardingView, page: OnboardingView),
     RouteDef(Routes.restrictedHomeView, page: RestrictedHomeView),
     RouteDef(Routes.topicSelectionView, page: TopicSelectionView),
@@ -64,6 +68,12 @@ class StackedRouter extends RouterBase {
     UpdateView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => UpdateView(),
+        settings: data,
+      );
+    },
+    BookmarksView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => BookmarksView(),
         settings: data,
       );
     },

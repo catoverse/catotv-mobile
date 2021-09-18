@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
-import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
@@ -24,15 +23,16 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return _handleVersionUpdate(result.success["androidVersionCode"]["data"]);
+    return _handleVersionUpdate(result.success["getLatestVersion"]["version"]);
   }
 
-  bool _handleVersionUpdate(int apiVersion) {
+  bool _handleVersionUpdate(String apiVersion) {
+    int apiBundleVersion = int.parse(apiVersion.split(".").last);
     var currentVersion = int.parse(_packageInfo.buildNumber);
 
     _log.v("currentVersion: ${_packageInfo.buildNumber}");
 
-    return apiVersion > currentVersion;
+    return apiBundleVersion > currentVersion;
   }
 
   @override
@@ -95,6 +95,7 @@ class APIServiceImpl implements APIService {
     return result.success['userProfile']['selectedTopics'];
   }
 
+  @override
   Future createUserProfile(
       {required String userId,
       required String name,
@@ -151,36 +152,6 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future logUserEventToMessageQueue(
-    String userId,
-    String videoId,
-    String timestamp,
-    String description,
-    int videoDuration,
-    int sessionDuration,
-    int durationWatched,
-    UserEvent event,
-  ) async {
-    _log.i("logging userevent : $event");
-
-    Result<Failure, dynamic> result = await _client.mutation(
-        GQLQueries.logUserEvent,
-        variables: GQLQueries.logUserInputVariables(
-            userId,
-            videoId,
-            timestamp,
-            description,
-            videoDuration,
-            sessionDuration,
-            durationWatched,
-            event.toString().split('.').last));
-
-    if (result.isFailed) return result.failure;
-
-    return result.success["MqProducerUser"];
-  }
-
-  @override
   Future getVideoById(String videoId) async {
     _log.i("getting video with videoId: $videoId");
 
@@ -191,5 +162,33 @@ class APIServiceImpl implements APIService {
     if (result.isFailed) return result.failure;
 
     return result.success["videoByWatchId"];
+  }
+
+  @override
+  Future logUserEventToMessageQueue(List<MqEventLog> events) async {
+    _log.i("logging events : ${events.map((e) => e.toJson()).toList()}");
+
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.logUserEvent,
+        variables: GQLQueries.logUserInputVariables(
+            events.map((e) => e.toJson()).toList()));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["MqProducerUser"];
+  }
+
+  @override
+  Future addBookmarks(String userId, String bookmarkId) async {
+    _log.i('posting bookmarks $bookmarkId with userId: $userId');
+
+    Result<Failure, dynamic> result = await _client.mutation(
+      GQLQueries.addBookmarks,
+      variables: GQLQueries.addBookmarksVariables(userId, [bookmarkId]),
+    );
+
+    if (result.isFailed) return result.failure;
+
+    return result.success['userProfile'];
   }
 }

@@ -5,30 +5,28 @@ import 'package:feed/core/mixins/auth.dart';
 import 'package:feed/core/services/url_service.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class OnboardingViewModel extends BaseViewModel with SnackbarHelper, AuthMixin {
   final _videoService = locator<VideoService>();
   final _urlLauncher = locator<OpenLinkService>();
-  int currentIndex = 0;
+  final _navigationService = locator<NavigationService>();
+  final _dialogService = locator<DialogService>();
 
-  void navigateToRestrictedHome() => showConstraint(
-      title: "Hi There!",
-      description: "Welcome and we're happy to have you onboard",
-      mainButton: "I already have an account",
-      secondaryButton: "Continue without logging in",
-      secondaryRoute: Routes.restrictedHomeView);
-
-  void setIndex(int index) {
-    currentIndex = index;
-    notifyListeners();
-  }
+  void navigateToRestrictedHome() =>
+      _navigationService.replaceWith(Routes.restrictedHomeView);
 
   onModelReady() async {
     await _videoService.getUrlFromAPI("https://youtu.be/lEXBxijQREo");
   }
 
-  openTermsOfService() async =>
-      //TODO: Add terms of service link
-      _urlLauncher.openLink(
-          "https://catoverse.notion.site/Privacy-Policy-759493db56a34396ae30950028ae978e");
+  void requestInvite() => _navigationService.navigateTo(Routes.inviteView);
+
+  void showInvite() => _dialogService.showDialog(
+      title: "🎉 Welcome",
+      description:
+          "CatoTV is an effort to make education accessible to everyone.\n\nThe gates of CatoTV are currently closed for new users but you can request your invite and we'll get back to you.");
+
+  openTermsOfService() async => _urlLauncher.openLink(
+      "https://catoverse.notion.site/Privacy-Policy-759493db56a34396ae30950028ae978e");
 }

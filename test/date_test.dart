@@ -9,13 +9,13 @@ void main() {
   });
 
   test('y-MM-d h:m:s date format test', () {
-    print(DateFormat("y-MM-d h:m:s").format(DateTime.now()).toString());
+    debugPrint(DateFormat("y-MM-d h:m:s").format(DateTime.now()).toString());
   });
 
   test('package version test', () async {
     final package = await PackageInfo.fromPlatform();
     var currentVersion = int.parse(package.version.split(".")[0]);
 
-    print(currentVersion);
+    debugPrint(currentVersion.toString());
   });
 }

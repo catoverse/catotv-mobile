@@ -51,12 +51,12 @@ MockAPIService getAndRegisterAPIService(
   when(service.isUpdateRequired())
       .thenAnswer((realInvocation) => Future.value(isUpdateRequired));
 
-  when(service.getVideoStream(SampleWatchId)).thenAnswer((realInvocation) =>
+  when(service.getVideoStream(kSampleWatchId)).thenAnswer((realInvocation) =>
       Future.value(
-          isVideoCached ? SampleStreamUrl : Failure.message("Link Not Found")));
+          isVideoCached ? kSampleStreamUrl : const Failure.message("Link Not Found")));
 
-  when(service.postVideoStream(SampleWatchId, SampleStreamUrl)).thenAnswer(
-      (realInvocation) => Future.delayed(Duration(milliseconds: 500)));
+  when(service.postVideoStream(kSampleWatchId, kSampleStreamUrl)).thenAnswer(
+      (realInvocation) => Future.delayed(const Duration(milliseconds: 500)));
 
   locator.registerSingleton<APIService>(service);
   return service;
@@ -87,8 +87,8 @@ MockExplodeService getAndRegisterExplodeService({bool hasError = false}) {
   _removeRegistrationIfExists<ExplodeService>();
   final service = MockExplodeService();
 
-  when(service.getStreamUrl(SampleVideoUrl)).thenAnswer(
-      (realInvocation) => Future.value(hasError ? "" : SampleStreamUrl));
+  when(service.getStreamUrl(kSampleVideoUrl)).thenAnswer(
+      (realInvocation) => Future.value(hasError ? "" : kSampleStreamUrl));
 
   locator.registerSingleton<ExplodeService>(service);
   return service;

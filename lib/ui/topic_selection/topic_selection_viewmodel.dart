@@ -3,6 +3,7 @@ import 'package:feed/app/app.router.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,19 +18,20 @@ class TopicSelectionViewModel extends BaseViewModel {
   bool get hasTopics => selectedTopics.isNotEmpty;
 
   void selectTopic(int index) {
-    print("Selected topic $index");
+    debugPrint("Selected topic $index");
 
     bool selected = !topicCheckList[index].isSelected!;
 
-    if (selected)
+    if (selected) {
       selectedTopics.add(topicCheckList[index].id);
-    else
+    } else {
       selectedTopics.remove(topicCheckList[index].id);
+    }
 
     topicCheckList[index] =
         topicCheckList[index].copyWith(isSelected: selected);
 
-    print("Selected Topics : $selectedTopics");
+    debugPrint("Selected Topics : $selectedTopics");
     notifyListeners();
   }
 

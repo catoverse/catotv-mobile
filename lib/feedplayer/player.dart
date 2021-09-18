@@ -75,12 +75,14 @@ class _FeedPlayerState extends State<FeedPlayer>
     if (oldWidget.isInView != widget.isInView) {
       if (widget.isInView) {
         if (flickManager != null &&
-            flickManager!.flickVideoManager!.isVideoInitialized)
+            flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.play();
+        }
       } else {
         if (flickManager != null &&
-            flickManager!.flickVideoManager!.isVideoInitialized)
+            flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.pause();
+        }
       }
     }
     super.didUpdateWidget(oldWidget);
@@ -124,10 +126,10 @@ class _FeedPlayerState extends State<FeedPlayer>
                       children: <Widget>[
                         Positioned.fill(
                             child: ThumbnailImage(thumbnail: thumbnail)),
-                        Positioned(
+                        const Positioned(
                           right: 10,
                           top: 10,
-                          child: Container(
+                          child: SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
@@ -152,11 +154,11 @@ class _FeedPlayerState extends State<FeedPlayer>
                       feedViewModel: widget.baseFeedModel,
                       index: widget.index,
                       flickManager: flickManager!),
-                  iconThemeData: IconThemeData(
+                  iconThemeData: const IconThemeData(
                     size: 40,
                     color: Colors.white,
                   ),
-                  textStyle: TextStyle(fontSize: 16, color: Colors.white),
+                  textStyle: const TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
               VideoProgressBar(

@@ -3,11 +3,13 @@ import 'package:feed/core/models/app_models.dart';
 import 'data/feed_data.dart';
 
 class RestrictedHomeViewModel extends BaseFeedModel {
-  List<Video> _videos = [];
+  final List<Video> _videos = [];
 
   @override
-  Future getVideos() async {
-    feedData.forEach((json) => _videos.add(Video.fromJson(json)));
+  Future getData() async {
+    for (var json in feedData) {
+      _videos.add(Video.fromJson(json));
+    }
     notifyListeners();
   }
 
@@ -24,4 +26,9 @@ class RestrictedHomeViewModel extends BaseFeedModel {
 
   @override
   Future shareVideo(int index) async {}
+
+  @override
+  Future<void> addBookmarks(int index) {
+    throw UnimplementedError();
+  }
 }

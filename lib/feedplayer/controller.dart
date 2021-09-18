@@ -1,9 +1,9 @@
 import 'package:flick_video_player/flick_video_player.dart';
 
 class FeedPlayerController {
-  List<FlickManager> _flickManagers = [];
+  final List<FlickManager> _flickManagers = [];
   // FlickManager? _activeManager;
-  bool _isMute = false;
+  final bool _isMute = false;
 
   init(FlickManager flickManager) {
     _flickManagers.add(flickManager);
@@ -53,7 +53,9 @@ class FeedPlayerController {
   // }
 
   dispose() {
-    _flickManagers.forEach((flickManager) => flickManager.dispose());
+    for (var flickManager in _flickManagers) {
+      flickManager.dispose();
+    }
     _flickManagers.clear();
   }
 }

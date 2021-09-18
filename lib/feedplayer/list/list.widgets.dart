@@ -22,7 +22,7 @@ class FeedFooter extends ViewModelWidget<BaseFeedModel> {
           Visibility(
             visible: showShare,
             child: IconButton(
-              icon: Icon(Icons.share_outlined),
+              icon: const Icon(Icons.share_outlined),
               onPressed: () => viewModel.shareVideo(index),
             ),
           )
@@ -34,38 +34,52 @@ class FeedFooter extends ViewModelWidget<BaseFeedModel> {
 
 class FeedHeader extends ViewModelWidget<BaseFeedModel> {
   final int index;
+  final bool showBookmark;
 
-  const FeedHeader({required this.index});
+  const FeedHeader({required this.index, this.showBookmark = true});
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
     final channelName = viewModel.videos[index].channelInformation?.name ?? "";
     final title = viewModel.videos[index].title;
-
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       alignment: Alignment.centerLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            channelName,
-            maxLines: 3,
-            style: TextStyle(
-                color: Colors.black54,
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  channelName,
+                  maxLines: 3,
+                  style: const TextStyle(
+                      color: Colors.black54,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal),
+                ),
+                Text(
+                  title,
+                  maxLines: 3,
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.normal),
+                ),
+              ],
+            ),
           ),
-          Text(
-            title,
-            maxLines: 3,
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                fontStyle: FontStyle.normal),
+          Visibility(
+            visible: showBookmark,
+            child: IconButton(
+              onPressed: () => viewModel.addBookmarks(index),
+              icon: const Icon(Icons.bookmark_border),
+            ),
           ),
         ],
       ),

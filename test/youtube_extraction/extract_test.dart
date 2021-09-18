@@ -26,7 +26,7 @@ void main() {
       var manifest =
           await _youtubeExplode.videos.streamsClient.getManifest(videoID);
 
-      print(
+      debugPrint(
           "It took Explode ${DateTime.now().difference(start).inSeconds} seconds to get the video");
 
       late Uri videoUri = manifest.muxed.first.url;
@@ -47,15 +47,16 @@ void main() {
 
       var response = await _client.get(Uri.parse("$apiUrl$youtubeVideoUrl"));
 
-      print(
+      debugPrint(
           "It took API ${DateTime.now().difference(start).inSeconds} seconds to get the video");
 
       if (response.statusCode == 200) {
         var res = json.decode(response.body);
-        print(res["links"][0]);
+        debugPrint(res["links"][0]);
         return true;
-      } else
+      } else {
         return false;
+      }
     } catch (e) {
       return false;
     }
@@ -63,7 +64,7 @@ void main() {
 
   group("Explode vs API comparison", () {
     test("API fetches faster than ", () async {
-      final String youtubeUrl = "https://www.youtube.com/watch?v=5AxWC49ZMzs";
+      const String youtubeUrl = "https://www.youtube.com/watch?v=5AxWC49ZMzs";
 
       await getExplodeStream(youtubeUrl);
       await getApiStream(youtubeUrl);
@@ -73,7 +74,7 @@ void main() {
         () {
       test("API Service fails to get all the videos in the list", () async {
         bool total = true;
-        for (var item in FakeFeedData) {
+        for (var item in fakeFeedData) {
           bool res = await getApiStream(item["video_url"]);
           total = total & res;
         }
@@ -83,7 +84,7 @@ void main() {
 
       test("Explode Service fails to get all the videos in the list", () async {
         bool total = true;
-        for (var item in FakeFeedData) {
+        for (var item in fakeFeedData) {
           bool res = await getExplodeStream(item["video_url"]);
           total = total & res;
         }

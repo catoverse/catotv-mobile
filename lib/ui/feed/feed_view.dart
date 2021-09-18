@@ -13,7 +13,7 @@ class FeedView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenBuilder<BaseFeedModel>(
         viewModel: FeedViewModel(),
-        onModelReady: (model) => model.getVideos(),
+        onModelReady: (model) => model.getData(),
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: () => model.showExitDialog(),
               child: Scaffold(
@@ -21,7 +21,7 @@ class FeedView extends StatelessWidget {
                   elevation: 0,
                   backgroundColor: Colors.transparent,
                   foregroundColor: AppColors.primary,
-                  iconTheme: IconThemeData(color: AppColors.textPrimary),
+                  iconTheme: const IconThemeData(color: AppColors.textPrimary),
                   centerTitle: true,
                   title: Text("Home",
                       style: uiHelpers.button!
@@ -29,7 +29,7 @@ class FeedView extends StatelessWidget {
                 ),
                 drawer: DrawerView(),
                 body: model.isBusy
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : RefreshIndicator(
                         onRefresh: model.refresh,
                         child: FeedPlayerListView(
@@ -53,7 +53,7 @@ class FeedView extends StatelessWidget {
                                   ),
                                   ElevatedButton(
                                       onPressed: () => model.refresh(),
-                                      child: Text("Want More?")),
+                                      child: const Text("Want More?")),
                                 ],
                               )),
                         )),

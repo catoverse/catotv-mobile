@@ -26,7 +26,7 @@ abstract class BaseFeedModel extends BaseViewModel
 
     String streamUrl = await _videoService.getStream(videoUrl);
 
-    await _analytics.logEvent(VideoLoadingTime, params: {
+    await _analytics.logEvent(kVideoLoadingTime, params: {
       "duration": DateTime.now().difference(beforeLoading).inMilliseconds
     });
 
@@ -41,7 +41,7 @@ abstract class BaseFeedModel extends BaseViewModel
         videoId: videos[index].id);
   }
 
-  Future getVideos();
+  Future getData();
 
   Future<void> refresh();
 
@@ -74,4 +74,7 @@ abstract class BaseFeedModel extends BaseViewModel
   }
 
   getVideo(String videoId);
+
+  Future<void> addBookmarks(int index) async =>
+      await _videoService.addBookmarks(videos[index]);
 }

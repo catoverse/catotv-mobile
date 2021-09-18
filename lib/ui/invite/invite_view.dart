@@ -20,7 +20,7 @@ class InviteView extends StatelessWidget with $InviteView {
               appBar: AppBar(
                 elevation: 0,
                 backgroundColor: Colors.transparent,
-                iconTheme: IconThemeData(color: AppColors.textPrimary),
+                iconTheme: const IconThemeData(color: AppColors.textPrimary),
               ),
               body: ListView(
                 padding: const EdgeInsets.all(20),
@@ -42,9 +42,11 @@ class InviteView extends StatelessWidget with $InviteView {
               ),
               floatingActionButton: FloatingActionButton(
                 child: model.isBusy
-                    ? CircularProgressIndicator()
-                    : Icon(Icons.done),
-                onPressed: model.requestInvite,
+                    ? const CircularProgressIndicator(
+                        color: AppColors.onPrimary,
+                      )
+                    : const Icon(Icons.done),
+                onPressed: model.isBusy ? () {} : () => model.requestInvite(),
               ),
             ));
   }

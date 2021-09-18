@@ -10,7 +10,7 @@ class AnalyticsService {
   FirebaseAnalyticsObserver getAnalyticsObserver() =>
       FirebaseAnalyticsObserver(analytics: _analytics);
 
-  AnalyticsService({this.appMode = kReleaseMode});
+  AnalyticsService({this.appMode = kDebugMode});
 
   Future logAppOpen() async {
     if (appMode) {

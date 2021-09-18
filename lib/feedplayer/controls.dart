@@ -54,7 +54,7 @@ class FeedControls extends StatelessWidget {
                     child: FlickPlayToggle(
                       size: 30,
                       color: Colors.black,
-                      padding: EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: Colors.white70,
                         borderRadius: BorderRadius.circular(40),
@@ -69,10 +69,11 @@ class FeedControls extends StatelessWidget {
                             ? controlManager.replay()
                             : controlManager.togglePlay();
 
-                        if (videoManager.isPlaying)
+                        if (videoManager.isPlaying) {
                           feedViewModel.logPlayVideo(index);
-                        else
+                        } else {
                           feedViewModel.logPauseVideo(index);
+                        }
                       },
                     ),
                   ),

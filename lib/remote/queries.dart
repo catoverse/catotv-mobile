@@ -1,9 +1,10 @@
 class GQLQueries {
   // Queries - we use queries to fetch data
   static const String getAndroidVersion = r'''
-    query GetAndroidVersion{
-      androidVersionCode {
-        data
+    query GetAndroidVersion {
+      getLatestVersion {
+        version
+        required
       }
     }
   ''';
@@ -160,32 +161,25 @@ class GQLQueries {
   ''';
 
   static const String logUserEvent = r'''
-    mutation MQLogUserEvent(
-      $userId: ID!
-      $videoId: ID!
-      $videoDuration: Int!
-      $sessionDuration: Int!
-      $durationWatched: Int!
-      $timestamp : String!
-      $description: String!
-      $event: UserEvent!
-    ) {
-      MqProducerUser(
-        user: {
-          user_id: $userId
-          video_id: $videoId
-          video_duration: $videoDuration
-          session_duration: $sessionDuration
-          duration_watched: $durationWatched
-          timestamp: $timestamp
-          description: $description
-          event: $event
-        }
-      ) {
+    mutation MQLogUserEvent($events: [MQProducerUserInput!]!) {
+      MqProducerUser(events: $events) {
         data
         message
       }
     }
+  ''';
+
+  static const String addBookmarks = r'''
+  mutation addBookmarks(
+    $userId: ID!
+    $bookmarks: [String]!
+  ) {
+
+    addBookmarks(userId: $userId, bookmarks: $bookmarks) {
+      name
+    }
+
+  }
   ''';
 
   /// Variables
@@ -238,24 +232,15 @@ class GQLQueries {
   }
 
   static Map<String, dynamic> logUserInputVariables(
-    String userId,
-    String videoId,
-    String timestamp,
-    String description,
-    int videoDuration,
-    int sessionDuration,
-    int durationWatched,
-    String event,
-  ) {
+      List<Map<String, dynamic>> events) {
+    return {"events": events};
+  }
+
+  static Map<String, dynamic> addBookmarksVariables(
+      String userId, List<String> bookmarks) {
     return {
-      "userId": userId,
-      "videoId": videoId,
-      "timestamp": timestamp,
-      "description": description,
-      "videoDuration": videoDuration,
-      "sessionDuration": sessionDuration,
-      "durationWatched": durationWatched,
-      "event": event,
+      'userId': userId,
+      'bookmarks': bookmarks,
     };
   }
 }

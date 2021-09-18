@@ -311,9 +311,9 @@ class _$TopicTearOff {
   const _$TopicTearOff();
 
   _Topic call(
-      {required String id,
-      required String name,
-      @JsonKey(defaultValue: false) bool? isSelected}) {
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected}) {
     return _Topic(
       id: id,
       name: name,
@@ -331,9 +331,12 @@ const $Topic = _$TopicTearOff();
 
 /// @nodoc
 mixin _$Topic {
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @JsonKey(defaultValue: false)
+  @HiveField(2)
   bool? get isSelected => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -346,7 +349,9 @@ abstract class $TopicCopyWith<$Res> {
   factory $TopicCopyWith(Topic value, $Res Function(Topic) then) =
       _$TopicCopyWithImpl<$Res>;
   $Res call(
-      {String id, String name, @JsonKey(defaultValue: false) bool? isSelected});
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected});
 }
 
 /// @nodoc
@@ -386,7 +391,9 @@ abstract class _$TopicCopyWith<$Res> implements $TopicCopyWith<$Res> {
       __$TopicCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id, String name, @JsonKey(defaultValue: false) bool? isSelected});
+      {@HiveField(0) String id,
+      @HiveField(1) String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected});
 }
 
 /// @nodoc
@@ -423,22 +430,26 @@ class __$TopicCopyWithImpl<$Res> extends _$TopicCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 3)
 class _$_Topic extends _Topic {
   _$_Topic(
-      {required this.id,
-      required this.name,
-      @JsonKey(defaultValue: false) this.isSelected})
+      {@HiveField(0) required this.id,
+      @HiveField(1) required this.name,
+      @JsonKey(defaultValue: false) @HiveField(2) this.isSelected})
       : super._();
 
   factory _$_Topic.fromJson(Map<String, dynamic> json) =>
       _$_$_TopicFromJson(json);
 
   @override
+  @HiveField(0)
   final String id;
   @override
+  @HiveField(1)
   final String name;
   @override
   @JsonKey(defaultValue: false)
+  @HiveField(2)
   final bool? isSelected;
 
   @override
@@ -479,19 +490,22 @@ class _$_Topic extends _Topic {
 
 abstract class _Topic extends Topic {
   factory _Topic(
-      {required String id,
-      required String name,
-      @JsonKey(defaultValue: false) bool? isSelected}) = _$_Topic;
+      {@HiveField(0) required String id,
+      @HiveField(1) required String name,
+      @JsonKey(defaultValue: false) @HiveField(2) bool? isSelected}) = _$_Topic;
   _Topic._() : super._();
 
   factory _Topic.fromJson(Map<String, dynamic> json) = _$_Topic.fromJson;
 
   @override
+  @HiveField(0)
   String get id => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(defaultValue: false)
+  @HiveField(2)
   bool? get isSelected => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -507,9 +521,9 @@ class _$ChannelInformationTearOff {
   const _$ChannelInformationTearOff();
 
   _ChannelInformation call(
-      {String? id,
-      String? name,
-      @JsonKey(name: "subscriber_count") int? subscriberCount}) {
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount}) {
     return _ChannelInformation(
       id: id,
       name: name,
@@ -527,8 +541,11 @@ const $ChannelInformation = _$ChannelInformationTearOff();
 
 /// @nodoc
 mixin _$ChannelInformation {
+  @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: "subscriber_count")
   int? get subscriberCount => throw _privateConstructorUsedError;
 
@@ -544,9 +561,9 @@ abstract class $ChannelInformationCopyWith<$Res> {
           ChannelInformation value, $Res Function(ChannelInformation) then) =
       _$ChannelInformationCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
-      String? name,
-      @JsonKey(name: "subscriber_count") int? subscriberCount});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount});
 }
 
 /// @nodoc
@@ -589,9 +606,9 @@ abstract class _$ChannelInformationCopyWith<$Res>
       __$ChannelInformationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
-      String? name,
-      @JsonKey(name: "subscriber_count") int? subscriberCount});
+      {@HiveField(0) String? id,
+      @HiveField(1) String? name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount});
 }
 
 /// @nodoc
@@ -630,21 +647,25 @@ class __$ChannelInformationCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 4)
 class _$_ChannelInformation extends _ChannelInformation {
   _$_ChannelInformation(
-      {this.id,
-      this.name,
-      @JsonKey(name: "subscriber_count") this.subscriberCount})
+      {@HiveField(0) this.id,
+      @HiveField(1) this.name,
+      @HiveField(3) @JsonKey(name: "subscriber_count") this.subscriberCount})
       : super._();
 
   factory _$_ChannelInformation.fromJson(Map<String, dynamic> json) =>
       _$_$_ChannelInformationFromJson(json);
 
   @override
+  @HiveField(0)
   final String? id;
   @override
+  @HiveField(1)
   final String? name;
   @override
+  @HiveField(3)
   @JsonKey(name: "subscriber_count")
   final int? subscriberCount;
 
@@ -686,20 +707,26 @@ class _$_ChannelInformation extends _ChannelInformation {
 
 abstract class _ChannelInformation extends ChannelInformation {
   factory _ChannelInformation(
-          {String? id,
+      {@HiveField(0)
+          String? id,
+      @HiveField(1)
           String? name,
-          @JsonKey(name: "subscriber_count") int? subscriberCount}) =
-      _$_ChannelInformation;
+      @HiveField(3)
+      @JsonKey(name: "subscriber_count")
+          int? subscriberCount}) = _$_ChannelInformation;
   _ChannelInformation._() : super._();
 
   factory _ChannelInformation.fromJson(Map<String, dynamic> json) =
       _$_ChannelInformation.fromJson;
 
   @override
+  @HiveField(0)
   String? get id => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   String? get name => throw _privateConstructorUsedError;
   @override
+  @HiveField(3)
   @JsonKey(name: "subscriber_count")
   int? get subscriberCount => throw _privateConstructorUsedError;
   @override
@@ -717,12 +744,12 @@ class _$ContentDetailsTearOff {
   const _$ContentDetailsTearOff();
 
   _ContentDetails call(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views}) {
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views}) {
     return _ContentDetails(
       youtubeCategory: youtubeCategory,
       hasCaptions: hasCaptions,
@@ -743,13 +770,19 @@ const $ContentDetails = _$ContentDetailsTearOff();
 
 /// @nodoc
 mixin _$ContentDetails {
+  @HiveField(0)
   @JsonKey(name: "youtube_category")
   int? get youtubeCategory => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: "captions_available")
   bool? get hasCaptions => throw _privateConstructorUsedError;
+  @HiveField(2)
   int? get dislikes => throw _privateConstructorUsedError;
+  @HiveField(3)
   int? get likes => throw _privateConstructorUsedError;
+  @HiveField(4)
   int? get duration => throw _privateConstructorUsedError;
+  @HiveField(5)
   int? get views => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -764,12 +797,12 @@ abstract class $ContentDetailsCopyWith<$Res> {
           ContentDetails value, $Res Function(ContentDetails) then) =
       _$ContentDetailsCopyWithImpl<$Res>;
   $Res call(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views});
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views});
 }
 
 /// @nodoc
@@ -827,12 +860,12 @@ abstract class _$ContentDetailsCopyWith<$Res>
       __$ContentDetailsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views});
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views});
 }
 
 /// @nodoc
@@ -886,32 +919,39 @@ class __$ContentDetailsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 5)
 class _$_ContentDetails extends _ContentDetails {
   _$_ContentDetails(
-      {@JsonKey(name: "youtube_category") this.youtubeCategory,
-      @JsonKey(name: "captions_available") this.hasCaptions,
-      this.dislikes,
-      this.likes,
-      this.duration,
-      this.views})
+      {@HiveField(0) @JsonKey(name: "youtube_category") this.youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") this.hasCaptions,
+      @HiveField(2) this.dislikes,
+      @HiveField(3) this.likes,
+      @HiveField(4) this.duration,
+      @HiveField(5) this.views})
       : super._();
 
   factory _$_ContentDetails.fromJson(Map<String, dynamic> json) =>
       _$_$_ContentDetailsFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: "youtube_category")
   final int? youtubeCategory;
   @override
+  @HiveField(1)
   @JsonKey(name: "captions_available")
   final bool? hasCaptions;
   @override
+  @HiveField(2)
   final int? dislikes;
   @override
+  @HiveField(3)
   final int? likes;
   @override
+  @HiveField(4)
   final int? duration;
   @override
+  @HiveField(5)
   final int? views;
 
   @override
@@ -964,30 +1004,36 @@ class _$_ContentDetails extends _ContentDetails {
 
 abstract class _ContentDetails extends ContentDetails {
   factory _ContentDetails(
-      {@JsonKey(name: "youtube_category") int? youtubeCategory,
-      @JsonKey(name: "captions_available") bool? hasCaptions,
-      int? dislikes,
-      int? likes,
-      int? duration,
-      int? views}) = _$_ContentDetails;
+      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
+      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
+      @HiveField(2) int? dislikes,
+      @HiveField(3) int? likes,
+      @HiveField(4) int? duration,
+      @HiveField(5) int? views}) = _$_ContentDetails;
   _ContentDetails._() : super._();
 
   factory _ContentDetails.fromJson(Map<String, dynamic> json) =
       _$_ContentDetails.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: "youtube_category")
   int? get youtubeCategory => throw _privateConstructorUsedError;
   @override
+  @HiveField(1)
   @JsonKey(name: "captions_available")
   bool? get hasCaptions => throw _privateConstructorUsedError;
   @override
+  @HiveField(2)
   int? get dislikes => throw _privateConstructorUsedError;
   @override
+  @HiveField(3)
   int? get likes => throw _privateConstructorUsedError;
   @override
+  @HiveField(4)
   int? get duration => throw _privateConstructorUsedError;
   @override
+  @HiveField(5)
   int? get views => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -1903,5 +1949,412 @@ abstract class _FailureMessage implements Failure {
   String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   _$FailureMessageCopyWith<_FailureMessage> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+MqEventLog _$MqEventLogFromJson(Map<String, dynamic> json) {
+  return _MEventqLog.fromJson(json);
+}
+
+/// @nodoc
+class _$MqEventLogTearOff {
+  const _$MqEventLogTearOff();
+
+  _MEventqLog call(
+      {@HiveField(0)
+      @JsonKey(name: "user_id")
+          required String userId,
+      @HiveField(1)
+      @JsonKey(name: "video_id")
+          required String videoId,
+      @HiveField(2)
+          required String timestamp,
+      @HiveField(3)
+          required String description,
+      @HiveField(4)
+      @JsonKey(name: "video_duration")
+          required int videoDuration,
+      @HiveField(5)
+      @JsonKey(name: "session_duration")
+          required int sessionDuration,
+      @HiveField(6)
+      @JsonKey(name: "duration_watched")
+          required int durationWatched,
+      @HiveField(7)
+          required String event}) {
+    return _MEventqLog(
+      userId: userId,
+      videoId: videoId,
+      timestamp: timestamp,
+      description: description,
+      videoDuration: videoDuration,
+      sessionDuration: sessionDuration,
+      durationWatched: durationWatched,
+      event: event,
+    );
+  }
+
+  MqEventLog fromJson(Map<String, Object> json) {
+    return MqEventLog.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $MqEventLog = _$MqEventLogTearOff();
+
+/// @nodoc
+mixin _$MqEventLog {
+  @HiveField(0)
+  @JsonKey(name: "user_id")
+  String get userId => throw _privateConstructorUsedError;
+  @HiveField(1)
+  @JsonKey(name: "video_id")
+  String get videoId => throw _privateConstructorUsedError;
+  @HiveField(2)
+  String get timestamp => throw _privateConstructorUsedError;
+  @HiveField(3)
+  String get description => throw _privateConstructorUsedError;
+  @HiveField(4)
+  @JsonKey(name: "video_duration")
+  int get videoDuration => throw _privateConstructorUsedError;
+  @HiveField(5)
+  @JsonKey(name: "session_duration")
+  int get sessionDuration => throw _privateConstructorUsedError;
+  @HiveField(6)
+  @JsonKey(name: "duration_watched")
+  int get durationWatched => throw _privateConstructorUsedError;
+  @HiveField(7)
+  String get event => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MqEventLogCopyWith<MqEventLog> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MqEventLogCopyWith<$Res> {
+  factory $MqEventLogCopyWith(
+          MqEventLog value, $Res Function(MqEventLog) then) =
+      _$MqEventLogCopyWithImpl<$Res>;
+  $Res call(
+      {@HiveField(0) @JsonKey(name: "user_id") String userId,
+      @HiveField(1) @JsonKey(name: "video_id") String videoId,
+      @HiveField(2) String timestamp,
+      @HiveField(3) String description,
+      @HiveField(4) @JsonKey(name: "video_duration") int videoDuration,
+      @HiveField(5) @JsonKey(name: "session_duration") int sessionDuration,
+      @HiveField(6) @JsonKey(name: "duration_watched") int durationWatched,
+      @HiveField(7) String event});
+}
+
+/// @nodoc
+class _$MqEventLogCopyWithImpl<$Res> implements $MqEventLogCopyWith<$Res> {
+  _$MqEventLogCopyWithImpl(this._value, this._then);
+
+  final MqEventLog _value;
+  // ignore: unused_field
+  final $Res Function(MqEventLog) _then;
+
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? videoId = freezed,
+    Object? timestamp = freezed,
+    Object? description = freezed,
+    Object? videoDuration = freezed,
+    Object? sessionDuration = freezed,
+    Object? durationWatched = freezed,
+    Object? event = freezed,
+  }) {
+    return _then(_value.copyWith(
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoId: videoId == freezed
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: timestamp == freezed
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoDuration: videoDuration == freezed
+          ? _value.videoDuration
+          : videoDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessionDuration: sessionDuration == freezed
+          ? _value.sessionDuration
+          : sessionDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      durationWatched: durationWatched == freezed
+          ? _value.durationWatched
+          : durationWatched // ignore: cast_nullable_to_non_nullable
+              as int,
+      event: event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$MEventqLogCopyWith<$Res> implements $MqEventLogCopyWith<$Res> {
+  factory _$MEventqLogCopyWith(
+          _MEventqLog value, $Res Function(_MEventqLog) then) =
+      __$MEventqLogCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@HiveField(0) @JsonKey(name: "user_id") String userId,
+      @HiveField(1) @JsonKey(name: "video_id") String videoId,
+      @HiveField(2) String timestamp,
+      @HiveField(3) String description,
+      @HiveField(4) @JsonKey(name: "video_duration") int videoDuration,
+      @HiveField(5) @JsonKey(name: "session_duration") int sessionDuration,
+      @HiveField(6) @JsonKey(name: "duration_watched") int durationWatched,
+      @HiveField(7) String event});
+}
+
+/// @nodoc
+class __$MEventqLogCopyWithImpl<$Res> extends _$MqEventLogCopyWithImpl<$Res>
+    implements _$MEventqLogCopyWith<$Res> {
+  __$MEventqLogCopyWithImpl(
+      _MEventqLog _value, $Res Function(_MEventqLog) _then)
+      : super(_value, (v) => _then(v as _MEventqLog));
+
+  @override
+  _MEventqLog get _value => super._value as _MEventqLog;
+
+  @override
+  $Res call({
+    Object? userId = freezed,
+    Object? videoId = freezed,
+    Object? timestamp = freezed,
+    Object? description = freezed,
+    Object? videoDuration = freezed,
+    Object? sessionDuration = freezed,
+    Object? durationWatched = freezed,
+    Object? event = freezed,
+  }) {
+    return _then(_MEventqLog(
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoId: videoId == freezed
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
+              as String,
+      timestamp: timestamp == freezed
+          ? _value.timestamp
+          : timestamp // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: description == freezed
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      videoDuration: videoDuration == freezed
+          ? _value.videoDuration
+          : videoDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      sessionDuration: sessionDuration == freezed
+          ? _value.sessionDuration
+          : sessionDuration // ignore: cast_nullable_to_non_nullable
+              as int,
+      durationWatched: durationWatched == freezed
+          ? _value.durationWatched
+          : durationWatched // ignore: cast_nullable_to_non_nullable
+              as int,
+      event: event == freezed
+          ? _value.event
+          : event // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+@HiveType(typeId: 2)
+class _$_MEventqLog extends _MEventqLog {
+  _$_MEventqLog(
+      {@HiveField(0)
+      @JsonKey(name: "user_id")
+          required this.userId,
+      @HiveField(1)
+      @JsonKey(name: "video_id")
+          required this.videoId,
+      @HiveField(2)
+          required this.timestamp,
+      @HiveField(3)
+          required this.description,
+      @HiveField(4)
+      @JsonKey(name: "video_duration")
+          required this.videoDuration,
+      @HiveField(5)
+      @JsonKey(name: "session_duration")
+          required this.sessionDuration,
+      @HiveField(6)
+      @JsonKey(name: "duration_watched")
+          required this.durationWatched,
+      @HiveField(7)
+          required this.event})
+      : super._();
+
+  factory _$_MEventqLog.fromJson(Map<String, dynamic> json) =>
+      _$_$_MEventqLogFromJson(json);
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: "user_id")
+  final String userId;
+  @override
+  @HiveField(1)
+  @JsonKey(name: "video_id")
+  final String videoId;
+  @override
+  @HiveField(2)
+  final String timestamp;
+  @override
+  @HiveField(3)
+  final String description;
+  @override
+  @HiveField(4)
+  @JsonKey(name: "video_duration")
+  final int videoDuration;
+  @override
+  @HiveField(5)
+  @JsonKey(name: "session_duration")
+  final int sessionDuration;
+  @override
+  @HiveField(6)
+  @JsonKey(name: "duration_watched")
+  final int durationWatched;
+  @override
+  @HiveField(7)
+  final String event;
+
+  @override
+  String toString() {
+    return 'MqEventLog(userId: $userId, videoId: $videoId, timestamp: $timestamp, description: $description, videoDuration: $videoDuration, sessionDuration: $sessionDuration, durationWatched: $durationWatched, event: $event)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _MEventqLog &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.videoId, videoId) ||
+                const DeepCollectionEquality()
+                    .equals(other.videoId, videoId)) &&
+            (identical(other.timestamp, timestamp) ||
+                const DeepCollectionEquality()
+                    .equals(other.timestamp, timestamp)) &&
+            (identical(other.description, description) ||
+                const DeepCollectionEquality()
+                    .equals(other.description, description)) &&
+            (identical(other.videoDuration, videoDuration) ||
+                const DeepCollectionEquality()
+                    .equals(other.videoDuration, videoDuration)) &&
+            (identical(other.sessionDuration, sessionDuration) ||
+                const DeepCollectionEquality()
+                    .equals(other.sessionDuration, sessionDuration)) &&
+            (identical(other.durationWatched, durationWatched) ||
+                const DeepCollectionEquality()
+                    .equals(other.durationWatched, durationWatched)) &&
+            (identical(other.event, event) ||
+                const DeepCollectionEquality().equals(other.event, event)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(videoId) ^
+      const DeepCollectionEquality().hash(timestamp) ^
+      const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(videoDuration) ^
+      const DeepCollectionEquality().hash(sessionDuration) ^
+      const DeepCollectionEquality().hash(durationWatched) ^
+      const DeepCollectionEquality().hash(event);
+
+  @JsonKey(ignore: true)
+  @override
+  _$MEventqLogCopyWith<_MEventqLog> get copyWith =>
+      __$MEventqLogCopyWithImpl<_MEventqLog>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_MEventqLogToJson(this);
+  }
+}
+
+abstract class _MEventqLog extends MqEventLog {
+  factory _MEventqLog(
+      {@HiveField(0)
+      @JsonKey(name: "user_id")
+          required String userId,
+      @HiveField(1)
+      @JsonKey(name: "video_id")
+          required String videoId,
+      @HiveField(2)
+          required String timestamp,
+      @HiveField(3)
+          required String description,
+      @HiveField(4)
+      @JsonKey(name: "video_duration")
+          required int videoDuration,
+      @HiveField(5)
+      @JsonKey(name: "session_duration")
+          required int sessionDuration,
+      @HiveField(6)
+      @JsonKey(name: "duration_watched")
+          required int durationWatched,
+      @HiveField(7)
+          required String event}) = _$_MEventqLog;
+  _MEventqLog._() : super._();
+
+  factory _MEventqLog.fromJson(Map<String, dynamic> json) =
+      _$_MEventqLog.fromJson;
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: "user_id")
+  String get userId => throw _privateConstructorUsedError;
+  @override
+  @HiveField(1)
+  @JsonKey(name: "video_id")
+  String get videoId => throw _privateConstructorUsedError;
+  @override
+  @HiveField(2)
+  String get timestamp => throw _privateConstructorUsedError;
+  @override
+  @HiveField(3)
+  String get description => throw _privateConstructorUsedError;
+  @override
+  @HiveField(4)
+  @JsonKey(name: "video_duration")
+  int get videoDuration => throw _privateConstructorUsedError;
+  @override
+  @HiveField(5)
+  @JsonKey(name: "session_duration")
+  int get sessionDuration => throw _privateConstructorUsedError;
+  @override
+  @HiveField(6)
+  @JsonKey(name: "duration_watched")
+  int get durationWatched => throw _privateConstructorUsedError;
+  @override
+  @HiveField(7)
+  String get event => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$MEventqLogCopyWith<_MEventqLog> get copyWith =>
       throw _privateConstructorUsedError;
 }

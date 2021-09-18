@@ -1,14 +1,11 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
-import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
 import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/user_service.dart';
-import 'package:feed/firebase/analytics.dart';
-import 'package:feed/firebase/fcm_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,23 +14,21 @@ mixin AuthMixin on BaseViewModel {
   final _snackbarService = locator<SnackbarService>();
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
-  final _analytics = locator<AnalyticsService>();
   final _messageQueue = locator<MessageQueueService>();
-  final _fcmService = locator<FcmService>();
   final _log = getLogger("Authentication ViewModel");
 
   User get currentUser => _userService.currentUser;
 
   Future showConstraint({
-    String title: 'You need an account to continue',
-    String description:
+    String title = 'You need an account to continue',
+    String description =
         'We’re currently in early access mode, you can’t enter unless you have an invite.',
     String secondaryRoute = Routes.inviteView,
     String secondaryButton = 'Request an Invite',
     String mainButton = "Continue with Google",
   }) async {
     var sheetResponse = await _bottomSheetService.showCustomSheet(
-        variant: BottomSheetType.Constraint,
+        variant: BottomSheetType.constraint,
         title: title,
         description: description,
         mainButtonTitle: mainButton,
@@ -43,10 +38,10 @@ mixin AuthMixin on BaseViewModel {
       ThreeButtonResponseData responseData = sheetResponse?.data;
 
       switch (responseData) {
-        case ThreeButtonResponseData.Primary:
+        case ThreeButtonResponseData.primary:
           await loginWithGoogle();
           break;
-        case ThreeButtonResponseData.Secondary:
+        case ThreeButtonResponseData.secondary:
           _navigationService.replaceWith(secondaryRoute);
           break;
         default:
@@ -66,14 +61,12 @@ mixin AuthMixin on BaseViewModel {
       _log.e("failed to perform login");
       _snackbarService.showSnackbar(
           title: "Aww, Sorry", message: "Something went wrong from our side.");
-      return _analytics.logEvent(LoginFailed);
     }
 
     _log.i(
         "User Login Successful : Logged in user: ${_userService.currentUser}");
 
     isProfileExists = await _userService.isUserProfileExists();
-    _analytics.logEvent(LoginSuccess);
     _messageQueue.logUserEvent(UserEvent.login);
 
     setBusy(false);

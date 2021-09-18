@@ -113,11 +113,13 @@ class HiveServiceImpl implements HiveService {
       final openBox = await _hiveInterface.openBox(boxName);
       int length = openBox.length;
 
-      if (length == 0)
+      if (length == 0) {
         return Result.failed(Failure.message("No Box Named : $boxName"));
+      }
 
-      if (index >= length)
+      if (index >= length) {
         return Result.failed(Failure.message("Index $index out of bounds"));
+      }
 
       var result = openBox.getAt(index);
 
