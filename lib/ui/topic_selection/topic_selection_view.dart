@@ -26,8 +26,9 @@ class TopicSelectionView extends StatelessWidget {
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 actions: [
+                  if(!model.isBusy)
                   TextButton(
-                      onPressed: () => model.gotoHome(),
+                      onPressed: () => model.onSkip(),
                       child: Text(
                         "Skip",
                         style: uiHelpers.button,
@@ -53,14 +54,14 @@ class TopicSelectionView extends StatelessWidget {
                         Wrap(
                           alignment: WrapAlignment.spaceBetween,
                           children: model.topicCheckList.map((e) {
-                        int index = model.topicCheckList.indexOf(e);
-                        return TopicSelectionListItem(
-                          image: e.getAssetImage(),
-                          topicName: e.name,
-                          isSelected:
-                              model.topicCheckList[index].isSelected!,
-                          onSelected: () => model.selectTopic(index),
-                        );
+                            int index = model.topicCheckList.indexOf(e);
+                            return TopicSelectionListItem(
+                              image: e.getAssetImage(),
+                              topicName: e.name,
+                              isSelected:
+                                  model.topicCheckList[index].isSelected!,
+                              onSelected: () => model.selectTopic(index),
+                            );
                           }).toList(),
                         )
                       ],
@@ -71,7 +72,7 @@ class TopicSelectionView extends StatelessWidget {
                 child: Container(
                   color: Colors.transparent,
                   padding: const EdgeInsets.all(20.0),
-                  child: !model.hasTopics
+                  child: !model.hasTopics || model.isBusy
                       ? null
                       : ElevatedButton(
                           style: raisedButtonStyle.copyWith(
