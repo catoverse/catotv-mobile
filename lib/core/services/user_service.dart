@@ -108,7 +108,7 @@ class UserService {
     return result is! Failure;
   }
 
-  /// Creates profile for user with [selectedTopics]
+  /// Creates profile for user with [selectedTopicIds]
   Future<bool> createProfile({required List<String> topicIds}) async {
     _log.i("creating profile for user with $topicIds");
 

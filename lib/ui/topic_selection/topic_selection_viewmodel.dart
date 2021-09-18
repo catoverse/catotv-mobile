@@ -8,14 +8,14 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class TopicSelectionViewModel extends BaseViewModel {
-  List<String> selectedTopics = [];
+  List<String> selectedTopicIds = [];
   List<Topic> topicCheckList = [];
 
   final TopicService _topicService = locator<TopicService>();
   final UserService _userService = locator<UserService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  bool get hasTopics => selectedTopics.isNotEmpty;
+  bool get hasTopics => selectedTopicIds.isNotEmpty;
 
   void selectTopic(int index) {
     debugPrint("Selected topic $index");
@@ -23,15 +23,15 @@ class TopicSelectionViewModel extends BaseViewModel {
     bool selected = !topicCheckList[index].isSelected!;
 
     if (selected) {
-      selectedTopics.add(topicCheckList[index].id);
+      selectedTopicIds.add(topicCheckList[index].id);
     } else {
-      selectedTopics.remove(topicCheckList[index].id);
+      selectedTopicIds.remove(topicCheckList[index].id);
     }
 
     topicCheckList[index] =
         topicCheckList[index].copyWith(isSelected: selected);
 
-    debugPrint("Selected Topics : $selectedTopics");
+    debugPrint("Selected Topics : $selectedTopicIds");
     notifyListeners();
   }
 
@@ -46,8 +46,7 @@ class TopicSelectionViewModel extends BaseViewModel {
 
   Future storeSelectedTopics({bool isUpdate = false}) async {
     setBusy(true);
-    await _userService.createProfile(topicIds: selectedTopics);
-    setBusy(false);
+    await _userService.createProfile(topicIds: selectedTopicIds);
 
     //TODO: Indicate the topics are stored successfully
     //TODO: Subscribe to topics
@@ -59,7 +58,7 @@ class TopicSelectionViewModel extends BaseViewModel {
     var result =
         await _topicService.getSelectedTopics(_userService.currentUser.id);
 
-    selectedTopics = result;
+    selectedTopicIds = result;
 
     for (var item in result) {
       var selectedTopic =
@@ -70,6 +69,12 @@ class TopicSelectionViewModel extends BaseViewModel {
     }
 
     notifyListeners();
+  }
+
+  void onSkip() async {
+    selectedTopicIds.addAll(topicCheckList.map((e) => e.id));
+    await storeSelectedTopics();
+    gotoHome();
   }
 
   void gotoHome() => _navigationService.replaceWith(Routes.feedView);
