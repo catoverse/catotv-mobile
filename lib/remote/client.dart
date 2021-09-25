@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
@@ -7,6 +9,7 @@ import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/custom_link.dart';
 import 'package:graphql/client.dart';
+import 'package:http/http.dart' as http;
 
 /// The [RemoteClient] is a wrapper class to abstract [GraphQLClient]
 /// Here are the reasons why we need an external class -
@@ -22,10 +25,12 @@ class RemoteClient {
   final _environmentService = locator<EnvironmentService>();
 
   late GraphQLClient _graphQLClient;
+  late http.Client _httpClient;
   String jwtToken = "";
 
   RemoteClient() {
     _graphQLClient = getInstance();
+    _httpClient = http.Client();
   }
 
   /// Returns [GraphQLClient] with CustomAuthLink
@@ -120,5 +125,64 @@ class RemoteClient {
     }
 
     return Result.success(result.data);
+  }
+
+  Future<Result<Failure, dynamic>> postHttp(
+    String url,
+    Map<String, dynamic> body,
+  ) async {
+    bool hasInternet = await _connectivity.isConnected;
+
+    if (!hasInternet) {
+      return Result.failed(Failure.error(NoConnectivityError()));
+    }
+
+    try {
+      final result = await http.post(
+        Uri.parse(url),
+        body: body,
+        headers: {
+          HttpHeaders.acceptHeader: 'application/json',
+        }
+      );
+
+      if (result.statusCode <= 202) {
+        return Result.success(true);
+      } else {
+        return Result.failed(
+            const Failure.message('User was/is not on wait list'));
+      }
+    } catch (err) {
+      _log.e('failed to perform http post due to server error');
+      return Result.failed(Failure.error(ServerError()));
+    }
+  }
+
+  Future<Result<Failure, dynamic>> post(
+    String url,
+    Map<String, dynamic> body,
+  ) async {
+    bool hasInternet = await _connectivity.isConnected;
+
+    if (!hasInternet) {
+      return Result.failed(Failure.error(NoConnectivityError()));
+    }
+
+    try {
+      final result = await http.post(
+        Uri.parse(url),
+        body: body,
+      );
+
+      if (result.statusCode <= 202) {
+        return Result.success(result.body);
+      } else {
+        _log.e(result.body + ' ' + result.statusCode.toString());
+        return Result.failed(Failure.message('Failed: ${result.statusCode}'));
+      }
+    } catch (err) {
+      _log.e('failed to perform http post due to server error');
+      return Result.failed(Failure.error(ServerError()));
+    }
   }
 }

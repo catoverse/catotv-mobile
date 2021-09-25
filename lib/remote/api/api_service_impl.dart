@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/client.dart';
 import 'package:feed/remote/queries.dart';
@@ -11,6 +13,7 @@ import 'package:package_info/package_info.dart';
 class APIServiceImpl implements APIService {
   final RemoteClient _client = locator<RemoteClient>();
   final PackageInfo _packageInfo = locator<PackageInfo>();
+  final EnvironmentService _environmentService = locator<EnvironmentService>();
   final _log = getLogger("API Service");
 
   @override
@@ -190,5 +193,39 @@ class APIServiceImpl implements APIService {
     if (result.isFailed) return result.failure;
 
     return result.success['userProfile'];
+  }
+
+  @override
+  Future<bool> isUserOnWaitlist(String email) async {
+    _log.i('Checking if user is on waitlist email: $email');
+
+    Result<Failure, dynamic> result = await _client.postHttp(
+      'https://getwaitlist.com/api/v1/users/status/',
+      {
+        "email": email,
+        "api_key": _environmentService.getValue(kGetWaitListApiKey),
+      },
+    );
+    if (result.isFailed) return false;
+
+    return true;
+  }
+
+  @override
+  Future<GetWaitlist?> addUserToWailist(String email) async {
+    _log.i('Adding User on waitlist email: $email');
+
+    Result<Failure, dynamic> result = await _client.post(
+    
+      'https://getwaitlist.com/waitlist/',
+      {
+        "email": email,
+        "api_key": _environmentService.getValue(kGetWaitListApiKey),
+        "referral_link": "https://www.cato.tv/",
+      },
+    );
+    if (result.isFailed) return null;
+
+    return GetWaitlist.fromJson(result.success as String);
   }
 }

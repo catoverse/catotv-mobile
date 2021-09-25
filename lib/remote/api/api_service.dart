@@ -22,4 +22,6 @@ abstract class APIService {
   Future postVideoStream(String watchId, String streamUrl);
   Future logUserEventToMessageQueue(List<MqEventLog> events);
   Future addBookmarks(String userId, String bookmarkId);
+  Future<bool> isUserOnWaitlist(String email);
+  Future<GetWaitlist?> addUserToWailist(String email);
 }
