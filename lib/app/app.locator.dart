@@ -20,6 +20,7 @@ import '../core/services/feed_service.dart';
 import '../core/services/hive_service/hive_service.dart';
 import '../core/services/hive_service/hive_service_impl.dart';
 import '../core/services/key_storage_service.dart';
+import '../core/services/life_cycle_service.dart';
 import '../core/services/message_queue_service.dart';
 import '../core/services/notification_service.dart';
 import '../core/services/share_service.dart';
@@ -59,6 +60,9 @@ Future setupLocator(
 
   final sharedPreferences = await SharedPreferences.getInstance();
   locator.registerSingleton(sharedPreferences);
+
+  final lifeCycleService = await LifeCycleService.getInstance();
+  locator.registerSingleton(lifeCycleService!);
 
   locator.registerLazySingleton(() => Connectivity());
   locator.registerLazySingleton<ConnectivityService>(

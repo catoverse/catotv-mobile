@@ -39,6 +39,7 @@ abstract class BaseFeedModel extends BaseViewModel
     await _shareService.share("Checkout ${video.title} at $url");
     await _messageQueue.logUserEvent(UserEvent.share,
         videoId: videos[index].id);
+    logShareVideo(index);
   }
 
   Future getData();
@@ -71,6 +72,32 @@ abstract class BaseFeedModel extends BaseViewModel
 
   logPauseVideo(int index) {
     logUserEvent(UserEvent.pause, videoId: videos[index].id);
+  }
+
+  logShareVideo(int index) {
+    logUserEvent(UserEvent.share, videoId: videos[index].id);
+  }
+
+  logViewVideo(int index) {
+    logUserEvent(UserEvent.view, videoId: videos[index].id);
+  }
+
+  logSessionStart() {
+    logUserEvent(
+      UserEvent.sesssionStart,
+    );
+  }
+
+  logSessionEnd() {
+    logUserEvent(UserEvent.sessionEnd);
+  }
+
+  logCompleteVideo(int index) {
+    logUserEvent(UserEvent.sesssionStart, videoId: videos[index].id);
+  }
+
+  void logSkipVideo(int index) {
+    logUserEvent(UserEvent.sesssionStart, videoId: videos[index].id);
   }
 
   getVideo(String videoId);

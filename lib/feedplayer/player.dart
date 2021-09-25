@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/feedplayer/controller.dart';
@@ -30,13 +32,14 @@ class FeedPlayer extends StatefulWidget {
 }
 
 class _FeedPlayerState extends State<FeedPlayer>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
   late Future<void> _initializeVideoPlayerFuture;
   FlickManager? flickManager;
   late String thumbnail;
 
   @override
   void initState() {
+    WidgetsBinding.instance!.addObserver(this);
     thumbnail = widget.baseFeedModel.getThumbnail(widget.video.videoUrl);
     _initializeVideoPlayerFuture = widget.baseFeedModel
         .getStreamUrl(widget.video.videoUrl)
@@ -85,7 +88,25 @@ class _FeedPlayerState extends State<FeedPlayer>
         }
       }
     }
+    logSkip();
     super.didUpdateWidget(oldWidget);
+  }
+
+  void logSkip() async {
+    var _flickManager = widget.feedPlayerController
+        .getFlickManaget(widget.index)
+        .flickVideoManager;
+
+    if (_flickManager != null) {
+      var currentVideoDuration =
+          await _flickManager.videoPlayerController!.position;
+
+      if (currentVideoDuration != null &&
+          currentVideoDuration.compareTo(const Duration(seconds: 10)) <= 0) {
+        widget.baseFeedModel.logSkipVideo(widget.index);
+        log('User Skip video ${widget.index}');
+      }
+    }
   }
 
   @override

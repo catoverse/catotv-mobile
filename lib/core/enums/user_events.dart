@@ -8,4 +8,7 @@ enum UserEvent {
   like,
   share,
   bookmark,
+  sesssionStart,
+  sessionEnd,
+  view,
 }
