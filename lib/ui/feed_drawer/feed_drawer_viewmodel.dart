@@ -19,6 +19,4 @@ class DrawerViewModel extends BaseViewModel with AuthMixin {
   }
 
   viewBookmakrs() => _navigationService.navigateTo(Routes.bookmarksView);
-  viewInvite() => _navigationService.navigateTo(Routes.inviteView);
-  viewPosition() => _navigationService.navigateTo(Routes.positionView);
 }

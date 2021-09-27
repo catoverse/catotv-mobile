@@ -68,7 +68,6 @@ class PositionView extends StatelessWidget {
                           'Tap to copy your code',
                           style: uiHelpers.subheading?.copyWith(
                             fontSize: 14,
-                            // letterSpacing: 20,
                           ),
                         ),
                         uiHelpers.verticalSpaceLow!,
