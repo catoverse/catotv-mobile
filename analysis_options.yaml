@@ -5,6 +5,8 @@ analyzer:
     - lib/core/models/app_models.dart
     - lib/core/models/app_models.freezed.dart
     - lib/core/models/app_models.g.dart
+    - test/helpers/test_helpers.mocks.dart
+    - test/helpers/test_helpers.dart
   errors:
     todo: warning
 

@@ -1,6 +1,6 @@
-import 'package:feed/core/constants/assets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
+import 'package:feed/core/constants/assets.dart';
 
 part 'app_models.freezed.dart';
 part 'app_models.g.dart';
@@ -169,4 +169,21 @@ extension ImageProperty on Topic {
         return "";
     }
   }
+}
+
+@freezed
+class GetWaitlist with _$GetWaitlist {
+  GetWaitlist._();
+
+  factory GetWaitlist({
+    @JsonKey(name: "current_priority")  int? currentPriority,
+    @JsonKey(name: "referral_link") required String referralLink,
+    @JsonKey(name: "registered_email") required String registeredEmail,
+    @JsonKey(name: "total_referrals") required int totalReferrals,
+    @JsonKey(name: "total_users") required int totalUsers,
+    @JsonKey(name: "user_id") required String userId,
+  }) = _GetWaitlist;
+
+  factory GetWaitlist.fromJson(Map<String, dynamic> json) =>
+      _$GetWaitlistFromJson(json);
 }

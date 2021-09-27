@@ -2,6 +2,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/enums/bottom_sheet.dart';
+import 'package:feed/core/enums/login_events.dart';
 import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/message_queue_service.dart';
@@ -56,7 +57,11 @@ mixin AuthMixin on BaseViewModel {
 
     var loginSuccess = await _userService.loginWithGoogle();
 
-    if (!loginSuccess) {
+    if (loginSuccess == LoginEvents.notOnWaitlist) {
+      return _navigationService.navigateTo(Routes.positionView);
+    }
+
+    if (loginSuccess != LoginEvents.success) {
       setBusy(false);
       _log.e("failed to perform login");
       _snackbarService.showSnackbar(

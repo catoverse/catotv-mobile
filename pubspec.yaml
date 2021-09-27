@@ -35,6 +35,9 @@ dependencies:
   # graphql for fetching data from API
   graphql: ^5.0.0
 
+  # network
+  dio: ^4.0.0
+
   # could be handy for hiding keys in [.env] file
   flutter_dotenv: ^5.0.2
 

@@ -1,5 +1,6 @@
+// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
 part of 'app_models.dart';
 
@@ -199,8 +200,7 @@ class _$_User extends _User {
       @JsonKey(ignore: true) @HiveField(5) this.invites})
       : super._();
 
-  factory _$_User.fromJson(Map<String, dynamic> json) =>
-      _$_$_UserFromJson(json);
+  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
   @override
   @HiveField(0)
@@ -262,7 +262,7 @@ class _$_User extends _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_UserToJson(this);
+    return _$$_UserToJson(this);
   }
 }
 
@@ -439,7 +439,7 @@ class _$_Topic extends _Topic {
       : super._();
 
   factory _$_Topic.fromJson(Map<String, dynamic> json) =>
-      _$_$_TopicFromJson(json);
+      _$$_TopicFromJson(json);
 
   @override
   @HiveField(0)
@@ -484,7 +484,7 @@ class _$_Topic extends _Topic {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_TopicToJson(this);
+    return _$$_TopicToJson(this);
   }
 }
 
@@ -656,7 +656,7 @@ class _$_ChannelInformation extends _ChannelInformation {
       : super._();
 
   factory _$_ChannelInformation.fromJson(Map<String, dynamic> json) =>
-      _$_$_ChannelInformationFromJson(json);
+      _$$_ChannelInformationFromJson(json);
 
   @override
   @HiveField(0)
@@ -701,7 +701,7 @@ class _$_ChannelInformation extends _ChannelInformation {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_ChannelInformationToJson(this);
+    return _$$_ChannelInformationToJson(this);
   }
 }
 
@@ -931,7 +931,7 @@ class _$_ContentDetails extends _ContentDetails {
       : super._();
 
   factory _$_ContentDetails.fromJson(Map<String, dynamic> json) =>
-      _$_$_ContentDetailsFromJson(json);
+      _$$_ContentDetailsFromJson(json);
 
   @override
   @HiveField(0)
@@ -998,7 +998,7 @@ class _$_ContentDetails extends _ContentDetails {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_ContentDetailsToJson(this);
+    return _$$_ContentDetailsToJson(this);
   }
 }
 
@@ -1376,7 +1376,7 @@ class _$_Video extends _Video {
       : super._();
 
   factory _$_Video.fromJson(Map<String, dynamic> json) =>
-      _$_$_VideoFromJson(json);
+      _$$_VideoFromJson(json);
 
   @override
   @HiveField(0)
@@ -1462,7 +1462,7 @@ class _$_Video extends _Video {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_VideoToJson(this);
+    return _$$_VideoToJson(this);
   }
 }
 
@@ -1570,6 +1570,13 @@ mixin _$Failure {
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Error error)? error,
+    TResult Function(Exception exception)? exception,
+    TResult Function(String message)? message,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Error error)? error,
     TResult Function(Exception exception)? exception,
@@ -1582,6 +1589,13 @@ mixin _$Failure {
     required TResult Function(_GenericError value) error,
     required TResult Function(_RaisedException value) exception,
     required TResult Function(_FailureMessage value) message,
+  }) =>
+      throw _privateConstructorUsedError;
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GenericError value)? error,
+    TResult Function(_RaisedException value)? exception,
+    TResult Function(_FailureMessage value)? message,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -1677,6 +1691,16 @@ class _$_GenericError implements _GenericError {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Error error)? error,
+    TResult Function(Exception exception)? exception,
+    TResult Function(String message)? message,
+  }) {
+    return error?.call(this.error);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Error error)? error,
     TResult Function(Exception exception)? exception,
@@ -1697,6 +1721,16 @@ class _$_GenericError implements _GenericError {
     required TResult Function(_FailureMessage value) message,
   }) {
     return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GenericError value)? error,
+    TResult Function(_RaisedException value)? exception,
+    TResult Function(_FailureMessage value)? message,
+  }) {
+    return error?.call(this);
   }
 
   @override
@@ -1792,6 +1826,16 @@ class _$_RaisedException implements _RaisedException {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Error error)? error,
+    TResult Function(Exception exception)? exception,
+    TResult Function(String message)? message,
+  }) {
+    return exception?.call(this.exception);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Error error)? error,
     TResult Function(Exception exception)? exception,
@@ -1812,6 +1856,16 @@ class _$_RaisedException implements _RaisedException {
     required TResult Function(_FailureMessage value) message,
   }) {
     return exception(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GenericError value)? error,
+    TResult Function(_RaisedException value)? exception,
+    TResult Function(_FailureMessage value)? message,
+  }) {
+    return exception?.call(this);
   }
 
   @override
@@ -1906,6 +1960,16 @@ class _$_FailureMessage implements _FailureMessage {
 
   @override
   @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function(Error error)? error,
+    TResult Function(Exception exception)? exception,
+    TResult Function(String message)? message,
+  }) {
+    return message?.call(this.message);
+  }
+
+  @override
+  @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Error error)? error,
     TResult Function(Exception exception)? exception,
@@ -1926,6 +1990,16 @@ class _$_FailureMessage implements _FailureMessage {
     required TResult Function(_FailureMessage value) message,
   }) {
     return message(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_GenericError value)? error,
+    TResult Function(_RaisedException value)? exception,
+    TResult Function(_FailureMessage value)? message,
+  }) {
+    return message?.call(this);
   }
 
   @override
@@ -2208,7 +2282,7 @@ class _$_MEventqLog extends _MEventqLog {
       : super._();
 
   factory _$_MEventqLog.fromJson(Map<String, dynamic> json) =>
-      _$_$_MEventqLogFromJson(json);
+      _$$_MEventqLogFromJson(json);
 
   @override
   @HiveField(0)
@@ -2292,7 +2366,7 @@ class _$_MEventqLog extends _MEventqLog {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_MEventqLogToJson(this);
+    return _$$_MEventqLogToJson(this);
   }
 }
 
@@ -2356,5 +2430,303 @@ abstract class _MEventqLog extends MqEventLog {
   @override
   @JsonKey(ignore: true)
   _$MEventqLogCopyWith<_MEventqLog> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+GetWaitlist _$GetWaitlistFromJson(Map<String, dynamic> json) {
+  return _GetWaitlist.fromJson(json);
+}
+
+/// @nodoc
+class _$GetWaitlistTearOff {
+  const _$GetWaitlistTearOff();
+
+  _GetWaitlist call(
+      {@JsonKey(name: "current_priority") int? currentPriority,
+      @JsonKey(name: "referral_link") required String referralLink,
+      @JsonKey(name: "registered_email") required String registeredEmail,
+      @JsonKey(name: "total_referrals") required int totalReferrals,
+      @JsonKey(name: "total_users") required int totalUsers,
+      @JsonKey(name: "user_id") required String userId}) {
+    return _GetWaitlist(
+      currentPriority: currentPriority,
+      referralLink: referralLink,
+      registeredEmail: registeredEmail,
+      totalReferrals: totalReferrals,
+      totalUsers: totalUsers,
+      userId: userId,
+    );
+  }
+
+  GetWaitlist fromJson(Map<String, Object> json) {
+    return GetWaitlist.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $GetWaitlist = _$GetWaitlistTearOff();
+
+/// @nodoc
+mixin _$GetWaitlist {
+  @JsonKey(name: "current_priority")
+  int? get currentPriority => throw _privateConstructorUsedError;
+  @JsonKey(name: "referral_link")
+  String get referralLink => throw _privateConstructorUsedError;
+  @JsonKey(name: "registered_email")
+  String get registeredEmail => throw _privateConstructorUsedError;
+  @JsonKey(name: "total_referrals")
+  int get totalReferrals => throw _privateConstructorUsedError;
+  @JsonKey(name: "total_users")
+  int get totalUsers => throw _privateConstructorUsedError;
+  @JsonKey(name: "user_id")
+  String get userId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $GetWaitlistCopyWith<GetWaitlist> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $GetWaitlistCopyWith<$Res> {
+  factory $GetWaitlistCopyWith(
+          GetWaitlist value, $Res Function(GetWaitlist) then) =
+      _$GetWaitlistCopyWithImpl<$Res>;
+  $Res call(
+      {@JsonKey(name: "current_priority") int? currentPriority,
+      @JsonKey(name: "referral_link") String referralLink,
+      @JsonKey(name: "registered_email") String registeredEmail,
+      @JsonKey(name: "total_referrals") int totalReferrals,
+      @JsonKey(name: "total_users") int totalUsers,
+      @JsonKey(name: "user_id") String userId});
+}
+
+/// @nodoc
+class _$GetWaitlistCopyWithImpl<$Res> implements $GetWaitlistCopyWith<$Res> {
+  _$GetWaitlistCopyWithImpl(this._value, this._then);
+
+  final GetWaitlist _value;
+  // ignore: unused_field
+  final $Res Function(GetWaitlist) _then;
+
+  @override
+  $Res call({
+    Object? currentPriority = freezed,
+    Object? referralLink = freezed,
+    Object? registeredEmail = freezed,
+    Object? totalReferrals = freezed,
+    Object? totalUsers = freezed,
+    Object? userId = freezed,
+  }) {
+    return _then(_value.copyWith(
+      currentPriority: currentPriority == freezed
+          ? _value.currentPriority
+          : currentPriority // ignore: cast_nullable_to_non_nullable
+              as int?,
+      referralLink: referralLink == freezed
+          ? _value.referralLink
+          : referralLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      registeredEmail: registeredEmail == freezed
+          ? _value.registeredEmail
+          : registeredEmail // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalReferrals: totalReferrals == freezed
+          ? _value.totalReferrals
+          : totalReferrals // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalUsers: totalUsers == freezed
+          ? _value.totalUsers
+          : totalUsers // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$GetWaitlistCopyWith<$Res>
+    implements $GetWaitlistCopyWith<$Res> {
+  factory _$GetWaitlistCopyWith(
+          _GetWaitlist value, $Res Function(_GetWaitlist) then) =
+      __$GetWaitlistCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {@JsonKey(name: "current_priority") int? currentPriority,
+      @JsonKey(name: "referral_link") String referralLink,
+      @JsonKey(name: "registered_email") String registeredEmail,
+      @JsonKey(name: "total_referrals") int totalReferrals,
+      @JsonKey(name: "total_users") int totalUsers,
+      @JsonKey(name: "user_id") String userId});
+}
+
+/// @nodoc
+class __$GetWaitlistCopyWithImpl<$Res> extends _$GetWaitlistCopyWithImpl<$Res>
+    implements _$GetWaitlistCopyWith<$Res> {
+  __$GetWaitlistCopyWithImpl(
+      _GetWaitlist _value, $Res Function(_GetWaitlist) _then)
+      : super(_value, (v) => _then(v as _GetWaitlist));
+
+  @override
+  _GetWaitlist get _value => super._value as _GetWaitlist;
+
+  @override
+  $Res call({
+    Object? currentPriority = freezed,
+    Object? referralLink = freezed,
+    Object? registeredEmail = freezed,
+    Object? totalReferrals = freezed,
+    Object? totalUsers = freezed,
+    Object? userId = freezed,
+  }) {
+    return _then(_GetWaitlist(
+      currentPriority: currentPriority == freezed
+          ? _value.currentPriority
+          : currentPriority // ignore: cast_nullable_to_non_nullable
+              as int?,
+      referralLink: referralLink == freezed
+          ? _value.referralLink
+          : referralLink // ignore: cast_nullable_to_non_nullable
+              as String,
+      registeredEmail: registeredEmail == freezed
+          ? _value.registeredEmail
+          : registeredEmail // ignore: cast_nullable_to_non_nullable
+              as String,
+      totalReferrals: totalReferrals == freezed
+          ? _value.totalReferrals
+          : totalReferrals // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalUsers: totalUsers == freezed
+          ? _value.totalUsers
+          : totalUsers // ignore: cast_nullable_to_non_nullable
+              as int,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_GetWaitlist extends _GetWaitlist {
+  _$_GetWaitlist(
+      {@JsonKey(name: "current_priority") this.currentPriority,
+      @JsonKey(name: "referral_link") required this.referralLink,
+      @JsonKey(name: "registered_email") required this.registeredEmail,
+      @JsonKey(name: "total_referrals") required this.totalReferrals,
+      @JsonKey(name: "total_users") required this.totalUsers,
+      @JsonKey(name: "user_id") required this.userId})
+      : super._();
+
+  factory _$_GetWaitlist.fromJson(Map<String, dynamic> json) =>
+      _$$_GetWaitlistFromJson(json);
+
+  @override
+  @JsonKey(name: "current_priority")
+  final int? currentPriority;
+  @override
+  @JsonKey(name: "referral_link")
+  final String referralLink;
+  @override
+  @JsonKey(name: "registered_email")
+  final String registeredEmail;
+  @override
+  @JsonKey(name: "total_referrals")
+  final int totalReferrals;
+  @override
+  @JsonKey(name: "total_users")
+  final int totalUsers;
+  @override
+  @JsonKey(name: "user_id")
+  final String userId;
+
+  @override
+  String toString() {
+    return 'GetWaitlist(currentPriority: $currentPriority, referralLink: $referralLink, registeredEmail: $registeredEmail, totalReferrals: $totalReferrals, totalUsers: $totalUsers, userId: $userId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _GetWaitlist &&
+            (identical(other.currentPriority, currentPriority) ||
+                const DeepCollectionEquality()
+                    .equals(other.currentPriority, currentPriority)) &&
+            (identical(other.referralLink, referralLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.referralLink, referralLink)) &&
+            (identical(other.registeredEmail, registeredEmail) ||
+                const DeepCollectionEquality()
+                    .equals(other.registeredEmail, registeredEmail)) &&
+            (identical(other.totalReferrals, totalReferrals) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalReferrals, totalReferrals)) &&
+            (identical(other.totalUsers, totalUsers) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalUsers, totalUsers)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(currentPriority) ^
+      const DeepCollectionEquality().hash(referralLink) ^
+      const DeepCollectionEquality().hash(registeredEmail) ^
+      const DeepCollectionEquality().hash(totalReferrals) ^
+      const DeepCollectionEquality().hash(totalUsers) ^
+      const DeepCollectionEquality().hash(userId);
+
+  @JsonKey(ignore: true)
+  @override
+  _$GetWaitlistCopyWith<_GetWaitlist> get copyWith =>
+      __$GetWaitlistCopyWithImpl<_GetWaitlist>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_GetWaitlistToJson(this);
+  }
+}
+
+abstract class _GetWaitlist extends GetWaitlist {
+  factory _GetWaitlist(
+      {@JsonKey(name: "current_priority") int? currentPriority,
+      @JsonKey(name: "referral_link") required String referralLink,
+      @JsonKey(name: "registered_email") required String registeredEmail,
+      @JsonKey(name: "total_referrals") required int totalReferrals,
+      @JsonKey(name: "total_users") required int totalUsers,
+      @JsonKey(name: "user_id") required String userId}) = _$_GetWaitlist;
+  _GetWaitlist._() : super._();
+
+  factory _GetWaitlist.fromJson(Map<String, dynamic> json) =
+      _$_GetWaitlist.fromJson;
+
+  @override
+  @JsonKey(name: "current_priority")
+  int? get currentPriority => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "referral_link")
+  String get referralLink => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "registered_email")
+  String get registeredEmail => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "total_referrals")
+  int get totalReferrals => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "total_users")
+  int get totalUsers => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: "user_id")
+  String get userId => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$GetWaitlistCopyWith<_GetWaitlist> get copyWith =>
       throw _privateConstructorUsedError;
 }
