@@ -35,4 +35,10 @@ mixin SnackbarHelper {
 
     return false;
   }
+
+  void copiedToClipboardSnackbar() {
+    _snackbarService.showSnackbar(
+      message: kTextCopiedToClipboardMessage,
+    );
+  }
 }

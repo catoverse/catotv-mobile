@@ -97,7 +97,6 @@ class GQLQueries {
         }
         userId
         id
-        WatchHistory
       }
     }
   ''';

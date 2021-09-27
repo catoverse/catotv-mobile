@@ -7,6 +7,7 @@ import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:feed/remote/custom_link.dart';
 import 'package:graphql/client.dart';
+import 'package:dio/dio.dart' as dio;
 
 /// The [RemoteClient] is a wrapper class to abstract [GraphQLClient]
 /// Here are the reasons why we need an external class -
@@ -121,4 +122,32 @@ class RemoteClient {
 
     return Result.success(result.data);
   }
+
+  Future<Result<Failure, dynamic>> postDio(
+    String url,
+    Map<String, dynamic> body,
+  ) async {
+    bool hasInternet = await _connectivity.isConnected;
+
+    if (!hasInternet) {
+      return Result.failed(Failure.error(NoConnectivityError()));
+    }
+
+    try {
+      final result = await dio.Dio().post(
+        url,
+        data: body,
+        options: dio.Options(
+          responseType: dio.ResponseType.json,
+          followRedirects: false,
+        ),
+      );
+
+      return Result.success(result.data);
+    } catch (err) {
+      _log.e('failed to perform http post due to server error');
+      return Result.failed(Failure.error(ServerError()));
+    }
+  }
+
 }

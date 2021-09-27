@@ -27,6 +27,7 @@ import 'package:feed/ui/bookmarks/bookmarks_view.dart';
 import 'package:feed/ui/feed/feed_view.dart';
 import 'package:feed/ui/invite/invite_view.dart';
 import 'package:feed/ui/onboarding/onboarding_view.dart';
+import 'package:feed/ui/position/position_view.dart';
 import 'package:feed/ui/restricted_home/restricted_home_view.dart';
 import 'package:feed/ui/single_video/single_video_view.dart';
 import 'package:feed/ui/startup/startup_view.dart';
@@ -56,6 +57,7 @@ import 'injection.dart';
     MaterialRoute(page: InviteView),
     MaterialRoute(page: FeedView),
     MaterialRoute(page: SingleFeedView),
+    MaterialRoute(page: PositionView),
   ],
   dependencies: [
     Presolve(

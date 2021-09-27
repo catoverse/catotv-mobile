@@ -2,6 +2,7 @@
 const String kGraphqlApiEnvKey = "GRAPHQL_API_URL";
 const String kNoKey = "NO_KEY";
 const String kGoogleClientEnvKey = "GOOGLE_CLIENT";
+const String kGetWaitListApiKey = "GET_WAITLIST_API_KEY";
 
 // Hive database box names
 const String kAuthUserBox = "USER_AUTH_BOX";

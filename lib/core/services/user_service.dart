@@ -2,6 +2,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/events.dart';
 import 'package:feed/core/constants/keys.dart';
+import 'package:feed/core/enums/login_events.dart';
 import 'package:feed/core/models/app_models.dart';
 
 import 'package:feed/core/services/hive_service/hive_service.dart';
@@ -32,14 +33,21 @@ class UserService {
   /// Returns [true] if the user is signed on the device
   bool get hasLoggedInUser => _keyStorageService.get(kLoginStatusKey) ?? false;
 
-  Future<bool> loginWithGoogle() async {
+  Future<LoginEvents> loginWithGoogle() async {
     final authResult = await _authService.signInWithGoogle();
 
     if (authResult.hasError) {
       _log.e('Local google signin error: ${authResult.errorMessage}');
       _analytics
           .logEvent(kLoginFailed, params: {"error": "google_signin_error"});
-      return false;
+      return LoginEvents.failed;
+    }
+
+    final shouldUserGo =
+        await _apiService.letUserInOrNot(authResult.user!.email!);
+
+    if (!shouldUserGo) {
+      return LoginEvents.notOnWaitlist;
     }
 
     var googleUser = authResult.user;
@@ -56,7 +64,7 @@ class UserService {
       _log.e('Gql Google signin error: $result');
       _analytics
           .logEvent(kLoginFailed, params: {"error": "graphql_signin_error"});
-      return false;
+      return LoginEvents.failed;
     }
 
     _log.i("User signed in successful");
@@ -68,7 +76,7 @@ class UserService {
       syncUser(user: result),
     ]);
 
-    return true;
+    return LoginEvents.success;
   }
 
   /// Stores the loggedin user and updates

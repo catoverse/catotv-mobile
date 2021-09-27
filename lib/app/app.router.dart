@@ -8,11 +8,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked/stacked_annotations.dart';
 
 import '../ui/bookmarks/bookmarks_view.dart';
 import '../ui/feed/feed_view.dart';
 import '../ui/invite/invite_view.dart';
 import '../ui/onboarding/onboarding_view.dart';
+import '../ui/position/position_view.dart';
 import '../ui/restricted_home/restricted_home_view.dart';
 import '../ui/single_video/single_video_view.dart';
 import '../ui/startup/startup_view.dart';
@@ -29,6 +31,7 @@ class Routes {
   static const String inviteView = '/invite-view';
   static const String feedView = '/feed-view';
   static const String singleFeedView = '/single-feed-view';
+  static const String positionView = '/position-view';
   static const all = <String>{
     startUpView,
     updateView,
@@ -39,6 +42,7 @@ class Routes {
     inviteView,
     feedView,
     singleFeedView,
+    positionView,
   };
 }
 
@@ -55,36 +59,37 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.inviteView, page: InviteView),
     RouteDef(Routes.feedView, page: FeedView),
     RouteDef(Routes.singleFeedView, page: SingleFeedView),
+    RouteDef(Routes.positionView, page: PositionView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
   final _pagesMap = <Type, StackedRouteFactory>{
     StartUpView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => const StartUpView(),
         settings: data,
       );
     },
     UpdateView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => UpdateView(),
         settings: data,
       );
     },
     BookmarksView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => BookmarksView(),
         settings: data,
       );
     },
     OnboardingView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => OnboardingView(),
         settings: data,
       );
     },
     RestrictedHomeView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => RestrictedHomeView(),
         settings: data,
       );
@@ -93,7 +98,7 @@ class StackedRouter extends RouterBase {
       var args = data.getArgs<TopicSelectionViewArguments>(
         orElse: () => TopicSelectionViewArguments(),
       );
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => TopicSelectionView(
           key: args.key,
           updateTopicSelection: args.updateTopicSelection,
@@ -102,24 +107,30 @@ class StackedRouter extends RouterBase {
       );
     },
     InviteView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => InviteView(),
         settings: data,
       );
     },
     FeedView: (data) {
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => FeedView(),
         settings: data,
       );
     },
     SingleFeedView: (data) {
       var args = data.getArgs<SingleFeedViewArguments>(nullOk: false);
-      return MaterialPageRoute<dynamic>(
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
         builder: (context) => SingleFeedView(
           key: args.key,
           videoId: args.videoId,
         ),
+        settings: data,
+      );
+    },
+    PositionView: (data) {
+      return MaterialPageRoute<MaterialRoute<dynamic>>(
+        builder: (context) => const PositionView(),
         settings: data,
       );
     },
