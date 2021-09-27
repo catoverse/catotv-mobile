@@ -298,17 +298,15 @@ class MEventqLogAdapter extends TypeAdapter<_$_MEventqLog> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_User _$_$_UserFromJson(Map<String, dynamic> json) {
-  return _$_User(
-    id: json['id'] as String,
-    name: json['name'] as String,
-    email: json['email'] as String,
-    avatar: json['avatar'] as String,
-    token: json['token'] as String,
-  );
-}
+_$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      email: json['email'] as String,
+      avatar: json['avatar'] as String,
+      token: json['token'] as String,
+    );
 
-Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
+Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,
@@ -316,30 +314,27 @@ Map<String, dynamic> _$_$_UserToJson(_$_User instance) => <String, dynamic>{
       'token': instance.token,
     };
 
-_$_Topic _$_$_TopicFromJson(Map<String, dynamic> json) {
-  return _$_Topic(
-    id: json['id'] as String,
-    name: json['name'] as String,
-    isSelected: json['isSelected'] as bool? ?? false,
-  );
-}
+_$_Topic _$$_TopicFromJson(Map<String, dynamic> json) => _$_Topic(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      isSelected: json['isSelected'] as bool? ?? false,
+    );
 
-Map<String, dynamic> _$_$_TopicToJson(_$_Topic instance) => <String, dynamic>{
+Map<String, dynamic> _$$_TopicToJson(_$_Topic instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'isSelected': instance.isSelected,
     };
 
-_$_ChannelInformation _$_$_ChannelInformationFromJson(
-    Map<String, dynamic> json) {
-  return _$_ChannelInformation(
-    id: json['id'] as String?,
-    name: json['name'] as String?,
-    subscriberCount: json['subscriber_count'] as int?,
-  );
-}
+_$_ChannelInformation _$$_ChannelInformationFromJson(
+        Map<String, dynamic> json) =>
+    _$_ChannelInformation(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      subscriberCount: json['subscriber_count'] as int?,
+    );
 
-Map<String, dynamic> _$_$_ChannelInformationToJson(
+Map<String, dynamic> _$$_ChannelInformationToJson(
         _$_ChannelInformation instance) =>
     <String, dynamic>{
       'id': instance.id,
@@ -347,18 +342,17 @@ Map<String, dynamic> _$_$_ChannelInformationToJson(
       'subscriber_count': instance.subscriberCount,
     };
 
-_$_ContentDetails _$_$_ContentDetailsFromJson(Map<String, dynamic> json) {
-  return _$_ContentDetails(
-    youtubeCategory: json['youtube_category'] as int?,
-    hasCaptions: json['captions_available'] as bool?,
-    dislikes: json['dislikes'] as int?,
-    likes: json['likes'] as int?,
-    duration: json['duration'] as int?,
-    views: json['views'] as int?,
-  );
-}
+_$_ContentDetails _$$_ContentDetailsFromJson(Map<String, dynamic> json) =>
+    _$_ContentDetails(
+      youtubeCategory: json['youtube_category'] as int?,
+      hasCaptions: json['captions_available'] as bool?,
+      dislikes: json['dislikes'] as int?,
+      likes: json['likes'] as int?,
+      duration: json['duration'] as int?,
+      views: json['views'] as int?,
+    );
 
-Map<String, dynamic> _$_$_ContentDetailsToJson(_$_ContentDetails instance) =>
+Map<String, dynamic> _$$_ContentDetailsToJson(_$_ContentDetails instance) =>
     <String, dynamic>{
       'youtube_category': instance.youtubeCategory,
       'captions_available': instance.hasCaptions,
@@ -368,26 +362,24 @@ Map<String, dynamic> _$_$_ContentDetailsToJson(_$_ContentDetails instance) =>
       'views': instance.views,
     };
 
-_$_Video _$_$_VideoFromJson(Map<String, dynamic> json) {
-  return _$_Video(
-    id: json['id'] as String,
-    title: json['title'] as String,
-    videoUrl: json['video_url'] as String,
-    topic: Topic.fromJson(json['topic'] as Map<String, dynamic>),
-    startTimestamp: json['start_timestamp'] as int?,
-    endTimestamp: json['end_timestamp'] as int?,
-    channelInformation: json['channel_information'] == null
-        ? null
-        : ChannelInformation.fromJson(
-            json['channel_information'] as Map<String, dynamic>),
-    contentDetails: json['content_details'] == null
-        ? null
-        : ContentDetails.fromJson(
-            json['content_details'] as Map<String, dynamic>),
-  );
-}
+_$_Video _$$_VideoFromJson(Map<String, dynamic> json) => _$_Video(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      videoUrl: json['video_url'] as String,
+      topic: Topic.fromJson(json['topic'] as Map<String, dynamic>),
+      startTimestamp: json['start_timestamp'] as int?,
+      endTimestamp: json['end_timestamp'] as int?,
+      channelInformation: json['channel_information'] == null
+          ? null
+          : ChannelInformation.fromJson(
+              json['channel_information'] as Map<String, dynamic>),
+      contentDetails: json['content_details'] == null
+          ? null
+          : ContentDetails.fromJson(
+              json['content_details'] as Map<String, dynamic>),
+    );
 
-Map<String, dynamic> _$_$_VideoToJson(_$_Video instance) => <String, dynamic>{
+Map<String, dynamic> _$$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'video_url': instance.videoUrl,
@@ -398,20 +390,19 @@ Map<String, dynamic> _$_$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'content_details': instance.contentDetails,
     };
 
-_$_MEventqLog _$_$_MEventqLogFromJson(Map<String, dynamic> json) {
-  return _$_MEventqLog(
-    userId: json['user_id'] as String,
-    videoId: json['video_id'] as String,
-    timestamp: json['timestamp'] as String,
-    description: json['description'] as String,
-    videoDuration: json['video_duration'] as int,
-    sessionDuration: json['session_duration'] as int,
-    durationWatched: json['duration_watched'] as int,
-    event: json['event'] as String,
-  );
-}
+_$_MEventqLog _$$_MEventqLogFromJson(Map<String, dynamic> json) =>
+    _$_MEventqLog(
+      userId: json['user_id'] as String,
+      videoId: json['video_id'] as String,
+      timestamp: json['timestamp'] as String,
+      description: json['description'] as String,
+      videoDuration: json['video_duration'] as int,
+      sessionDuration: json['session_duration'] as int,
+      durationWatched: json['duration_watched'] as int,
+      event: json['event'] as String,
+    );
 
-Map<String, dynamic> _$_$_MEventqLogToJson(_$_MEventqLog instance) =>
+Map<String, dynamic> _$$_MEventqLogToJson(_$_MEventqLog instance) =>
     <String, dynamic>{
       'user_id': instance.userId,
       'video_id': instance.videoId,
@@ -421,4 +412,24 @@ Map<String, dynamic> _$_$_MEventqLogToJson(_$_MEventqLog instance) =>
       'session_duration': instance.sessionDuration,
       'duration_watched': instance.durationWatched,
       'event': instance.event,
+    };
+
+_$_GetWaitlist _$$_GetWaitlistFromJson(Map<String, dynamic> json) =>
+    _$_GetWaitlist(
+      currentPriority: json['current_priority'] as int?,
+      referralLink: json['referral_link'] as String,
+      registeredEmail: json['registered_email'] as String,
+      totalReferrals: json['total_referrals'] as int,
+      totalUsers: json['total_users'] as int,
+      userId: json['user_id'] as String,
+    );
+
+Map<String, dynamic> _$$_GetWaitlistToJson(_$_GetWaitlist instance) =>
+    <String, dynamic>{
+      'current_priority': instance.currentPriority,
+      'referral_link': instance.referralLink,
+      'registered_email': instance.registeredEmail,
+      'total_referrals': instance.totalReferrals,
+      'total_users': instance.totalUsers,
+      'user_id': instance.userId,
     };

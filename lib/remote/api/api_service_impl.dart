@@ -196,11 +196,11 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future<bool> isUserOnWaitlist(String email) async {
+  Future<bool> letUserInOrNot(String email) async {
     _log.i('Checking if user is on waitlist email: $email');
 
-    Result<Failure, dynamic> result = await _client.postHttp(
-      'https://getwaitlist.com/api/v1/users/status/',
+    Result<Failure, dynamic> result = await _client.postDio(
+      'https://getwaitlist.com/api/v1/users/status',
       {
         "email": email,
         "api_key": _environmentService.getValue(kGetWaitListApiKey),
@@ -208,16 +208,19 @@ class APIServiceImpl implements APIService {
     );
     if (result.isFailed) return false;
 
-    return true;
+    final _waitlist = GetWaitlist.fromJson(result.success);
+
+    if (_waitlist.currentPriority == null) return true;
+
+    return false;
   }
 
   @override
   Future<GetWaitlist?> addUserToWailist(String email) async {
     _log.i('Adding User on waitlist email: $email');
 
-    Result<Failure, dynamic> result = await _client.post(
-    
-      'https://getwaitlist.com/waitlist/',
+    Result<Failure, dynamic> result = await _client.postDio(
+      'https://getwaitlist.com/api/v1/waitlists/submit',
       {
         "email": email,
         "api_key": _environmentService.getValue(kGetWaitListApiKey),
@@ -226,6 +229,6 @@ class APIServiceImpl implements APIService {
     );
     if (result.isFailed) return null;
 
-    return GetWaitlist.fromJson(result.success as String);
+    return GetWaitlist.fromJson(result.success);
   }
 }

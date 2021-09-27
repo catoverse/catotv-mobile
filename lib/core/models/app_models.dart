@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:feed/core/constants/assets.dart';
@@ -173,93 +171,19 @@ extension ImageProperty on Topic {
   }
 }
 
+@freezed
+class GetWaitlist with _$GetWaitlist {
+  GetWaitlist._();
 
-class GetWaitlist {
+  factory GetWaitlist({
+    @JsonKey(name: "current_priority")  int? currentPriority,
+    @JsonKey(name: "referral_link") required String referralLink,
+    @JsonKey(name: "registered_email") required String registeredEmail,
+    @JsonKey(name: "total_referrals") required int totalReferrals,
+    @JsonKey(name: "total_users") required int totalUsers,
+    @JsonKey(name: "user_id") required String userId,
+  }) = _GetWaitlist;
 
-  final int currentPriority;
-  final String referralLink;
-  final String registeredEmail;
-  final int totalReferrals;
-  final int totalUsers;
-  final String userId;
-  GetWaitlist({
-    required this.currentPriority,
-    required this.referralLink,
-    required this.registeredEmail,
-    required this.totalReferrals,
-    required this.totalUsers,
-    required this.userId,
-  });
-
-  GetWaitlist copyWith({
-    int? currentPriority,
-    String? referralLink,
-    String? registeredEmail,
-    int? totalReferrals,
-    int? totalUsers,
-    String? userId,
-  }) {
-    return GetWaitlist(
-      currentPriority: currentPriority ?? this.currentPriority,
-      referralLink: referralLink ?? this.referralLink,
-      registeredEmail: registeredEmail ?? this.registeredEmail,
-      totalReferrals: totalReferrals ?? this.totalReferrals,
-      totalUsers: totalUsers ?? this.totalUsers,
-      userId: userId ?? this.userId,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'currentPriority': currentPriority,
-      'referralLink': referralLink,
-      'registeredEmail': registeredEmail,
-      'totalReferrals': totalReferrals,
-      'totalUsers': totalUsers,
-      'userId': userId,
-    };
-  }
-
-  factory GetWaitlist.fromMap(Map<String, dynamic> map) {
-    return GetWaitlist(
-      currentPriority: map['currentPriority'],
-      referralLink: map['referralLink'],
-      registeredEmail: map['registeredEmail'],
-      totalReferrals: map['totalReferrals'],
-      totalUsers: map['totalUsers'],
-      userId: map['userId'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory GetWaitlist.fromJson(String source) => GetWaitlist.fromMap(json.decode(source));
-
-  @override
-  String toString() {
-    return 'GetWaitlist(currentPriority: $currentPriority, referralLink: $referralLink, registeredEmail: $registeredEmail, totalReferrals: $totalReferrals, totalUsers: $totalUsers, userId: $userId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is GetWaitlist &&
-      other.currentPriority == currentPriority &&
-      other.referralLink == referralLink &&
-      other.registeredEmail == registeredEmail &&
-      other.totalReferrals == totalReferrals &&
-      other.totalUsers == totalUsers &&
-      other.userId == userId;
-  }
-
-  @override
-  int get hashCode {
-    return currentPriority.hashCode ^
-      referralLink.hashCode ^
-      registeredEmail.hashCode ^
-      totalReferrals.hashCode ^
-      totalUsers.hashCode ^
-      userId.hashCode;
-  }
+  factory GetWaitlist.fromJson(Map<String, dynamic> json) =>
+      _$GetWaitlistFromJson(json);
 }

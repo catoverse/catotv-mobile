@@ -43,10 +43,10 @@ class UserService {
       return LoginEvents.failed;
     }
 
-    final isUserOnWaitlist =
-        await _apiService.isUserOnWaitlist(authResult.user!.email!);
+    final shouldUserGo =
+        await _apiService.letUserInOrNot(authResult.user!.email!);
 
-    if (!isUserOnWaitlist) {
+    if (!shouldUserGo) {
       return LoginEvents.notOnWaitlist;
     }
 
