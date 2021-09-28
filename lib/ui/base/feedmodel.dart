@@ -66,14 +66,6 @@ abstract class BaseFeedModel extends BaseViewModel
         durationWatched: durationWatched,
       );
 
-  logPlayVideo(int index) {
-    logUserEvent(UserEvent.play, videoId: videos[index].id);
-  }
-
-  logPauseVideo(int index) {
-    logUserEvent(UserEvent.pause, videoId: videos[index].id);
-  }
-
   logShareVideo(int index) {
     logUserEvent(UserEvent.share, videoId: videos[index].id);
   }
@@ -83,9 +75,7 @@ abstract class BaseFeedModel extends BaseViewModel
   }
 
   logSessionStart() {
-    logUserEvent(
-      UserEvent.sesssionStart,
-    );
+    logUserEvent(UserEvent.sesssionStart);
   }
 
   logSessionInterruption() {

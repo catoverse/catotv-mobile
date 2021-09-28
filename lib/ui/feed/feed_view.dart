@@ -37,11 +37,6 @@ class _FeedViewState extends State<FeedView> with WidgetsBindingObserver {
   }
 
   @override
-  Future<bool> didPopRoute() {
-    return super.didPopRoute();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return ScreenBuilder<BaseFeedModel>(
         viewModel: FeedViewModel(),

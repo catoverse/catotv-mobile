@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
@@ -54,16 +51,7 @@ class _FeedPlayerState extends State<FeedPlayer>
                 .flickVideoManager!.videoPlayerValue!.position.inSeconds;
 
             if (currentPosition != 0) {
-              final duration = flickManager?.flickVideoManager!
-                      .videoPlayerValue!.duration.inSeconds ??
-                  0;
-
-              widget.baseFeedModel.logUserEvent(
-                UserEvent.completed,
-                durationWatched: duration,
-                videoDuration: duration,
-                videoId: widget.video.videoUrl,
-              );
+              widget.baseFeedModel.logCompleteVideo(widget.index);
             }
           });
 
@@ -85,29 +73,22 @@ class _FeedPlayerState extends State<FeedPlayer>
         if (flickManager != null &&
             flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.pause();
+          logSkipOrView();
         }
       }
     }
-    logSkip();
+
     super.didUpdateWidget(oldWidget);
   }
 
-  void logSkip() async {
-    final _flickManager = widget.feedPlayerController
-        .getFlickManaget(widget.index)
-        .flickVideoManager;
+  void logSkipOrView() {
+    final currentVideoDuration =
+        flickManager!.flickVideoManager!.videoPlayerValue!.position;
 
-    if (_flickManager != null) {
-      final currentVideoDuration =
-          await _flickManager.videoPlayerController!.position;
-
-      // log(currentVideoDuration.toString(), name: 'Duration');
-
-      if (currentVideoDuration != null &&
-          currentVideoDuration.compareTo(const Duration(seconds: 10)) < 0) {
-        widget.baseFeedModel.logSkipVideo(widget.index);
-        log('User Skip video ${widget.index}');
-      }
+    if (currentVideoDuration.inSeconds < 10) {
+      widget.baseFeedModel.logSkipVideo(widget.index - 1);
+    } else {
+      widget.baseFeedModel.logViewVideo(widget.index - 1);
     }
   }
 
