@@ -2,6 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:feed/core/services/environment_service.dart';
 import 'package:feed/core/services/explode_service.dart';
 import 'package:feed/core/services/key_storage_service.dart';
+import 'package:feed/core/services/life_cycle_service.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/notification_service.dart';
 import 'package:feed/core/services/share_service.dart';
@@ -74,6 +75,11 @@ import 'injection.dart';
     Presolve(
       classType: SharedPreferences,
       presolveUsing: SharedPreferences.getInstance,
+    ),
+
+    Presolve(
+      classType: LifeCycleService,
+      presolveUsing: LifeCycleService.getInstance,
     ),
     LazySingleton(classType: Connectivity),
     LazySingleton(

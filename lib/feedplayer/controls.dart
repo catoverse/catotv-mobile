@@ -68,12 +68,6 @@ class FeedControls extends StatelessWidget {
                         videoManager.isVideoEnded
                             ? controlManager.replay()
                             : controlManager.togglePlay();
-
-                        if (videoManager.isPlaying) {
-                          feedViewModel.logPlayVideo(index);
-                        } else {
-                          feedViewModel.logPauseVideo(index);
-                        }
                       },
                     ),
                   ),

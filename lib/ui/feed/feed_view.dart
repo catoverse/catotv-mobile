@@ -1,3 +1,5 @@
+import 'package:feed/app/app.locator.dart';
+import 'package:feed/core/services/life_cycle_service.dart';
 import 'package:feed/feedplayer/list/list.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/ui/feed/widgets/greeting.dart';
@@ -8,7 +10,32 @@ import 'package:flutter/material.dart';
 
 import 'feed_viewmodel.dart';
 
-class FeedView extends StatelessWidget {
+class FeedView extends StatefulWidget {
+  @override
+  State<FeedView> createState() => _FeedViewState();
+}
+
+class _FeedViewState extends State<FeedView> with WidgetsBindingObserver {
+  final _lifeCycleService = locator<LifeCycleService>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance!.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    _lifeCycleService.addStream(state);
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenBuilder<BaseFeedModel>(

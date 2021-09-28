@@ -5,6 +5,8 @@ class FeedPlayerController {
   // FlickManager? _activeManager;
   final bool _isMute = false;
 
+  FlickManager getFlickManaget(int index) => _flickManagers[index];
+
   init(FlickManager flickManager) {
     _flickManagers.add(flickManager);
     if (_isMute) {

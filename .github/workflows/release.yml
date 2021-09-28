@@ -31,6 +31,9 @@ jobs:
 
       - name: Init Flutter
         run: flutter doctor -v && flutter pub get
+      
+      - name: Code Analysis
+        run: flutter analyze
 
       - run: flutter build apk --release
 

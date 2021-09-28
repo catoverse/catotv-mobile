@@ -1,4 +1,3 @@
-import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
@@ -30,13 +29,14 @@ class FeedPlayer extends StatefulWidget {
 }
 
 class _FeedPlayerState extends State<FeedPlayer>
-    with AutomaticKeepAliveClientMixin {
+    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
   late Future<void> _initializeVideoPlayerFuture;
   FlickManager? flickManager;
   late String thumbnail;
 
   @override
   void initState() {
+    WidgetsBinding.instance!.addObserver(this);
     thumbnail = widget.baseFeedModel.getThumbnail(widget.video.videoUrl);
     _initializeVideoPlayerFuture = widget.baseFeedModel
         .getStreamUrl(widget.video.videoUrl)
@@ -51,16 +51,7 @@ class _FeedPlayerState extends State<FeedPlayer>
                 .flickVideoManager!.videoPlayerValue!.position.inSeconds;
 
             if (currentPosition != 0) {
-              final duration = flickManager?.flickVideoManager!
-                      .videoPlayerValue!.duration.inSeconds ??
-                  0;
-
-              widget.baseFeedModel.logUserEvent(
-                UserEvent.completed,
-                durationWatched: duration,
-                videoDuration: duration,
-                videoId: widget.video.videoUrl,
-              );
+              widget.baseFeedModel.logCompleteVideo(widget.index);
             }
           });
 
@@ -82,10 +73,23 @@ class _FeedPlayerState extends State<FeedPlayer>
         if (flickManager != null &&
             flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.pause();
+          logSkipOrView();
         }
       }
     }
+
     super.didUpdateWidget(oldWidget);
+  }
+
+  void logSkipOrView() {
+    final currentVideoDuration =
+        flickManager!.flickVideoManager!.videoPlayerValue!.position;
+
+    if (currentVideoDuration.inSeconds < 10) {
+      widget.baseFeedModel.logSkipVideo(widget.index - 1);
+    } else {
+      widget.baseFeedModel.logViewVideo(widget.index - 1);
+    }
   }
 
   @override
