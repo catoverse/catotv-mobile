@@ -102,6 +102,10 @@ abstract class BaseFeedModel extends BaseViewModel
 
   getVideo(String videoId);
 
-  Future<void> addBookmarks(int index) async =>
-      await _videoService.addBookmarks(videos[index]);
+  Future<List<Video>> getBookmarkedVideos() =>
+      _videoService.getBookmarkedVideos();
+
+  Future<void> addBookmarks(int index) async {
+    await _videoService.addBookmarks(videos[index]);
+  }
 }

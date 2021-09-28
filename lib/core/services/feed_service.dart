@@ -22,6 +22,15 @@ class FeedService {
     var selectedTopics = await _topicService.getSelectedTopics(userId);
 
     var list = await _apiService.getVideos(skip, limit, selectedTopics);
+    final userProfileResult =
+        await _apiService.geFulltUserProfile(userId: userId);
+    List<String>? _bookmarks;
+
+    if (userProfileResult is! Failure) {
+      _bookmarks =
+          UserProfile.fromJson(userProfileResult as Map<String, dynamic>)
+              .bookmarks;
+    }
 
     List<Video> apiVideos = [];
 
@@ -32,6 +41,11 @@ class FeedService {
         var isYoutubeVideo = VideoService.convertUrlToId(json["video_url"]);
 
         if (isYoutubeVideo != null) apiVideos.add(Video.fromJson(json));
+      }
+      if (_bookmarks != null) {
+        apiVideos = apiVideos
+            .map((e) => e.copyWith(bookmarked: _bookmarks!.contains(e.id)))
+            .toList();
       }
 
       return apiVideos;

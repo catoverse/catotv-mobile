@@ -4,6 +4,7 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/core/services/life_cycle_service.dart';
 import 'package:feed/core/services/notification_service.dart';
+import 'package:feed/core/services/video_service.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,6 +14,7 @@ class FeedViewModel extends BaseFeedModel {
   final _dialogService = locator<DialogService>();
   final _notificationService = locator<NotificationService>();
   final _lifeCycleService = locator<LifeCycleService>();
+  final _videoService = locator<VideoService>();
 
   int skip = 0;
 
@@ -48,7 +50,6 @@ class FeedViewModel extends BaseFeedModel {
     });
     
     var newVideos = await _feedService.fetchVideos(skip: skip);
-
     setBusy(false);
 
     _videos = newVideos;
@@ -68,5 +69,14 @@ class FeedViewModel extends BaseFeedModel {
   @override
   getVideo(String videoId) {
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addBookmarks(int index) async {
+    if (!_videos[index].bookmarked) {
+      _videos[index] = _videos[index].copyWith(bookmarked: true);
+      notifyListeners();
+      await _videoService.addBookmarks(videos[index]);
+    }
   }
 }
