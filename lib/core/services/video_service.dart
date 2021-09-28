@@ -72,14 +72,42 @@ class VideoService {
   }
 
   Future<void> addBookmarks(Video video) async {
-    final bookmarkedVideos = await getBookmarkedVideos();
+    await _hiveService
+        .insertList<Video>(items: [video], boxName: kBookmarkedVideoKey);
+    await _apiService.addBookmarks(_userService.currentUser.id, video.id);
+  }
 
-    var shouldSave = !bookmarkedVideos.contains(video);
+  Future<void> addBookmarksToCache(Video video) async {
+    await _hiveService
+        .insertList<Video>(items: [video], boxName: kBookmarkedVideoKey);
+  }
 
-    if (shouldSave) {
-      await _hiveService
-          .insertList<Video>(items: [video], boxName: kBookmarkedVideoKey);
-      await _apiService.addBookmarks(_userService.currentUser.id, video.id);
+  Future<void> syncBookmarks() async {
+    List<Video> localBookmarkedVideos = await getBookmarkedVideos();
+    List<String> localBookmarks =
+        localBookmarkedVideos.map((e) => e.id).toList();
+
+    var userId = _userService.currentUser.id;
+
+    var result = await _apiService.geFulltUserProfile(userId: userId);
+    List<String> remoteBookmarks = [];
+
+    if (result is! Failure) {
+      final userProfile = UserProfile.fromJson(result as Map<String, dynamic>);
+
+      remoteBookmarks = userProfile.bookmarks ?? [];
+    }
+    remoteBookmarks = remoteBookmarks.toSet().toList();
+
+    remoteBookmarks.removeWhere((element) => localBookmarks.contains(element));
+
+    for (var videoId in remoteBookmarks) {
+      final videoResult = await _apiService.getVideoById(videoId);
+
+      if (videoResult is! Failure) {
+        var video = Video.fromJson(videoResult as Map<String, dynamic>);
+        await addBookmarksToCache(video.copyWith(bookmarked: true));
+      }
     }
   }
 }

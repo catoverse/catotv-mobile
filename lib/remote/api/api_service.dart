@@ -14,6 +14,7 @@ abstract class APIService {
   Future getVideoById(String videoId);
   Future requestInvite({required String email});
   Future getUserProfile({required String userId});
+  Future geFulltUserProfile({required String userId});
   Future createUserProfile(
       {required String userId,
       required String name,

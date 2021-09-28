@@ -47,8 +47,8 @@ class GQLQueries {
   ''';
 
   static const String getVideoById = r'''
-    query GetVideoById($watchId: String!) {
-      videoByWatchId(watchId: $watchId) {
+    query GetVideoById($id: ID!) {
+      videoById(id: $id) {
         id
         title
         video_url
@@ -95,6 +95,7 @@ class GQLQueries {
           date
           count
         }
+        bookmarks
         userId
         id
       }
@@ -221,8 +222,8 @@ class GQLQueries {
     return {"watchId": watchId};
   }
 
-  static Map<String, dynamic> getVideoByIdVariables(String watchId) {
-    return {"watchId": watchId};
+  static Map<String, dynamic> getVideoByIdVariables(String id) {
+    return {"id": id};
   }
 
   static Map<String, dynamic> postStreamLinkVariables(
