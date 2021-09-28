@@ -20,7 +20,7 @@ class BookmarksView extends StatelessWidget {
                 iconTheme: const IconThemeData(color: AppColors.textPrimary),
               ),
               body: model.isBusy
-                  ? const CircularProgressIndicator()
+                  ? const Center(child: CircularProgressIndicator())
                   : model.videos.isEmpty
                       ? const NoBookmarksView()
                       : RefreshIndicator(

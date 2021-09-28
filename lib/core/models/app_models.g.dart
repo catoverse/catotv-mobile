@@ -203,13 +203,14 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       endTimestamp: fields[5] as int?,
       channelInformation: fields[6] as ChannelInformation?,
       contentDetails: fields[7] as ContentDetails?,
+      bookmarked: fields[8] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_Video obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -225,7 +226,9 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       ..writeByte(6)
       ..write(obj.channelInformation)
       ..writeByte(7)
-      ..write(obj.contentDetails);
+      ..write(obj.contentDetails)
+      ..writeByte(8)
+      ..write(obj.bookmarked);
   }
 
   @override
@@ -377,6 +380,7 @@ _$_Video _$$_VideoFromJson(Map<String, dynamic> json) => _$_Video(
           ? null
           : ContentDetails.fromJson(
               json['content_details'] as Map<String, dynamic>),
+      bookmarked: json['bookmarked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_VideoToJson(_$_Video instance) => <String, dynamic>{
@@ -388,6 +392,7 @@ Map<String, dynamic> _$$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'end_timestamp': instance.endTimestamp,
       'channel_information': instance.channelInformation,
       'content_details': instance.contentDetails,
+      'bookmarked': instance.bookmarked,
     };
 
 _$_MEventqLog _$$_MEventqLogFromJson(Map<String, dynamic> json) =>
@@ -432,4 +437,60 @@ Map<String, dynamic> _$$_GetWaitlistToJson(_$_GetWaitlist instance) =>
       'total_referrals': instance.totalReferrals,
       'total_users': instance.totalUsers,
       'user_id': instance.userId,
+    };
+
+_$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
+    _$_UserProfile(
+      name: json['name'] as String,
+      selectedTopics: (json['selectedTopics'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      totalWatchTime: json['totalWatchTime'] as int?,
+      videoWatched: (json['videoWatched'] as List<dynamic>?)
+          ?.map((e) => VideoWatched.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      videoCount: json['videoCount'] as int?,
+      lastFiveCount: (json['lastFiveCount'] as List<dynamic>?)
+          ?.map((e) => Count.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      bookmarks: (json['bookmarks'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      userId: json['userId'] as String,
+      id: json['id'] as String,
+    );
+
+Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'selectedTopics': instance.selectedTopics,
+      'totalWatchTime': instance.totalWatchTime,
+      'videoWatched': instance.videoWatched,
+      'videoCount': instance.videoCount,
+      'lastFiveCount': instance.lastFiveCount,
+      'bookmarks': instance.bookmarks,
+      'userId': instance.userId,
+      'id': instance.id,
+    };
+
+_$_Count _$$_CountFromJson(Map<String, dynamic> json) => _$_Count(
+      date: json['date'] as String,
+      count: json['count'] as int,
+    );
+
+Map<String, dynamic> _$$_CountToJson(_$_Count instance) => <String, dynamic>{
+      'date': instance.date,
+      'count': instance.count,
+    };
+
+_$_VideoWatched _$$_VideoWatchedFromJson(Map<String, dynamic> json) =>
+    _$_VideoWatched(
+      topic: json['topic'] as String,
+      count: json['count'] as int,
+    );
+
+Map<String, dynamic> _$$_VideoWatchedToJson(_$_VideoWatched instance) =>
+    <String, dynamic>{
+      'topic': instance.topic,
+      'count': instance.count,
     };

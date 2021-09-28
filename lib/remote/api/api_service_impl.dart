@@ -99,6 +99,22 @@ class APIServiceImpl implements APIService {
   }
 
   @override
+  Future geFulltUserProfile({required String userId}) async {
+    _log.i("fetching profile for User(id: $userId)");
+
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.getUserProfile,
+        variables: GQLQueries.getUserProfileVariables(userId));
+
+    if (result.isFailed) {
+      return result.failure;
+    }
+
+
+    return result.success['userProfile'];
+  }
+
+  @override
   Future createUserProfile(
       {required String userId,
       required String name,
@@ -164,7 +180,7 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return result.success["videoByWatchId"];
+    return result.success["videoById"];
   }
 
   @override

@@ -87,6 +87,7 @@ class Video with _$Video {
     @HiveField(7)
     @JsonKey(name: "content_details")
         ContentDetails? contentDetails,
+    @HiveField(8) @Default(false) bool bookmarked,
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
@@ -186,4 +187,49 @@ class GetWaitlist with _$GetWaitlist {
 
   factory GetWaitlist.fromJson(Map<String, dynamic> json) =>
       _$GetWaitlistFromJson(json);
+}
+
+@freezed
+class UserProfile with _$UserProfile {
+  UserProfile._();
+
+  factory UserProfile({
+    required String name,
+    List<String>? selectedTopics,
+    int? totalWatchTime,
+    List<VideoWatched>? videoWatched,
+    int? videoCount,
+    List<Count>? lastFiveCount,
+    List<String>? bookmarks,
+    required String userId,
+    required String id,
+  }) = _UserProfile;
+
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
+}
+
+@freezed
+class Count with _$Count {
+  Count._();
+
+  factory Count({
+    required String date,
+    required int count,
+  }) = _Count;
+
+  factory Count.fromJson(Map<String, dynamic> json) => _$CountFromJson(json);
+}
+
+@freezed
+class VideoWatched with _$VideoWatched {
+  VideoWatched._();
+
+  factory VideoWatched({
+    required String topic,
+    required int count,
+  }) = _VideoWatched;
+
+  factory VideoWatched.fromJson(Map<String, dynamic> json) =>
+      _$VideoWatchedFromJson(json);
 }

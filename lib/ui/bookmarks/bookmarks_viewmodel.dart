@@ -4,13 +4,16 @@ import 'package:feed/core/services/video_service.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 
 class BookmarksViewModel extends BaseFeedModel {
-  final VideoService _videoService = locator<VideoService>();
+  final _videoService = locator<VideoService>();
 
   List<Video> _bookmarkedVideos = [];
 
   @override
   Future getData() async {
     setBusy(true);
+
+    await _videoService.syncBookmarks();
+
     var newVideos = await _videoService.getBookmarkedVideos();
 
     if (newVideos.isNotEmpty) _bookmarkedVideos = newVideos;

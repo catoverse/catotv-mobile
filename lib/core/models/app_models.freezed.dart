@@ -1073,7 +1073,9 @@ class _$VideoTearOff {
           ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          ContentDetails? contentDetails}) {
+          ContentDetails? contentDetails,
+      @HiveField(8)
+          bool bookmarked = false}) {
     return _Video(
       id: id,
       title: title,
@@ -1083,6 +1085,7 @@ class _$VideoTearOff {
       endTimestamp: endTimestamp,
       channelInformation: channelInformation,
       contentDetails: contentDetails,
+      bookmarked: bookmarked,
     );
   }
 
@@ -1121,6 +1124,8 @@ mixin _$Video {
   @HiveField(7)
   @JsonKey(name: "content_details")
   ContentDetails? get contentDetails => throw _privateConstructorUsedError;
+  @HiveField(8)
+  bool get bookmarked => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1155,7 +1160,9 @@ abstract class $VideoCopyWith<$Res> {
           ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          ContentDetails? contentDetails});
+          ContentDetails? contentDetails,
+      @HiveField(8)
+          bool bookmarked});
 
   $TopicCopyWith<$Res> get topic;
   $ChannelInformationCopyWith<$Res>? get channelInformation;
@@ -1180,6 +1187,7 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
     Object? endTimestamp = freezed,
     Object? channelInformation = freezed,
     Object? contentDetails = freezed,
+    Object? bookmarked = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -1214,6 +1222,10 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.contentDetails
           : contentDetails // ignore: cast_nullable_to_non_nullable
               as ContentDetails?,
+      bookmarked: bookmarked == freezed
+          ? _value.bookmarked
+          : bookmarked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -1277,7 +1289,9 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
           ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          ContentDetails? contentDetails});
+          ContentDetails? contentDetails,
+      @HiveField(8)
+          bool bookmarked});
 
   @override
   $TopicCopyWith<$Res> get topic;
@@ -1306,6 +1320,7 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
     Object? endTimestamp = freezed,
     Object? channelInformation = freezed,
     Object? contentDetails = freezed,
+    Object? bookmarked = freezed,
   }) {
     return _then(_Video(
       id: id == freezed
@@ -1340,6 +1355,10 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.contentDetails
           : contentDetails // ignore: cast_nullable_to_non_nullable
               as ContentDetails?,
+      bookmarked: bookmarked == freezed
+          ? _value.bookmarked
+          : bookmarked // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -1372,7 +1391,9 @@ class _$_Video extends _Video {
           this.channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          this.contentDetails})
+          this.contentDetails,
+      @HiveField(8)
+          this.bookmarked = false})
       : super._();
 
   factory _$_Video.fromJson(Map<String, dynamic> json) =>
@@ -1410,10 +1431,14 @@ class _$_Video extends _Video {
   @HiveField(7)
   @JsonKey(name: "content_details")
   final ContentDetails? contentDetails;
+  @JsonKey(defaultValue: false)
+  @override
+  @HiveField(8)
+  final bool bookmarked;
 
   @override
   String toString() {
-    return 'Video(id: $id, title: $title, videoUrl: $videoUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, channelInformation: $channelInformation, contentDetails: $contentDetails)';
+    return 'Video(id: $id, title: $title, videoUrl: $videoUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, channelInformation: $channelInformation, contentDetails: $contentDetails, bookmarked: $bookmarked)';
   }
 
   @override
@@ -1440,7 +1465,10 @@ class _$_Video extends _Video {
                     .equals(other.channelInformation, channelInformation)) &&
             (identical(other.contentDetails, contentDetails) ||
                 const DeepCollectionEquality()
-                    .equals(other.contentDetails, contentDetails)));
+                    .equals(other.contentDetails, contentDetails)) &&
+            (identical(other.bookmarked, bookmarked) ||
+                const DeepCollectionEquality()
+                    .equals(other.bookmarked, bookmarked)));
   }
 
   @override
@@ -1453,7 +1481,8 @@ class _$_Video extends _Video {
       const DeepCollectionEquality().hash(startTimestamp) ^
       const DeepCollectionEquality().hash(endTimestamp) ^
       const DeepCollectionEquality().hash(channelInformation) ^
-      const DeepCollectionEquality().hash(contentDetails);
+      const DeepCollectionEquality().hash(contentDetails) ^
+      const DeepCollectionEquality().hash(bookmarked);
 
   @JsonKey(ignore: true)
   @override
@@ -1491,7 +1520,9 @@ abstract class _Video extends Video {
           ChannelInformation? channelInformation,
       @HiveField(7)
       @JsonKey(name: "content_details")
-          ContentDetails? contentDetails}) = _$_Video;
+          ContentDetails? contentDetails,
+      @HiveField(8)
+          bool bookmarked}) = _$_Video;
   _Video._() : super._();
 
   factory _Video.fromJson(Map<String, dynamic> json) = _$_Video.fromJson;
@@ -1529,6 +1560,9 @@ abstract class _Video extends Video {
   @HiveField(7)
   @JsonKey(name: "content_details")
   ContentDetails? get contentDetails => throw _privateConstructorUsedError;
+  @override
+  @HiveField(8)
+  bool get bookmarked => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$VideoCopyWith<_Video> get copyWith => throw _privateConstructorUsedError;
@@ -2728,5 +2762,688 @@ abstract class _GetWaitlist extends GetWaitlist {
   @override
   @JsonKey(ignore: true)
   _$GetWaitlistCopyWith<_GetWaitlist> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
+  return _UserProfile.fromJson(json);
+}
+
+/// @nodoc
+class _$UserProfileTearOff {
+  const _$UserProfileTearOff();
+
+  _UserProfile call(
+      {required String name,
+      List<String>? selectedTopics,
+      int? totalWatchTime,
+      List<VideoWatched>? videoWatched,
+      int? videoCount,
+      List<Count>? lastFiveCount,
+      List<String>? bookmarks,
+      required String userId,
+      required String id}) {
+    return _UserProfile(
+      name: name,
+      selectedTopics: selectedTopics,
+      totalWatchTime: totalWatchTime,
+      videoWatched: videoWatched,
+      videoCount: videoCount,
+      lastFiveCount: lastFiveCount,
+      bookmarks: bookmarks,
+      userId: userId,
+      id: id,
+    );
+  }
+
+  UserProfile fromJson(Map<String, Object> json) {
+    return UserProfile.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $UserProfile = _$UserProfileTearOff();
+
+/// @nodoc
+mixin _$UserProfile {
+  String get name => throw _privateConstructorUsedError;
+  List<String>? get selectedTopics => throw _privateConstructorUsedError;
+  int? get totalWatchTime => throw _privateConstructorUsedError;
+  List<VideoWatched>? get videoWatched => throw _privateConstructorUsedError;
+  int? get videoCount => throw _privateConstructorUsedError;
+  List<Count>? get lastFiveCount => throw _privateConstructorUsedError;
+  List<String>? get bookmarks => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $UserProfileCopyWith<UserProfile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserProfileCopyWith<$Res> {
+  factory $UserProfileCopyWith(
+          UserProfile value, $Res Function(UserProfile) then) =
+      _$UserProfileCopyWithImpl<$Res>;
+  $Res call(
+      {String name,
+      List<String>? selectedTopics,
+      int? totalWatchTime,
+      List<VideoWatched>? videoWatched,
+      int? videoCount,
+      List<Count>? lastFiveCount,
+      List<String>? bookmarks,
+      String userId,
+      String id});
+}
+
+/// @nodoc
+class _$UserProfileCopyWithImpl<$Res> implements $UserProfileCopyWith<$Res> {
+  _$UserProfileCopyWithImpl(this._value, this._then);
+
+  final UserProfile _value;
+  // ignore: unused_field
+  final $Res Function(UserProfile) _then;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? selectedTopics = freezed,
+    Object? totalWatchTime = freezed,
+    Object? videoWatched = freezed,
+    Object? videoCount = freezed,
+    Object? lastFiveCount = freezed,
+    Object? bookmarks = freezed,
+    Object? userId = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedTopics: selectedTopics == freezed
+          ? _value.selectedTopics
+          : selectedTopics // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      totalWatchTime: totalWatchTime == freezed
+          ? _value.totalWatchTime
+          : totalWatchTime // ignore: cast_nullable_to_non_nullable
+              as int?,
+      videoWatched: videoWatched == freezed
+          ? _value.videoWatched
+          : videoWatched // ignore: cast_nullable_to_non_nullable
+              as List<VideoWatched>?,
+      videoCount: videoCount == freezed
+          ? _value.videoCount
+          : videoCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lastFiveCount: lastFiveCount == freezed
+          ? _value.lastFiveCount
+          : lastFiveCount // ignore: cast_nullable_to_non_nullable
+              as List<Count>?,
+      bookmarks: bookmarks == freezed
+          ? _value.bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$UserProfileCopyWith<$Res>
+    implements $UserProfileCopyWith<$Res> {
+  factory _$UserProfileCopyWith(
+          _UserProfile value, $Res Function(_UserProfile) then) =
+      __$UserProfileCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String name,
+      List<String>? selectedTopics,
+      int? totalWatchTime,
+      List<VideoWatched>? videoWatched,
+      int? videoCount,
+      List<Count>? lastFiveCount,
+      List<String>? bookmarks,
+      String userId,
+      String id});
+}
+
+/// @nodoc
+class __$UserProfileCopyWithImpl<$Res> extends _$UserProfileCopyWithImpl<$Res>
+    implements _$UserProfileCopyWith<$Res> {
+  __$UserProfileCopyWithImpl(
+      _UserProfile _value, $Res Function(_UserProfile) _then)
+      : super(_value, (v) => _then(v as _UserProfile));
+
+  @override
+  _UserProfile get _value => super._value as _UserProfile;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? selectedTopics = freezed,
+    Object? totalWatchTime = freezed,
+    Object? videoWatched = freezed,
+    Object? videoCount = freezed,
+    Object? lastFiveCount = freezed,
+    Object? bookmarks = freezed,
+    Object? userId = freezed,
+    Object? id = freezed,
+  }) {
+    return _then(_UserProfile(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      selectedTopics: selectedTopics == freezed
+          ? _value.selectedTopics
+          : selectedTopics // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      totalWatchTime: totalWatchTime == freezed
+          ? _value.totalWatchTime
+          : totalWatchTime // ignore: cast_nullable_to_non_nullable
+              as int?,
+      videoWatched: videoWatched == freezed
+          ? _value.videoWatched
+          : videoWatched // ignore: cast_nullable_to_non_nullable
+              as List<VideoWatched>?,
+      videoCount: videoCount == freezed
+          ? _value.videoCount
+          : videoCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lastFiveCount: lastFiveCount == freezed
+          ? _value.lastFiveCount
+          : lastFiveCount // ignore: cast_nullable_to_non_nullable
+              as List<Count>?,
+      bookmarks: bookmarks == freezed
+          ? _value.bookmarks
+          : bookmarks // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_UserProfile extends _UserProfile {
+  _$_UserProfile(
+      {required this.name,
+      this.selectedTopics,
+      this.totalWatchTime,
+      this.videoWatched,
+      this.videoCount,
+      this.lastFiveCount,
+      this.bookmarks,
+      required this.userId,
+      required this.id})
+      : super._();
+
+  factory _$_UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$$_UserProfileFromJson(json);
+
+  @override
+  final String name;
+  @override
+  final List<String>? selectedTopics;
+  @override
+  final int? totalWatchTime;
+  @override
+  final List<VideoWatched>? videoWatched;
+  @override
+  final int? videoCount;
+  @override
+  final List<Count>? lastFiveCount;
+  @override
+  final List<String>? bookmarks;
+  @override
+  final String userId;
+  @override
+  final String id;
+
+  @override
+  String toString() {
+    return 'UserProfile(name: $name, selectedTopics: $selectedTopics, totalWatchTime: $totalWatchTime, videoWatched: $videoWatched, videoCount: $videoCount, lastFiveCount: $lastFiveCount, bookmarks: $bookmarks, userId: $userId, id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _UserProfile &&
+            (identical(other.name, name) ||
+                const DeepCollectionEquality().equals(other.name, name)) &&
+            (identical(other.selectedTopics, selectedTopics) ||
+                const DeepCollectionEquality()
+                    .equals(other.selectedTopics, selectedTopics)) &&
+            (identical(other.totalWatchTime, totalWatchTime) ||
+                const DeepCollectionEquality()
+                    .equals(other.totalWatchTime, totalWatchTime)) &&
+            (identical(other.videoWatched, videoWatched) ||
+                const DeepCollectionEquality()
+                    .equals(other.videoWatched, videoWatched)) &&
+            (identical(other.videoCount, videoCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.videoCount, videoCount)) &&
+            (identical(other.lastFiveCount, lastFiveCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.lastFiveCount, lastFiveCount)) &&
+            (identical(other.bookmarks, bookmarks) ||
+                const DeepCollectionEquality()
+                    .equals(other.bookmarks, bookmarks)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(name) ^
+      const DeepCollectionEquality().hash(selectedTopics) ^
+      const DeepCollectionEquality().hash(totalWatchTime) ^
+      const DeepCollectionEquality().hash(videoWatched) ^
+      const DeepCollectionEquality().hash(videoCount) ^
+      const DeepCollectionEquality().hash(lastFiveCount) ^
+      const DeepCollectionEquality().hash(bookmarks) ^
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(id);
+
+  @JsonKey(ignore: true)
+  @override
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+      __$UserProfileCopyWithImpl<_UserProfile>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_UserProfileToJson(this);
+  }
+}
+
+abstract class _UserProfile extends UserProfile {
+  factory _UserProfile(
+      {required String name,
+      List<String>? selectedTopics,
+      int? totalWatchTime,
+      List<VideoWatched>? videoWatched,
+      int? videoCount,
+      List<Count>? lastFiveCount,
+      List<String>? bookmarks,
+      required String userId,
+      required String id}) = _$_UserProfile;
+  _UserProfile._() : super._();
+
+  factory _UserProfile.fromJson(Map<String, dynamic> json) =
+      _$_UserProfile.fromJson;
+
+  @override
+  String get name => throw _privateConstructorUsedError;
+  @override
+  List<String>? get selectedTopics => throw _privateConstructorUsedError;
+  @override
+  int? get totalWatchTime => throw _privateConstructorUsedError;
+  @override
+  List<VideoWatched>? get videoWatched => throw _privateConstructorUsedError;
+  @override
+  int? get videoCount => throw _privateConstructorUsedError;
+  @override
+  List<Count>? get lastFiveCount => throw _privateConstructorUsedError;
+  @override
+  List<String>? get bookmarks => throw _privateConstructorUsedError;
+  @override
+  String get userId => throw _privateConstructorUsedError;
+  @override
+  String get id => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$UserProfileCopyWith<_UserProfile> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Count _$CountFromJson(Map<String, dynamic> json) {
+  return _Count.fromJson(json);
+}
+
+/// @nodoc
+class _$CountTearOff {
+  const _$CountTearOff();
+
+  _Count call({required String date, required int count}) {
+    return _Count(
+      date: date,
+      count: count,
+    );
+  }
+
+  Count fromJson(Map<String, Object> json) {
+    return Count.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Count = _$CountTearOff();
+
+/// @nodoc
+mixin _$Count {
+  String get date => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CountCopyWith<Count> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CountCopyWith<$Res> {
+  factory $CountCopyWith(Count value, $Res Function(Count) then) =
+      _$CountCopyWithImpl<$Res>;
+  $Res call({String date, int count});
+}
+
+/// @nodoc
+class _$CountCopyWithImpl<$Res> implements $CountCopyWith<$Res> {
+  _$CountCopyWithImpl(this._value, this._then);
+
+  final Count _value;
+  // ignore: unused_field
+  final $Res Function(Count) _then;
+
+  @override
+  $Res call({
+    Object? date = freezed,
+    Object? count = freezed,
+  }) {
+    return _then(_value.copyWith(
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$CountCopyWith<$Res> implements $CountCopyWith<$Res> {
+  factory _$CountCopyWith(_Count value, $Res Function(_Count) then) =
+      __$CountCopyWithImpl<$Res>;
+  @override
+  $Res call({String date, int count});
+}
+
+/// @nodoc
+class __$CountCopyWithImpl<$Res> extends _$CountCopyWithImpl<$Res>
+    implements _$CountCopyWith<$Res> {
+  __$CountCopyWithImpl(_Count _value, $Res Function(_Count) _then)
+      : super(_value, (v) => _then(v as _Count));
+
+  @override
+  _Count get _value => super._value as _Count;
+
+  @override
+  $Res call({
+    Object? date = freezed,
+    Object? count = freezed,
+  }) {
+    return _then(_Count(
+      date: date == freezed
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as String,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Count extends _Count {
+  _$_Count({required this.date, required this.count}) : super._();
+
+  factory _$_Count.fromJson(Map<String, dynamic> json) =>
+      _$$_CountFromJson(json);
+
+  @override
+  final String date;
+  @override
+  final int count;
+
+  @override
+  String toString() {
+    return 'Count(date: $date, count: $count)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Count &&
+            (identical(other.date, date) ||
+                const DeepCollectionEquality().equals(other.date, date)) &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(date) ^
+      const DeepCollectionEquality().hash(count);
+
+  @JsonKey(ignore: true)
+  @override
+  _$CountCopyWith<_Count> get copyWith =>
+      __$CountCopyWithImpl<_Count>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_CountToJson(this);
+  }
+}
+
+abstract class _Count extends Count {
+  factory _Count({required String date, required int count}) = _$_Count;
+  _Count._() : super._();
+
+  factory _Count.fromJson(Map<String, dynamic> json) = _$_Count.fromJson;
+
+  @override
+  String get date => throw _privateConstructorUsedError;
+  @override
+  int get count => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$CountCopyWith<_Count> get copyWith => throw _privateConstructorUsedError;
+}
+
+VideoWatched _$VideoWatchedFromJson(Map<String, dynamic> json) {
+  return _VideoWatched.fromJson(json);
+}
+
+/// @nodoc
+class _$VideoWatchedTearOff {
+  const _$VideoWatchedTearOff();
+
+  _VideoWatched call({required String topic, required int count}) {
+    return _VideoWatched(
+      topic: topic,
+      count: count,
+    );
+  }
+
+  VideoWatched fromJson(Map<String, Object> json) {
+    return VideoWatched.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $VideoWatched = _$VideoWatchedTearOff();
+
+/// @nodoc
+mixin _$VideoWatched {
+  String get topic => throw _privateConstructorUsedError;
+  int get count => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $VideoWatchedCopyWith<VideoWatched> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $VideoWatchedCopyWith<$Res> {
+  factory $VideoWatchedCopyWith(
+          VideoWatched value, $Res Function(VideoWatched) then) =
+      _$VideoWatchedCopyWithImpl<$Res>;
+  $Res call({String topic, int count});
+}
+
+/// @nodoc
+class _$VideoWatchedCopyWithImpl<$Res> implements $VideoWatchedCopyWith<$Res> {
+  _$VideoWatchedCopyWithImpl(this._value, this._then);
+
+  final VideoWatched _value;
+  // ignore: unused_field
+  final $Res Function(VideoWatched) _then;
+
+  @override
+  $Res call({
+    Object? topic = freezed,
+    Object? count = freezed,
+  }) {
+    return _then(_value.copyWith(
+      topic: topic == freezed
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$VideoWatchedCopyWith<$Res>
+    implements $VideoWatchedCopyWith<$Res> {
+  factory _$VideoWatchedCopyWith(
+          _VideoWatched value, $Res Function(_VideoWatched) then) =
+      __$VideoWatchedCopyWithImpl<$Res>;
+  @override
+  $Res call({String topic, int count});
+}
+
+/// @nodoc
+class __$VideoWatchedCopyWithImpl<$Res> extends _$VideoWatchedCopyWithImpl<$Res>
+    implements _$VideoWatchedCopyWith<$Res> {
+  __$VideoWatchedCopyWithImpl(
+      _VideoWatched _value, $Res Function(_VideoWatched) _then)
+      : super(_value, (v) => _then(v as _VideoWatched));
+
+  @override
+  _VideoWatched get _value => super._value as _VideoWatched;
+
+  @override
+  $Res call({
+    Object? topic = freezed,
+    Object? count = freezed,
+  }) {
+    return _then(_VideoWatched(
+      topic: topic == freezed
+          ? _value.topic
+          : topic // ignore: cast_nullable_to_non_nullable
+              as String,
+      count: count == freezed
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_VideoWatched extends _VideoWatched {
+  _$_VideoWatched({required this.topic, required this.count}) : super._();
+
+  factory _$_VideoWatched.fromJson(Map<String, dynamic> json) =>
+      _$$_VideoWatchedFromJson(json);
+
+  @override
+  final String topic;
+  @override
+  final int count;
+
+  @override
+  String toString() {
+    return 'VideoWatched(topic: $topic, count: $count)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _VideoWatched &&
+            (identical(other.topic, topic) ||
+                const DeepCollectionEquality().equals(other.topic, topic)) &&
+            (identical(other.count, count) ||
+                const DeepCollectionEquality().equals(other.count, count)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(topic) ^
+      const DeepCollectionEquality().hash(count);
+
+  @JsonKey(ignore: true)
+  @override
+  _$VideoWatchedCopyWith<_VideoWatched> get copyWith =>
+      __$VideoWatchedCopyWithImpl<_VideoWatched>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_VideoWatchedToJson(this);
+  }
+}
+
+abstract class _VideoWatched extends VideoWatched {
+  factory _VideoWatched({required String topic, required int count}) =
+      _$_VideoWatched;
+  _VideoWatched._() : super._();
+
+  factory _VideoWatched.fromJson(Map<String, dynamic> json) =
+      _$_VideoWatched.fromJson;
+
+  @override
+  String get topic => throw _privateConstructorUsedError;
+  @override
+  int get count => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(ignore: true)
+  _$VideoWatchedCopyWith<_VideoWatched> get copyWith =>
       throw _privateConstructorUsedError;
 }
