@@ -11,4 +11,5 @@ enum UserEvent {
   sesssionStart,
   sessionEnd,
   view,
+  interruption,
 }

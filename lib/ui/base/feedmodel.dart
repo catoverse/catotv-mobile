@@ -88,8 +88,8 @@ abstract class BaseFeedModel extends BaseViewModel
     );
   }
 
-  logSessionEnd() {
-    logUserEvent(UserEvent.sessionEnd);
+  logSessionInterruption() {
+    logUserEvent(UserEvent.interruption);
   }
 
   logCompleteVideo(int index) {

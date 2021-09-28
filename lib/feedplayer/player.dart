@@ -93,16 +93,18 @@ class _FeedPlayerState extends State<FeedPlayer>
   }
 
   void logSkip() async {
-    var _flickManager = widget.feedPlayerController
+    final _flickManager = widget.feedPlayerController
         .getFlickManaget(widget.index)
         .flickVideoManager;
 
     if (_flickManager != null) {
-      var currentVideoDuration =
+      final currentVideoDuration =
           await _flickManager.videoPlayerController!.position;
 
+      // log(currentVideoDuration.toString(), name: 'Duration');
+
       if (currentVideoDuration != null &&
-          currentVideoDuration.compareTo(const Duration(seconds: 10)) <= 0) {
+          currentVideoDuration.compareTo(const Duration(seconds: 10)) < 0) {
         widget.baseFeedModel.logSkipVideo(widget.index);
         log('User Skip video ${widget.index}');
       }

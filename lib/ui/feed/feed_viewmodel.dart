@@ -46,7 +46,7 @@ class FeedViewModel extends BaseFeedModel {
     logSessionStart();
 
     _lifeCycleService.getStream().listen((event) {
-      if (event == AppLifecycleState.paused) logSessionEnd();
+      if (event == AppLifecycleState.paused) logSessionInterruption();
     });
     
     var newVideos = await _feedService.fetchVideos(skip: skip);
