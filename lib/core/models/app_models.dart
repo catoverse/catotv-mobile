@@ -177,7 +177,7 @@ class GetWaitlist with _$GetWaitlist {
   GetWaitlist._();
 
   factory GetWaitlist({
-    @JsonKey(name: "current_priority")  int? currentPriority,
+    @JsonKey(name: "current_priority") int? currentPriority,
     @JsonKey(name: "referral_link") required String referralLink,
     @JsonKey(name: "registered_email") required String registeredEmail,
     @JsonKey(name: "total_referrals") required int totalReferrals,
@@ -195,18 +195,43 @@ class UserProfile with _$UserProfile {
 
   factory UserProfile({
     required String name,
-    List<String>? selectedTopics,
-    int? totalWatchTime,
-    List<VideoWatched>? videoWatched,
-    int? videoCount,
-    List<Count>? lastFiveCount,
-    List<String>? bookmarks,
     required String userId,
-    required String id,
+    @Default(<String>[]) List<String> selectedTopics,
+    @Default(<String>[]) List<String> bookmarks,
+    int? totalWatchTime,
+    List<TopicCount>? videosWatchedPerTopic,
+    List<WatchedVideo>? watchedVideos,
   }) = _UserProfile;
 
   factory UserProfile.fromJson(Map<String, dynamic> json) =>
       _$UserProfileFromJson(json);
+}
+
+@freezed
+class TopicCount with _$TopicCount {
+  TopicCount._();
+
+  factory TopicCount({
+    required String topic,
+    required int count,
+  }) = _TopicCount;
+
+  factory TopicCount.fromJson(Map<String, dynamic> json) =>
+      _$TopicCountFromJson(json);
+}
+
+@freezed
+class WatchedVideo with _$WatchedVideo {
+  WatchedVideo._();
+
+  factory WatchedVideo({
+    required String videoId,
+    required String topicId,
+    required String channelId,
+  }) = _WatchedVideo;
+
+  factory WatchedVideo.fromJson(Map<String, dynamic> json) =>
+      _$WatchedVideoFromJson(json);
 }
 
 @freezed

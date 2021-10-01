@@ -70,6 +70,10 @@ abstract class BaseFeedModel extends BaseViewModel
     logUserEvent(UserEvent.share, videoId: videos[index].id);
   }
 
+  logBookmarkVideo(int index) {
+    logUserEvent(UserEvent.bookmark, videoId: videos[index].id);
+  }
+
   logViewVideo(int index) {
     logUserEvent(UserEvent.view, videoId: videos[index].id);
   }
@@ -83,11 +87,11 @@ abstract class BaseFeedModel extends BaseViewModel
   }
 
   logCompleteVideo(int index) {
-    logUserEvent(UserEvent.sesssionStart, videoId: videos[index].id);
+    logUserEvent(UserEvent.completed, videoId: videos[index].id);
   }
 
   void logSkipVideo(int index) {
-    logUserEvent(UserEvent.sesssionStart, videoId: videos[index].id);
+    logUserEvent(UserEvent.skipped, videoId: videos[index].id);
   }
 
   getVideo(String videoId);
@@ -96,6 +100,7 @@ abstract class BaseFeedModel extends BaseViewModel
       _videoService.getBookmarkedVideos();
 
   Future<void> addBookmarks(int index) async {
+    logBookmarkVideo(index);
     await _videoService.addBookmarks(videos[index]);
   }
 }
