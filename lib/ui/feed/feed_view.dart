@@ -40,7 +40,10 @@ class _FeedViewState extends State<FeedView> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return ScreenBuilder<BaseFeedModel>(
         viewModel: FeedViewModel(),
-        onModelReady: (model) => model.getData(),
+        onModelReady: (model) {
+          model.logSessionStart();
+          model.getData();
+        },
         builder: (context, uiHelpers, model) => WillPopScope(
               onWillPop: () => model.showExitDialog(),
               child: Scaffold(

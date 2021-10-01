@@ -43,8 +43,6 @@ class FeedViewModel extends BaseFeedModel {
   @override
   Future getData() async {
     setBusy(true);
-    logSessionStart();
-
     _lifeCycleService.getStream().listen((event) {
       if (event == AppLifecycleState.paused) logSessionInterruption();
     });
@@ -74,6 +72,7 @@ class FeedViewModel extends BaseFeedModel {
   @override
   Future<void> addBookmarks(int index) async {
     if (!_videos[index].bookmarked) {
+      logBookmarkVideo(index);
       _videos[index] = _videos[index].copyWith(bookmarked: true);
       notifyListeners();
       await _videoService.addBookmarks(videos[index]);

@@ -95,7 +95,7 @@ class VideoService {
     if (result is! Failure) {
       final userProfile = UserProfile.fromJson(result as Map<String, dynamic>);
 
-      remoteBookmarks = userProfile.bookmarks ?? [];
+      remoteBookmarks = userProfile.bookmarks;
     }
     remoteBookmarks = remoteBookmarks.toSet().toList();
 
