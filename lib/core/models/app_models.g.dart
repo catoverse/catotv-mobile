@@ -442,35 +442,59 @@ Map<String, dynamic> _$$_GetWaitlistToJson(_$_GetWaitlist instance) =>
 _$_UserProfile _$$_UserProfileFromJson(Map<String, dynamic> json) =>
     _$_UserProfile(
       name: json['name'] as String,
-      selectedTopics: (json['selectedTopics'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      totalWatchTime: json['totalWatchTime'] as int?,
-      videoWatched: (json['videoWatched'] as List<dynamic>?)
-          ?.map((e) => VideoWatched.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      videoCount: json['videoCount'] as int?,
-      lastFiveCount: (json['lastFiveCount'] as List<dynamic>?)
-          ?.map((e) => Count.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      bookmarks: (json['bookmarks'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
       userId: json['userId'] as String,
-      id: json['id'] as String,
+      selectedTopics: (json['selectedTopics'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      bookmarks: (json['bookmarks'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          [],
+      totalWatchTime: json['totalWatchTime'] as int?,
+      videosWatchedPerTopic: (json['videosWatchedPerTopic'] as List<dynamic>?)
+          ?.map((e) => TopicCount.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      watchedVideos: (json['watchedVideos'] as List<dynamic>?)
+          ?.map((e) => WatchedVideo.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$_UserProfileToJson(_$_UserProfile instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'selectedTopics': instance.selectedTopics,
-      'totalWatchTime': instance.totalWatchTime,
-      'videoWatched': instance.videoWatched,
-      'videoCount': instance.videoCount,
-      'lastFiveCount': instance.lastFiveCount,
-      'bookmarks': instance.bookmarks,
       'userId': instance.userId,
-      'id': instance.id,
+      'selectedTopics': instance.selectedTopics,
+      'bookmarks': instance.bookmarks,
+      'totalWatchTime': instance.totalWatchTime,
+      'videosWatchedPerTopic': instance.videosWatchedPerTopic,
+      'watchedVideos': instance.watchedVideos,
+    };
+
+_$_TopicCount _$$_TopicCountFromJson(Map<String, dynamic> json) =>
+    _$_TopicCount(
+      topic: json['topic'] as String,
+      count: json['count'] as int,
+    );
+
+Map<String, dynamic> _$$_TopicCountToJson(_$_TopicCount instance) =>
+    <String, dynamic>{
+      'topic': instance.topic,
+      'count': instance.count,
+    };
+
+_$_WatchedVideo _$$_WatchedVideoFromJson(Map<String, dynamic> json) =>
+    _$_WatchedVideo(
+      videoId: json['videoId'] as String,
+      topicId: json['topicId'] as String,
+      channelId: json['channelId'] as String,
+    );
+
+Map<String, dynamic> _$$_WatchedVideoToJson(_$_WatchedVideo instance) =>
+    <String, dynamic>{
+      'videoId': instance.videoId,
+      'topicId': instance.topicId,
+      'channelId': instance.channelId,
     };
 
 _$_Count _$$_CountFromJson(Map<String, dynamic> json) => _$_Count(

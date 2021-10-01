@@ -2,6 +2,7 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/enums/user_events.dart';
+import 'package:feed/core/extensions/extensions.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/hive_service/hive_service.dart';
 import 'package:feed/core/services/user_service.dart';
@@ -38,7 +39,7 @@ class MessageQueueService {
         videoDuration: videoDuration,
         sessionDuration: sessionDuration,
         durationWatched: durationWatched,
-        event: event.toString().split('.').last);
+        event: event.label);
 
     var logs = await _hiveService.fetchList<MqEventLog>(boxName: kMqEventBox);
 

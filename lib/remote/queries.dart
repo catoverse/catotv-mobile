@@ -84,20 +84,19 @@ class GQLQueries {
     query GetUserProfile($userId: ID!) {
       userProfile(userId: $userId) {
         name
+        userId
         selectedTopics
+        bookmarks
         totalWatchTime
-        videoWatched {
+        videosWatchedPerTopic {
           topic
           count
         }
-        videoCount
-        lastFiveCount {
-          date
-          count
+        watchedVideos {
+          videoId
+          topicId
+          channelId
         }
-        bookmarks
-        userId
-        id
       }
     }
   ''';
