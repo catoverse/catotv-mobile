@@ -73,7 +73,7 @@ class _FeedPlayerState extends State<FeedPlayer>
         if (flickManager != null &&
             flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.pause();
-          logSkipOrView();
+          // logSkipOrView();
         }
       }
     }

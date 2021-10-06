@@ -32,7 +32,9 @@ class MessageQueueService {
     ///    b. dump all the logs to MessageQueue
 
     var eventLog = MqEventLog(
-        userId: _userService.currentUser.id,
+        userId: _userService.hasLoggedInUser
+            ? _userService.currentUser.id
+            : 'guest',
         videoId: videoId,
         timestamp: DateFormat("y-MM-d h:m:s").format(DateTime.now()).toString(),
         description: description,
