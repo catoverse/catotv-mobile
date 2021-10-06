@@ -22,8 +22,6 @@ class HiveInjection {
     hive.registerAdapter(VideoAdapter());
     hive.registerAdapter(MEventqLogAdapter());
     hive.registerAdapter(TopicAdapter());
-    hive.registerAdapter(ContentDetailsAdapter());
-    hive.registerAdapter(ChannelInformationAdapter());
     return Hive;
   }
 }

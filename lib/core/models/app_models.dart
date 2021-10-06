@@ -37,57 +37,24 @@ class Topic with _$Topic {
 }
 
 @freezed
-class ChannelInformation with _$ChannelInformation {
-  ChannelInformation._();
-
-  @HiveType(typeId: 4)
-  factory ChannelInformation({
-    @HiveField(0) String? id,
-    @HiveField(1) String? name,
-    @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount,
-  }) = _ChannelInformation;
-
-  factory ChannelInformation.fromJson(Map<String, dynamic> json) =>
-      _$ChannelInformationFromJson(json);
-}
-
-@freezed
-class ContentDetails with _$ContentDetails {
-  ContentDetails._();
-
-  @HiveType(typeId: 5)
-  factory ContentDetails({
-    @HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
-    @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
-    @HiveField(2) int? dislikes,
-    @HiveField(3) int? likes,
-    @HiveField(4) int? duration,
-    @HiveField(5) int? views,
-  }) = _ContentDetails;
-
-  factory ContentDetails.fromJson(Map<String, dynamic> json) =>
-      _$ContentDetailsFromJson(json);
-}
-
-@freezed
 class Video with _$Video {
   Video._();
 
   @HiveType(typeId: 1)
   factory Video({
     @HiveField(0) @JsonKey(name: "id") required String id,
-    @HiveField(1) @JsonKey(name: "title") required String title,
-    @HiveField(2) @JsonKey(name: "video_url") required String videoUrl,
-    @HiveField(3) @JsonKey(name: "topic") required Topic topic,
-    @HiveField(4) @JsonKey(name: "start_timestamp") int? startTimestamp,
-    @HiveField(5) @JsonKey(name: "end_timestamp") int? endTimestamp,
-    @HiveField(6)
-    @JsonKey(name: "channel_information")
-        ChannelInformation? channelInformation,
-    @HiveField(7)
-    @JsonKey(name: "content_details")
-        ContentDetails? contentDetails,
-    @HiveField(8) @Default(false) bool bookmarked,
+    @HiveField(1) @JsonKey(name: "source") String? source,
+    @HiveField(2) @JsonKey(name: "video_id") required String videoId,
+    @HiveField(3) @JsonKey(name: "title") required String title,
+    @HiveField(4) @JsonKey(name: 'available') bool? available,
+    @HiveField(5) @JsonKey(name: "video_url") required String videoUrl,
+    @HiveField(6) @JsonKey(name: "topic") required Topic topic,
+    @HiveField(7) @JsonKey(name: "start_timestamp") int? startTimestamp,
+    @HiveField(8) @JsonKey(name: "end_timestamp") int? endTimestamp,
+    @HiveField(9) @JsonKey(name: "thumbnail_url") String? thumbnailUrl,
+    @HiveField(10) @JsonKey(name: "channel_name") String? channelName,
+    @HiveField(11) @JsonKey(name: "channel_avatar_url") String? channelAvatarUrl,
+    @HiveField(12) @Default(false) bool bookmarked,
   }) = _Video;
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);

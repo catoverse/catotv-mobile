@@ -73,6 +73,17 @@ class APIServiceImpl implements APIService {
   }
 
   @override
+  Future getTopVideos() async {
+    _log.i("fetching topVideos from GraphQL");
+
+    Result result = await _client.processQuery(query: GQLQueries.getTopVideos);
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["topVideos"];
+  }
+
+  @override
   Future requestInvite({required String email}) async {
     _log.i("adding $email to the waitlist");
 
@@ -141,7 +152,7 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return result.success["videoByTopics"];
+    return result.success["truncatedVideoByTopics"];
   }
 
   @override
@@ -180,7 +191,7 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return result.success["videoById"];
+    return result.success["truncatedVideoById"];
   }
 
   @override

@@ -10,6 +10,7 @@ abstract class APIService {
     required String accessToken,
   });
   Future getTopics();
+  Future getTopVideos();
   Future getVideos(int skip, int limit, List<String> selectedTopics);
   Future getVideoById(String videoId);
   Future requestInvite({required String email});

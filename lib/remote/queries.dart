@@ -19,10 +19,13 @@ class GQLQueries {
   ''';
 
   static const String getVideosByTopics = r'''  
-    query VideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
-      videoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
+    query TruncatedVideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
+      truncatedVideoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
         id
+        source
+        video_id
         title
+        available
         video_url
         topic {
           id
@@ -30,27 +33,21 @@ class GQLQueries {
         }
         start_timestamp
         end_timestamp
-        content_details {
-          youtube_category
-          captions_available
-          dislikes
-          duration
-          views
-        }
-        channel_information {
-          id
-          name
-          subscriber_count
-        }
+        thumbnail_url
+        channel_name
+        channel_avatar_url
       }
     }
   ''';
 
   static const String getVideoById = r'''
-    query GetVideoById($id: ID!) {
-      videoById(id: $id) {
+    query GetTruncatedVideoById($id: ID!) {
+      truncatedVideoById(id: $id) {
         id
+        source
+        video_id
         title
+        available
         video_url
         topic {
           id
@@ -58,18 +55,31 @@ class GQLQueries {
         }
         start_timestamp
         end_timestamp
-        content_details {
-          youtube_category
-          captions_available
-          dislikes
-          duration
-          views
-        }
-        channel_information {
+        thumbnail_url
+        channel_name
+        channel_avatar_url
+      }
+    }
+  ''';
+
+  static const String getTopVideos = r'''
+    query GetTopVideos {
+      topVideos {
+        id
+        source
+        video_id
+        title
+        available
+        video_url
+        topic {
           id
           name
-          subscriber_count
         }
+        start_timestamp
+        end_timestamp
+        thumbnail_url
+        channel_name
+        channel_avatar_url
       }
     }
   ''';

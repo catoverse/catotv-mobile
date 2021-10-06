@@ -95,95 +95,6 @@ class TopicAdapter extends TypeAdapter<_$_Topic> {
           typeId == other.typeId;
 }
 
-class ChannelInformationAdapter extends TypeAdapter<_$_ChannelInformation> {
-  @override
-  final int typeId = 4;
-
-  @override
-  _$_ChannelInformation read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return _$_ChannelInformation(
-      id: fields[0] as String?,
-      name: fields[1] as String?,
-      subscriberCount: fields[3] as int?,
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, _$_ChannelInformation obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.name)
-      ..writeByte(3)
-      ..write(obj.subscriberCount);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ChannelInformationAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class ContentDetailsAdapter extends TypeAdapter<_$_ContentDetails> {
-  @override
-  final int typeId = 5;
-
-  @override
-  _$_ContentDetails read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return _$_ContentDetails(
-      youtubeCategory: fields[0] as int?,
-      hasCaptions: fields[1] as bool?,
-      dislikes: fields[2] as int?,
-      likes: fields[3] as int?,
-      duration: fields[4] as int?,
-      views: fields[5] as int?,
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, _$_ContentDetails obj) {
-    writer
-      ..writeByte(6)
-      ..writeByte(0)
-      ..write(obj.youtubeCategory)
-      ..writeByte(1)
-      ..write(obj.hasCaptions)
-      ..writeByte(2)
-      ..write(obj.dislikes)
-      ..writeByte(3)
-      ..write(obj.likes)
-      ..writeByte(4)
-      ..write(obj.duration)
-      ..writeByte(5)
-      ..write(obj.views);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is ContentDetailsAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
 class VideoAdapter extends TypeAdapter<_$_Video> {
   @override
   final int typeId = 1;
@@ -196,38 +107,50 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
     };
     return _$_Video(
       id: fields[0] as String,
-      title: fields[1] as String,
-      videoUrl: fields[2] as String,
-      topic: fields[3] as Topic,
-      startTimestamp: fields[4] as int?,
-      endTimestamp: fields[5] as int?,
-      channelInformation: fields[6] as ChannelInformation?,
-      contentDetails: fields[7] as ContentDetails?,
-      bookmarked: fields[8] as bool,
+      source: fields[1] as String?,
+      videoId: fields[2] as String,
+      title: fields[3] as String,
+      available: fields[4] as bool?,
+      videoUrl: fields[5] as String,
+      topic: fields[6] as Topic,
+      startTimestamp: fields[7] as int?,
+      endTimestamp: fields[8] as int?,
+      thumbnailUrl: fields[9] as String?,
+      channelName: fields[10] as String?,
+      channelAvatarUrl: fields[11] as String?,
+      bookmarked: fields[12] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, _$_Video obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(13)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.source)
       ..writeByte(2)
-      ..write(obj.videoUrl)
+      ..write(obj.videoId)
       ..writeByte(3)
-      ..write(obj.topic)
+      ..write(obj.title)
       ..writeByte(4)
-      ..write(obj.startTimestamp)
+      ..write(obj.available)
       ..writeByte(5)
-      ..write(obj.endTimestamp)
+      ..write(obj.videoUrl)
       ..writeByte(6)
-      ..write(obj.channelInformation)
+      ..write(obj.topic)
       ..writeByte(7)
-      ..write(obj.contentDetails)
+      ..write(obj.startTimestamp)
       ..writeByte(8)
+      ..write(obj.endTimestamp)
+      ..writeByte(9)
+      ..write(obj.thumbnailUrl)
+      ..writeByte(10)
+      ..write(obj.channelName)
+      ..writeByte(11)
+      ..write(obj.channelAvatarUrl)
+      ..writeByte(12)
       ..write(obj.bookmarked);
   }
 
@@ -329,69 +252,35 @@ Map<String, dynamic> _$$_TopicToJson(_$_Topic instance) => <String, dynamic>{
       'isSelected': instance.isSelected,
     };
 
-_$_ChannelInformation _$$_ChannelInformationFromJson(
-        Map<String, dynamic> json) =>
-    _$_ChannelInformation(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      subscriberCount: json['subscriber_count'] as int?,
-    );
-
-Map<String, dynamic> _$$_ChannelInformationToJson(
-        _$_ChannelInformation instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'subscriber_count': instance.subscriberCount,
-    };
-
-_$_ContentDetails _$$_ContentDetailsFromJson(Map<String, dynamic> json) =>
-    _$_ContentDetails(
-      youtubeCategory: json['youtube_category'] as int?,
-      hasCaptions: json['captions_available'] as bool?,
-      dislikes: json['dislikes'] as int?,
-      likes: json['likes'] as int?,
-      duration: json['duration'] as int?,
-      views: json['views'] as int?,
-    );
-
-Map<String, dynamic> _$$_ContentDetailsToJson(_$_ContentDetails instance) =>
-    <String, dynamic>{
-      'youtube_category': instance.youtubeCategory,
-      'captions_available': instance.hasCaptions,
-      'dislikes': instance.dislikes,
-      'likes': instance.likes,
-      'duration': instance.duration,
-      'views': instance.views,
-    };
-
 _$_Video _$$_VideoFromJson(Map<String, dynamic> json) => _$_Video(
       id: json['id'] as String,
+      source: json['source'] as String?,
+      videoId: json['video_id'] as String,
       title: json['title'] as String,
+      available: json['available'] as bool?,
       videoUrl: json['video_url'] as String,
       topic: Topic.fromJson(json['topic'] as Map<String, dynamic>),
       startTimestamp: json['start_timestamp'] as int?,
       endTimestamp: json['end_timestamp'] as int?,
-      channelInformation: json['channel_information'] == null
-          ? null
-          : ChannelInformation.fromJson(
-              json['channel_information'] as Map<String, dynamic>),
-      contentDetails: json['content_details'] == null
-          ? null
-          : ContentDetails.fromJson(
-              json['content_details'] as Map<String, dynamic>),
+      thumbnailUrl: json['thumbnail_url'] as String?,
+      channelName: json['channel_name'] as String?,
+      channelAvatarUrl: json['channel_avatar_url'] as String?,
       bookmarked: json['bookmarked'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'id': instance.id,
+      'source': instance.source,
+      'video_id': instance.videoId,
       'title': instance.title,
+      'available': instance.available,
       'video_url': instance.videoUrl,
       'topic': instance.topic,
       'start_timestamp': instance.startTimestamp,
       'end_timestamp': instance.endTimestamp,
-      'channel_information': instance.channelInformation,
-      'content_details': instance.contentDetails,
+      'thumbnail_url': instance.thumbnailUrl,
+      'channel_name': instance.channelName,
+      'channel_avatar_url': instance.channelAvatarUrl,
       'bookmarked': instance.bookmarked,
     };
 

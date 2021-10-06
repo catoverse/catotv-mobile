@@ -60,4 +60,23 @@ class FeedService {
     var result = await _apiService.getVideoById(id);
     return Video.fromJson(result);
   }
+
+  /// Fetches all the top [Video] from API
+  Future<List<Video>> fetchTopVideos() async {
+    List<Video> apiVideos = [];
+
+    final list = await _apiService.getTopVideos();
+
+    if (list is List) {
+      for (var json in list) {
+        final isYoutubeVideo = VideoService.convertUrlToId(json["video_url"]);
+
+        if (isYoutubeVideo != null) {
+          apiVideos.add(Video.fromJson(json));
+        }
+      }
+    }
+
+    return apiVideos;
+  }
 }
