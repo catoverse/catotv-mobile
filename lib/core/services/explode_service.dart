@@ -22,7 +22,7 @@ class ExplodeService {
         }
       }
 
-      _log.v("Fetched video from explode successfully");
+      _log.v("Fetched video from explode successfully ${videoUri.toString()}");
 
       return videoUri.toString();
     } catch (e) {

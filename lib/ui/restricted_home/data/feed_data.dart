@@ -6,22 +6,10 @@ const List<Map<String, dynamic>> feedData = [
     'topic': {'id': '5f5273e59aa66f1d8c150489', 'name': 'Social'}
   },
   {
-    'id': '2h7b8HEwDsI',
-    'title': 'Is Exercising Worth Your Time?',
-    'video_url': "https://youtu.be/2h7b8HEwDsI",
-    'topic': {'id': '5f5273e59aa66f1d8c15048a', 'name': 'Health & Nutrition'}
-  },
-  {
     'id': 'lEXBxijQREo',
     'title': 'How sugar affects the brain',
     'video_url': "https://youtu.be/lEXBxijQREo",
     'topic': {'id': '5f5273e59aa66f1d8c15048a', 'name': 'Health & Nutrition'}
-  },
-  {
-    'id': 'zkTf0LmDqKI',
-    'title': 'Steve Jobs on Failure',
-    'video_url': "https://youtu.be/zkTf0LmDqKI",
-    'topic': {'id': '5f5273e59aa66f1d8c15048d', 'name': 'Productivity'}
   },
   {
     'id': '9H36Gjg5SLM',
@@ -51,7 +39,7 @@ const List<Map<String, dynamic>> feedData = [
     'id': 'KbYzF6Zy5tY',
     'title': 'The Infinite Game',
     'video_url': "https://youtu.be/KbYzF6Zy5tY",
-    'topic': {'name': 'Intellectual'}
+    'topic': {'id': '', 'name': 'Intellectual'}
   },
   {
     'id': 'qDxDCtZ9UkE',
