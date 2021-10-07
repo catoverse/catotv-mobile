@@ -1,18 +1,16 @@
-import 'package:feed/app/app.locator.dart';
-import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'data/feed_data.dart';
 
 class RestrictedHomeViewModel extends BaseFeedModel {
-  final _feedService = locator<FeedService>();
-  List<Video> _videos = [];
+  // final _feedService = locator<FeedService>();
+  final List<Video> _videos = [];
 
   @override
   Future getData() async {
     setBusy(true);
 
-    _videos = await _feedService.fetchTopVideos();
+    // _videos = await _feedService.fetchTopVideos();
 
     if(_videos.isEmpty) {
       for (var json in feedData) {

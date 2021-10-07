@@ -42,13 +42,6 @@ const List<Map<String, dynamic>> feedData = [
     "video_id": "123"
   },
   {
-    'id': 'KbYzF6Zy5tY',
-    'title': 'The Infinite Game',
-    'video_url': "https://youtu.be/KbYzF6Zy5tY",
-    'topic': {'id': '', 'name': 'Intellectual'},
-    "video_id": "123"
-  },
-  {
     'id': 'qDxDCtZ9UkE',
     'title': 'Daily Consistency = Massive Result',
     'video_url': "https://youtu.be/qDxDCtZ9UkE",
