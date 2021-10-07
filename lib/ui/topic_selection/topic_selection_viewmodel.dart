@@ -74,7 +74,6 @@ class TopicSelectionViewModel extends BaseViewModel {
   void onSkip() async {
     selectedTopicIds.addAll(topicCheckList.map((e) => e.id));
     await storeSelectedTopics();
-    gotoHome();
   }
 
   void gotoHome() => _navigationService.replaceWith(Routes.feedView);

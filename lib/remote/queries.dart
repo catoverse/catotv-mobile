@@ -114,7 +114,7 @@ class GQLQueries {
   static const String createUserProfile = r'''
     mutation CreateProfile($userId: ID!, $name: String!, $selectedTopics: [ID]!) {
       createUserProfile(
-        user: { name: $name, userId: $userId, selectedTopics: $selectedTopics }
+        userProfile: { name: $name, userId: $userId, selectedTopics: $selectedTopics }
       ) {
         name
       }
