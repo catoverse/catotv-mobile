@@ -4,12 +4,14 @@ import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/share_service.dart';
+import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/mixins/snackbar_helper.dart';
 import 'package:feed/core/mixins/auth.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 abstract class BaseFeedModel extends BaseViewModel
     with AuthMixin, SnackbarHelper {
@@ -18,6 +20,8 @@ abstract class BaseFeedModel extends BaseViewModel
   final _messageQueue = locator<MessageQueueService>();
   final _shareService = locator<ShareService>();
   final _dynamicLinksService = locator<DynamicLinksService>();
+  final _videoManagerService = locator<VideoManagerService>();
+  final _navigationService = locator<NavigationService>();
 
   List<Video> get videos;
 
@@ -102,5 +106,10 @@ abstract class BaseFeedModel extends BaseViewModel
   Future<void> addBookmarks(int index) async {
     logBookmarkVideo(index);
     await _videoService.addBookmarks(videos[index]);
+  }
+
+  void onBack() {
+    _navigationService.back();
+    _videoManagerService.addStream(FeedRouteState.onit);
   }
 }
