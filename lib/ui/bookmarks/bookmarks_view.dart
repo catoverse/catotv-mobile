@@ -29,11 +29,9 @@ class BookmarksView extends StatelessWidget {
                     ? const Center(child: CircularProgressIndicator())
                     : model.videos.isEmpty
                         ? const NoBookmarksView()
-                        : RefreshIndicator(
-                            onRefresh: model.refresh,
-                            child: FeedPlayerListView(
-                              showBookmark: false,
-                            )),
+                        : FeedPlayerListView(
+                          showBookmark: false,
+                        ),
               ),
             ));
   }

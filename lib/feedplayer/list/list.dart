@@ -66,6 +66,7 @@ class FeedPlayerListView extends ViewModelWidget<BaseFeedModel> {
                           isInView: isInView,
                           baseFeedModel: viewModel,
                           feedPlayerController: controller,
+                          showBookmark: showBookmark,
                           index: index),
 
                       // Feed Footer

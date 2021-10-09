@@ -3,6 +3,7 @@ import 'package:feed/app/app.router.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
+import 'package:feed/core/services/video_manager_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -14,6 +15,7 @@ class TopicSelectionViewModel extends BaseViewModel {
   final TopicService _topicService = locator<TopicService>();
   final UserService _userService = locator<UserService>();
   final NavigationService _navigationService = locator<NavigationService>();
+  final VideoManagerService _videoManagerService = locator<VideoManagerService>();
 
   bool get hasTopics => selectedTopicIds.isNotEmpty;
 
@@ -39,7 +41,7 @@ class TopicSelectionViewModel extends BaseViewModel {
     var result = await _topicService.getTopics();
 
     topicCheckList = result;
-    
+
     if (isUpdate) {
       await getSelectedTopics();
     }
@@ -59,7 +61,7 @@ class TopicSelectionViewModel extends BaseViewModel {
     //TODO: Indicate the topics are stored successfully
     //TODO: Subscribe to topics
 
-    return gotoHome();
+    return gotoHome(isUpdate: isUpdate);
   }
 
   Future getSelectedTopics() async {
@@ -73,17 +75,23 @@ class TopicSelectionViewModel extends BaseViewModel {
 
       topicCheckList[index] = selectedTopic.copyWith(isSelected: true);
     }
-
   }
 
   void onSkip({bool isUpdate = false}) async {
     if (isUpdate) {
-      gotoHome();
+      gotoHome(isUpdate: true);
     } else {
       selectedTopicIds.addAll(topicCheckList.map((Topic topic) => topic.id));
       await storeSelectedTopics();
     }
   }
 
-  void gotoHome() => _navigationService.replaceWith(Routes.feedView);
+  void gotoHome({bool isUpdate = false}) {
+    if (isUpdate) {
+      _navigationService.back();
+      _videoManagerService.addStream(FeedRouteState.onit);
+    } else {
+      _navigationService.replaceWith(Routes.feedView);
+    }
+  }
 }

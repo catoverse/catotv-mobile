@@ -17,13 +17,15 @@ class FeedPlayer extends StatefulWidget {
   final Video video;
   final BaseFeedModel baseFeedModel;
   final FeedPlayerController feedPlayerController;
+  final bool showBookmark;
+
   const FeedPlayer(
       {Key? key,
       required this.video,
       required this.isInView,
       required this.index,
       required this.feedPlayerController,
-      required this.baseFeedModel})
+      required this.baseFeedModel, this.showBookmark = true})
       : super(key: key);
 
   @override
@@ -61,11 +63,13 @@ class _FeedPlayerState extends State<FeedPlayer>
       widget.feedPlayerController.init(flickManager!);
     });
 
-    _videoManagerService.getStream().listen((event) { 
-      if(event == FeedRouteState.away) {
-        flickManager?.flickControlManager?.pause();
-      } else if(event == FeedRouteState.onit && widget.isInView) {
-        flickManager!.flickControlManager?.play();
+    _videoManagerService.getStream().listen((state) { 
+      if (widget.isInView) {
+        if (state == FeedRouteState.away) {
+          flickManager?.flickControlManager?.pause();
+        } else if (state == FeedRouteState.onit && widget.showBookmark) {
+          flickManager!.flickControlManager?.play();
+        }
       }
     });
 
