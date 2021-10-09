@@ -13,21 +13,28 @@ class BookmarksView extends StatelessWidget {
     return ScreenBuilder<BaseFeedModel>(
         viewModel: BookmarksViewModel(),
         onModelReady: (model) => model.getData(),
-        builder: (context, uiHelpers, model) => Scaffold(
-              appBar: AppBar(
-                elevation: 0,
-                backgroundColor: Colors.transparent,
-                iconTheme: const IconThemeData(color: AppColors.textPrimary),
+        builder: (context, uiHelpers, model) => WillPopScope(
+              onWillPop: () async {
+                model.onBack();
+                return true;
+              },
+              child: Scaffold(
+                appBar: AppBar(
+                  leading: BackButton(onPressed: model.onBack),
+                  elevation: 0,
+                  backgroundColor: Colors.transparent,
+                  iconTheme: const IconThemeData(color: AppColors.textPrimary),
+                ),
+                body: model.isBusy
+                    ? const Center(child: CircularProgressIndicator())
+                    : model.videos.isEmpty
+                        ? const NoBookmarksView()
+                        : RefreshIndicator(
+                            onRefresh: model.refresh,
+                            child: FeedPlayerListView(
+                              showBookmark: false,
+                            )),
               ),
-              body: model.isBusy
-                  ? const Center(child: CircularProgressIndicator())
-                  : model.videos.isEmpty
-                      ? const NoBookmarksView()
-                      : RefreshIndicator(
-                          onRefresh: model.refresh,
-                          child: FeedPlayerListView(
-                            showBookmark: false,
-                          )),
             ));
   }
 }

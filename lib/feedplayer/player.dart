@@ -64,6 +64,8 @@ class _FeedPlayerState extends State<FeedPlayer>
     _videoManagerService.getStream().listen((event) { 
       if(event == FeedRouteState.away) {
         flickManager?.flickControlManager?.pause();
+      } else if(event == FeedRouteState.onit && widget.isInView) {
+        flickManager!.flickControlManager?.play();
       }
     });
 
@@ -101,11 +103,11 @@ class _FeedPlayerState extends State<FeedPlayer>
     }
   }
 
-  @override
-  void dispose() {
-    flickManager?.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   flickManager?.dispose();
+  //   super.dispose();
+  // }
 
   // @override
   // void deactivate() {
