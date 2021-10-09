@@ -1,4 +1,6 @@
+import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/feedplayer/controller.dart';
 import 'package:feed/feedplayer/controls.dart';
 import 'package:feed/feedplayer/player.widgets.dart';
@@ -33,6 +35,7 @@ class _FeedPlayerState extends State<FeedPlayer>
   late Future<void> _initializeVideoPlayerFuture;
   FlickManager? flickManager;
   late String thumbnail;
+  final _videoManagerService = locator<VideoManagerService>();
 
   @override
   void initState() {
@@ -56,6 +59,12 @@ class _FeedPlayerState extends State<FeedPlayer>
           });
 
       widget.feedPlayerController.init(flickManager!);
+    });
+
+    _videoManagerService.getStream().listen((event) { 
+      if(event == FeedRouteState.away) {
+        flickManager?.flickControlManager?.pause();
+      }
     });
 
     super.initState();
@@ -98,11 +107,11 @@ class _FeedPlayerState extends State<FeedPlayer>
     super.dispose();
   }
 
-  @override
-  void deactivate() {
-    flickManager?.flickControlManager?.pause();
-    super.deactivate();
-  }
+  // @override
+  // void deactivate() {
+  //   flickManager?.flickControlManager?.pause();
+  //   super.deactivate();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +175,7 @@ class _FeedPlayerState extends State<FeedPlayer>
                 ),
               ),
               VideoProgressBar(
-                flickManager: flickManager,
+                flickManager: flickManager!,
                 progressColor: AppColors.primary,
               )
             ],
