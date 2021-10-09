@@ -110,7 +110,7 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future geFulltUserProfile({required String userId}) async {
+  Future geFullUserProfile({required String userId}) async {
     _log.i("fetching profile for User(id: $userId)");
 
     Result<Failure, dynamic> result = await _client.processQuery(
@@ -192,6 +192,18 @@ class APIServiceImpl implements APIService {
     if (result.isFailed) return result.failure;
 
     return result.success["truncatedVideoById"];
+  }
+
+  @override
+  Future getVideosByIds(List<String> videoIds) async {
+    _log.i("getting video with videoId: $videoIds");
+
+    Result<Failure, dynamic> result =
+        await _client.processQuery(query: GQLQueries.getVideosByIds, variables: GQLQueries.getVideosByIdsVariables(videoIds));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["truncatedVideosByIds"];
   }
 
   @override

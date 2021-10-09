@@ -82,32 +82,38 @@ class VideoService {
         .insertList<Video>(items: [video], boxName: kBookmarkedVideoKey);
   }
 
+  Future<void> addBookmarkedVideosToCache(List<Video> videos) async {
+    await _hiveService.insertList<Video>(items: videos, boxName: kBookmarkedVideoKey);
+  }
+
   Future<void> syncBookmarks() async {
     List<Video> localBookmarkedVideos = await getBookmarkedVideos();
-    List<String> localBookmarks =
-        localBookmarkedVideos.map((e) => e.id).toList();
+    List<String> localBookmarks = localBookmarkedVideos.map((Video video) => video.id).toList();
 
-    var userId = _userService.currentUser.id;
+    final userId = _userService.currentUser.id;
 
-    var result = await _apiService.geFulltUserProfile(userId: userId);
-    List<String> remoteBookmarks = [];
+    var result = await _apiService.geFullUserProfile(userId: userId);
+    List<String> remoteBookmarkedVideoIds = [];
 
     if (result is! Failure) {
       final userProfile = UserProfile.fromJson(result as Map<String, dynamic>);
 
-      remoteBookmarks = userProfile.bookmarks;
+      remoteBookmarkedVideoIds = userProfile.bookmarks;
     }
-    remoteBookmarks = remoteBookmarks.toSet().toList();
+    remoteBookmarkedVideoIds = remoteBookmarkedVideoIds.toSet().toList();
 
-    remoteBookmarks.removeWhere((element) => localBookmarks.contains(element));
+    remoteBookmarkedVideoIds.removeWhere((element) => localBookmarks.contains(element));
 
-    for (var videoId in remoteBookmarks) {
-      final videoResult = await _apiService.getVideoById(videoId);
+      final list = await _apiService.getVideosByIds(remoteBookmarkedVideoIds);
 
-      if (videoResult is! Failure) {
-        var video = Video.fromJson(videoResult as Map<String, dynamic>);
-        await addBookmarksToCache(video.copyWith(bookmarked: true));
+      if (list is List) {
+        final videos = <Video>[];
+
+        for (var json in list) {
+          final video = Video.fromJson(json as Map<String, dynamic>);
+          videos.add(video);
+        }
+        await addBookmarkedVideosToCache(videos);
       }
     }
-  }
 }

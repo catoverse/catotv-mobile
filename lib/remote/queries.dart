@@ -62,6 +62,28 @@ class GQLQueries {
     }
   ''';
 
+  static const String getVideosByIds = r'''
+    query GetTruncatedVideosByIds($ids: [ID!]!) {
+      truncatedVideosByIds(ids: $ids) {
+        id
+        source
+        video_id
+        title
+        available
+        video_url
+        topic {
+          id
+          name
+        }
+        start_timestamp
+        end_timestamp
+        thumbnail_url
+        channel_name
+        channel_avatar_url
+      }
+    }
+  ''';
+
   static const String getTopVideos = r'''
     query GetTopVideos {
       topVideos {
@@ -233,6 +255,10 @@ class GQLQueries {
 
   static Map<String, dynamic> getVideoByIdVariables(String id) {
     return {"id": id};
+  }
+
+  static Map<String, dynamic> getVideosByIdsVariables(List<String> ids) {
+    return {"ids": ids};
   }
 
   static Map<String, dynamic> postStreamLinkVariables(

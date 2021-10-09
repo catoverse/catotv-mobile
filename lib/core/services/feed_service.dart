@@ -11,6 +11,7 @@ class FeedService {
   final _apiService = locator<APIService>();
   final _userService = locator<UserService>();
   final _topicService = locator<TopicService>();
+  final _videoService = locator<VideoService>();
 
   /// Fetches videos from graphql api
   ///
@@ -22,14 +23,17 @@ class FeedService {
     var selectedTopics = await _topicService.getSelectedTopics(userId);
 
     var list = await _apiService.getVideos(skip, limit, selectedTopics);
-    final userProfileResult =
-        await _apiService.geFulltUserProfile(userId: userId);
-    List<String>? _bookmarks;
+    List<String> _bookmarks = [];
 
-    if (userProfileResult is! Failure) {
-      _bookmarks =
-          UserProfile.fromJson(userProfileResult as Map<String, dynamic>)
-              .bookmarks;
+    final bookmaredVideos = await _videoService.getBookmarkedVideos();
+
+    _bookmarks = bookmaredVideos.map((Video video) => video.id).toList();
+
+    if (_bookmarks.isEmpty) {
+      final userProfileResult = await _apiService.geFullUserProfile(userId: userId);
+      if (userProfileResult is! Failure) {
+        _bookmarks = UserProfile.fromJson(userProfileResult as Map<String, dynamic>).bookmarks;
+      }
     }
 
     List<Video> apiVideos = [];
@@ -42,11 +46,7 @@ class FeedService {
 
         if (isYoutubeVideo != null) apiVideos.add(Video.fromJson(json));
       }
-      if (_bookmarks != null) {
-        apiVideos = apiVideos
-            .map((e) => e.copyWith(bookmarked: _bookmarks!.contains(e.id)))
-            .toList();
-      }
+      apiVideos = apiVideos.map((Video video) => video.copyWith(bookmarked: _bookmarks.contains(video.id))).toList();
 
       return apiVideos;
     }
