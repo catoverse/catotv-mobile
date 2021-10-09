@@ -17,18 +17,17 @@ class TopicSelectionView extends StatelessWidget {
     return ScreenBuilder<TopicSelectionViewModel>(
         viewModel: TopicSelectionViewModel(),
         onModelReady: (model) {
-          model.getTopics();
-          if (updateTopicSelection) model.getSelectedTopics();
+          model.getTopics(isUpdate: updateTopicSelection);
         },
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(
-                automaticallyImplyLeading: false,
+                automaticallyImplyLeading: updateTopicSelection,
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 actions: [
                   if(!model.isBusy)
                   TextButton(
-                      onPressed: () => model.onSkip(),
+                      onPressed: () => model.onSkip(isUpdate: updateTopicSelection),
                       child: Text(
                         "Skip",
                         style: uiHelpers.button,

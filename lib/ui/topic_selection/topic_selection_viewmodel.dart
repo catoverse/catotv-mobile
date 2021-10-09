@@ -28,25 +28,33 @@ class TopicSelectionViewModel extends BaseViewModel {
       selectedTopicIds.remove(topicCheckList[index].id);
     }
 
-    topicCheckList[index] =
-        topicCheckList[index].copyWith(isSelected: selected);
+    topicCheckList[index] = topicCheckList[index].copyWith(isSelected: selected);
 
     debugPrint("Selected Topics : $selectedTopicIds");
     notifyListeners();
   }
 
-  Future getTopics() async {
+  Future getTopics({bool isUpdate = false}) async {
     setBusy(true);
     var result = await _topicService.getTopics();
-    setBusy(false);
 
     topicCheckList = result;
+    
+    if (isUpdate) {
+      await getSelectedTopics();
+    }
+
+    setBusy(false);
     notifyListeners();
   }
 
   Future storeSelectedTopics({bool isUpdate = false}) async {
     setBusy(true);
-    await _userService.createProfile(topicIds: selectedTopicIds);
+    if (isUpdate) {
+      await _userService.updateProfile(topicIds: selectedTopicIds);
+    } else {
+      await _userService.createProfile(topicIds: selectedTopicIds);
+    }
 
     //TODO: Indicate the topics are stored successfully
     //TODO: Subscribe to topics
@@ -55,25 +63,26 @@ class TopicSelectionViewModel extends BaseViewModel {
   }
 
   Future getSelectedTopics() async {
-    var result =
-        await _topicService.getSelectedTopics(_userService.currentUser.id);
+    var result = await _topicService.getSelectedTopics(_userService.currentUser.id);
 
     selectedTopicIds = result;
 
     for (var item in result) {
-      var selectedTopic =
-          topicCheckList.firstWhere((element) => element.id == item);
+      var selectedTopic = topicCheckList.firstWhere((Topic topic) => topic.id == item);
       int index = topicCheckList.indexOf(selectedTopic);
 
       topicCheckList[index] = selectedTopic.copyWith(isSelected: true);
     }
 
-    notifyListeners();
   }
 
-  void onSkip() async {
-    selectedTopicIds.addAll(topicCheckList.map((e) => e.id));
-    await storeSelectedTopics();
+  void onSkip({bool isUpdate = false}) async {
+    if (isUpdate) {
+      gotoHome();
+    } else {
+      selectedTopicIds.addAll(topicCheckList.map((Topic topic) => topic.id));
+      await storeSelectedTopics();
+    }
   }
 
   void gotoHome() => _navigationService.replaceWith(Routes.feedView);

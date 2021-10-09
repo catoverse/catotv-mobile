@@ -121,6 +121,17 @@ class GQLQueries {
     }
   ''';
 
+  static const String updateUserProfile = r'''
+    mutation UpdateProfile($userId: ID!, $name: String!, $selectedTopics: [ID]! ) {
+      updateUserProfile(
+         userId: $userId, userProfile: {name: $name, userId: $userId, selectedTopics: $selectedTopics}
+      ) {
+        name
+    		selectedTopics
+      }
+    }
+  ''';
+
   // Mutations - we use mutations to modify server-side data.
 
   static const String getIosVersion = r'''
@@ -219,6 +230,10 @@ class GQLQueries {
 
   static Map<String, dynamic> createUserProfileVariables(
       String userId, String name, List<String> topicIds) {
+    return {"userId": userId, "name": name, "selectedTopics": topicIds};
+  }
+
+  static Map<String, dynamic> updateUserProfileVariables(String userId, String name, List<String> topicIds) {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
