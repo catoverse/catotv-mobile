@@ -24,4 +24,9 @@ class DrawerViewModel extends BaseViewModel with AuthMixin {
     _videoManagerService.addStream(FeedRouteState.away);
     _navigationService.navigateTo(Routes.bookmarksView);
   }
+
+   void updateTopics() {
+    _videoManagerService.addStream(FeedRouteState.away);
+    _navigationService.navigateTo(Routes.topicSelectionView, arguments: TopicSelectionViewArguments(updateTopicSelection: true));
+  }
 }

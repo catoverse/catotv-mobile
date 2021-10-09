@@ -142,6 +142,16 @@ class APIServiceImpl implements APIService {
   }
 
   @override
+  Future updateUserProfile({required String userId, required String name, required List<String> topicIds}) async {
+    _log.i("Updating profile for User(id: $userId, topics: $topicIds)");
+    Result<Failure, dynamic> result = await _client.mutation(GQLQueries.updateUserProfile, variables: GQLQueries.updateUserProfileVariables(userId, name, topicIds));
+
+    if (result.isFailed) return result.failure;
+
+    return true;
+  }
+
+  @override
   Future getVideos(int skip, int limit, List<String> selectedTopics) async {
     _log.i("getting videos for topics: $selectedTopics");
 

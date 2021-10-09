@@ -20,6 +20,7 @@ abstract class APIService {
       {required String userId,
       required String name,
       required List<String> topicIds});
+  Future updateUserProfile({required String userId, required String name, required List<String> topicIds});
   Future getVideoStream(String watchId);
   Future postVideoStream(String watchId, String streamUrl);
   Future logUserEventToMessageQueue(List<MqEventLog> events);
