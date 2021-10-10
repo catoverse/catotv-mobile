@@ -1,4 +1,5 @@
 import 'package:feed/app/app.locator.dart';
+import 'package:feed/core/constants/assets.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/feedplayer/controller.dart';
@@ -9,6 +10,7 @@ import 'package:feed/ui/global/theme.dart';
 import 'package:feed/ui/global/thumbnail_image.dart';
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:video_player/video_player.dart';
 
 class FeedPlayer extends StatefulWidget {
@@ -25,35 +27,39 @@ class FeedPlayer extends StatefulWidget {
       required this.isInView,
       required this.index,
       required this.feedPlayerController,
-      required this.baseFeedModel, this.showBookmark = true})
+      required this.baseFeedModel,
+      this.showBookmark = true})
       : super(key: key);
 
   @override
   _FeedPlayerState createState() => _FeedPlayerState();
 }
 
-class _FeedPlayerState extends State<FeedPlayer>
-    with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
+class _FeedPlayerState extends State<FeedPlayer> with AutomaticKeepAliveClientMixin, WidgetsBindingObserver {
   late Future<void> _initializeVideoPlayerFuture;
   FlickManager? flickManager;
   late String thumbnail;
   final _videoManagerService = locator<VideoManagerService>();
 
+  Widget loading() => Stack(alignment: Alignment.center, children: [
+        ThumbnailImage(
+          thumbnail: thumbnail,
+        ),
+        Lottie.asset(Assets.loading, alignment: Alignment.center, fit: BoxFit.contain, height: 70),
+      ]);
+
   @override
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
     thumbnail = widget.baseFeedModel.getThumbnail(widget.video.videoUrl);
-    _initializeVideoPlayerFuture = widget.baseFeedModel
-        .getStreamUrl(widget.video.videoUrl)
-        .then((dataSource) {
+    _initializeVideoPlayerFuture = widget.baseFeedModel.getStreamUrl(widget.video.videoUrl).then((dataSource) {
       // Initalising the video with [streamUrl]
 
       flickManager = FlickManager(
           videoPlayerController: VideoPlayerController.network(dataSource),
           autoPlay: widget.isInView,
           onVideoEnd: () {
-            final currentPosition = flickManager!
-                .flickVideoManager!.videoPlayerValue!.position.inSeconds;
+            final currentPosition = flickManager!.flickVideoManager!.videoPlayerValue!.position.inSeconds;
 
             if (currentPosition != 0) {
               widget.baseFeedModel.logCompleteVideo(widget.index);
@@ -63,8 +69,8 @@ class _FeedPlayerState extends State<FeedPlayer>
       widget.feedPlayerController.init(flickManager!);
     });
 
-    _videoManagerService.getStream().listen((state) { 
-      if (widget.isInView) {
+    _videoManagerService.getStream().listen((state) {
+      if (widget.isInView && flickManager != null && flickManager!.flickVideoManager!.isVideoInitialized) {
         if (state == FeedRouteState.away) {
           flickManager?.flickControlManager?.pause();
         } else if (state == FeedRouteState.onit && widget.showBookmark) {
@@ -80,13 +86,11 @@ class _FeedPlayerState extends State<FeedPlayer>
   void didUpdateWidget(FeedPlayer oldWidget) {
     if (oldWidget.isInView != widget.isInView) {
       if (widget.isInView) {
-        if (flickManager != null &&
-            flickManager!.flickVideoManager!.isVideoInitialized) {
+        if (flickManager != null && flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.play();
         }
       } else {
-        if (flickManager != null &&
-            flickManager!.flickVideoManager!.isVideoInitialized) {
+        if (flickManager != null && flickManager!.flickVideoManager!.isVideoInitialized) {
           flickManager!.flickControlManager?.pause();
           // logSkipOrView();
         }
@@ -97,8 +101,7 @@ class _FeedPlayerState extends State<FeedPlayer>
   }
 
   void logSkipOrView() {
-    final currentVideoDuration =
-        flickManager!.flickVideoManager!.videoPlayerValue!.position;
+    final currentVideoDuration = flickManager!.flickVideoManager!.videoPlayerValue!.position;
 
     if (currentVideoDuration.inSeconds < 10) {
       widget.baseFeedModel.logSkipVideo(widget.index - 1);
@@ -107,17 +110,11 @@ class _FeedPlayerState extends State<FeedPlayer>
     }
   }
 
-  // @override
-  // void dispose() {
-  //   flickManager?.dispose();
-  //   super.dispose();
-  // }
-
-  // @override
-  // void deactivate() {
-  //   flickManager?.flickControlManager?.pause();
-  //   super.deactivate();
-  // }
+  @override
+  void dispose() {
+    flickManager?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,34 +137,14 @@ class _FeedPlayerState extends State<FeedPlayer>
                   playerErrorFallback: Positioned.fill(
                       // TODO: Add blur
                       child: ThumbnailImage(thumbnail: thumbnail)),
-                  playerLoadingFallback: Positioned.fill(
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                            child: ThumbnailImage(thumbnail: thumbnail)),
-                        const Positioned(
-                          right: 10,
-                          top: 10,
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              backgroundColor: Colors.white,
-                              strokeWidth: 4,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  playerLoadingFallback: loading(),
                 ),
                 flickVideoWithControlsFullscreen: FlickVideoWithControls(
                   playerLoadingFallback: Center(
                       child: ThumbnailImage(
                     thumbnail: thumbnail,
                   )),
-                  playerErrorFallback: Positioned.fill(
-                      child: ThumbnailImage(thumbnail: thumbnail)),
+                  playerErrorFallback: Positioned.fill(child: ThumbnailImage(thumbnail: thumbnail)),
                   controls: FeedControls(
                       feedPlayerController: widget.feedPlayerController,
                       feedViewModel: widget.baseFeedModel,
@@ -187,11 +164,7 @@ class _FeedPlayerState extends State<FeedPlayer>
             ],
           );
         } else {
-          return Center(
-            child: ThumbnailImage(
-              thumbnail: thumbnail,
-            ),
-          );
+          return loading();
         }
       },
     );

@@ -371,7 +371,7 @@ packages:
       name: flick_video_player
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "0.4.0-dev.4"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -653,6 +653,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  lottie:
+    dependency: "direct main"
+    description:
+      name: lottie
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.2.1"
   matcher:
     dependency: transitive
     description:
@@ -799,7 +806,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.1"
   pub_semver:
     dependency: transitive
     description:
@@ -941,10 +948,12 @@ packages:
   stacked:
     dependency: "direct main"
     description:
-      name: stacked
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.5"
+      path: "packages/stacked"
+      ref: HEAD
+      resolved-ref: ba552f70c420955c27a4ef2cd41bc471baa81213
+      url: "https://github.com/amanxnanda/stacked"
+    source: git
+    version: "2.2.6"
   stacked_firebase_auth:
     dependency: "direct main"
     description:
@@ -955,17 +964,21 @@ packages:
   stacked_generator:
     dependency: "direct dev"
     description:
-      name: stacked_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "packages/stacked_generator"
+      ref: HEAD
+      resolved-ref: ba552f70c420955c27a4ef2cd41bc471baa81213
+      url: "https://github.com/amanxnanda/stacked"
+    source: git
     version: "0.5.2"
   stacked_services:
     dependency: "direct main"
     description:
-      name: stacked_services
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.8.13"
+      path: "packages/stacked_services"
+      ref: HEAD
+      resolved-ref: ba552f70c420955c27a4ef2cd41bc471baa81213
+      url: "https://github.com/amanxnanda/stacked"
+    source: git
+    version: "0.8.14"
   stream_channel:
     dependency: transitive
     description:
@@ -1015,6 +1028,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  universal_html:
+    dependency: transitive
+    description:
+      name: universal_html
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.8"
   universal_io:
     dependency: transitive
     description:
