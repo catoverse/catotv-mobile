@@ -14,7 +14,8 @@ class DynamicLinksService {
   DynamicLinksService() : _instance = FirebaseDynamicLinks.instance;
 
   Future<String> shareVideo(Video video) async {
-    String videoID = VideoService.convertUrlToId(video.videoUrl)!;
+    // String videoID = VideoService.convertUrlToId(video.videoUrl)!;
+    String videoID = video.id;
 
     Uri fallbackURL = Uri.parse("https://cato.tv/video/$videoID");
 

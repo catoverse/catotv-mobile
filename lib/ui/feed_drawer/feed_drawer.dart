@@ -36,7 +36,7 @@ class DrawerView extends StatelessWidget {
                   ),
                   ListTile(
                     leading: const Icon(Icons.category),
-                    title: const Text("Topics"),
+                    title: const Text("Selected Topics"),
                     onTap: () => model.updateTopics(),
                   ),
                   ListTile(

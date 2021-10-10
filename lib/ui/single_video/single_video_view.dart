@@ -15,6 +15,7 @@ class SingleFeedView extends StatelessWidget {
     return ScreenBuilder<BaseFeedModel>(
         viewModel: SingleFeedViewModel(),
         onModelReady: (model) => model.getVideo(videoId),
+        onDispose: (model) => model.onBack(),
         builder: (context, uiHelpers, model) => Scaffold(
               appBar: AppBar(
                 elevation: 0,
@@ -26,7 +27,7 @@ class SingleFeedView extends StatelessWidget {
               ),
               body: model.isBusy
                   ? const Center(child: CircularProgressIndicator())
-                  : FeedPlayerListView(),
+                  : FeedPlayerListView(showBookmark: false),
             ));
   }
 }

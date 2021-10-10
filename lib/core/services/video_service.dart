@@ -26,7 +26,7 @@ class VideoService {
 
     if (streamUrl is Failure) {
       _log.v("Getting video from explode");
-      return getUrlFromAPI(videoUrl);
+      return await getUrlFromAPI(videoUrl);
     }
 
     _log.v("Getting video from API");
