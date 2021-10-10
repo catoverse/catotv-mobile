@@ -23,12 +23,7 @@ class OnboardingView extends StatelessWidget {
                   appBar: AppBar(
                     backgroundColor: Colors.transparent,
                     elevation: 0,
-                    leading: IconButton(
-                        onPressed: () => model.showInvite(),
-                        icon: const Icon(
-                          Icons.help,
-                          color: AppColors.textPrimary,
-                        )),
+                    automaticallyImplyLeading: false,
                     actions: [
                       Container(
                         margin: const EdgeInsets.only(right: 8.0),
@@ -47,24 +42,32 @@ class OnboardingView extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        TextButton(
-                          onPressed: () => model.requestInvite(),
-                          child: const Text.rich(
-                            TextSpan(
-                              style: TextStyle(color: AppColors.textPrimary),
-                              children: [
-                                TextSpan(text: "Need an invite? "),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            GestureDetector(
+                                onTap: () => model.showInvite(),
+                                child: const Icon(
+                                  Icons.help,
+                                  color: AppColors.textPrimary,
+                                  size: 20,
+                                )),
+                            TextButton(
+                              onPressed: () => model.requestInvite(),
+                              child: const Text.rich(
                                 TextSpan(
-                                    text: "Request",
-                                    style: TextStyle(color: AppColors.primary)),
-                              ],
+                                  style: TextStyle(color: AppColors.textPrimary),
+                                  children: [
+                                    TextSpan(text: "Need an invite? "),
+                                    TextSpan(text: "Request", style: TextStyle(color: AppColors.primary)),
+                                  ],
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                         ElevatedButton(
-                          style: raisedButtonStyle.copyWith(
-                              textStyle: MaterialStateProperty.all<TextStyle>(
-                                  uiHelpers.button!)),
+                          style: raisedButtonStyle.copyWith(textStyle: MaterialStateProperty.all<TextStyle>(uiHelpers.button!)),
                           onPressed: () => model.navigateToRestrictedHome(),
                           child: const Text("Get Started"),
                         ),
@@ -77,14 +80,11 @@ class OnboardingView extends StatelessWidget {
                             children: [
                               const Text(
                                 "By getting started you agree to our ",
-                                style:
-                                    TextStyle(color: AppColors.textSecondary),
+                                style: TextStyle(color: AppColors.textSecondary),
                               ),
                               InkWell(
                                   onTap: () => model.openTermsOfService(),
-                                  child: const Text("Terms & Privacy",
-                                      style:
-                                          TextStyle(color: AppColors.primary))),
+                                  child: const Text("Terms & Privacy", style: TextStyle(color: AppColors.primary))),
                             ],
                           ),
                         ),
