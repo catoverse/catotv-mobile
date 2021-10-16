@@ -3,7 +3,6 @@ import 'package:feed/app/app.router.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
-import 'package:feed/core/services/video_manager_service.dart';
 import 'package:flutter/foundation.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -15,7 +14,6 @@ class TopicSelectionViewModel extends BaseViewModel {
   final TopicService _topicService = locator<TopicService>();
   final UserService _userService = locator<UserService>();
   final NavigationService _navigationService = locator<NavigationService>();
-  final VideoManagerService _videoManagerService = locator<VideoManagerService>();
 
   bool get hasTopics => selectedTopicIds.isNotEmpty;
 
@@ -89,7 +87,6 @@ class TopicSelectionViewModel extends BaseViewModel {
   void gotoHome({bool isUpdate = false}) {
     if (isUpdate) {
       _navigationService.back();
-      _videoManagerService.addStream(FeedRouteState.onit);
     } else {
       _navigationService.replaceWith(Routes.feedView);
     }
