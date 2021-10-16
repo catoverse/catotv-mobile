@@ -60,6 +60,7 @@ class _FeedViewState extends State<FeedView> with WidgetsBindingObserver {
                       style: uiHelpers.button!
                           .copyWith(color: AppColors.textPrimary)),
                 ),
+                onDrawerChanged: model.onDrawerChanged,
                 drawer: DrawerView(),
                 body: model.isBusy
                     ? const Center(child: CircularProgressIndicator())
