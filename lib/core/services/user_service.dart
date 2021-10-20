@@ -148,7 +148,7 @@ class UserService {
       return false;
     }
 
-    await _hiveService.insertList<String>(items: topicIds, boxName: kUserSelectedTopicsBox);
+    await _hiveService.putList<String>(items: topicIds, boxName: kUserSelectedTopicsBox);
 
     return true;
   }

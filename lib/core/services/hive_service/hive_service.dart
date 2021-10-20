@@ -18,6 +18,9 @@ abstract class HiveService {
   Future<Result<Failure, bool>> insertList<T>(
       {required List<T> items, required String boxName});
 
+  /// Put list of items to box (Overrides existing value)
+  Future<Result<Failure, bool>> putList<T>({required List<T> items, required String boxName});
+
   /// Returns item from the box
   Future<Result<Failure, T>> fetchItem<T>({required String boxName});
 
