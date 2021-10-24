@@ -540,8 +540,8 @@ class _$VideoTearOff {
       @JsonKey(name: "video_url")
           required String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          required Topic topic,
+      @JsonKey(name: "topics")
+          required List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -566,7 +566,7 @@ class _$VideoTearOff {
       title: title,
       available: available,
       videoUrl: videoUrl,
-      topic: topic,
+      topics: topics,
       startTimestamp: startTimestamp,
       endTimestamp: endTimestamp,
       thumbnailUrl: thumbnailUrl,
@@ -605,8 +605,8 @@ mixin _$Video {
   @JsonKey(name: "video_url")
   String get videoUrl => throw _privateConstructorUsedError;
   @HiveField(6)
-  @JsonKey(name: "topic")
-  Topic get topic => throw _privateConstructorUsedError;
+  @JsonKey(name: "topics")
+  List<Topic> get topics => throw _privateConstructorUsedError;
   @HiveField(7)
   @JsonKey(name: "start_timestamp")
   int? get startTimestamp => throw _privateConstructorUsedError;
@@ -654,8 +654,8 @@ abstract class $VideoCopyWith<$Res> {
       @JsonKey(name: "video_url")
           String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          Topic topic,
+      @JsonKey(name: "topics")
+          List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -673,8 +673,6 @@ abstract class $VideoCopyWith<$Res> {
           String? channelAvatarUrl,
       @HiveField(12)
           bool bookmarked});
-
-  $TopicCopyWith<$Res> get topic;
 }
 
 /// @nodoc
@@ -693,7 +691,7 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
     Object? title = freezed,
     Object? available = freezed,
     Object? videoUrl = freezed,
-    Object? topic = freezed,
+    Object? topics = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
     Object? thumbnailUrl = freezed,
@@ -726,10 +724,10 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      topic: topic == freezed
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as Topic,
+      topics: topics == freezed
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<Topic>,
       startTimestamp: startTimestamp == freezed
           ? _value.startTimestamp
           : startTimestamp // ignore: cast_nullable_to_non_nullable
@@ -755,13 +753,6 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           : bookmarked // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
-  }
-
-  @override
-  $TopicCopyWith<$Res> get topic {
-    return $TopicCopyWith<$Res>(_value.topic, (value) {
-      return _then(_value.copyWith(topic: value));
-    });
   }
 }
 
@@ -790,8 +781,8 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
       @JsonKey(name: "video_url")
           String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          Topic topic,
+      @JsonKey(name: "topics")
+          List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -809,9 +800,6 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
           String? channelAvatarUrl,
       @HiveField(12)
           bool bookmarked});
-
-  @override
-  $TopicCopyWith<$Res> get topic;
 }
 
 /// @nodoc
@@ -831,7 +819,7 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
     Object? title = freezed,
     Object? available = freezed,
     Object? videoUrl = freezed,
-    Object? topic = freezed,
+    Object? topics = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
     Object? thumbnailUrl = freezed,
@@ -864,10 +852,10 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      topic: topic == freezed
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as Topic,
+      topics: topics == freezed
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<Topic>,
       startTimestamp: startTimestamp == freezed
           ? _value.startTimestamp
           : startTimestamp // ignore: cast_nullable_to_non_nullable
@@ -907,7 +895,7 @@ class _$_Video extends _Video {
       @HiveField(3) @JsonKey(name: "title") required this.title,
       @HiveField(4) @JsonKey(name: 'available') this.available,
       @HiveField(5) @JsonKey(name: "video_url") required this.videoUrl,
-      @HiveField(6) @JsonKey(name: "topic") required this.topic,
+      @HiveField(6) @JsonKey(name: "topics") required this.topics,
       @HiveField(7) @JsonKey(name: "start_timestamp") this.startTimestamp,
       @HiveField(8) @JsonKey(name: "end_timestamp") this.endTimestamp,
       @HiveField(9) @JsonKey(name: "thumbnail_url") this.thumbnailUrl,
@@ -945,8 +933,8 @@ class _$_Video extends _Video {
   final String videoUrl;
   @override
   @HiveField(6)
-  @JsonKey(name: "topic")
-  final Topic topic;
+  @JsonKey(name: "topics")
+  final List<Topic> topics;
   @override
   @HiveField(7)
   @JsonKey(name: "start_timestamp")
@@ -974,7 +962,7 @@ class _$_Video extends _Video {
 
   @override
   String toString() {
-    return 'Video(id: $id, source: $source, videoId: $videoId, title: $title, available: $available, videoUrl: $videoUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, thumbnailUrl: $thumbnailUrl, channelName: $channelName, channelAvatarUrl: $channelAvatarUrl, bookmarked: $bookmarked)';
+    return 'Video(id: $id, source: $source, videoId: $videoId, title: $title, available: $available, videoUrl: $videoUrl, topics: $topics, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, thumbnailUrl: $thumbnailUrl, channelName: $channelName, channelAvatarUrl: $channelAvatarUrl, bookmarked: $bookmarked)';
   }
 
   @override
@@ -996,8 +984,8 @@ class _$_Video extends _Video {
             (identical(other.videoUrl, videoUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.videoUrl, videoUrl)) &&
-            (identical(other.topic, topic) ||
-                const DeepCollectionEquality().equals(other.topic, topic)) &&
+            (identical(other.topics, topics) ||
+                const DeepCollectionEquality().equals(other.topics, topics)) &&
             (identical(other.startTimestamp, startTimestamp) ||
                 const DeepCollectionEquality()
                     .equals(other.startTimestamp, startTimestamp)) &&
@@ -1027,7 +1015,7 @@ class _$_Video extends _Video {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(available) ^
       const DeepCollectionEquality().hash(videoUrl) ^
-      const DeepCollectionEquality().hash(topic) ^
+      const DeepCollectionEquality().hash(topics) ^
       const DeepCollectionEquality().hash(startTimestamp) ^
       const DeepCollectionEquality().hash(endTimestamp) ^
       const DeepCollectionEquality().hash(thumbnailUrl) ^
@@ -1067,8 +1055,8 @@ abstract class _Video extends Video {
       @JsonKey(name: "video_url")
           required String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          required Topic topic,
+      @JsonKey(name: "topics")
+          required List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -1116,8 +1104,8 @@ abstract class _Video extends Video {
   String get videoUrl => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
-  @JsonKey(name: "topic")
-  Topic get topic => throw _privateConstructorUsedError;
+  @JsonKey(name: "topics")
+  List<Topic> get topics => throw _privateConstructorUsedError;
   @override
   @HiveField(7)
   @JsonKey(name: "start_timestamp")

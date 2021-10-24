@@ -48,12 +48,14 @@ class Video with _$Video {
     @HiveField(3) @JsonKey(name: "title") required String title,
     @HiveField(4) @JsonKey(name: 'available') bool? available,
     @HiveField(5) @JsonKey(name: "video_url") required String videoUrl,
-    @HiveField(6) @JsonKey(name: "topic") required Topic topic,
+    @HiveField(6) @JsonKey(name: "topics") required List<Topic> topics,
     @HiveField(7) @JsonKey(name: "start_timestamp") int? startTimestamp,
     @HiveField(8) @JsonKey(name: "end_timestamp") int? endTimestamp,
     @HiveField(9) @JsonKey(name: "thumbnail_url") String? thumbnailUrl,
     @HiveField(10) @JsonKey(name: "channel_name") String? channelName,
-    @HiveField(11) @JsonKey(name: "channel_avatar_url") String? channelAvatarUrl,
+    @HiveField(11)
+    @JsonKey(name: "channel_avatar_url")
+        String? channelAvatarUrl,
     @HiveField(12) @Default(false) bool bookmarked,
   }) = _Video;
 
