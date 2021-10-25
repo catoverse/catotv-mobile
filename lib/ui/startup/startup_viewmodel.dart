@@ -1,10 +1,10 @@
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.router.dart';
+import 'package:feed/core/services/update_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/firebase/fcm_service.dart';
-import 'package:feed/remote/api/api_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -13,7 +13,7 @@ class StartUpViewModel extends BaseViewModel {
   final _log = getLogger('StartUpViewModel');
   final _userService = locator<UserService>();
   final _connectivityService = locator<ConnectivityService>();
-  final _apiService = locator<APIService>();
+  final _appUpdateService = locator<AppUpdateService>();
   final _navigationService = locator<NavigationService>();
   final _fcmService = locator<FcmService>();
   final _dynamicLinks = locator<DynamicLinksService>();
@@ -32,13 +32,7 @@ class StartUpViewModel extends BaseViewModel {
     await _dynamicLinks.handleDynamicLinks();
     await _fcmService.setupFCM();
 
-    var forceUpdateRequired = await _apiService.isUpdateRequired();
-
-    if (forceUpdateRequired is bool && forceUpdateRequired) {
-      _log.v('The app needs to be updated, navigate to update screen');
-      _navigationService.replaceWith(Routes.updateView);
-      return;
-    }
+    await _appUpdateService.handleAppUpdate();
 
     bool isLoggedIn = _userService.hasLoggedInUser;
 

@@ -25,6 +25,7 @@ import '../core/services/message_queue_service.dart';
 import '../core/services/notification_service.dart';
 import '../core/services/share_service.dart';
 import '../core/services/topic_service.dart';
+import '../core/services/update_service.dart';
 import '../core/services/url_service.dart';
 import '../core/services/user_service.dart';
 import '../core/services/video_manager_service.dart';
@@ -69,6 +70,7 @@ Future setupLocator(
   locator.registerSingleton(videoManagerService!);
 
   locator.registerLazySingleton(() => Connectivity());
+  locator.registerLazySingleton(() => AppUpdateService());
   locator.registerLazySingleton<ConnectivityService>(
       () => ConnectivityServiceImpl());
   locator.registerLazySingleton(() => RemoteClient());

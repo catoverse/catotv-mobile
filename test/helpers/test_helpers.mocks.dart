@@ -3,7 +3,7 @@
 // Do not manually edit this file.
 
 import 'dart:async' as _i4;
-import 'dart:ui' as _i13;
+import 'dart:ui' as _i12;
 
 import 'package:feed/core/enums/connectivity_status.dart' as _i8;
 import 'package:feed/core/enums/login_events.dart' as _i5;
@@ -13,7 +13,6 @@ import 'package:feed/core/services/user_service.dart' as _i3;
 import 'package:feed/remote/api/api_service.dart' as _i6;
 import 'package:feed/remote/connectivity/connectivity_service.dart' as _i7;
 import 'package:flutter/material.dart' as _i11;
-import 'package:get/get.dart' as _i12;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:stacked_services/stacked_services.dart' as _i10;
 
@@ -244,10 +243,10 @@ class MockNavigationService extends _i1.Mock implements _i10.NavigationService {
           bool? popGesture,
           int? id,
           _i11.Curve? curve,
-          _i12.Bindings? binding,
+          _i10.Bindings? binding,
           bool? fullscreenDialog = false,
           bool? preventDuplicates = true,
-          _i12.Transition? transitionClass}) =>
+          _i10.Transition? transitionClass}) =>
       (super.noSuchMethod(Invocation.method(#navigateWithTransition, [
         page
       ], {
@@ -270,10 +269,10 @@ class MockNavigationService extends _i1.Mock implements _i10.NavigationService {
           bool? popGesture,
           int? id,
           _i11.Curve? curve,
-          _i12.Bindings? binding,
+          _i10.Bindings? binding,
           bool? fullscreenDialog = false,
           bool? preventDuplicates = true,
-          _i12.Transition? transitionClass}) =>
+          _i10.Transition? transitionClass}) =>
       (super.noSuchMethod(Invocation.method(#replaceWithTransition, [
         page
       ], {
@@ -320,12 +319,12 @@ class MockNavigationService extends _i1.Mock implements _i10.NavigationService {
           int? id,
           bool? opaque,
           _i11.Curve? curve,
-          _i12.Bindings? binding,
+          _i10.Bindings? binding,
           Duration? duration,
           bool? fullscreenDialog = false,
           bool? popGesture,
           bool? preventDuplicates = true,
-          _i12.Transition? transition}) =>
+          _i10.Transition? transition}) =>
       (super.noSuchMethod(Invocation.method(#navigateToView, [
         view
       ], {
@@ -447,7 +446,7 @@ class MockBottomSheetService extends _i1.Mock
           bool? showIconInAdditionalButton = false,
           String? additionalButtonTitle,
           bool? takesInput = false,
-          _i13.Color? barrierColor = const _i13.Color(2315255808),
+          _i12.Color? barrierColor = const _i12.Color(2315255808),
           bool? barrierDismissible = true,
           bool? isScrollControlled = false,
           String? barrierLabel = r'',
