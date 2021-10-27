@@ -2,12 +2,14 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/models/app_models.dart';
+import 'package:feed/core/services/user_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class DynamicLinksService {
   final FirebaseDynamicLinks _instance;
   final _navigationService = locator<NavigationService>();
+  final _userService = locator<UserService>();
   final _log = getLogger("DynamicLinksService");
 
   DynamicLinksService() : _instance = FirebaseDynamicLinks.instance;
@@ -15,10 +17,13 @@ class DynamicLinksService {
   Future<String> shareVideo(Video video) async {
     // String videoID = VideoService.convertUrlToId(video.videoUrl)!;
     String videoID = video.id;
+    String userId =
+        _userService.hasLoggedInUser ? _userService.currentUser.id : 'guest';
 
-    Uri fallbackURL = Uri.parse("https://cato.tv/video/$videoID");
+    Uri fallbackURL =
+        Uri.parse("https://cato.tv/video/$videoID&user_id=$userId");
 
-    _log.v("Generating sharelink for $videoID");
+    _log.i("Generating sharelink for $videoID");
 
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: 'https://catoverse.page.link',
