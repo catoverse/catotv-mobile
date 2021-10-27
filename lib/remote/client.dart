@@ -113,7 +113,8 @@ class RemoteClient {
     if (result.hasException && result.exception != null) {
       _log.e(result.exception);
       return Result.failed(Failure.exception(GraphQLException(
-          message: "Failed to fetch result from graphql ${result.exception}")));
+          message: result.exception?.graphqlErrors[0].message ??
+              "Failed to get data from graphql")));
     }
 
     if (result.data == null) {
@@ -149,5 +150,4 @@ class RemoteClient {
       return Result.failed(Failure.error(ServerError()));
     }
   }
-
 }

@@ -121,7 +121,6 @@ class APIServiceImpl implements APIService {
       return result.failure;
     }
 
-
     return result.success['userProfile'];
   }
 
@@ -142,9 +141,15 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future updateUserProfile({required String userId, required String name, required List<String> topicIds}) async {
+  Future updateUserProfile(
+      {required String userId,
+      required String name,
+      required List<String> topicIds}) async {
     _log.i("Updating profile for User(id: $userId, topics: $topicIds)");
-    Result<Failure, dynamic> result = await _client.mutation(GQLQueries.updateUserProfile, variables: GQLQueries.updateUserProfileVariables(userId, name, topicIds));
+    Result<Failure, dynamic> result = await _client.mutation(
+        GQLQueries.updateUserProfile,
+        variables:
+            GQLQueries.updateUserProfileVariables(userId, name, topicIds));
 
     if (result.isFailed) return result.failure;
 
@@ -208,8 +213,9 @@ class APIServiceImpl implements APIService {
   Future getVideosByIds(List<String> videoIds) async {
     _log.i("getting video with videoId: $videoIds");
 
-    Result<Failure, dynamic> result =
-        await _client.processQuery(query: GQLQueries.getVideosByIds, variables: GQLQueries.getVideosByIdsVariables(videoIds));
+    Result<Failure, dynamic> result = await _client.processQuery(
+        query: GQLQueries.getVideosByIds,
+        variables: GQLQueries.getVideosByIdsVariables(videoIds));
 
     if (result.isFailed) return result.failure;
 

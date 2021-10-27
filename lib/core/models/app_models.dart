@@ -62,18 +62,35 @@ class Video with _$Video {
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 }
 
-@freezed
-class Failure with _$Failure {
-  const factory Failure.error(Error error) = _GenericError;
-  const factory Failure.exception(Exception exception) = _RaisedException;
-  const factory Failure.message(String message) = _FailureMessage;
+class Failure {
+  final Error? error;
 
+  final Exception? exception;
+
+  final String? message;
+
+  const Failure.error(Error e)
+      : error = e,
+        message = null,
+        exception = null;
+
+  const Failure.exception(Exception e)
+      : error = null,
+        message = null,
+        exception = e;
+
+  const Failure.message(String m)
+      : error = null,
+        message = m,
+        exception = null;
+
+  @override
   String toString() {
-    return this.map(
-      error: (e) => e.error.toString(),
-      exception: (e) => e.exception.toString(),
-      message: (e) => e.message,
-    );
+    return error == null
+        ? exception == null
+            ? message!
+            : exception.toString()
+        : error.toString();
   }
 }
 
