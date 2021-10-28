@@ -10,4 +10,5 @@ class Assets {
   static const topicProductivityImage = "assets/images/productivity.png";
   static const placeholderImage = "assets/images/placeholder.jpg";
   static const noBookmarksImage = "assets/images/no_bookmarks.png";
+  static const loading = 'assets/animations/loading.json';
 }

@@ -1,7 +1,7 @@
 name: feed
 description: A new Flutter project.
 publish_to: "none"
-version: 0.0.1+7
+version: 0.0.1+9
 
 environment:
   sdk: ">=2.14.0 <3.0.0"
@@ -13,8 +13,14 @@ dependencies:
   cupertino_icons: ^1.0.3
 
   # stacked state management
-  stacked: ^2.2.5
-  stacked_services: ^0.8.13
+  stacked:
+    git:
+      url: https://github.com/amanxnanda/stacked
+      path: packages/stacked
+  stacked_services:
+    git:
+      url: https://github.com/amanxnanda/stacked
+      path: packages/stacked_services
   observable_ish: ^3.0.0
 
   # data models
@@ -45,7 +51,8 @@ dependencies:
   package_info: ^2.0.2
 
   # a videoplayer to play youtube videos
-  flick_video_player: ^0.3.1
+  # flick_video_player: ^0.3.1
+  flick_video_player: ^0.4.0-dev.4
   share: ^2.0.4
   youtube_explode_dart: ^1.10.8
   visibility_detector: ^0.2.0
@@ -59,11 +66,13 @@ dependencies:
   firebase_analytics: ^8.3.2
   firebase_messaging: ^10.0.7
   awesome_notifications: ^0.0.6+10
-  
+
   inview_notifier_list: ^2.0.0
   flutter_hooks: ^0.18.0
   url_launcher: ^6.0.11
   intl: ^0.17.0
+
+  lottie: ^1.2.1
 
 dev_dependencies:
   flutter_lints: ^1.0.4
@@ -72,7 +81,10 @@ dev_dependencies:
 
   # code generators
   build_runner:
-  stacked_generator: ^0.5.2
+  stacked_generator:
+    git:
+      url: https://github.com/amanxnanda/stacked
+      path: packages/stacked_generator
   hive_generator: ^1.1.1
 
   # data models
@@ -94,6 +106,7 @@ flutter:
   assets:
     - .env
     - assets/images/
+    - assets/animations/
 
   fonts:
     - family: AppFont

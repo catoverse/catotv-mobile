@@ -4,20 +4,23 @@ import 'package:feed/core/enums/user_events.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/share_service.dart';
+import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:feed/firebase/analytics.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/core/mixins/snackbar_helper.dart';
 import 'package:feed/core/mixins/auth.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-abstract class BaseFeedModel extends BaseViewModel
-    with AuthMixin, SnackbarHelper {
+abstract class BaseFeedModel extends BaseViewModel with AuthMixin, SnackbarHelper {
   final _videoService = locator<VideoService>();
   final _analytics = locator<AnalyticsService>();
   final _messageQueue = locator<MessageQueueService>();
   final _shareService = locator<ShareService>();
   final _dynamicLinksService = locator<DynamicLinksService>();
+  final _videoManagerService = locator<VideoManagerService>();
+  final _navigationService = locator<NavigationService>();
 
   List<Video> get videos;
 
@@ -26,9 +29,7 @@ abstract class BaseFeedModel extends BaseViewModel
 
     String streamUrl = await _videoService.getStream(videoUrl);
 
-    await _analytics.logEvent(kVideoLoadingTime, params: {
-      "duration": DateTime.now().difference(beforeLoading).inMilliseconds
-    });
+    await _analytics.logEvent(kVideoLoadingTime, params: {"duration": DateTime.now().difference(beforeLoading).inMilliseconds});
 
     return streamUrl;
   }
@@ -37,8 +38,7 @@ abstract class BaseFeedModel extends BaseViewModel
     var video = videos[index];
     String url = await _dynamicLinksService.shareVideo(video);
     await _shareService.share("Checkout ${video.title} at $url");
-    await _messageQueue.logUserEvent(UserEvent.share,
-        videoId: videos[index].id);
+    await _messageQueue.logUserEvent(UserEvent.share, videoId: videos[index].id);
     logShareVideo(index);
   }
 
@@ -96,11 +96,23 @@ abstract class BaseFeedModel extends BaseViewModel
 
   getVideo(String videoId);
 
-  Future<List<Video>> getBookmarkedVideos() =>
-      _videoService.getBookmarkedVideos();
+  Future<List<Video>> getBookmarkedVideos() => _videoService.getBookmarkedVideos();
 
   Future<void> addBookmarks(int index) async {
     logBookmarkVideo(index);
     await _videoService.addBookmarks(videos[index]);
+  }
+
+  void onBack() {
+    _navigationService.back();
+    _videoManagerService.addStream(FeedRouteState.onit);
+  }
+
+  void onDrawerChanged(bool opened) {
+    if (opened) {
+      _videoManagerService.addStream(FeedRouteState.away);
+    } else {
+      _videoManagerService.addStream(FeedRouteState.onit);
+    }
   }
 }

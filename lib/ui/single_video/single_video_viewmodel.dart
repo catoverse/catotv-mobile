@@ -1,10 +1,12 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/feed_service.dart';
+import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 
 class SingleFeedViewModel extends BaseFeedModel {
   final _feedService = locator<FeedService>();
+  final VideoManagerService _videoManagerService = locator<VideoManagerService>();
   late String videoId;
 
   final List<Video> _videos = [];
@@ -17,6 +19,7 @@ class SingleFeedViewModel extends BaseFeedModel {
 
   @override
   Future getData() async {
+    _videoManagerService.addStream(FeedRouteState.away);
     setBusy(true);
 
     var video = await _feedService.fetchVideoById(videoId);

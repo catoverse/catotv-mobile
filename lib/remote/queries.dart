@@ -19,10 +19,13 @@ class GQLQueries {
   ''';
 
   static const String getVideosByTopics = r'''  
-    query VideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
-      videoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
+    query TruncatedVideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
+      truncatedVideoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
         id
+        source
+        video_id
         title
+        available
         video_url
         topic {
           id
@@ -30,27 +33,21 @@ class GQLQueries {
         }
         start_timestamp
         end_timestamp
-        content_details {
-          youtube_category
-          captions_available
-          dislikes
-          duration
-          views
-        }
-        channel_information {
-          id
-          name
-          subscriber_count
-        }
+        thumbnail_url
+        channel_name
+        channel_avatar_url
       }
     }
   ''';
 
   static const String getVideoById = r'''
-    query GetVideoById($id: ID!) {
-      videoById(id: $id) {
+    query GetTruncatedVideoById($id: ID!) {
+      truncatedVideoById(id: $id) {
         id
+        source
+        video_id
         title
+        available
         video_url
         topic {
           id
@@ -58,18 +55,53 @@ class GQLQueries {
         }
         start_timestamp
         end_timestamp
-        content_details {
-          youtube_category
-          captions_available
-          dislikes
-          duration
-          views
-        }
-        channel_information {
+        thumbnail_url
+        channel_name
+        channel_avatar_url
+      }
+    }
+  ''';
+
+  static const String getVideosByIds = r'''
+    query GetTruncatedVideosByIds($ids: [ID!]!) {
+      truncatedVideosByIds(ids: $ids) {
+        id
+        source
+        video_id
+        title
+        available
+        video_url
+        topic {
           id
           name
-          subscriber_count
         }
+        start_timestamp
+        end_timestamp
+        thumbnail_url
+        channel_name
+        channel_avatar_url
+      }
+    }
+  ''';
+
+  static const String getTopVideos = r'''
+    query GetTopVideos {
+      topVideos {
+        id
+        source
+        video_id
+        title
+        available
+        video_url
+        topic {
+          id
+          name
+        }
+        start_timestamp
+        end_timestamp
+        thumbnail_url
+        channel_name
+        channel_avatar_url
       }
     }
   ''';
@@ -104,9 +136,20 @@ class GQLQueries {
   static const String createUserProfile = r'''
     mutation CreateProfile($userId: ID!, $name: String!, $selectedTopics: [ID]!) {
       createUserProfile(
-        user: { name: $name, userId: $userId, selectedTopics: $selectedTopics }
+        userProfile: { name: $name, userId: $userId, selectedTopics: $selectedTopics }
       ) {
         name
+      }
+    }
+  ''';
+
+  static const String updateUserProfile = r'''
+    mutation UpdateProfile($userId: ID!, $name: String!, $selectedTopics: [ID]! ) {
+      updateUserProfile(
+         userId: $userId, userProfile: {name: $name, userId: $userId, selectedTopics: $selectedTopics}
+      ) {
+        name
+    		selectedTopics
       }
     }
   ''';
@@ -212,6 +255,10 @@ class GQLQueries {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
+  static Map<String, dynamic> updateUserProfileVariables(String userId, String name, List<String> topicIds) {
+    return {"userId": userId, "name": name, "selectedTopics": topicIds};
+  }
+
   static Map<String, dynamic> videosByTopicsVariables(
       int skip, int limit, List<String> topicIds) {
     return {"skip": skip, "limit": limit, "selectedTopics": topicIds};
@@ -223,6 +270,10 @@ class GQLQueries {
 
   static Map<String, dynamic> getVideoByIdVariables(String id) {
     return {"id": id};
+  }
+
+  static Map<String, dynamic> getVideosByIdsVariables(List<String> ids) {
+    return {"ids": ids};
   }
 
   static Map<String, dynamic> postStreamLinkVariables(

@@ -27,6 +27,7 @@ import '../core/services/share_service.dart';
 import '../core/services/topic_service.dart';
 import '../core/services/url_service.dart';
 import '../core/services/user_service.dart';
+import '../core/services/video_manager_service.dart';
 import '../core/services/video_service.dart';
 import '../feedplayer/controller.dart';
 import '../firebase/analytics.dart';
@@ -63,6 +64,9 @@ Future setupLocator(
 
   final lifeCycleService = await LifeCycleService.getInstance();
   locator.registerSingleton(lifeCycleService!);
+
+  final videoManagerService = await VideoManagerService.getInstance();
+  locator.registerSingleton(videoManagerService!);
 
   locator.registerLazySingleton(() => Connectivity());
   locator.registerLazySingleton<ConnectivityService>(

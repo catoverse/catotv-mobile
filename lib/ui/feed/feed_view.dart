@@ -1,5 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/core/services/life_cycle_service.dart';
+import 'package:feed/core/services/video_service.dart';
 import 'package:feed/feedplayer/list/list.dart';
 import 'package:feed/ui/base/feedmodel.dart';
 import 'package:feed/ui/feed/widgets/greeting.dart';
@@ -17,10 +18,12 @@ class FeedView extends StatefulWidget {
 
 class _FeedViewState extends State<FeedView> with WidgetsBindingObserver {
   final _lifeCycleService = locator<LifeCycleService>();
+  final _videoService = locator<VideoService>();
 
   @override
   void initState() {
     WidgetsBinding.instance!.addObserver(this);
+    _videoService.syncBookmarks();
     super.initState();
   }
 
@@ -57,6 +60,7 @@ class _FeedViewState extends State<FeedView> with WidgetsBindingObserver {
                       style: uiHelpers.button!
                           .copyWith(color: AppColors.textPrimary)),
                 ),
+                onDrawerChanged: model.onDrawerChanged,
                 drawer: DrawerView(),
                 body: model.isBusy
                     ? const Center(child: CircularProgressIndicator())

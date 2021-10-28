@@ -73,6 +73,17 @@ class APIServiceImpl implements APIService {
   }
 
   @override
+  Future getTopVideos() async {
+    _log.i("fetching topVideos from GraphQL");
+
+    Result result = await _client.processQuery(query: GQLQueries.getTopVideos);
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["topVideos"];
+  }
+
+  @override
   Future requestInvite({required String email}) async {
     _log.i("adding $email to the waitlist");
 
@@ -99,7 +110,7 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future geFulltUserProfile({required String userId}) async {
+  Future geFullUserProfile({required String userId}) async {
     _log.i("fetching profile for User(id: $userId)");
 
     Result<Failure, dynamic> result = await _client.processQuery(
@@ -131,6 +142,16 @@ class APIServiceImpl implements APIService {
   }
 
   @override
+  Future updateUserProfile({required String userId, required String name, required List<String> topicIds}) async {
+    _log.i("Updating profile for User(id: $userId, topics: $topicIds)");
+    Result<Failure, dynamic> result = await _client.mutation(GQLQueries.updateUserProfile, variables: GQLQueries.updateUserProfileVariables(userId, name, topicIds));
+
+    if (result.isFailed) return result.failure;
+
+    return true;
+  }
+
+  @override
   Future getVideos(int skip, int limit, List<String> selectedTopics) async {
     _log.i("getting videos for topics: $selectedTopics");
 
@@ -141,7 +162,7 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return result.success["videoByTopics"];
+    return result.success["truncatedVideoByTopics"];
   }
 
   @override
@@ -180,7 +201,19 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return result.success["videoById"];
+    return result.success["truncatedVideoById"];
+  }
+
+  @override
+  Future getVideosByIds(List<String> videoIds) async {
+    _log.i("getting video with videoId: $videoIds");
+
+    Result<Failure, dynamic> result =
+        await _client.processQuery(query: GQLQueries.getVideosByIds, variables: GQLQueries.getVideosByIdsVariables(videoIds));
+
+    if (result.isFailed) return result.failure;
+
+    return result.success["truncatedVideosByIds"];
   }
 
   @override

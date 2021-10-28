@@ -2,7 +2,6 @@ import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/app/app.router.dart';
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/core/services/video_service.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -14,7 +13,8 @@ class DynamicLinksService {
   DynamicLinksService() : _instance = FirebaseDynamicLinks.instance;
 
   Future<String> shareVideo(Video video) async {
-    String videoID = VideoService.convertUrlToId(video.videoUrl)!;
+    // String videoID = VideoService.convertUrlToId(video.videoUrl)!;
+    String videoID = video.id;
 
     Uri fallbackURL = Uri.parse("https://cato.tv/video/$videoID");
 

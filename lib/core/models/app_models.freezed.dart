@@ -512,535 +512,6 @@ abstract class _Topic extends Topic {
   _$TopicCopyWith<_Topic> get copyWith => throw _privateConstructorUsedError;
 }
 
-ChannelInformation _$ChannelInformationFromJson(Map<String, dynamic> json) {
-  return _ChannelInformation.fromJson(json);
-}
-
-/// @nodoc
-class _$ChannelInformationTearOff {
-  const _$ChannelInformationTearOff();
-
-  _ChannelInformation call(
-      {@HiveField(0) String? id,
-      @HiveField(1) String? name,
-      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount}) {
-    return _ChannelInformation(
-      id: id,
-      name: name,
-      subscriberCount: subscriberCount,
-    );
-  }
-
-  ChannelInformation fromJson(Map<String, Object> json) {
-    return ChannelInformation.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ChannelInformation = _$ChannelInformationTearOff();
-
-/// @nodoc
-mixin _$ChannelInformation {
-  @HiveField(0)
-  String? get id => throw _privateConstructorUsedError;
-  @HiveField(1)
-  String? get name => throw _privateConstructorUsedError;
-  @HiveField(3)
-  @JsonKey(name: "subscriber_count")
-  int? get subscriberCount => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ChannelInformationCopyWith<ChannelInformation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ChannelInformationCopyWith<$Res> {
-  factory $ChannelInformationCopyWith(
-          ChannelInformation value, $Res Function(ChannelInformation) then) =
-      _$ChannelInformationCopyWithImpl<$Res>;
-  $Res call(
-      {@HiveField(0) String? id,
-      @HiveField(1) String? name,
-      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount});
-}
-
-/// @nodoc
-class _$ChannelInformationCopyWithImpl<$Res>
-    implements $ChannelInformationCopyWith<$Res> {
-  _$ChannelInformationCopyWithImpl(this._value, this._then);
-
-  final ChannelInformation _value;
-  // ignore: unused_field
-  final $Res Function(ChannelInformation) _then;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? subscriberCount = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subscriberCount: subscriberCount == freezed
-          ? _value.subscriberCount
-          : subscriberCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$ChannelInformationCopyWith<$Res>
-    implements $ChannelInformationCopyWith<$Res> {
-  factory _$ChannelInformationCopyWith(
-          _ChannelInformation value, $Res Function(_ChannelInformation) then) =
-      __$ChannelInformationCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {@HiveField(0) String? id,
-      @HiveField(1) String? name,
-      @HiveField(3) @JsonKey(name: "subscriber_count") int? subscriberCount});
-}
-
-/// @nodoc
-class __$ChannelInformationCopyWithImpl<$Res>
-    extends _$ChannelInformationCopyWithImpl<$Res>
-    implements _$ChannelInformationCopyWith<$Res> {
-  __$ChannelInformationCopyWithImpl(
-      _ChannelInformation _value, $Res Function(_ChannelInformation) _then)
-      : super(_value, (v) => _then(v as _ChannelInformation));
-
-  @override
-  _ChannelInformation get _value => super._value as _ChannelInformation;
-
-  @override
-  $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? subscriberCount = freezed,
-  }) {
-    return _then(_ChannelInformation(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      subscriberCount: subscriberCount == freezed
-          ? _value.subscriberCount
-          : subscriberCount // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-@HiveType(typeId: 4)
-class _$_ChannelInformation extends _ChannelInformation {
-  _$_ChannelInformation(
-      {@HiveField(0) this.id,
-      @HiveField(1) this.name,
-      @HiveField(3) @JsonKey(name: "subscriber_count") this.subscriberCount})
-      : super._();
-
-  factory _$_ChannelInformation.fromJson(Map<String, dynamic> json) =>
-      _$$_ChannelInformationFromJson(json);
-
-  @override
-  @HiveField(0)
-  final String? id;
-  @override
-  @HiveField(1)
-  final String? name;
-  @override
-  @HiveField(3)
-  @JsonKey(name: "subscriber_count")
-  final int? subscriberCount;
-
-  @override
-  String toString() {
-    return 'ChannelInformation(id: $id, name: $name, subscriberCount: $subscriberCount)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _ChannelInformation &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.subscriberCount, subscriberCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.subscriberCount, subscriberCount)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(subscriberCount);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ChannelInformationCopyWith<_ChannelInformation> get copyWith =>
-      __$ChannelInformationCopyWithImpl<_ChannelInformation>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ChannelInformationToJson(this);
-  }
-}
-
-abstract class _ChannelInformation extends ChannelInformation {
-  factory _ChannelInformation(
-      {@HiveField(0)
-          String? id,
-      @HiveField(1)
-          String? name,
-      @HiveField(3)
-      @JsonKey(name: "subscriber_count")
-          int? subscriberCount}) = _$_ChannelInformation;
-  _ChannelInformation._() : super._();
-
-  factory _ChannelInformation.fromJson(Map<String, dynamic> json) =
-      _$_ChannelInformation.fromJson;
-
-  @override
-  @HiveField(0)
-  String? get id => throw _privateConstructorUsedError;
-  @override
-  @HiveField(1)
-  String? get name => throw _privateConstructorUsedError;
-  @override
-  @HiveField(3)
-  @JsonKey(name: "subscriber_count")
-  int? get subscriberCount => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$ChannelInformationCopyWith<_ChannelInformation> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-ContentDetails _$ContentDetailsFromJson(Map<String, dynamic> json) {
-  return _ContentDetails.fromJson(json);
-}
-
-/// @nodoc
-class _$ContentDetailsTearOff {
-  const _$ContentDetailsTearOff();
-
-  _ContentDetails call(
-      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
-      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
-      @HiveField(2) int? dislikes,
-      @HiveField(3) int? likes,
-      @HiveField(4) int? duration,
-      @HiveField(5) int? views}) {
-    return _ContentDetails(
-      youtubeCategory: youtubeCategory,
-      hasCaptions: hasCaptions,
-      dislikes: dislikes,
-      likes: likes,
-      duration: duration,
-      views: views,
-    );
-  }
-
-  ContentDetails fromJson(Map<String, Object> json) {
-    return ContentDetails.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ContentDetails = _$ContentDetailsTearOff();
-
-/// @nodoc
-mixin _$ContentDetails {
-  @HiveField(0)
-  @JsonKey(name: "youtube_category")
-  int? get youtubeCategory => throw _privateConstructorUsedError;
-  @HiveField(1)
-  @JsonKey(name: "captions_available")
-  bool? get hasCaptions => throw _privateConstructorUsedError;
-  @HiveField(2)
-  int? get dislikes => throw _privateConstructorUsedError;
-  @HiveField(3)
-  int? get likes => throw _privateConstructorUsedError;
-  @HiveField(4)
-  int? get duration => throw _privateConstructorUsedError;
-  @HiveField(5)
-  int? get views => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ContentDetailsCopyWith<ContentDetails> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ContentDetailsCopyWith<$Res> {
-  factory $ContentDetailsCopyWith(
-          ContentDetails value, $Res Function(ContentDetails) then) =
-      _$ContentDetailsCopyWithImpl<$Res>;
-  $Res call(
-      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
-      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
-      @HiveField(2) int? dislikes,
-      @HiveField(3) int? likes,
-      @HiveField(4) int? duration,
-      @HiveField(5) int? views});
-}
-
-/// @nodoc
-class _$ContentDetailsCopyWithImpl<$Res>
-    implements $ContentDetailsCopyWith<$Res> {
-  _$ContentDetailsCopyWithImpl(this._value, this._then);
-
-  final ContentDetails _value;
-  // ignore: unused_field
-  final $Res Function(ContentDetails) _then;
-
-  @override
-  $Res call({
-    Object? youtubeCategory = freezed,
-    Object? hasCaptions = freezed,
-    Object? dislikes = freezed,
-    Object? likes = freezed,
-    Object? duration = freezed,
-    Object? views = freezed,
-  }) {
-    return _then(_value.copyWith(
-      youtubeCategory: youtubeCategory == freezed
-          ? _value.youtubeCategory
-          : youtubeCategory // ignore: cast_nullable_to_non_nullable
-              as int?,
-      hasCaptions: hasCaptions == freezed
-          ? _value.hasCaptions
-          : hasCaptions // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      dislikes: dislikes == freezed
-          ? _value.dislikes
-          : dislikes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      likes: likes == freezed
-          ? _value.likes
-          : likes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
-      views: views == freezed
-          ? _value.views
-          : views // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$ContentDetailsCopyWith<$Res>
-    implements $ContentDetailsCopyWith<$Res> {
-  factory _$ContentDetailsCopyWith(
-          _ContentDetails value, $Res Function(_ContentDetails) then) =
-      __$ContentDetailsCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
-      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
-      @HiveField(2) int? dislikes,
-      @HiveField(3) int? likes,
-      @HiveField(4) int? duration,
-      @HiveField(5) int? views});
-}
-
-/// @nodoc
-class __$ContentDetailsCopyWithImpl<$Res>
-    extends _$ContentDetailsCopyWithImpl<$Res>
-    implements _$ContentDetailsCopyWith<$Res> {
-  __$ContentDetailsCopyWithImpl(
-      _ContentDetails _value, $Res Function(_ContentDetails) _then)
-      : super(_value, (v) => _then(v as _ContentDetails));
-
-  @override
-  _ContentDetails get _value => super._value as _ContentDetails;
-
-  @override
-  $Res call({
-    Object? youtubeCategory = freezed,
-    Object? hasCaptions = freezed,
-    Object? dislikes = freezed,
-    Object? likes = freezed,
-    Object? duration = freezed,
-    Object? views = freezed,
-  }) {
-    return _then(_ContentDetails(
-      youtubeCategory: youtubeCategory == freezed
-          ? _value.youtubeCategory
-          : youtubeCategory // ignore: cast_nullable_to_non_nullable
-              as int?,
-      hasCaptions: hasCaptions == freezed
-          ? _value.hasCaptions
-          : hasCaptions // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      dislikes: dislikes == freezed
-          ? _value.dislikes
-          : dislikes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      likes: likes == freezed
-          ? _value.likes
-          : likes // ignore: cast_nullable_to_non_nullable
-              as int?,
-      duration: duration == freezed
-          ? _value.duration
-          : duration // ignore: cast_nullable_to_non_nullable
-              as int?,
-      views: views == freezed
-          ? _value.views
-          : views // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-@HiveType(typeId: 5)
-class _$_ContentDetails extends _ContentDetails {
-  _$_ContentDetails(
-      {@HiveField(0) @JsonKey(name: "youtube_category") this.youtubeCategory,
-      @HiveField(1) @JsonKey(name: "captions_available") this.hasCaptions,
-      @HiveField(2) this.dislikes,
-      @HiveField(3) this.likes,
-      @HiveField(4) this.duration,
-      @HiveField(5) this.views})
-      : super._();
-
-  factory _$_ContentDetails.fromJson(Map<String, dynamic> json) =>
-      _$$_ContentDetailsFromJson(json);
-
-  @override
-  @HiveField(0)
-  @JsonKey(name: "youtube_category")
-  final int? youtubeCategory;
-  @override
-  @HiveField(1)
-  @JsonKey(name: "captions_available")
-  final bool? hasCaptions;
-  @override
-  @HiveField(2)
-  final int? dislikes;
-  @override
-  @HiveField(3)
-  final int? likes;
-  @override
-  @HiveField(4)
-  final int? duration;
-  @override
-  @HiveField(5)
-  final int? views;
-
-  @override
-  String toString() {
-    return 'ContentDetails(youtubeCategory: $youtubeCategory, hasCaptions: $hasCaptions, dislikes: $dislikes, likes: $likes, duration: $duration, views: $views)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _ContentDetails &&
-            (identical(other.youtubeCategory, youtubeCategory) ||
-                const DeepCollectionEquality()
-                    .equals(other.youtubeCategory, youtubeCategory)) &&
-            (identical(other.hasCaptions, hasCaptions) ||
-                const DeepCollectionEquality()
-                    .equals(other.hasCaptions, hasCaptions)) &&
-            (identical(other.dislikes, dislikes) ||
-                const DeepCollectionEquality()
-                    .equals(other.dislikes, dislikes)) &&
-            (identical(other.likes, likes) ||
-                const DeepCollectionEquality().equals(other.likes, likes)) &&
-            (identical(other.duration, duration) ||
-                const DeepCollectionEquality()
-                    .equals(other.duration, duration)) &&
-            (identical(other.views, views) ||
-                const DeepCollectionEquality().equals(other.views, views)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(youtubeCategory) ^
-      const DeepCollectionEquality().hash(hasCaptions) ^
-      const DeepCollectionEquality().hash(dislikes) ^
-      const DeepCollectionEquality().hash(likes) ^
-      const DeepCollectionEquality().hash(duration) ^
-      const DeepCollectionEquality().hash(views);
-
-  @JsonKey(ignore: true)
-  @override
-  _$ContentDetailsCopyWith<_ContentDetails> get copyWith =>
-      __$ContentDetailsCopyWithImpl<_ContentDetails>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_ContentDetailsToJson(this);
-  }
-}
-
-abstract class _ContentDetails extends ContentDetails {
-  factory _ContentDetails(
-      {@HiveField(0) @JsonKey(name: "youtube_category") int? youtubeCategory,
-      @HiveField(1) @JsonKey(name: "captions_available") bool? hasCaptions,
-      @HiveField(2) int? dislikes,
-      @HiveField(3) int? likes,
-      @HiveField(4) int? duration,
-      @HiveField(5) int? views}) = _$_ContentDetails;
-  _ContentDetails._() : super._();
-
-  factory _ContentDetails.fromJson(Map<String, dynamic> json) =
-      _$_ContentDetails.fromJson;
-
-  @override
-  @HiveField(0)
-  @JsonKey(name: "youtube_category")
-  int? get youtubeCategory => throw _privateConstructorUsedError;
-  @override
-  @HiveField(1)
-  @JsonKey(name: "captions_available")
-  bool? get hasCaptions => throw _privateConstructorUsedError;
-  @override
-  @HiveField(2)
-  int? get dislikes => throw _privateConstructorUsedError;
-  @override
-  @HiveField(3)
-  int? get likes => throw _privateConstructorUsedError;
-  @override
-  @HiveField(4)
-  int? get duration => throw _privateConstructorUsedError;
-  @override
-  @HiveField(5)
-  int? get views => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(ignore: true)
-  _$ContentDetailsCopyWith<_ContentDetails> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
 Video _$VideoFromJson(Map<String, dynamic> json) {
   return _Video.fromJson(json);
 }
@@ -1054,37 +525,53 @@ class _$VideoTearOff {
       @JsonKey(name: "id")
           required String id,
       @HiveField(1)
+      @JsonKey(name: "source")
+          String? source,
+      @HiveField(2)
+      @JsonKey(name: "video_id")
+          required String videoId,
+      @HiveField(3)
       @JsonKey(name: "title")
           required String title,
-      @HiveField(2)
+      @HiveField(4)
+      @JsonKey(name: 'available')
+          bool? available,
+      @HiveField(5)
       @JsonKey(name: "video_url")
           required String videoUrl,
-      @HiveField(3)
+      @HiveField(6)
       @JsonKey(name: "topic")
           required Topic topic,
-      @HiveField(4)
+      @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
-      @HiveField(5)
+      @HiveField(8)
       @JsonKey(name: "end_timestamp")
           int? endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "channel_information")
-          ChannelInformation? channelInformation,
-      @HiveField(7)
-      @JsonKey(name: "content_details")
-          ContentDetails? contentDetails,
-      @HiveField(8)
+      @HiveField(9)
+      @JsonKey(name: "thumbnail_url")
+          String? thumbnailUrl,
+      @HiveField(10)
+      @JsonKey(name: "channel_name")
+          String? channelName,
+      @HiveField(11)
+      @JsonKey(name: "channel_avatar_url")
+          String? channelAvatarUrl,
+      @HiveField(12)
           bool bookmarked = false}) {
     return _Video(
       id: id,
+      source: source,
+      videoId: videoId,
       title: title,
+      available: available,
       videoUrl: videoUrl,
       topic: topic,
       startTimestamp: startTimestamp,
       endTimestamp: endTimestamp,
-      channelInformation: channelInformation,
-      contentDetails: contentDetails,
+      thumbnailUrl: thumbnailUrl,
+      channelName: channelName,
+      channelAvatarUrl: channelAvatarUrl,
       bookmarked: bookmarked,
     );
   }
@@ -1103,28 +590,39 @@ mixin _$Video {
   @JsonKey(name: "id")
   String get id => throw _privateConstructorUsedError;
   @HiveField(1)
+  @JsonKey(name: "source")
+  String? get source => throw _privateConstructorUsedError;
+  @HiveField(2)
+  @JsonKey(name: "video_id")
+  String get videoId => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: "title")
   String get title => throw _privateConstructorUsedError;
-  @HiveField(2)
+  @HiveField(4)
+  @JsonKey(name: 'available')
+  bool? get available => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(name: "video_url")
   String get videoUrl => throw _privateConstructorUsedError;
-  @HiveField(3)
+  @HiveField(6)
   @JsonKey(name: "topic")
   Topic get topic => throw _privateConstructorUsedError;
-  @HiveField(4)
+  @HiveField(7)
   @JsonKey(name: "start_timestamp")
   int? get startTimestamp => throw _privateConstructorUsedError;
-  @HiveField(5)
+  @HiveField(8)
   @JsonKey(name: "end_timestamp")
   int? get endTimestamp => throw _privateConstructorUsedError;
-  @HiveField(6)
-  @JsonKey(name: "channel_information")
-  ChannelInformation? get channelInformation =>
-      throw _privateConstructorUsedError;
-  @HiveField(7)
-  @JsonKey(name: "content_details")
-  ContentDetails? get contentDetails => throw _privateConstructorUsedError;
-  @HiveField(8)
+  @HiveField(9)
+  @JsonKey(name: "thumbnail_url")
+  String? get thumbnailUrl => throw _privateConstructorUsedError;
+  @HiveField(10)
+  @JsonKey(name: "channel_name")
+  String? get channelName => throw _privateConstructorUsedError;
+  @HiveField(11)
+  @JsonKey(name: "channel_avatar_url")
+  String? get channelAvatarUrl => throw _privateConstructorUsedError;
+  @HiveField(12)
   bool get bookmarked => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -1141,32 +639,42 @@ abstract class $VideoCopyWith<$Res> {
       @JsonKey(name: "id")
           String id,
       @HiveField(1)
+      @JsonKey(name: "source")
+          String? source,
+      @HiveField(2)
+      @JsonKey(name: "video_id")
+          String videoId,
+      @HiveField(3)
       @JsonKey(name: "title")
           String title,
-      @HiveField(2)
+      @HiveField(4)
+      @JsonKey(name: 'available')
+          bool? available,
+      @HiveField(5)
       @JsonKey(name: "video_url")
           String videoUrl,
-      @HiveField(3)
+      @HiveField(6)
       @JsonKey(name: "topic")
           Topic topic,
-      @HiveField(4)
+      @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
-      @HiveField(5)
+      @HiveField(8)
       @JsonKey(name: "end_timestamp")
           int? endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "channel_information")
-          ChannelInformation? channelInformation,
-      @HiveField(7)
-      @JsonKey(name: "content_details")
-          ContentDetails? contentDetails,
-      @HiveField(8)
+      @HiveField(9)
+      @JsonKey(name: "thumbnail_url")
+          String? thumbnailUrl,
+      @HiveField(10)
+      @JsonKey(name: "channel_name")
+          String? channelName,
+      @HiveField(11)
+      @JsonKey(name: "channel_avatar_url")
+          String? channelAvatarUrl,
+      @HiveField(12)
           bool bookmarked});
 
   $TopicCopyWith<$Res> get topic;
-  $ChannelInformationCopyWith<$Res>? get channelInformation;
-  $ContentDetailsCopyWith<$Res>? get contentDetails;
 }
 
 /// @nodoc
@@ -1180,13 +688,17 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
+    Object? source = freezed,
+    Object? videoId = freezed,
     Object? title = freezed,
+    Object? available = freezed,
     Object? videoUrl = freezed,
     Object? topic = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
-    Object? channelInformation = freezed,
-    Object? contentDetails = freezed,
+    Object? thumbnailUrl = freezed,
+    Object? channelName = freezed,
+    Object? channelAvatarUrl = freezed,
     Object? bookmarked = freezed,
   }) {
     return _then(_value.copyWith(
@@ -1194,10 +706,22 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      source: source == freezed
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      videoId: videoId == freezed
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      available: available == freezed
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool?,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -1214,14 +738,18 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.endTimestamp
           : endTimestamp // ignore: cast_nullable_to_non_nullable
               as int?,
-      channelInformation: channelInformation == freezed
-          ? _value.channelInformation
-          : channelInformation // ignore: cast_nullable_to_non_nullable
-              as ChannelInformation?,
-      contentDetails: contentDetails == freezed
-          ? _value.contentDetails
-          : contentDetails // ignore: cast_nullable_to_non_nullable
-              as ContentDetails?,
+      thumbnailUrl: thumbnailUrl == freezed
+          ? _value.thumbnailUrl
+          : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelName: channelName == freezed
+          ? _value.channelName
+          : channelName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelAvatarUrl: channelAvatarUrl == freezed
+          ? _value.channelAvatarUrl
+          : channelAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       bookmarked: bookmarked == freezed
           ? _value.bookmarked
           : bookmarked // ignore: cast_nullable_to_non_nullable
@@ -1233,29 +761,6 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
   $TopicCopyWith<$Res> get topic {
     return $TopicCopyWith<$Res>(_value.topic, (value) {
       return _then(_value.copyWith(topic: value));
-    });
-  }
-
-  @override
-  $ChannelInformationCopyWith<$Res>? get channelInformation {
-    if (_value.channelInformation == null) {
-      return null;
-    }
-
-    return $ChannelInformationCopyWith<$Res>(_value.channelInformation!,
-        (value) {
-      return _then(_value.copyWith(channelInformation: value));
-    });
-  }
-
-  @override
-  $ContentDetailsCopyWith<$Res>? get contentDetails {
-    if (_value.contentDetails == null) {
-      return null;
-    }
-
-    return $ContentDetailsCopyWith<$Res>(_value.contentDetails!, (value) {
-      return _then(_value.copyWith(contentDetails: value));
     });
   }
 }
@@ -1270,35 +775,43 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
       @JsonKey(name: "id")
           String id,
       @HiveField(1)
+      @JsonKey(name: "source")
+          String? source,
+      @HiveField(2)
+      @JsonKey(name: "video_id")
+          String videoId,
+      @HiveField(3)
       @JsonKey(name: "title")
           String title,
-      @HiveField(2)
+      @HiveField(4)
+      @JsonKey(name: 'available')
+          bool? available,
+      @HiveField(5)
       @JsonKey(name: "video_url")
           String videoUrl,
-      @HiveField(3)
+      @HiveField(6)
       @JsonKey(name: "topic")
           Topic topic,
-      @HiveField(4)
+      @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
-      @HiveField(5)
+      @HiveField(8)
       @JsonKey(name: "end_timestamp")
           int? endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "channel_information")
-          ChannelInformation? channelInformation,
-      @HiveField(7)
-      @JsonKey(name: "content_details")
-          ContentDetails? contentDetails,
-      @HiveField(8)
+      @HiveField(9)
+      @JsonKey(name: "thumbnail_url")
+          String? thumbnailUrl,
+      @HiveField(10)
+      @JsonKey(name: "channel_name")
+          String? channelName,
+      @HiveField(11)
+      @JsonKey(name: "channel_avatar_url")
+          String? channelAvatarUrl,
+      @HiveField(12)
           bool bookmarked});
 
   @override
   $TopicCopyWith<$Res> get topic;
-  @override
-  $ChannelInformationCopyWith<$Res>? get channelInformation;
-  @override
-  $ContentDetailsCopyWith<$Res>? get contentDetails;
 }
 
 /// @nodoc
@@ -1313,13 +826,17 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
+    Object? source = freezed,
+    Object? videoId = freezed,
     Object? title = freezed,
+    Object? available = freezed,
     Object? videoUrl = freezed,
     Object? topic = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
-    Object? channelInformation = freezed,
-    Object? contentDetails = freezed,
+    Object? thumbnailUrl = freezed,
+    Object? channelName = freezed,
+    Object? channelAvatarUrl = freezed,
     Object? bookmarked = freezed,
   }) {
     return _then(_Video(
@@ -1327,10 +844,22 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      source: source == freezed
+          ? _value.source
+          : source // ignore: cast_nullable_to_non_nullable
+              as String?,
+      videoId: videoId == freezed
+          ? _value.videoId
+          : videoId // ignore: cast_nullable_to_non_nullable
+              as String,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
+      available: available == freezed
+          ? _value.available
+          : available // ignore: cast_nullable_to_non_nullable
+              as bool?,
       videoUrl: videoUrl == freezed
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
@@ -1347,14 +876,18 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.endTimestamp
           : endTimestamp // ignore: cast_nullable_to_non_nullable
               as int?,
-      channelInformation: channelInformation == freezed
-          ? _value.channelInformation
-          : channelInformation // ignore: cast_nullable_to_non_nullable
-              as ChannelInformation?,
-      contentDetails: contentDetails == freezed
-          ? _value.contentDetails
-          : contentDetails // ignore: cast_nullable_to_non_nullable
-              as ContentDetails?,
+      thumbnailUrl: thumbnailUrl == freezed
+          ? _value.thumbnailUrl
+          : thumbnailUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelName: channelName == freezed
+          ? _value.channelName
+          : channelName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      channelAvatarUrl: channelAvatarUrl == freezed
+          ? _value.channelAvatarUrl
+          : channelAvatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
       bookmarked: bookmarked == freezed
           ? _value.bookmarked
           : bookmarked // ignore: cast_nullable_to_non_nullable
@@ -1368,32 +901,19 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
 @HiveType(typeId: 1)
 class _$_Video extends _Video {
   _$_Video(
-      {@HiveField(0)
-      @JsonKey(name: "id")
-          required this.id,
-      @HiveField(1)
-      @JsonKey(name: "title")
-          required this.title,
-      @HiveField(2)
-      @JsonKey(name: "video_url")
-          required this.videoUrl,
-      @HiveField(3)
-      @JsonKey(name: "topic")
-          required this.topic,
-      @HiveField(4)
-      @JsonKey(name: "start_timestamp")
-          this.startTimestamp,
-      @HiveField(5)
-      @JsonKey(name: "end_timestamp")
-          this.endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "channel_information")
-          this.channelInformation,
-      @HiveField(7)
-      @JsonKey(name: "content_details")
-          this.contentDetails,
-      @HiveField(8)
-          this.bookmarked = false})
+      {@HiveField(0) @JsonKey(name: "id") required this.id,
+      @HiveField(1) @JsonKey(name: "source") this.source,
+      @HiveField(2) @JsonKey(name: "video_id") required this.videoId,
+      @HiveField(3) @JsonKey(name: "title") required this.title,
+      @HiveField(4) @JsonKey(name: 'available') this.available,
+      @HiveField(5) @JsonKey(name: "video_url") required this.videoUrl,
+      @HiveField(6) @JsonKey(name: "topic") required this.topic,
+      @HiveField(7) @JsonKey(name: "start_timestamp") this.startTimestamp,
+      @HiveField(8) @JsonKey(name: "end_timestamp") this.endTimestamp,
+      @HiveField(9) @JsonKey(name: "thumbnail_url") this.thumbnailUrl,
+      @HiveField(10) @JsonKey(name: "channel_name") this.channelName,
+      @HiveField(11) @JsonKey(name: "channel_avatar_url") this.channelAvatarUrl,
+      @HiveField(12) this.bookmarked = false})
       : super._();
 
   factory _$_Video.fromJson(Map<String, dynamic> json) =>
@@ -1405,40 +925,56 @@ class _$_Video extends _Video {
   final String id;
   @override
   @HiveField(1)
+  @JsonKey(name: "source")
+  final String? source;
+  @override
+  @HiveField(2)
+  @JsonKey(name: "video_id")
+  final String videoId;
+  @override
+  @HiveField(3)
   @JsonKey(name: "title")
   final String title;
   @override
-  @HiveField(2)
+  @HiveField(4)
+  @JsonKey(name: 'available')
+  final bool? available;
+  @override
+  @HiveField(5)
   @JsonKey(name: "video_url")
   final String videoUrl;
   @override
-  @HiveField(3)
+  @HiveField(6)
   @JsonKey(name: "topic")
   final Topic topic;
   @override
-  @HiveField(4)
+  @HiveField(7)
   @JsonKey(name: "start_timestamp")
   final int? startTimestamp;
   @override
-  @HiveField(5)
+  @HiveField(8)
   @JsonKey(name: "end_timestamp")
   final int? endTimestamp;
   @override
-  @HiveField(6)
-  @JsonKey(name: "channel_information")
-  final ChannelInformation? channelInformation;
+  @HiveField(9)
+  @JsonKey(name: "thumbnail_url")
+  final String? thumbnailUrl;
   @override
-  @HiveField(7)
-  @JsonKey(name: "content_details")
-  final ContentDetails? contentDetails;
+  @HiveField(10)
+  @JsonKey(name: "channel_name")
+  final String? channelName;
+  @override
+  @HiveField(11)
+  @JsonKey(name: "channel_avatar_url")
+  final String? channelAvatarUrl;
   @JsonKey(defaultValue: false)
   @override
-  @HiveField(8)
+  @HiveField(12)
   final bool bookmarked;
 
   @override
   String toString() {
-    return 'Video(id: $id, title: $title, videoUrl: $videoUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, channelInformation: $channelInformation, contentDetails: $contentDetails, bookmarked: $bookmarked)';
+    return 'Video(id: $id, source: $source, videoId: $videoId, title: $title, available: $available, videoUrl: $videoUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, thumbnailUrl: $thumbnailUrl, channelName: $channelName, channelAvatarUrl: $channelAvatarUrl, bookmarked: $bookmarked)';
   }
 
   @override
@@ -1447,8 +983,16 @@ class _$_Video extends _Video {
         (other is _Video &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.source, source) ||
+                const DeepCollectionEquality().equals(other.source, source)) &&
+            (identical(other.videoId, videoId) ||
+                const DeepCollectionEquality()
+                    .equals(other.videoId, videoId)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.available, available) ||
+                const DeepCollectionEquality()
+                    .equals(other.available, available)) &&
             (identical(other.videoUrl, videoUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.videoUrl, videoUrl)) &&
@@ -1460,12 +1004,15 @@ class _$_Video extends _Video {
             (identical(other.endTimestamp, endTimestamp) ||
                 const DeepCollectionEquality()
                     .equals(other.endTimestamp, endTimestamp)) &&
-            (identical(other.channelInformation, channelInformation) ||
+            (identical(other.thumbnailUrl, thumbnailUrl) ||
                 const DeepCollectionEquality()
-                    .equals(other.channelInformation, channelInformation)) &&
-            (identical(other.contentDetails, contentDetails) ||
+                    .equals(other.thumbnailUrl, thumbnailUrl)) &&
+            (identical(other.channelName, channelName) ||
                 const DeepCollectionEquality()
-                    .equals(other.contentDetails, contentDetails)) &&
+                    .equals(other.channelName, channelName)) &&
+            (identical(other.channelAvatarUrl, channelAvatarUrl) ||
+                const DeepCollectionEquality()
+                    .equals(other.channelAvatarUrl, channelAvatarUrl)) &&
             (identical(other.bookmarked, bookmarked) ||
                 const DeepCollectionEquality()
                     .equals(other.bookmarked, bookmarked)));
@@ -1475,13 +1022,17 @@ class _$_Video extends _Video {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(source) ^
+      const DeepCollectionEquality().hash(videoId) ^
       const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(available) ^
       const DeepCollectionEquality().hash(videoUrl) ^
       const DeepCollectionEquality().hash(topic) ^
       const DeepCollectionEquality().hash(startTimestamp) ^
       const DeepCollectionEquality().hash(endTimestamp) ^
-      const DeepCollectionEquality().hash(channelInformation) ^
-      const DeepCollectionEquality().hash(contentDetails) ^
+      const DeepCollectionEquality().hash(thumbnailUrl) ^
+      const DeepCollectionEquality().hash(channelName) ^
+      const DeepCollectionEquality().hash(channelAvatarUrl) ^
       const DeepCollectionEquality().hash(bookmarked);
 
   @JsonKey(ignore: true)
@@ -1501,27 +1052,39 @@ abstract class _Video extends Video {
       @JsonKey(name: "id")
           required String id,
       @HiveField(1)
+      @JsonKey(name: "source")
+          String? source,
+      @HiveField(2)
+      @JsonKey(name: "video_id")
+          required String videoId,
+      @HiveField(3)
       @JsonKey(name: "title")
           required String title,
-      @HiveField(2)
+      @HiveField(4)
+      @JsonKey(name: 'available')
+          bool? available,
+      @HiveField(5)
       @JsonKey(name: "video_url")
           required String videoUrl,
-      @HiveField(3)
+      @HiveField(6)
       @JsonKey(name: "topic")
           required Topic topic,
-      @HiveField(4)
+      @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
-      @HiveField(5)
+      @HiveField(8)
       @JsonKey(name: "end_timestamp")
           int? endTimestamp,
-      @HiveField(6)
-      @JsonKey(name: "channel_information")
-          ChannelInformation? channelInformation,
-      @HiveField(7)
-      @JsonKey(name: "content_details")
-          ContentDetails? contentDetails,
-      @HiveField(8)
+      @HiveField(9)
+      @JsonKey(name: "thumbnail_url")
+          String? thumbnailUrl,
+      @HiveField(10)
+      @JsonKey(name: "channel_name")
+          String? channelName,
+      @HiveField(11)
+      @JsonKey(name: "channel_avatar_url")
+          String? channelAvatarUrl,
+      @HiveField(12)
           bool bookmarked}) = _$_Video;
   _Video._() : super._();
 
@@ -1533,35 +1096,50 @@ abstract class _Video extends Video {
   String get id => throw _privateConstructorUsedError;
   @override
   @HiveField(1)
+  @JsonKey(name: "source")
+  String? get source => throw _privateConstructorUsedError;
+  @override
+  @HiveField(2)
+  @JsonKey(name: "video_id")
+  String get videoId => throw _privateConstructorUsedError;
+  @override
+  @HiveField(3)
   @JsonKey(name: "title")
   String get title => throw _privateConstructorUsedError;
   @override
-  @HiveField(2)
+  @HiveField(4)
+  @JsonKey(name: 'available')
+  bool? get available => throw _privateConstructorUsedError;
+  @override
+  @HiveField(5)
   @JsonKey(name: "video_url")
   String get videoUrl => throw _privateConstructorUsedError;
   @override
-  @HiveField(3)
+  @HiveField(6)
   @JsonKey(name: "topic")
   Topic get topic => throw _privateConstructorUsedError;
   @override
-  @HiveField(4)
+  @HiveField(7)
   @JsonKey(name: "start_timestamp")
   int? get startTimestamp => throw _privateConstructorUsedError;
   @override
-  @HiveField(5)
+  @HiveField(8)
   @JsonKey(name: "end_timestamp")
   int? get endTimestamp => throw _privateConstructorUsedError;
   @override
-  @HiveField(6)
-  @JsonKey(name: "channel_information")
-  ChannelInformation? get channelInformation =>
-      throw _privateConstructorUsedError;
+  @HiveField(9)
+  @JsonKey(name: "thumbnail_url")
+  String? get thumbnailUrl => throw _privateConstructorUsedError;
   @override
-  @HiveField(7)
-  @JsonKey(name: "content_details")
-  ContentDetails? get contentDetails => throw _privateConstructorUsedError;
+  @HiveField(10)
+  @JsonKey(name: "channel_name")
+  String? get channelName => throw _privateConstructorUsedError;
   @override
-  @HiveField(8)
+  @HiveField(11)
+  @JsonKey(name: "channel_avatar_url")
+  String? get channelAvatarUrl => throw _privateConstructorUsedError;
+  @override
+  @HiveField(12)
   bool get bookmarked => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

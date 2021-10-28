@@ -40,7 +40,7 @@ class FeedHeader extends ViewModelWidget<BaseFeedModel> {
 
   @override
   Widget build(BuildContext context, BaseFeedModel viewModel) {
-    final channelName = viewModel.videos[index].channelInformation?.name ?? "";
+    final channelName = viewModel.videos[index].channelName ?? "";
     final title = viewModel.videos[index].title;
     final isBookmarked = viewModel.videos[index].bookmarked;
     return Container(
