@@ -127,7 +127,7 @@ class UserService {
         userId: currentUser.id, name: currentUser.name, topicIds: topicIds);
 
     if (result is Failure) {
-      _log.e("Failed to create profile: $result");
+      _log.e("Failed to create profile: ${result.toString()}");
       return false;
     }
 
@@ -140,15 +140,17 @@ class UserService {
   /// Update profile for user with [selectedTopicIds]
   Future<bool> updateProfile({required List<String> topicIds}) async {
     _log.i("Updater profile for user with $topicIds");
-    
-    var result = await _apiService.updateUserProfile(userId: currentUser.id, name: currentUser.name, topicIds: topicIds);
+
+    var result = await _apiService.updateUserProfile(
+        userId: currentUser.id, name: currentUser.name, topicIds: topicIds);
 
     if (result is Failure) {
       _log.e("Failed to update profile: $result");
       return false;
     }
 
-    await _hiveService.insertList<String>(items: topicIds, boxName: kUserSelectedTopicsBox);
+    await _hiveService.putList<String>(
+        items: topicIds, boxName: kUserSelectedTopicsBox);
 
     return true;
   }

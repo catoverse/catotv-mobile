@@ -7,7 +7,7 @@ class GraphQLException implements Exception {
 
   @override
   String toString() {
-    return 'ApiException: $message';
+    return 'GraphQLException: $message';
   }
 }
 

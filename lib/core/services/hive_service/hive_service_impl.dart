@@ -84,6 +84,26 @@ class HiveServiceImpl implements HiveService {
   }
 
   @override
+  Future<Result<Failure, bool>> putList<T>(
+      {required List<T> items, required String boxName}) async {
+    _log.v("Inserting items to $boxName");
+
+    try {
+      final openBox = await _hiveInterface.openBox(boxName);
+
+      openBox.clear();
+
+      for (var item in items) {
+        openBox.add(item);
+      }
+
+      return Result.success(true);
+    } catch (error) {
+      return Result.failed(Failure.message(error.toString()));
+    }
+  }
+
+  @override
   Future<Result<Failure, List<T>>> fetchList<T>(
       {required String boxName}) async {
     _log.v("Accessing items from $boxName");

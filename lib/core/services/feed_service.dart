@@ -30,9 +30,12 @@ class FeedService {
     _bookmarks = bookmaredVideos.map((Video video) => video.id).toList();
 
     if (_bookmarks.isEmpty) {
-      final userProfileResult = await _apiService.geFullUserProfile(userId: userId);
+      final userProfileResult =
+          await _apiService.geFullUserProfile(userId: userId);
       if (userProfileResult is! Failure) {
-        _bookmarks = UserProfile.fromJson(userProfileResult as Map<String, dynamic>).bookmarks;
+        _bookmarks =
+            UserProfile.fromJson(userProfileResult as Map<String, dynamic>)
+                .bookmarks;
       }
     }
 
@@ -46,7 +49,10 @@ class FeedService {
 
         if (isYoutubeVideo != null) apiVideos.add(Video.fromJson(json));
       }
-      apiVideos = apiVideos.map((Video video) => video.copyWith(bookmarked: _bookmarks.contains(video.id))).toList();
+      apiVideos = apiVideos
+          .map((Video video) =>
+              video.copyWith(bookmarked: _bookmarks.contains(video.id)))
+          .toList();
 
       return apiVideos;
     }

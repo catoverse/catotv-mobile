@@ -83,12 +83,14 @@ class VideoService {
   }
 
   Future<void> addBookmarkedVideosToCache(List<Video> videos) async {
-    await _hiveService.insertList<Video>(items: videos, boxName: kBookmarkedVideoKey);
+    await _hiveService.insertList<Video>(
+        items: videos, boxName: kBookmarkedVideoKey);
   }
 
   Future<void> syncBookmarks() async {
     List<Video> localBookmarkedVideos = await getBookmarkedVideos();
-    List<String> localBookmarks = localBookmarkedVideos.map((Video video) => video.id).toList();
+    List<String> localBookmarks =
+        localBookmarkedVideos.map((Video video) => video.id).toList();
 
     final userId = _userService.currentUser.id;
 
@@ -102,18 +104,19 @@ class VideoService {
     }
     remoteBookmarkedVideoIds = remoteBookmarkedVideoIds.toSet().toList();
 
-    remoteBookmarkedVideoIds.removeWhere((element) => localBookmarks.contains(element));
+    remoteBookmarkedVideoIds
+        .removeWhere((element) => localBookmarks.contains(element));
 
-      final list = await _apiService.getVideosByIds(remoteBookmarkedVideoIds);
+    final list = await _apiService.getVideosByIds(remoteBookmarkedVideoIds);
 
-      if (list is List) {
-        final videos = <Video>[];
+    if (list is List) {
+      final videos = <Video>[];
 
-        for (var json in list) {
-          final video = Video.fromJson(json as Map<String, dynamic>);
-          videos.add(video);
-        }
-        await addBookmarkedVideosToCache(videos);
+      for (var json in list) {
+        final video = Video.fromJson(json as Map<String, dynamic>);
+        videos.add(video);
       }
+      await addBookmarkedVideosToCache(videos);
     }
+  }
 }

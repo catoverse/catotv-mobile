@@ -27,7 +27,7 @@ class GQLQueries {
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -49,7 +49,7 @@ class GQLQueries {
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -71,7 +71,7 @@ class GQLQueries {
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -93,7 +93,7 @@ class GQLQueries {
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -255,7 +255,8 @@ class GQLQueries {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
-  static Map<String, dynamic> updateUserProfileVariables(String userId, String name, List<String> topicIds) {
+  static Map<String, dynamic> updateUserProfileVariables(
+      String userId, String name, List<String> topicIds) {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
