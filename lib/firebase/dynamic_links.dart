@@ -66,7 +66,7 @@ class DynamicLinksService {
 
     if (isVideo) {
       var videoUrl = deepLink.toString();
-      var videoId = videoUrl.split("video/")[1];
+      var videoId = videoUrl.split("video/")[1].split("&")[0];
       _navigationService.navigateTo(Routes.singleFeedView,
           arguments: SingleFeedViewArguments(videoId: videoId));
     }
