@@ -16,13 +16,10 @@ class FeedService {
   /// Fetches videos from graphql api
   ///
   /// If there are no videos returned, it gives you videos
-  Future<List<Video>> fetchVideos({int skip = 0, int limit = 10}) async {
-    _log.i("Fetching videos from $skip");
-
+  Future<List<Video>> fetchVideos({int limit = 10}) async {
     String userId = _userService.currentUser.id;
-    var selectedTopics = await _topicService.getSelectedTopics(userId);
 
-    var list = await _apiService.getVideos(skip, limit, selectedTopics);
+    var list = await _apiService.getVideos(limit, userId);
     List<String> _bookmarks = [];
 
     final bookmaredVideos = await _videoService.getBookmarkedVideos();

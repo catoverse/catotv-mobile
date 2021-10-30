@@ -19,8 +19,8 @@ class GQLQueries {
   ''';
 
   static const String getVideosByTopics = r'''  
-    query TruncatedVideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
-      truncatedVideoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
+    query GetFeedVideos($userId: ID!, $limit: Int!) {
+      getFeed(userId: $userId, limit: $limit) {
         id
         source
         video_id
@@ -37,7 +37,7 @@ class GQLQueries {
         channel_name
         channel_avatar_url
       }
-    }
+    } 
   ''';
 
   static const String getVideoById = r'''
@@ -260,9 +260,8 @@ class GQLQueries {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
-  static Map<String, dynamic> videosByTopicsVariables(
-      int skip, int limit, List<String> topicIds) {
-    return {"skip": skip, "limit": limit, "selectedTopics": topicIds};
+  static Map<String, dynamic> getFeedVariables(int limit, String userId) {
+    return {"limit": limit, "userId": userId};
   }
 
   static Map<String, dynamic> getStreamLinkVariables(String watchId) {

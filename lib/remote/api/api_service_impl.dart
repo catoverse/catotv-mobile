@@ -157,17 +157,16 @@ class APIServiceImpl implements APIService {
   }
 
   @override
-  Future getVideos(int skip, int limit, List<String> selectedTopics) async {
-    _log.i("getting videos for topics: $selectedTopics");
+  Future getVideos(int limit, String userId) async {
+    _log.i("getting videos for topics: $userId");
 
     Result<Failure, dynamic> result = await _client.processQuery(
         query: GQLQueries.getVideosByTopics,
-        variables:
-            GQLQueries.videosByTopicsVariables(skip, limit, selectedTopics));
+        variables: GQLQueries.getFeedVariables(limit, userId));
 
     if (result.isFailed) return result.failure;
 
-    return result.success["truncatedVideoByTopics"];
+    return result.success["getFeed"];
   }
 
   @override
