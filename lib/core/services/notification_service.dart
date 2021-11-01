@@ -1,13 +1,16 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
+import 'package:feed/app/app.router.dart';
 import 'package:feed/core/constants/keys.dart';
 import 'package:feed/core/services/key_storage_service.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class NotificationService {
   final _notificationsPlugin = AwesomeNotifications();
   final _keyStorageService = locator<KeyStorageService>();
   final _log = getLogger("NotificationService");
+  final _navigationService = locator<NavigationService>();
 
   Future<void> init() async {
     _log.i("Init Notifications");
@@ -16,19 +19,20 @@ class NotificationService {
       NotificationChannel(
         channelKey: kVideoNotificationChannel,
         channelName: 'Cato Delights',
-        channelDescription:
-            'Notification channel for sending video notifications',
+        channelDescription: 'Notification channel for sending video notifications',
       )
     ]);
 
     _notificationsPlugin.actionStream.listen((event) {
-      //TODO: Navigate to single video view
+      if (event.payload != null && event.payload!["redirect"] == "video") {
+        String videoId = event.payload!["videoId"]!;
+        _navigationService.navigateTo(Routes.singleFeedView, arguments: SingleFeedViewArguments(videoId: videoId));
+      }
     });
   }
 
   Future<bool> shouldAskForNotification() async {
-    var askedBefore =
-        await _keyStorageService.get(kDeniedNotificationPermission);
+    var askedBefore = await _keyStorageService.get(kDeniedNotificationPermission);
     var allowed = await _notificationsPlugin.isNotificationAllowed();
 
     return askedBefore == null && !allowed;
