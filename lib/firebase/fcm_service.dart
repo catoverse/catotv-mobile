@@ -14,8 +14,6 @@ class FcmService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       _log.v(message);
 
-      print('From setupFCM: ${message.data}');
-
       final title = message.data["title"];
       final body = message.data["body"];
       final videoId = message.data["videoId"];

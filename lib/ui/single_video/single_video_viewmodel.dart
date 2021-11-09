@@ -7,8 +7,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class SingleFeedViewModel extends BaseFeedModel {
   final _feedService = locator<FeedService>();
-  final VideoManagerService _videoManagerService =
-      locator<VideoManagerService>();
+  final VideoManagerService _videoManagerService = locator<VideoManagerService>();
   final NavigationService _navigationService = locator<NavigationService>();
   late String videoId;
 
@@ -33,9 +32,7 @@ class SingleFeedViewModel extends BaseFeedModel {
       }
 
       _videos.add(video);
-    } catch (e) {
-      print('From SingleVideoViewmodel $e');
-    }
+    } catch (_) {}
 
     setBusy(false);
   }

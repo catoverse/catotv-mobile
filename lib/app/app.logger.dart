@@ -115,8 +115,7 @@ class MultipleLoggerOutput extends LogOutput {
     for (var logOutput in logOutputs) {
       try {
         logOutput.output(event);
-      } catch (e) {
-        print('Log output failed');
+      } catch (_) {
       }
     }
   }

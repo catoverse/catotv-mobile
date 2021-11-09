@@ -1,7 +1,6 @@
 import 'package:feed/app/app.locator.dart';
 import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/models/app_models.dart';
-import 'package:feed/core/services/topic_service.dart';
 import 'package:feed/core/services/user_service.dart';
 import 'package:feed/core/services/video_service.dart';
 import 'package:feed/remote/api/api_service.dart';
@@ -10,7 +9,6 @@ class FeedService {
   final _log = getLogger("Feed Service");
   final _apiService = locator<APIService>();
   final _userService = locator<UserService>();
-  final _topicService = locator<TopicService>();
   final _videoService = locator<VideoService>();
 
   /// Fetches videos from graphql api
