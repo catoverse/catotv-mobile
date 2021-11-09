@@ -20,13 +20,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await setupLocator();
   await Firebase.initializeApp();
 
-  var title = message.data["title"];
-  var body = message.data["body"];
-  var videoId = message.data["videoId"];
-  var image = message.data["image"];
+  // var title = message.data["title"];
+  // var body = message.data["body"];
+  // var videoId = message.data["videoId"];
+  // var image = message.data["image"];
 
-  await locator<NotificationService>().showVideoNotification(
-      videoId: videoId, title: title, body: body, image: image);
+  // await locator<NotificationService>().showVideoNotification(videoId: videoId, title: title, body: body, image: image);
 }
 
 Future main() async {
