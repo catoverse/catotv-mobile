@@ -51,7 +51,7 @@ class DrawerView extends StatelessWidget {
                   ),
                   ListTile(
                     leading: const Icon(Icons.people),
-                    title: const Text("Invite Friends"),
+                    title: const Text("Refer a Friend"),
                     onTap: () => model.inviteFriends(),
                   ),
                   ListTile(
