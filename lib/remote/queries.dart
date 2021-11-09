@@ -41,8 +41,8 @@ class GQLQueries {
   ''';
 
   static const String getVideoById = r'''
-    query GetTruncatedVideoById($id: ID!) {
-      truncatedVideoById(id: $id) {
+    query GetTruncatedVideoByWatchId($watchId: String!) {
+      truncatedVideoByWatchId(watchId: $watchId) {
         id
         source
         video_id
@@ -269,7 +269,7 @@ class GQLQueries {
   }
 
   static Map<String, dynamic> getVideoByIdVariables(String id) {
-    return {"id": id};
+    return {"watchId": id};
   }
 
   static Map<String, dynamic> getVideosByIdsVariables(List<String> ids) {
