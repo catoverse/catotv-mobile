@@ -59,9 +59,12 @@ class FeedService {
   }
 
   /// Fetches video with given [id]
-  Future<Video> fetchVideoById(String id) async {
+  Future<Video?> fetchVideoById(String id) async {
     var result = await _apiService.getVideoById(id);
-    return Video.fromJson(result);
+
+    if (result is! Failure) {
+      return Video.fromJson(result);
+    }
   }
 
   /// Fetches all the top [Video] from API

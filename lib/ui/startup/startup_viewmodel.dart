@@ -6,6 +6,7 @@ import 'package:feed/core/services/user_service.dart';
 import 'package:feed/firebase/dynamic_links.dart';
 import 'package:feed/firebase/fcm_service.dart';
 import 'package:feed/remote/connectivity/connectivity_service.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -48,6 +49,8 @@ class StartUpViewModel extends BaseViewModel {
     } else {
       return redirectToLogin();
     }
+
+    _handleBackgroundInteraction();
   }
 
   void redirectToLogin() {
@@ -63,5 +66,17 @@ class StartUpViewModel extends BaseViewModel {
   onModelReady() async {
     await checkConnectivity();
     runStartupLogic(connectivityPassed: _isConnected);
+  }
+
+  void _handleBackgroundInteraction() async {
+    final message = await FirebaseMessaging.instance.getInitialMessage();
+
+    if (message == null) return;
+
+    try {
+      final videoId = message.data["videoId"];
+
+      _navigationService.navigateTo(Routes.singleFeedView, arguments: SingleFeedViewArguments(videoId: videoId));
+    } catch (_) {}
   }
 }

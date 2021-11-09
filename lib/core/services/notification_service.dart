@@ -24,8 +24,8 @@ class NotificationService {
     ]);
 
     _notificationsPlugin.actionStream.listen((event) {
-      if (event.payload != null && event.payload!["redirect"] == "video") {
-        String videoId = event.payload!["videoId"]!;
+      if (event.payload != null) {
+        String videoId = event.payload!['videoId']!;
         _navigationService.navigateTo(Routes.singleFeedView, arguments: SingleFeedViewArguments(videoId: videoId));
       }
     });

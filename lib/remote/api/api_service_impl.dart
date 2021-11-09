@@ -205,7 +205,7 @@ class APIServiceImpl implements APIService {
 
     if (result.isFailed) return result.failure;
 
-    return result.success["truncatedVideoById"];
+    return result.success["truncatedVideoByWatchId"];
   }
 
   @override
