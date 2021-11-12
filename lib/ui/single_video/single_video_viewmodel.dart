@@ -3,10 +3,12 @@ import 'package:feed/core/models/app_models.dart';
 import 'package:feed/core/services/feed_service.dart';
 import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/ui/base/feedmodel.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class SingleFeedViewModel extends BaseFeedModel {
   final _feedService = locator<FeedService>();
   final VideoManagerService _videoManagerService = locator<VideoManagerService>();
+  final NavigationService _navigationService = locator<NavigationService>();
   late String videoId;
 
   final List<Video> _videos = [];
@@ -22,9 +24,15 @@ class SingleFeedViewModel extends BaseFeedModel {
     _videoManagerService.addStream(FeedRouteState.away);
     setBusy(true);
 
-    var video = await _feedService.fetchVideoById(videoId);
+    try {
+      final video = await _feedService.fetchVideoById(videoId);
 
-    _videos.add(video);
+      if (video == null) {
+        return _navigationService.back();
+      }
+
+      _videos.add(video);
+    } catch (_) {}
 
     setBusy(false);
   }

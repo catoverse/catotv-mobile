@@ -6,6 +6,7 @@ import 'package:feed/core/services/life_cycle_service.dart';
 import 'package:feed/core/services/message_queue_service.dart';
 import 'package:feed/core/services/notification_service.dart';
 import 'package:feed/core/services/share_service.dart';
+import 'package:feed/core/services/update_service.dart';
 import 'package:feed/core/services/url_service.dart';
 import 'package:feed/core/services/video_manager_service.dart';
 import 'package:feed/feedplayer/controller.dart';
@@ -87,6 +88,7 @@ import 'injection.dart';
       presolveUsing: VideoManagerService.getInstance,
     ),
     LazySingleton(classType: Connectivity),
+    LazySingleton(classType: AppUpdateService),
     LazySingleton(
         classType: ConnectivityServiceImpl, asType: ConnectivityService),
 

@@ -19,15 +19,15 @@ class GQLQueries {
   ''';
 
   static const String getVideosByTopics = r'''  
-    query TruncatedVideoByTopics($selectedTopics: [ID!], $skip: Int!, $limit: Int!) {
-      truncatedVideoByTopics(topics: $selectedTopics, skip: $skip, limit: $limit) {
+    query GetFeedVideos($userId: ID!, $limit: Int!) {
+      getFeed(userId: $userId, limit: $limit) {
         id
         source
         video_id
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -37,19 +37,19 @@ class GQLQueries {
         channel_name
         channel_avatar_url
       }
-    }
+    } 
   ''';
 
   static const String getVideoById = r'''
-    query GetTruncatedVideoById($id: ID!) {
-      truncatedVideoById(id: $id) {
+    query GetTruncatedVideoByWatchId($watchId: String!) {
+      truncatedVideoByWatchId(watchId: $watchId) {
         id
         source
         video_id
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -71,7 +71,7 @@ class GQLQueries {
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -93,7 +93,7 @@ class GQLQueries {
         title
         available
         video_url
-        topic {
+        topics {
           id
           name
         }
@@ -255,13 +255,13 @@ class GQLQueries {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
-  static Map<String, dynamic> updateUserProfileVariables(String userId, String name, List<String> topicIds) {
+  static Map<String, dynamic> updateUserProfileVariables(
+      String userId, String name, List<String> topicIds) {
     return {"userId": userId, "name": name, "selectedTopics": topicIds};
   }
 
-  static Map<String, dynamic> videosByTopicsVariables(
-      int skip, int limit, List<String> topicIds) {
-    return {"skip": skip, "limit": limit, "selectedTopics": topicIds};
+  static Map<String, dynamic> getFeedVariables(int limit, String userId) {
+    return {"limit": limit, "userId": userId};
   }
 
   static Map<String, dynamic> getStreamLinkVariables(String watchId) {
@@ -269,7 +269,7 @@ class GQLQueries {
   }
 
   static Map<String, dynamic> getVideoByIdVariables(String id) {
-    return {"id": id};
+    return {"watchId": id};
   }
 
   static Map<String, dynamic> getVideosByIdsVariables(List<String> ids) {

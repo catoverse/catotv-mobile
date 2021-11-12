@@ -11,7 +11,10 @@ const String onboardingItemSubtitle3 =
     "Play games with friends to practice,\nimplement and improve upon what you learn";
 const String confirmExitTitle = "Are you sure to exit?";
 const String confirmExitDescription = "👋 Bye!";
-const kNotificationPermissionsTitle = 'A new idea a day to expand your horizons';
-const kNotificationPermissionDescription = 'Trun on notifications to get highly curated video recommendations on your selected topics';
+const kNotificationPermissionsTitle =
+    'A new idea a day to expand your horizons';
+const kNotificationPermissionDescription =
+    'Trun on notifications to get highly curated video recommendations on your selected topics';
 const kTextCopiedToClipboardMessage = 'Text copied to clipboard';
-
+const kPlayStoreUrl =
+    "https://play.google.com/store/apps/details?id=cato.tv.app";

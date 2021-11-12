@@ -15,10 +15,14 @@ class FeedFooter extends ViewModelWidget<BaseFeedModel> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InputChip(
-            label: Text(viewModel.videos[index].topic.name),
-            onPressed: () {},
-          ),
+          ...viewModel.videos[index].topics
+              .map(
+                (topic) => InputChip(
+                  label: Text(topic.name),
+                  onPressed: () {},
+                ),
+              )
+              .toList(),
           Visibility(
             visible: showShare,
             child: IconButton(

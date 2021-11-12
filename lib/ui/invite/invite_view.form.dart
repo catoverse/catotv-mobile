@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 
-const String kEmailValueKey = 'email';
+const String emailValueKey = 'email';
 
 mixin $InviteView on StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -25,7 +25,7 @@ mixin $InviteView on StatelessWidget {
   void _updateFormData(FormViewModel model) => model.setData(
         model.formValueMap
           ..addAll({
-            kEmailValueKey: emailController.text,
+            emailValueKey: emailController.text,
           }),
       );
 
@@ -34,13 +34,14 @@ mixin $InviteView on StatelessWidget {
     // The dispose function for a TextEditingController sets all listeners to null
 
     emailController.dispose();
+    emailFocusNode.dispose();
   }
 }
 
 extension ValueProperties on FormViewModel {
-  String? get emailValue => formValueMap[kEmailValueKey];
+  String? get emailValue => formValueMap[emailValueKey];
 
-  bool get hasEmail => formValueMap.containsKey(kEmailValueKey);
+  bool get hasEmail => formValueMap.containsKey(emailValueKey);
 }
 
 extension Methods on FormViewModel {}

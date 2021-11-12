@@ -540,8 +540,8 @@ class _$VideoTearOff {
       @JsonKey(name: "video_url")
           required String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          required Topic topic,
+      @JsonKey(name: "topics")
+          required List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -566,7 +566,7 @@ class _$VideoTearOff {
       title: title,
       available: available,
       videoUrl: videoUrl,
-      topic: topic,
+      topics: topics,
       startTimestamp: startTimestamp,
       endTimestamp: endTimestamp,
       thumbnailUrl: thumbnailUrl,
@@ -605,8 +605,8 @@ mixin _$Video {
   @JsonKey(name: "video_url")
   String get videoUrl => throw _privateConstructorUsedError;
   @HiveField(6)
-  @JsonKey(name: "topic")
-  Topic get topic => throw _privateConstructorUsedError;
+  @JsonKey(name: "topics")
+  List<Topic> get topics => throw _privateConstructorUsedError;
   @HiveField(7)
   @JsonKey(name: "start_timestamp")
   int? get startTimestamp => throw _privateConstructorUsedError;
@@ -654,8 +654,8 @@ abstract class $VideoCopyWith<$Res> {
       @JsonKey(name: "video_url")
           String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          Topic topic,
+      @JsonKey(name: "topics")
+          List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -673,8 +673,6 @@ abstract class $VideoCopyWith<$Res> {
           String? channelAvatarUrl,
       @HiveField(12)
           bool bookmarked});
-
-  $TopicCopyWith<$Res> get topic;
 }
 
 /// @nodoc
@@ -693,7 +691,7 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
     Object? title = freezed,
     Object? available = freezed,
     Object? videoUrl = freezed,
-    Object? topic = freezed,
+    Object? topics = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
     Object? thumbnailUrl = freezed,
@@ -726,10 +724,10 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      topic: topic == freezed
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as Topic,
+      topics: topics == freezed
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<Topic>,
       startTimestamp: startTimestamp == freezed
           ? _value.startTimestamp
           : startTimestamp // ignore: cast_nullable_to_non_nullable
@@ -755,13 +753,6 @@ class _$VideoCopyWithImpl<$Res> implements $VideoCopyWith<$Res> {
           : bookmarked // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
-  }
-
-  @override
-  $TopicCopyWith<$Res> get topic {
-    return $TopicCopyWith<$Res>(_value.topic, (value) {
-      return _then(_value.copyWith(topic: value));
-    });
   }
 }
 
@@ -790,8 +781,8 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
       @JsonKey(name: "video_url")
           String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          Topic topic,
+      @JsonKey(name: "topics")
+          List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -809,9 +800,6 @@ abstract class _$VideoCopyWith<$Res> implements $VideoCopyWith<$Res> {
           String? channelAvatarUrl,
       @HiveField(12)
           bool bookmarked});
-
-  @override
-  $TopicCopyWith<$Res> get topic;
 }
 
 /// @nodoc
@@ -831,7 +819,7 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
     Object? title = freezed,
     Object? available = freezed,
     Object? videoUrl = freezed,
-    Object? topic = freezed,
+    Object? topics = freezed,
     Object? startTimestamp = freezed,
     Object? endTimestamp = freezed,
     Object? thumbnailUrl = freezed,
@@ -864,10 +852,10 @@ class __$VideoCopyWithImpl<$Res> extends _$VideoCopyWithImpl<$Res>
           ? _value.videoUrl
           : videoUrl // ignore: cast_nullable_to_non_nullable
               as String,
-      topic: topic == freezed
-          ? _value.topic
-          : topic // ignore: cast_nullable_to_non_nullable
-              as Topic,
+      topics: topics == freezed
+          ? _value.topics
+          : topics // ignore: cast_nullable_to_non_nullable
+              as List<Topic>,
       startTimestamp: startTimestamp == freezed
           ? _value.startTimestamp
           : startTimestamp // ignore: cast_nullable_to_non_nullable
@@ -907,7 +895,7 @@ class _$_Video extends _Video {
       @HiveField(3) @JsonKey(name: "title") required this.title,
       @HiveField(4) @JsonKey(name: 'available') this.available,
       @HiveField(5) @JsonKey(name: "video_url") required this.videoUrl,
-      @HiveField(6) @JsonKey(name: "topic") required this.topic,
+      @HiveField(6) @JsonKey(name: "topics") required this.topics,
       @HiveField(7) @JsonKey(name: "start_timestamp") this.startTimestamp,
       @HiveField(8) @JsonKey(name: "end_timestamp") this.endTimestamp,
       @HiveField(9) @JsonKey(name: "thumbnail_url") this.thumbnailUrl,
@@ -945,8 +933,8 @@ class _$_Video extends _Video {
   final String videoUrl;
   @override
   @HiveField(6)
-  @JsonKey(name: "topic")
-  final Topic topic;
+  @JsonKey(name: "topics")
+  final List<Topic> topics;
   @override
   @HiveField(7)
   @JsonKey(name: "start_timestamp")
@@ -974,7 +962,7 @@ class _$_Video extends _Video {
 
   @override
   String toString() {
-    return 'Video(id: $id, source: $source, videoId: $videoId, title: $title, available: $available, videoUrl: $videoUrl, topic: $topic, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, thumbnailUrl: $thumbnailUrl, channelName: $channelName, channelAvatarUrl: $channelAvatarUrl, bookmarked: $bookmarked)';
+    return 'Video(id: $id, source: $source, videoId: $videoId, title: $title, available: $available, videoUrl: $videoUrl, topics: $topics, startTimestamp: $startTimestamp, endTimestamp: $endTimestamp, thumbnailUrl: $thumbnailUrl, channelName: $channelName, channelAvatarUrl: $channelAvatarUrl, bookmarked: $bookmarked)';
   }
 
   @override
@@ -996,8 +984,8 @@ class _$_Video extends _Video {
             (identical(other.videoUrl, videoUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.videoUrl, videoUrl)) &&
-            (identical(other.topic, topic) ||
-                const DeepCollectionEquality().equals(other.topic, topic)) &&
+            (identical(other.topics, topics) ||
+                const DeepCollectionEquality().equals(other.topics, topics)) &&
             (identical(other.startTimestamp, startTimestamp) ||
                 const DeepCollectionEquality()
                     .equals(other.startTimestamp, startTimestamp)) &&
@@ -1027,7 +1015,7 @@ class _$_Video extends _Video {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(available) ^
       const DeepCollectionEquality().hash(videoUrl) ^
-      const DeepCollectionEquality().hash(topic) ^
+      const DeepCollectionEquality().hash(topics) ^
       const DeepCollectionEquality().hash(startTimestamp) ^
       const DeepCollectionEquality().hash(endTimestamp) ^
       const DeepCollectionEquality().hash(thumbnailUrl) ^
@@ -1067,8 +1055,8 @@ abstract class _Video extends Video {
       @JsonKey(name: "video_url")
           required String videoUrl,
       @HiveField(6)
-      @JsonKey(name: "topic")
-          required Topic topic,
+      @JsonKey(name: "topics")
+          required List<Topic> topics,
       @HiveField(7)
       @JsonKey(name: "start_timestamp")
           int? startTimestamp,
@@ -1116,8 +1104,8 @@ abstract class _Video extends Video {
   String get videoUrl => throw _privateConstructorUsedError;
   @override
   @HiveField(6)
-  @JsonKey(name: "topic")
-  Topic get topic => throw _privateConstructorUsedError;
+  @JsonKey(name: "topics")
+  List<Topic> get topics => throw _privateConstructorUsedError;
   @override
   @HiveField(7)
   @JsonKey(name: "start_timestamp")
@@ -1144,498 +1132,6 @@ abstract class _Video extends Video {
   @override
   @JsonKey(ignore: true)
   _$VideoCopyWith<_Video> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-class _$FailureTearOff {
-  const _$FailureTearOff();
-
-  _GenericError error(Error error) {
-    return _GenericError(
-      error,
-    );
-  }
-
-  _RaisedException exception(Exception exception) {
-    return _RaisedException(
-      exception,
-    );
-  }
-
-  _FailureMessage message(String message) {
-    return _FailureMessage(
-      message,
-    );
-  }
-}
-
-/// @nodoc
-const $Failure = _$FailureTearOff();
-
-/// @nodoc
-mixin _$Failure {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Error error) error,
-    required TResult Function(Exception exception) exception,
-    required TResult Function(String message) message,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GenericError value) error,
-    required TResult Function(_RaisedException value) exception,
-    required TResult Function(_FailureMessage value) message,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $FailureCopyWith<$Res> {
-  factory $FailureCopyWith(Failure value, $Res Function(Failure) then) =
-      _$FailureCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class _$FailureCopyWithImpl<$Res> implements $FailureCopyWith<$Res> {
-  _$FailureCopyWithImpl(this._value, this._then);
-
-  final Failure _value;
-  // ignore: unused_field
-  final $Res Function(Failure) _then;
-}
-
-/// @nodoc
-abstract class _$GenericErrorCopyWith<$Res> {
-  factory _$GenericErrorCopyWith(
-          _GenericError value, $Res Function(_GenericError) then) =
-      __$GenericErrorCopyWithImpl<$Res>;
-  $Res call({Error error});
-}
-
-/// @nodoc
-class __$GenericErrorCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
-    implements _$GenericErrorCopyWith<$Res> {
-  __$GenericErrorCopyWithImpl(
-      _GenericError _value, $Res Function(_GenericError) _then)
-      : super(_value, (v) => _then(v as _GenericError));
-
-  @override
-  _GenericError get _value => super._value as _GenericError;
-
-  @override
-  $Res call({
-    Object? error = freezed,
-  }) {
-    return _then(_GenericError(
-      error == freezed
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as Error,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_GenericError implements _GenericError {
-  const _$_GenericError(this.error);
-
-  @override
-  final Error error;
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _GenericError &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
-
-  @JsonKey(ignore: true)
-  @override
-  _$GenericErrorCopyWith<_GenericError> get copyWith =>
-      __$GenericErrorCopyWithImpl<_GenericError>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Error error) error,
-    required TResult Function(Exception exception) exception,
-    required TResult Function(String message) message,
-  }) {
-    return error(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GenericError value) error,
-    required TResult Function(_RaisedException value) exception,
-    required TResult Function(_FailureMessage value) message,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _GenericError implements Failure {
-  const factory _GenericError(Error error) = _$_GenericError;
-
-  Error get error => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$GenericErrorCopyWith<_GenericError> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$RaisedExceptionCopyWith<$Res> {
-  factory _$RaisedExceptionCopyWith(
-          _RaisedException value, $Res Function(_RaisedException) then) =
-      __$RaisedExceptionCopyWithImpl<$Res>;
-  $Res call({Exception exception});
-}
-
-/// @nodoc
-class __$RaisedExceptionCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
-    implements _$RaisedExceptionCopyWith<$Res> {
-  __$RaisedExceptionCopyWithImpl(
-      _RaisedException _value, $Res Function(_RaisedException) _then)
-      : super(_value, (v) => _then(v as _RaisedException));
-
-  @override
-  _RaisedException get _value => super._value as _RaisedException;
-
-  @override
-  $Res call({
-    Object? exception = freezed,
-  }) {
-    return _then(_RaisedException(
-      exception == freezed
-          ? _value.exception
-          : exception // ignore: cast_nullable_to_non_nullable
-              as Exception,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_RaisedException implements _RaisedException {
-  const _$_RaisedException(this.exception);
-
-  @override
-  final Exception exception;
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _RaisedException &&
-            (identical(other.exception, exception) ||
-                const DeepCollectionEquality()
-                    .equals(other.exception, exception)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(exception);
-
-  @JsonKey(ignore: true)
-  @override
-  _$RaisedExceptionCopyWith<_RaisedException> get copyWith =>
-      __$RaisedExceptionCopyWithImpl<_RaisedException>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Error error) error,
-    required TResult Function(Exception exception) exception,
-    required TResult Function(String message) message,
-  }) {
-    return exception(this.exception);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-  }) {
-    return exception?.call(this.exception);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-    required TResult orElse(),
-  }) {
-    if (exception != null) {
-      return exception(this.exception);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GenericError value) error,
-    required TResult Function(_RaisedException value) exception,
-    required TResult Function(_FailureMessage value) message,
-  }) {
-    return exception(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-  }) {
-    return exception?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-    required TResult orElse(),
-  }) {
-    if (exception != null) {
-      return exception(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _RaisedException implements Failure {
-  const factory _RaisedException(Exception exception) = _$_RaisedException;
-
-  Exception get exception => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$RaisedExceptionCopyWith<_RaisedException> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$FailureMessageCopyWith<$Res> {
-  factory _$FailureMessageCopyWith(
-          _FailureMessage value, $Res Function(_FailureMessage) then) =
-      __$FailureMessageCopyWithImpl<$Res>;
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$FailureMessageCopyWithImpl<$Res> extends _$FailureCopyWithImpl<$Res>
-    implements _$FailureMessageCopyWith<$Res> {
-  __$FailureMessageCopyWithImpl(
-      _FailureMessage _value, $Res Function(_FailureMessage) _then)
-      : super(_value, (v) => _then(v as _FailureMessage));
-
-  @override
-  _FailureMessage get _value => super._value as _FailureMessage;
-
-  @override
-  $Res call({
-    Object? message = freezed,
-  }) {
-    return _then(_FailureMessage(
-      message == freezed
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$_FailureMessage implements _FailureMessage {
-  const _$_FailureMessage(this.message);
-
-  @override
-  final String message;
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _FailureMessage &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
-
-  @JsonKey(ignore: true)
-  @override
-  _$FailureMessageCopyWith<_FailureMessage> get copyWith =>
-      __$FailureMessageCopyWithImpl<_FailureMessage>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Error error) error,
-    required TResult Function(Exception exception) exception,
-    required TResult Function(String message) message,
-  }) {
-    return message(this.message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-  }) {
-    return message?.call(this.message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Error error)? error,
-    TResult Function(Exception exception)? exception,
-    TResult Function(String message)? message,
-    required TResult orElse(),
-  }) {
-    if (message != null) {
-      return message(this.message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GenericError value) error,
-    required TResult Function(_RaisedException value) exception,
-    required TResult Function(_FailureMessage value) message,
-  }) {
-    return message(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-  }) {
-    return message?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GenericError value)? error,
-    TResult Function(_RaisedException value)? exception,
-    TResult Function(_FailureMessage value)? message,
-    required TResult orElse(),
-  }) {
-    if (message != null) {
-      return message(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _FailureMessage implements Failure {
-  const factory _FailureMessage(String message) = _$_FailureMessage;
-
-  String get message => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  _$FailureMessageCopyWith<_FailureMessage> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 MqEventLog _$MqEventLogFromJson(Map<String, dynamic> json) {

@@ -16,8 +16,6 @@ class FeedViewModel extends BaseFeedModel {
   final _lifeCycleService = locator<LifeCycleService>();
   final _videoService = locator<VideoService>();
 
-  int skip = 0;
-
   List<Video> _videos = [];
 
   void requestNotification() async {
@@ -46,12 +44,11 @@ class FeedViewModel extends BaseFeedModel {
     _lifeCycleService.getStream().listen((event) {
       if (event == AppLifecycleState.paused) logSessionInterruption();
     });
-    
-    var newVideos = await _feedService.fetchVideos(skip: skip);
-    setBusy(false);
 
+    var newVideos = await _feedService.fetchVideos();
     _videos = newVideos;
-    skip += newVideos.length;
+
+    setBusy(false);
 
     Future.delayed(const Duration(seconds: 2), requestNotification);
 

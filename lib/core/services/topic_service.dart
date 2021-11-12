@@ -1,4 +1,5 @@
 import 'package:feed/app/app.locator.dart';
+import 'package:feed/app/app.logger.dart';
 import 'package:feed/core/constants/keys.dart';
 
 import 'package:feed/core/models/app_models.dart';
@@ -8,6 +9,7 @@ import 'package:feed/remote/api/api_service.dart';
 class TopicService {
   final APIService _apiService = locator<APIService>();
   final HiveService _hiveService = locator<HiveService>();
+  final _log = getLogger("TopicService");
 
   List<Topic> _allTopics = [];
 
@@ -42,6 +44,8 @@ class TopicService {
     /// There's no selected topics from Hive, So fetch them from API Call
     if (result.isFailed || result.success!.isEmpty) {
       var profile = await _apiService.getUserProfile(userId: userId);
+
+      _log.i(profile);
 
       if (profile is! Failure) topics = List<String>.from(profile);
     }

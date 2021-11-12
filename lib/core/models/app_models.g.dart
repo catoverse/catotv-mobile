@@ -112,7 +112,7 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       title: fields[3] as String,
       available: fields[4] as bool?,
       videoUrl: fields[5] as String,
-      topic: fields[6] as Topic,
+      topics: (fields[6] as List).cast<Topic>(),
       startTimestamp: fields[7] as int?,
       endTimestamp: fields[8] as int?,
       thumbnailUrl: fields[9] as String?,
@@ -139,7 +139,7 @@ class VideoAdapter extends TypeAdapter<_$_Video> {
       ..writeByte(5)
       ..write(obj.videoUrl)
       ..writeByte(6)
-      ..write(obj.topic)
+      ..write(obj.topics)
       ..writeByte(7)
       ..write(obj.startTimestamp)
       ..writeByte(8)
@@ -259,7 +259,9 @@ _$_Video _$$_VideoFromJson(Map<String, dynamic> json) => _$_Video(
       title: json['title'] as String,
       available: json['available'] as bool?,
       videoUrl: json['video_url'] as String,
-      topic: Topic.fromJson(json['topic'] as Map<String, dynamic>),
+      topics: (json['topics'] as List<dynamic>)
+          .map((e) => Topic.fromJson(e as Map<String, dynamic>))
+          .toList(),
       startTimestamp: json['start_timestamp'] as int?,
       endTimestamp: json['end_timestamp'] as int?,
       thumbnailUrl: json['thumbnail_url'] as String?,
@@ -275,7 +277,7 @@ Map<String, dynamic> _$$_VideoToJson(_$_Video instance) => <String, dynamic>{
       'title': instance.title,
       'available': instance.available,
       'video_url': instance.videoUrl,
-      'topic': instance.topic,
+      'topics': instance.topics,
       'start_timestamp': instance.startTimestamp,
       'end_timestamp': instance.endTimestamp,
       'thumbnail_url': instance.thumbnailUrl,
