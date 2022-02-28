@@ -13,18 +13,12 @@ dependencies:
   cupertino_icons: ^1.0.3
 
   # stacked state management
-  stacked:
-    git:
-      url: https://github.com/amanxnanda/stacked
-      path: packages/stacked
-  stacked_services:
-    git:
-      url: https://github.com/amanxnanda/stacked
-      path: packages/stacked_services
+  stacked: ^2.2.8
+  stacked_services: ^0.8.17
   observable_ish: ^3.0.0
 
   # data models
-  freezed_annotation: ^0.14.3
+  freezed_annotation: ^1.1.0
   json_annotation: ^4.1.0
 
   # logger for debugging
@@ -58,16 +52,16 @@ dependencies:
   visibility_detector: ^0.2.0
 
   # firebase integration
-  firebase_core: ^1.6.0
-  firebase_auth: ^3.1.1
-  stacked_firebase_auth: ^0.2.10
-  firebase_dynamic_links: ^2.0.9
-  firebase_crashlytics: ^2.2.1
-  firebase_analytics: ^8.3.2
-  firebase_messaging: ^10.0.7
-  awesome_notifications: ^0.0.6+10
+  firebase_core: ^1.13.1
+  firebase_auth: ^3.3.9
+  stacked_firebase_auth: ^0.2.10+2
+  firebase_dynamic_links: ^4.0.8
+  firebase_crashlytics: ^2.5.3
+  firebase_analytics: ^9.1.2
+  firebase_messaging: ^11.2.8
+  awesome_notifications: ^0.6.21
 
-  inview_notifier_list: ^2.0.0
+  inview_notifier_list: ^3.0.0
   flutter_hooks: ^0.18.0
   url_launcher: ^6.0.11
   intl: ^0.17.0
@@ -75,7 +69,7 @@ dependencies:
   lottie: ^1.2.1
 
   font_awesome_flutter: ^9.1.0
-  in_app_update: ^2.0.0
+  in_app_update: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^1.0.4
@@ -83,16 +77,13 @@ dev_dependencies:
     sdk: flutter
 
   # code generators
-  build_runner:
-  stacked_generator:
-    git:
-      url: https://github.com/amanxnanda/stacked
-      path: packages/stacked_generator
+  build_runner: ^2.1.7
+  stacked_generator: ^0.5.7
   hive_generator: ^1.1.1
 
   # data models
-  freezed: ^0.14.5
-  json_serializable: ^5.0.0
+  freezed: ^1.1.1
+  json_serializable: ^6.1.4
 
   # for testing
   mockito:

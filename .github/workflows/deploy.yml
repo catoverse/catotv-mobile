@@ -35,7 +35,7 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v1
         with:
-          flutter-version: "2.5.1"
+          flutter-version: "stable"
 
       - name: Init Flutter
         run: flutter doctor -v && flutter pub get

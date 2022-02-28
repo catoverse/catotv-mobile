@@ -63,6 +63,7 @@ class FeedService {
     if (result is! Failure) {
       return Video.fromJson(result);
     }
+    return null;
   }
 
   /// Fetches all the top [Video] from API
